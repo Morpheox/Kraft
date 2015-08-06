@@ -11,7 +11,7 @@ items["gold"]=0;
 items["iron"]=0;
 items["coal"]=0;
 items["steel"]=0;
-items["moral"]=0;
+items["morale"]=0;
 
 var bonus =new Array()
 for(key in items){
@@ -64,6 +64,7 @@ technologies["metallurgy"]=0
 technologies["sword"]=0
 technologies["storage"]=0
 technologies["currency"]=0
+technologies["coin"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -79,6 +80,7 @@ craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
 craft["block"]=0
+craft["coin"]=0
 
 var unlocked=new Array();
 
@@ -108,14 +110,14 @@ power+=people["swordman"]*10
 
 foodcost=power*2
 watercost=power
-moralcost=power/5
+moralecost=power/5
 
-if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["moral"]>=moralcost){
+if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
 
 
 items["food"]-=foodcost;
 items["water"]-=watercost;
-items["moral"]-=moralcost;
+items["morale"]-=moralecost;
 
 
 
@@ -247,6 +249,19 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["mineral"]-=mineralcost;
 	items["wood"]-=woodcost;
 	craft["block"]++;
+
+}
+
+}
+if (b=="coin"){
+
+goldcost=5
+
+if (items["gold"]>=goldcost){
+
+	items["gold"]-=goldcost;
+
+	craft["coin"]++;
 
 }
 
@@ -420,6 +435,22 @@ if (items["gold"]>=goldcost){
 
 	$(".build_casino").show()
         unlocked[".build_casino"]=1;
+}
+
+}
+else if (b=="coin" && technologies["coin"]==0){
+
+ironcost=20;
+goldcost=10;
+
+if (items["gold"]>=goldcost && items["iron"]>=ironcost){
+
+	items["gold"]-=goldcost;
+	items["iron"]-=ironcost
+	technologies["coin"]++
+
+	$(".craft_coin").show()
+    unlocked[".craft_coin"]=1;
 }
 
 }
@@ -650,7 +681,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;break;
+		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 	}
 	
 }
@@ -666,7 +697,7 @@ if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 	items["wood"]-=woodcost;
 	items["copper"]-=coppercost;
 	buildings["banner"]+=1;
-	maximums["moral"]+=1;
+	maximums["morale"]+=1;
 
 }
 
@@ -782,7 +813,7 @@ coppercost=Math.pow(1.7, (buildings["banner"]))*1;
 $(".build_banner").html("Banner ("+buildings["banner"]+")");
 $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".build_banner").attr('tooltip3', 'Max moral +1');
+$(".build_banner").attr('tooltip3', 'Max morale +1');
 
 mineralcost= Math.pow(1.6,(buildings["foundry"]))*500;
 coppercost=Math.pow(1.6, (buildings["foundry"]))*5
@@ -846,7 +877,7 @@ $(".hire_pikeman").html("Pikeman ("+people["pikeman"]+")");
 $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip2', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip3', "Food comsumption: -0.10/s");
-$(".hire_pikeman").attr('tooltip4', 'Moral production +0.01/s');
+$(".hire_pikeman").attr('tooltip4', 'morale production +0.01/s');
 $(".hire_pikeman").attr('tooltip5', 'Power: 5');
 
 foodcost=150
@@ -855,7 +886,7 @@ $(".hire_swordman").html("Swordman ("+people["swordman"]+")");
 $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".hire_swordman").attr('tooltip3', "Food comsumption: -0.40/s");
-$(".hire_swordman").attr('tooltip4', 'Moral production +0.02/s');
+$(".hire_swordman").attr('tooltip4', 'morale production +0.02/s');
 $(".hire_swordman").attr('tooltip5', 'Power: 10');
 //Technologies
 
@@ -912,7 +943,6 @@ $(".tech_sword").attr('tooltip3', "Allows the crafting of Iron Swords and the hi
 
 
 
-
 woodcost=500
 mineralcost=500
 ironcost=20
@@ -928,6 +958,13 @@ $(".tech_currency").html("Currency" + (technologies["currency"] >0 ? " (research
 $(".tech_currency").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 //crafting
+
+ironcost=20;
+goldcost=10;
+$(".tech_coin").html("Coin forging" + (technologies["currency"] >0 ? " (researched)" : ""));
+$(".tech_coin").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_coin").attr('tooltip2', "Allows forging gold coins");
 
 woodcost=20;
 coppercost=1;
@@ -956,6 +993,10 @@ $(".craft_block").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)
 $(".craft_block").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".craft_block").attr('tooltip3', "Compact building material");
 
+goldcost=5
+$(".craft_coin").html("Coin");
+$(".craft_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".craft_coin").attr('tooltip3', "Gold refined into a coin for future use.");
 //Others
 
 power=0
@@ -964,11 +1005,11 @@ power+=people["swordman"]*10
 
 foodcost=power*2
 watercost=power
-moralcost=power/5
+moralecost=power/5
 $(".expedition").html("Expedition");
 $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
-$(".expedition").attr('tooltip3', 'Moral: '+ parseFloat(items["moral"]).toFixed(2)+" / "+parseFloat(moralcost).toFixed(2))
+$(".expedition").attr('tooltip3', 'morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".expedition").attr('tooltip4', "Send your soldiers in a expedition");
 
 
@@ -1030,13 +1071,13 @@ production["gold"]+=people["smelter"]/4000
 if (items["food"]>=people["pikeman"]/40)
 {
 comsumption["food"]+=people["pikeman"]/40
-production["moral"]+=people["pikeman"]/400
+production["morale"]+=people["pikeman"]/400
 }
 
 if (items["food"]>=people["swordman"]/10)
 {
 comsumption["food"]+=people["swordman"]/10
-production["moral"]+=people["swordman"]/200
+production["morale"]+=people["swordman"]/200
 }
 
 
@@ -1167,8 +1208,9 @@ for(key in unlocked){
 		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;break;
+		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 	}
+	
 } 
 
 function update(array1, array2){

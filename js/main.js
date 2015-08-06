@@ -125,68 +125,69 @@ items["moral"]-=moralcost;
 if(Math.random()>0.1){
 
 
-reward="The expedition found:\n";
+reward="The expedition found:<br>";
 
 
 if(Math.random()>0.40){
 rnd=(Math.random()*power)*25;
-reward+=parseFloat(rnd).toFixed(2) + " wood\n";
+reward+=parseFloat(rnd).toFixed(2) + " wood<br>";
 items["wood"]+=rnd;
 }
 if(Math.random()>0.60){
 rnd=(Math.random()*power)*15;
-reward+=parseFloat(rnd).toFixed(2) + " minerals\n";
+reward+=parseFloat(rnd).toFixed(2) + " minerals<br>";
 items["mineral"]+=rnd;
 }
 if(Math.random()>0.85){
 rnd=(Math.random()*power)*5;
-reward+=parseFloat(rnd).toFixed(2) + " food\n";
+reward+=parseFloat(rnd).toFixed(2) + " food<br>";
 items["food"]+=rnd;
 }
 if(Math.random()>0.95){
 rnd=(Math.random()*power)/5;
-reward+=parseFloat(rnd).toFixed(2) + " copper\n";
+reward+=parseFloat(rnd).toFixed(2) + " copper<br>";
 items["copper"]+=rnd;
 }
 if(Math.random()>0.975){
 rnd=(Math.random()*power)/8;
-reward+=parseFloat(rnd).toFixed(2) + " iron\n";
+reward+=parseFloat(rnd).toFixed(2) + " iron<br>";
 items["iron"]+=rnd;
 }
 if(Math.random()>0.99){
 rnd=(Math.random()*power)/20;
-reward+=parseFloat(rnd).toFixed(2) + " gold\n";
+reward+=parseFloat(rnd).toFixed(2) + " gold<br>";
 items["gold"]+=rnd;
 }
 if(Math.random()>0.95){
 rnd=Math.round((Math.random()*power)/50)+1;
-reward+=parseFloat(rnd).toFixed(2) + " spear\n";
+reward+=parseFloat(rnd).toFixed(2) + " spear<br>";
 craft["spear"]+=rnd;
 }
 if(Math.random()>0.99){
 rnd=Math.round((Math.random()*power)/50)+1;
-reward+=parseFloat(rnd).toFixed(2) + " sword\n";
+reward+=parseFloat(rnd).toFixed(2) + " sword<br>";
 craft["sword"]+=rnd;
 }
 if(Math.random()>0.995){
 rnd=Math.round((Math.random()*power)/200)+1;
-reward+=parseFloat(rnd).toFixed(2) + " block\n";
+reward+=parseFloat(rnd).toFixed(2) + " block<br>";
 craft["block"]+=rnd;
 }
 if(reward!="The expedition found:\n")
 {
-alert(reward)
+$(".expeditionresult").html(reward)
 }
 else
 {
-alert("The expedition didn´t find anything useful.")
+
+$(".expeditionresult").html("The expedition didn´t find anything useful.")
 }
 
 
 }
 else
 {
-alert("The expedition didn´t find anything useful.")
+$(".expeditionresult").html("The expedition didn´t find anything useful.")
 }
 
 
@@ -930,7 +931,7 @@ $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 
 woodcost=20;
 coppercost=1;
-$(".craft_pickaxe").html("pickaxe");
+$(".craft_pickaxe").html("Pickaxe");
 $(".craft_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".craft_pickaxe").attr('tooltip3', "Basic copper pickaxe");

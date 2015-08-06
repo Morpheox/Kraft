@@ -1213,7 +1213,7 @@ for(key in unlocked){
 	
 	if(maximums["moral"]!=0 || maximums["moral"]!=null)
 	{
-	maximums["morale"]=
+	maximums["morale"]=maximums["moral"]
     maximums["moral"]=0
 	items["morale"]=items["moral"]
 	items["moral"]=0;

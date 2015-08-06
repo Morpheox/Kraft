@@ -1144,7 +1144,7 @@ calculatecost();
 function bet(b){
 
     var amountbet=parseFloat($(".betamount").val()).toFixed(2);
-    if(maximums["bet"]>=amountbet){
+    if(maximums["bet"]>=amountbet && items["gold"]>=amountbet){
     items["gold"]-=amountbet;
     var rnd=Math.round(Math.random()*999)
     

@@ -961,7 +961,7 @@ $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 
 ironcost=20;
 goldcost=10;
-$(".tech_coin").html("Coin forging" + (technologies["currency"] >0 ? " (researched)" : ""));
+$(".tech_coin").html("Coin forging" + (technologies["coin"] >0 ? " (researched)" : ""));
 $(".tech_coin").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_coin").attr('tooltip2', "Allows forging gold coins");

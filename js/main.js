@@ -1146,14 +1146,14 @@ Cookies.set('population', population,{ expires: 9999 });
 
 function load(){
     
-items = JSON.parse(Cookies.get( 'items'));
-bonus = JSON.parse(Cookies.get( 'bonus'));
-buildings = JSON.parse(Cookies.get( 'buildings'));
-maximums = JSON.parse(Cookies.get( 'maximums'));
-technologies = JSON.parse(Cookies.get( 'technologies'));
-people = JSON.parse(Cookies.get( 'people'));
-craft = JSON.parse(Cookies.get( 'craft'));
-unlocked = JSON.parse(Cookies.get( 'unlocked'));
+items = update(items,JSON.parse(Cookies.get( 'items')));
+bonus = update(bonus,JSON.parse(Cookies.get( 'bonus')));
+buildings = update(buildings,JSON.parse(Cookies.get( 'buildings')));
+maximums = update(maximums,JSON.parse(Cookies.get( 'maximums')));
+technologies = update(technologies,items,JSON.parse(Cookies.get( 'technologies')));
+people = update(people,JSON.parse(Cookies.get( 'people')));
+craft = update(craft,JSON.parse(Cookies.get( 'craft')));
+unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 population = Cookies.get('population');
 population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["pikeman"]+people["swordman"]
 for(key in unlocked){
@@ -1169,3 +1169,12 @@ for(key in unlocked){
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;break;
 	}
 } 
+
+function update(array1, array2){
+
+for (key in array2){
+array1[key]=array2[key]
+}
+
+return array1
+}

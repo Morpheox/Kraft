@@ -1211,6 +1211,8 @@ for(key in unlocked){
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 	}
 	
+	maximums["morale"]=maximums["moral"]
+    maximums["moral"]=0
 	items["morale"]=items["moral"]
 	items["moral"]=0;
 } 

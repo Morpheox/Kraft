@@ -227,7 +227,7 @@ if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 }
 
 }
-if (b=="sword"){
+else if (b=="sword"){
 
 ironcost=10;
 
@@ -239,7 +239,7 @@ if (items["iron"]>=coppercost && items["iron"]>=ironcost){
 }
 
 }
-if (b=="block"){
+else if (b=="block"){
 
 woodcost=100;
 mineralcost=200;
@@ -253,7 +253,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 }
 
 }
-if (b=="coin"){
+else if (b=="coin"){
 
 goldcost=5
 

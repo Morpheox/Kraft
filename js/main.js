@@ -56,6 +56,7 @@ var population=0;
 var technologies=new Array()
 
 technologies["coppertools"]=0
+technologies["pickaxe"]=0
 technologies["spear"]=0
 technologies["exploration"]=0
 technologies["ironfoundry"]=0
@@ -68,10 +69,13 @@ var people=new Array();
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0
+people["miner"]=0
 people["pikeman"]=0
 people["swordman"]=0
 
 var craft=new Array();
+
+craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
 craft["block"]=0
@@ -192,7 +196,21 @@ alert("The expedition didn´t find anything useful.")
 }
 function crafting(b){
 
-if (b=="spear"){
+if (b=="pickaxe"){
+
+woodcost=20;
+coppercost=1;
+
+if (items["copper"]>=coppercost && items["wood"]>=woodcost){
+
+	items["copper"]-=coppercost;
+	items["wood"]-=woodcost;
+	craft["pickaxe"]++;
+
+}
+
+}
+else if (b=="spear"){
 
 woodcost=50;
 coppercost=3;
@@ -248,6 +266,26 @@ if (items["copper"]>=coppercost && technologies["coppertools"]==0){
 	bonus["mineral"]+=0.20;
 	technologies["coppertools"]++
 }
+
+}
+else if (b=="pickaxe"){
+
+woodcost=100;
+coppercost=3;
+
+
+if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["pickaxe"]==0){
+	items["copper"]-=coppercost;
+	items["wood"]-=woodcost;
+	technologies["pickaxe"]++
+	$("#craftingpane").removeClass("invisible")
+	$(".craft_pickaxe").show()
+	$(".hire_miner").show()
+        unlocked["#craftingpane"]=1;
+        unlocked[".craft_pickaxe"]=1;
+        unlocked[".hire_miner"]=1;
+}
+
 
 }
 else if (b=="spear"){
@@ -428,7 +466,21 @@ if (items["wood"]>=woodcost){
 }
 
 }
+else if (b=="miner"){
 
+foodcost=50;
+pickaxecost=1;
+
+if (items["food"]>=foodcost && craft["pickaxe"]>=pickaxecost){
+	items["food"]-=foodcost;
+	craft["pickaxe"]-=spearcost
+	people["miner"]+=1
+	population++
+	$(".fire_miner").show()
+        unlocked[".fire_miner"]=1;
+}
+
+}
 else if (b=="pikeman"){
 
 foodcost=50;
@@ -594,7 +646,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	buildings["library"]+=1;
 
 	switch(buildings["library"]){
-		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
+		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;break;
@@ -780,6 +832,14 @@ $(".hire_farmer").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)
 $(".hire_farmer").attr('tooltip2', "Food production: 0.40/s");
 
 foodcost=50
+pickaxecost=1
+$(".hire_miner").html("Miner ("+people["miner"]+")");
+$(".hire_miner").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".hire_miner").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".hire_miner").attr('tooltip3', "Food comsumption: -0.10/s");
+$(".hire_miner").attr('tooltip4', 'Mineral production +1/s');
+
+foodcost=50
 spearcost=1
 $(".hire_pikeman").html("Pikeman ("+people["pikeman"]+")");
 $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
@@ -802,6 +862,14 @@ coppercost=1;
 $(".tech_coppertools").html("Copper tools" + (technologies["coppertools"] >0 ? " (researched)" : ""));
 $(".tech_coppertools").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".tech_coppertools").attr('tooltip2', "Increments wood and mineral production by 20%");
+
+woodcost=100;
+coppercost=3;
+
+$(".tech_pickaxe").html("Pickaxe" + (technologies["pickaxe"] >0 ? " (researched)" : ""));
+$(".tech_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".tech_pickaxe").attr('tooltip3', "Allows the crafting of pickaxes and hiring of miners");
 
 woodcost=200;
 coppercost=5;
@@ -860,6 +928,12 @@ $(".tech_currency").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(
 $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 //crafting
 
+woodcost=20;
+coppercost=1;
+$(".craft_pickaxe").html("pickaxe");
+$(".craft_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".craft_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".craft_pickaxe").attr('tooltip3', "Basic copper pickaxe");
 
 woodcost=50;
 coppercost=3;
@@ -937,7 +1011,11 @@ if (items["food"]>=people["woodcutter"]/40)
 comsumption["food"]+=people["woodcutter"]/40
 production["wood"]+=people["woodcutter"]/4
 }
-
+if (items["food"]>=people["miner"]/40)
+{
+comsumption["food"]+=people["miner"]/40
+production["mineral"]+=people["miner"]/4
+}
 if (items["mineral"]>=people["smelter"]/20 && items["food"]>=people["smelter"]/40)
 {
 comsumption["mineral"]+=people["smelter"]/20
@@ -1083,5 +1161,11 @@ for(key in unlocked){
     {
     $(key).show().removeClass("invisible")
     }
-} 
+}
+	switch(buildings["library"]){
+		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
+		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
+		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
+		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;break;
+	}
 } 

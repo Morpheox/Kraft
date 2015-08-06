@@ -58,11 +58,12 @@
 			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
 			<div class="block hire_smelter"></div><button class="fire fire_smelter" onclick='fire("smelter")'>Fire 1</button><br>
 			<div class="block hire_farmer"></div><button class="fire fire_farmer" onclick='fire("farmer")'>Fire 1</button><br>
-
+			<div class="block hire_miner"></div><button class="fire fire_miner" onclick='fire("miner")'>Fire 1</button><br>
 		</div>
 		<div id="technologies" class="technologies tab-pane fade">
 
 			<div class="block tech_coppertools"></div><br>
+			<div class="block tech_pickaxe"></div><br>
 			<div class="block tech_spear"></div><br>
 			<div class="block tech_exploration"></div><br>
 			<div class="block tech_ironfoundry"></div><br>
@@ -75,6 +76,7 @@
 
 	<div  id="crafting" class="crafting tab-pane fade">
 
+		<div class="block craft_pickaxe"></div><br>
 		<div class="block craft_spear"></div><br>
 		<div class="block craft_sword"></div><br>
 		<div class="block craft_block"></div><br>
@@ -121,7 +123,9 @@
 	$(".hire_farmer").click(function() {hire("farmer")});
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
+	$(".hire_miner").click(function() {hire("miner")});
 	$(".tech_coppertools").click(function() {research("coppertools")});
+	$(".tech_pickaxe").click(function() {research("pickaxe")});
 	$(".tech_spear").click(function() {research("spear")});
 	$(".tech_exploration").click(function() {research("exploration")});
 	$(".tech_ironfoundry").click(function() {research("ironfoundry")});
@@ -129,6 +133,7 @@
 	$(".tech_currency").click(function() {research("currency")});
 	$(".tech_sword").click(function() {research("sword")});
 	$(".tech_storage").click(function() {research("storage")});
+	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
 	$(".craft_sword").click(function() {crafting("sword")});
 	$(".craft_block").click(function() {crafting("block")});

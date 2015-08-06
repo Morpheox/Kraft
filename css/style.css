@@ -1,0 +1,70 @@
+html,body{
+margin:0;
+padding:0;
+}
+
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+
+  .block{
+  	border:1px solid black;
+  	cursor:pointer;
+  	padding:5px;
+  	width:200px;
+    margin-top:10px;
+    display: inline-block;
+  }
+
+  .block:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(tooltip) "\A" attr(tooltip2) "\A" attr(tooltip3) "\A" attr(tooltip4) "\A" attr(tooltip5) "\A" attr(tooltip6) "\A" attr(tooltip7);;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: auto;
+    height:auto;
+     white-space: pre;
+}
+
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers{
+	float:left;
+	position: relative;
+	padding:25px;
+
+}
+
+.fire{
+margin-left:5px;
+display: inline;
+font-size:10px;
+}
+.toggle{
+margin-left:5px;
+display: inline;
+font-size:10px;
+}
+.off{
+  background-color:rgba(255,0,0,0.5);
+}
+.invisible{
+  visibility: hidden;
+  width:0;
+}
+.betresult{
+    font-size:40px;
+    text-align:center
+}
+.casino{
+    border:1px solid black;
+    padding:15px;
+    float:left;
+}
+
+.infokraft{
+    float:right
+}

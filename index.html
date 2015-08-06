@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kraft v0.01</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+
+	<script type="text/javascript" src="jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/js-cookie.js"></script>
+	<!--<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="js/json_parse.js"></script>-->
+	<script type="text/javascript" src="js/json-array.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</head>
+<body>
+    <div class="infokraft">Kraft v0.01 Created by Ernesto Mayoral emayoralc@gmail.com</div>
+	<div class="population"></div>
+        <button onclick="save()">Save</button>
+        
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#build">Buildings</a></li>
+		<li id="jobspane"><a data-toggle="tab" href="#jobs">Jobs</a></li>
+		<li id="technologiespane"><a data-toggle="tab" href="#technologies">Technologies</a></li>
+		<li id="craftingpane"><a data-toggle="tab" href="#crafting">Crafting</a></li>
+		<li id="militarypane"><a data-toggle="tab" href="#military">Military</a></li>
+		<li id="casinopane"><a data-toggle="tab" href="#casino">Casino</a></li>
+	</ul>
+	<br><br>
+
+	<div class="inventory">
+	</div>
+	<div class="inventory_craft">
+	</div>
+
+
+	<div class="tab-content">
+
+		<div id="build" class="build tab-pane fade in active">
+			<div class="block build_lumbermill"></div><br>
+			<div class="block build_mine"></div><br>
+			<div class="block build_warehouse"></div><br>
+			<div class="block build_fountain"></div><br>
+			<div class="block build_pasture"></div><button class="toggle toggle_pasture" onclick='toggle("pasture")'>Toggle</button><br>
+			<div class="block build_house"></div><br>
+			<div class="block build_library"></div><br>
+			<div class="block build_banner"></div><br>
+			<div class="block build_foundry"></div><button class="toggle toggle_foundry" onclick='toggle("foundry")'>Toggle</button><br>
+			<div class="block build_barn"></div><br>
+			<div class="block build_casino"></div><br>
+
+		</div>
+		<div id="jobs" class="people tab-pane fade">
+			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
+			<div class="block hire_smelter"></div><button class="fire fire_smelter" onclick='fire("smelter")'>Fire 1</button><br>
+			<div class="block hire_farmer"></div><button class="fire fire_farmer" onclick='fire("farmer")'>Fire 1</button><br>
+
+		</div>
+		<div id="technologies" class="technologies tab-pane fade">
+
+			<div class="block tech_coppertools"></div><br>
+			<div class="block tech_spear"></div><br>
+			<div class="block tech_exploration"></div><br>
+			<div class="block tech_ironfoundry"></div><br>
+			<div class="block tech_metallurgy"></div><br>
+			<div class="block tech_sword"></div><br>
+			<div class="block tech_storage"></div><br>
+			<div class="block tech_currency"></div><br>
+		</div>
+
+
+	<div  id="crafting" class="crafting tab-pane fade">
+
+		<div class="block craft_spear"></div><br>
+		<div class="block craft_sword"></div><br>
+		<div class="block craft_block"></div><br>
+	</div>
+	<div id="military" class="soldiers tab-pane fade">
+		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
+		<div class="block hire_swordman"></div><button class="fire fire_swordman" onclick='fire("swordman")'>Fire 1</button><br>
+		<div class="block expedition"></div><br>
+	</div>
+	<div id="casino" class="casino tab-pane fade">
+	<div class="betresult"></div>
+	Amount to bet:<input type="number" class="betamount"></input><br>
+	<button onclick="bet('low')">Bet low</button> <button onclick="bet('high')">Bet high</button>
+        <div class="casinolog"></div>
+	</div>
+	</div>
+</body>
+<script>
+	setInterval(function(){ refresh()}, 250);
+        setInterval(function(){ save()}, 20000);
+
+
+
+
+
+
+
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane").addClass("invisible");
+	$(".block, .fire, .population,.toggle").hide()
+	$(".build_lumbermill").click(function() {build("lumbermill")});
+	$(".build_lumbermill").show()
+	$(".build_pasture").click(function() {build("pasture")});
+	$(".build_mine").click(function() {build("mine")});
+	$(".build_warehouse").click(function() {build("warehouse")});
+	$(".build_fountain").click(function() {build("fountain")});
+	$(".build_library").click(function() {build("library")});
+	$(".build_banner").click(function() {build("banner")});
+	$(".build_house").click(function() {build("house")});
+	$(".build_foundry").click(function() {build("foundry")});
+	$(".build_barn").click(function() {build("barn")});
+	$(".build_casino").click(function() {build("casino")});
+	$(".hire_woodcutter").click(function() {hire("woodcutter")});
+	$(".hire_smelter").click(function() {hire("smelter")});
+	$(".hire_farmer").click(function() {hire("farmer")});
+	$(".hire_pikeman").click(function() {hire("pikeman")});
+	$(".hire_swordman").click(function() {hire("swordman")});
+	$(".tech_coppertools").click(function() {research("coppertools")});
+	$(".tech_spear").click(function() {research("spear")});
+	$(".tech_exploration").click(function() {research("exploration")});
+	$(".tech_ironfoundry").click(function() {research("ironfoundry")});
+	$(".tech_metallurgy").click(function() {research("metallurgy")});
+	$(".tech_currency").click(function() {research("currency")});
+	$(".tech_sword").click(function() {research("sword")});
+	$(".tech_storage").click(function() {research("storage")});
+	$(".craft_spear").click(function() {crafting("spear")});
+	$(".craft_sword").click(function() {crafting("sword")});
+	$(".craft_block").click(function() {crafting("block")});
+	$(".expedition").click(function() {expedition()});
+        
+        
+         load();
+</script>
+
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</html>

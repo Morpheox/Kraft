@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.01</title>
+	<title>Kraft v0.02</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.01 Created by Ernesto Mayoral emayoralc@gmail.com</div>
+    <div class="infokraft">Kraft v0.02 Created by Ernesto Mayoral emayoralc@gmail.com</div>
 	<div class="population"></div>
         <button onclick="save()">Save</button>
         
@@ -29,6 +29,7 @@
 		<li id="craftingpane"><a data-toggle="tab" href="#crafting">Crafting</a></li>
 		<li id="militarypane"><a data-toggle="tab" href="#military">Military</a></li>
 		<li id="casinopane"><a data-toggle="tab" href="#casino">Casino</a></li>
+		<li id="marketpane"><a data-toggle="tab" href="#market">Market</a></li>
 	</ul>
 	<br><br>
 
@@ -52,7 +53,7 @@
 			<div class="block build_foundry"></div><button class="toggle toggle_foundry" onclick='toggle("foundry")'>Toggle</button><br>
 			<div class="block build_barn"></div><br>
 			<div class="block build_casino"></div><br>
-
+			<div class="block build_market"></div><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
 			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
@@ -72,6 +73,7 @@
 			<div class="block tech_storage"></div><br>
 			<div class="block tech_currency"></div><br>
 			<div class="block tech_coin"></div><br>
+			<div class="block tech_exchange"></div><br>
 		</div>
 
 
@@ -95,6 +97,12 @@
 	<button onclick="bet('low')">Bet low</button> <button onclick="bet('high')">Bet high</button>
         <div class="casinolog"></div>
 	</div>
+	<div id="market" class="market tab-pane fade">
+	All trades cost 1 coin: <br><br>
+	<div class="trade_wood"></div><br>
+	<div class="trade_mineral"></div><br>
+	<div class="trade_food"></div><br>
+	</div>
 	</div>
 </body>
 <script>
@@ -107,7 +115,7 @@
 
 
 
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane").addClass("invisible");
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane").addClass("invisible");
 	$(".block, .fire, .population,.toggle").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -121,6 +129,7 @@
 	$(".build_foundry").click(function() {build("foundry")});
 	$(".build_barn").click(function() {build("barn")});
 	$(".build_casino").click(function() {build("casino")});
+	$(".build_market").click(function() {build("market")});
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
 	$(".hire_farmer").click(function() {hire("farmer")});
@@ -134,6 +143,7 @@
 	$(".tech_ironfoundry").click(function() {research("ironfoundry")});
 	$(".tech_metallurgy").click(function() {research("metallurgy")});
 	$(".tech_currency").click(function() {research("currency")});
+	$(".tech_exchange").click(function() {research("exchange")});
 	$(".tech_coin").click(function() {research("coin")});
 	$(".tech_sword").click(function() {research("sword")});
 	$(".tech_storage").click(function() {research("storage")});
@@ -144,6 +154,9 @@
 	$(".craft_coin").click(function() {crafting("coin")});
 	$(".expedition").click(function() {expedition()});
         
+    $(".trade_wood").click(function() {trade("wood")});
+    $(".trade_mineral").click(function() {trade("mineral")});
+    $(".trade_food").click(function() {trade("food")});
         
          load();
 </script>

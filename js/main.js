@@ -1555,7 +1555,7 @@ people = update(people,JSON.parse(Cookies.get( 'people')));
 craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 population = Cookies.get('population');
-population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["pikeman"]+people["swordman"]
+population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["pikeman"]+people["swordman"]
 for(key in unlocked){
     if (unlocked[key]==1)
     {

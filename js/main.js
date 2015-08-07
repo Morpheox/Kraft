@@ -284,7 +284,7 @@ else if (b=="bronze"){
 coppercost=40
 tincost=10
 
-if (items["copper "]>=coppercost && items["tin"]>=tincost){
+if (items["copper"]>=coppercost && items["tin"]>=tincost){
 
 	items["copper"]-=coppercost;
 	items["tin"]-=tincost;

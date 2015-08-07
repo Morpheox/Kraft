@@ -781,8 +781,8 @@ else if (b=="market"){
 woodcost= Math.pow(1.6,(buildings["market"]))*500
 coincost= Math.pow(1.6,(buildings["market"]))*1
 
-if (craft["block"]>=blockcost && items["gold"]>=goldcost){
-	craft["block"]-=blockcost;
+if (items["wood"]>=woodcost && items["gold"]>=goldcost){
+	items["wood"]-=woodcost;
 	items["gold"]-=goldcost
 
 	bonus["market"]+=0.05

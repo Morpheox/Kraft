@@ -903,7 +903,7 @@ if (craft["bronze"]>=bronzecost){
 	bonus["morale"]+=0.05;
 
 
-
+	buildings["statue"]+=1
 }
 }
 }
@@ -1492,7 +1492,7 @@ for(key in unlocked){
 
 	//END RETROCOMPATIBILITY
 
-	
+
 save()
 } 
 

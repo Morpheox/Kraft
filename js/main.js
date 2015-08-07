@@ -459,6 +459,8 @@ if (items["iron"]>=ironcost  && items["mineral"]>=mineralcost  && items["wood"]>
 
 	items["wood"]-=foodcost;
 	items["mineral"]-=mineralcost;
+	items["iron"]-=ironcost;
+	
 	technologies["storage"]++
 
 	$("#craftingpane").removeClass("invisible")

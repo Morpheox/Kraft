@@ -33,6 +33,7 @@ buildings["foundry"]=0;
 buildings["barn"]=0;
 buildings["casino"]=0;
 buildings["market"]=0;
+buildings["kiln"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -68,6 +69,7 @@ technologies["storage"]=0
 technologies["currency"]=0
 technologies["coin"]=0
 technologies["exchange"]=0
+technologies["charcoal"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -478,6 +480,22 @@ if (craft["coin"]>=coincost && items["food"]>=foodcost){
 }
 
 }
+else if (b=="charcoal" && technologies["charcoal"]==0){
+
+woodcost=4000
+mineralcost=2000
+
+if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+
+	items["wood"]-=woodcost;
+	items["mineral"]-=mineralcost
+	technologies["exchange"]++
+
+	$(".build_kiln").show()
+    unlocked[".build_kiln"]=1;
+}
+
+}
 }
 
 function hire(b){
@@ -706,6 +724,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
+		case 5: $(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
 	}
 	
 }
@@ -790,6 +809,21 @@ if (items["wood"]>=woodcost && craft["coin"]>=coincost){
 	$("#marketpane").removeClass("invisible")
     unlocked["#marketpane"]=1
 	buildings["market"]+=1
+
+
+}
+}
+else if (b=="kiln"){
+
+blockcost= Math.pow(1.6,(buildings["kiln"]))*15
+mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
+
+if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
+	items["mineral"]-=mineralcost;
+	craft["block"]-=blockcost;
+    $(".toggle_kiln").show()
+	unlocked[".toggle_kiln"]=1
+	buildings["kiln"]+=1
 
 
 }
@@ -888,6 +922,16 @@ $(".build_market").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2
 $(".build_market").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".build_market").attr('tooltip3', 'Allows trading');
 $(".build_market").attr('tooltip4', '+5% market trade effiency');
+
+blockcost= Math.pow(1.6,(buildings["kiln"]))*15
+mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
+
+$(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
+$(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".build_kiln").attr('tooltip3', 'Wood comsumption: -2/s');
+$(".build_kiln").attr('tooltip4', 'Coal production: 0.01/s');
+
 
 
 //People
@@ -1007,14 +1051,6 @@ $(".tech_currency").html("Currency" + (technologies["currency"] >0 ? " (research
 $(".tech_currency").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 
-foodcost=800
-coincost=3
-$(".tech_exchange").html("Exchange" + (technologies["exchange"] >0 ? " (researched)" : ""));
-$(".tech_exchange").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
-$(".tech_exchange").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".tech_exchange").attr('tooltip3', "Allow the construction of markets");
-//crafting
-
 ironcost=20;
 goldcost=10;
 $(".tech_coin").html("Coin forging" + (technologies["coin"] >0 ? " (researched)" : ""));
@@ -1022,6 +1058,23 @@ $(".tech_coin").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+"
 $(".tech_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_coin").attr('tooltip2', "Allows forging gold coins");
 
+foodcost=800
+coincost=3
+$(".tech_exchange").html("Exchange" + (technologies["exchange"] >0 ? " (researched)" : ""));
+$(".tech_exchange").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".tech_exchange").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_exchange").attr('tooltip3', "Allow the construction of markets");
+
+
+woodcost=4000
+mineralcost=2000
+$(".tech_charcoal").html("Charcoal" + (technologies["charcoal"] >0 ? " (researched)" : ""));
+$(".tech_charcoal").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_charcoal").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_charcoal").attr('tooltip3', "Unlocks kilns");
+
+
+//crafting
 woodcost=20;
 coppercost=1;
 $(".craft_pickaxe").html("Pickaxe");
@@ -1105,6 +1158,12 @@ if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 {
 comsumption["mineral"]+=buildings["foundry"]/8
 production["iron"]=buildings["foundry"]/200;
+
+}
+if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
+{
+comsumption["wood"]+=buildings["kiln"]/2
+production["coal"]=buildings["kiln"]/400;
 
 }
 //people
@@ -1303,6 +1362,7 @@ for(key in unlocked){
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
+		case 5: $(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
 	}
 	
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)

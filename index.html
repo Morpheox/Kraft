@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.02</title>
+	<title>Kraft v0.02.5</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.02 Created by Ernesto Mayoral emayoralc@gmail.com</div>
+    <div class="infokraft">Kraft v0.02.5 Created by Ernesto Mayoral emayoralc@gmail.com</div>
 	<div class="population"></div>
         <button onclick="save()">Save</button>
         
@@ -54,6 +54,7 @@
 			<div class="block build_barn"></div><br>
 			<div class="block build_casino"></div><br>
 			<div class="block build_market"></div><br>
+			<div class="block build_kiln"></div><button class="toggle toggle_kiln" onclick='toggle("kiln")'>Toggle</button><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
 			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
@@ -74,6 +75,7 @@
 			<div class="block tech_currency"></div><br>
 			<div class="block tech_coin"></div><br>
 			<div class="block tech_exchange"></div><br>
+			<div class="block tech_charcoal"></div><br>
 		</div>
 
 
@@ -130,6 +132,7 @@
 	$(".build_barn").click(function() {build("barn")});
 	$(".build_casino").click(function() {build("casino")});
 	$(".build_market").click(function() {build("market")});
+	$(".build_kiln").click(function() {build("kiln")});
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
 	$(".hire_farmer").click(function() {hire("farmer")});
@@ -147,6 +150,7 @@
 	$(".tech_coin").click(function() {research("coin")});
 	$(".tech_sword").click(function() {research("sword")});
 	$(".tech_storage").click(function() {research("storage")});
+	$(".tech_charcoal").click(function() {research("charcoal")});
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
 	$(".craft_sword").click(function() {crafting("sword")});

@@ -1266,6 +1266,8 @@ function bet(b){
 }
 function save(){
 	
+document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+
 Cookies.set( 'items', JSON.stringify(items) ,{ expires: 9999 });
 Cookies.set( 'bonus', JSON.stringify(bonus) ,{ expires: 9999 });
 Cookies.set( 'buildings', JSON.stringify(buildings) ,{ expires: 9999 });
@@ -1279,6 +1281,7 @@ Cookies.set('population', population,{ expires: 9999 });
 
 function load(){
     
+
 items = update(items,JSON.parse(Cookies.get( 'items')));
 bonus = update(bonus,JSON.parse(Cookies.get( 'bonus')));
 buildings = update(buildings,JSON.parse(Cookies.get( 'buildings')));

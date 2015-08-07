@@ -10,6 +10,7 @@ items["copper"]=0;
 items["gold"]=0;
 items["iron"]=0;
 items["coal"]=0;
+items["tin"]=0;
 items["steel"]=0;
 items["morale"]=0;
 
@@ -70,6 +71,7 @@ technologies["currency"]=0
 technologies["coin"]=0
 technologies["exchange"]=0
 technologies["charcoal"]=0
+technologies["bronze"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -86,6 +88,7 @@ craft["spear"]=0
 craft["sword"]=0
 craft["block"]=0
 craft["coin"]=0
+craft["bronze"]=0
 
 var unlocked=new Array();
 
@@ -276,7 +279,21 @@ if (items["gold"]>=goldcost){
 }
 
 }
+else if (b=="bronze"){
 
+coppercost=40
+tincost=10
+
+if (items["copper "]>=coppercost && items["tin"]>=tincost){
+
+	items["copper"]-=coppercost;
+	items["tin"]-=tincost;
+
+	craft["bronze"]++;
+
+}
+
+}
 
 }
 
@@ -480,6 +497,24 @@ if (craft["coin"]>=coincost && items["food"]>=foodcost){
 }
 
 }
+else if (b=="bronze" && technologies["bronze"]==0){
+
+ironcost=40;
+coppercost=40;
+
+if (items["iron"]>=ironcost && items["copper"]>=coppercost){
+
+	items["iron"]-=ironcost;
+	items["copper"]-=coppercost
+
+	technologies["bronze"]++
+
+	$(".craft_bronze").show()
+    unlocked[".craft_bronze"]=1;
+
+}
+
+}
 else if (b=="charcoal" && technologies["charcoal"]==0){
 
 woodcost=4000
@@ -647,6 +682,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	maximums["copper"]+=5;
 	maximums["gold"]+=1;
 	maximums["iron"]+=5;
+	maximums["tin"]+=4;
 	maximums["coal"]+=5;
 	maximums["steel"]+=3;
 
@@ -724,7 +760,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-		case 5: $(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
+		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
 	}
 	
 }
@@ -837,14 +873,14 @@ function calculatecost(){
 woodcost= Math.pow(1.3,(buildings["lumbermill"]))*3
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
-$(".build_lumbermill").attr('tooltip2', "Wood production: 0.20/s");
+$(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
 
 woodcost= Math.pow(1.3,(buildings["mine"]))*2
 mineralcost=Math.pow(1.3, (buildings["mine"]))*5
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
-$(".build_mine").attr('tooltip3', "Mineral production: 0.20/s");
+$(".build_mine").attr('tooltip3', "Mineral production: +0.20/s");
 
 woodcost= Math.pow(1.7,(buildings["warehouse"]))*20
 mineralcost=Math.pow(1.7, (buildings["warehouse"]))*10
@@ -857,14 +893,14 @@ $(".build_warehouse").attr('tooltip3', "Increments storage space for basic mater
 mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
 $(".build_fountain").html("Fountain ("+buildings["fountain"]+")");
 $(".build_fountain").attr('tooltip',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
-$(".build_fountain").attr('tooltip2', "Water production: 0.40/s");
+$(".build_fountain").attr('tooltip2', "Water production: +0.40/s");
 $(".build_fountain").attr('tooltip3', "Water storage: 5");
 
 woodcost= Math.pow(1.4,(buildings["pasture"]))*10
 $(".build_pasture").html("Pasture ("+buildings["pasture"]+")");
 $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_pasture").attr('tooltip2', "Water comsumption: -0.20/s");
-$(".build_pasture").attr('tooltip3', "Food production: 0.20/s");
+$(".build_pasture").attr('tooltip3', "Food production: +0.20/s");
 
 woodcost= Math.pow(1.9,(buildings["house"]))*20
 mineralcost=Math.pow(1.9, (buildings["house"]))*50
@@ -897,8 +933,10 @@ $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_foundry").attr('tooltip3', "Mineral comsumption: -0.50/s");
-$(".build_foundry").attr('tooltip4', "Iron production: 0.02/s");
-
+$(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
+if(technologies["bronze"]>0){
+$(".build_foundry").attr('tooltip5', "Tin production: +0.01/s");
+}
 blockcost= Math.pow(1.5,(buildings["barn"]))*5
 $(".build_barn").html("Barn ("+buildings["barn"]+")");
 $(".build_barn").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -929,8 +967,8 @@ mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
 $(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
 $(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
-$(".build_kiln").attr('tooltip3', 'Wood comsumption: -2/s');
-$(".build_kiln").attr('tooltip4', 'Coal production: 0.01/s');
+$(".build_kiln").attr('tooltip3', 'Wood comsumption: -2.00/s');
+$(".build_kiln").attr('tooltip4', 'Coal production: +0.01/s');
 
 
 
@@ -939,22 +977,22 @@ foodcost=50;
 $(".hire_woodcutter").html("Woodcutter ("+people["woodcutter"]+")");
 $(".hire_woodcutter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_woodcutter").attr('tooltip2', "Food comsumption: -0.10/s");
-$(".hire_woodcutter").attr('tooltip3', "Wood production: 1.00/s");
+$(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
 
 foodcost=50;
 $(".hire_smelter").html("Smelter ("+people["smelter"]+")");
 $(".hire_smelter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_smelter").attr('tooltip2', "Mineral comsumption: -0.20/s");
 $(".hire_smelter").attr('tooltip3', "Food comsumption: -0.10/s");
-$(".hire_smelter").attr('tooltip4', "Copper production: 0.01/s");
+$(".hire_smelter").attr('tooltip4', "Copper production: +0.01/s");
 if(technologies["metallurgy"]>0){
-$(".hire_smelter").attr('tooltip5', "Gold production: 0.001/s");	
+$(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
 }
 
 woodcost=50
 $(".hire_farmer").html("Farmer ("+people["farmer"]+")");
 $(".hire_farmer").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
-$(".hire_farmer").attr('tooltip2', "Food production: 0.40/s");
+$(".hire_farmer").attr('tooltip2', "Food production: +0.40/s");
 
 foodcost=50
 pickaxecost=1
@@ -962,7 +1000,7 @@ $(".hire_miner").html("Miner ("+people["miner"]+")");
 $(".hire_miner").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_miner").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".hire_miner").attr('tooltip3', "Food comsumption: -0.10/s");
-$(".hire_miner").attr('tooltip4', 'Mineral production +1/s');
+$(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=50
 spearcost=1
@@ -1065,6 +1103,13 @@ $(".tech_exchange").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(
 $(".tech_exchange").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_exchange").attr('tooltip3', "Allow the construction of markets");
 
+ironcost=40;
+coppercost=40;
+$(".tech_bronze").html("Bronze" + (technologies["bronze"] >0 ? " (researched)" : ""));
+$(".tech_bronze").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_bronze").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".tech_bronze").attr('tooltip3', "Allows foundrys to smelt a bit of tin");
+$(".tech_bronze").attr('tooltip4', "Unlocks bronze crafting");
 
 woodcost=4000
 mineralcost=2000
@@ -1106,6 +1151,13 @@ goldcost=5
 $(".craft_coin").html("Coin");
 $(".craft_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".craft_coin").attr('tooltip3', "Gold refined into a coin for future use.");
+
+coppercost=40
+tincost=10
+$(".craft_bronze").html("Bronze");
+$(".craft_bronze").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".craft_bronze").attr('tooltip2', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
+$(".craft_bronze").attr('tooltip3', "A refined alloy of copper and tin");
 //Others
 
 power=0
@@ -1158,7 +1210,9 @@ if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 {
 comsumption["mineral"]+=buildings["foundry"]/8
 production["iron"]=buildings["foundry"]/200;
-
+if(technologies["bronze"]>0){
+production["tin"]=buildings["foundry"]/400;
+}
 }
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 {
@@ -1362,15 +1416,21 @@ for(key in unlocked){
 		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-		case 5: $(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
+		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;break;
 	}
 	
+	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)
 	{
 	maximums["morale"]=maximums["moral"]
     maximums["moral"]=0
 	items["morale"]=items["moral"]
 	items["moral"]=0;
+	}
+
+	if(maximums["tin"]==0)
+	{
+	maximums["tin"]=buildings["warehouse"]*4;
 	}
 
 save()

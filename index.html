@@ -75,6 +75,7 @@
 			<div class="block tech_currency"></div><br>
 			<div class="block tech_coin"></div><br>
 			<div class="block tech_exchange"></div><br>
+			<div class="block tech_bronze"></div><br>
 			<div class="block tech_charcoal"></div><br>
 		</div>
 
@@ -86,6 +87,7 @@
 		<div class="block craft_sword"></div><br>
 		<div class="block craft_block"></div><br>
 		<div class="block craft_coin"></div><br>
+		<div class="block craft_bronze"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
@@ -151,11 +153,13 @@
 	$(".tech_sword").click(function() {research("sword")});
 	$(".tech_storage").click(function() {research("storage")});
 	$(".tech_charcoal").click(function() {research("charcoal")});
+	$(".tech_bronze").click(function() {research("bronze")});
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
 	$(".craft_sword").click(function() {crafting("sword")});
 	$(".craft_block").click(function() {crafting("block")});
 	$(".craft_coin").click(function() {crafting("coin")});
+	$(".craft_bronze").click(function() {crafting("bronze")});
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});

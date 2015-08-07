@@ -31,7 +31,7 @@ padding:0;
      white-space: pre;
 }
 
-.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers{
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market{
 	float:left;
 	position: relative;
 	padding:25px;

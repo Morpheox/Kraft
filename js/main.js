@@ -515,6 +515,28 @@ if (items["iron"]>=ironcost && items["copper"]>=coppercost){
 }
 
 }
+else if (b=="bronzetools" && technologies["bronzetools"]==0){
+
+bronzecost=2;
+
+if (craft["bronze"]>=bronzecost){
+
+	craft["bronze"]-=bronzecost;
+
+	bonus["wood"]+=0.2;
+	bonus["mineral"]+=0.2;
+	bonus["food"]+=0.2;
+	bonus["copper"]+=0.1;
+	bonus["iron"]+=0.1;
+	bonus["tin"]+=0.1;
+
+	technologies["bronzetools"]++
+
+
+
+}
+
+}
 else if (b=="charcoal" && technologies["charcoal"]==0){
 
 woodcost=4000
@@ -1110,6 +1132,12 @@ $(".tech_bronze").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)
 $(".tech_bronze").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".tech_bronze").attr('tooltip3', "Allows foundrys to smelt a bit of tin");
 $(".tech_bronze").attr('tooltip4', "Unlocks bronze crafting");
+
+bronzecost=2;
+$(".tech_bronzetools").html("Bronze tools" + (technologies["bronzetools"] >0 ? " (researched)" : ""));
+$(".tech_bronzetools").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".tech_bronzetools").attr('tooltip2', "Increments wood, mineral, and food production by 20%");
+$(".tech_bronzetools").attr('tooltip3', "Increments iron, copper, and tin production by 10%");
 
 woodcost=4000
 mineralcost=2000

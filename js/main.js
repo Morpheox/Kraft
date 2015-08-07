@@ -489,7 +489,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 
 	items["wood"]-=woodcost;
 	items["mineral"]-=mineralcost
-	technologies["exchange"]++
+	technologies["charcoal"]++
 
 	$(".build_kiln").show()
     unlocked[".build_kiln"]=1;

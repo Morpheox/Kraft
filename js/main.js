@@ -1378,7 +1378,7 @@ else if(b=="food"){
 function bet(b){
 
     var amountbet=parseFloat($(".betamount").val()).toFixed(2);
-    if(maximums["bet"]>=amountbet && items["gold"]>=amountbet){
+    if(amountbet>0 && maximums["bet"]>=amountbet && items["gold"]>=amountbet){
     items["gold"]-=amountbet;
     var rnd=Math.round(Math.random()*999)
     

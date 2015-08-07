@@ -957,7 +957,7 @@ $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toF
 $(".build_foundry").attr('tooltip3', "Mineral comsumption: -0.50/s");
 $(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
 if(technologies["bronze"]>0){
-$(".build_foundry").attr('tooltip5', "Tin production: +0.01/s");
+$(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
 }
 blockcost= Math.pow(1.5,(buildings["barn"]))*5
 $(".build_barn").html("Barn ("+buildings["barn"]+")");
@@ -1239,7 +1239,7 @@ if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 comsumption["mineral"]+=buildings["foundry"]/8
 production["iron"]=buildings["foundry"]/200;
 if(technologies["bronze"]>0){
-production["tin"]=buildings["foundry"]/400;
+production["tin"]=buildings["foundry"]/800;
 }
 }
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)

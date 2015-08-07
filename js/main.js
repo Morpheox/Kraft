@@ -71,7 +71,7 @@ technologies["currency"]=0
 technologies["coin"]=0
 technologies["exchange"]=0
 technologies["bronze"]=0
-technologies["bronzetools"]==0
+technologies["bronzetools"]=0
 technologies["charcoal"]=0
 
 

@@ -35,6 +35,8 @@ buildings["barn"]=0;
 buildings["casino"]=0;
 buildings["market"]=0;
 buildings["kiln"]=0;
+buildings["statue"]=0;
+
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -513,7 +515,8 @@ if (items["iron"]>=ironcost && items["copper"]>=coppercost){
 
 	$(".craft_bronze").show()
     unlocked[".craft_bronze"]=1;
-
+	$(".build_statue").show()
+    unlocked[".build_statue"]=1;
 }
 
 }
@@ -888,6 +891,21 @@ if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
 
 }
 }
+else if (b=="statue"){
+
+bronzecost= Math.pow(1.7,(buildings["statue"]))*1
+
+
+if (craft["bronze"]>=bronzecost){
+
+	craft["bronze"]-=bronzecost;
+	maximums["morale"]+=2;
+	bonus["morale"]+=0.05;
+
+
+
+}
+}
 }
 
 function calculatecost(){
@@ -994,7 +1012,11 @@ $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(
 $(".build_kiln").attr('tooltip3', 'Wood comsumption: -2.00/s');
 $(".build_kiln").attr('tooltip4', 'Coal production: +0.01/s');
 
-
+bronzecost= Math.pow(1.7,(buildings["statue"]))*1
+$(".build_statue").html("Statue ("+buildings["statue"]+")");
+$(".build_statue").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".build_statue").attr('tooltip2', 'Max morale +2');
+$(".build_statue").attr('tooltip3', 'Morale production +5%');
 
 //People
 foodcost=50;
@@ -1032,7 +1054,7 @@ $(".hire_pikeman").html("Pikeman ("+people["pikeman"]+")");
 $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip2', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip3', "Food comsumption: -0.10/s");
-$(".hire_pikeman").attr('tooltip4', 'morale production +0.01/s');
+$(".hire_pikeman").attr('tooltip4', 'Morale production +0.02/s');
 $(".hire_pikeman").attr('tooltip5', 'Power: 5');
 
 foodcost=150
@@ -1041,7 +1063,7 @@ $(".hire_swordman").html("Swordman ("+people["swordman"]+")");
 $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".hire_swordman").attr('tooltip3', "Food comsumption: -0.40/s");
-$(".hire_swordman").attr('tooltip4', 'morale production +0.02/s');
+$(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
 $(".hire_swordman").attr('tooltip5', 'Power: 10');
 //Technologies
 
@@ -1276,13 +1298,13 @@ production["gold"]+=people["smelter"]/4000
 if (items["food"]>=people["pikeman"]/40)
 {
 comsumption["food"]+=people["pikeman"]/40
-production["morale"]+=people["pikeman"]/400
+production["morale"]+=people["pikeman"]/200
 }
 
 if (items["food"]>=people["swordman"]/10)
 {
 comsumption["food"]+=people["swordman"]/10
-production["morale"]+=people["swordman"]/200
+production["morale"]+=people["swordman"]/400
 }
 
 
@@ -1463,6 +1485,14 @@ for(key in unlocked){
 	maximums["tin"]=buildings["warehouse"]*4;
 	}
 
+	if(technologies["bronze"]==1){
+	$(".build_statue").show()
+    unlocked[".build_statue"]=1;
+	}
+
+	//END RETROCOMPATIBILITY
+
+	
 save()
 } 
 

@@ -17,7 +17,7 @@ var bonus =new Array()
 for(key in items){
 bonus[key]=0;
 }
-bonus["market"]=0;
+bonus["trade"]=0;
 
 var buildings=new Array();
 
@@ -785,7 +785,7 @@ if (items["wood"]>=woodcost && items["gold"]>=goldcost){
 	items["wood"]-=woodcost;
 	items["gold"]-=goldcost
 
-	bonus["market"]+=0.05
+	bonus["trade"]+=0.05
 
 	$("#marketpane").removeClass("invisible")
     unlocked["#marketpane"]=1

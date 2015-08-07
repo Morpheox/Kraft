@@ -72,3 +72,12 @@ font-size:10px;
 .expeditionresult{
   margin-top:15px;
 }
+
+.trade{
+    border:1px solid black;
+    cursor:pointer;
+    padding:5px;
+    width:200px;
+    margin-top:10px;
+    display: inline-block;
+}

@@ -1291,7 +1291,7 @@ for(key in items){
 if(items[key]!=0){
 inv_text+=key+": "+parseFloat(items[key]).toFixed(2)+" / "+ maximums[key]+" ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+") ";
 if (bonus[key]>0){
-	inv_text+= "<span class='bonus'>+ "+parseFloat(bonus[key]*100).toFixed(2)+"%<span>";
+	inv_text+= "<span class='bonus'>+"+parseFloat(bonus[key]*100).toFixed(2)+"%</span>";
 }
 
 inv_text+="<br>"

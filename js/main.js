@@ -846,8 +846,8 @@ $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
 $(".build_mine").attr('tooltip3', "Mineral production: 0.20/s");
 
-woodcost= Math.pow(1.8,(buildings["warehouse"]))*20
-mineralcost=Math.pow(1.8, (buildings["warehouse"]))*10
+woodcost= Math.pow(1.7,(buildings["warehouse"]))*20
+mineralcost=Math.pow(1.7, (buildings["warehouse"]))*10
 $(".build_warehouse").html("Warehouse ("+buildings["warehouse"]+")");
 $(".build_warehouse").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_warehouse").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )

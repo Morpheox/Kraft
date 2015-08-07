@@ -1212,15 +1212,15 @@ trademineral=400*(bonus["trade"]+1)
 tradefood=300*(bonus["trade"]+1)
 
 if(b=="wood"){
-	items["wood"]+=tradewood
+	items["wood"]+=Math.round(tradewood)
 	craft["coin"]-=1
 }
 else if(b=="mineral"){
-	items["mineral"]+=trademineral
+	items["mineral"]+=Math.round(trademineral)
 	craft["coin"]-=1
 }
 else if(b=="food"){
-	items["food"]+=tradefood
+	items["food"]+=Math.round(tradefood)
 	craft["coin"]-=1
 }
 
@@ -1309,6 +1309,8 @@ for(key in unlocked){
 	items["morale"]=items["moral"]
 	items["moral"]=0;
 	}
+
+save()
 } 
 
 function update(array1, array2){

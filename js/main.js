@@ -634,8 +634,8 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 }
 else if (b=="warehouse"){
 
-woodcost= Math.pow(1.7,(buildings["warehouse"]))*20
-mineralcost=Math.pow(1.7, (buildings["warehouse"]))*10
+woodcost= Math.pow(1.8,(buildings["warehouse"]))*20
+mineralcost=Math.pow(1.8, (buildings["warehouse"]))*10
 
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["wood"]-=woodcost;

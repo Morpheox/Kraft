@@ -1541,13 +1541,14 @@ $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
 
 
-var inv_text=""
+var inv_text="<table>"
 for(key in craft){
 if(craft[key]!=0){
-inv_text+=key+": "+parseFloat(craft[key]).toFixed(2);
-inv_text+="<br>"
+inv_text+="<tr><td>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
+inv_text+="</td></tr>"
 }
 }
+inv_text+="</table>"
 $(".inventory_craft").html(inv_text);
 /*var people_text=""
 for(key in people){

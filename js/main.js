@@ -1311,8 +1311,8 @@ ironcost=20;
 goldcost=10;
 $(".tech_coin").html("Coin forging" + (technologies["coin"] >0 ? " (researched)" : ""));
 $(".tech_coin").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
-$(".tech_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
-$(".tech_coin").attr('tooltip2', "Allows forging gold coins");
+$(".tech_coin").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_coin").attr('tooltip3', "Allows forging gold coins");
 
 foodcost=800
 coincost=3

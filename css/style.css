@@ -16,7 +16,7 @@ padding:0;
     margin-top:10px;
     display: inline-block;
   }
-  .block[style*="display:none"]{
+  .block[style*="display: none;"]{
     padding:0px;
     margin-top:0px;
     width:0px;
@@ -34,7 +34,7 @@ padding:0;
     height:auto;
      white-space: pre;
 }
-.block[style*="display:none"] + br{
+.block[style*="display: none;"] + br{
   display: none;
 }
 .inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market{

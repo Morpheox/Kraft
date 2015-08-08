@@ -1319,7 +1319,7 @@ $(".tech_sword").attr('tooltip3', "Allows the crafting of Iron Swords and the hi
 woodcost=500
 mineralcost=500
 ironcost=20
-$(".tech_storage").html("Storage management" + (technologies["storage"] >0 ? " (researched)" : ""));
+$(".tech_storage").html("Storage management" + (technologies["storage"] >0 ? " (res...)" : ""));
 $(".tech_storage").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_storage").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_storage").attr('tooltip3', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))

@@ -1353,8 +1353,8 @@ steelcost=5;
 coincost=5;
 $(".tech_manufacturing").html("Manufacturing" + (technologies["manufacturing"] >0 ? " (researched)" : ""));
 $(".tech_manufacturing").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".tech_manufacturing").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".tech_manufacturing").attr('tooltip2', "Enhances crafting by allowing the building of workbenchs");
+$(".tech_manufacturing").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_manufacturing").attr('tooltip3', "Enhances crafting by allowing the building of workbenchs");
 
 
 

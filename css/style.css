@@ -34,7 +34,9 @@ padding:0;
     height:auto;
      white-space: pre;
 }
-
+.block[style*="display:none"] + br{
+  display: none;
+}
 .inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market{
 	float:left;
 	position: relative;

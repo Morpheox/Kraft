@@ -37,6 +37,17 @@ padding:0;
 	padding:25px;
 
 }
+.inventory{
+  width:300px;
+}
+.inventory td{
+  padding:1px;
+}
+
+.bonus{
+  color:green;
+  font-size:12px;
+}
 
 .fire{
 margin-left:5px;
@@ -85,4 +96,5 @@ font-size:10px;
 .bonus{
   color:green;
   font-size:12px;
+    text-align:right;
 }

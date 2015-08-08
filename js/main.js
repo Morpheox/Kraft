@@ -768,7 +768,7 @@ if (people[b]>0){
 function build(b){
 if (b=="lumbermill"){
 
-woodcost= Math.pow(1.3,(buildings["lumbermill"]))*3
+woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 
 if (items["wood"]>=woodcost){
 	items["wood"]-=woodcost;
@@ -780,8 +780,8 @@ if (items["wood"]>=woodcost){
 }
 else if (b=="mine"){
 
-woodcost= Math.pow(1.3,(buildings["mine"]))*2
-mineralcost=Math.pow(1.3, (buildings["mine"]))*5
+woodcost= Math.pow(1.1,(buildings["mine"]))*2
+mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
 
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["wood"]-=woodcost;
@@ -796,8 +796,8 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 }
 else if (b=="warehouse"){
 
-woodcost= Math.pow(1.7,(buildings["warehouse"]))*20
-mineralcost=Math.pow(1.7, (buildings["warehouse"]))*10
+woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
+mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
 
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["wood"]-=woodcost;
@@ -848,9 +848,9 @@ if (items["wood"]>=woodcost){
 }
 else if (b=="house"){
 
-woodcost= Math.pow(1.9,(buildings["house"]))*20
-mineralcost=Math.pow(1.9, (buildings["house"]))*50
-foodcost=Math.pow(1.9, (buildings["house"]))*15
+woodcost= Math.pow(1.8,(buildings["house"]))*20
+mineralcost=Math.pow(1.8, (buildings["house"]))*50
+foodcost=Math.pow(1.8, (buildings["house"]))*15
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && items["food"]>=foodcost ){
 	items["wood"]-=woodcost;
 	items["mineral"]-=mineralcost
@@ -874,8 +874,8 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && items["food"]>=f
 }
 else if (b=="library"){
 
-woodcost= Math.pow(2,(buildings["library"]))*300
-mineralcost=Math.pow(2, (buildings["library"]))*100
+woodcost= Math.pow(1.9,(buildings["library"]))*300
+mineralcost=Math.pow(1.9, (buildings["library"]))*100
 
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["wood"]-=woodcost;
@@ -912,8 +912,8 @@ if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 else if (b=="foundry"){
 
 
-mineralcost= Math.pow(1.6,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.6, (buildings["foundry"]))*5
+mineralcost= Math.pow(1.5,(buildings["foundry"]))*500;
+coppercost=Math.pow(1.5, (buildings["foundry"]))*5
 
 if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
 	items["mineral"]-=mineralcost;
@@ -942,8 +942,8 @@ if (craft["block"]>=blockcost){
 }
 else if (b=="casino"){
 
-blockcost= Math.pow(1.7,(buildings["casino"]))*3
-goldcost= Math.pow(1.7,(buildings["casino"]))*1
+blockcost= Math.pow(1.6,(buildings["casino"]))*3
+goldcost= Math.pow(1.6,(buildings["casino"]))*1
 
 if (craft["block"]>=blockcost && items["gold"]>=goldcost){
 	craft["block"]-=blockcost;
@@ -994,7 +994,7 @@ if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
 }
 else if (b=="statue"){
 
-bronzecost= Math.pow(1.7,(buildings["statue"]))*1
+bronzecost= Math.pow(1.5,(buildings["statue"]))*1
 
 
 if (craft["bronze"]>=bronzecost){
@@ -1009,9 +1009,9 @@ if (craft["bronze"]>=bronzecost){
 }
 else if (b=="towncenter"){
 
-blockcost= Math.pow(1.5,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.5,(buildings["towncenter"]))*5
-coincost= Math.pow(1.5,(buildings["towncenter"]))*3
+blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
+structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
+coincost= Math.pow(1.4,(buildings["towncenter"]))*3
 
 if (craft["bronze"]>=bronzecost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
 
@@ -1057,20 +1057,20 @@ function calculatecost(){
 
 
 //Buildings
-woodcost= Math.pow(1.3,(buildings["lumbermill"]))*3
+woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
 
-woodcost= Math.pow(1.3,(buildings["mine"]))*2
-mineralcost=Math.pow(1.3, (buildings["mine"]))*5
+woodcost= Math.pow(1.1,(buildings["mine"]))*2
+mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
 $(".build_mine").attr('tooltip3', "Mineral production: +0.20/s");
 
-woodcost= Math.pow(1.7,(buildings["warehouse"]))*20
-mineralcost=Math.pow(1.7, (buildings["warehouse"]))*10
+woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
+mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
 $(".build_warehouse").html("Warehouse ("+buildings["warehouse"]+")");
 $(".build_warehouse").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_warehouse").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -1089,17 +1089,17 @@ $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(
 $(".build_pasture").attr('tooltip2', "Water comsumption: -0.20/s");
 $(".build_pasture").attr('tooltip3', "Food production: +0.20/s");
 
-woodcost= Math.pow(1.9,(buildings["house"]))*20
-mineralcost=Math.pow(1.9, (buildings["house"]))*50
-foodcost=Math.pow(1.9, (buildings["house"]))*15
+woodcost= Math.pow(1.8,(buildings["house"]))*20
+mineralcost=Math.pow(1.8, (buildings["house"]))*50
+foodcost=Math.pow(1.8, (buildings["house"]))*15
 $(".build_house").html("House ("+buildings["house"]+")");
 $(".build_house").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_house").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_house").attr('tooltip3', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".build_house").attr('tooltip4', "Max population +3");
 
-woodcost= Math.pow(2,(buildings["library"]))*300
-mineralcost=Math.pow(2, (buildings["library"]))*100
+woodcost= Math.pow(1.9,(buildings["library"]))*300
+mineralcost=Math.pow(1.9, (buildings["library"]))*100
 
 $(".build_library").html("Library ("+buildings["library"]+")");
 $(".build_library").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -1114,8 +1114,8 @@ $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_banner").attr('tooltip3', 'Max morale +1');
 
-mineralcost= Math.pow(1.6,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.6, (buildings["foundry"]))*5
+mineralcost= Math.pow(1.5,(buildings["foundry"]))*500;
+coppercost=Math.pow(1.5, (buildings["foundry"]))*5
 $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -1130,8 +1130,8 @@ $(".build_barn").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2
 $(".build_barn").attr('tooltip2', 'Max wood +500');
 $(".build_barn").attr('tooltip3', 'Max mineral +500');
 
-blockcost= Math.pow(1.7,(buildings["casino"]))*3
-goldcost= Math.pow(1.7,(buildings["casino"]))*1
+blockcost= Math.pow(1.6,(buildings["casino"]))*3
+goldcost= Math.pow(1.6,(buildings["casino"]))*1
 $(".build_casino").html("Casino ("+buildings["casino"]+")");
 $(".build_casino").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_casino").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
@@ -1157,15 +1157,15 @@ $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(
 $(".build_kiln").attr('tooltip3', 'Wood comsumption: -2.00/s');
 $(".build_kiln").attr('tooltip4', 'Coal production: +0.01/s');
 
-bronzecost= Math.pow(1.7,(buildings["statue"]))*1
+bronzecost= Math.pow(1.5,(buildings["statue"]))*1
 $(".build_statue").html("Statue ("+buildings["statue"]+")");
 $(".build_statue").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".build_statue").attr('tooltip2', 'Max morale +2');
 $(".build_statue").attr('tooltip3', 'Morale production +5%');
 
-blockcost= Math.pow(1.5,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.5,(buildings["towncenter"]))*5
-coincost= Math.pow(1.5,(buildings["towncenter"]))*3
+blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
+structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
+coincost= Math.pow(1.4,(buildings["towncenter"]))*3
 $(".build_towncenter").html("Towncenter ("+buildings["towncenter"]+")");
 $(".build_towncenter").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_towncenter").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
@@ -1525,17 +1525,18 @@ production["morale"]+=people["swordman"]/400
 }
 
 
-var inv_text=""
+var inv_text="<table>"
 for(key in items){
 if(items[key]!=0){
-inv_text+=key+": "+parseFloat(items[key]).toFixed(2)+" / "+ maximums[key]+" ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+") ";
+inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+parseFloat(items[key]).toFixed(2)+" / "+ maximums[key]+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+")</td> ";
 if (bonus[key]>0){
-	inv_text+= "<span class='bonus'>+"+Math.round(bonus[key]*100)+"%</span>";
+	inv_text+= "<td class='bonus'>+"+Math.round(bonus[key]*100)+"%</td>";
 }
 
-inv_text+="<br>"
+inv_text+="<tr>"
 }
 }
+inv_text+="</table>"
 $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
 

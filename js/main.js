@@ -768,7 +768,7 @@ if (people[b]>0){
 function build(b){
 if (b=="lumbermill"){
 
-woodcost= Math.pow(1.15,(buildings["lumbermill"]))*3
+woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 
 if (items["wood"]>=woodcost){
 	items["wood"]-=woodcost;
@@ -780,8 +780,8 @@ if (items["wood"]>=woodcost){
 }
 else if (b=="mine"){
 
-woodcost= Math.pow(1.15,(buildings["mine"]))*2
-mineralcost=Math.pow(1.15, (buildings["mine"]))*3.5
+woodcost= Math.pow(1.1,(buildings["mine"]))*2
+mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
 
 if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 	items["wood"]-=woodcost;
@@ -1057,13 +1057,13 @@ function calculatecost(){
 
 
 //Buildings
-woodcost= Math.pow(1.15,(buildings["lumbermill"]))*3
+woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
 
-woodcost= Math.pow(1.15,(buildings["mine"]))*2
-mineralcost=Math.pow(1.15, (buildings["mine"]))*3.5
+woodcost= Math.pow(1.1,(buildings["mine"]))*2
+mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )

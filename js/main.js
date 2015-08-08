@@ -648,9 +648,9 @@ else if (b=="steeltools" && technologies["steeltools"]==0){
 
 steelcost=10;
 
-if (craft["steel"]>=steelcost){
+if (items["steel"]>=steelcost){
 
-	craft["steel"]-=steelcost;
+	items["steel"]-=steelcost;
 
 	bonus["wood"]+=0.3;
 	bonus["mineral"]+=0.3;

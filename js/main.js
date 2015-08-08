@@ -1702,12 +1702,14 @@ var techvisible=1;
 function toggletech(){
 	if(techvisible==1){
 		$(".researched").hide()
+		$(".researched + br").hide()
 		$(".toggletech").html("Show researched technologies")
 		techvisible=0;
 	}
 	else
 	{
 		$(".researched").show()
+		$(".researched + br").show()
 		$(".toggletech").html("Hide researched technologies")
 		techvisible=1;
 	}

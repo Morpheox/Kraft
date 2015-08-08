@@ -1698,6 +1698,18 @@ function bet(b){
     
     
 }
+var techvisible=1;
+function toggletech(){
+	if(techvisible==1){
+		$(".researched").hide()
+		$(".toggletech").html("Show researched technologies")
+	}
+	else
+	{
+		$(".researched").show()
+		$(".toggletech").html("Hide researched technologies")
+	}
+}
 function save(){
 	
 document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });

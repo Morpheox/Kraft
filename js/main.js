@@ -81,6 +81,7 @@ technologies["charcoal"]=0
 technologies["centralisation"]=0
 technologies["steel"]=0
 technologies["manufacturing"]=0
+technologies["steeltools"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -643,6 +644,29 @@ if (items["steel"]>=steelcost && craft["coin"]>=coincost){
 }
 
 }
+else if (b=="steeltools" && technologies["steeltools"]==0){
+
+steelcost=10;
+
+if (craft["steel"]>=steelcost){
+
+	craft["steel"]-=steelcost;
+
+	bonus["wood"]+=0.3;
+	bonus["mineral"]+=0.3;
+	bonus["food"]+=0.3;
+	bonus["copper"]+=0.1;
+	bonus["iron"]+=0.1;
+	bonus["tin"]+=0.1;
+	bonus["steel"]+=0.05;
+
+	technologies["steeltools"]++
+
+
+
+}
+
+}
 }
 
 function hire(b){
@@ -888,7 +912,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;break;
+		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;break;
 	}
 	
 }
@@ -1369,20 +1393,29 @@ $(".tech_centralisation").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"
 $(".tech_centralisation").attr('tooltip4', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_centralisation").attr('tooltip5', "Allows the building of towncenters");
 
+
+steelcost=10;
+$(".tech_steeltools").html("Steel tools" + (technologies["steeltools"] >0 ? " (researched)" : ""));
+$(".tech_steeltools").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_steeltools").attr('tooltip2', "Increments wood, mineral, and food production by 30%");
+$(".tech_steeltools").attr('tooltip3', "Increments iron, copper, and tin production by 10%");
+$(".tech_steeltools").attr('tooltip3', "Increments steel production by 5%");
+
+
 //crafting
 woodcost=20;
 coppercost=1;
 $(".craft_pickaxe").html("Pickaxe");
 $(".craft_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".craft_pickaxe").attr('tooltip3', "Basic copper pickaxe");
+$(".craft_pickaxe").attr('tooltip4', "Basic copper pickaxe");
 
 woodcost=50;
 coppercost=3;
 $(".craft_spear").html("Spear");
 $(".craft_spear").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_spear").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".craft_spear").attr('tooltip3', "Spear made of wood and copper");
+$(".craft_spear").attr('tooltip4', "Spear made of wood and copper");
 
 
 ironcost=10
@@ -1407,7 +1440,7 @@ tincost=10
 $(".craft_bronze").html("Bronze");
 $(".craft_bronze").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".craft_bronze").attr('tooltip2', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
-$(".craft_bronze").attr('tooltip3', "A refined alloy of copper and tin");
+$(".craft_bronze").attr('tooltip4', "A refined alloy of copper and tin");
 
 woodcost=1000;
 ironcost=20;
@@ -1415,7 +1448,7 @@ ironcost=20;
 $(".craft_structure").html("Structure");
 $(".craft_structure").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_structure").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
-$(".craft_structure").attr('tooltip3', "Reinforced structure for big buildings");
+$(".craft_structure").attr('tooltip4', "Reinforced structure for big buildings");
 //Others
 
 power=0
@@ -1688,9 +1721,9 @@ for(key in unlocked){
 		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;break;
+		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;break;
 	}
-	
+
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)
 	{

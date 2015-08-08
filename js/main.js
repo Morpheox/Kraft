@@ -260,7 +260,7 @@ else if (b=="sword"){
 
 ironcost=10;
 
-if (items["iron"]>=coppercost && items["iron"]>=ironcost){
+if (items["iron"]>=ironcost){
 
 	items["iron"]-=ironcost;
 	craft["sword"]+=1+bonus["craft"];

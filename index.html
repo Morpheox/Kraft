@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.03</title>
+	<title>Kraft v0.04</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.03 Created by Ernesto Mayoral emayoralc@gmail.com</div>
+    <div class="infokraft">Kraft v0.04 Created by Ernesto Mayoral emayoralc@gmail.com</div>
 	<div class="population"></div>
         <button onclick="save()">Save</button><br><br>
         
@@ -63,6 +63,7 @@
 			<div class="block hire_smelter"></div><button class="fire fire_smelter" onclick='fire("smelter")'>Fire 1</button><br>
 			<div class="block hire_farmer"></div><button class="fire fire_farmer" onclick='fire("farmer")'>Fire 1</button><br>
 			<div class="block hire_miner"></div><button class="fire fire_miner" onclick='fire("miner")'>Fire 1</button><br>
+			<div class="block hire_foundryman"></div><button class="fire fire_miner" onclick='fire("foundryman")'>Fire 1</button><br>
 		</div>
 		<div id="technologies" class="technologies tab-pane fade">
 
@@ -81,11 +82,13 @@
 			<div class="block tech_bronzetools"></div><br>
 			<div class="block tech_charcoal"></div><br>
 			<div class="block tech_centralisation"></div><br>
+			<div class="block tech_steel"></div><br>
+			<div class="block tech_manufacturing"></div><br>
 		</div>
 
 
 	<div  id="crafting" class="crafting tab-pane fade">
-
+		<div class="block build_workbench"></div><button class="toggle toggle_workbench" onclick='toggle("workbench")'>Toggle</button><br><br>
 		<div class="block craft_pickaxe"></div><br>
 		<div class="block craft_spear"></div><br>
 		<div class="block craft_sword"></div><br>
@@ -143,6 +146,7 @@
 	$(".build_kiln").click(function() {build("kiln")});
 	$(".build_statue").click(function() {build("statue")});
 	$(".build_towncenter").click(function() {build("towncenter")});
+	$(".build_workbench").click(function() {build("workbench")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -150,6 +154,7 @@
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_miner").click(function() {hire("miner")});
+	$(".hire_foundryman").click(function() {hire("hire_foundryman")});
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -166,6 +171,8 @@
 	$(".tech_bronze").click(function() {research("bronze")});
 	$(".tech_bronzetools").click(function() {research("bronzetools")});
 	$(".tech_centralisation").click(function() {research("centralisation")});
+	$(".tech_steel").click(function() {research("steel")});
+	$(".tech_manufacturing").click(function() {research("manufacturing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

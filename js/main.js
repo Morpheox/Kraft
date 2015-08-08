@@ -1703,11 +1703,13 @@ function toggletech(){
 	if(techvisible==1){
 		$(".researched").hide()
 		$(".toggletech").html("Show researched technologies")
+		techvisible=0;
 	}
 	else
 	{
 		$(".researched").show()
 		$(".toggletech").html("Hide researched technologies")
+		techvisible=1;
 	}
 }
 function save(){

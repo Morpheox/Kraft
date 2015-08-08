@@ -110,3 +110,12 @@ font-size:10px;
 .researched{
   background-color:rgba(0,0,0,0.1);
 }
+
+.toggletech{
+    border:1px solid black;
+    cursor:pointer;
+    padding:5px;
+    width:220px;
+    margin-top:10px;
+    display: inline-block;
+}

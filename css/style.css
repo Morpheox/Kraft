@@ -42,8 +42,12 @@ padding:0;
 }
 .inventory td{
   padding:1px;
-}
 
+}
+.amount{
+  padding-left:3px;
+  padding-right:3px;
+}
 .bonus{
   color:green;
   font-size:12px;

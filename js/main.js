@@ -1013,9 +1013,9 @@ blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
 structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
 coincost= Math.pow(1.4,(buildings["towncenter"]))*3
 
-if (craft["bronze"]>=bronzecost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
+if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
 
-	craft["bronze"]-=bronzecost;
+	craft["block"]-=blockcost;
 	craft["structure"]-=structurecost;
 	craft["coin"]-=coincost;
 

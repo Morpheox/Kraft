@@ -1176,7 +1176,7 @@ $(".build_towncenter").attr('tooltip5', 'Max population +5');
 steelcost= Math.pow(1.4,(buildings["workbench"]))*2
 $(".build_workbench").html("Workbench ("+buildings["workbench"]+")");
 $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".build_workbench").attr('tooltip2', 'Craft effiency +5%');
+$(".build_workbench").attr('tooltip2', 'Craft effiency +8%');
 $(".build_workbench").attr('tooltip4', 'Allows +1 items crafted per workbench');
 $(".build_workbench").attr('tooltip5', 'when active');
 

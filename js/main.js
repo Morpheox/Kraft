@@ -1522,7 +1522,7 @@ $(".tech_husbandry").attr('tooltip3', "Allow soldiers to bring back horses found
 goldcost=25;
 steelcost=25;
 $(".tech_cavalry").addClass((technologies["cavalry"] >0 ? "researched" : ""))
-$(".tech_cavalry").html("Husbandry" + (technologies["cavalry"] >0 ? " (researched)" : ""));
+$(".tech_cavalry").html("Cavalry" + (technologies["cavalry"] >0 ? " (researched)" : ""));
 $(".tech_cavalry").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_cavalry").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_cavalry").attr('tooltip4', "Grants swordmans training to become armored knights");

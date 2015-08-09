@@ -7,5 +7,5 @@ function intToString (value) {
     if (shortValue % 1 != 0)  shortNum = shortValue.toFixed(1);
     return shortValue+suffixes[suffixNum];
     }
-    else {return value;}
+    else {return parseFloat(value).toFixed(2);}
     }

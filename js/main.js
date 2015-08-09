@@ -1707,7 +1707,7 @@ production["morale"]+=people["knight"]/100
 var inv_text="<table>"
 for(key in items){
 if(items[key]!=0){
-inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+parseFloat(items[key]).toFixed(2)+" / "+ maximums[key]+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+")</td> ";
+inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(parseFloat(items[key]).toFixed(2))+" / "+ intToString(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+")</td> ";
 if (bonus[key]>0){
 	inv_text+= "<td class='bonus'>+"+Math.round(bonus[key]*100)+"%</td>";
 }

@@ -1886,7 +1886,7 @@ for(key in unlocked){
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 	}
 	if(buildings["library"]>=5){
-		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
+		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
 	}
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)

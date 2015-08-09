@@ -830,7 +830,8 @@ if (items["food"]>=foodcost && craft["sword"]>=swordcost){
 }
 
 }
-else if (b=="knight"){
+}
+if (b=="knight"){
 
 swordmancost=1;
 horsecost=1;
@@ -853,7 +854,7 @@ if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armo
 }
 
 }
-}
+
 
 
 }

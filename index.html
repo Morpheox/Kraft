@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.04</title>
+	<title>Kraft v0.05</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.04 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+    <div class="infokraft">Kraft v0.05 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
 	<div class="population"></div>
         <button onclick="save()">Save</button><br><br>
         
@@ -86,6 +86,8 @@
 			<div class="block tech_steel"></div><br>
 			<div class="block tech_manufacturing"></div>
 			<div class="block tech_steeltools"></div><br>
+			<div class="block tech_husbandry"></div><br>
+			<div class="block tech_cavalry"></div><br>
 		</div>
 
 
@@ -98,10 +100,12 @@
 		<div class="block craft_coin"></div><br>
 		<div class="block craft_bronze"></div><br>
 		<div class="block craft_structure"></div><br>
+		<div class="block craft_armor"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
 		<div class="block hire_swordman"></div><button class="fire fire_swordman" onclick='fire("swordman")'>Fire 1</button><br>
+		<div class="block hire_knight"></div><button class="fire fire_knight" onclick='fire("knight")'>Fire 1</button><br>
 		<div class="block expedition"></div><br>
 		<div class="expeditionresult"></div><br>
 	</div>
@@ -153,10 +157,12 @@
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
 	$(".hire_farmer").click(function() {hire("farmer")});
-	$(".hire_pikeman").click(function() {hire("pikeman")});
-	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_miner").click(function() {hire("miner")});
 	$(".hire_foundryman").click(function() {hire("foundryman")});
+	$(".hire_pikeman").click(function() {hire("pikeman")});
+	$(".hire_swordman").click(function() {hire("swordman")});
+	$(".hire_knight").click(function() {hire("knight")});
+
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -176,6 +182,8 @@
 	$(".tech_steel").click(function() {research("steel")});
 	$(".tech_manufacturing").click(function() {research("manufacturing")});
 	$(".tech_steeltools").click(function() {research("steeltools")});
+	$(".tech_husbandry").click(function() {research("husbandry")});
+	$(".tech_cavalry").click(function() {research("cavalry")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -184,6 +192,7 @@
 	$(".craft_coin").click(function() {crafting("coin")});
 	$(".craft_bronze").click(function() {crafting("bronze")});
 	$(".craft_structure").click(function() {crafting("structure")});
+	$(".craft_armor").click(function() {crafting("armor")});
 
 	$(".expedition").click(function() {expedition()});
         

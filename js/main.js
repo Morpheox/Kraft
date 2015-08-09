@@ -1347,7 +1347,7 @@ swordmancost=1;
 horsecost=1;
 armorcost=1;
 $(".hire_knight").html("Knight ("+people["knight"]+")");
-$(".hire_knight").attr('tooltip', 'Swordman: '+ people["swordman"]+" / "+parseFloat(swordmancost).toFixed(2))
+$(".hire_knight").attr('tooltip', 'Swordman: '+ people["swordman"]+" / "+swordmancost)
 $(".hire_knight").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
 $(".hire_knight").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
 $(".hire_knight").attr('tooltip4', "Food comsumption: -2.00/s");
@@ -1591,6 +1591,7 @@ $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 power=0
 power+=people["pikeman"]*5
 power+=people["swordman"]*10
+power+=people["knight"]*25
 
 foodcost=power*2
 watercost=power

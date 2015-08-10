@@ -2208,7 +2208,7 @@ else
 	$(".trade_wood").removeClass("unavailable")
 	$(".trade_mineral").removeClass("unavailable")
 	$(".trade_food").removeClass("unavailable")
-}
+
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));

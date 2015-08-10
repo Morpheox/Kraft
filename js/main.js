@@ -586,7 +586,7 @@ else if (b=="storage"){
 
 woodcost=500
 mineralcost=500
-ironcost=20
+ironcost=15
 
 if (items["iron"]>=ironcost  && items["mineral"]>=mineralcost  && items["wood"]>=woodcost  && technologies["storage"]==0){
 
@@ -624,7 +624,7 @@ if (items["gold"]>=goldcost){
 else if (b=="coin" && technologies["coin"]==0){
 
 ironcost=20;
-goldcost=10;
+goldcost=5;
 
 if (items["gold"]>=goldcost && items["iron"]>=ironcost){
 
@@ -1795,7 +1795,7 @@ $(".tech_sword").attr('tooltip3', "Allows the crafting of Iron Swords and the hi
 
 woodcost=500
 mineralcost=500
-ironcost=20
+ironcost=15
 if(items["iron"]<ironcost || items["wood"]<woodcost || items["mineral"]<mineralcost){
 	$(".tech_storage").addClass("unavailable")
 }
@@ -1825,7 +1825,7 @@ $(".tech_currency").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(
 $(".tech_currency").attr('tooltip2', "Unlocks casinos");
 
 ironcost=20;
-goldcost=10;
+goldcost=5;
 if(items["gold"]<goldcost || items["iron"]<ironcost){
 	$(".tech_coin").addClass("unavailable")
 }

@@ -1748,29 +1748,29 @@ $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 //Leaders
 
 
-$(".leader_sucellus").html("Sucellus lv: " + people["sucellus"]);
+$(".leader_sucellus").html("Sucellus (lv:" + people["sucellus"]+")");
 $(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 15%')
 $(".leader_sucellus").attr('tooltip3', "'Nature its not optional'");
 
-$(".leader_eredal").html("Eredal lv: " + people["eredal"]);
+$(".leader_eredal").html("Eredal (lv:" + people["eredal"]+")");
 $(".leader_eredal").attr('tooltip', 'Increments mineral, copper, iron and steel production by 10%')
 $(".leader_eredal").attr('tooltip3', "'Metal till death'");
 
-$(".leader_khrysos").html("Khrysos lv: " + people["khrysos"]);
+$(".leader_khrysos").html("Khrysos (lv:" + people["khrysos"]+")");
 $(".leader_khrysos").attr('tooltip', 'Increments gold production by 30%')
 $(".leader_khrysos").attr('tooltip2', 'Increments trade effiency by 10%')
 $(".leader_khrysos").attr('tooltip4', "'Everything has a price'");
 
-$(".leader_elisia").html("Elisia lv: " + people["elisia"]);
+$(".leader_elisia").html("Elisia (lv:" + people["elisia"]+")");
 $(".leader_elisia").attr('tooltip', 'Increments craft effiency by 5%')
 $(".leader_elisia").attr('tooltip2', 'Increments wood and mineral storage by 500')
 $(".leader_elisia").attr('tooltip4', "'Making makes us human'");
 
-$(".leader_xochiquetzal").html("Xochiquetzal lv: " + people["xochiquetzal"]);
+$(".leader_xochiquetzal").html("Xochiquetzal (lv:" + people["xochiquetzal"]+")");
 $(".leader_xochiquetzal").attr('tooltip', 'Increments max population by 2')
 $(".leader_xochiquetzal").attr('tooltip3', "'Life finds a way'");
 
-$(".leader_warmuk").html("Warmuk lv: " + people["warmuk"]);
+$(".leader_warmuk").html("Warmuk (lv:" + people["warmuk"]+")");
 $(".leader_warmuk").attr('tooltip', 'Increments troops power by 10%')
 $(".leader_warmuk").attr('tooltip2', 'Increments max morale by 2')
 $(".leader_warmuk").attr('tooltip3', 'Increments morale production by 5%')

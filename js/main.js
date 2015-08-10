@@ -2083,6 +2083,13 @@ for(key in unlocked){
 		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
 	}
 
+	
+
+	if(buildings["library"]>=5){
+		$(".tech_bronze").show();unlocked[".tech_bronze"]=1;
+		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
+	}
+
 	if(buildings["library"]>=7){
 	 $(".tech_leadership").show();unlocked[".tech_leadership"]=1;
 	}
@@ -2096,7 +2103,8 @@ for(key in unlocked){
 	items["moral"]=0;
 	}
 
-
+	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
+	
 	if(technologies["bronze"]==1){
 	$(".build_statue").show()
     unlocked[".build_statue"]=1;

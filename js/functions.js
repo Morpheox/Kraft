@@ -1,6 +1,7 @@
 function intToString (value) {
         if (value>10000)
         {
+            value=Math.round(value);
     var suffixes = ["", "K", "M", "B","T","C","Q","S"];
     var suffixNum = Math.floor((""+value).length/3);
     var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(3));
@@ -13,6 +14,7 @@ function intToString (value) {
 function intToStringRound(value) {
         if (value>10000)
         {
+            value=Math.round(value);
     var suffixes = ["", "K", "M", "B","T","C","Q","S"];
     var suffixNum = Math.floor((""+value).length/3);
     var shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(3));

@@ -125,3 +125,7 @@ font-size:10px;
 .population, .titles{
   display:inline;
 }
+
+.titles{
+  margin-left:20px;
+}

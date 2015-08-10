@@ -20,6 +20,8 @@ bonus[key]=0;
 }
 bonus["trade"]=0;
 bonus["craft"]=0;
+bonus["title"]=0;
+bonus["power"]=0;
 
 var buildings=new Array();
 
@@ -39,7 +41,7 @@ buildings["kiln"]=0;
 buildings["statue"]=0;
 buildings["towncenter"]=0;
 buildings["workbench"]=0;
-
+buildings["castle"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -50,6 +52,7 @@ var maximums=new Array()
 
 maximums["population"]=0;
 maximums["bet"]=0;
+
 
 for(key in items){
 maximums[key]=0;
@@ -84,6 +87,7 @@ technologies["manufacturing"]=0
 technologies["steeltools"]=0
 technologies["husbandry"]=0
 technologies["cavalry"]=0
+technologies["leadership"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -94,6 +98,15 @@ people["foundryman"]=0
 people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
+
+people["sucellus"]=0
+people["eredal"]=0
+people["khrysos"]=0
+people["elisia"]=0
+people["xochiquetzal"]=0
+people["warmuk"]=0
+
+
 
 var craft=new Array();
 
@@ -128,6 +141,87 @@ else
 
 
 }
+function lead(b){
+
+ 
+if(bonus["title"]>=1){
+if (b=="sucellus"){
+
+bonus["wood"]+=0.15
+bonus["food"]+=0.15
+bonus["water"]+=0.15
+
+bonus["title"]--
+people["sucellus"]+=1;
+
+
+}
+else if (b=="eredal"){
+
+bonus["mineral"]+=0.10
+bonus["copper"]+=0.10
+bonus["iron"]+=0.10
+bonus["steel"]+=0.10
+
+bonus["title"]--
+people["eredal"]+=1;
+
+
+}
+else if (b=="khrysos"){
+
+bonus["gold"]+=0.30
+bonus["trade"]+=0.10
+
+bonus["title"]--
+people["khrysos"]+=1;
+
+
+}
+else if (b=="elisia"){
+
+bonus["craft"]+=0.05
+maximums["wood"]+=500;
+maximums["mineral"]+=500;
+
+bonus["title"]--
+people["elisia"]+=1;
+
+
+}
+else if (b=="xochiquetzal"){
+
+maximums["population"]+=2;
+
+bonus["title"]--
+people["xochiquetzal"]+=1;
+
+
+}
+else if (b=="warmuk"){
+
+bonus["power"]+=0.10;
+bonus["morale"]+=0.05;
+maximums["morale"]+=2;
+
+bonus["title"]--
+people["warmuk"]+=1;
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+
+}
 function expedition(){
 power=0
 power+=people["pikeman"]*5
@@ -137,6 +231,8 @@ power+=people["knight"]*25
 foodcost=power*2
 watercost=power
 moralecost=power/5
+
+power=power*(bonus["power"]+1)
 
 if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
 
@@ -724,7 +820,22 @@ if (items["gold"]>=goldcost && items["steel"]>=steelcost){
 }
 
 }
+else if (b=="leadership" && technologies["leadership"]==0){
 
+coincost=25
+
+if (craft["coin"]>=coincost){
+
+	craft["coin"]-=coincost
+
+
+	technologies["leadership"]++
+	$(".build_castle").show()
+    unlocked[".build_castle"]=1;
+
+}
+
+}
 }
 
 function hire(b){
@@ -995,6 +1106,8 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
+		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;break;
+
 	}
 	
 }
@@ -1156,7 +1269,36 @@ if (items["steel"]>=steelcost){
 	unlocked[".toggle_workbench"]=1
 }
 }
+else if (b=="castle"){
 
+blockcost= Math.pow(1.6,(buildings["castle"]))*50
+goldcost= Math.pow(1.6,(buildings["castle"]))*5
+
+if (craft["block"]>=blockcost && items["gold"]>=goldcost){
+
+	craft["block"]-=blockcost;
+	items["gold"]-=goldcost
+
+	bonus["title"]+=1;
+
+
+	buildings["castle"]+=1
+    $(".leader_sucellus").show()
+    unlocked[".leader_sucellus"]=1;
+    $(".leader_eredal").show()
+     unlocked[".leader_eredal"]=1;
+    $(".leader_khrysos").show()
+     unlocked[".leader_khrysos"]=1;
+    $(".leader_elisia").show()
+     unlocked[".leader_elisia"]=1;
+    $(".leader_xochiquetzal").show()
+     unlocked[".leader_xochiquetzal"]=1;
+    $(".leader_warmuk").show()
+    unlocked[".leader_warmuk"]=1;
+    $("#leaderpane").show()
+    unlocked["#leaderpane"]=1;
+}
+}
 }
 
 function calculatecost(){
@@ -1285,6 +1427,16 @@ $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFi
 $(".build_workbench").attr('tooltip2', 'Craft effiency +8%');
 $(".build_workbench").attr('tooltip4', 'Allows +1 items crafted per workbench');
 $(".build_workbench").attr('tooltip5', 'when active');
+
+blockcost= Math.pow(1.6,(buildings["castle"]))*50
+goldcost= Math.pow(1.6,(buildings["castle"]))*5
+
+$(".build_castle").html("Castle ("+buildings["castle"]+")");
+$(".build_castle").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".build_castle").attr('tooltip4', 'Unlocks leaders to rule the realm.');
+$(".build_castle").attr('tooltip5', '+1 title per level');
+
 
 //People
 foodcost=50;
@@ -1586,6 +1738,44 @@ $(".craft_armor").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".craft_armor").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
+//Leaders
+
+    $(".leader_sucellus").click(function() {lead("sucellus")});
+    $(".leader_eredal").click(function() {lead("eredal")});
+    $(".leader_khrysos").click(function() {lead("khrysos")});
+    $(".leader_elisia").click(function() {lead("elisia")});
+    $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
+    $(".leader_warmuk").click(function() {lead("warmuk")});
+
+$(".leader_sucellus").html("Sucellus lv: " + people["sucellus"]);
+$(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 15%')
+$(".leader_sucellus").attr('tooltip3', "'Nature its not optional'");
+
+$(".leader_eredal").html("Eredal lv: " + people["eredal"]);
+$(".leader_eredal").attr('tooltip', 'Increments mineral, copper, iron and steel production by 10%')
+$(".leader_eredal").attr('tooltip3', "'Metal till death'");
+
+$(".leader_khrysos").html("Khrysos lv: " + people["khrysos"]);
+$(".leader_khrysos").attr('tooltip', 'Increments gold production by 30%')
+$(".leader_khrysos").attr('tooltip2', 'Increments trade effiency by 10%')
+$(".leader_khrysos").attr('tooltip4', "'Everything has a price'");
+
+$(".leader_elisia").html("Elisia lv: " + people["elisia"]);
+$(".leader_elisia").attr('tooltip', 'Increments craft effiency by 5%')
+$(".leader_elisia").attr('tooltip2', 'Increments wood and mineral storage by 500')
+$(".leader_elisia").attr('tooltip4', "'Making makes us human'");
+
+$(".leader_xochiquetzal").html("Xochiquetzal lv: " + people["xochiquetzal"]);
+$(".leader_xochiquetzal").attr('tooltip', 'Increments max population by 2')
+$(".leader_xochiquetzal").attr('tooltip3', "'Life finds a way'");
+
+$(".leader_warmuk").html("Warmuk lv: " + people["warmuk"]);
+$(".leader_warmuk").attr('tooltip', 'Increments troops power by 10%')
+$(".leader_warmuk").attr('tooltip2', 'Increments max morale by 2')
+$(".leader_warmuk").attr('tooltip3', 'Increments morale production by 5%')
+$(".leader_warmuk").attr('tooltip5', "'If you run away, you will die tired'");
+
+
 
 //Others
 
@@ -1594,9 +1784,12 @@ power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
 
+
 foodcost=power*2
 watercost=power
 moralecost=power/5
+
+power=power*(bonus["power"]+1)
 $(".expedition").html("Expedition");
 $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
@@ -1718,7 +1911,7 @@ inv_text+="<tr>"
 inv_text+="</table>"
 $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
-
+$(".titles").html("Titles: "+bonus["title"]);
 
 var inv_text="<table>"
 for(key in craft){
@@ -1888,6 +2081,11 @@ for(key in unlocked){
 	if(buildings["library"]>=5){
 		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
 	}
+
+	if(buildings["library"]>=7){
+	 $(".tech_leadership").show();unlocked[".tech_leadership"]=1;
+	}
+
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)
 	{

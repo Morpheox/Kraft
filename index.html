@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.05</title>
+	<title>Kraft v0.06</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,8 +19,8 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.05 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
-	<div class="population"></div>
+    <div class="infokraft">Kraft v0.06 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+	<div class="population"></div><div class="titles"></div>
         <button onclick="save()">Save</button><br><br>
         
 	<ul class="nav nav-tabs">
@@ -31,6 +31,7 @@
 		<li id="militarypane"><a data-toggle="tab" href="#military">Military</a></li>
 		<li id="casinopane"><a data-toggle="tab" href="#casino">Casino</a></li>
 		<li id="marketpane"><a data-toggle="tab" href="#market">Market</a></li>
+		<li id="leaderpane"><a data-toggle="tab" href="#leader">Leaders</a></li>
 	</ul>
 	<br><br>
 
@@ -57,7 +58,8 @@
 			<div class="block build_market"></div><br>
 			<div class="block build_kiln"></div><button class="toggle toggle_kiln" onclick='toggle("kiln")'>Toggle</button><br>
 			<div class="block build_statue"></div><br>
-			<div class="block build_towncenter"></div>
+			<div class="block build_towncenter"></div><br>
+			<div class="block build_castle"></div>
 			<br><br><br><br><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -89,6 +91,7 @@
 			<div class="block tech_steeltools"></div><br>
 			<div class="block tech_husbandry"></div>
 			<div class="block tech_cavalry"></div><br>
+			<div class="block tech_leadership"></div><br>
 		</div>
 
 
@@ -122,6 +125,17 @@
 	<div class="trade trade_mineral"></div><br>
 	<div class="trade trade_food"></div><br>
 	</div>
+	<div id="leader" class="leader tab-pane fade">
+
+	<div class="block leader_sucellus"></div><br>
+	<div class="block leader_eredal"></div><br>
+	<div class="block leader_khrysos"></div><br>
+	<div class="block leader_elisia"></div><br>
+	<div class="block leader_xochiquetzal"></div><br>
+	<div class="block leader_warmuk"></div><br>
+
+
+	</div>
 	</div>
 </body>
 <script>
@@ -133,9 +147,8 @@
 
 
 
-
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle").hide()
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane").addClass("invisible");
+	$(".block, .fire, .population,.toggle ,.titles").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -154,6 +167,7 @@
 	$(".build_statue").click(function() {build("statue")});
 	$(".build_towncenter").click(function() {build("towncenter")});
 	$(".build_workbench").click(function() {build("workbench")});
+	$(".build_castle").click(function() {build("castle")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -185,6 +199,8 @@
 	$(".tech_steeltools").click(function() {research("steeltools")});
 	$(".tech_husbandry").click(function() {research("husbandry")});
 	$(".tech_cavalry").click(function() {research("cavalry")});
+	$(".tech_leadership").click(function() {research("leadership")});
+
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -200,7 +216,17 @@
     $(".trade_wood").click(function() {trade("wood")});
     $(".trade_mineral").click(function() {trade("mineral")});
     $(".trade_food").click(function() {trade("food")});
-        
+
+    $(".leader_sucellus").click(function() {lead("sucellus")});
+    $(".leader_eredal").click(function() {lead("eredal")});
+    $(".leader_khrysos").click(function() {lead("khrysos")});
+    $(".leader_elisia").click(function() {lead("elisia")});
+    $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
+    $(".leader_warmuk").click(function() {lead("warmuk")});
+
+
+
+
          load();
 </script>
 
@@ -225,5 +251,5 @@ Histats.track_hits();} catch(err){};
                       })(document);
                   </script>
               
-              
+
 </html>

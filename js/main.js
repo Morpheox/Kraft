@@ -1796,7 +1796,7 @@ $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+
 $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".expedition").attr('tooltip3', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".expedition").attr('tooltip5', "Send your soldiers in a expedition");
-$(".expedition").attr('tooltip6', "Total power: "+power);
+$(".expedition").attr('tooltip6', "Total power: "+Math.round(power));
 tradewood=500*(bonus["trade"]+1)
 trademineral=400*(bonus["trade"]+1)
 tradefood=300*(bonus["trade"]+1)

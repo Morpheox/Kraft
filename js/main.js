@@ -2197,7 +2197,19 @@ $(".expedition").attr('tooltip6', "Total power: "+Math.round(power));
 tradewood=500*(bonus["trade"]+1)
 trademineral=400*(bonus["trade"]+1)
 tradefood=300*(bonus["trade"]+1)
+if(craft["coin"]<1){
+	$(".trade_wood").addClass("unavailable")
+	$(".trade_mineral").addClass("unavailable")
+	$(".trade_food").addClass("unavailable")
+}
+else
+{
 
+	$(".trade_wood").removeClass("unavailable")
+	$(".trade_mineral").removeClass("unavailable")
+	$(".trade_food").removeClass("unavailable")
+}
+}
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
 $(".trade_food").html("Food: " + Math.round(tradefood));

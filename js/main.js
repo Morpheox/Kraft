@@ -1308,12 +1308,26 @@ function calculatecost(){
 
 //Buildings
 woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
+if(items["wood"]<woodcost){
+	$(".build_lumbermill").addClass("unavailable")
+}
+else
+{
+	$(".build_lumbermill").removeClass("unavailable")
+}
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
 
 woodcost= Math.pow(1.1,(buildings["mine"]))*2
 mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
+if(items["wood"]<woodcost || items["mineral"]<mineralcost){
+	$(".build_mine").addClass("unavailable")
+}
+else
+{
+	$(".build_mine").removeClass("unavailable")
+}
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -1321,6 +1335,13 @@ $(".build_mine").attr('tooltip3', "Mineral production: +0.20/s");
 
 woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
 mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
+if(items["wood"]<woodcost || items["mineral"]<mineralcost){
+	$(".build_warehouse").addClass("unavailable")
+}
+else
+{
+	$(".build_warehouse").removeClass("unavailable")
+}
 $(".build_warehouse").html("Warehouse ("+buildings["warehouse"]+")");
 $(".build_warehouse").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_warehouse").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -1328,12 +1349,26 @@ $(".build_warehouse").attr('tooltip3', "Increments storage space for basic mater
 
 
 mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
+if(items["mineral"]<mineralcost){
+	$(".build_fountain").addClass("unavailable")
+}
+else
+{
+	$(".build_fountain").removeClass("unavailable")
+}
 $(".build_fountain").html("Fountain ("+buildings["fountain"]+")");
 $(".build_fountain").attr('tooltip',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
 $(".build_fountain").attr('tooltip2', "Water production: +0.40/s");
 $(".build_fountain").attr('tooltip3', "Water storage: 5");
 
 woodcost= Math.pow(1.4,(buildings["pasture"]))*10
+if(items["wood"]<woodcost){
+	$(".build_pasture").addClass("unavailable")
+}
+else
+{
+	$(".build_pasture").removeClass("unavailable")
+}
 $(".build_pasture").html("Pasture ("+buildings["pasture"]+")");
 $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_pasture").attr('tooltip2', "Water comsumption: -0.20/s");
@@ -1342,6 +1377,13 @@ $(".build_pasture").attr('tooltip3', "Food production: +0.20/s");
 woodcost= Math.pow(1.8,(buildings["house"]))*20
 mineralcost=Math.pow(1.8, (buildings["house"]))*50
 foodcost=Math.pow(1.8, (buildings["house"]))*15
+if(items["wood"]<woodcost || items["mineral"]<mineralcost || items["food"]<foodcost){
+	$(".build_house").addClass("unavailable")
+}
+else
+{
+	$(".build_house").removeClass("unavailable")
+}
 $(".build_house").html("House ("+buildings["house"]+")");
 $(".build_house").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_house").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -1350,7 +1392,13 @@ $(".build_house").attr('tooltip4', "Max population +3");
 
 woodcost= Math.pow(1.9,(buildings["library"]))*300
 mineralcost=Math.pow(1.9, (buildings["library"]))*100
-
+if(items["wood"]<woodcost || items["mineral"]<mineralcost){
+	$(".build_library").addClass("unavailable")
+}
+else
+{
+	$(".build_library").removeClass("unavailable")
+}
 $(".build_library").html("Library ("+buildings["library"]+")");
 $(".build_library").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_library").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -1358,7 +1406,13 @@ $(".build_library").attr('tooltip3', 'Unlock powerful technologies each level');
 
 woodcost= Math.pow(1.7,(buildings["banner"]))*100;
 coppercost=Math.pow(1.7, (buildings["banner"]))*1;
-
+if(items["wood"]<woodcost || craft["copper"]<coppercost){
+	$(".build_banner").addClass("unavailable")
+}
+else
+{
+	$(".build_banner").removeClass("unavailable")
+}
 $(".build_banner").html("Banner ("+buildings["banner"]+")");
 $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -1366,6 +1420,13 @@ $(".build_banner").attr('tooltip3', 'Max morale +1');
 
 mineralcost= Math.pow(1.5,(buildings["foundry"]))*500;
 coppercost=Math.pow(1.5, (buildings["foundry"]))*5
+if(items["mineral"]<mineralcost || craft["copper"]<coppercost){
+	$(".build_foundry").addClass("unavailable")
+}
+else
+{
+	$(".build_foundry").removeClass("unavailable")
+}
 $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -1374,7 +1435,15 @@ $(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
 if(technologies["bronze"]>0){
 $(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
 }
+
 blockcost= Math.pow(1.5,(buildings["barn"]))*5
+if(craft["block"]<blockcost){
+	$(".build_barn").addClass("unavailable")
+}
+else
+{
+	$(".build_barn").removeClass("unavailable")
+}
 $(".build_barn").html("Barn ("+buildings["barn"]+")");
 $(".build_barn").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_barn").attr('tooltip2', 'Max wood +500');
@@ -1382,6 +1451,13 @@ $(".build_barn").attr('tooltip3', 'Max mineral +500');
 
 blockcost= Math.pow(1.6,(buildings["casino"]))*3
 goldcost= Math.pow(1.6,(buildings["casino"]))*1
+if(craft["block"]<blockcost || items["gold"]<goldcost){
+	$(".build_casino").addClass("unavailable")
+}
+else
+{
+	$(".build_casino").removeClass("unavailable")
+}
 $(".build_casino").html("Casino ("+buildings["casino"]+")");
 $(".build_casino").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_casino").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
@@ -1392,6 +1468,13 @@ $(".build_casino").attr('tooltip6', 'Max gold +1');
 
 woodcost= Math.pow(1.6,(buildings["market"]))*500
 coincost= Math.pow(1.6,(buildings["market"]))*1
+if(craft["coin"]<coincost || items["wood"]<woodcost){
+	$(".build_market").addClass("unavailable")
+}
+else
+{
+	$(".build_market").removeClass("unavailable")
+}
 $(".build_market").html("Market ("+buildings["market"]+")");
 $(".build_market").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_market").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
@@ -1400,7 +1483,13 @@ $(".build_market").attr('tooltip4', '+5% market trade effiency');
 
 blockcost= Math.pow(1.6,(buildings["kiln"]))*15
 mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
-
+if(craft["block"]<blockcost || items["mineral"]<mineralcost){
+	$(".build_kiln").addClass("unavailable")
+}
+else
+{
+	$(".build_kiln").removeClass("unavailable")
+}
 $(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
 $(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -1408,6 +1497,13 @@ $(".build_kiln").attr('tooltip3', 'Wood comsumption: -2.00/s');
 $(".build_kiln").attr('tooltip4', 'Coal production: +0.01/s');
 
 bronzecost= Math.pow(1.5,(buildings["statue"]))*1
+if(craft["bronze"]<bronzecost){
+	$(".build_statue").addClass("unavailable")
+}
+else
+{
+	$(".build_statue").removeClass("unavailable")
+}
 $(".build_statue").html("Statue ("+buildings["statue"]+")");
 $(".build_statue").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".build_statue").attr('tooltip2', 'Max morale +2');
@@ -1416,6 +1512,13 @@ $(".build_statue").attr('tooltip3', 'Morale production +5%');
 blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
 structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
 coincost= Math.pow(1.4,(buildings["towncenter"]))*3
+if(craft["block"]<blockcost || craft["structure"]<structurecost || craft["coin"]<coincost){
+	$(".build_towncenter").addClass("unavailable")
+}
+else
+{
+	$(".build_towncenter").removeClass("unavailable")
+}
 $(".build_towncenter").html("Towncenter ("+buildings["towncenter"]+")");
 $(".build_towncenter").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_towncenter").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
@@ -1424,6 +1527,13 @@ $(".build_towncenter").attr('tooltip4', 'Provides big storage space');
 $(".build_towncenter").attr('tooltip5', 'Max population +5');
 
 steelcost= Math.pow(1.4,(buildings["workbench"]))*2
+if(items["steel"]<steelcost){
+	$(".build_workbench").addClass("unavailable")
+}
+else
+{
+	$(".build_workbench").removeClass("unavailable")
+}
 $(".build_workbench").html("Workbench ("+buildings["workbench"]+")");
 $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".build_workbench").attr('tooltip2', 'Craft effiency +8%');
@@ -1432,7 +1542,13 @@ $(".build_workbench").attr('tooltip5', 'when active');
 
 blockcost= Math.pow(1.6,(buildings["castle"]))*50
 goldcost= Math.pow(1.6,(buildings["castle"]))*5
-
+if(items["gold"]<goldcost || craft["block"]<blockcost){
+	$(".build_castle").addClass("unavailable")
+}
+else
+{
+	$(".build_castle").removeClass("unavailable")
+}
 $(".build_castle").html("Castle ("+buildings["castle"]+")");
 $(".build_castle").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
@@ -2104,7 +2220,7 @@ for(key in unlocked){
 	}
 
 	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
-	
+
 	if(technologies["bronze"]==1){
 	$(".build_statue").show()
     unlocked[".build_statue"]=1;

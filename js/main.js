@@ -1295,7 +1295,7 @@ if (craft["block"]>=blockcost && items["gold"]>=goldcost){
      unlocked[".leader_xochiquetzal"]=1;
     $(".leader_warmuk").show()
     unlocked[".leader_warmuk"]=1;
-    $("#leaderpane").show()
+    $("#leaderpane").removeClass("invisible")
     unlocked["#leaderpane"]=1;
 }
 }

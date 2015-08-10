@@ -1644,6 +1644,11 @@ $(".tech_manufacturing").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).to
 $(".tech_manufacturing").attr('tooltip3', "Enhances crafting by allowing the building of workbenchs");
 
 
+coincost=25;
+$(".tech_leadership").addClass((technologies["leadership"] >0 ? "researched" : ""))
+$(".tech_leadership").html("Leadership" + (technologies["leadership"] >0 ? " (researched)" : ""));
+$(".tech_leadership").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_leadership").attr('tooltip3', "Unlocks castles, wich can grant titles to powerful leaders.");
 
 woodcost=5000
 mineralcost=5000
@@ -1740,12 +1745,6 @@ $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
 //Leaders
 
-    $(".leader_sucellus").click(function() {lead("sucellus")});
-    $(".leader_eredal").click(function() {lead("eredal")});
-    $(".leader_khrysos").click(function() {lead("khrysos")});
-    $(".leader_elisia").click(function() {lead("elisia")});
-    $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
-    $(".leader_warmuk").click(function() {lead("warmuk")});
 
 $(".leader_sucellus").html("Sucellus lv: " + people["sucellus"]);
 $(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 15%')

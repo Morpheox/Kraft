@@ -1558,7 +1558,7 @@ $(".build_castle").attr('tooltip5', '+1 title per level');
 
 //People
 foodcost=50;
-if(items["food"]<foodcost || population<maximums["population"]){
+if(items["food"]<foodcost || population>maximums["population"]){
 	$(".hire_woodcutter").addClass("unavailable")
 }
 else
@@ -1571,7 +1571,7 @@ $(".hire_woodcutter").attr('tooltip2', "Food comsumption: -0.10/s");
 $(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
 
 foodcost=50;
-if(items["food"]<foodcost || population<maximums["population"]){
+if(items["food"]<foodcost || population>maximums["population"]){
 	$(".hire_smelter").addClass("unavailable")
 }
 else
@@ -1588,7 +1588,7 @@ $(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");
 }
 
 woodcost=50
-if(items["wood"]<woodcost || population<maximums["population"]){
+if(items["wood"]<woodcost || population>maximums["population"]){
 	$(".hire_farmer").addClass("unavailable")
 }
 else
@@ -1601,7 +1601,7 @@ $(".hire_farmer").attr('tooltip2', "Food production: +0.40/s");
 
 foodcost=50
 pickaxecost=1
-if(items["wood"]<woodcost || craft["pickaxe"]<pickaxecost || population<maximums["population"]){
+if(items["food"]<foodcost || craft["pickaxe"]<pickaxecost || population>maximums["population"]){
 	$(".hire_miner").addClass("unavailable")
 }
 else
@@ -1616,12 +1616,12 @@ $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=200
 coincost=1
-if(items["wood"]<woodcost || craft["coin"]<coincost || population<maximums["population"]){
-	$(".hire_farmer").addClass("unavailable")
+if(items["wood"]<woodcost || craft["coin"]<coincost || population>maximums["population"]){
+	$(".hire_foundryman").addClass("unavailable")
 }
 else
 {
-	$(".hire_farmer").removeClass("unavailable")
+	$(".hire_foundryman").removeClass("unavailable")
 }
 $(".hire_foundryman").html("Foundryman ("+people["foundryman"]+")");
 $(".hire_foundryman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
@@ -1633,6 +1633,13 @@ $(".hire_foundryman").attr('tooltip6', 'Steel production +0.01/s');
 
 foodcost=50
 spearcost=1
+if(items["food"]<foodcost || craft["spear"]<spearcost || population>maximums["population"]){
+	$(".hire_pikeman").addClass("unavailable")
+}
+else
+{
+	$(".hire_pikeman").removeClass("unavailable")
+}
 $(".hire_pikeman").html("Pikeman ("+people["pikeman"]+")");
 $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip2', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
@@ -1642,6 +1649,13 @@ $(".hire_pikeman").attr('tooltip5', 'Power: 5');
 
 foodcost=150
 swordcost=1
+if(items["food"]<foodcost || craft["sword"]<swordcost || population>maximums["population"]){
+	$(".hire_swordman").addClass("unavailable")
+}
+else
+{
+	$(".hire_swordman").removeClass("unavailable")
+}
 $(".hire_swordman").html("Swordman ("+people["swordman"]+")");
 $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
@@ -1652,6 +1666,13 @@ $(".hire_swordman").attr('tooltip5', 'Power: 10');
 swordmancost=1;
 horsecost=1;
 armorcost=1;
+if(people["swordman"]<swordmancost || craft["horse"]<horsecost || craft["armor"]<armorcost){
+	$(".hire_knight").addClass("unavailable")
+}
+else
+{
+	$(".hire_knight").removeClass("unavailable")
+}
 $(".hire_knight").html("Knight ("+people["knight"]+")");
 $(".hire_knight").attr('tooltip', 'Swordman: '+ people["swordman"]+" / "+swordmancost)
 $(".hire_knight").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))

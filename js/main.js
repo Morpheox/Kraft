@@ -1558,7 +1558,7 @@ $(".build_castle").attr('tooltip5', '+1 title per level');
 
 //People
 foodcost=50;
-if(items["food"]<foodcost || population>maximums["population"]){
+if(items["food"]<foodcost || population>=maximums["population"]){
 	$(".hire_woodcutter").addClass("unavailable")
 }
 else
@@ -1571,7 +1571,7 @@ $(".hire_woodcutter").attr('tooltip2', "Food comsumption: -0.10/s");
 $(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
 
 foodcost=50;
-if(items["food"]<foodcost || population>maximums["population"]){
+if(items["food"]<foodcost || population>=maximums["population"]){
 	$(".hire_smelter").addClass("unavailable")
 }
 else
@@ -1588,7 +1588,7 @@ $(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");
 }
 
 woodcost=50
-if(items["wood"]<woodcost || population>maximums["population"]){
+if(items["wood"]<woodcost || population>=maximums["population"]){
 	$(".hire_farmer").addClass("unavailable")
 }
 else
@@ -1601,7 +1601,7 @@ $(".hire_farmer").attr('tooltip2', "Food production: +0.40/s");
 
 foodcost=50
 pickaxecost=1
-if(items["food"]<foodcost || craft["pickaxe"]<pickaxecost || population>maximums["population"]){
+if(items["food"]<foodcost || craft["pickaxe"]<pickaxecost || population>=maximums["population"]){
 	$(".hire_miner").addClass("unavailable")
 }
 else
@@ -1616,7 +1616,7 @@ $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=200
 coincost=1
-if(items["wood"]<woodcost || craft["coin"]<coincost || population>maximums["population"]){
+if(items["wood"]<woodcost || craft["coin"]<coincost || population>=maximums["population"]){
 	$(".hire_foundryman").addClass("unavailable")
 }
 else
@@ -1633,7 +1633,7 @@ $(".hire_foundryman").attr('tooltip6', 'Steel production +0.01/s');
 
 foodcost=50
 spearcost=1
-if(items["food"]<foodcost || craft["spear"]<spearcost || population>maximums["population"]){
+if(items["food"]<foodcost || craft["spear"]<spearcost || population>=maximums["population"]){
 	$(".hire_pikeman").addClass("unavailable")
 }
 else
@@ -1649,7 +1649,7 @@ $(".hire_pikeman").attr('tooltip5', 'Power: 5');
 
 foodcost=150
 swordcost=1
-if(items["food"]<foodcost || craft["sword"]<swordcost || population>maximums["population"]){
+if(items["food"]<foodcost || craft["sword"]<swordcost || population>=maximums["population"]){
 	$(".hire_swordman").addClass("unavailable")
 }
 else

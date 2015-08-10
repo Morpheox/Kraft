@@ -1801,9 +1801,9 @@ tradewood=500*(bonus["trade"]+1)
 trademineral=400*(bonus["trade"]+1)
 tradefood=300*(bonus["trade"]+1)
 
-$(".trade_wood").html("Wood: " + tradewood);
-$(".trade_mineral").html("Mineral: " + trademineral);
-$(".trade_food").html("Food: " + tradefood);
+$(".trade_wood").html("Wood: " + Math.round(tradewood));
+$(".trade_mineral").html("Mineral: " + Math.round(trademineral));
+$(".trade_food").html("Food: " + Math.round(tradefood));
 }
 
 

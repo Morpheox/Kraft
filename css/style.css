@@ -37,7 +37,7 @@ padding:0;
 .block[style*="display: none;"] + br{
   display: none;
 }
-.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market{
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader{
 	float:left;
 	position: relative;
 	padding:25px;

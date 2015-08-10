@@ -2120,7 +2120,7 @@ $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
 //Leaders
 
-if(bonus["titles"]<1){
+if(bonus["title"]<1){
 	$(".leader_sucellus").addClass("unavailable")
 	$(".leader_eredal").addClass("unavailable")
 	$(".leader_khrysos").addClass("unavailable")

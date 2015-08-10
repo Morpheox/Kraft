@@ -137,7 +137,7 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
 }
 
 .unavailable:not(.researched){
-  background-color:rgba(0,0,0,0.05);
+  background-color:rgba(0,0,0,0.045);
   color:rgba(0,0,0,0.7);
 -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
 -moz-box-shadow:0px 0px 0px 0px rgba(0,0,0,0.75);

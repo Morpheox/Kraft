@@ -1462,7 +1462,7 @@ $(".build_casino").html("Casino ("+buildings["casino"]+")");
 $(".build_casino").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_casino").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".build_casino").attr('tooltip3', 'Allows betting in the casino');
-$(".build_casino").attr('tooltip4', 'Gold production +0.002/s');
+$(".build_casino").attr('tooltip4', 'Gold production +0.004/s');
 $(".build_casino").attr('tooltip5', 'Max bet +0.5');
 $(".build_casino").attr('tooltip6', 'Max gold +1');
 
@@ -2232,7 +2232,7 @@ comsumption[key]=0;
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;
-production["gold"]+=buildings["casino"]/2000;
+production["gold"]+=buildings["casino"]/1000;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

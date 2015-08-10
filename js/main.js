@@ -1558,12 +1558,26 @@ $(".build_castle").attr('tooltip5', '+1 title per level');
 
 //People
 foodcost=50;
+if(items["food"]<foodcost || population<maximums["population"]){
+	$(".hire_woodcutter").addClass("unavailable")
+}
+else
+{
+	$(".hire_woodcutter").removeClass("unavailable")
+}
 $(".hire_woodcutter").html("Woodcutter ("+people["woodcutter"]+")");
 $(".hire_woodcutter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_woodcutter").attr('tooltip2', "Food comsumption: -0.10/s");
 $(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
 
 foodcost=50;
+if(items["food"]<foodcost || population<maximums["population"]){
+	$(".hire_smelter").addClass("unavailable")
+}
+else
+{
+	$(".hire_smelter").removeClass("unavailable")
+}
 $(".hire_smelter").html("Smelter ("+people["smelter"]+")");
 $(".hire_smelter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_smelter").attr('tooltip2', "Mineral comsumption: -0.20/s");
@@ -1574,12 +1588,26 @@ $(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");
 }
 
 woodcost=50
+if(items["wood"]<woodcost || population<maximums["population"]){
+	$(".hire_farmer").addClass("unavailable")
+}
+else
+{
+	$(".hire_farmer").removeClass("unavailable")
+}
 $(".hire_farmer").html("Farmer ("+people["farmer"]+")");
 $(".hire_farmer").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_farmer").attr('tooltip2', "Food production: +0.40/s");
 
 foodcost=50
 pickaxecost=1
+if(items["wood"]<woodcost || craft["pickaxe"]<pickaxecost || population<maximums["population"]){
+	$(".hire_miner").addClass("unavailable")
+}
+else
+{
+	$(".hire_miner").removeClass("unavailable")
+}
 $(".hire_miner").html("Miner ("+people["miner"]+")");
 $(".hire_miner").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_miner").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
@@ -1588,6 +1616,13 @@ $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=200
 coincost=1
+if(items["wood"]<woodcost || craft["coin"]<coincost || population<maximums["population"]){
+	$(".hire_farmer").addClass("unavailable")
+}
+else
+{
+	$(".hire_farmer").removeClass("unavailable")
+}
 $(".hire_foundryman").html("Foundryman ("+people["foundryman"]+")");
 $(".hire_foundryman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_foundryman").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))

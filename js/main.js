@@ -329,32 +329,36 @@ $(".expeditionresult").html("The expedition didn´t find anything useful.")
 }
 else
 {
-
+enemy["reward"]=0;
+enemy["peasant"]=0;
+enemy["bandit"]=0;
+enemy["mercenary"]=0;
+enemy["soldier"]=0;
 var enemytipo=Math.random()*power;
 var stringencuentro="Enemys:<br>"
 var rew=0;
 if(enemytipo<25){
-enemy["peasant"]=Math.round(Math.random()*power)+1;
-stringencuentro+=enemy["peasant"]+" Peasants (Attack:1 Hp:8)<br>";
+enemy["peasant"]=Math.round(Math.random()*power*0.6)+1;
+stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
 rew+=Math.random()*enemy["peasant"]*0.05
 }
 if(enemytipo>15 && enemytipo<50){
-enemy["bandit"]=Math.round(Math.random()*power*0.6)+1;
-stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:20)<br>";
+enemy["bandit"]=Math.round(Math.random()*power*0.3)+1;
+stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
 rew+=Math.random()*enemy["bandit"]*0.11
 }
 if(enemytipo>40 && enemytipo<120){
-enemy["mercenary"]=Math.round(Math.random()*power*0.4)+1;
-stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:60)<br>";
+enemy["mercenary"]=Math.round(Math.random()*power*0.15)+1;
+stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
 rew+=Math.random()*enemy["mercenary"]*0.21
 }
 if(enemytipo>110){
-enemy["soldier"]=Math.round(Math.random()*power*0.15)+1;
-stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:120)<br>";
+enemy["soldier"]=Math.round(Math.random()*power*0.08)+1;
+stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
 rew+=Math.random()*enemy["soldier"]*0.38
 }
-enemy["reward"]=parseFloat(rew).toFixed(2);
-stringencuentro+="Reward: "+enemy["reward"]+" Coins<br>"
+enemy["reward"]=rew;
+stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
 stringencuentro+="<button class='fight' onclick='fight()'>Fight</button><button class='retreat' onclick='retreat()'>Flee</button>";
 
 
@@ -385,47 +389,50 @@ hp+=people["pikeman"]*30
 hp+=people["swordman"]*50
 hp+=people["knight"]*200
 
-hp=power*(bonus["hp"]+1)
+hp=hp*(bonus["hp"]+1)
 
 power2=0;
-power2+=enemy["peasant"]*1
+power2+=enemy["peasant"]*2
 power2+=enemy["bandit"]*4
 power2+=enemy["mercenary"]*9
 power2+=enemy["soldier"]*15
 
 hp2=0;
 hp2+=enemy["peasant"]*8
-hp2+=enemy["bandit"]*20
-hp2+=enemy["mercenary"]*60
-hp2+=enemy["soldier"]*120
+hp2+=enemy["bandit"]*15
+hp2+=enemy["mercenary"]*40
+hp2+=enemy["soldier"]*100
 
 combatlog="The battle starts:<br>"
 var ronda=0;
 for(i=0;i<=50;i++){
 dmg1=power+(Math.random()*(power/2))-(Math.random()*(power/2));
-dgm2=power2+(Math.random()*(power2/2))-(Math.random()*(power2/2));
-combatlog+="Round "+i+"<br>"
+dmg2=power2+(Math.random()*(power2/2))-(Math.random()*(power2/2));
+combatlog+="Round "+(i+1)+"<br>"
 combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
 hp2-=dmg1;
-hp-=dmg;
-combatlog+="Your hp: "+hp +" / Enemy hp: "+hp2+"<br><br>";
+hp-=dmg2;
+combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
 if(hp<1){
 combatlog+="You lose the combat<br>"
-if(people["pikeman"]>1 && Math.random()>0.20){
+if(people["pikeman"]>0 && Math.random()>0.20){
+	losses=Math.round(Math.random()*(people["pikeman"]-1))+1
+	people["pikeman"]-=losses;
+	population-=losses;
+	combatlog+="You lose "+losses+" pikeman<br>"
+}
+if(people["swordman"]>0 && Math.random()>0.20){
 	losses=Math.round(Math.random()*(people["swordman"]-1))+1
 	people["swordman"]-=losses;
-	combatlog+="You lose"+losses+" pikeman"
+	population-=losses;
+	combatlog+="You lose "+losses+" swordman<br>"
 }
-if(people["swordman"]>1 && Math.random()>0.20){
-	losses=Math.round(Math.random()*(people["swordman"]-1))+1
-	people["swordman"]-=losses;
-	combatlog+="You lose"+losses+" swordman"
-}
-if(people["knight"]>1 && Math.random()>0.20){
+if(people["knight"]>0 && Math.random()>0.20){
 	losses=Math.round(Math.random()*(people["knight"]-1))+1
 	people["knight"]-=losses;
-	combatlog+="You lose"+losses+" knight"
+	population-=losses;
+	combatlog+="You lose "+losses+" knight<br>"
 }
 
 
@@ -434,7 +441,10 @@ break;
 }
 else if(hp2<1){
 
-
+combatlog+="Your win the combat!<br><br>";
+combatlog+="You won "+ intToString(enemy["reward"])+" coins";
+$(".encounter").hide()
+craft["coin"]+=enemy["reward"];
 
 break;
 }
@@ -446,8 +456,9 @@ if(i>49){
 combatlog+="The combat ends in a draw<br>"
 }
 
-
-
+$(".expeditionresult").html(combatlog)
+$(".encounter").html("")
+$(".encounter").hide()
 
 
 
@@ -1795,7 +1806,7 @@ $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2
 $(".hire_pikeman").attr('tooltip2', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip3', "Food comsumption: -0.10/s");
 $(".hire_pikeman").attr('tooltip4', 'Morale production +0.02/s');
-$(".hire_pikeman").attr('tooltip5', 'Power: 5');
+$(".hire_pikeman").attr('tooltip5', 'Attack: 5 Hp: 30');
 
 foodcost=150
 swordcost=1
@@ -1811,7 +1822,7 @@ $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".hire_swordman").attr('tooltip3', "Food comsumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
-$(".hire_swordman").attr('tooltip5', 'Power: 10');
+$(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp:50');
 
 swordmancost=1;
 horsecost=1;
@@ -1829,7 +1840,7 @@ $(".hire_knight").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed
 $(".hire_knight").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
 $(".hire_knight").attr('tooltip4', "Food comsumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
-$(".hire_knight").attr('tooltip6', 'Power: 25');
+$(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 
 
 
@@ -2173,7 +2184,7 @@ $(".tech_armament").html("Armament" + (technologies["armament"] >0 ? " (research
 $(".tech_armament").attr('tooltip', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
 $(".tech_armament").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".tech_armament").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
-$(".tech_armament").attr('tooltip5', "Grants soldiers a 40% power boost");
+$(".tech_armament").attr('tooltip5', "Grants soldiers a 40% attack boost");
 
 
 
@@ -2331,7 +2342,7 @@ $(".leader_xochiquetzal").attr('tooltip', 'Increments max population by 2')
 $(".leader_xochiquetzal").attr('tooltip3', "'Life finds a way'");
 
 $(".leader_warmuk").html("Warmuk (lv:" + people["warmuk"]+")");
-$(".leader_warmuk").attr('tooltip', 'Increments troops power by 10%')
+$(".leader_warmuk").attr('tooltip', 'Increments troops attack by 10%')
 $(".leader_warmuk").attr('tooltip2', 'Increments max morale by 2')
 $(".leader_warmuk").attr('tooltip3', 'Increments morale production by 5%')
 $(".leader_warmuk").attr('tooltip5', "'If you run away, you will die tired'");

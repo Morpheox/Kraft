@@ -348,22 +348,22 @@ var enemytipo=Math.random()*power;
 var stringencuentro="Enemys:<br>"
 var rew=0;
 if(enemytipo<25){
-enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.1))+1;
+enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
 stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
 rew+=(Math.random()*enemy["peasant"]*0.05)+(enemy["peasant"]*0.01)
 }
 if(enemytipo>20 && enemytipo<50){
-enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.05))+1;
+enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
 stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
 rew+=(Math.random()*enemy["bandit"]*0.10)+(enemy["bandit"]*0.02)
 }
 if(enemytipo>40 && enemytipo<120){
-enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.020))+1;
+enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
 stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
 rew+=(Math.random()*enemy["mercenary"]*0.25)+(enemy["mercenary"]*0.05)
 }
 if(enemytipo>110){
-enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.010))+1;
+enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
 stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
 rew+=(Math.random()*enemy["soldier"]*0.50)+(enemy["soldier"]*0.10)
 }

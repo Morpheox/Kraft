@@ -839,7 +839,7 @@ if (craft["coin"]>=coincost){
 }
 else if (b=="armament" && technologies["armament"]==0){
 
-spearcost=25
+spearcost=50
 swordcost=25
 armorcost=2
 
@@ -2029,7 +2029,7 @@ $(".tech_leadership").html("Leadership" + (technologies["leadership"] >0 ? " (re
 $(".tech_leadership").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_leadership").attr('tooltip3', "Unlocks castles, wich can grant titles to powerful leaders.");
 
-spearcost=25
+spearcost=50
 swordcost=25
 armorcost=2
 if(craft["spear"]<spearcost || craft["sword"]<swordcost || craft["armor"]<armorcost){

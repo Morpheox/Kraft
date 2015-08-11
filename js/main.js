@@ -2350,7 +2350,7 @@ build_text+=key+": "+buildings[key]+"<br>"
 $(".buildings").html(build_text);*/
 
 $(".betamount").attr("max",maximums["bet"]);
-$(".craftamount").html("Items crafted: "+(1+bonus["craft"])+"<br>")
+$(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
 for(key in items){
 
 var result=(production[key]*(bonus[key]+1))-comsumption[key]

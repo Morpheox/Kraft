@@ -2356,6 +2356,11 @@ power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
 
+hp+=people["pikeman"]*30
+hp+=people["swordman"]*50
+hp+=people["knight"]*200
+
+hp=hp*(bonus["hp"]+1)
 
 foodcost=power*2
 watercost=power
@@ -2374,7 +2379,7 @@ $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+
 $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".expedition").attr('tooltip3', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".expedition").attr('tooltip5', "Send your soldiers in a expedition");
-$(".expedition").attr('tooltip6', "Total power: "+Math.round(power));
+$(".expedition").attr('tooltip6', "Total Attack: "+Math.round(power)+" Total Hp: "+Math.round(hp));
 tradewood=600*(bonus["trade"]+1)
 trademineral=500*(bonus["trade"]+1)
 tradefood=400*(bonus["trade"]+1)

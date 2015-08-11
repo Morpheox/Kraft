@@ -2356,6 +2356,7 @@ power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
 
+var hp=0;
 hp+=people["pikeman"]*30
 hp+=people["swordman"]*50
 hp+=people["knight"]*200

@@ -47,7 +47,7 @@ for(var i=0;i<9;i++){
 stringtablero+="<tr>";
 var hasexit=0;
 for(var j=0;j<9;j++){
-    if(Math.random()>0.50)
+    if(Math.random()>0.30)
     {
     arrprice[i][j]=Math.random()*2
 
@@ -61,7 +61,7 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]="GG" 
     hasexit=1;  
-    }
+    } 
 
 stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"
 }

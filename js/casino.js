@@ -49,7 +49,7 @@ var hasexit=0;
 for(var j=0;j<9;j++){
     if(Math.random()>0.50)
     {
-    arrprice[i][j]=Math.random()*2
+    arrprice[i][j]=Math.random()*3
 
     }
     else if(Math.random()>0.30)

@@ -426,19 +426,19 @@ hp-=dmg2;
 combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
 if(hp<1){
 combatlog+="You lose the combat<br>"
-if(people["pikeman"]>0 && Math.random()>0.20){
+if(people["pikeman"]>0 && Math.random()>0.75){
 	losses=Math.round(Math.random()*(people["pikeman"]-1))+1
 	people["pikeman"]-=losses;
 	population-=losses;
 	combatlog+="You lose "+losses+" pikeman<br>"
 }
-if(people["swordman"]>0 && Math.random()>0.20){
+if(people["swordman"]>0 && Math.random()>0.75){
 	losses=Math.round(Math.random()*(people["swordman"]-1))+1
 	people["swordman"]-=losses;
 	population-=losses;
 	combatlog+="You lose "+losses+" swordman<br>"
 }
-if(people["knight"]>0 && Math.random()>0.20){
+if(people["knight"]>0 && Math.random()>0.75){
 	losses=Math.round(Math.random()*(people["knight"]-1))+1
 	people["knight"]-=losses;
 	population-=losses;

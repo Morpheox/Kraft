@@ -205,3 +205,17 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
   line-height: 300px;
   font-size:22px;
 }
+
+.playgame2{
+      margin-top: 15px;
+    background-color: #1AE81A;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.casinogame1 button{
+margin-top: 15px;
+border-radius: 5px;
+font-size: 20px;
+
+}

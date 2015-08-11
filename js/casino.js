@@ -102,7 +102,8 @@ $("td[data-x="+x+"][data-y="+y+"]").html("+1")
 remaining++  
 }
 
-$(".totalwon").html(remaining+" remaining. Total Won: "+intToString(totalwon));
+$(".totalwon").html("Total Won: "+intToString(totalwon));
+$(".remaings").html(remaining)
 if(remaining<1){
 
     $(".tablero").html("<div class='lose'>You Won "+intToString(totalwon)+" coins</div>")

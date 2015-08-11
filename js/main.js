@@ -343,7 +343,7 @@ enemy["peasant"]=Math.round(Math.random()*power*0.6)+1;
 stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
 rew+=Math.random()*enemy["peasant"]*0.09
 }
-if(enemytipo>15 && enemytipo<50){
+if(enemytipo>20 && enemytipo<50){
 enemy["bandit"]=Math.round(Math.random()*power*0.3)+1;
 stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
 rew+=Math.random()*enemy["bandit"]*0.20

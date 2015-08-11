@@ -123,7 +123,12 @@ craft["horse"]=0
 
 var unlocked=new Array();
 
-
+var enemy=new Array();
+enemy["reward"]=0;
+enemy["peasant"]=0;
+enemy["bandit"]=0;
+enemy["mercenary"]=0;
+enemy["soldier"]=0;
 
 
 function toggle(t){
@@ -243,11 +248,12 @@ items["water"]-=watercost;
 items["morale"]-=moralecost;
 
 
+$(".expeditionresult").html("")
+$(".encounter").hide()
 
 
 
-
-if(Math.random()>0.05){
+if(Math.random()>0.40){
 
 
 reward="The expedition found:<br>";
@@ -322,13 +328,55 @@ $(".expeditionresult").html("The expedition didn´t find anything useful.")
 }
 else
 {
-$(".expeditionresult").html("The expedition didn´t find anything useful.")
+
+var enemytipo=Math.random()*power;
+var stringencuentro="Enemys:<br>"
+var rew=0;
+if(enemytipo<25){
+enemy["peasant"]=Math.round(Math.random()*power)+1;
+stringencuentro+=enemy["peasant"]+" Peasants (Attack:1 Hp:8)<br>";
+rew+=Math.random()*enemy["peasant"]*0.05
+}
+if(enemytipo>15 && enemytipo<50){
+enemy["bandit"]=Math.round(Math.random()*power*0.6)+1;
+stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:20)<br>";
+rew+=Math.random()*enemy["bandit"]*0.11
+}
+if(enemytipo>40 && enemytipo<120){
+enemy["mercenary"]=Math.round(Math.random()*power*0.4)+1;
+stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:60)<br>";
+rew+=Math.random()*enemy["mercenary"]*0.21
+}
+if(enemytipo>110){
+enemy["soldier"]=Math.round(Math.random()*power*0.15)+1;
+stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
+rew+=Math.random()*enemy["soldier"]*0.38
+}
+enemy["reward"]=parseFloat(rew).toFixed(2);
+stringencuentro+="Reward: "+enemy["reward"]+" Coins<br>"
+stringencuentro+="<button class='fight' onclick='fight()'>Fight</button><button class='retreat' onclick='retreat()'>Flee</button>";
+
+
+$(".encounter").show()
+$(".expeditionresult").html("Some enemys appeared in our way.")
+$(".encounter").html(stringencuentro)
+
 }
 
 
 
 
 }
+}
+
+
+
+
+
+
+function retreat(){
+$(".expeditionresult").html("You flee cowardly")
+$(".encounter").hide()
 }
 function crafting(b){
 	var tocraft=1;
@@ -906,7 +954,7 @@ pickaxecost=1;
 
 if (items["food"]>=foodcost && craft["pickaxe"]>=pickaxecost){
 	items["food"]-=foodcost;
-	craft["pickaxe"]-=spearcost
+	craft["pickaxe"]-=pickaxecost
 	people["miner"]+=1
 	population++
 	$(".fire_miner").show()
@@ -2566,6 +2614,9 @@ for(key in unlocked){
 	unlocked[".craftamount"]=1
 	}
 
+	if(craft["pickaxe"]<0){
+		craft["pickaxe"]=0;
+	}
 	//END RETROCOMPATIBILITY
 
 

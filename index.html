@@ -113,6 +113,7 @@
 		<div class="block hire_swordman"></div><button class="fire fire_swordman" onclick='fire("swordman")'>Fire 1</button><br>
 		<div class="block hire_knight"></div><button class="fire fire_knight" onclick='fire("knight")'>Fire 1</button><br>
 		<div class="block expedition"></div><br>
+		<div class="encounter"></div><br>
 		<div class="expeditionresult"></div><br>
 	</div>
 	<div id="casino" class="casino tab-pane fade">
@@ -141,7 +142,7 @@
 	</div>
 </body>
 <script>
-	setInterval(function(){ refresh()}, 250);
+	setInterval(function(){ refresh()}, 5);
     setInterval(function(){ save()}, 5000);
 
 
@@ -150,7 +151,7 @@
 
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()

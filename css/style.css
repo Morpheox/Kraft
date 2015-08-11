@@ -141,3 +141,27 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
 -moz-box-shadow:0px 0px 0px 0px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
 }
+
+.encounter{
+  padding:15px;
+  border:1px solid black;
+  margin-top:15px;
+}
+
+.fight{
+  background-color:rgba(255,0,0,0.9);
+  font-size:16px;
+  color:white;
+    border-radius:3px;
+    padding:5px;
+          border: 1px solid black;
+}
+.retreat{
+  background-color:gray;
+  font-size:16px;
+  color:white;
+  border-radius:3px;
+      padding:5px;
+      border: 1px solid black;
+      margin-left:10px;
+}

@@ -407,8 +407,8 @@ hp2+=enemy["soldier"]*100
 combatlog="The battle starts:<br>"
 var ronda=0;
 for(i=0;i<=50;i++){
-dmg1=power+(Math.random()*(power/2))-(Math.random()*(power/2));
-dmg2=power2+(Math.random()*(power2/2))-(Math.random()*(power2/2));
+dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
+dmg2=power2+(Math.random()*(power2/4))-(Math.random()*(power2/4));
 combatlog+="Round "+(i+1)+"<br>"
 combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"

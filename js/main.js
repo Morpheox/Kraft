@@ -1533,7 +1533,7 @@ else
 }
 $(".build_pasture").html("Pasture ("+buildings["pasture"]+")");
 $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
-$(".build_pasture").attr('tooltip2', "Water comsumption: -0.20/s");
+$(".build_pasture").attr('tooltip2', "Water consumption: -0.20/s");
 $(".build_pasture").attr('tooltip3', "Food production: +0.20/s");
 
 woodcost= Math.pow(1.8,(buildings["house"]))*20
@@ -1592,7 +1592,7 @@ else
 $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".build_foundry").attr('tooltip3', "Mineral comsumption: -0.50/s");
+$(".build_foundry").attr('tooltip3', "Mineral consumption: -0.50/s");
 $(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
 if(technologies["bronze"]>0){
 $(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
@@ -1655,7 +1655,7 @@ else
 $(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
 $(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
-$(".build_kiln").attr('tooltip3', 'Wood comsumption: -2.00/s');
+$(".build_kiln").attr('tooltip3', 'Wood consumption: -2.00/s');
 $(".build_kiln").attr('tooltip4', 'Coal production: +0.01/s');
 
 bronzecost= Math.pow(1.5,(buildings["statue"]))*1
@@ -1729,7 +1729,7 @@ else
 }
 $(".hire_woodcutter").html("Woodcutter ("+people["woodcutter"]+")");
 $(".hire_woodcutter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
-$(".hire_woodcutter").attr('tooltip2', "Food comsumption: -0.10/s");
+$(".hire_woodcutter").attr('tooltip2', "Food consumption: -0.10/s");
 $(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
 
 foodcost=50;
@@ -1742,8 +1742,8 @@ else
 }
 $(".hire_smelter").html("Smelter ("+people["smelter"]+")");
 $(".hire_smelter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
-$(".hire_smelter").attr('tooltip2', "Mineral comsumption: -0.20/s");
-$(".hire_smelter").attr('tooltip3', "Food comsumption: -0.10/s");
+$(".hire_smelter").attr('tooltip2', "Mineral consumption: -0.20/s");
+$(".hire_smelter").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_smelter").attr('tooltip4', "Copper production: +0.01/s");
 if(technologies["metallurgy"]>0){
 $(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
@@ -1773,7 +1773,7 @@ else
 $(".hire_miner").html("Miner ("+people["miner"]+")");
 $(".hire_miner").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_miner").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
-$(".hire_miner").attr('tooltip3', "Food comsumption: -0.10/s");
+$(".hire_miner").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=200
@@ -1788,9 +1788,9 @@ else
 $(".hire_foundryman").html("Foundryman ("+people["foundryman"]+")");
 $(".hire_foundryman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_foundryman").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".hire_foundryman").attr('tooltip3', "Food comsumption: -0.10/s");
-$(".hire_foundryman").attr('tooltip4', "Iron comsumption: -0.05/s");
-$(".hire_foundryman").attr('tooltip5', "Coal comsumption: -0.02/s");
+$(".hire_foundryman").attr('tooltip3', "Food consumption: -0.10/s");
+$(".hire_foundryman").attr('tooltip4', "Iron consumption: -0.05/s");
+$(".hire_foundryman").attr('tooltip5', "Coal consumption: -0.02/s");
 $(".hire_foundryman").attr('tooltip6', 'Steel production +0.01/s');
 
 foodcost=50
@@ -1805,7 +1805,7 @@ else
 $(".hire_pikeman").html("Pikeman ("+people["pikeman"]+")");
 $(".hire_pikeman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_pikeman").attr('tooltip2', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
-$(".hire_pikeman").attr('tooltip3', "Food comsumption: -0.10/s");
+$(".hire_pikeman").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_pikeman").attr('tooltip4', 'Morale production +0.02/s');
 $(".hire_pikeman").attr('tooltip5', 'Attack: 5 Hp: 30');
 
@@ -1821,7 +1821,7 @@ else
 $(".hire_swordman").html("Swordman ("+people["swordman"]+")");
 $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
-$(".hire_swordman").attr('tooltip3', "Food comsumption: -0.40/s");
+$(".hire_swordman").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
 $(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp:50');
 
@@ -1839,7 +1839,7 @@ $(".hire_knight").html("Knight ("+people["knight"]+")");
 $(".hire_knight").attr('tooltip', 'Swordman: '+ people["swordman"]+" / "+swordmancost)
 $(".hire_knight").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
 $(".hire_knight").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
-$(".hire_knight").attr('tooltip4', "Food comsumption: -2.00/s");
+$(".hire_knight").attr('tooltip4', "Food consumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 
@@ -2413,9 +2413,9 @@ var production =new Array()
 for(key in items){
 production[key]=0;
 }
-var comsumption =new Array()
+var consumption =new Array()
 for(key in items){
-comsumption[key]=0;
+consumption[key]=0;
 }
 //buildings
 production["wood"]+=buildings["lumbermill"]/20;
@@ -2425,12 +2425,12 @@ production["gold"]+=buildings["casino"]/1000;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {
-comsumption["water"]+=buildings["pasture"]/20
+consumption["water"]+=buildings["pasture"]/20
 production["food"]=buildings["pasture"]/20;
 }
 if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 {
-comsumption["mineral"]+=buildings["foundry"]/8
+consumption["mineral"]+=buildings["foundry"]/8
 production["iron"]=buildings["foundry"]/200;
 if(technologies["bronze"]>0){
 production["tin"]=buildings["foundry"]/800;
@@ -2438,7 +2438,7 @@ production["tin"]=buildings["foundry"]/800;
 }
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 {
-comsumption["wood"]+=buildings["kiln"]/2
+consumption["wood"]+=buildings["kiln"]/2
 production["coal"]=buildings["kiln"]/400;
 
 }
@@ -2447,18 +2447,18 @@ production["food"]+=people["farmer"]/10;
 
 if (items["food"]>=people["woodcutter"]/40)
 {
-comsumption["food"]+=people["woodcutter"]/40
+consumption["food"]+=people["woodcutter"]/40
 production["wood"]+=people["woodcutter"]/4
 }
 if (items["food"]>=people["miner"]/40)
 {
-comsumption["food"]+=people["miner"]/40
+consumption["food"]+=people["miner"]/40
 production["mineral"]+=people["miner"]/4
 }
 if (items["mineral"]>=people["smelter"]/20 && items["food"]>=people["smelter"]/40)
 {
-comsumption["mineral"]+=people["smelter"]/20
-comsumption["food"]+=people["smelter"]/40
+consumption["mineral"]+=people["smelter"]/20
+consumption["food"]+=people["smelter"]/40
 production["copper"]+=people["smelter"]/400
 if(technologies["metallurgy"]>0){
 production["gold"]+=people["smelter"]/4000
@@ -2467,9 +2467,9 @@ production["gold"]+=people["smelter"]/4000
 
 if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman"]/40 && items["coal"]>=people["foundryman"]/200)
 {
-comsumption["iron"]+=people["foundryman"]/100
-comsumption["coal"]+=people["foundryman"]/200
-comsumption["food"]+=people["foundryman"]/40
+consumption["iron"]+=people["foundryman"]/100
+consumption["coal"]+=people["foundryman"]/200
+consumption["food"]+=people["foundryman"]/40
 
 production["steel"]+=people["foundryman"]/400
 
@@ -2478,19 +2478,19 @@ production["steel"]+=people["foundryman"]/400
 
 if (items["food"]>=people["pikeman"]/40)
 {
-comsumption["food"]+=people["pikeman"]/40
+consumption["food"]+=people["pikeman"]/40
 production["morale"]+=people["pikeman"]/200
 }
 
 if (items["food"]>=people["swordman"]/10)
 {
-comsumption["food"]+=people["swordman"]/10
+consumption["food"]+=people["swordman"]/10
 production["morale"]+=people["swordman"]/400
 }
 
 if (items["food"]>=people["knight"]/2)
 {
-comsumption["food"]+=people["knight"]/2
+consumption["food"]+=people["knight"]/2
 production["morale"]+=people["knight"]/100
 }
 
@@ -2499,7 +2499,7 @@ production["morale"]+=people["knight"]/100
 var inv_text="<table>"
 for(key in items){
 if(items[key]!=0){
-inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-comsumption[key])).toFixed(2)+")</td> ";
+inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-consumption[key])).toFixed(2)+")</td> ";
 if (bonus[key]>0){
 	inv_text+= "<td class='bonus'>+"+Math.round(bonus[key]*100)+"%</td>";
 }
@@ -2540,10 +2540,10 @@ $(".betamount").attr("max",maximums["bet"]);
 $(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
 for(key in items){
 
-var result=(production[key]*(bonus[key]+1))-comsumption[key]
+var result=(production[key]*(bonus[key]+1))-consumption[key]
 
 if((items[key]+result)<maximums[key]){
-items[key]+=(production[key]*(bonus[key]+1))-comsumption[key];
+items[key]+=(production[key]*(bonus[key]+1))-consumption[key];
 }
 else
 {

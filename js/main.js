@@ -1267,6 +1267,8 @@ if (items["steel"]>=steelcost){
 	buildings["workbench"]+=1
 	$(".toggle_workbench").show()
 	unlocked[".toggle_workbench"]=1
+	$(".craftamount").show()
+	unlocked[".craftamount"]=1
 }
 }
 else if (b=="castle"){
@@ -2348,7 +2350,7 @@ build_text+=key+": "+buildings[key]+"<br>"
 $(".buildings").html(build_text);*/
 
 $(".betamount").attr("max",maximums["bet"]);
-
+$(".craftamount").html("Items crafted: "+(1+bonus["craft"])+"<br>")
 for(key in items){
 
 var result=(production[key]*(bonus[key]+1))-comsumption[key]
@@ -2517,6 +2519,11 @@ for(key in unlocked){
 	if(technologies["bronze"]==1){
 	$(".build_statue").show()
     unlocked[".build_statue"]=1;
+	}
+
+	if(buildings["workbench"]>0){
+	$(".craftamount").show()
+	unlocked[".craftamount"]=1
 	}
 
 	//END RETROCOMPATIBILITY

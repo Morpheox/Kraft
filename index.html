@@ -96,6 +96,7 @@
 
 
 	<div  id="crafting" class="crafting tab-pane fade">
+		<div class="craftamount"></div>
 		<div class="block build_workbench"></div><button class="toggle toggle_workbench" onclick='toggle("workbench")'>Toggle</button><br><br>
 		<div class="block craft_pickaxe"></div><br>
 		<div class="block craft_spear"></div><br>
@@ -148,7 +149,7 @@
 
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()

@@ -211,6 +211,8 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
     background-color: #1AE81A;
     border-radius: 5px;
     font-size: 20px;
+    text-align: center;
+    width: 60px;
 }
 
 .casinogame1 button{

@@ -75,7 +75,7 @@ arrprice[Math.round(Math.random()*9)][Math.round(Math.random()*9)]="X";
 }
 remaining=5;
 $(".tablero").html(stringtablero)
-
+$(".playgame2").html(remaining)
 
 }
 }
@@ -103,14 +103,14 @@ remaining++
 }
 
 $(".totalwon").html("Total Won: "+intToString(totalwon));
-$(".remaings").html(remaining)
+$(".playgame2").html(remaining)
 if(remaining<1){
 
     $(".tablero").html("<div class='lose'>You Won "+intToString(totalwon)+" coins</div>")
     craft["coin"]+=totalwon;
     totalwon=0;
     $(".totalwon").html("")
-    $(".remaings").html("")
+    $(".playgame2").html("Play")
 }
 
 }

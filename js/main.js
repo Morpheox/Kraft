@@ -121,6 +121,7 @@ craft["bronze"]=0
 craft["structure"]=0
 craft["armor"]=0
 craft["horse"]=0
+craft["token"]=0
 
 var unlocked=new Array();
 
@@ -2693,7 +2694,7 @@ for(key in unlocked){
 		$(".tech_bronze").show();unlocked[".tech_bronze"]=1;
 		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
 	}
-	
+
 	if(buildings["library"]>=6){
 		$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;
 		$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;

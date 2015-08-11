@@ -89,6 +89,7 @@ technologies["husbandry"]=0
 technologies["cavalry"]=0
 technologies["leadership"]=0
 technologies["armament"]=0
+technologies["gambling"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1005,6 +1006,21 @@ if (craft["spear"]>=spearcost && craft["sword"]>=swordcost && craft["armor"]>=ar
 }
 
 }
+else if (b=="gambling" && technologies["gambling"]==0){
+
+coincost=50;
+
+if (craft["coin"]>=coincost){
+
+	craft["coin"]-=spearcost
+
+
+	technologies["gambling"]++
+	$(".casinogame2").show()
+	unlocked[".casinogame2"]=1;
+}
+
+}
 }
 
 function hire(b){
@@ -1275,7 +1291,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;break;
+		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;break;
 
 	}
 	
@@ -2197,7 +2213,11 @@ $(".tech_armament").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFix
 $(".tech_armament").attr('tooltip5', "Grants soldiers a 40% attack boost");
 
 
-
+coincost=50;
+$(".tech_gambling").addClass((technologies["gambling"] >0 ? "researched" : ""))
+$(".tech_gambling").html("Gambling" + (technologies["gambling"] >0 ? " (researched)" : ""));
+$(".tech_gambling").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_gambling").attr('tooltip3', "Unlocks a new game at the casino.");
 
 //crafting
 woodcost=20;
@@ -2596,38 +2616,7 @@ else if(b=="food"){
 
 
 }
-function bet(b){
 
-    var amountbet=parseFloat($(".betamount").val()).toFixed(2);
-    if(amountbet>0 && maximums["bet"]>=amountbet && items["gold"]>=amountbet){
-    items["gold"]-=amountbet;
-    var rnd=Math.round(Math.random()*999)
-    
-    $(".betresult").html(rnd)
-    if(b=="high" && rnd>=500){
-        amountwon=amountbet*2;
-        $(".casinolog").html("You win! \n You won "+amountwon+" gold");
-        items["gold"]+=amountwon;
-    } 
-    else if(b=="low" && rnd<500)
-    {
-        amountwon=amountbet*2;
-        $(".casinolog").html("You win! \n You won "+amountwon+" gold");
-        items["gold"]+=amountwon;
-        
-    }
-    else
-    {
-        $(".casinolog").html("Sorry you lost, try again!");
-    }
-}else
-{
-    $(".casinolog").html("Maximum bet is "+maximums["bet"]+" gold")
-}
-    
-    
-    
-}
 var techvisible=1;
 function toggletech(){
 	if(techvisible==1){
@@ -2702,6 +2691,7 @@ for(key in unlocked){
 	if(buildings["library"]>=7){
 	 $(".tech_leadership").show();unlocked[".tech_leadership"]=1;
 	 $(".tech_armament").show();unlocked[".tech_armament"]=1;
+	 $(".tech_gambling").show();unlocked[".tech_gambling"]=1;
 	}
 
 	//RETROCOMPATIBILITY

@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="js/json-array.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
     <div class="infokraft">Kraft v0.07 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
@@ -93,6 +94,7 @@
 			<div class="block tech_cavalry"></div><br>
 			<div class="block tech_leadership"></div>
 			<div class="block tech_armament"></div><br>
+			<div class="block tech_gambling"></div><br>
 		</div>
 
 
@@ -117,11 +119,21 @@
 		<div class="expeditionresult"></div><br>
 	</div>
 	<div id="casino" class="casino tab-pane fade">
+	<div class="casinogame1">
 	<div class="betresult">000</div>
 	Amount to bet:<input value="0.5" type="number" class="betamount"></input><br>
 	<button onclick="bet('low')">Bet low</button> <button onclick="bet('high')">Bet high</button>
         <div class="casinolog"></div>
+    </div><br><br>
+    <div class="casinogame2">
+    5 coins to play<br>
+    <div class="tablero"></div>
+    <button class="playgame2" onclick="playgame2()">Play</button>
+    <div class='totalwon'></div>
+    </div>
 	</div>
+
+
 	<div id="market" class="market tab-pane fade">
 	All trades cost 1 coin: <br><br>
 	<div class="trade trade_wood"></div><br>
@@ -151,7 +163,7 @@
 
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -204,6 +216,8 @@
 	$(".tech_cavalry").click(function() {research("cavalry")});
 	$(".tech_leadership").click(function() {research("leadership")});
 	$(".tech_armament").click(function() {research("armament")});
+	$(".tech_gambling").click(function() {research("gambling")});
+
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -231,19 +245,23 @@
 
 
          load();
+
+
+
+
 </script>
 
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
-	<!-- Histats.com  START (hidden counter)-->
+
 <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
 <a href="http://www.histats.com" target="_blank" title="acesso" ><script  type="text/javascript" >
 try {Histats.start(1,3127890,4,0,0,0,"");
 Histats.track_hits();} catch(err){};
 </script></a>
 <noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?3127890&101" alt="acesso" border="0"></a></noscript>
-<!-- Histats.com  END  -->
+
 
 <script>var __v='barc-user-Morpheox';</script>
                   <script type="text/javascript">
@@ -253,6 +271,6 @@ Histats.track_hits();} catch(err){};
                           var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(b, s);
                       })(document);
                   </script>
-              
+ 
 
 </html>

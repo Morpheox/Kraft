@@ -2033,11 +2033,11 @@ spearcost=50
 swordcost=25
 armorcost=2
 if(craft["spear"]<spearcost || craft["sword"]<swordcost || craft["armor"]<armorcost){
-	$(".tech_leadership").addClass("unavailable")
+	$(".tech_armament").addClass("unavailable")
 }
 else
 {
-	$(".tech_leadership").removeClass("unavailable")
+	$(".tech_armament").removeClass("unavailable")
 }
 $(".tech_armament").addClass((technologies["armament"] >0 ? "researched" : ""))
 $(".tech_armament").html("Armament" + (technologies["armament"] >0 ? " (researched)" : ""));

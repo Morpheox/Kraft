@@ -22,7 +22,7 @@ bonus["trade"]=0;
 bonus["craft"]=0;
 bonus["title"]=0;
 bonus["power"]=0;
-
+bonus["hp"]=0;
 var buildings=new Array();
 
 buildings["lumbermill"]=0;
@@ -129,6 +129,7 @@ enemy["peasant"]=0;
 enemy["bandit"]=0;
 enemy["mercenary"]=0;
 enemy["soldier"]=0;
+
 
 
 function toggle(t){
@@ -349,7 +350,7 @@ rew+=Math.random()*enemy["mercenary"]*0.21
 }
 if(enemytipo>110){
 enemy["soldier"]=Math.round(Math.random()*power*0.15)+1;
-stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
+stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:120)<br>";
 rew+=Math.random()*enemy["soldier"]*0.38
 }
 enemy["reward"]=parseFloat(rew).toFixed(2);
@@ -371,7 +372,87 @@ $(".encounter").html(stringencuentro)
 
 
 
+function fight(){
+power=0;
+power+=people["pikeman"]*5
+power+=people["swordman"]*10
+power+=people["knight"]*25
 
+power=power*(bonus["power"]+1)
+
+hp=0;
+hp+=people["pikeman"]*30
+hp+=people["swordman"]*50
+hp+=people["knight"]*200
+
+hp=power*(bonus["hp"]+1)
+
+power2=0;
+power2+=enemy["peasant"]*1
+power2+=enemy["bandit"]*4
+power2+=enemy["mercenary"]*9
+power2+=enemy["soldier"]*15
+
+hp2=0;
+hp2+=enemy["peasant"]*8
+hp2+=enemy["bandit"]*20
+hp2+=enemy["mercenary"]*60
+hp2+=enemy["soldier"]*120
+
+combatlog="The battle starts:<br>"
+var ronda=0;
+for(i=0;i<=50;i++){
+dmg1=power+(Math.random()*(power/2))-(Math.random()*(power/2));
+dgm2=power2+(Math.random()*(power2/2))-(Math.random()*(power2/2));
+combatlog+="Round "+i+"<br>"
+combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
+combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+hp2-=dmg1;
+hp-=dmg;
+combatlog+="Your hp: "+hp +" / Enemy hp: "+hp2+"<br><br>";
+if(hp<1){
+combatlog+="You lose the combat<br>"
+if(people["pikeman"]>1 && Math.random()>0.20){
+	losses=Math.round(Math.random()*(people["swordman"]-1))+1
+	people["swordman"]-=losses;
+	combatlog+="You lose"+losses+" pikeman"
+}
+if(people["swordman"]>1 && Math.random()>0.20){
+	losses=Math.round(Math.random()*(people["swordman"]-1))+1
+	people["swordman"]-=losses;
+	combatlog+="You lose"+losses+" swordman"
+}
+if(people["knight"]>1 && Math.random()>0.20){
+	losses=Math.round(Math.random()*(people["knight"]-1))+1
+	people["knight"]-=losses;
+	combatlog+="You lose"+losses+" knight"
+}
+
+
+
+break;
+}
+else if(hp2<1){
+
+
+
+break;
+}
+
+ronda++
+}
+
+if(i>49){
+combatlog+="The combat ends in a draw<br>"
+}
+
+
+
+
+
+
+
+}
 
 
 function retreat(){

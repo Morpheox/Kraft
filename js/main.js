@@ -88,6 +88,7 @@ technologies["steeltools"]=0
 technologies["husbandry"]=0
 technologies["cavalry"]=0
 technologies["leadership"]=0
+technologies["armament"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -832,6 +833,24 @@ if (craft["coin"]>=coincost){
 	technologies["leadership"]++
 	$(".build_castle").show()
     unlocked[".build_castle"]=1;
+
+}
+
+}
+else if (b=="armament" && technologies["armament"]==0){
+
+spearcost=25
+swordcost=25
+armorcost=2
+
+if (craft["spear"]>=spearcost && craft["sword"]>=swordcost && craft["armor"]>=armorcost){
+
+	craft["spear"]-=spearcost
+	craft["sword"]-=swordcost
+	craft["armor"]-=armorcost
+
+	technologies["armament"]++
+	bonus["power"]+=0.40;
 
 }
 
@@ -2009,6 +2028,26 @@ $(".tech_leadership").addClass((technologies["leadership"] >0 ? "researched" : "
 $(".tech_leadership").html("Leadership" + (technologies["leadership"] >0 ? " (researched)" : ""));
 $(".tech_leadership").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_leadership").attr('tooltip3', "Unlocks castles, wich can grant titles to powerful leaders.");
+
+spearcost=25
+swordcost=25
+armorcost=2
+if(craft["spear"]<spearcost || craft["sword"]<swordcost || craft["armor"]<armorcost){
+	$(".tech_leadership").addClass("unavailable")
+}
+else
+{
+	$(".tech_leadership").removeClass("unavailable")
+}
+$(".tech_armament").addClass((technologies["armament"] >0 ? "researched" : ""))
+$(".tech_armament").html("Armament" + (technologies["armament"] >0 ? " (researched)" : ""));
+$(".tech_armament").attr('tooltip', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
+$(".tech_armament").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
+$(".tech_armament").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
+$(".tech_armament").attr('tooltip5', "Grants soldiers a 40% power boost");
+
+
+
 
 //crafting
 woodcost=20;

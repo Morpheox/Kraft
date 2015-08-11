@@ -246,7 +246,7 @@ items["morale"]-=moralecost;
 
 
 
-if(Math.random()>0.1){
+if(Math.random()>0.05){
 
 
 reward="The expedition found:<br>";
@@ -262,7 +262,7 @@ rnd=(Math.random()*power)*15;
 reward+=parseFloat(rnd).toFixed(2) + " minerals<br>";
 items["mineral"]+=rnd;
 }
-if(Math.random()>0.85){
+if(Math.random()>0.75){
 rnd=(Math.random()*power)*5;
 reward+=parseFloat(rnd).toFixed(2) + " food<br>";
 items["food"]+=rnd;
@@ -2194,9 +2194,9 @@ $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(
 $(".expedition").attr('tooltip3', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".expedition").attr('tooltip5', "Send your soldiers in a expedition");
 $(".expedition").attr('tooltip6', "Total power: "+Math.round(power));
-tradewood=500*(bonus["trade"]+1)
-trademineral=400*(bonus["trade"]+1)
-tradefood=300*(bonus["trade"]+1)
+tradewood=600*(bonus["trade"]+1)
+trademineral=500*(bonus["trade"]+1)
+tradefood=400*(bonus["trade"]+1)
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
 	$(".trade_mineral").addClass("unavailable")
@@ -2373,9 +2373,9 @@ function trade(b){
 
 
 if (craft["coin"]>=1){
-tradewood=500*(bonus["trade"]+1)
-trademineral=400*(bonus["trade"]+1)
-tradefood=300*(bonus["trade"]+1)
+tradewood=600*(bonus["trade"]+1)
+trademineral=500*(bonus["trade"]+1)
+tradefood=400*(bonus["trade"]+1)
 
 if(b=="wood"){
 	items["wood"]+=Math.round(tradewood)

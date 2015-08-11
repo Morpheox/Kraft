@@ -267,17 +267,17 @@ rnd=(Math.random()*power)*5;
 reward+=parseFloat(rnd).toFixed(2) + " food<br>";
 items["food"]+=rnd;
 }
-if(Math.random()>0.95){
+if(Math.random()>0.925){
 rnd=(Math.random()*power)/5;
 reward+=parseFloat(rnd).toFixed(2) + " copper<br>";
 items["copper"]+=rnd;
 }
-if(Math.random()>0.975){
+if(Math.random()>0.925){
 rnd=(Math.random()*power)/8;
 reward+=parseFloat(rnd).toFixed(2) + " iron<br>";
 items["iron"]+=rnd;
 }
-if(Math.random()>0.99){
+if(Math.random()>0.95){
 rnd=(Math.random()*power)/20;
 reward+=parseFloat(rnd).toFixed(2) + " gold<br>";
 items["gold"]+=rnd;
@@ -287,17 +287,17 @@ rnd=Math.round((Math.random()*power)/50)+1;
 reward+=parseFloat(rnd).toFixed(2) + " spear<br>";
 craft["spear"]+=rnd;
 }
-if(Math.random()>0.99 && technologies["sword"]==1){
+if(Math.random()>0.95 && technologies["sword"]==1){
 rnd=Math.round((Math.random()*power)/50)+1;
 reward+=parseFloat(rnd).toFixed(2) + " sword<br>";
 craft["sword"]+=rnd;
 }
-if(Math.random()>0.995 && technologies["storage"]==1){
+if(Math.random()>0.95 && technologies["storage"]==1){
 rnd=Math.round((Math.random()*power)/200)+1;
 reward+=parseFloat(rnd).toFixed(2) + " block<br>";
 craft["block"]+=rnd;
 }
-if(Math.random()>0.999 && technologies["coin"]==1){
+if(Math.random()>0.95 && technologies["coin"]==1){
 rnd=Math.round((Math.random()*power)/500)+1;
 reward+=parseFloat(rnd).toFixed(2) + " coin<br>";
 craft["coin"]+=rnd;

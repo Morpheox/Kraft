@@ -1616,7 +1616,7 @@ $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 
 foodcost=200
 coincost=1
-if(items["wood"]<woodcost || craft["coin"]<coincost || population>=maximums["population"]){
+if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
 	$(".hire_foundryman").addClass("unavailable")
 }
 else

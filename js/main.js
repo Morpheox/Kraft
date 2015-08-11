@@ -1993,7 +1993,7 @@ $(".tech_cavalry").addClass((technologies["cavalry"] >0 ? "researched" : ""))
 $(".tech_cavalry").html("Cavalry" + (technologies["cavalry"] >0 ? " (researched)" : ""));
 $(".tech_cavalry").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_cavalry").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".tech_cavalry").attr('tooltip4', "Grants swordmans training to become armored knights");
+$(".tech_cavalry").attr('tooltip4', "Grants swordmen training to become armored knights");
 
 coincost=25;
 if(craft["coin"]<coincost ){

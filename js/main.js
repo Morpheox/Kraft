@@ -2214,6 +2214,13 @@ $(".tech_armament").attr('tooltip5', "Grants soldiers a 40% attack boost");
 
 
 coincost=50;
+if(craft["coin"]<coincost ){
+	$(".tech_gambling").addClass("unavailable")
+}
+else
+{
+	$(".tech_gambling").removeClass("unavailable")
+}
 $(".tech_gambling").addClass((technologies["gambling"] >0 ? "researched" : ""))
 $(".tech_gambling").html("Gambling" + (technologies["gambling"] >0 ? " (researched)" : ""));
 $(".tech_gambling").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))

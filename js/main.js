@@ -341,22 +341,22 @@ var rew=0;
 if(enemytipo<25){
 enemy["peasant"]=Math.round(Math.random()*power*0.6)+1;
 stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
-rew+=Math.random()*enemy["peasant"]*0.05
+rew+=Math.random()*enemy["peasant"]*0.09
 }
 if(enemytipo>15 && enemytipo<50){
 enemy["bandit"]=Math.round(Math.random()*power*0.3)+1;
 stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
-rew+=Math.random()*enemy["bandit"]*0.11
+rew+=Math.random()*enemy["bandit"]*0.20
 }
 if(enemytipo>40 && enemytipo<120){
 enemy["mercenary"]=Math.round(Math.random()*power*0.15)+1;
 stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
-rew+=Math.random()*enemy["mercenary"]*0.21
+rew+=Math.random()*enemy["mercenary"]*0.38
 }
 if(enemytipo>110){
 enemy["soldier"]=Math.round(Math.random()*power*0.08)+1;
 stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
-rew+=Math.random()*enemy["soldier"]*0.38
+rew+=Math.random()*enemy["soldier"]*0.48
 }
 enemy["reward"]=rew;
 stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"

@@ -199,6 +199,7 @@ people["elisia"]+=1;
 else if (b=="xochiquetzal"){
 
 maximums["population"]+=2;
+bonus["hp"]+=0.05;
 
 bonus["title"]--
 people["xochiquetzal"]+=1;
@@ -2339,7 +2340,8 @@ $(".leader_elisia").attr('tooltip4', "'Making makes us human'");
 
 $(".leader_xochiquetzal").html("Xochiquetzal (lv:" + people["xochiquetzal"]+")");
 $(".leader_xochiquetzal").attr('tooltip', 'Increments max population by 2')
-$(".leader_xochiquetzal").attr('tooltip3', "'Life finds a way'");
+$(".leader_xochiquetzal").attr('tooltip2', 'Increments troops hp by 5%')
+$(".leader_xochiquetzal").attr('tooltip4', "'Life finds a way'");
 
 $(".leader_warmuk").html("Warmuk (lv:" + people["warmuk"]+")");
 $(".leader_warmuk").attr('tooltip', 'Increments troops attack by 10%')
@@ -2715,6 +2717,8 @@ for(key in unlocked){
 	if(craft["pickaxe"]<0){
 		craft["pickaxe"]=0;
 	}
+
+	bonus["hp"]=people["xochiquetzal"]*0.05
 	//END RETROCOMPATIBILITY
 
 

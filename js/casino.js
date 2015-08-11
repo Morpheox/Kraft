@@ -47,9 +47,9 @@ for(var i=0;i<9;i++){
 stringtablero+="<tr>";
 var hasexit=0;
 for(var j=0;j<9;j++){
-    if(Math.random()>0.50)
+    if(Math.random()>0.40)
     {
-    arrprice[i][j]=Math.random()*3
+    arrprice[i][j]=Math.random()*2
 
     }
     else if(Math.random()>0.30)

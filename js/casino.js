@@ -110,6 +110,7 @@ if(remaining<1){
     craft["coin"]+=totalwon;
     totalwon=0;
     $(".totalwon").html("")
+    $(".remaings").html("")
 }
 
 }

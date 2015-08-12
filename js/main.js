@@ -3046,7 +3046,7 @@ Cookies.set('trademission', trademission,{ expires: 9999 });
 
 function load(){
     
-
+if (typeof Cookies.get( 'items') != 'undefined'){
 items = update(items,JSON.parse(Cookies.get( 'items')));
 bonus = update(bonus,JSON.parse(Cookies.get( 'bonus')));
 buildings = update(buildings,JSON.parse(Cookies.get( 'buildings')));
@@ -3137,7 +3137,7 @@ for(key in unlocked){
 
 
 
-setInterval(function(){ save()}, 5000);
+
 save()
 
 trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
@@ -3147,7 +3147,7 @@ if(trademission["time"]>0){
 	$(".tradego").hide()
 }
 
-
+}
 } 
 
 function update(array1, array2){

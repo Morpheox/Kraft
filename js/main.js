@@ -3055,17 +3055,10 @@ technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
 people = update(people,JSON.parse(Cookies.get( 'people')));
 craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
-trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
+
 population = Cookies.get('population');
 population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["pikeman"]+people["swordman"]+people["knight"]
 
-
-
-if(trademission["time"]>0){
-	tickinterval = setInterval(function(){ ticktrade()}, 1000);
-	$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
-	$(".tradego").hide()
-}
 
 
 
@@ -3141,6 +3134,14 @@ for(key in unlocked){
 
 	bonus["hp"]=people["xochiquetzal"]*0.05
 	//END RETROCOMPATIBILITY
+	
+trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
+if(trademission["time"]>0){
+	tickinterval = setInterval(function(){ ticktrade()}, 1000);
+	$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
+	$(".tradego").hide()
+}
+
 
 setInterval(function(){ save()}, 5000);
 save()

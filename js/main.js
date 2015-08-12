@@ -3057,7 +3057,7 @@ craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
 population = Cookies.get('population');
-population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["pikeman"]+people["swordman"]+people["knight"]
+population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["pikeman"]+people["swordman"]+people["knight"]
 
 
 

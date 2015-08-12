@@ -44,6 +44,8 @@ buildings["towncenter"]=0;
 buildings["workbench"]=0;
 buildings["castle"]=0;
 buildings["relic"]=0;
+buildings["shipyard"]=0;
+buildings["docks"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){

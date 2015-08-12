@@ -18,6 +18,7 @@ var bonus =new Array()
 for(key in items){
 bonus[key]=0;
 }
+bonus["global"]=0;
 bonus["trade"]=0;
 bonus["craft"]=0;
 bonus["title"]=0;
@@ -42,6 +43,7 @@ buildings["statue"]=0;
 buildings["towncenter"]=0;
 buildings["workbench"]=0;
 buildings["castle"]=0;
+buildings["relic"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -90,6 +92,7 @@ technologies["cavalry"]=0
 technologies["leadership"]=0
 technologies["armament"]=0
 technologies["gambling"]=0
+technologies["redeem"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1013,12 +1016,27 @@ coincost=50;
 
 if (craft["coin"]>=coincost){
 
-	craft["coin"]-=spearcost
+	craft["coin"]-=coincost;
 
 
 	technologies["gambling"]++
 	$(".casinogame2").show()
 	unlocked[".casinogame2"]=1;
+}
+
+}
+else if (b=="redeem" && technologies["redeem"]==0){
+
+tokencost=100;
+
+if (craft["token"]>=tokencost){
+
+	craft["token"]-=tokencost;
+
+
+	technologies["redeem"]++
+	$(".build_relic").show()
+	unlocked[".build_relic"]=1;
 }
 
 }
@@ -1292,7 +1310,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;break;
+		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
 
 	}
 	
@@ -1487,6 +1505,21 @@ if (craft["block"]>=blockcost && items["gold"]>=goldcost){
     unlocked[".titles"]=1;
     $("#leaderpane").removeClass("invisible")
     unlocked["#leaderpane"]=1;
+}
+}
+else if (b=="relic"){
+
+tokencost= Math.pow(1.6,(buildings["relic"]))*5
+
+
+if (items["token"]>=tokencost){
+
+	items["token"]-=tokencost;
+
+
+
+	buildings["relic"]+=1
+	bonus["global"]+=0.01
 }
 }
 }
@@ -1742,6 +1775,18 @@ $(".build_castle").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed
 $(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".build_castle").attr('tooltip4', 'Unlocks leaders to rule the realm.');
 $(".build_castle").attr('tooltip5', '+1 title per level');
+
+tokencost= Math.pow(1.6,(buildings["relic"]))*5
+if(craft["token"]<tokencost){
+	$(".build_relic").addClass("unavailable")
+}
+else
+{
+	$(".build_relic").removeClass("unavailable")
+}
+$(".build_relic").html("Relic ("+buildings["relic"]+")");
+$(".build_relic").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".build_relic").attr('tooltip3', 'Global production +1%');
 
 
 //People
@@ -2227,6 +2272,21 @@ $(".tech_gambling").html("Gambling" + (technologies["gambling"] >0 ? " (research
 $(".tech_gambling").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_gambling").attr('tooltip3', "Unlocks a new game at the casino.");
 
+tokencost=100;
+if(craft["token"]<tokencost ){
+	$(".tech_redeem").addClass("unavailable")
+}
+else
+{
+	$(".tech_redeem").removeClass("unavailable")
+}
+$(".tech_redeem").addClass((technologies["redeem"] >0 ? "researched" : ""))
+$(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" : ""));
+$(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".tech_redeem").attr('tooltip3', "Allows reedeming tokens in the casino.");
+
+
+
 //crafting
 woodcost=20;
 coppercost=1;
@@ -2536,9 +2596,9 @@ production["morale"]+=people["knight"]/100
 var inv_text="<table>"
 for(key in items){
 if(items[key]!=0){
-inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+1))-consumption[key])).toFixed(2)+")</td> ";
+inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
 if (bonus[key]>0){
-	inv_text+= "<td class='bonus'>+"+Math.round(bonus[key]*100)+"%</td>";
+	inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
 }
 
 inv_text+="<tr>"
@@ -2705,6 +2765,7 @@ for(key in unlocked){
 	 $(".tech_leadership").show();unlocked[".tech_leadership"]=1;
 	 $(".tech_armament").show();unlocked[".tech_armament"]=1;
 	 $(".tech_gambling").show();unlocked[".tech_gambling"]=1;
+	 $(".tech_redeem").show();unlocked[".tech_redeem"]=1;
 	}
 
 	//RETROCOMPATIBILITY

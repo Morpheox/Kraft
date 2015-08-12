@@ -95,6 +95,7 @@
 			<div class="block tech_leadership"></div>
 			<div class="block tech_armament"></div><br>
 			<div class="block tech_gambling"></div><br>
+			<div class="block tech_redeem"></div><br>
 		</div>
 
 
@@ -119,12 +120,15 @@
 		<div class="expeditionresult"></div><br>
 	</div>
 	<div id="casino" class="casino tab-pane fade">
+	<div class="casinoreward">
+	<div class="block build_relic"></div>
+	</div>
 	<div class="casinogame1">
 	<div class="betresult">000</div>
 	Amount to bet:<input value="0.5" type="number" class="betamount"></input><br>
 	<button onclick="bet('low')">Bet low</button> <button onclick="bet('high')">Bet high</button>
         <div class="casinolog"></div>
-    </div>
+    </div><br>
     <div class="casinogame2">
     5 coins to play<br>
     <div class="tablero"></div>
@@ -183,6 +187,7 @@
 	$(".build_towncenter").click(function() {build("towncenter")});
 	$(".build_workbench").click(function() {build("workbench")});
 	$(".build_castle").click(function() {build("castle")});
+	$(".build_relic").click(function() {build("relic")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -217,7 +222,7 @@
 	$(".tech_leadership").click(function() {research("leadership")});
 	$(".tech_armament").click(function() {research("armament")});
 	$(".tech_gambling").click(function() {research("gambling")});
-
+	$(".tech_redeem").click(function() {research("redeem")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

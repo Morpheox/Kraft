@@ -614,13 +614,13 @@ if (items["steel"]>=steelcost && craft["bronze"]>=bronzecost){
 }
 else if (b=="supplies"){
 
-woodcost=200;
+plankcost=5;
 foodcost=500;
 watercost=100;
 
-if (items["wood"]>=woodcost && items["food"]>=foodcost && items["water"]>=watercost){
+if (craft["plank"]>=plankcost && items["food"]>=foodcost && items["water"]>=watercost){
 
-	items["wood"]-=woodcost;
+	craft["plank"]-=plankcost;
 	items["food"]-=foodcost;
 	items["water"]-=watercost;
 
@@ -2696,11 +2696,11 @@ $(".craft_armor").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".craft_armor").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
-woodcost=200;
+plankcost=5;
 foodcost=500;
 watercost=100;
 
-if(items["wood"]<woodcost || items["food"]<foodcost || items["water"]<watercost){
+if(craft["plank"]<plankcost || items["food"]<foodcost || items["water"]<watercost){
 	$(".craft_supplies").addClass("unavailable")
 }
 else
@@ -2708,7 +2708,7 @@ else
 	$(".craft_supplies").removeClass("unavailable")
 }
 $(".craft_supplies").html("Supplies");
-$(".craft_supplies").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".craft_supplies").attr('tooltip', 'Wood: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");

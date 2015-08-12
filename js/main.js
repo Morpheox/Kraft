@@ -1639,7 +1639,7 @@ if (craft["plank"]>=plankcost && items["iron"]>=ironcost){
 
 	buildings["docks"]+=1
 
-	$("#dockpane").show()
+	$("#dockpane").removeClass("invisible");
 	unlocked["#dockpane"]=1
 	$(".hire_galley").show()
 	unlocked[".hire_galley"]=1

@@ -1529,8 +1529,8 @@ if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 else if (b=="foundry"){
 
 
-mineralcost= Math.pow(1.5,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.5, (buildings["foundry"]))*5
+mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
+coppercost=Math.pow(1.4, (buildings["foundry"]))*5
 
 if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
 	items["mineral"]-=mineralcost;
@@ -1596,8 +1596,8 @@ if (items["wood"]>=woodcost && craft["coin"]>=coincost){
 }
 else if (b=="kiln"){
 
-blockcost= Math.pow(1.6,(buildings["kiln"]))*15
-mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
+blockcost= Math.pow(1.5,(buildings["kiln"]))*15
+mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
 
 if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
 	items["mineral"]-=mineralcost;
@@ -1626,9 +1626,9 @@ if (craft["bronze"]>=bronzecost){
 }
 else if (b=="towncenter"){
 
-blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
-coincost= Math.pow(1.4,(buildings["towncenter"]))*3
+blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
+structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
+coincost= Math.pow(1.3,(buildings["towncenter"]))*3
 
 if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
 
@@ -1718,8 +1718,8 @@ if (craft["token"]>=tokencost){
 }
 else if (b=="shipyard"){
 
-woodcost=Math.pow(1.5,(buildings["shipyard"]))*20000
-structurecost= Math.pow(1.5,(buildings["shipyard"]))*50
+woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
+structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
 
 
 
@@ -1737,8 +1737,8 @@ if (craft["structure"]>=structurecost && items["wood"]>=woodcost){
 }
 
 else if (b=="docks"){
-ironcost=Math.pow(1.4,(buildings["docks"]))*100
-plankcost= Math.pow(1.4,(buildings["docks"]))*50
+ironcost=Math.pow(1.3,(buildings["docks"]))*100
+plankcost= Math.pow(1.3,(buildings["docks"]))*50
 
 
 
@@ -1877,8 +1877,8 @@ $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_banner").attr('tooltip3', 'Max morale +1');
 
-mineralcost= Math.pow(1.5,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.5, (buildings["foundry"]))*5
+mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
+coppercost=Math.pow(1.4, (buildings["foundry"]))*5
 if(items["mineral"]<mineralcost || items["copper"]<coppercost){
 	$(".build_foundry").addClass("unavailable")
 }
@@ -1940,8 +1940,8 @@ $(".build_market").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(
 $(".build_market").attr('tooltip3', 'Allows trading');
 $(".build_market").attr('tooltip4', '+5% market trade effiency');
 
-blockcost= Math.pow(1.6,(buildings["kiln"]))*15
-mineralcost= Math.pow(1.6,(buildings["kiln"]))*2000
+blockcost= Math.pow(1.5,(buildings["kiln"]))*15
+mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
 if(craft["block"]<blockcost || items["mineral"]<mineralcost){
 	$(".build_kiln").addClass("unavailable")
 }
@@ -1968,9 +1968,9 @@ $(".build_statue").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFix
 $(".build_statue").attr('tooltip2', 'Max morale +2');
 $(".build_statue").attr('tooltip3', 'Morale production +5%');
 
-blockcost= Math.pow(1.4,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.4,(buildings["towncenter"]))*5
-coincost= Math.pow(1.4,(buildings["towncenter"]))*3
+blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
+structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
+coincost= Math.pow(1.3,(buildings["towncenter"]))*3
 if(craft["block"]<blockcost || craft["structure"]<structurecost || craft["coin"]<coincost){
 	$(".build_towncenter").addClass("unavailable")
 }
@@ -2026,8 +2026,8 @@ $(".build_relic").html("Relic ("+buildings["relic"]+")");
 $(".build_relic").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".build_relic").attr('tooltip3', 'Global production +1%');
 
-woodcost=Math.pow(1.5,(buildings["shipyard"]))*20000
-structurecost= Math.pow(1.5,(buildings["shipyard"]))*50
+woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
+structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
 if(items["wood"]<woodcost || craft["structure"]<structurecost){
 	$(".build_shipyard").addClass("unavailable")
 }
@@ -2044,8 +2044,8 @@ $(".build_shipyard").attr('tooltip5', 'Plank production +0.05/s');
 
 
 
-ironcost=Math.pow(1.4,(buildings["docks"]))*100
-plankcost= Math.pow(1.4,(buildings["docks"]))*50
+ironcost=Math.pow(1.3,(buildings["docks"]))*100
+plankcost= Math.pow(1.3,(buildings["docks"]))*50
 if(items["iron"]<ironcost || craft["plank"]<plankcost){
 	$(".build_docks").addClass("unavailable")
 }

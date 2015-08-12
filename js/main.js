@@ -346,8 +346,8 @@ craft["chest"]+=rnd;
 	maximums["coal"]+=0.15*(rnd);
 	maximums["steel"]+=0.10*(rnd);
 }
-if(reward!="The expedition found:<br>
-	")
+if(reward!="The expedition found:<br>")
+
 {
 $(".expeditionresult").html(reward)
 }

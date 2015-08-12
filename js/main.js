@@ -1154,7 +1154,7 @@ if (items["food"]>=foodcost && items["gold"]>=goldcost && craft["coin"]>=coincos
 }
 else if (b=="cache" && technologies["cache"]==0){
 
-mineralcost=23000;
+mineralcost=22500;
 steelcost=100;
 plankcost=500;
 
@@ -2636,7 +2636,7 @@ $(".tech_trade").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)
 $(".tech_trade").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_trade").attr('tooltip5', "Allows hiring sailors to embark on trade missions.");
 
-mineralcost=23000;
+mineralcost=22500;
 steelcost=100;
 plankcost=500;
 if(craft["plank"]<plankcost || items["mineral"]<mineralcost || items["steel"]<steelcost){

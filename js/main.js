@@ -53,6 +53,7 @@ buildstatus[key]=1;
 var maximums=new Array()
 
 maximums["population"]=0;
+maximums["ships"]=0;
 maximums["bet"]=0;
 
 
@@ -63,8 +64,7 @@ maximums["wood"]=50
 maximums["mineral"]=20
 
 var population=0;
-
-
+var ships=0;
 
 
 var technologies=new Array()
@@ -93,6 +93,8 @@ technologies["leadership"]=0
 technologies["armament"]=0
 technologies["gambling"]=0
 technologies["redeem"]=0
+technologies["shipyard"]=0
+technologies["sailing"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -111,7 +113,7 @@ people["elisia"]=0
 people["xochiquetzal"]=0
 people["warmuk"]=0
 
-
+people["galley"]=0
 
 var craft=new Array();
 
@@ -125,6 +127,7 @@ craft["structure"]=0
 craft["armor"]=0
 craft["horse"]=0
 craft["token"]=0
+craft["plank"]=0
 
 var unlocked=new Array();
 
@@ -1040,6 +1043,38 @@ if (craft["token"]>=tokencost){
 }
 
 }
+else if (b=="shipyard" && technologies["shipyard"]==0){
+
+woodcost=25000;
+
+
+if (items["wood"]>=woodcost){
+
+	items["wood"]-=woodcost;
+
+
+	technologies["shipyard"]++
+	$(".build_shipyard").show()
+	unlocked[".build_shipyard"]=1;
+}
+
+}
+else if (b=="sailing" && technologies["sailing"]==0){
+
+plankcost=100;
+
+
+if (craft["plank"]>=plankcost){
+
+	craft["plank"]-=plankcost;
+
+
+	technologies["shipyard"]++
+	$(".build_docks").show()
+	unlocked[".build_docks"]=1;
+}
+
+}
 }
 
 function hire(b){
@@ -1169,7 +1204,52 @@ if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armo
 }
 
 }
+if(ships<maximums["ships"]){
+if (b=="galley"){
 
+woodcost=20000;
+plankcost=100;
+structurecost=50;
+
+
+if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
+	items["wood"]-=woodcost
+	craft["plank"]-=plankcost;
+	craft["structure"]-=structure;
+
+	people["galley"]+=1;
+	ships++
+
+	$(".salvage_galley").show()
+    unlocked[".salvage_galley"]=1;
+
+
+
+}
+
+}
+
+}
+
+
+
+}
+function salvage(b){
+if (people[b]>0){
+
+	people[b]-=1
+	ships--
+	if (people[b]==0){
+	$(".salvage_"+b).hide()
+        unlocked[".salvage_"+b]=0;
+	}
+	if(b=="galley"){
+
+		craft["plank"]+=10+(Math.random()*10);
+		craft["structure"]+=5+(Math.random()*5);
+		items["wood"]+=1000+(Math.random()*5000);
+	}
+}
 
 
 }
@@ -1311,7 +1391,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-
+		case 9:$(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;break;
 	}
 	
 }
@@ -1522,6 +1602,50 @@ if (craft["token"]>=tokencost){
 	bonus["global"]+=0.01
 }
 }
+else if (b=="shipyard"){
+
+woodcost=Math.pow(1.5,(buildings["shipyard"]))*20000
+structurecost= Math.pow(1.5,(buildings["shipyard"]))*50
+
+
+
+if (craft["structure"]>=structurecost && items["wood"]>=woodcost){
+
+	craft["structure"]-=structurecost;
+	items["wood"]-=woodcost;
+
+
+	buildings["shipyard"]+=1
+	$(".toggle_shipyard").show()
+	unlocked[".toggle_shipyard"]=1
+
+}
+}
+
+else if (b=="docks"){
+ironcost=Math.pow(1.4,(buildings["docks"]))*100
+plankcost= Math.pow(1.4,(buildings["docks"]))*50
+
+
+
+if (craft["plank"]>=plankcost && items["iron"]>=ironcost){
+
+	craft["plank"]-=plankcost;
+	items["iron"]-=ironcost;
+
+	maximums["ships"]++
+
+	buildings["docks"]+=1
+
+	$("#dockpane").show()
+	unlocked["#dockpane"]=1
+	$(".hire_galley").show()
+	unlocked[".hire_galley"]=1
+	$(".ships").show()
+	unlocked[".ships"]=1
+}
+}
+
 }
 
 function calculatecost(){
@@ -1788,6 +1912,41 @@ $(".build_relic").html("Relic ("+buildings["relic"]+")");
 $(".build_relic").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".build_relic").attr('tooltip3', 'Global production +1%');
 
+woodcost=Math.pow(1.5,(buildings["shipyard"]))*20000
+structurecost= Math.pow(1.5,(buildings["shipyard"]))*50
+if(items["wood"]<woodcost || craft["structure"]<structurecost){
+	$(".build_shipyard").addClass("unavailable")
+}
+else
+{
+	$(".build_shipyard").removeClass("unavailable")
+}
+$(".build_shipyard").html("Shipyard ("+buildings["shipyard"]+")");
+$(".build_shipyard").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".build_shipyard").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
+$(".build_shipyard").attr('tooltip4', 'Wood consumption -40.00/s');
+$(".build_shipyard").attr('tooltip5', 'Plank production +0.05/s');
+
+
+
+
+ironcost=Math.pow(1.4,(buildings["docks"]))*100
+plankcost= Math.pow(1.4,(buildings["docks"]))*50
+if(items["iron"]<ironcost || craft["plank"]<plankcost){
+	$(".build_docks").addClass("unavailable")
+}
+else
+{
+	$(".build_docks").removeClass("unavailable")
+}
+$(".build_docks").html("Docks ("+buildings["shipyard"]+")");
+$(".build_docks").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_docks").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".build_docks").attr('tooltip4', '+1 Ship storage');
+
+
+
+
 
 //People
 foodcost=50;
@@ -1913,6 +2072,26 @@ $(".hire_knight").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed
 $(".hire_knight").attr('tooltip4', "Food consumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
+
+
+//Ships
+woodcost=20000;
+plankcost=100;
+structurecost=50;
+if(items["wood"]<woodcost || craft["plank"]<plankcost || craft["structure"]<structurecost){
+	$(".hire_galley").addClass("unavailable")
+}
+else
+{
+	$(".hire_galley").removeClass("unavailable")
+}
+$(".hire_galley").html("Galley ("+people["galley"]+")");
+$(".hire_galley").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".hire_galley").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".hire_galley").attr('tooltip3', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
+$(".hire_galley").attr('tooltip5', "Power: 150 Structure: 2000");
+$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5000');
+
 
 
 
@@ -2285,7 +2464,31 @@ $(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" :
 $(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_redeem").attr('tooltip3', "Allows reedeming tokens in the casino.");
 
+woodcost=25000;
+if(items["wood"]<woodcost ){
+	$(".tech_shipyard").addClass("unavailable")
+}
+else
+{
+	$(".tech_shipyard").removeClass("unavailable")
+}
+$(".tech_shipyard").addClass((technologies["shipyard"] >0 ? "researched" : ""))
+$(".tech_shipyard").html("Shipyard" + (technologies["shipyard"] >0 ? " (researched)" : ""));
+$(".tech_shipyard").attr('tooltip', 'Wood: '+ parseFloat(craft["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_shipyard").attr('tooltip3', "Unlocks the buildings of shipyards.");
 
+plankcost=100;
+if(craft["plank"]<plankcost ){
+	$(".tech_sailing").addClass("unavailable")
+}
+else
+{
+	$(".tech_sailing").removeClass("unavailable")
+}
+$(".tech_sailing").addClass((technologies["sailing"] >0 ? "researched" : ""))
+$(".tech_sailing").html("Sailing" + (technologies["sailing"] >0 ? " (researched)" : ""));
+$(".tech_sailing").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_sailing").attr('tooltip3', "Allows building docks to store ships.");
 
 //crafting
 woodcost=20;
@@ -2539,6 +2742,11 @@ consumption["wood"]+=buildings["kiln"]/2
 production["coal"]=buildings["kiln"]/400;
 
 }
+if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
+{
+consumption["wood"]+=buildings["shipyard"]*10
+craft["plank"]+=buildings["shipyard"]/80;
+}
 //people
 production["food"]+=people["farmer"]/10;
 
@@ -2607,6 +2815,7 @@ inv_text+="<tr>"
 inv_text+="</table>"
 $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
+$(".ships").html("Ships: "+ships+" / "+ +maximums["ships"]);
 $(".titles").html("Titles: "+bonus["title"]);
 
 var inv_text="<table>"
@@ -2767,7 +2976,11 @@ for(key in unlocked){
 	 $(".tech_gambling").show();unlocked[".tech_gambling"]=1;
 	 $(".tech_redeem").show();unlocked[".tech_redeem"]=1;
 	}
+	if(buildings["library"]>=8){
+	 $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
+	 $(".tech_sailing").show();unlocked[".tech_sailing"]=1;
 
+	}
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)
 	{

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.07</title>
+	<title>Kraft v0.08</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -20,8 +20,8 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.07 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
-	<div class="population"></div><div class="titles"></div>
+    <div class="infokraft">Kraft v0.08 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+	<div class="population"></div><div class="titles"></div><div class="ships"></div>
         <button onclick="save()">Save</button><br><br>
         
 	<ul class="nav nav-tabs">
@@ -33,6 +33,7 @@
 		<li id="casinopane"><a data-toggle="tab" href="#casino">Casino</a></li>
 		<li id="marketpane"><a data-toggle="tab" href="#market">Market</a></li>
 		<li id="leaderpane"><a data-toggle="tab" href="#leader">Leaders</a></li>
+		<li id="dockpane"><a data-toggle="tab" href="#dock">Dock</a></li>
 	</ul>
 	<br><br>
 
@@ -61,6 +62,8 @@
 			<div class="block build_kiln"></div><button class="toggle toggle_kiln" onclick='toggle("kiln")'>Toggle</button><br>
 			<div class="block build_towncenter"></div><br>
 			<div class="block build_castle"></div>
+			<div class="block build_shipyard"></div><button class="toggle toggle_shipyard" onclick='toggle("shipyard")'>Toggle</button><br>
+			<div class="block build_docks"></div>
 			<br><br><br><br><br><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -96,6 +99,8 @@
 			<div class="block tech_armament"></div><br>
 			<div class="block tech_gambling"></div>
 			<div class="block tech_redeem"></div><br>
+			<div class="block tech_shipyard"></div><br>
+			<div class="block tech_sailing"></div><br>
 		</div>
 
 
@@ -155,6 +160,9 @@
 
 
 	</div>
+	<div id="dock" class="dock tab-pane fade">
+	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br>
+	</div>
 	</div>
 </body>
 <script>
@@ -166,7 +174,7 @@
 
 
 
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane").addClass("invisible");
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});

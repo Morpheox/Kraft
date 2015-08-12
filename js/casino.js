@@ -45,7 +45,7 @@ $(".tablero").show();
 stringtablero="<table class='tabgame'>"
 for(var i=0;i<9;i++){
 stringtablero+="<tr>";
-var hasexit=0;
+
 for(var j=0;j<9;j++){
     if(Math.random()>0.30)
     {
@@ -55,12 +55,10 @@ for(var j=0;j<9;j++){
     else if(Math.random()>0.50)
     {
     arrprice[i][j]="X" 
-    hasexit=1;   
     }
     else
     {
-    arrprice[i][j]="GG" 
-    hasexit=1;  
+    arrprice[i][j]="GG"
     } 
 
 stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"
@@ -70,9 +68,7 @@ stringtablero+="</tr>";
 }
 
 stringtablero+="</table>";
-if(hasexit==0){
-arrprice[Math.round(Math.random()*9)][Math.round(Math.random()*9)]="X";
-}
+
 remaining=5;
 $(".tablero").html(stringtablero)
 $(".playgame2").html(remaining)

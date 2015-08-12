@@ -664,9 +664,9 @@ if (craft["plank"]>=plankcost && items["food"]>=foodcost && items["water"]>=wate
 }
 else if (b=="chest"){
 
-plankcost=50;
-steelcost=50;
-bronzecost=10;
+plankcost=100;
+steelcost=30;
+bronzecost=5;
 
 if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && items["steel"]>=steelcost){
 
@@ -1351,7 +1351,7 @@ if(ships<maximums["ships"]){
 if (b=="galley"){
 
 woodcost=20000;
-plankcost=100;
+plankcost=200;
 structurecost=50;
 
 
@@ -2235,7 +2235,7 @@ $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 
 //Ships
 woodcost=20000;
-plankcost=100;
+plankcost=200;
 structurecost=50;
 if(items["wood"]<woodcost || craft["plank"]<plankcost || craft["structure"]<structurecost || ships>=maximums["ships"]){
 	$(".hire_galley").addClass("unavailable")
@@ -2813,9 +2813,9 @@ $(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixe
 $(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");
 
-plankcost=50;
-steelcost=50;
-bronzecost=10;
+plankcost=100;
+steelcost=30;
+bronzecost=5;
 if(craft["plank"]<plankcost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
 	$(".craft_chest").addClass("unavailable")
 }

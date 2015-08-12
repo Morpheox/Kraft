@@ -483,14 +483,14 @@ break;
 else if(hp2<1){
 
 combatlog+="Your win the combat!<br><br>";
-combatlog+="You won "+ intToString(enemy["reward"])+" coins";
+combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
 $(".encounter").hide()
 craft["coin"]+=enemy["reward"];
 if(Math.random()>0.80 && technologies["cache"]==1){
 rnd=(Math.random()*((power/2)+(hp/15)))/500;
 reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 craft["chest"]+=rnd;
-combatlog+="You also took "+ rnd+" chests that they were carrying";
+combatlog+="You also took "+ intToString(rnd)+" chests that they were carrying";
 	maximums["wood"]+=50*(rnd);
 	maximums["mineral"]+=25*(rnd);
 	maximums["food"]+=10*(rnd);

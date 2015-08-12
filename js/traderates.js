@@ -93,7 +93,16 @@ function tradeship(){
 
 	amountget=resourcestrade*traderatio[$(".selgive").val()][$(".selget").val()]
 
+	if($(".selget").val()=="nothing"){
+		$(".docklog").html("No resource selected.")
+		return;
 
+	}
+
+	if (resourcestrade>resources){
+		$(".docklog").html("Not enough resources for this trade.")
+		return;
+	}
 
 	if (resourcestrade>resources){
 		$(".docklog").html("Not enough resources for this trade.")

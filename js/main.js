@@ -1216,7 +1216,7 @@ structurecost=50;
 
 
 if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
-	
+
 	items["wood"]-=woodcost
 	craft["plank"]-=plankcost;
 	craft["structure"]-=structurecost;
@@ -3015,7 +3015,7 @@ for(key in unlocked){
 	bonus["hp"]=people["xochiquetzal"]*0.05
 	//END RETROCOMPATIBILITY
 
-
+setInterval(function(){ save()}, 5000);
 save()
 } 
 

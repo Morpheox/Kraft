@@ -2597,7 +2597,7 @@ var inv_text="<table>"
 for(key in items){
 if(items[key]!=0){
 inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
-if (bonus[key]>0){
+if (bonus[key]>0 || bonus["global"]>0){
 	inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
 }
 
@@ -2637,10 +2637,10 @@ $(".betamount").attr("max",maximums["bet"]);
 $(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
 for(key in items){
 
-var result=(production[key]*(bonus[key]+1))-consumption[key]
+var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
 
 if((items[key]+result)<maximums[key]){
-items[key]+=(production[key]*(bonus[key]+1))-consumption[key];
+items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
 }
 else
 {

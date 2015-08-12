@@ -3134,7 +3134,12 @@ for(key in unlocked){
 
 	bonus["hp"]=people["xochiquetzal"]*0.05
 	//END RETROCOMPATIBILITY
-	
+
+
+
+setInterval(function(){ save()}, 5000);
+save()
+
 trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
 if(trademission["time"]>0){
 	tickinterval = setInterval(function(){ ticktrade()}, 1000);
@@ -3143,8 +3148,6 @@ if(trademission["time"]>0){
 }
 
 
-setInterval(function(){ save()}, 5000);
-save()
 } 
 
 function update(array1, array2){

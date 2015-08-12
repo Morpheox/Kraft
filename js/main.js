@@ -1206,6 +1206,7 @@ if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armo
 }
 
 }
+
 if(ships<maximums["ships"]){
 if (b=="galley"){
 
@@ -1215,9 +1216,10 @@ structurecost=50;
 
 
 if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
+	
 	items["wood"]-=woodcost
 	craft["plank"]-=plankcost;
-	craft["structure"]-=structure;
+	craft["structure"]-=structurecost;
 
 	people["galley"]+=1;
 	ships++
@@ -2940,6 +2942,8 @@ craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 population = Cookies.get('population');
 population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["pikeman"]+people["swordman"]+people["knight"]
+
+ships=people["galley"]
 for(key in unlocked){
     if (unlocked[key]==1)
     {

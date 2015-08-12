@@ -10,29 +10,29 @@ traderatio["steel"]=new Array()
 
 traderatio["wood"]["mineral"]=0.7;
 traderatio["wood"]["food"]=0.4;
-traderatio["wood"]["iron"]=0.001;
-traderatio["wood"]["coal"]=0.0003;
-traderatio["wood"]["steel"]=0.0001;
+traderatio["wood"]["iron"]=0.0012;
+traderatio["wood"]["coal"]=0.0007;
+traderatio["wood"]["steel"]=0.0002;
 
 traderatio["mineral"]["wood"]=0.7;
 traderatio["mineral"]["food"]=0.45;
-traderatio["mineral"]["iron"]=0.0012;
-traderatio["mineral"]["coal"]=0.00034;
-traderatio["mineral"]["steel"]=0.00015;
+traderatio["mineral"]["iron"]=0.0015;
+traderatio["mineral"]["coal"]=0.0008;
+traderatio["mineral"]["steel"]=0.00025;
 
 
 traderatio["food"]["wood"]=1;
 traderatio["food"]["mineral"]=0.9;
-traderatio["food"]["iron"]=0.0015;
-traderatio["food"]["coal"]=0.00045;
-traderatio["food"]["steel"]=0.00018;
+traderatio["food"]["iron"]=0.0017;
+traderatio["food"]["coal"]=0.001;
+traderatio["food"]["steel"]=0.00035;
 
 
 traderatio["iron"]["wood"]=100;
 traderatio["iron"]["mineral"]=80;
 traderatio["iron"]["food"]=50;
 traderatio["iron"]["coal"]=0.1;
-traderatio["iron"]["steel"]=0.05;
+traderatio["iron"]["steel"]=0.08;
 
 
 traderatio["steel"]["wood"]=1000;

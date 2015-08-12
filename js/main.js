@@ -1703,7 +1703,7 @@ if (craft["block"]>=blockcost && items["gold"]>=goldcost){
 }
 else if (b=="relic"){
 
-tokencost= Math.pow(1.3,(buildings["relic"]))*20
+tokencost= Math.pow(1.2,(buildings["relic"]))*20
 
 
 if (craft["token"]>=tokencost){
@@ -2014,7 +2014,7 @@ $(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(
 $(".build_castle").attr('tooltip4', 'Unlocks leaders to rule the realm.');
 $(".build_castle").attr('tooltip5', '+1 title per level');
 
-tokencost= Math.pow(1.3,(buildings["relic"]))*20
+tokencost= Math.pow(1.2,(buildings["relic"]))*20
 if(craft["token"]<tokencost){
 	$(".build_relic").addClass("unavailable")
 }

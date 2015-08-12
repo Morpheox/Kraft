@@ -2207,7 +2207,7 @@ $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 woodcost=20000;
 plankcost=100;
 structurecost=50;
-if(items["wood"]<woodcost || craft["plank"]<plankcost || craft["structure"]<structurecost){
+if(items["wood"]<woodcost || craft["plank"]<plankcost || craft["structure"]<structurecost || ships>=maximums["ships"]){
 	$(".hire_galley").addClass("unavailable")
 }
 else

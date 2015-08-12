@@ -31,7 +31,7 @@ traderatio["food"]["steel"]=0.00035;
 traderatio["iron"]["wood"]=100;
 traderatio["iron"]["mineral"]=80;
 traderatio["iron"]["food"]=50;
-traderatio["iron"]["coal"]=0.1;
+traderatio["iron"]["coal"]=0.3;
 traderatio["iron"]["steel"]=0.08;
 
 

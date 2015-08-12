@@ -172,7 +172,7 @@ items[trademission["resourceget"]]+=trademission["get"];
 
 clearInterval(tickinterval);
 
-$(".docklog").html("The fleet its back!<br> You recieve "+trademission["get"]+" "+intToString(trademission["resourceget"]));
+$(".docklog").html("The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]);
 $(".tradego").show()
 
 trademission["get"]=0;

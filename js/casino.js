@@ -106,8 +106,8 @@ $(".totalwon").html("Total Won: "+intToString(totalwon));
 $(".playgame2").html(remaining)
 if(remaining<1){
 
-    $(".tablero").html("<div class='lose'>You Won "+intToString(totalwon)+" coins</div>")
-    craft["coin"]+=totalwon;
+    $(".tablero").html("<div class='lose'>You Won "+intToString(totalwon)+" tokens</div>")
+    craft["token"]+=totalwon;
     totalwon=0;
     $(".totalwon").html("")
     $(".playgame2").html("Play")

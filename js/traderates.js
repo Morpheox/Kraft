@@ -133,7 +133,7 @@ function tradeship(){
 		trademission["get"]=amountget;
 		trademission["resourceget"]=$(".selget").val();
 
-
+		items[$(".selgive").val()]-=resourcestrade
 
 		tickinterval = setInterval(function(){ ticktrade()}, 1000);
 

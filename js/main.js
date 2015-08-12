@@ -1512,9 +1512,9 @@ else if (b=="relic"){
 tokencost= Math.pow(1.6,(buildings["relic"]))*5
 
 
-if (items["token"]>=tokencost){
+if (craft["token"]>=tokencost){
 
-	items["token"]-=tokencost;
+	craft["token"]-=tokencost;
 
 
 

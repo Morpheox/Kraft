@@ -98,6 +98,7 @@ technologies["redeem"]=0
 technologies["shipyard"]=0
 technologies["sailing"]=0
 technologies["trade"]=0
+technologies["cache"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -121,6 +122,7 @@ people["galley"]=0
 
 var craft=new Array();
 
+craft["chest"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
@@ -630,6 +632,34 @@ if (craft["plank"]>=plankcost && items["food"]>=foodcost && items["water"]>=wate
 }
 
 }
+else if (b=="chest"){
+
+plankcost=50;
+steelcost=50;
+bronzecost=10;
+
+if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && items["steel"]>=steelcost){
+
+	craft["plank"]-=plankcost;
+	craft["bronze"]-=bronzecost;
+	items["steel"]-=steelcost;
+
+
+	craft["chest"]+=1+bonus["craft"];
+
+	maximums["wood"]+=20*(bonus["craft"]+1);
+	maximums["mineral"]+=15*(bonus["craft"]+1);
+	maximums["food"]+=10*(bonus["craft"]+1);
+	maximums["copper"]+=5*(bonus["craft"]+1);
+	maximums["gold"]+=0.05*(bonus["craft"]+1);
+	maximums["iron"]+=0.2*(bonus["craft"]+1);
+	maximums["tin"]+=0.15*(bonus["craft"]+1);
+	maximums["coal"]+=0.15*(bonus["craft"]+1);
+	maximums["steel"]+=0.10*(bonus["craft"]+1);
+
+}
+
+}
 }
 }
 
@@ -1122,6 +1152,26 @@ if (items["food"]>=foodcost && items["gold"]>=goldcost && craft["coin"]>=coincos
 }
 
 }
+else if (b=="cache" && technologies["cache"]==0){
+
+mineralcost=23000;
+steelcost=100;
+plankcost=500;
+
+
+if (items["mineral"]>=mineralcost && items["gold"]>=goldcost && craft["plank"]>=plankcost){
+
+	craft["plank"]-=plankcost;
+	items["steel"]-=steelcost;
+	items["mineral"]-=mineralcost;
+
+	technologies["cache"]++
+	$(".craft_chest").show()
+	unlocked[".craft_chest"]=1;
+
+}
+
+}
 }
 
 function hire(b){
@@ -1455,7 +1505,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;break;
+		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;break;
 	}
 	
 }
@@ -2586,6 +2636,26 @@ $(".tech_trade").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)
 $(".tech_trade").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_trade").attr('tooltip5', "Allows hiring sailors to embark on trade missions.");
 
+mineralcost=23000;
+steelcost=100;
+plankcost=500;
+if(craft["plank"]<plankcost || items["mineral"]<mineralcost || items["steel"]<steelcost){
+	$(".tech_cache").addClass("unavailable")
+}
+else
+{
+	$(".tech_cache").removeClass("unavailable")
+}
+$(".tech_cache").addClass((technologies["cache"] >0 ? "researched" : ""))
+$(".tech_cache").html("Cache" + (technologies["cache"] >0 ? " (researched)" : ""));
+$(".tech_cache").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_cache").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_cache").attr('tooltip3', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_cache").attr('tooltip5', "Allows crafting chests to store resources.");
+
+
+
+
 //crafting
 woodcost=20;
 coppercost=1;
@@ -2712,6 +2782,27 @@ $(".craft_supplies").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFix
 $(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");
+
+plankcost=50;
+steelcost=50;
+bronzecost=10;
+if(craft["plank"]<plankcost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
+	$(".craft_chest").addClass("unavailable")
+}
+else
+{
+	$(".craft_chest").removeClass("unavailable")
+}
+$(".craft_chest").html("Chest");
+$(".craft_chest").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".craft_chest").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_chest").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+
+$(".craft_chest").attr('tooltip5', "A chest used to store resources");
+
+
+
+
 //Leaders
 
 if(bonus["title"]<1){
@@ -3105,6 +3196,7 @@ for(key in unlocked){
 	 $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
 	 $(".tech_sailing").show();unlocked[".tech_sailing"]=1;
 	 $(".tech_trade").show();unlocked[".tech_trade"]=1;
+	 $(".tech_cache").show();unlocked[".tech_cache"]=1;
 
 	}
 	//RETROCOMPATIBILITY

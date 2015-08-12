@@ -103,7 +103,8 @@
 			<div class="block tech_redeem"></div><br>
 			<div class="block tech_shipyard"></div>
 			<div class="block tech_sailing"></div><br>
-			<div class="block tech_trade"></div><br>
+			<div class="block tech_trade"></div>
+			<div class="block tech_cache"></div><br>
 		</div>
 
 
@@ -119,6 +120,7 @@
 		<div class="block craft_structure"></div><br>
 		<div class="block craft_armor"></div><br>
 		<div class="block craft_supplies"></div><br>
+		<div class="block craft_chest"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
@@ -251,6 +253,7 @@
 	$(".tech_shipyard").click(function() {research("shipyard")});
 	$(".tech_sailing").click(function() {research("sailing")});
 	$(".tech_trade").click(function() {research("trade")});
+	$(".tech_cache").click(function() {research("cache")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -261,6 +264,7 @@
 	$(".craft_structure").click(function() {crafting("structure")});
 	$(".craft_armor").click(function() {crafting("armor")});
 	$(".craft_supplies").click(function() {crafting("supplies")});
+	$(".craft_chest").click(function() {crafting("chest")});
 
 	$(".expedition").click(function() {expedition()});
         

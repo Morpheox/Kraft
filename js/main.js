@@ -2833,7 +2833,7 @@ $(".leader_eredal").attr('tooltip3', "'Metal till death'");
 
 $(".leader_khrysos").html("Khrysos (lv:" + people["khrysos"]+")");
 $(".leader_khrysos").attr('tooltip', 'Increments gold production by 30%')
-$(".leader_khrysos").attr('tooltip2', 'Increments trade effiency by 10%')
+$(".leader_khrysos").attr('tooltip2', 'Increments market ratios by 10%')
 $(".leader_khrysos").attr('tooltip4', "'Everything has a price'");
 
 $(".leader_elisia").html("Elisia (lv:" + people["elisia"]+")");

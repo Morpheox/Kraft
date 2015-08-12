@@ -67,7 +67,7 @@ function maxtrade(){
 	}
 
 	$(".tradeamount").val(resources)
-
+	refreshtrade();
 
 }
 

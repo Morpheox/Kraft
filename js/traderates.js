@@ -99,6 +99,15 @@ function tradeship(){
 
 	}
 
+	if(isNaN($(".tradeamount").val()))
+	{
+		$(".docklog").html("Incorrect trade amount.")
+		return;
+
+	}
+
+
+		
 	if (resourcestrade>resources){
 		$(".docklog").html("Not enough resources for this trade.")
 		return;
@@ -125,7 +134,7 @@ function tradeship(){
 	}
 
 	craft["supplies"]-=cost;
-	
+
 		trademission["time"]=300;
 		trademission["get"]=amountget;
 		trademission["resourceget"]=$(".selget").val();

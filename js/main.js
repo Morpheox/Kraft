@@ -322,7 +322,7 @@ reward+=parseFloat(rnd).toFixed(2) + " block<br>";
 craft["block"]+=rnd;
 }
 if(Math.random()>0.95 && technologies["coin"]==1){
-rnd=Math.round((Math.random()*power)/500)+1;
+rnd=Math.round((Math.random()*power)/300)+1;
 reward+=parseFloat(rnd).toFixed(2) + " coin<br>";
 craft["coin"]+=rnd;
 }
@@ -331,7 +331,23 @@ rnd=Math.round((Math.random()*power)/300)+1;
 reward+=parseFloat(rnd).toFixed(2) + " horse<br>";
 craft["horse"]+=rnd;
 }
-if(reward!="The expedition found:<br>")
+
+if(Math.random()>0.99 && technologies["cache"]==1){
+rnd=(Math.random()*power)/1000;
+reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
+craft["chest"]+=rnd;
+	maximums["wood"]+=50*(rnd);
+	maximums["mineral"]+=25*(rnd);
+	maximums["food"]+=10*(rnd);
+	maximums["copper"]+=0.3*(rnd);
+	maximums["gold"]+=0.05*(rnd);
+	maximums["iron"]+=0.2*(rnd);
+	maximums["tin"]+=0.15*(rnd);
+	maximums["coal"]+=0.15*(rnd);
+	maximums["steel"]+=0.10*(rnd);
+}
+if(reward!="The expedition found:<br>
+	")
 {
 $(".expeditionresult").html(reward)
 }
@@ -470,7 +486,21 @@ combatlog+="Your win the combat!<br><br>";
 combatlog+="You won "+ intToString(enemy["reward"])+" coins";
 $(".encounter").hide()
 craft["coin"]+=enemy["reward"];
-
+if(Math.random()>0.80 && technologies["cache"]==1){
+rnd=(Math.random()*((power/2)+(hp/15)))/500;
+reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
+craft["chest"]+=rnd;
+combatlog+="You also took "+ rnd+" chests that they were carrying";
+	maximums["wood"]+=50*(rnd);
+	maximums["mineral"]+=25*(rnd);
+	maximums["food"]+=10*(rnd);
+	maximums["copper"]+=0.3*(rnd);
+	maximums["gold"]+=0.05*(rnd);
+	maximums["iron"]+=0.2*(rnd);
+	maximums["tin"]+=0.15*(rnd);
+	maximums["coal"]+=0.15*(rnd);
+	maximums["steel"]+=0.10*(rnd);
+}
 break;
 }
 

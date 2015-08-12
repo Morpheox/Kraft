@@ -1084,7 +1084,7 @@ if (craft["coin"]>=coincost){
 }
 else if (b=="redeem" && technologies["redeem"]==0){
 
-tokencost=100;
+tokencost=50;
 
 if (craft["token"]>=tokencost){
 
@@ -1703,7 +1703,7 @@ if (craft["block"]>=blockcost && items["gold"]>=goldcost){
 }
 else if (b=="relic"){
 
-tokencost= Math.pow(1.6,(buildings["relic"]))*5
+tokencost= Math.pow(1.3,(buildings["relic"]))*20
 
 
 if (craft["token"]>=tokencost){
@@ -2014,7 +2014,7 @@ $(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(
 $(".build_castle").attr('tooltip4', 'Unlocks leaders to rule the realm.');
 $(".build_castle").attr('tooltip5', '+1 title per level');
 
-tokencost= Math.pow(1.6,(buildings["relic"]))*5
+tokencost= Math.pow(1.3,(buildings["relic"]))*20
 if(craft["token"]<tokencost){
 	$(".build_relic").addClass("unavailable")
 }
@@ -2580,7 +2580,7 @@ $(".tech_gambling").html("Gambling" + (technologies["gambling"] >0 ? " (research
 $(".tech_gambling").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_gambling").attr('tooltip3', "Unlocks a new game at the casino.");
 
-tokencost=100;
+tokencost=50;
 if(craft["token"]<tokencost ){
 	$(".tech_redeem").addClass("unavailable")
 }

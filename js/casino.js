@@ -47,12 +47,12 @@ for(var i=0;i<9;i++){
 stringtablero+="<tr>";
 
 for(var j=0;j<9;j++){
-    if(Math.random()>0.30)
+    if(Math.random()>0.90)
     {
-    arrprice[i][j]=Math.random()*2
+    arrprice[i][j]=Math.random()*5
 
     }
-    else if(Math.random()>0.50)
+    else if(Math.random()>0.20)
     {
     arrprice[i][j]="X" 
     }

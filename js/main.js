@@ -1071,7 +1071,7 @@ if (craft["plank"]>=plankcost){
 	craft["plank"]-=plankcost;
 
 
-	technologies["shipyard"]++
+	technologies["sailing"]++
 	$(".build_docks").show()
 	unlocked[".build_docks"]=1;
 }
@@ -1941,7 +1941,7 @@ else
 {
 	$(".build_docks").removeClass("unavailable")
 }
-$(".build_docks").html("Docks ("+buildings["shipyard"]+")");
+$(".build_docks").html("Docks ("+buildings["docks"]+")");
 $(".build_docks").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_docks").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".build_docks").attr('tooltip4', '+1 Ship storage');

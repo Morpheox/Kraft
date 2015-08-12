@@ -5,6 +5,7 @@ var traderatio=new Array()
 traderatio["wood"]=new Array()
 traderatio["mineral"]=new Array()
 traderatio["food"]=new Array()
+traderatio["copper"]=new Array()
 traderatio["iron"]=new Array()
 traderatio["steel"]=new Array()
 
@@ -12,20 +13,28 @@ traderatio["wood"]["mineral"]=0.7;
 traderatio["wood"]["food"]=0.4;
 traderatio["wood"]["iron"]=0.0012;
 traderatio["wood"]["coal"]=0.0007;
-traderatio["wood"]["steel"]=0.0002;
+
 
 traderatio["mineral"]["wood"]=0.7;
 traderatio["mineral"]["food"]=0.45;
 traderatio["mineral"]["iron"]=0.0015;
-traderatio["mineral"]["coal"]=0.0008;
 traderatio["mineral"]["steel"]=0.00025;
+traderatio["mineral"]["copper"]=0.002;
 
 
-traderatio["food"]["wood"]=1;
 traderatio["food"]["mineral"]=0.9;
 traderatio["food"]["iron"]=0.0017;
 traderatio["food"]["coal"]=0.001;
 traderatio["food"]["steel"]=0.00035;
+traderatio["food"]["gold"]=0.0005;
+
+
+traderatio["copper"]["wood"]=70;
+traderatio["copper"]["mineral"]=60;
+traderatio["copper"]["food"]=40;
+traderatio["copper"]["iron"]=0.6;
+traderatio["copper"]["coal"]=0.2;
+traderatio["copper"]["steel"]=0.05;
 
 
 traderatio["iron"]["wood"]=100;
@@ -40,6 +49,7 @@ traderatio["steel"]["mineral"]=880;
 traderatio["steel"]["food"]=600;
 traderatio["steel"]["iron"]=4;
 traderatio["steel"]["coal"]=1.5;
+traderatio["steel"]["tin"]=2;
 
 function refreshtrade(){
 		amount=$(".tradeamount").val()

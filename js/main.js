@@ -647,8 +647,8 @@ if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && items["steel"]>=
 
 	craft["chest"]+=1+bonus["craft"];
 
-	maximums["wood"]+=20*(bonus["craft"]+1);
-	maximums["mineral"]+=15*(bonus["craft"]+1);
+	maximums["wood"]+=50*(bonus["craft"]+1);
+	maximums["mineral"]+=25*(bonus["craft"]+1);
 	maximums["food"]+=10*(bonus["craft"]+1);
 	maximums["copper"]+=0.3*(bonus["craft"]+1);
 	maximums["gold"]+=0.05*(bonus["craft"]+1);

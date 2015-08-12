@@ -52,14 +52,18 @@ for(var j=0;j<9;j++){
     arrprice[i][j]=Math.random()*5
 
     }
-    else if(Math.random()>0.20)
+    else if(Math.random()>0.10)
     {
     arrprice[i][j]="X" 
     }
-    else
+    else if(Math.random()>0.10)
     {
     arrprice[i][j]="GG"
-    } 
+    }
+    else
+    {
+    arrprice[i][j]="GGG"    
+    }
 
 stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"
 }
@@ -80,31 +84,42 @@ var totalwon=0;
 function openbox(x,y){
 
 
-if(arrprice[x][y]!="X" && arrprice[x][y]!="GG"){
+if(arrprice[x][y]!="X" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"){
 $("td[data-x="+x+"][data-y="+y+"]").html(intToString(arrprice[x][y]))
 
 totalwon+=arrprice[x][y];
 remaining--
 
 }
-else if(arrprice[x][y]!="GG")
+else if(arrprice[x][y]!="GG" && arrprice[x][y]!="GGG")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("X")
 remaining--
 }
-else
+else if(arrprice[x][y]!="GGG")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("+1")
 remaining++  
+}
+else
+{
+$("td[data-x="+x+"][data-y="+y+"]").html("+5")
+remaining+=5
 }
 
 $(".totalwon").html("Total Won: "+intToString(totalwon));
 $(".playgame2").html(remaining)
 if(remaining<1){
-
+if(totalwon>0){
     $(".tablero").html("<div class='lose'>You Won "+intToString(totalwon)+" tokens</div>")
     craft["token"]+=totalwon;
     totalwon=0;
+}
+else
+{
+    $(".tablero").html("<div class='lose'>Better luck next time!</div>")
+
+}
     $(".totalwon").html("")
     $(".playgame2").html("Play")
 }

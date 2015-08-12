@@ -1391,7 +1391,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-		case 9:$(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;break;
+		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;break;
 	}
 	
 }
@@ -2474,7 +2474,7 @@ else
 }
 $(".tech_shipyard").addClass((technologies["shipyard"] >0 ? "researched" : ""))
 $(".tech_shipyard").html("Shipyard" + (technologies["shipyard"] >0 ? " (researched)" : ""));
-$(".tech_shipyard").attr('tooltip', 'Wood: '+ parseFloat(craft["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_shipyard").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_shipyard").attr('tooltip3', "Unlocks the buildings of shipyards.");
 
 plankcost=100;

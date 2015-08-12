@@ -99,7 +99,7 @@
 			<div class="block tech_armament"></div><br>
 			<div class="block tech_gambling"></div>
 			<div class="block tech_redeem"></div><br>
-			<div class="block tech_shipyard"></div><br>
+			<div class="block tech_shipyard"></div>
 			<div class="block tech_sailing"></div><br>
 		</div>
 
@@ -175,7 +175,7 @@
 
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2, .ships").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -196,6 +196,8 @@
 	$(".build_workbench").click(function() {build("workbench")});
 	$(".build_castle").click(function() {build("castle")});
 	$(".build_relic").click(function() {build("relic")});
+	$(".build_shipyard").click(function() {build("shipyard")});
+	$(".build_docks").click(function() {build("docks")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -206,6 +208,7 @@
 	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_knight").click(function() {hire("knight")});
 
+	$(".hire_galley").click(function() {hire("galley")});
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -231,6 +234,8 @@
 	$(".tech_armament").click(function() {research("armament")});
 	$(".tech_gambling").click(function() {research("gambling")});
 	$(".tech_redeem").click(function() {research("redeem")});
+	$(".tech_shipyard").click(function() {research("shipyard")});
+	$(".tech_sailing").click(function() {research("sailing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

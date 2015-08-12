@@ -2708,7 +2708,7 @@ else
 	$(".craft_supplies").removeClass("unavailable")
 }
 $(".craft_supplies").html("Supplies");
-$(".craft_supplies").attr('tooltip', 'Wood: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".craft_supplies").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");

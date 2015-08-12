@@ -2872,6 +2872,7 @@ if (items["food"]>=people["miner"]/40)
 consumption["food"]+=people["miner"]/40
 production["mineral"]+=people["miner"]/4
 }
+
 if (items["food"]>=people["sailor"]/20)
 {
 consumption["food"]+=people["sailor"]/20
@@ -3062,6 +3063,8 @@ population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner
 
 if(trademission["time"]>0){
 	tickinterval = setInterval(function(){ ticktrade()}, 1000);
+	$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
+	$(".tradego").hide()
 }
 
 

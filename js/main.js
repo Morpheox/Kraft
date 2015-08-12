@@ -97,6 +97,7 @@ technologies["gambling"]=0
 technologies["redeem"]=0
 technologies["shipyard"]=0
 technologies["sailing"]=0
+technologies["trade"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -104,6 +105,7 @@ people["smelter"]=0
 people["farmer"]=0
 people["miner"]=0
 people["foundryman"]=0
+people["sailor"]=0
 people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
@@ -130,6 +132,7 @@ craft["armor"]=0
 craft["horse"]=0
 craft["token"]=0
 craft["plank"]=0
+craft["supplies"]=0
 
 var unlocked=new Array();
 
@@ -609,8 +612,27 @@ if (items["steel"]>=steelcost && craft["bronze"]>=bronzecost){
 }
 
 }
+else if (b=="supplies"){
+
+woodcost=200;
+foodcost=500;
+watercost=100;
+
+if (items["wood"]>=woodcost && items["food"]>=foodcost && items["water"]>=watercost){
+
+	items["wood"]-=woodcost;
+	items["food"]-=foodcost;
+	items["water"]-=watercost;
+
+
+	craft["supplies"]+=1+bonus["craft"];
+
+}
+
 }
 }
+}
+
 
 function research(b){
 
@@ -1077,6 +1099,29 @@ if (craft["plank"]>=plankcost){
 }
 
 }
+else if (b=="trade" && technologies["trade"]==0){
+
+foodcost=7000;
+goldcost=45;
+coincost=50;
+
+
+if (items["food"]>=foodcost && items["gold"]>=goldcost && craft["coin"]>=coincost){
+
+	craft["coin"]-=coincost;
+	items["gold"]-=goldcost;
+	items["food"]-=foodcost;
+
+	technologies["trade"]++
+	$(".craft_supplies").show()
+	unlocked[".craft_supplies"]=1;
+	$(".hire_sailor").show()
+	unlocked[".hire_sailor"]=1;
+	$(".tradesea").show()
+	unlocked[".tradesea"]=1;
+}
+
+}
 }
 
 function hire(b){
@@ -1148,6 +1193,21 @@ if (items["food"]>=foodcost && craft["coin"]>=coincost){
 	population++
 	$(".fire_foundryman").show()
         unlocked[".fire_foundryman"]=1;
+}
+
+}
+else if (b=="sailor"){
+
+foodcost=500;
+coincost=5;
+
+if (items["food"]>=foodcost && craft["coin"]>=coincost){
+	items["food"]-=foodcost;
+	craft["coin"]-=coincost
+	people["sailor"]+=1
+	population++
+	$(".fire_sailor").show()
+    unlocked[".fire_sailor"]=1;
 }
 
 }
@@ -1395,7 +1455,7 @@ if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;break;
+		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;break;
 	}
 	
 }
@@ -2027,6 +2087,21 @@ $(".hire_foundryman").attr('tooltip4', "Iron consumption: -0.05/s");
 $(".hire_foundryman").attr('tooltip5', "Coal consumption: -0.02/s");
 $(".hire_foundryman").attr('tooltip6', 'Steel production +0.01/s');
 
+foodcost=500;
+coincost=5;
+if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
+	$(".hire_sailor").addClass("unavailable")
+}
+else
+{
+	$(".hire_sailor").removeClass("unavailable")
+}
+$(".hire_sailor").html("Sailor ("+people["sailor"]+")");
+$(".hire_sailor").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".hire_sailor").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_sailor").attr('tooltip3', "Food consumption: -0.20/s");
+$(".hire_sailor").attr('tooltip5', 'People needed for naval missions.');
+
 foodcost=50
 spearcost=1
 if(items["food"]<foodcost || craft["spear"]<spearcost || population>=maximums["population"]){
@@ -2093,8 +2168,8 @@ $(".hire_galley").html("Galley ("+people["galley"]+")");
 $(".hire_galley").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".hire_galley").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".hire_galley").attr('tooltip3', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
-$(".hire_galley").attr('tooltip5', "Power: 150 Structure: 2000");
-$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5000');
+$(".hire_galley").attr('tooltip5', "Power: 150  Structure: 2000");
+$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5000  Crew: 2');
 
 
 
@@ -2494,6 +2569,23 @@ $(".tech_sailing").html("Sailing" + (technologies["sailing"] >0 ? " (researched)
 $(".tech_sailing").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_sailing").attr('tooltip3', "Allows building docks to store ships.");
 
+foodcost=7000;
+goldcost=45;
+coincost=50;
+if(craft["coin"]<coincost || items["food"]<foodcost || items["gold"]<goldcost){
+	$(".tech_trade").addClass("unavailable")
+}
+else
+{
+	$(".tech_trade").removeClass("unavailable")
+}
+$(".tech_trade").addClass((technologies["trade"] >0 ? "researched" : ""))
+$(".tech_trade").html("Trade" + (technologies["trade"] >0 ? " (researched)" : ""));
+$(".tech_trade").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".tech_trade").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_trade").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_trade").attr('tooltip5', "Allows hiring sailors to embark on trade missions.");
+
 //crafting
 woodcost=20;
 coppercost=1;
@@ -2604,6 +2696,22 @@ $(".craft_armor").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".craft_armor").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
+woodcost=200;
+foodcost=500;
+watercost=100;
+
+if(items["wood"]<woodcost || items["food"]<foodcost || items["water"]<watercost){
+	$(".craft_supplies").addClass("unavailable")
+}
+else
+{
+	$(".craft_supplies").removeClass("unavailable")
+}
+$(".craft_supplies").html("Supplies");
+$(".craft_supplies").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
+$(".craft_supplies").attr('tooltip5', "A barrel containing supplies");
 //Leaders
 
 if(bonus["title"]<1){
@@ -2764,6 +2872,11 @@ if (items["food"]>=people["miner"]/40)
 consumption["food"]+=people["miner"]/40
 production["mineral"]+=people["miner"]/4
 }
+if (items["food"]>=people["sailor"]/20)
+{
+consumption["food"]+=people["sailor"]/20
+}
+
 if (items["mineral"]>=people["smelter"]/20 && items["food"]>=people["smelter"]/40)
 {
 consumption["mineral"]+=people["smelter"]/20
@@ -2927,6 +3040,7 @@ Cookies.set( 'people', JSON.stringify(people) ,{ expires: 9999 });
 Cookies.set( 'craft', JSON.stringify(craft) ,{ expires: 9999 });
 Cookies.set( 'unlocked', JSON.stringify(unlocked) ,{ expires: 9999 });
 Cookies.set('population', population,{ expires: 9999 });
+Cookies.set('trademission', trademission,{ expires: 9999 });
 }
 
 function load(){
@@ -2940,8 +3054,17 @@ technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
 people = update(people,JSON.parse(Cookies.get( 'people')));
 craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
+trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
 population = Cookies.get('population');
 population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["pikeman"]+people["swordman"]+people["knight"]
+
+
+
+if(trademission["time"]>0){
+	tickinterval = setInterval(function(){ ticktrade()}, 1000);
+}
+
+
 
 ships=people["galley"]
 for(key in unlocked){
@@ -2985,6 +3108,7 @@ for(key in unlocked){
 	if(buildings["library"]>=8){
 	 $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
 	 $(".tech_sailing").show();unlocked[".tech_sailing"]=1;
+	 $(".tech_trade").show();unlocked[".tech_trade"]=1;
 
 	}
 	//RETROCOMPATIBILITY

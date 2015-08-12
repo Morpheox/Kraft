@@ -23,3 +23,14 @@ function intToStringRound(value) {
     }
     else {return Math.round(value);}
     }
+function totime(b){
+
+    minutes=Math.floor(b/60);
+    seconds=b-(minutes*60)
+    
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+
+    return minutes+":"+seconds;
+
+}

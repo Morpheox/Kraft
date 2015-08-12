@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="js/json_parse.js"></script>-->
 	<script type="text/javascript" src="js/json-array.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/traderates.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
@@ -72,6 +73,7 @@
 			<div class="block hire_farmer"></div><button class="fire fire_farmer" onclick='fire("farmer")'>Fire 1</button><br>
 			<div class="block hire_miner"></div><button class="fire fire_miner" onclick='fire("miner")'>Fire 1</button><br>
 			<div class="block hire_foundryman"></div><button class="fire fire_foundryman" onclick='fire("foundryman")'>Fire 1</button><br>
+			<div class="block hire_sailor"></div><button class="fire fire_sailor" onclick='fire("sailor")'>Fire 1</button><br>
 		</div>
 		<div id="technologies" class="technologies tab-pane fade">
 		<button class="toggletech" onclick="toggletech()">Hide researched technologies</button><br><br>
@@ -101,6 +103,7 @@
 			<div class="block tech_redeem"></div><br>
 			<div class="block tech_shipyard"></div>
 			<div class="block tech_sailing"></div><br>
+			<div class="block tech_trade"></div><br>
 		</div>
 
 
@@ -115,6 +118,7 @@
 		<div class="block craft_bronze"></div><br>
 		<div class="block craft_structure"></div><br>
 		<div class="block craft_armor"></div><br>
+		<div class="block craft_supplies"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
@@ -161,21 +165,29 @@
 
 	</div>
 	<div id="dock" class="dock tab-pane fade">
-	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br>
+	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br><br>
+	<div class="tradesea">
+	Trade mission<br>
+	Amount: <input class="tradeamount" type="number" value="1"></input><button class="maxtrade" onclick="maxtrade()">MAX</button><br><br>
+	Send <select class="selgive"></select><div class="ratiotrade"></div><select class="selget"><option>----</option></select> Recieve<br><br>
+	<div class="traderecieve"></div><br>
+	<button class="tradego" onclick="tradeship()">Trade</button>
+
+
+
+
+	</div><br><br>
+	<div class="docklog">
+
+	</div>
 	</div>
 	</div>
 </body>
 <script>
 	setInterval(function(){ refresh()}, 250);
 
-
-
-
-
-
-
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2, .ships").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -204,6 +216,7 @@
 	$(".hire_farmer").click(function() {hire("farmer")});
 	$(".hire_miner").click(function() {hire("miner")});
 	$(".hire_foundryman").click(function() {hire("foundryman")});
+	$(".hire_sailor").click(function() {hire("sailor")});
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_knight").click(function() {hire("knight")});
@@ -245,6 +258,7 @@
 	$(".craft_bronze").click(function() {crafting("bronze")});
 	$(".craft_structure").click(function() {crafting("structure")});
 	$(".craft_armor").click(function() {crafting("armor")});
+	$(".craft_supplies").click(function() {crafting("supplies")});
 
 	$(".expedition").click(function() {expedition()});
         
@@ -260,6 +274,10 @@
     $(".leader_warmuk").click(function() {lead("warmuk")});
 
 
+   	for(gives in traderatio){
+
+   		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
+   	}
 
 
          load();

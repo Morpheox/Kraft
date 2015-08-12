@@ -2099,7 +2099,7 @@ else
 $(".hire_sailor").html("Sailor ("+people["sailor"]+")");
 $(".hire_sailor").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_sailor").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".hire_sailor").attr('tooltip3', "Food consumption: -0.20/s");
+$(".hire_sailor").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_sailor").attr('tooltip5', 'People needed for naval missions.');
 
 foodcost=50

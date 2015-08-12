@@ -104,10 +104,6 @@ function tradeship(){
 		return;
 	}
 
-	if (resourcestrade>resources){
-		$(".docklog").html("Not enough resources for this trade.")
-		return;
-	}
 
 	if (resourcestrade>maxresources || amountget>maxresources){
 		$(".docklog").html("Not enough cargo capacity for this trade route.")

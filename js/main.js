@@ -135,6 +135,7 @@ craft["horse"]=0
 craft["token"]=0
 craft["plank"]=0
 craft["supplies"]=0
+craft["lock"]=0
 
 var unlocked=new Array();
 
@@ -667,11 +668,13 @@ else if (b=="chest"){
 plankcost=100;
 steelcost=30;
 bronzecost=5;
+lockcost=1;
 
-if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && items["steel"]>=steelcost){
+if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && craft["lock"]>=lockcost && items["steel"]>=steelcost){
 
 	craft["plank"]-=plankcost;
 	craft["bronze"]-=bronzecost;
+	craft["lock"]-=lockcost 
 	items["steel"]-=steelcost;
 
 
@@ -2816,7 +2819,8 @@ $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");
 plankcost=100;
 steelcost=30;
 bronzecost=5;
-if(craft["plank"]<plankcost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
+lockcost=1;
+if(craft["plank"]<plankcost || craft["bronze"]<bronzecost || items["steel"]<steelcost ||  craft["lock"]<lockcost){
 	$(".craft_chest").addClass("unavailable")
 }
 else
@@ -2825,10 +2829,11 @@ else
 }
 $(".craft_chest").html("Chest");
 $(".craft_chest").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
-$(".craft_chest").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".craft_chest").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".craft_chest").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_chest").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".craft_chest").attr('tooltip4', 'Lock: '+ parseFloat(craft["lock"]).toFixed(2)+" / "+parseFloat(lockcost).toFixed(2))
 
-$(".craft_chest").attr('tooltip5', "A chest used to store resources");
+$(".craft_chest").attr('tooltip6', "A chest used to store resources");
 
 
 

@@ -3168,6 +3168,7 @@ function save(){
 	Cookies.set( 'unlocked', JSON.stringify(unlocked) ,{ expires: 9999 });
 	Cookies.set('population', population,{ expires: 9999 });
 	Cookies.set('trademission', trademission,{ expires: 9999 });
+	Cookies.set('prestige', prestige,{ expires: 9999 });
 }
 
 function load(){
@@ -3277,7 +3278,7 @@ function load(){
 	}
 
 	save()
-	
+
 	} 
 } 
 

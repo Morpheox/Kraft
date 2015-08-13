@@ -126,6 +126,7 @@ else
 
 }
     craft["lock"]+=locks;
+    locks=0;
     $(".totalwon").html("")
     $(".playgame2").html("Play")
 }

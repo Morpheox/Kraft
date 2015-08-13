@@ -174,8 +174,8 @@ clearInterval(tickinterval);
 
 $(".docklog").html("The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]);
 $(".tradego").show()
-if(Math.random()>0.20){
-$(".docklog").html("<br> You also get 1 lock.");
+if(Math.random()>0.80){
+$(".docklog").html("The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]+"<br> You also get 1 lock");
 craft["lock"]++
 
 }

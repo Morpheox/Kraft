@@ -52,15 +52,15 @@ for(var j=0;j<9;j++){
     arrprice[i][j]=Math.random()*5
 
     }
-    else if(Math.random()>0.10)
+    else if(Math.random()>0.15)
     {
     arrprice[i][j]="X" 
     }
-    else if(Math.random()>0.30)
+    else if(Math.random()>0.35)
     {
     arrprice[i][j]="GG"
     }
-    else if(Math.random()>0.30)
+    else if(Math.random()>0.35)
     {
     arrprice[i][j]="GGG"
     }

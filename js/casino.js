@@ -60,9 +60,13 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]="GG"
     }
+    else if(Math.random()>0.30)
+    {
+    arrprice[i][j]="GGG"
+    }
     else
     {
-    arrprice[i][j]="L"
+    arrprice[i][j]="L"   
     }
 
 stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"

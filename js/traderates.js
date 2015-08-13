@@ -108,7 +108,11 @@ function tradeship(){
 		return;
 
 	}
+	if(resourcestrade==0){
+		$(".docklog").html("Specify an amount.")
+		return;
 
+	}
 	if(isNaN($(".tradeamount").val()))
 	{
 		$(".docklog").html("Incorrect trade amount.")

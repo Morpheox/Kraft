@@ -56,7 +56,7 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]="X" 
     }
-    else if(Math.random()>0.50)
+    else if(Math.random()>0.30)
     {
     arrprice[i][j]="GG"
     }

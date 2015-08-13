@@ -56,13 +56,13 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]="X" 
     }
-    else if(Math.random()>0.10)
+    else if(Math.random()>0.50)
     {
     arrprice[i][j]="GG"
     }
     else
     {
-    arrprice[i][j]="GGG"    
+    arrprice[i][j]="L"
     }
 
 stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"
@@ -80,31 +80,36 @@ $(".playgame2").html(remaining)
 }
 }
 var totalwon=0;
-
+var locks=0;
 function openbox(x,y){
 
 
-if(arrprice[x][y]!="X" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"){
+if(arrprice[x][y]!="X" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"  && arrprice[x][y]!="L"){
 $("td[data-x="+x+"][data-y="+y+"]").html(intToString(arrprice[x][y]))
 
 totalwon+=arrprice[x][y];
 remaining--
 
 }
-else if(arrprice[x][y]!="GG" && arrprice[x][y]!="GGG")
+else if(arrprice[x][y]!="GG" && arrprice[x][y]!="GGG" && arrprice[x][y]!="L")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("X")
 remaining--
 }
-else if(arrprice[x][y]!="GGG")
+else if(arrprice[x][y]!="GGG" && arrprice[x][y]!="L")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("+1")
 remaining++  
 }
-else
+else if(arrprice[x][y]!="L")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("+5")
 remaining+=5
+}
+else
+{
+$("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>L</span>")
+locks++;
 }
 
 $(".totalwon").html("Total Won: "+intToString(totalwon));
@@ -120,6 +125,7 @@ else
     $(".tablero").html("<div class='lose'>Better luck next time!</div>")
 
 }
+    craft["lock"]+=locks;
     $(".totalwon").html("")
     $(".playgame2").html("Play")
 }

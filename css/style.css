@@ -246,3 +246,9 @@ font-size: 20px;
   display: inline;
   margin-left:5px;
 }
+
+.tabgame .lockre{
+text-shadow: 1px 1px #000000;
+color:green;
+font-size:13px;
+}

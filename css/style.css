@@ -248,7 +248,8 @@ font-size: 20px;
 }
 
 .lockrew{
-text-shadow: 1px 1px #000000;
-color:green;
-font-size:13px;
+    text-shadow: 0 0 8px #46FF06;
+    color: green;
+    font-size: 20px;
+    font-weight: 700;
 }

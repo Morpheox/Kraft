@@ -16,7 +16,7 @@ items["morale"]=0;
 
 var bonus =new Array()
 for(key in items){
-bonus[key]=0;
+	bonus[key]=0;
 }
 bonus["global"]=0;
 bonus["trade"]=0;
@@ -49,7 +49,7 @@ buildings["docks"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
-buildstatus[key]=1;
+	buildstatus[key]=1;
 }
 
 var maximums=new Array()
@@ -60,7 +60,7 @@ maximums["bet"]=0;
 
 
 for(key in items){
-maximums[key]=0;
+	maximums[key]=0;
 }
 maximums["wood"]=50
 maximums["mineral"]=20
@@ -150,95 +150,95 @@ enemy["soldier"]=0;
 
 function toggle(t){
 
-if (buildstatus[t]==0){
-	buildstatus[t]=1;
-	$(".build_"+t).removeClass("off")
-}
-else
-{
-	buildstatus[t]=0;
-	$(".build_"+t).addClass("off")
+	if (buildstatus[t]==0){
+		buildstatus[t]=1;
+		$(".build_"+t).removeClass("off")
+	}
+	else
+	{
+		buildstatus[t]=0;
+		$(".build_"+t).addClass("off")
 
-}
+	}
 
 
 
 }
 function lead(b){
 
- 
-if(bonus["title"]>=1){
-if (b=="sucellus"){
 
-bonus["wood"]+=0.15
-bonus["food"]+=0.15
-bonus["water"]+=0.15
+	if(bonus["title"]>=1){
+		if (b=="sucellus"){
 
-bonus["title"]--
-people["sucellus"]+=1;
+			bonus["wood"]+=0.15
+			bonus["food"]+=0.15
+			bonus["water"]+=0.15
 
-
-}
-else if (b=="eredal"){
-
-bonus["mineral"]+=0.10
-bonus["copper"]+=0.10
-bonus["iron"]+=0.10
-bonus["steel"]+=0.10
-
-bonus["title"]--
-people["eredal"]+=1;
+			bonus["title"]--
+			people["sucellus"]+=1;
 
 
-}
-else if (b=="khrysos"){
+		}
+		else if (b=="eredal"){
 
-bonus["gold"]+=0.30
-bonus["trade"]+=0.10
+			bonus["mineral"]+=0.10
+			bonus["copper"]+=0.10
+			bonus["iron"]+=0.10
+			bonus["steel"]+=0.10
 
-bonus["title"]--
-people["khrysos"]+=1;
-
-
-}
-else if (b=="elisia"){
-
-bonus["craft"]+=0.05
-maximums["wood"]+=500;
-maximums["mineral"]+=500;
-
-bonus["title"]--
-people["elisia"]+=1;
+			bonus["title"]--
+			people["eredal"]+=1;
 
 
-}
-else if (b=="xochiquetzal"){
+		}
+		else if (b=="khrysos"){
 
-maximums["population"]+=2;
-bonus["hp"]+=0.05;
+			bonus["gold"]+=0.30
+			bonus["trade"]+=0.10
 
-bonus["title"]--
-people["xochiquetzal"]+=1;
-
-
-}
-else if (b=="warmuk"){
-
-bonus["power"]+=0.10;
-bonus["morale"]+=0.05;
-maximums["morale"]+=2;
-
-bonus["title"]--
-people["warmuk"]+=1;
+			bonus["title"]--
+			people["khrysos"]+=1;
 
 
-}
+		}
+		else if (b=="elisia"){
+
+			bonus["craft"]+=0.05
+			maximums["wood"]+=500;
+			maximums["mineral"]+=500;
+
+			bonus["title"]--
+			people["elisia"]+=1;
 
 
+		}
+		else if (b=="xochiquetzal"){
+
+			maximums["population"]+=2;
+			bonus["hp"]+=0.05;
+
+			bonus["title"]--
+			people["xochiquetzal"]+=1;
+
+
+		}
+		else if (b=="warmuk"){
+
+			bonus["power"]+=0.10;
+			bonus["morale"]+=0.05;
+			maximums["morale"]+=2;
+
+			bonus["title"]--
+			people["warmuk"]+=1;
+
+
+		}
 
 
 
-}
+
+
+	}
 
 
 
@@ -247,274 +247,274 @@ people["warmuk"]+=1;
 
 }
 function expedition(){
-power=0
-power+=people["pikeman"]*5
-power+=people["swordman"]*10
-power+=people["knight"]*25
+	power=0
+	power+=people["pikeman"]*5
+	power+=people["swordman"]*10
+	power+=people["knight"]*25
 
-foodcost=power*2
-watercost=power
-moralecost=power/5
+	foodcost=power*2
+	watercost=power
+	moralecost=power/5
 
-power=power*(bonus["power"]+1)
+	power=power*(bonus["power"]+1)
 
-if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
-
-
-items["food"]-=foodcost;
-items["water"]-=watercost;
-items["morale"]-=moralecost;
+	if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
 
 
-$(".expeditionresult").html("")
-$(".encounter").hide()
+		items["food"]-=foodcost;
+		items["water"]-=watercost;
+		items["morale"]-=moralecost;
 
 
-
-if(Math.random()>0.40){
-
-
-reward="The expedition found:<br>";
-
-
-if(Math.random()>0.40){
-rnd=(Math.random()*power)*25;
-reward+=parseFloat(rnd).toFixed(2) + " wood<br>";
-items["wood"]+=rnd;
-}
-if(Math.random()>0.60){
-rnd=(Math.random()*power)*15;
-reward+=parseFloat(rnd).toFixed(2) + " minerals<br>";
-items["mineral"]+=rnd;
-}
-if(Math.random()>0.75){
-rnd=(Math.random()*power)*5;
-reward+=parseFloat(rnd).toFixed(2) + " food<br>";
-items["food"]+=rnd;
-}
-if(Math.random()>0.925){
-rnd=(Math.random()*power)/5;
-reward+=parseFloat(rnd).toFixed(2) + " copper<br>";
-items["copper"]+=rnd;
-}
-if(Math.random()>0.925){
-rnd=(Math.random()*power)/8;
-reward+=parseFloat(rnd).toFixed(2) + " iron<br>";
-items["iron"]+=rnd;
-}
-if(Math.random()>0.95){
-rnd=(Math.random()*power)/20;
-reward+=parseFloat(rnd).toFixed(2) + " gold<br>";
-items["gold"]+=rnd;
-}
-if(Math.random()>0.95 && technologies["spear"]==1){
-rnd=Math.round((Math.random()*power)/50)+1;
-reward+=parseFloat(rnd).toFixed(2) + " spear<br>";
-craft["spear"]+=rnd;
-}
-if(Math.random()>0.95 && technologies["sword"]==1){
-rnd=Math.round((Math.random()*power)/50)+1;
-reward+=parseFloat(rnd).toFixed(2) + " sword<br>";
-craft["sword"]+=rnd;
-}
-if(Math.random()>0.95 && technologies["storage"]==1){
-rnd=Math.round((Math.random()*power)/200)+1;
-reward+=parseFloat(rnd).toFixed(2) + " block<br>";
-craft["block"]+=rnd;
-}
-if(Math.random()>0.95 && technologies["coin"]==1){
-rnd=Math.round((Math.random()*power)/300)+1;
-reward+=parseFloat(rnd).toFixed(2) + " coin<br>";
-craft["coin"]+=rnd;
-}
-if(Math.random()>0.90 && technologies["husbandry"]==1){
-rnd=Math.round((Math.random()*power)/300)+1;
-reward+=parseFloat(rnd).toFixed(2) + " horse<br>";
-craft["horse"]+=rnd;
-}
-
-if(Math.random()>0.99 && technologies["cache"]==1){
-rnd=(Math.random()*power)/1000;
-reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
-craft["chest"]+=rnd;
-	maximums["wood"]+=50*(rnd);
-	maximums["mineral"]+=25*(rnd);
-	maximums["food"]+=10*(rnd);
-	maximums["copper"]+=0.3*(rnd);
-	maximums["gold"]+=0.05*(rnd);
-	maximums["iron"]+=0.2*(rnd);
-	maximums["tin"]+=0.15*(rnd);
-	maximums["coal"]+=0.15*(rnd);
-	maximums["steel"]+=0.10*(rnd);
-}
-if(reward!="The expedition found:<br>")
-
-{
-$(".expeditionresult").html(reward)
-}
-else
-{
-
-$(".expeditionresult").html("The expedition didn´t find anything useful.")
-}
-
-
-}
-else
-{
-hp=0;
-hp+=people["pikeman"]*30
-hp+=people["swordman"]*50
-hp+=people["knight"]*200
-
-hp=hp*(bonus["hp"]+1)
-
-power=(power/2)+(hp/15)
-
-enemy["reward"]=0;
-enemy["peasant"]=0;
-enemy["bandit"]=0;
-enemy["mercenary"]=0;
-enemy["soldier"]=0;
-var enemytipo=Math.random()*power;
-var stringencuentro="Enemys:<br>"
-var rew=0;
-if(enemytipo<25){
-enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
-stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
-rew+=(Math.random()*enemy["peasant"]*0.05)+(enemy["peasant"]*0.01)
-}
-if(enemytipo>20 && enemytipo<50){
-enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
-stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
-rew+=(Math.random()*enemy["bandit"]*0.10)+(enemy["bandit"]*0.02)
-}
-if(enemytipo>40 && enemytipo<120){
-enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
-stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
-rew+=(Math.random()*enemy["mercenary"]*0.25)+(enemy["mercenary"]*0.05)
-}
-if(enemytipo>110){
-enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
-stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
-rew+=(Math.random()*enemy["soldier"]*0.50)+(enemy["soldier"]*0.10)
-}
-enemy["reward"]=rew;
-stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
-stringencuentro+="<button class='fight' onclick='fight()'>Fight</button><button class='retreat' onclick='retreat()'>Flee</button>";
-
-
-$(".encounter").show()
-$(".expeditionresult").html("Some enemys appeared in our way.")
-$(".encounter").html(stringencuentro)
-
-}
+		$(".expeditionresult").html("")
+		$(".encounter").hide()
 
 
 
+		if(Math.random()>0.40){
 
-}
+
+			reward="The expedition found:<br>";
+
+
+			if(Math.random()>0.40){
+				rnd=(Math.random()*power)*25;
+				reward+=parseFloat(rnd).toFixed(2) + " wood<br>";
+				items["wood"]+=rnd;
+			}
+			if(Math.random()>0.60){
+				rnd=(Math.random()*power)*15;
+				reward+=parseFloat(rnd).toFixed(2) + " minerals<br>";
+				items["mineral"]+=rnd;
+			}
+			if(Math.random()>0.75){
+				rnd=(Math.random()*power)*5;
+				reward+=parseFloat(rnd).toFixed(2) + " food<br>";
+				items["food"]+=rnd;
+			}
+			if(Math.random()>0.925){
+				rnd=(Math.random()*power)/5;
+				reward+=parseFloat(rnd).toFixed(2) + " copper<br>";
+				items["copper"]+=rnd;
+			}
+			if(Math.random()>0.925){
+				rnd=(Math.random()*power)/8;
+				reward+=parseFloat(rnd).toFixed(2) + " iron<br>";
+				items["iron"]+=rnd;
+			}
+			if(Math.random()>0.95){
+				rnd=(Math.random()*power)/20;
+				reward+=parseFloat(rnd).toFixed(2) + " gold<br>";
+				items["gold"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["spear"]==1){
+				rnd=Math.round((Math.random()*power)/50)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " spear<br>";
+				craft["spear"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["sword"]==1){
+				rnd=Math.round((Math.random()*power)/50)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " sword<br>";
+				craft["sword"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["storage"]==1){
+				rnd=Math.round((Math.random()*power)/200)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " block<br>";
+				craft["block"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["coin"]==1){
+				rnd=Math.round((Math.random()*power)/300)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " coin<br>";
+				craft["coin"]+=rnd;
+			}
+			if(Math.random()>0.90 && technologies["husbandry"]==1){
+				rnd=Math.round((Math.random()*power)/300)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " horse<br>";
+				craft["horse"]+=rnd;
+			}
+
+			if(Math.random()>0.99 && technologies["cache"]==1){
+				rnd=(Math.random()*power)/1000;
+				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
+				craft["chest"]+=rnd;
+				maximums["wood"]+=50*(rnd);
+				maximums["mineral"]+=25*(rnd);
+				maximums["food"]+=10*(rnd);
+				maximums["copper"]+=0.3*(rnd);
+				maximums["gold"]+=0.05*(rnd);
+				maximums["iron"]+=0.2*(rnd);
+				maximums["tin"]+=0.15*(rnd);
+				maximums["coal"]+=0.15*(rnd);
+				maximums["steel"]+=0.10*(rnd);
+			}
+			if(reward!="The expedition found:<br>")
+
+			{
+				$(".expeditionresult").html(reward)
+			}
+			else
+			{
+
+				$(".expeditionresult").html("The expedition didn´t find anything useful.")
+			}
+
+
+		}
+		else
+		{
+			hp=0;
+			hp+=people["pikeman"]*30
+			hp+=people["swordman"]*50
+			hp+=people["knight"]*200
+
+			hp=hp*(bonus["hp"]+1)
+
+			power=(power/2)+(hp/15)
+
+			enemy["reward"]=0;
+			enemy["peasant"]=0;
+			enemy["bandit"]=0;
+			enemy["mercenary"]=0;
+			enemy["soldier"]=0;
+			var enemytipo=Math.random()*power;
+			var stringencuentro="Enemys:<br>"
+			var rew=0;
+			if(enemytipo<25){
+				enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
+				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
+				rew+=(Math.random()*enemy["peasant"]*0.05)+(enemy["peasant"]*0.01)
+			}
+			if(enemytipo>20 && enemytipo<50){
+				enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
+				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
+				rew+=(Math.random()*enemy["bandit"]*0.10)+(enemy["bandit"]*0.02)
+			}
+			if(enemytipo>40 && enemytipo<120){
+				enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
+				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
+				rew+=(Math.random()*enemy["mercenary"]*0.25)+(enemy["mercenary"]*0.05)
+			}
+			if(enemytipo>110){
+				enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
+				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
+				rew+=(Math.random()*enemy["soldier"]*0.50)+(enemy["soldier"]*0.10)
+			}
+			enemy["reward"]=rew;
+			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
+			stringencuentro+="<button class='fight' onclick='fight()'>Fight</button><button class='retreat' onclick='retreat()'>Flee</button>";
+
+
+			$(".encounter").show()
+			$(".expeditionresult").html("Some enemys appeared in our way.")
+			$(".encounter").html(stringencuentro)
+
+		}
+
+
+
+
+	}
 }
 
 
 
 function fight(){
-power=0;
-power+=people["pikeman"]*5
-power+=people["swordman"]*10
-power+=people["knight"]*25
+	power=0;
+	power+=people["pikeman"]*5
+	power+=people["swordman"]*10
+	power+=people["knight"]*25
 
-power=power*(bonus["power"]+1)
+	power=power*(bonus["power"]+1)
 
-hp=0;
-hp+=people["pikeman"]*30
-hp+=people["swordman"]*50
-hp+=people["knight"]*200
+	hp=0;
+	hp+=people["pikeman"]*30
+	hp+=people["swordman"]*50
+	hp+=people["knight"]*200
 
-hp=hp*(bonus["hp"]+1)
+	hp=hp*(bonus["hp"]+1)
 
-power2=0;
-power2+=enemy["peasant"]*2
-power2+=enemy["bandit"]*4
-power2+=enemy["mercenary"]*9
-power2+=enemy["soldier"]*15
+	power2=0;
+	power2+=enemy["peasant"]*2
+	power2+=enemy["bandit"]*4
+	power2+=enemy["mercenary"]*9
+	power2+=enemy["soldier"]*15
 
-hp2=0;
-hp2+=enemy["peasant"]*8
-hp2+=enemy["bandit"]*15
-hp2+=enemy["mercenary"]*40
-hp2+=enemy["soldier"]*100
+	hp2=0;
+	hp2+=enemy["peasant"]*8
+	hp2+=enemy["bandit"]*15
+	hp2+=enemy["mercenary"]*40
+	hp2+=enemy["soldier"]*100
 
-combatlog="The battle starts:<br>"
-var ronda=0;
-for(i=0;i<=50;i++){
-dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
-dmg2=power2+(Math.random()*(power2/4))-(Math.random()*(power2/4));
-combatlog+="Round "+(i+1)+"<br>"
-combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
-combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
-hp2-=dmg1;
-hp-=dmg2;
-combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
-if(hp<1){
-combatlog+="You lose the combat<br>"
-if(people["pikeman"]>0 && Math.random()>0.75){
-	losses=Math.round(Math.random()*(people["pikeman"]-1))+1
-	people["pikeman"]-=losses;
-	population-=losses;
-	combatlog+="You lose "+losses+" pikeman<br>"
-}
-if(people["swordman"]>0 && Math.random()>0.75){
-	losses=Math.round(Math.random()*(people["swordman"]-1))+1
-	people["swordman"]-=losses;
-	population-=losses;
-	combatlog+="You lose "+losses+" swordman<br>"
-}
-if(people["knight"]>0 && Math.random()>0.75){
-	losses=Math.round(Math.random()*(people["knight"]-1))+1
-	people["knight"]-=losses;
-	population-=losses;
-	combatlog+="You lose "+losses+" knight<br>"
-}
+	combatlog="The battle starts:<br>"
+	var ronda=0;
+	for(i=0;i<=50;i++){
+		dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
+		dmg2=power2+(Math.random()*(power2/4))-(Math.random()*(power2/4));
+		combatlog+="Round "+(i+1)+"<br>"
+		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
+		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+		hp2-=dmg1;
+		hp-=dmg2;
+		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
+		if(hp<1){
+			combatlog+="You lose the combat<br>"
+			if(people["pikeman"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
+				people["pikeman"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" pikeman<br>"
+			}
+			if(people["swordman"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["swordman"]-1))+1
+				people["swordman"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" swordman<br>"
+			}
+			if(people["knight"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["knight"]-1))+1
+				people["knight"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" knight<br>"
+			}
 
 
 
-break;
-}
-else if(hp2<1){
+			break;
+		}
+		else if(hp2<1){
 
-combatlog+="Your win the combat!<br><br>";
-combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
-$(".encounter").hide()
-craft["coin"]+=enemy["reward"];
-if(Math.random()>0.80 && technologies["cache"]==1){
-rnd=(Math.random()*((power/2)+(hp/15)))/500;
-reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
-craft["chest"]+=rnd;
-combatlog+="You also took "+ intToString(rnd)+" chests that they were carrying";
-	maximums["wood"]+=50*(rnd);
-	maximums["mineral"]+=25*(rnd);
-	maximums["food"]+=10*(rnd);
-	maximums["copper"]+=0.3*(rnd);
-	maximums["gold"]+=0.05*(rnd);
-	maximums["iron"]+=0.2*(rnd);
-	maximums["tin"]+=0.15*(rnd);
-	maximums["coal"]+=0.15*(rnd);
-	maximums["steel"]+=0.10*(rnd);
-}
-break;
-}
+			combatlog+="Your win the combat!<br><br>";
+			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
+			$(".encounter").hide()
+			craft["coin"]+=enemy["reward"];
+			if(Math.random()>0.80 && technologies["cache"]==1){
+				rnd=(Math.random()*((power/2)+(hp/15)))/500;
+				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
+				craft["chest"]+=rnd;
+				combatlog+="You also took "+ intToString(rnd)+" chests that they were carrying";
+				maximums["wood"]+=50*(rnd);
+				maximums["mineral"]+=25*(rnd);
+				maximums["food"]+=10*(rnd);
+				maximums["copper"]+=0.3*(rnd);
+				maximums["gold"]+=0.05*(rnd);
+				maximums["iron"]+=0.2*(rnd);
+				maximums["tin"]+=0.15*(rnd);
+				maximums["coal"]+=0.15*(rnd);
+				maximums["steel"]+=0.10*(rnd);
+			}
+			break;
+		}
 
-ronda++
-}
+		ronda++
+	}
 
-if(i>49){
-combatlog+="The combat ends in a draw<br>"
-}
+	if(i>49){
+		combatlog+="The combat ends in a draw<br>"
+	}
 
-$(".expeditionresult").html(combatlog)
-$(".encounter").html("")
-$(".encounter").hide()
+	$(".expeditionresult").html(combatlog)
+	$(".encounter").html("")
+	$(".encounter").hide()
 
 
 
@@ -523,1275 +523,1275 @@ $(".encounter").hide()
 
 
 function retreat(){
-$(".expeditionresult").html("You flee cowardly")
-$(".encounter").hide()
+	$(".expeditionresult").html("You flee cowardly")
+	$(".encounter").hide()
 }
 function crafting(b){
 	var tocraft=1;
-if(buildstatus["workbench"]==1){
-	tocraft=buildings["workbench"]+1;
-}
-for(i=0;i<tocraft;i++)
-{
-if (b=="pickaxe"){
+	if(buildstatus["workbench"]==1){
+		tocraft=buildings["workbench"]+1;
+	}
+	for(i=0;i<tocraft;i++)
+	{
+		if (b=="pickaxe"){
 
-woodcost=20;
-coppercost=1;
+			woodcost=20;
+			coppercost=1;
 
-if (items["copper"]>=coppercost && items["wood"]>=woodcost){
+			if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 
-	items["copper"]-=coppercost;
-	items["wood"]-=woodcost;
-	craft["pickaxe"]+=1+bonus["craft"];
+				items["copper"]-=coppercost;
+				items["wood"]-=woodcost;
+				craft["pickaxe"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="spear"){
+		}
+		else if (b=="spear"){
 
-woodcost=50;
-coppercost=3;
+			woodcost=50;
+			coppercost=3;
 
-if (items["copper"]>=coppercost && items["wood"]>=woodcost){
+			if (items["copper"]>=coppercost && items["wood"]>=woodcost){
 
-	items["copper"]-=coppercost;
-	items["wood"]-=woodcost;
-	craft["spear"]+=1+bonus["craft"];
+				items["copper"]-=coppercost;
+				items["wood"]-=woodcost;
+				craft["spear"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="sword"){
+		}
+		else if (b=="sword"){
 
-ironcost=10;
+			ironcost=10;
 
-if (items["iron"]>=ironcost){
+			if (items["iron"]>=ironcost){
 
-	items["iron"]-=ironcost;
-	craft["sword"]+=1+bonus["craft"];
+				items["iron"]-=ironcost;
+				craft["sword"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="block"){
+		}
+		else if (b=="block"){
 
-woodcost=100;
-mineralcost=200;
+			woodcost=100;
+			mineralcost=200;
 
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+			if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 
-	items["mineral"]-=mineralcost;
-	items["wood"]-=woodcost;
-	craft["block"]+=1+bonus["craft"];
+				items["mineral"]-=mineralcost;
+				items["wood"]-=woodcost;
+				craft["block"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="coin"){
+		}
+		else if (b=="coin"){
 
-goldcost=5
+			goldcost=5
 
-if (items["gold"]>=goldcost){
+			if (items["gold"]>=goldcost){
 
-	items["gold"]-=goldcost;
+				items["gold"]-=goldcost;
 
-	craft["coin"]+=1+bonus["craft"];
+				craft["coin"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="bronze"){
+		}
+		else if (b=="bronze"){
 
-coppercost=40
-tincost=10
+			coppercost=40
+			tincost=10
 
-if (items["copper"]>=coppercost && items["tin"]>=tincost){
+			if (items["copper"]>=coppercost && items["tin"]>=tincost){
 
-	items["copper"]-=coppercost;
-	items["tin"]-=tincost;
+				items["copper"]-=coppercost;
+				items["tin"]-=tincost;
 
-	craft["bronze"]+=1+bonus["craft"];
+				craft["bronze"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="structure"){
+		}
+		else if (b=="structure"){
 
-woodcost=1000;
-ironcost=20;
+			woodcost=1000;
+			ironcost=20;
 
-if (items["wood"]>=woodcost && items["iron"]>=ironcost){
+			if (items["wood"]>=woodcost && items["iron"]>=ironcost){
 
-	items["wood"]-=woodcost;
-	items["iron"]-=ironcost;
+				items["wood"]-=woodcost;
+				items["iron"]-=ironcost;
 
-	craft["structure"]+=1+bonus["craft"];
+				craft["structure"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="armor"){
+		}
+		else if (b=="armor"){
 
-steelcost=30;
-bronzecost=5;
+			steelcost=30;
+			bronzecost=5;
 
-if (items["steel"]>=steelcost && craft["bronze"]>=bronzecost){
+			if (items["steel"]>=steelcost && craft["bronze"]>=bronzecost){
 
-	items["steel"]-=steelcost;
-	craft["bronze"]-=bronzecost;
+				items["steel"]-=steelcost;
+				craft["bronze"]-=bronzecost;
 
-	craft["armor"]+=1+bonus["craft"];
+				craft["armor"]+=1+bonus["craft"];
 
-}
+			}
 
-}
-else if (b=="supplies"){
+		}
+		else if (b=="supplies"){
 
-plankcost=5;
-foodcost=500;
-watercost=100;
+			plankcost=5;
+			foodcost=500;
+			watercost=100;
 
-if (craft["plank"]>=plankcost && items["food"]>=foodcost && items["water"]>=watercost){
+			if (craft["plank"]>=plankcost && items["food"]>=foodcost && items["water"]>=watercost){
 
-	craft["plank"]-=plankcost;
-	items["food"]-=foodcost;
-	items["water"]-=watercost;
-
-
-	craft["supplies"]+=1+bonus["craft"];
-
-}
-
-}
-else if (b=="chest"){
-
-plankcost=100;
-steelcost=30;
-bronzecost=5;
-lockcost=1;
-
-if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && craft["lock"]>=lockcost && items["steel"]>=steelcost){
-
-	craft["plank"]-=plankcost;
-	craft["bronze"]-=bronzecost;
-	craft["lock"]-=lockcost 
-	items["steel"]-=steelcost;
+				craft["plank"]-=plankcost;
+				items["food"]-=foodcost;
+				items["water"]-=watercost;
 
 
-	craft["chest"]+=1+bonus["craft"];
+				craft["supplies"]+=1+bonus["craft"];
 
-	maximums["wood"]+=50*(bonus["craft"]+1);
-	maximums["mineral"]+=25*(bonus["craft"]+1);
-	maximums["food"]+=10*(bonus["craft"]+1);
-	maximums["copper"]+=0.3*(bonus["craft"]+1);
-	maximums["gold"]+=0.05*(bonus["craft"]+1);
-	maximums["iron"]+=0.2*(bonus["craft"]+1);
-	maximums["tin"]+=0.15*(bonus["craft"]+1);
-	maximums["coal"]+=0.15*(bonus["craft"]+1);
-	maximums["steel"]+=0.10*(bonus["craft"]+1);
+			}
 
-}
+		}
+		else if (b=="chest"){
 
-}
-}
+			plankcost=100;
+			steelcost=30;
+			bronzecost=5;
+			lockcost=1;
+
+			if (craft["plank"]>=plankcost && craft["bronze"]>=bronzecost && craft["lock"]>=lockcost && items["steel"]>=steelcost){
+
+				craft["plank"]-=plankcost;
+				craft["bronze"]-=bronzecost;
+				craft["lock"]-=lockcost 
+				items["steel"]-=steelcost;
+
+
+				craft["chest"]+=1+bonus["craft"];
+
+				maximums["wood"]+=50*(bonus["craft"]+1);
+				maximums["mineral"]+=25*(bonus["craft"]+1);
+				maximums["food"]+=10*(bonus["craft"]+1);
+				maximums["copper"]+=0.3*(bonus["craft"]+1);
+				maximums["gold"]+=0.05*(bonus["craft"]+1);
+				maximums["iron"]+=0.2*(bonus["craft"]+1);
+				maximums["tin"]+=0.15*(bonus["craft"]+1);
+				maximums["coal"]+=0.15*(bonus["craft"]+1);
+				maximums["steel"]+=0.10*(bonus["craft"]+1);
+
+			}
+
+		}
+	}
 }
 
 
 function research(b){
 
-if (b=="coppertools"){
+	if (b=="coppertools"){
 
-coppercost=1;
+		coppercost=1;
 
-if (items["copper"]>=coppercost && technologies["coppertools"]==0){
-	items["copper"]-=coppercost;
-	bonus["wood"]+=0.20;
-	bonus["mineral"]+=0.20;
-	technologies["coppertools"]++
-}
+		if (items["copper"]>=coppercost && technologies["coppertools"]==0){
+			items["copper"]-=coppercost;
+			bonus["wood"]+=0.20;
+			bonus["mineral"]+=0.20;
+			technologies["coppertools"]++
+		}
 
-}
-else if (b=="pickaxe"){
+	}
+	else if (b=="pickaxe"){
 
-woodcost=100;
-coppercost=3;
+		woodcost=100;
+		coppercost=3;
 
 
-if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["pickaxe"]==0){
-	items["copper"]-=coppercost;
-	items["wood"]-=woodcost;
-	technologies["pickaxe"]++
-	$("#craftingpane").removeClass("invisible")
-	$(".craft_pickaxe").show()
-	$(".hire_miner").show()
-        unlocked["#craftingpane"]=1;
-        unlocked[".craft_pickaxe"]=1;
-        unlocked[".hire_miner"]=1;
-}
+		if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["pickaxe"]==0){
+			items["copper"]-=coppercost;
+			items["wood"]-=woodcost;
+			technologies["pickaxe"]++
+			$("#craftingpane").removeClass("invisible")
+			$(".craft_pickaxe").show()
+			$(".hire_miner").show()
+			unlocked["#craftingpane"]=1;
+			unlocked[".craft_pickaxe"]=1;
+			unlocked[".hire_miner"]=1;
+		}
 
 
-}
-else if (b=="spear"){
+	}
+	else if (b=="spear"){
 
-woodcost=200;
-coppercost=5;
+		woodcost=200;
+		coppercost=5;
 
 
-if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["spear"]==0){
-	items["copper"]-=coppercost;
-	items["wood"]-=woodcost;
-	technologies["spear"]++
-	$("#craftingpane").removeClass("invisible")
-	$("#militarypane").removeClass("invisible")
-	$(".craft_spear").show()
-	$(".hire_pikeman").show()
-        unlocked["#craftingpane"]=1;
-        unlocked["#militarypane"]=1;
-        unlocked[".craft_spear"]=1;
-        unlocked[".hire_pikeman"]=1;
-}
+		if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["spear"]==0){
+			items["copper"]-=coppercost;
+			items["wood"]-=woodcost;
+			technologies["spear"]++
+			$("#craftingpane").removeClass("invisible")
+			$("#militarypane").removeClass("invisible")
+			$(".craft_spear").show()
+			$(".hire_pikeman").show()
+			unlocked["#craftingpane"]=1;
+			unlocked["#militarypane"]=1;
+			unlocked[".craft_spear"]=1;
+			unlocked[".hire_pikeman"]=1;
+		}
 
 
-}
-else if (b=="exploration"){
+	}
+	else if (b=="exploration"){
 
-foodcost=100;
+		foodcost=100;
 
-if (items["food"]>=foodcost && technologies["exploration"]==0){
+		if (items["food"]>=foodcost && technologies["exploration"]==0){
 
-	items["food"]-=foodcost;
-	technologies["exploration"]++
-	$(".expedition").show()
-        unlocked[".expedition"]=1;
+			items["food"]-=foodcost;
+			technologies["exploration"]++
+			$(".expedition").show()
+			unlocked[".expedition"]=1;
 
-}
+		}
 
-}
-else if (b=="ironfoundry"){
+	}
+	else if (b=="ironfoundry"){
 
-woodcost=1000;
-mineralcost=500;
-foodcost=200;
+		woodcost=1000;
+		mineralcost=500;
+		foodcost=200;
 
 
-if (items["wood"]>=woodcost  && items["mineral"]>=mineralcost  && items["food"]>=foodcost  && technologies["ironfoundry"]==0){
+		if (items["wood"]>=woodcost  && items["mineral"]>=mineralcost  && items["food"]>=foodcost  && technologies["ironfoundry"]==0){
 
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost;
-	items["food"]-=foodcost;
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost;
+			items["food"]-=foodcost;
 
-	technologies["ironfoundry"]++
-	$(".build_foundry").show()
-        unlocked[".build_foundry"]=1;
-}
+			technologies["ironfoundry"]++
+			$(".build_foundry").show()
+			unlocked[".build_foundry"]=1;
+		}
 
-}
-else if (b=="metallurgy"){
+	}
+	else if (b=="metallurgy"){
 
-foodcost=200;
-coppercost=10;
-ironcost=5;
+		foodcost=200;
+		coppercost=10;
+		ironcost=5;
 
 
-if (items["iron"]>=ironcost  && items["copper"]>=coppercost  && items["food"]>=foodcost  && technologies["metallurgy"]==0){
+		if (items["iron"]>=ironcost  && items["copper"]>=coppercost  && items["food"]>=foodcost  && technologies["metallurgy"]==0){
 
-	items["iron"]-=ironcost;
-	items["copper"]-=coppercost;
-	items["food"]-=foodcost;
+			items["iron"]-=ironcost;
+			items["copper"]-=coppercost;
+			items["food"]-=foodcost;
 
-	bonus["iron"]+=0.10;
-	bonus["copper"]+=0.10;
+			bonus["iron"]+=0.10;
+			bonus["copper"]+=0.10;
 
-	technologies["metallurgy"]++
+			technologies["metallurgy"]++
 
-}
+		}
 
-}
-else if (b=="sword"){
+	}
+	else if (b=="sword"){
 
-foodcost=500
-ironcost=10
+		foodcost=500
+		ironcost=10
 
-if (items["food"]>=foodcost && items["iron"]>=ironcost && technologies["sword"]==0){
+		if (items["food"]>=foodcost && items["iron"]>=ironcost && technologies["sword"]==0){
 
-	items["food"]-=foodcost;
-	items["iron"]-=ironcost;
-	technologies["sword"]++
-	$("#craftingpane").removeClass("invisible")
-	$("#militarypane").removeClass("invisible")
-	$(".craft_sword").show()
-	$(".hire_swordman").show()
-        unlocked["#craftingpane"]=1;
-        unlocked["#militarypane"]=1;
-        unlocked[".craft_sword"]=1;
-        unlocked[".hire_swordman"]=1;
-}
+			items["food"]-=foodcost;
+			items["iron"]-=ironcost;
+			technologies["sword"]++
+			$("#craftingpane").removeClass("invisible")
+			$("#militarypane").removeClass("invisible")
+			$(".craft_sword").show()
+			$(".hire_swordman").show()
+			unlocked["#craftingpane"]=1;
+			unlocked["#militarypane"]=1;
+			unlocked[".craft_sword"]=1;
+			unlocked[".hire_swordman"]=1;
+		}
 
-}
-else if (b=="storage"){
+	}
+	else if (b=="storage"){
 
-woodcost=500
-mineralcost=500
-ironcost=15
+		woodcost=500
+		mineralcost=500
+		ironcost=15
 
-if (items["iron"]>=ironcost  && items["mineral"]>=mineralcost  && items["wood"]>=woodcost  && technologies["storage"]==0){
+		if (items["iron"]>=ironcost  && items["mineral"]>=mineralcost  && items["wood"]>=woodcost  && technologies["storage"]==0){
 
-	items["wood"]-=foodcost;
-	items["mineral"]-=mineralcost;
-	items["iron"]-=ironcost;
+			items["wood"]-=foodcost;
+			items["mineral"]-=mineralcost;
+			items["iron"]-=ironcost;
 
-	technologies["storage"]++
+			technologies["storage"]++
 
-	$("#craftingpane").removeClass("invisible")
-	$(".craft_block").show()
-	$(".build_barn").show()
-        unlocked["#craftingpane"]=1;
-        unlocked[".craft_block"]=1;
-        unlocked[".build_barn"]=1;
-}
+			$("#craftingpane").removeClass("invisible")
+			$(".craft_block").show()
+			$(".build_barn").show()
+			unlocked["#craftingpane"]=1;
+			unlocked[".craft_block"]=1;
+			unlocked[".build_barn"]=1;
+		}
 
-}
-else if (b=="currency" && technologies["currency"]==0){
+	}
+	else if (b=="currency" && technologies["currency"]==0){
 
-goldcost=2;
+		goldcost=2;
 
-if (items["gold"]>=goldcost){
+		if (items["gold"]>=goldcost){
 
-	items["gold"]-=goldcost;
+			items["gold"]-=goldcost;
 
-	technologies["currency"]++
+			technologies["currency"]++
 
 
-	$(".build_casino").show()
-        unlocked[".build_casino"]=1;
-}
+			$(".build_casino").show()
+			unlocked[".build_casino"]=1;
+		}
 
-}
-else if (b=="coin" && technologies["coin"]==0){
+	}
+	else if (b=="coin" && technologies["coin"]==0){
 
-ironcost=20;
-goldcost=5;
+		ironcost=20;
+		goldcost=5;
 
-if (items["gold"]>=goldcost && items["iron"]>=ironcost){
+		if (items["gold"]>=goldcost && items["iron"]>=ironcost){
 
-	items["gold"]-=goldcost;
-	items["iron"]-=ironcost
-	technologies["coin"]++
+			items["gold"]-=goldcost;
+			items["iron"]-=ironcost
+			technologies["coin"]++
 
-	$(".craft_coin").show()
-    unlocked[".craft_coin"]=1;
-}
+			$(".craft_coin").show()
+			unlocked[".craft_coin"]=1;
+		}
 
-}
-else if (b=="exchange" && technologies["exchange"]==0){
+	}
+	else if (b=="exchange" && technologies["exchange"]==0){
 
-foodcost=800
-coincost=3
+		foodcost=800
+		coincost=3
 
-if (craft["coin"]>=coincost && items["food"]>=foodcost){
+		if (craft["coin"]>=coincost && items["food"]>=foodcost){
 
-	craft["coin"]-=coincost;
-	items["food"]-=foodcost
-	technologies["exchange"]++
+			craft["coin"]-=coincost;
+			items["food"]-=foodcost
+			technologies["exchange"]++
 
-	$(".build_market").show()
-    unlocked[".build_market"]=1;
-}
+			$(".build_market").show()
+			unlocked[".build_market"]=1;
+		}
 
-}
-else if (b=="bronze" && technologies["bronze"]==0){
+	}
+	else if (b=="bronze" && technologies["bronze"]==0){
 
-ironcost=40;
-coppercost=40;
+		ironcost=40;
+		coppercost=40;
 
-if (items["iron"]>=ironcost && items["copper"]>=coppercost){
+		if (items["iron"]>=ironcost && items["copper"]>=coppercost){
 
-	items["iron"]-=ironcost;
-	items["copper"]-=coppercost
+			items["iron"]-=ironcost;
+			items["copper"]-=coppercost
 
-	technologies["bronze"]++
+			technologies["bronze"]++
 
-	$(".craft_bronze").show()
-    unlocked[".craft_bronze"]=1;
-	$(".build_statue").show()
-    unlocked[".build_statue"]=1;
-}
+			$(".craft_bronze").show()
+			unlocked[".craft_bronze"]=1;
+			$(".build_statue").show()
+			unlocked[".build_statue"]=1;
+		}
 
-}
-else if (b=="bronzetools" && technologies["bronzetools"]==0){
+	}
+	else if (b=="bronzetools" && technologies["bronzetools"]==0){
 
-bronzecost=2;
+		bronzecost=2;
 
-if (craft["bronze"]>=bronzecost){
+		if (craft["bronze"]>=bronzecost){
 
-	craft["bronze"]-=bronzecost;
+			craft["bronze"]-=bronzecost;
 
-	bonus["wood"]+=0.2;
-	bonus["mineral"]+=0.2;
-	bonus["food"]+=0.2;
-	bonus["copper"]+=0.1;
-	bonus["iron"]+=0.1;
-	bonus["tin"]+=0.1;
+			bonus["wood"]+=0.2;
+			bonus["mineral"]+=0.2;
+			bonus["food"]+=0.2;
+			bonus["copper"]+=0.1;
+			bonus["iron"]+=0.1;
+			bonus["tin"]+=0.1;
 
-	technologies["bronzetools"]++
+			technologies["bronzetools"]++
 
 
 
-}
+		}
 
-}
-else if (b=="charcoal" && technologies["charcoal"]==0){
+	}
+	else if (b=="charcoal" && technologies["charcoal"]==0){
 
-woodcost=4000
-mineralcost=2000
+		woodcost=4000
+		mineralcost=2000
 
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
 
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost
-	technologies["charcoal"]++
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost
+			technologies["charcoal"]++
 
-	$(".build_kiln").show()
-    unlocked[".build_kiln"]=1;
-}
+			$(".build_kiln").show()
+			unlocked[".build_kiln"]=1;
+		}
 
-}
-else if (b=="centralisation" && technologies["centralisation"]==0){
+	}
+	else if (b=="centralisation" && technologies["centralisation"]==0){
 
-woodcost=5000
-mineralcost=5000
-bronzecost=3
-goldcost=10
+		woodcost=5000
+		mineralcost=5000
+		bronzecost=3
+		goldcost=10
 
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && craft["bronze"]>=bronzecost && items["gold"]>=goldcost){
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && craft["bronze"]>=bronzecost && items["gold"]>=goldcost){
 
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost
-	items["gold"]-=goldcost
-	craft["bronze"]-=bronzecost
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost
+			items["gold"]-=goldcost
+			craft["bronze"]-=bronzecost
 
-	technologies["centralisation"]++
+			technologies["centralisation"]++
 
-	$(".build_towncenter").show()
-    unlocked[".build_towncenter"]=1;
-    $(".craft_structure").show()
-    unlocked[".craft_structure"]=1;
-}
+			$(".build_towncenter").show()
+			unlocked[".build_towncenter"]=1;
+			$(".craft_structure").show()
+			unlocked[".craft_structure"]=1;
+		}
 
-}
-else if (b=="steel" && technologies["steel"]==0){
+	}
+	else if (b=="steel" && technologies["steel"]==0){
 
-ironcost=50;
-coalcost=50;
+		ironcost=50;
+		coalcost=50;
 
-if (items["iron"]>=ironcost && items["coal"]>=coalcost){
+		if (items["iron"]>=ironcost && items["coal"]>=coalcost){
 
-	items["iron"]-=ironcost;
-	items["coal"]-=coalcost;
-	technologies["steel"]++
+			items["iron"]-=ironcost;
+			items["coal"]-=coalcost;
+			technologies["steel"]++
 
-	$(".hire_foundryman").show()
-    unlocked[".hire_foundryman"]=1;
-}
+			$(".hire_foundryman").show()
+			unlocked[".hire_foundryman"]=1;
+		}
 
-}
-else if (b=="manufacturing" && technologies["manufacturing"]==0){
+	}
+	else if (b=="manufacturing" && technologies["manufacturing"]==0){
 
-steelcost=5;
-coincost=5;
+		steelcost=5;
+		coincost=5;
 
-if (items["steel"]>=steelcost && craft["coin"]>=coincost){
+		if (items["steel"]>=steelcost && craft["coin"]>=coincost){
 
-	items["steel"]-=steelcost;
-	craft["coin"]-=coincost;
-	technologies["manufacturing"]++
+			items["steel"]-=steelcost;
+			craft["coin"]-=coincost;
+			technologies["manufacturing"]++
 
-	$(".build_workbench").show()
-    unlocked[".build_workbench"]=1;
-}
+			$(".build_workbench").show()
+			unlocked[".build_workbench"]=1;
+		}
 
-}
-else if (b=="steeltools" && technologies["steeltools"]==0){
+	}
+	else if (b=="steeltools" && technologies["steeltools"]==0){
 
-steelcost=10;
+		steelcost=10;
 
-if (items["steel"]>=steelcost){
+		if (items["steel"]>=steelcost){
 
-	items["steel"]-=steelcost;
+			items["steel"]-=steelcost;
 
-	bonus["wood"]+=0.3;
-	bonus["mineral"]+=0.3;
-	bonus["food"]+=0.3;
-	bonus["copper"]+=0.1;
-	bonus["iron"]+=0.1;
-	bonus["tin"]+=0.1;
-	bonus["steel"]+=0.05;
+			bonus["wood"]+=0.3;
+			bonus["mineral"]+=0.3;
+			bonus["food"]+=0.3;
+			bonus["copper"]+=0.1;
+			bonus["iron"]+=0.1;
+			bonus["tin"]+=0.1;
+			bonus["steel"]+=0.05;
 
-	technologies["steeltools"]++
+			technologies["steeltools"]++
 
 
 
-}
+		}
 
-}
-else if (b=="husbandry" && technologies["husbandry"]==0){
+	}
+	else if (b=="husbandry" && technologies["husbandry"]==0){
 
-foodcost=2500;
+		foodcost=2500;
 
-if (items["food"]>=foodcost){
+		if (items["food"]>=foodcost){
 
-	items["food"]-=foodcost;
+			items["food"]-=foodcost;
 
-	technologies["husbandry"]++
+			technologies["husbandry"]++
 
-}
+		}
 
-}
-else if (b=="cavalry" && technologies["cavalry"]==0){
+	}
+	else if (b=="cavalry" && technologies["cavalry"]==0){
 
-goldcost=25;
-steelcost=25;
+		goldcost=25;
+		steelcost=25;
 
-if (items["gold"]>=goldcost && items["steel"]>=steelcost){
+		if (items["gold"]>=goldcost && items["steel"]>=steelcost){
 
-	items["steel"]-=steelcost;
-	items["gold"]-=goldcost;
+			items["steel"]-=steelcost;
+			items["gold"]-=goldcost;
 
-	technologies["cavalry"]++
-	$(".craft_armor").show()
-    unlocked[".craft_armor"]=1;
-    $(".hire_knight").show()
-    unlocked[".hire_knight"]=1;
+			technologies["cavalry"]++
+			$(".craft_armor").show()
+			unlocked[".craft_armor"]=1;
+			$(".hire_knight").show()
+			unlocked[".hire_knight"]=1;
 
-}
+		}
 
-}
-else if (b=="leadership" && technologies["leadership"]==0){
+	}
+	else if (b=="leadership" && technologies["leadership"]==0){
 
-coincost=25
+		coincost=25
 
-if (craft["coin"]>=coincost){
+		if (craft["coin"]>=coincost){
 
-	craft["coin"]-=coincost
+			craft["coin"]-=coincost
 
 
-	technologies["leadership"]++
-	$(".build_castle").show()
-    unlocked[".build_castle"]=1;
+			technologies["leadership"]++
+			$(".build_castle").show()
+			unlocked[".build_castle"]=1;
 
-}
+		}
 
-}
-else if (b=="armament" && technologies["armament"]==0){
+	}
+	else if (b=="armament" && technologies["armament"]==0){
 
-spearcost=50
-swordcost=25
-armorcost=2
+		spearcost=50
+		swordcost=25
+		armorcost=2
 
-if (craft["spear"]>=spearcost && craft["sword"]>=swordcost && craft["armor"]>=armorcost){
+		if (craft["spear"]>=spearcost && craft["sword"]>=swordcost && craft["armor"]>=armorcost){
 
-	craft["spear"]-=spearcost
-	craft["sword"]-=swordcost
-	craft["armor"]-=armorcost
+			craft["spear"]-=spearcost
+			craft["sword"]-=swordcost
+			craft["armor"]-=armorcost
 
-	technologies["armament"]++
-	bonus["power"]+=0.40;
+			technologies["armament"]++
+			bonus["power"]+=0.40;
 
-}
+		}
 
-}
-else if (b=="gambling" && technologies["gambling"]==0){
+	}
+	else if (b=="gambling" && technologies["gambling"]==0){
 
-coincost=50;
+		coincost=50;
 
-if (craft["coin"]>=coincost){
+		if (craft["coin"]>=coincost){
 
-	craft["coin"]-=coincost;
+			craft["coin"]-=coincost;
 
 
-	technologies["gambling"]++
-	$(".casinogame2").show()
-	unlocked[".casinogame2"]=1;
-}
+			technologies["gambling"]++
+			$(".casinogame2").show()
+			unlocked[".casinogame2"]=1;
+		}
 
-}
-else if (b=="redeem" && technologies["redeem"]==0){
+	}
+	else if (b=="redeem" && technologies["redeem"]==0){
 
-tokencost=50;
+		tokencost=50;
 
-if (craft["token"]>=tokencost){
+		if (craft["token"]>=tokencost){
 
-	craft["token"]-=tokencost;
+			craft["token"]-=tokencost;
 
 
-	technologies["redeem"]++
-	$(".build_relic").show()
-	unlocked[".build_relic"]=1;
-}
+			technologies["redeem"]++
+			$(".build_relic").show()
+			unlocked[".build_relic"]=1;
+		}
 
-}
-else if (b=="shipyard" && technologies["shipyard"]==0){
+	}
+	else if (b=="shipyard" && technologies["shipyard"]==0){
 
-woodcost=25000;
+		woodcost=25000;
 
 
-if (items["wood"]>=woodcost){
+		if (items["wood"]>=woodcost){
 
-	items["wood"]-=woodcost;
+			items["wood"]-=woodcost;
 
 
-	technologies["shipyard"]++
-	$(".build_shipyard").show()
-	unlocked[".build_shipyard"]=1;
-}
+			technologies["shipyard"]++
+			$(".build_shipyard").show()
+			unlocked[".build_shipyard"]=1;
+		}
 
-}
-else if (b=="sailing" && technologies["sailing"]==0){
+	}
+	else if (b=="sailing" && technologies["sailing"]==0){
 
-plankcost=100;
+		plankcost=100;
 
 
-if (craft["plank"]>=plankcost){
+		if (craft["plank"]>=plankcost){
 
-	craft["plank"]-=plankcost;
+			craft["plank"]-=plankcost;
 
 
-	technologies["sailing"]++
-	$(".build_docks").show()
-	unlocked[".build_docks"]=1;
-}
+			technologies["sailing"]++
+			$(".build_docks").show()
+			unlocked[".build_docks"]=1;
+		}
 
-}
-else if (b=="trade" && technologies["trade"]==0){
+	}
+	else if (b=="trade" && technologies["trade"]==0){
 
-foodcost=7000;
-goldcost=45;
-coincost=50;
+		foodcost=7000;
+		goldcost=45;
+		coincost=50;
 
 
-if (items["food"]>=foodcost && items["gold"]>=goldcost && craft["coin"]>=coincost){
+		if (items["food"]>=foodcost && items["gold"]>=goldcost && craft["coin"]>=coincost){
 
-	craft["coin"]-=coincost;
-	items["gold"]-=goldcost;
-	items["food"]-=foodcost;
+			craft["coin"]-=coincost;
+			items["gold"]-=goldcost;
+			items["food"]-=foodcost;
 
-	technologies["trade"]++
-	$(".craft_supplies").show()
-	unlocked[".craft_supplies"]=1;
-	$(".hire_sailor").show()
-	unlocked[".hire_sailor"]=1;
-	$(".tradesea").show()
-	unlocked[".tradesea"]=1;
-}
+			technologies["trade"]++
+			$(".craft_supplies").show()
+			unlocked[".craft_supplies"]=1;
+			$(".hire_sailor").show()
+			unlocked[".hire_sailor"]=1;
+			$(".tradesea").show()
+			unlocked[".tradesea"]=1;
+		}
 
-}
-else if (b=="cache" && technologies["cache"]==0){
+	}
+	else if (b=="cache" && technologies["cache"]==0){
 
-mineralcost=22500;
-steelcost=100;
-plankcost=500;
+		mineralcost=22500;
+		steelcost=100;
+		plankcost=500;
 
 
-if (items["mineral"]>=mineralcost && items["gold"]>=goldcost && craft["plank"]>=plankcost){
+		if (items["mineral"]>=mineralcost && items["gold"]>=goldcost && craft["plank"]>=plankcost){
 
-	craft["plank"]-=plankcost;
-	items["steel"]-=steelcost;
-	items["mineral"]-=mineralcost;
+			craft["plank"]-=plankcost;
+			items["steel"]-=steelcost;
+			items["mineral"]-=mineralcost;
 
-	technologies["cache"]++
-	$(".craft_chest").show()
-	unlocked[".craft_chest"]=1;
+			technologies["cache"]++
+			$(".craft_chest").show()
+			unlocked[".craft_chest"]=1;
 
-}
+		}
 
-}
+	}
 }
 
 function hire(b){
-if (population<maximums["population"]){
+	if (population<maximums["population"]){
 
-if (b=="woodcutter"){
+		if (b=="woodcutter"){
 
-foodcost=50;
+			foodcost=50;
 
-if (items["food"]>=foodcost){
-	items["food"]-=foodcost;
-	people["woodcutter"]+=1
-	population++
-	$(".fire_woodcutter").show()
-        unlocked[".fire_woodcutter"]=1;
-}
+			if (items["food"]>=foodcost){
+				items["food"]-=foodcost;
+				people["woodcutter"]+=1
+				population++
+				$(".fire_woodcutter").show()
+				unlocked[".fire_woodcutter"]=1;
+			}
 
-}
-else if (b=="smelter"){
+		}
+		else if (b=="smelter"){
 
-foodcost=50;
+			foodcost=50;
 
-if (items["food"]>=foodcost){
-	items["food"]-=foodcost;
-	people["smelter"]+=1
-	population++
-	$(".fire_smelter").show()
-        unlocked[".fire_smelter"]=1;
-}
+			if (items["food"]>=foodcost){
+				items["food"]-=foodcost;
+				people["smelter"]+=1
+				population++
+				$(".fire_smelter").show()
+				unlocked[".fire_smelter"]=1;
+			}
 
-}
-else if (b=="farmer"){
+		}
+		else if (b=="farmer"){
 
-woodcost=50;
+			woodcost=50;
 
-if (items["wood"]>=woodcost){
-	items["wood"]-=woodcost;
-	people["farmer"]+=1
-	population++
-	$(".fire_farmer").show()
-        unlocked[".fire_farmer"]=1;
-}
+			if (items["wood"]>=woodcost){
+				items["wood"]-=woodcost;
+				people["farmer"]+=1
+				population++
+				$(".fire_farmer").show()
+				unlocked[".fire_farmer"]=1;
+			}
 
-}
-else if (b=="miner"){
+		}
+		else if (b=="miner"){
 
-foodcost=50;
-pickaxecost=1;
+			foodcost=50;
+			pickaxecost=1;
 
-if (items["food"]>=foodcost && craft["pickaxe"]>=pickaxecost){
-	items["food"]-=foodcost;
-	craft["pickaxe"]-=pickaxecost
-	people["miner"]+=1
-	population++
-	$(".fire_miner").show()
-        unlocked[".fire_miner"]=1;
-}
+			if (items["food"]>=foodcost && craft["pickaxe"]>=pickaxecost){
+				items["food"]-=foodcost;
+				craft["pickaxe"]-=pickaxecost
+				people["miner"]+=1
+				population++
+				$(".fire_miner").show()
+				unlocked[".fire_miner"]=1;
+			}
 
-}
-else if (b=="foundryman"){
+		}
+		else if (b=="foundryman"){
 
-foodcost=200;
-coincost=1;
+			foodcost=200;
+			coincost=1;
 
-if (items["food"]>=foodcost && craft["coin"]>=coincost){
-	items["food"]-=foodcost;
-	craft["coin"]-=coincost
-	people["foundryman"]+=1
-	population++
-	$(".fire_foundryman").show()
-        unlocked[".fire_foundryman"]=1;
-}
+			if (items["food"]>=foodcost && craft["coin"]>=coincost){
+				items["food"]-=foodcost;
+				craft["coin"]-=coincost
+				people["foundryman"]+=1
+				population++
+				$(".fire_foundryman").show()
+				unlocked[".fire_foundryman"]=1;
+			}
 
-}
-else if (b=="sailor"){
+		}
+		else if (b=="sailor"){
 
-foodcost=500;
-coincost=5;
+			foodcost=500;
+			coincost=5;
 
-if (items["food"]>=foodcost && craft["coin"]>=coincost){
-	items["food"]-=foodcost;
-	craft["coin"]-=coincost
-	people["sailor"]+=1
-	population++
-	$(".fire_sailor").show()
-    unlocked[".fire_sailor"]=1;
-}
+			if (items["food"]>=foodcost && craft["coin"]>=coincost){
+				items["food"]-=foodcost;
+				craft["coin"]-=coincost
+				people["sailor"]+=1
+				population++
+				$(".fire_sailor").show()
+				unlocked[".fire_sailor"]=1;
+			}
 
-}
-else if (b=="pikeman"){
+		}
+		else if (b=="pikeman"){
 
-foodcost=50;
-spearcost=1;
+			foodcost=50;
+			spearcost=1;
 
-if (items["food"]>=foodcost && craft["spear"]>=spearcost){
-	items["food"]-=foodcost;
-	craft["spear"]-=spearcost
-	people["pikeman"]+=1
-	population++
-	$(".fire_pikeman").show()
-        unlocked[".fire_pikeman"]=1;
-}
+			if (items["food"]>=foodcost && craft["spear"]>=spearcost){
+				items["food"]-=foodcost;
+				craft["spear"]-=spearcost
+				people["pikeman"]+=1
+				population++
+				$(".fire_pikeman").show()
+				unlocked[".fire_pikeman"]=1;
+			}
 
-}
+		}
 
-else if (b=="swordman"){
+		else if (b=="swordman"){
 
-foodcost=150;
-swordcost=1;
+			foodcost=150;
+			swordcost=1;
 
-if (items["food"]>=foodcost && craft["sword"]>=swordcost){
-	items["food"]-=foodcost;
-	craft["sword"]-=swordcost
-	people["swordman"]+=1
-	population++
-	$(".fire_swordman").show()
-        unlocked[".fire_swordman"]=1;
-}
+			if (items["food"]>=foodcost && craft["sword"]>=swordcost){
+				items["food"]-=foodcost;
+				craft["sword"]-=swordcost
+				people["swordman"]+=1
+				population++
+				$(".fire_swordman").show()
+				unlocked[".fire_swordman"]=1;
+			}
 
-}
-}
-if (b=="knight"){
+		}
+	}
+	if (b=="knight"){
 
-swordmancost=1;
-horsecost=1;
-armorcost=1;
+		swordmancost=1;
+		horsecost=1;
+		armorcost=1;
 
-if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armor"]>=armorcost){
-	craft["armor"]-=armorcost;
-	craft["horse"]-=horsecost;
-	people["swordman"]-=1;
-	people["knight"]+=1;
-	$(".fire_knight").show()
-    unlocked[".fire_knight"]=1;
+		if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armor"]>=armorcost){
+			craft["armor"]-=armorcost;
+			craft["horse"]-=horsecost;
+			people["swordman"]-=1;
+			people["knight"]+=1;
+			$(".fire_knight").show()
+			unlocked[".fire_knight"]=1;
 
-	if (people["swordman"]==0){
-	$(".fire_swordman").hide()
-        unlocked[".fire_swordman"]=0;
+			if (people["swordman"]==0){
+				$(".fire_swordman").hide()
+				unlocked[".fire_swordman"]=0;
+			}
+
+
+		}
+
 	}
 
+	if(ships<maximums["ships"]){
+		if (b=="galley"){
 
-}
-
-}
-
-if(ships<maximums["ships"]){
-if (b=="galley"){
-
-woodcost=20000;
-plankcost=200;
-structurecost=50;
+			woodcost=20000;
+			plankcost=200;
+			structurecost=50;
 
 
-if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
+			if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
 
-	items["wood"]-=woodcost
-	craft["plank"]-=plankcost;
-	craft["structure"]-=structurecost;
+				items["wood"]-=woodcost
+				craft["plank"]-=plankcost;
+				craft["structure"]-=structurecost;
 
-	people["galley"]+=1;
-	ships++
+				people["galley"]+=1;
+				ships++
 
-	$(".salvage_galley").show()
-    unlocked[".salvage_galley"]=1;
+				$(".salvage_galley").show()
+				unlocked[".salvage_galley"]=1;
 
 
 
-}
+			}
 
-}
+		}
 
-}
+	}
 
 
 
 }
 function salvage(b){
-if (people[b]>0){
+	if (people[b]>0){
 
-	people[b]-=1
-	ships--
-	if (people[b]==0){
-	$(".salvage_"+b).hide()
-        unlocked[".salvage_"+b]=0;
-	}
-	if(b=="galley"){
+		people[b]-=1
+		ships--
+		if (people[b]==0){
+			$(".salvage_"+b).hide()
+			unlocked[".salvage_"+b]=0;
+		}
+		if(b=="galley"){
 
-		craft["plank"]+=10+(Math.random()*10);
-		craft["structure"]+=5+(Math.random()*5);
-		items["wood"]+=1000+(Math.random()*5000);
+			craft["plank"]+=10+(Math.random()*10);
+			craft["structure"]+=5+(Math.random()*5);
+			items["wood"]+=1000+(Math.random()*5000);
+		}
 	}
-}
 
 
 }
 function fire(b){
 
 
-if (people[b]>0){
+	if (people[b]>0){
 
-	people[b]-=1
-	population--
-	if (people[b]==0){
-	$(".fire_"+b).hide()
-        unlocked[".fire_"+b]=0;
+		people[b]-=1
+		population--
+		if (people[b]==0){
+			$(".fire_"+b).hide()
+			unlocked[".fire_"+b]=0;
+		}
 	}
-}
 }
 function build(b){
-if (b=="lumbermill"){
+	if (b=="lumbermill"){
 
-woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
+		woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 
-if (items["wood"]>=woodcost){
-	items["wood"]-=woodcost;
-	buildings["lumbermill"]+=1
-	$(".build_mine").show()
-        unlocked[".build_mine"]=1;
-}
+		if (items["wood"]>=woodcost){
+			items["wood"]-=woodcost;
+			buildings["lumbermill"]+=1
+			$(".build_mine").show()
+			unlocked[".build_mine"]=1;
+		}
 
-}
-else if (b=="mine"){
-
-woodcost= Math.pow(1.1,(buildings["mine"]))*2
-mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
-
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost
-	buildings["mine"]+=1
-	$(".build_warehouse").show()
-        unlocked[".build_warehouse"]=1;
-
-
-}
-
-}
-else if (b=="warehouse"){
-
-woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
-mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
-
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost
-
-	maximums["wood"]+=200;
-	maximums["mineral"]+=200;
-	maximums["food"]+=100;
-	maximums["copper"]+=5;
-	maximums["gold"]+=1;
-	maximums["iron"]+=5;
-	maximums["tin"]+=4;
-	maximums["coal"]+=5;
-	maximums["steel"]+=3;
-
-	buildings["warehouse"]+=1
-	$(".build_fountain").show()
-	$(".build_pasture").show()
-        unlocked[".build_fountain"]=1;
-        unlocked[".build_pasture"]=1;
-}
-
-}
-else if (b=="fountain"){
-
-mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
-
-if (items["mineral"]>=mineralcost){
-	items["mineral"]-=mineralcost
-	buildings["fountain"]+=1
-	maximums["water"]+=5;
-}
-
-}
-else if (b=="pasture"){
-
-woodcost= Math.pow(1.4,(buildings["pasture"]))*10
-
-if (items["wood"]>=woodcost){
-	items["wood"]-=woodcost;
-	buildings["pasture"]+=1
-	$(".build_house").show()
-	$(".toggle_pasture").show()
-        unlocked[".build_house"]=1;
-        unlocked[".toggle_pasture"]=1;
-}
-
-}
-else if (b=="house"){
-
-woodcost= Math.pow(1.8,(buildings["house"]))*20
-mineralcost=Math.pow(1.8, (buildings["house"]))*50
-foodcost=Math.pow(1.8, (buildings["house"]))*15
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && items["food"]>=foodcost ){
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost
-	items["food"]-=foodcost
-	buildings["house"]+=1
-	maximums["population"]+=3;
-	$(".build_library").show()
-	$(".population").show()
-	$(".hire_woodcutter").show()
-	$(".hire_smelter").show()
-	$(".hire_farmer").show()
-	$("#jobspane").removeClass("invisible")
-        unlocked[".build_library"]=1;
-        unlocked[".population"]=1;
-        unlocked[".hire_woodcutter"]=1;
-        unlocked[".hire_smelter"]=1;
-        unlocked[".hire_farmer"]=1;
-        unlocked["#jobspane"]=1;
-}
-
-}
-else if (b=="library"){
-
-woodcost= Math.pow(1.9,(buildings["library"]))*300
-mineralcost=Math.pow(1.9, (buildings["library"]))*100
-
-if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-	items["wood"]-=woodcost;
-	items["mineral"]-=mineralcost;
-	buildings["library"]+=1;
-
-	switch(buildings["library"]){
-		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
-		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
-		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-		case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-		case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;break;
 	}
-	
-}
+	else if (b=="mine"){
+
+		woodcost= Math.pow(1.1,(buildings["mine"]))*2
+		mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
+
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost
+			buildings["mine"]+=1
+			$(".build_warehouse").show()
+			unlocked[".build_warehouse"]=1;
+
+
+		}
+
+	}
+	else if (b=="warehouse"){
+
+		woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
+		mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
+
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost
+
+			maximums["wood"]+=200;
+			maximums["mineral"]+=200;
+			maximums["food"]+=100;
+			maximums["copper"]+=5;
+			maximums["gold"]+=1;
+			maximums["iron"]+=5;
+			maximums["tin"]+=4;
+			maximums["coal"]+=5;
+			maximums["steel"]+=3;
+
+			buildings["warehouse"]+=1
+			$(".build_fountain").show()
+			$(".build_pasture").show()
+			unlocked[".build_fountain"]=1;
+			unlocked[".build_pasture"]=1;
+		}
+
+	}
+	else if (b=="fountain"){
+
+		mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
+
+		if (items["mineral"]>=mineralcost){
+			items["mineral"]-=mineralcost
+			buildings["fountain"]+=1
+			maximums["water"]+=5;
+		}
+
+	}
+	else if (b=="pasture"){
+
+		woodcost= Math.pow(1.4,(buildings["pasture"]))*10
+
+		if (items["wood"]>=woodcost){
+			items["wood"]-=woodcost;
+			buildings["pasture"]+=1
+			$(".build_house").show()
+			$(".toggle_pasture").show()
+			unlocked[".build_house"]=1;
+			unlocked[".toggle_pasture"]=1;
+		}
+
+	}
+	else if (b=="house"){
+
+		woodcost= Math.pow(1.8,(buildings["house"]))*20
+		mineralcost=Math.pow(1.8, (buildings["house"]))*50
+		foodcost=Math.pow(1.8, (buildings["house"]))*15
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && items["food"]>=foodcost ){
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost
+			items["food"]-=foodcost
+			buildings["house"]+=1
+			maximums["population"]+=3;
+			$(".build_library").show()
+			$(".population").show()
+			$(".hire_woodcutter").show()
+			$(".hire_smelter").show()
+			$(".hire_farmer").show()
+			$("#jobspane").removeClass("invisible")
+			unlocked[".build_library"]=1;
+			unlocked[".population"]=1;
+			unlocked[".hire_woodcutter"]=1;
+			unlocked[".hire_smelter"]=1;
+			unlocked[".hire_farmer"]=1;
+			unlocked["#jobspane"]=1;
+		}
 
-}
-else if (b=="banner"){
+	}
+	else if (b=="library"){
 
+		woodcost= Math.pow(1.9,(buildings["library"]))*300
+		mineralcost=Math.pow(1.9, (buildings["library"]))*100
 
-woodcost= Math.pow(1.7,(buildings["banner"]))*100;
-coppercost=Math.pow(1.7, (buildings["banner"]))*1;
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost;
+			buildings["library"]+=1;
 
-if (items["copper"]>=coppercost && items["wood"]>=woodcost){
-	items["wood"]-=woodcost;
-	items["copper"]-=coppercost;
-	buildings["banner"]+=1;
-	maximums["morale"]+=1;
+			switch(buildings["library"]){
+				case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
+				case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
+				case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
+				case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
+				case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
+				case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
+				case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
+				case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;break;
+			}
 
-}
+		}
 
-}
-else if (b=="foundry"){
+	}
+	else if (b=="banner"){
 
 
-mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.4, (buildings["foundry"]))*5
+		woodcost= Math.pow(1.7,(buildings["banner"]))*100;
+		coppercost=Math.pow(1.7, (buildings["banner"]))*1;
 
-if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
-	items["mineral"]-=mineralcost;
-	items["copper"]-=coppercost;
-	buildings["foundry"]+=1;
-	$(".toggle_foundry").show()
-        unlocked[".toggle_foundry"]=1
-}
+		if (items["copper"]>=coppercost && items["wood"]>=woodcost){
+			items["wood"]-=woodcost;
+			items["copper"]-=coppercost;
+			buildings["banner"]+=1;
+			maximums["morale"]+=1;
 
-}
-else if (b=="barn"){
+		}
 
-blockcost= Math.pow(1.5,(buildings["barn"]))*5
+	}
+	else if (b=="foundry"){
 
 
-if (craft["block"]>=blockcost){
-	craft["block"]-=blockcost;
+		mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
+		coppercost=Math.pow(1.4, (buildings["foundry"]))*5
 
-	maximums["wood"]+=500;
-	maximums["mineral"]+=500;
+		if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
+			items["mineral"]-=mineralcost;
+			items["copper"]-=coppercost;
+			buildings["foundry"]+=1;
+			$(".toggle_foundry").show()
+			unlocked[".toggle_foundry"]=1
+		}
 
-	buildings["barn"]+=1
+	}
+	else if (b=="barn"){
 
+		blockcost= Math.pow(1.5,(buildings["barn"]))*5
 
-}
-}
-else if (b=="casino"){
 
-blockcost= Math.pow(1.6,(buildings["casino"]))*3
-goldcost= Math.pow(1.6,(buildings["casino"]))*1
+		if (craft["block"]>=blockcost){
+			craft["block"]-=blockcost;
 
-if (craft["block"]>=blockcost && items["gold"]>=goldcost){
-	craft["block"]-=blockcost;
-	items["gold"]-=goldcost
+			maximums["wood"]+=500;
+			maximums["mineral"]+=500;
 
-	maximums["gold"]+=1;
-	maximums["bet"]+=0.5;
+			buildings["barn"]+=1
 
-	$("#casinopane").removeClass("invisible")
-        unlocked["#casinopane"]=1
-	buildings["casino"]+=1
 
+		}
+	}
+	else if (b=="casino"){
 
-}
-}
-else if (b=="market"){
+		blockcost= Math.pow(1.6,(buildings["casino"]))*3
+		goldcost= Math.pow(1.6,(buildings["casino"]))*1
 
-woodcost= Math.pow(1.6,(buildings["market"]))*500
-coincost= Math.pow(1.6,(buildings["market"]))*1
+		if (craft["block"]>=blockcost && items["gold"]>=goldcost){
+			craft["block"]-=blockcost;
+			items["gold"]-=goldcost
 
-if (items["wood"]>=woodcost && craft["coin"]>=coincost){
-	items["wood"]-=woodcost;
-	craft["coin"]-=coincost
+			maximums["gold"]+=1;
+			maximums["bet"]+=0.5;
 
-	bonus["trade"]+=0.05
+			$("#casinopane").removeClass("invisible")
+			unlocked["#casinopane"]=1
+			buildings["casino"]+=1
 
-	$("#marketpane").removeClass("invisible")
-    unlocked["#marketpane"]=1
-	buildings["market"]+=1
 
+		}
+	}
+	else if (b=="market"){
 
-}
-}
-else if (b=="kiln"){
+		woodcost= Math.pow(1.6,(buildings["market"]))*500
+		coincost= Math.pow(1.6,(buildings["market"]))*1
 
-blockcost= Math.pow(1.5,(buildings["kiln"]))*15
-mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
+		if (items["wood"]>=woodcost && craft["coin"]>=coincost){
+			items["wood"]-=woodcost;
+			craft["coin"]-=coincost
 
-if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
-	items["mineral"]-=mineralcost;
-	craft["block"]-=blockcost;
-    $(".toggle_kiln").show()
-	unlocked[".toggle_kiln"]=1
-	buildings["kiln"]+=1
+			bonus["trade"]+=0.05
 
+			$("#marketpane").removeClass("invisible")
+			unlocked["#marketpane"]=1
+			buildings["market"]+=1
 
-}
-}
-else if (b=="statue"){
 
-bronzecost= Math.pow(1.5,(buildings["statue"]))*1
+		}
+	}
+	else if (b=="kiln"){
 
+		blockcost= Math.pow(1.5,(buildings["kiln"]))*15
+		mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
 
-if (craft["bronze"]>=bronzecost){
+		if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
+			items["mineral"]-=mineralcost;
+			craft["block"]-=blockcost;
+			$(".toggle_kiln").show()
+			unlocked[".toggle_kiln"]=1
+			buildings["kiln"]+=1
 
-	craft["bronze"]-=bronzecost;
-	maximums["morale"]+=2;
-	bonus["morale"]+=0.05;
 
+		}
+	}
+	else if (b=="statue"){
 
-	buildings["statue"]+=1
-}
-}
-else if (b=="towncenter"){
+		bronzecost= Math.pow(1.5,(buildings["statue"]))*1
 
-blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
-coincost= Math.pow(1.3,(buildings["towncenter"]))*3
 
-if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
+		if (craft["bronze"]>=bronzecost){
 
-	craft["block"]-=blockcost;
-	craft["structure"]-=structurecost;
-	craft["coin"]-=coincost;
+			craft["bronze"]-=bronzecost;
+			maximums["morale"]+=2;
+			bonus["morale"]+=0.05;
 
-	maximums["wood"]+=1500;
-	maximums["mineral"]+=1000;
-	maximums["food"]+=500;
-	maximums["copper"]+=10;
-	maximums["gold"]+=2;
-	maximums["iron"]+=10;
-	maximums["tin"]+=10;
-	maximums["coal"]+=5;
-	maximums["steel"]+=5;
 
-	maximums["population"]+=5;
+			buildings["statue"]+=1
+		}
+	}
+	else if (b=="towncenter"){
 
-	buildings["towncenter"]+=1
-}
-}
-else if (b=="workbench"){
+		blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
+		structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
+		coincost= Math.pow(1.3,(buildings["towncenter"]))*3
 
-steelcost= Math.pow(1.4,(buildings["workbench"]))*2
+		if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
 
+			craft["block"]-=blockcost;
+			craft["structure"]-=structurecost;
+			craft["coin"]-=coincost;
 
-if (items["steel"]>=steelcost){
+			maximums["wood"]+=1500;
+			maximums["mineral"]+=1000;
+			maximums["food"]+=500;
+			maximums["copper"]+=10;
+			maximums["gold"]+=2;
+			maximums["iron"]+=10;
+			maximums["tin"]+=10;
+			maximums["coal"]+=5;
+			maximums["steel"]+=5;
 
-	items["steel"]-=steelcost;
-	bonus["craft"]+=0.08;
+			maximums["population"]+=5;
 
+			buildings["towncenter"]+=1
+		}
+	}
+	else if (b=="workbench"){
 
-	buildings["workbench"]+=1
-	$(".toggle_workbench").show()
-	unlocked[".toggle_workbench"]=1
-	$(".craftamount").show()
-	unlocked[".craftamount"]=1
-}
-}
-else if (b=="castle"){
+		steelcost= Math.pow(1.4,(buildings["workbench"]))*2
 
-blockcost= Math.pow(1.6,(buildings["castle"]))*50
-goldcost= Math.pow(1.6,(buildings["castle"]))*5
 
-if (craft["block"]>=blockcost && items["gold"]>=goldcost){
+		if (items["steel"]>=steelcost){
 
-	craft["block"]-=blockcost;
-	items["gold"]-=goldcost
+			items["steel"]-=steelcost;
+			bonus["craft"]+=0.08;
 
-	bonus["title"]+=1;
 
+			buildings["workbench"]+=1
+			$(".toggle_workbench").show()
+			unlocked[".toggle_workbench"]=1
+			$(".craftamount").show()
+			unlocked[".craftamount"]=1
+		}
+	}
+	else if (b=="castle"){
 
-	buildings["castle"]+=1
-    $(".leader_sucellus").show()
-    unlocked[".leader_sucellus"]=1;
-    $(".leader_eredal").show()
-     unlocked[".leader_eredal"]=1;
-    $(".leader_khrysos").show()
-     unlocked[".leader_khrysos"]=1;
-    $(".leader_elisia").show()
-     unlocked[".leader_elisia"]=1;
-    $(".leader_xochiquetzal").show()
-     unlocked[".leader_xochiquetzal"]=1;
-    $(".leader_warmuk").show()
-    unlocked[".leader_warmuk"]=1;
-    $(".titles").show()
-    unlocked[".titles"]=1;
-    $("#leaderpane").removeClass("invisible")
-    unlocked["#leaderpane"]=1;
-}
-}
-else if (b=="relic"){
+		blockcost= Math.pow(1.6,(buildings["castle"]))*50
+		goldcost= Math.pow(1.6,(buildings["castle"]))*5
 
-tokencost= Math.pow(1.2,(buildings["relic"]))*20
+		if (craft["block"]>=blockcost && items["gold"]>=goldcost){
 
+			craft["block"]-=blockcost;
+			items["gold"]-=goldcost
 
-if (craft["token"]>=tokencost){
+			bonus["title"]+=1;
 
-	craft["token"]-=tokencost;
 
+			buildings["castle"]+=1
+			$(".leader_sucellus").show()
+			unlocked[".leader_sucellus"]=1;
+			$(".leader_eredal").show()
+			unlocked[".leader_eredal"]=1;
+			$(".leader_khrysos").show()
+			unlocked[".leader_khrysos"]=1;
+			$(".leader_elisia").show()
+			unlocked[".leader_elisia"]=1;
+			$(".leader_xochiquetzal").show()
+			unlocked[".leader_xochiquetzal"]=1;
+			$(".leader_warmuk").show()
+			unlocked[".leader_warmuk"]=1;
+			$(".titles").show()
+			unlocked[".titles"]=1;
+			$("#leaderpane").removeClass("invisible")
+			unlocked["#leaderpane"]=1;
+		}
+	}
+	else if (b=="relic"){
 
+		tokencost= Math.pow(1.2,(buildings["relic"]))*20
 
-	buildings["relic"]+=1
-	bonus["global"]+=0.01
-}
-}
-else if (b=="shipyard"){
 
-woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
-structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
+		if (craft["token"]>=tokencost){
 
+			craft["token"]-=tokencost;
 
 
-if (craft["structure"]>=structurecost && items["wood"]>=woodcost){
 
-	craft["structure"]-=structurecost;
-	items["wood"]-=woodcost;
+			buildings["relic"]+=1
+			bonus["global"]+=0.01
+		}
+	}
+	else if (b=="shipyard"){
 
+		woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
+		structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
 
-	buildings["shipyard"]+=1
-	$(".toggle_shipyard").show()
-	unlocked[".toggle_shipyard"]=1
 
-}
-}
 
-else if (b=="docks"){
-ironcost=Math.pow(1.3,(buildings["docks"]))*100
-plankcost= Math.pow(1.3,(buildings["docks"]))*50
+		if (craft["structure"]>=structurecost && items["wood"]>=woodcost){
 
+			craft["structure"]-=structurecost;
+			items["wood"]-=woodcost;
 
 
-if (craft["plank"]>=plankcost && items["iron"]>=ironcost){
+			buildings["shipyard"]+=1
+			$(".toggle_shipyard").show()
+			unlocked[".toggle_shipyard"]=1
 
-	craft["plank"]-=plankcost;
-	items["iron"]-=ironcost;
+		}
+	}
 
-	maximums["ships"]++
+	else if (b=="docks"){
+		ironcost=Math.pow(1.3,(buildings["docks"]))*100
+		plankcost= Math.pow(1.3,(buildings["docks"]))*50
 
-	buildings["docks"]+=1
 
-	$("#dockpane").removeClass("invisible");
-	unlocked["#dockpane"]=1
-	$(".hire_galley").show()
-	unlocked[".hire_galley"]=1
-	$(".ships").show()
-	unlocked[".ships"]=1
-}
-}
+
+		if (craft["plank"]>=plankcost && items["iron"]>=ironcost){
+
+			craft["plank"]-=plankcost;
+			items["iron"]-=ironcost;
+
+			maximums["ships"]++
+
+			buildings["docks"]+=1
+
+			$("#dockpane").removeClass("invisible");
+			unlocked["#dockpane"]=1
+			$(".hire_galley").show()
+			unlocked[".hire_galley"]=1
+			$(".ships").show()
+			unlocked[".ships"]=1
+		}
+	}
 
 }
 
@@ -1925,7 +1925,7 @@ $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toF
 $(".build_foundry").attr('tooltip3', "Mineral consumption: -0.50/s");
 $(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
 if(technologies["bronze"]>0){
-$(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
+	$(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
 }
 
 blockcost= Math.pow(1.5,(buildings["barn"]))*5
@@ -2123,7 +2123,7 @@ $(".hire_smelter").attr('tooltip2', "Mineral consumption: -0.20/s");
 $(".hire_smelter").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_smelter").attr('tooltip4', "Copper production: +0.01/s");
 if(technologies["metallurgy"]>0){
-$(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
+	$(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
 }
 
 woodcost=50
@@ -2947,14 +2947,14 @@ $(".trade_food").html("Food: " + Math.round(tradefood));
 function refresh(){
 
 
-var production =new Array()
-for(key in items){
-production[key]=0;
-}
-var consumption =new Array()
-for(key in items){
-consumption[key]=0;
-}
+	var production =new Array()
+	for(key in items){
+		production[key]=0;
+	}
+	var consumption =new Array()
+	for(key in items){
+		consumption[key]=0;
+	}
 //buildings
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
@@ -2963,98 +2963,98 @@ production["gold"]+=buildings["casino"]/1000;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {
-consumption["water"]+=buildings["pasture"]/20
-production["food"]=buildings["pasture"]/20;
+	consumption["water"]+=buildings["pasture"]/20
+	production["food"]=buildings["pasture"]/20;
 }
 if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 {
-consumption["mineral"]+=buildings["foundry"]/8
-production["iron"]=buildings["foundry"]/200;
-if(technologies["bronze"]>0){
-production["tin"]=buildings["foundry"]/800;
-}
+	consumption["mineral"]+=buildings["foundry"]/8
+	production["iron"]=buildings["foundry"]/200;
+	if(technologies["bronze"]>0){
+		production["tin"]=buildings["foundry"]/800;
+	}
 }
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 {
-consumption["wood"]+=buildings["kiln"]/2
-production["coal"]=buildings["kiln"]/400;
+	consumption["wood"]+=buildings["kiln"]/2
+	production["coal"]=buildings["kiln"]/400;
 
 }
 if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
 {
-consumption["wood"]+=buildings["shipyard"]*10
-craft["plank"]+=buildings["shipyard"]/80;
+	consumption["wood"]+=buildings["shipyard"]*10
+	craft["plank"]+=buildings["shipyard"]/80;
 }
 //people
 production["food"]+=people["farmer"]/10;
 
 if (items["food"]>=people["woodcutter"]/40)
 {
-consumption["food"]+=people["woodcutter"]/40
-production["wood"]+=people["woodcutter"]/4
+	consumption["food"]+=people["woodcutter"]/40
+	production["wood"]+=people["woodcutter"]/4
 }
 if (items["food"]>=people["miner"]/40)
 {
-consumption["food"]+=people["miner"]/40
-production["mineral"]+=people["miner"]/4
+	consumption["food"]+=people["miner"]/40
+	production["mineral"]+=people["miner"]/4
 }
 
 if (items["food"]>=people["sailor"]/20)
 {
-consumption["food"]+=people["sailor"]/20
+	consumption["food"]+=people["sailor"]/20
 }
 
 if (items["mineral"]>=people["smelter"]/20 && items["food"]>=people["smelter"]/40)
 {
-consumption["mineral"]+=people["smelter"]/20
-consumption["food"]+=people["smelter"]/40
-production["copper"]+=people["smelter"]/400
-if(technologies["metallurgy"]>0){
-production["gold"]+=people["smelter"]/4000
-}
+	consumption["mineral"]+=people["smelter"]/20
+	consumption["food"]+=people["smelter"]/40
+	production["copper"]+=people["smelter"]/400
+	if(technologies["metallurgy"]>0){
+		production["gold"]+=people["smelter"]/4000
+	}
 }
 
 if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman"]/40 && items["coal"]>=people["foundryman"]/200)
 {
-consumption["iron"]+=people["foundryman"]/100
-consumption["coal"]+=people["foundryman"]/200
-consumption["food"]+=people["foundryman"]/40
+	consumption["iron"]+=people["foundryman"]/100
+	consumption["coal"]+=people["foundryman"]/200
+	consumption["food"]+=people["foundryman"]/40
 
-production["steel"]+=people["foundryman"]/400
+	production["steel"]+=people["foundryman"]/400
 
 }
 
 
 if (items["food"]>=people["pikeman"]/40)
 {
-consumption["food"]+=people["pikeman"]/40
-production["morale"]+=people["pikeman"]/200
+	consumption["food"]+=people["pikeman"]/40
+	production["morale"]+=people["pikeman"]/200
 }
 
 if (items["food"]>=people["swordman"]/10)
 {
-consumption["food"]+=people["swordman"]/10
-production["morale"]+=people["swordman"]/400
+	consumption["food"]+=people["swordman"]/10
+	production["morale"]+=people["swordman"]/400
 }
 
 if (items["food"]>=people["knight"]/2)
 {
-consumption["food"]+=people["knight"]/2
-production["morale"]+=people["knight"]/100
+	consumption["food"]+=people["knight"]/2
+	production["morale"]+=people["knight"]/100
 }
 
 
 
 var inv_text="<table>"
 for(key in items){
-if(items[key]!=0){
-inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
-if (bonus[key]>0 || bonus["global"]>0){
-	inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
-}
+	if(items[key]!=0){
+		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
+		if (bonus[key]>0 || bonus["global"]>0){
+			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
+		}
 
-inv_text+="<tr>"
-}
+		inv_text+="<tr>"
+	}
 }
 inv_text+="</table>"
 $(".inventory").html(inv_text);
@@ -3064,10 +3064,10 @@ $(".titles").html("Titles: "+bonus["title"]);
 
 var inv_text="<table>"
 for(key in craft){
-if(craft[key]!=0){
-inv_text+="<tr><td>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
-inv_text+="</td></tr>"
-}
+	if(craft[key]!=0){
+		inv_text+="<tr><td>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
+		inv_text+="</td></tr>"
+	}
 }
 inv_text+="</table>"
 $(".inventory_craft").html(inv_text);
@@ -3090,15 +3090,15 @@ $(".betamount").attr("max",maximums["bet"]);
 $(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
 for(key in items){
 
-var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
+	var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
 
-if((items[key]+result)<maximums[key]){
-items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
-}
-else
-{
-items[key]=maximums[key]
-}
+	if((items[key]+result)<maximums[key]){
+		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
+	}
+	else
+	{
+		items[key]=maximums[key]
+	}
 
 }
 
@@ -3111,25 +3111,25 @@ calculatecost();
 function trade(b){
 
 
-if (craft["coin"]>=1){
-tradewood=600*(bonus["trade"]+1)
-trademineral=500*(bonus["trade"]+1)
-tradefood=400*(bonus["trade"]+1)
+	if (craft["coin"]>=1){
+		tradewood=600*(bonus["trade"]+1)
+		trademineral=500*(bonus["trade"]+1)
+		tradefood=400*(bonus["trade"]+1)
 
-if(b=="wood"){
-	items["wood"]+=Math.round(tradewood)
-	craft["coin"]-=1
-}
-else if(b=="mineral"){
-	items["mineral"]+=Math.round(trademineral)
-	craft["coin"]-=1
-}
-else if(b=="food"){
-	items["food"]+=Math.round(tradefood)
-	craft["coin"]-=1
-}
+		if(b=="wood"){
+			items["wood"]+=Math.round(tradewood)
+			craft["coin"]-=1
+		}
+		else if(b=="mineral"){
+			items["mineral"]+=Math.round(trademineral)
+			craft["coin"]-=1
+		}
+		else if(b=="food"){
+			items["food"]+=Math.round(tradefood)
+			craft["coin"]-=1
+		}
 
-}
+	}
 
 
 
@@ -3156,103 +3156,103 @@ function toggletech(){
 }
 function save(){
 	
-document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+	document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
 
-Cookies.set( 'items', JSON.stringify(items) ,{ expires: 9999 });
-Cookies.set( 'bonus', JSON.stringify(bonus) ,{ expires: 9999 });
-Cookies.set( 'buildings', JSON.stringify(buildings) ,{ expires: 9999 });
-Cookies.set( 'maximums',JSON.stringify( maximums) ,{ expires: 9999 });
-Cookies.set( 'technologies', JSON.stringify(technologies) ,{ expires: 9999 });
-Cookies.set( 'people', JSON.stringify(people) ,{ expires: 9999 });
-Cookies.set( 'craft', JSON.stringify(craft) ,{ expires: 9999 });
-Cookies.set( 'unlocked', JSON.stringify(unlocked) ,{ expires: 9999 });
-Cookies.set('population', population,{ expires: 9999 });
-Cookies.set('trademission', trademission,{ expires: 9999 });
+	Cookies.set( 'items', JSON.stringify(items) ,{ expires: 9999 });
+	Cookies.set( 'bonus', JSON.stringify(bonus) ,{ expires: 9999 });
+	Cookies.set( 'buildings', JSON.stringify(buildings) ,{ expires: 9999 });
+	Cookies.set( 'maximums',JSON.stringify( maximums) ,{ expires: 9999 });
+	Cookies.set( 'technologies', JSON.stringify(technologies) ,{ expires: 9999 });
+	Cookies.set( 'people', JSON.stringify(people) ,{ expires: 9999 });
+	Cookies.set( 'craft', JSON.stringify(craft) ,{ expires: 9999 });
+	Cookies.set( 'unlocked', JSON.stringify(unlocked) ,{ expires: 9999 });
+	Cookies.set('population', population,{ expires: 9999 });
+	Cookies.set('trademission', trademission,{ expires: 9999 });
 }
 
 function load(){
-    
-if (typeof Cookies.get( 'items') != 'undefined'){
-items = update(items,JSON.parse(Cookies.get( 'items')));
-bonus = update(bonus,JSON.parse(Cookies.get( 'bonus')));
-buildings = update(buildings,JSON.parse(Cookies.get( 'buildings')));
-maximums = update(maximums,JSON.parse(Cookies.get( 'maximums')));
-technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
-people = update(people,JSON.parse(Cookies.get( 'people')));
-craft = update(craft,JSON.parse(Cookies.get( 'craft')));
-unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
-population = Cookies.get('population');
-population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["pikeman"]+people["swordman"]+people["knight"]
+	if (typeof Cookies.get( 'items') != 'undefined'){
+		items = update(items,JSON.parse(Cookies.get( 'items')));
+		bonus = update(bonus,JSON.parse(Cookies.get( 'bonus')));
+		buildings = update(buildings,JSON.parse(Cookies.get( 'buildings')));
+		maximums = update(maximums,JSON.parse(Cookies.get( 'maximums')));
+		technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
+		people = update(people,JSON.parse(Cookies.get( 'people')));
+		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
+		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
-
+		population = Cookies.get('population');
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["pikeman"]+people["swordman"]+people["knight"]
 
 
-ships=people["galley"]
-for(key in unlocked){
-    if (unlocked[key]==1)
-    {
-    $(key).show().removeClass("invisible")
-    }
-}
-	switch(buildings["library"]){
-		case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;
-		case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
-		case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-		case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-		case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-		case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-	}
 
-	if(buildings["library"]>=4){
-	$(".tech_currency").show();unlocked[".tech_currency"]=1;
-	$(".tech_exchange").show();unlocked[".tech_exchange"]=1;
-	$(".tech_coin").show();unlocked[".tech_coin"]=1;
-	}
 
-	if(buildings["library"]>=5){
-		$(".tech_bronze").show();unlocked[".tech_bronze"]=1;
-		$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
-	}
+		ships=people["galley"]
+		for(key in unlocked){
+			if (unlocked[key]==1)
+			{
+				$(key).show().removeClass("invisible")
+			}
+		}
+		switch(buildings["library"]){
+			case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;
+			case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
+			case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
+			case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
+			case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
+			case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
+		}
 
-	if(buildings["library"]>=6){
-		$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;
-		$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;
-		$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;
-	}
+		if(buildings["library"]>=4){
+			$(".tech_currency").show();unlocked[".tech_currency"]=1;
+			$(".tech_exchange").show();unlocked[".tech_exchange"]=1;
+			$(".tech_coin").show();unlocked[".tech_coin"]=1;
+		}
 
-	if(buildings["library"]>=7){
-	 $(".tech_leadership").show();unlocked[".tech_leadership"]=1;
-	 $(".tech_armament").show();unlocked[".tech_armament"]=1;
-	 $(".tech_gambling").show();unlocked[".tech_gambling"]=1;
-	 $(".tech_redeem").show();unlocked[".tech_redeem"]=1;
-	}
-	if(buildings["library"]>=8){
-	 $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
-	 $(".tech_sailing").show();unlocked[".tech_sailing"]=1;
-	 $(".tech_trade").show();unlocked[".tech_trade"]=1;
-	 $(".tech_cache").show();unlocked[".tech_cache"]=1;
+		if(buildings["library"]>=5){
+			$(".tech_bronze").show();unlocked[".tech_bronze"]=1;
+			$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
+		}
 
-	}
+		if(buildings["library"]>=6){
+			$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;
+			$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;
+			$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;
+		}
+
+		if(buildings["library"]>=7){
+			$(".tech_leadership").show();unlocked[".tech_leadership"]=1;
+			$(".tech_armament").show();unlocked[".tech_armament"]=1;
+			$(".tech_gambling").show();unlocked[".tech_gambling"]=1;
+			$(".tech_redeem").show();unlocked[".tech_redeem"]=1;
+		}
+		if(buildings["library"]>=8){
+			$(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
+			$(".tech_sailing").show();unlocked[".tech_sailing"]=1;
+			$(".tech_trade").show();unlocked[".tech_trade"]=1;
+			$(".tech_cache").show();unlocked[".tech_cache"]=1;
+
+		}
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)
 	{
-	maximums["morale"]=maximums["moral"]
-    maximums["moral"]=0
-	items["morale"]=items["moral"]
-	items["moral"]=0;
+		maximums["morale"]=maximums["moral"]
+		maximums["moral"]=0
+		items["morale"]=items["moral"]
+		items["moral"]=0;
 	}
 
 	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
 
 	if(technologies["bronze"]==1){
-	$(".build_statue").show()
-    unlocked[".build_statue"]=1;
+		$(".build_statue").show()
+		unlocked[".build_statue"]=1;
 	}
 
 	if(buildings["workbench"]>0){
-	$(".craftamount").show()
-	unlocked[".craftamount"]=1
+		$(".craftamount").show()
+		unlocked[".craftamount"]=1
 	}
 
 	if(craft["pickaxe"]<0){
@@ -3265,23 +3265,32 @@ for(key in unlocked){
 
 
 
-save()
 
-trademission = update(trademission,JSON.parse(Cookies.get( 'trademission')));
-if(trademission["time"]>0){
-	tickinterval = setInterval(function(){ ticktrade()}, 1000);
-	$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
-	$(".tradego").hide()
-}
+	if (typeof Cookies.get( 'trademission') != 'undefined'){
+		trademission = update(trademission,JSON.parse(Cookies.get('trademission')));
+		if(trademission["time"]>0){
+			tickinterval = setInterval(function(){ ticktrade()}, 1000);
+			$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
+			$(".tradego").hide()
+		}
 
-}
+	}
+
+	save()
+	
+	} 
 } 
+
+
+
+
+
 
 function update(array1, array2){
 
-for (key in array2){
-array1[key]=array2[key]
-}
+	for (key in array2){
+		array1[key]=array2[key]
+	}
 
-return array1
+	return array1
 }

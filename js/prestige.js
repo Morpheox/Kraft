@@ -228,12 +228,12 @@ for(key in unlocked){
 	$("#legacypane").removeClass("invisible")
 	unlocked["#legacypane"]=1;
 
-	unlocked["legacy_motivation"]=1;
-	unlocked["legacy_depot"]=1;
-	unlocked["legacy_vengeance"]=1;
-	unlocked["legacy_aegis"]=1;
-	unlocked["legacy_bargain"]=1;
-	unlocked["legacy_mastery"]=1;
+	unlocked[".legacy_motivation"]=1;
+	unlocked[".legacy_depot"]=1;
+	unlocked[".legacy_vengeance"]=1;
+	unlocked[".legacy_aegis"]=1;
+	unlocked[".legacy_bargain"]=1;
+	unlocked[".legacy_mastery"]=1;
 
 	$(".countdown").show();
 	unlocked[".countdown"]=1;

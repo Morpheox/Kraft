@@ -486,7 +486,7 @@ function fight(){
 		}
 		else if(hp2<1){
 
-			combatlog+="Your win the combat!<br><br>";
+			combatlog+="You win the combat!<br><br>";
 			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
 			$(".encounter").hide()
 			craft["coin"]+=enemy["reward"];

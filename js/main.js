@@ -385,22 +385,22 @@ function expedition(){
 			if(enemytipo<25){
 				enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
 				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
-				rew+=(Math.random()*enemy["peasant"]*0.05)+(enemy["peasant"]*0.01)
+				rew+=(Math.random()*enemy["peasant"]*0.05)+(enemy["peasant"]*0.015)
 			}
 			if(enemytipo>20 && enemytipo<50){
 				enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
 				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
-				rew+=(Math.random()*enemy["bandit"]*0.10)+(enemy["bandit"]*0.02)
+				rew+=(Math.random()*enemy["bandit"]*0.10)+(enemy["bandit"]*0.03)
 			}
 			if(enemytipo>40 && enemytipo<120){
 				enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
 				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
-				rew+=(Math.random()*enemy["mercenary"]*0.25)+(enemy["mercenary"]*0.05)
+				rew+=(Math.random()*enemy["mercenary"]*0.25)+(enemy["mercenary"]*0.07)
 			}
 			if(enemytipo>110){
 				enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
-				rew+=(Math.random()*enemy["soldier"]*0.50)+(enemy["soldier"]*0.10)
+				rew+=(Math.random()*enemy["soldier"]*0.50)+(enemy["soldier"]*0.15)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"

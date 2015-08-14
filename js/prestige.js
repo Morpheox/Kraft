@@ -214,7 +214,11 @@ craft["supplies"]=0
 craft["lock"]=0
 population=0;
 ships=0;
+for(key in technologies){
 
+$(".tech_"+key).removeClass("researched");
+
+}
 for(key in unlocked){
 
 	unlocked[key]=0;

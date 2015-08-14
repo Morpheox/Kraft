@@ -13,6 +13,7 @@ items["coal"]=0;
 items["tin"]=0;
 items["steel"]=0;
 items["morale"]=0;
+items["knowledge"]=0;
 
 var bonus =new Array()
 for(key in items){

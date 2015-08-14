@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Kraft v0.08</title>
+	<title>Kraft v0.1 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -22,8 +22,8 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Kraft v0.08 Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
-	<div class="population"></div><div class="titles"></div><div class="ships"></div>
+    <div class="infokraft">Kraft v0.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
         
 	<ul class="nav nav-tabs">
@@ -36,6 +36,7 @@
 		<li id="marketpane"><a data-toggle="tab" href="#market">Market</a></li>
 		<li id="leaderpane"><a data-toggle="tab" href="#leader">Leaders</a></li>
 		<li id="dockpane"><a data-toggle="tab" href="#dock">Dock</a></li>
+		<li id="legacypane"><a data-toggle="tab" href="#legacy">Legacy</a></li>
 	</ul>
 	<br><br>
 
@@ -183,15 +184,59 @@
 	<div class="docklog">
 
 	</div>
+	<button type="button" class="toggletech" data-toggle="modal" data-target="#myModal">Explore new continent</button>
+	</div>
+	<div id="legacy" class="legacy tab-pane fade">
+	Use your legacy wisely<br>
+	<div class="block legacy_motivation"></div><br>
+	<div class="block legacy_depot"></div><br>
+	<div class="block legacy_vengeance"></div><br>
+	<div class="block legacy_aegis"></div><br>
+	<div class="block legacy_bargain"></div><br>
+	<div class="block legacy_mastery"></div><br>
+
+
 	</div>
 	</div>
+
+
+
+	  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title messagetitle">Exploring new lands</h4>
+        </div>
+        <div class="modal-body messagetext">
+        Exploring new lands its not an easy task<br>
+        You will embark on a journey with no turn back, you will never again see your current civilization in this land.<br><br>
+        You will only carry the legacy that this civilization once gave you.<br>
+        If your are bold enough to explore a new continent, we will try to fill your ships with as muchs chests as we have to help you in your new journey, but it will take some time<br>
+        until you get where you are now here, think wisely.<br><br>
+        ¿Are you sure you want to do this?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetgame()">GO!</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
 </body>
 <script>
 	setInterval(function(){ refresh()}, 250);
 	setInterval(function(){ save()}, 20000);
 
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #dockpane, #leaderpane, #legacypane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea").hide()
+
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
@@ -279,6 +324,14 @@
     $(".leader_elisia").click(function() {lead("elisia")});
     $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
     $(".leader_warmuk").click(function() {lead("warmuk")});
+
+	$(".legacy_motivation").click(function() {lega("motivation")});
+	$(".legacy_depot").click(function() {lega("depot")});
+	$(".legacy_vengeance").click(function() {lega("vengeance")});
+	$(".legacy_aegis").click(function() {lega("aegis")});
+	$(".legacy_bargain").click(function() {lega("bargain")});
+	$(".legacy_mastery").click(function() {lega("mastery")});
+
 
 
    	for(gives in traderatio){

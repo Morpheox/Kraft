@@ -24,6 +24,8 @@ bonus["craft"]=0;
 bonus["title"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
+bonus["storage"]=0;
+
 var buildings=new Array();
 
 buildings["lumbermill"]=0;
@@ -334,7 +336,7 @@ function expedition(){
 			}
 
 			if(Math.random()>0.99 && technologies["cache"]==1){
-				rnd=(Math.random()*power)/1000;
+				rnd=(Math.random()*power)/800;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 				craft["chest"]+=rnd;
 				maximums["wood"]+=50*(rnd);
@@ -2891,6 +2893,23 @@ $(".leader_warmuk").attr('tooltip5', "'If you run away, you will die tired'");
 
 //Others
 
+if(prestige["number"]>0){
+	tooltipsprestige("motivation");
+	tooltipsprestige("depot");
+	tooltipsprestige("vengeance");
+	tooltipsprestige("aegis");
+	tooltipsprestige("bargain");
+	tooltipsprestige("mastery");
+
+	$(".legacynum").html("Legacy: "+prestige["legacy"])
+	$(".treasurenum").html("Treasures: "+prestige["treasure"])
+}
+
+
+
+
+
+
 power=0
 power+=people["pikeman"]*5
 power+=people["swordman"]*10
@@ -3048,7 +3067,7 @@ if (items["food"]>=people["knight"]/2)
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){
-		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key])+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
+		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key]*(bonus["storage"]+1))+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
 		if (bonus[key]>0 || bonus["global"]>0){
 			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
 		}
@@ -3092,12 +3111,12 @@ for(key in items){
 
 	var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
 
-	if((items[key]+result)<maximums[key]){
+	if((items[key]+result)<(maximums[key]*(bonus["storage"]+1))){
 		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
 	}
 	else
 	{
-		items[key]=maximums[key]
+		items[key]=(maximums[key]*(bonus["storage"]+1))
 	}
 
 }
@@ -3276,7 +3295,10 @@ function load(){
 		}
 
 	}
+	if (typeof Cookies.get( 'prestige') != 'undefined'){
+		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
 
+	}
 	save()
 
 	} 

@@ -1474,7 +1474,7 @@ function build(b){
 	}
 	else if (b=="fountain"){
 
-		mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
+		mineralcost=Math.pow(1.35, (buildings["fountain"]))*6
 
 		if (items["mineral"]>=mineralcost){
 			items["mineral"]-=mineralcost
@@ -1843,7 +1843,7 @@ $(".build_warehouse").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"])
 $(".build_warehouse").attr('tooltip3', "Increments storage space for basic materials");
 
 
-mineralcost=Math.pow(1.4, (buildings["fountain"]))*6
+mineralcost=Math.pow(1.35, (buildings["fountain"]))*6
 if(items["mineral"]<mineralcost){
 	$(".build_fountain").addClass("unavailable")
 }

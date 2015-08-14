@@ -89,6 +89,8 @@ switch(b){
 
 function resetgame(){
 
+$(".nav-tabs a[href='#build']").tab("show");
+
 prestige["number"]++
 prestige["treasure"]+=Math.floor(craft["chest"]);
 

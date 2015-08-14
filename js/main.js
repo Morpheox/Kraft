@@ -1485,7 +1485,7 @@ function build(b){
 	}
 	else if (b=="pasture"){
 
-		woodcost= Math.pow(1.4,(buildings["pasture"]))*10
+		woodcost= Math.pow(1.35,(buildings["pasture"]))*10
 
 		if (items["wood"]>=woodcost){
 			items["wood"]-=woodcost;
@@ -1856,7 +1856,7 @@ $(".build_fountain").attr('tooltip',"Minerals: "+ parseFloat(items["mineral"]).t
 $(".build_fountain").attr('tooltip2', "Water production: +0.40/s");
 $(".build_fountain").attr('tooltip3', "Water storage: 5");
 
-woodcost= Math.pow(1.4,(buildings["pasture"]))*10
+woodcost= Math.pow(1.35,(buildings["pasture"]))*10
 if(items["wood"]<woodcost){
 	$(".build_pasture").addClass("unavailable")
 }

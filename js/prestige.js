@@ -14,7 +14,7 @@ prestige["mastery"]=0;
 function lega(b){
 
 if(prestige[b]==0){
-	legacycost=Math.pow(10,(prestige["upgrades"]))*1
+	legacycost=Math.pow(5,(prestige["upgrades"]))*1
 }
 else{
 	legacycost=Math.ceil(Math.pow(1.2,(prestige[b])))
@@ -58,7 +58,7 @@ else if(b=="bargain"){
 }
 function tooltipsprestige(b){
 if(prestige[b]==0){
-	legacycost=Math.pow(10,(prestige["upgrades"]))*1
+	legacycost=Math.pow(5,(prestige["upgrades"]))*1
 }
 else{
 	legacycost=Math.ceil(Math.pow(1.2,(prestige[b])))

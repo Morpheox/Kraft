@@ -16,7 +16,9 @@ padding:0;
     margin-top:10px;
     display: inline-block;
     font-size:15px;
-
+-webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none;
   }
   .block[style*="display: none;"]{
     padding:0px;

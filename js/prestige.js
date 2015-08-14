@@ -99,7 +99,7 @@ var legacyadd=0;
 legacyadd+=maximums["population"]/10;
 legacyadd+=maximums["ships"];
 legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+bonus["title"]
-legacyadd+=Math.pow(1.4,(buildings["library"]))*1
+legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
 
 prestige["legacy"]+=Math.floor(legacyadd);
 

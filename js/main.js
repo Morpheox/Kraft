@@ -3297,8 +3297,9 @@ function load(){
 	}
 	if (typeof Cookies.get( 'prestige') != 'undefined'){
 		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
-
 	}
+
+
 	save()
 
 	} 

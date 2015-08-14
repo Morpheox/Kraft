@@ -90,7 +90,7 @@ switch(b){
 function resetgame(){
 
 prestige["number"]++
-prestige["treasure"]+=craft["chest"];
+prestige["treasure"]+=Math.floor(craft["chest"]);
 
 var legacyadd=0;
 

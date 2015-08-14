@@ -125,10 +125,9 @@ bonus["storage"]=0;
 
 for(key in items){
 	bonus[key]=0;
-}
-for(key in items){
 	maximums[key]=0;
 }
+
 buildings["lumbermill"]=0;
 buildings["mine"]=0;
 buildings["warehouse"]=0;

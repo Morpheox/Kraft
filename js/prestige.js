@@ -120,6 +120,11 @@ bonus["title"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
 bonus["storage"]=0;
+
+for(key in items){
+	bonus[key]=0;
+}
+
 buildings["lumbermill"]=0;
 buildings["mine"]=0;
 buildings["warehouse"]=0;

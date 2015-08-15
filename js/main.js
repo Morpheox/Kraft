@@ -2769,7 +2769,7 @@ $(".tech_specialization").attr('tooltip4', "New technologies will be unlocked ba
 
 mineralcost=30000;
 knowledgecost=50;
-if(items["knowledge"]<knowledgecost && items["mineral"]<mineralcost){
+if(items["knowledge"]<knowledgecost || items["mineral"]<mineralcost){
 	$(".tech_geology").addClass("unavailable")
 }
 else

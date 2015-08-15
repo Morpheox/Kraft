@@ -1532,6 +1532,7 @@ function build(b){
 			items["wood"]-=woodcost;
 			items["mineral"]-=mineralcost;
 			buildings["library"]+=1;
+			maximums["knowledge"]+=100;
 
 			switch(buildings["library"]){
 				case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
@@ -1897,8 +1898,14 @@ else
 $(".build_library").html("Library ("+buildings["library"]+")");
 $(".build_library").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_library").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+if(buildings["library"]<8){
 $(".build_library").attr('tooltip3', 'Unlock powerful technologies each level');
-
+}
+else
+{
+$(".build_library").attr('tooltip4', 'Knowledge production +0.1/s');
+$(".build_library").attr('tooltip4', 'Knowledge maximum + 100;');
+}
 woodcost= Math.pow(1.7,(buildings["banner"]))*100;
 coppercost=Math.pow(1.7, (buildings["banner"]))*1;
 if(items["wood"]<woodcost || items["copper"]<coppercost){
@@ -3005,6 +3012,10 @@ if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
 	consumption["wood"]+=buildings["shipyard"]*10
 	craft["plank"]+=buildings["shipyard"]/80;
 }
+
+if(buildings["library"]>=8){
+	items["knowledge"]+=buildings["library"]/400;
+}
 //people
 production["food"]+=people["farmer"]/10;
 
@@ -3043,6 +3054,7 @@ if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman
 	production["steel"]+=people["foundryman"]/400
 
 }
+
 
 
 if (items["food"]>=people["pikeman"]/40)

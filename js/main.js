@@ -2776,8 +2776,8 @@ else
 {
 	$(".tech_geology").removeClass("unavailable")
 }
-$(".tech_geology").addClass((technologies["specialization"] >0 ? "researched" : ""))
-$(".tech_geology").html("Specialization" + (technologies["specialization"] >0 ? " (researched)" : ""));
+$(".tech_geology").addClass((technologies["geology"] >0 ? "researched" : ""))
+$(".tech_geology").html("Geology" + (technologies["geology"] >0 ? " (researched)" : ""));
 $(".tech_geology").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_geology").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_geology").attr('tooltip4', "Mineral production +20%");
@@ -3417,7 +3417,7 @@ function load(){
 
 
 	researchunlock()
-	
+
 	save()
 
 	} 

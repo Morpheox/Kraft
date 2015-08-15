@@ -80,7 +80,7 @@
 		<div id="technologies" class="technologies tab-pane fade">
 			<div class="block research_economy"></div>
 			<div class="block research_science"></div>
-			<div class="block research_military"></div>
+			<div class="block research_military"></div><br>
 		<button class="toggletech" onclick="toggletech()">Hide researched technologies</button><br><br>
 			<div class="block tech_coppertools"></div>
 			<div class="block tech_pickaxe"></div><br>
@@ -347,7 +347,10 @@
    		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
    	}
 
-
+   	$(".research_military").research("military")
+   	$(".research_economy").research("economy")
+   	$(".research_science").research("science")
+   	
          load();
 
 

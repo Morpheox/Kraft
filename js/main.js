@@ -160,6 +160,7 @@ function develop(b){
 	bonus[b]+=items["knowledge"]
 	items["knowledge"]=0;
 }
+
 function toggle(t){
 
 	if (buildstatus[t]==0){

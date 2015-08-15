@@ -349,9 +349,9 @@
    		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
    	}
 
-   	$(".research_military").research("military")
-   	$(".research_economy").research("economy")
-   	$(".research_science").research("science")
+   	$(".research_military").click(function() {.research("military")});
+   	$(".research_economy").click(function() {.research("economy")});
+   	$(".research_science").click(function() {.research("science")});
 
          load();
 

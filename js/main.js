@@ -1903,7 +1903,7 @@ $(".build_library").attr('tooltip3', 'Unlock powerful technologies each level');
 }
 else
 {
-$(".build_library").attr('tooltip4', 'Knowledge production +0.10/s');
+$(".build_library").attr('tooltip4', 'Knowledge production +0.01/s');
 $(".build_library").attr('tooltip5', 'Knowledge maximum + 100');
 }
 woodcost= Math.pow(1.7,(buildings["banner"]))*100;

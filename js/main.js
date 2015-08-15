@@ -538,7 +538,7 @@ function fight(){
 				rnd=(Math.random()*((power/2)+(hp/15)))/300;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 				craft["chest"]+=rnd;
-				combatlog+="You also took "+ intToString(rnd)+" chests that they were carrying";
+				combatlog+="You took "+ intToString(rnd)+" chests that they were carrying<br>";
 				maximums["wood"]+=50*(rnd);
 				maximums["mineral"]+=25*(rnd);
 				maximums["food"]+=10*(rnd);

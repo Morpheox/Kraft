@@ -258,26 +258,7 @@ function lead(b){
 
 
 }
-function research(){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 function expedition(){
 	power=0
 	power+=people["pikeman"]*5

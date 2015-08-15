@@ -3276,6 +3276,7 @@ function load(){
 		items["moral"]=0;
 	}
 
+	maximums["knowledge"]=buildings["library"]*100;
 	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
 
 	if(technologies["bronze"]==1){

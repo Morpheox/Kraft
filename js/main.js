@@ -1245,7 +1245,7 @@ function research(b){
 	else if (b=="geology" && technologies["geology"]==0){
 
 		mineralcost=30000;
-		knoledgecost=50;
+		knowledgecost=50;
 		
 
 
@@ -2768,7 +2768,7 @@ $(".tech_specialization").attr('tooltip4', "New technologies will be unlocked ba
 
 
 mineralcost=30000;
-knoledgecost=50;
+knowledgecost=50;
 if(items["knowledge"]<knowledgecost && items["mineral"]<mineralcost){
 	$(".tech_geology").addClass("unavailable")
 }

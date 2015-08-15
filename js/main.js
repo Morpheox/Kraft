@@ -2843,7 +2843,7 @@ $(".tech_funding").html("Funding" + (technologies["funding"] >0 ? " (researched)
 $(".tech_funding").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_funding").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_funding").attr('tooltip4', "Gold production +20%");
-$(".tech_funding").attr('tooltip4', "Gold storage +2");
+$(".tech_funding").attr('tooltip5', "Gold storage +2");
 
 moralecost=35;
 knowledgecost=50;
@@ -2859,7 +2859,7 @@ $(".tech_tactics").html("Tactics" + (technologies["tactics"] >0 ? " (researched)
 $(".tech_tactics").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_tactics").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_tactics").attr('tooltip4', "Troops attack +20%");
-$(".tech_tactics").attr('tooltip4', "Morale maximum +2");
+$(".tech_tactics").attr('tooltip5', "Morale maximum +2");
 //Research
 
 

@@ -545,7 +545,7 @@ function fight(){
 				maximums["coal"]+=0.15*(rnd);
 				maximums["steel"]+=0.10*(rnd);
 			}
-			if(Math.random()>0.90 && technologies["cache"]==1){
+			if(Math.random()>0.80 && technologies["cache"]==1){
 				rnd=Math.floor(power/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;

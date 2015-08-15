@@ -116,6 +116,7 @@
 			<div class="block tech_geology"></div>
 			<div class="block tech_funding"></div>
 			<div class="block tech_tactics"></div>
+			<div class="block tech_healing"></div>
 		</div>
 			<br><br><br><br>
 		</div>
@@ -139,6 +140,7 @@
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
 		<div class="block hire_swordman"></div><button class="fire fire_swordman" onclick='fire("swordman")'>Fire 1</button><br>
 		<div class="block hire_knight"></div><button class="fire fire_knight" onclick='fire("knight")'>Fire 1</button><br>
+		<div class="block hire_medic"></div><button class="fire fire_medic" onclick='fire("medic")'>Fire 1</button><br>
 		<div class="block expedition"></div><br>
 		<div class="encounter"></div><br>
 		<div class="expeditionresult"></div><br>
@@ -280,6 +282,7 @@
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_knight").click(function() {hire("knight")});
+	$(".hire_medic").click(function() {hire("medic")});
 
 	$(".hire_galley").click(function() {hire("galley")});
 
@@ -315,6 +318,7 @@
 	$(".tech_geology").click(function() {research("geology")});
 	$(".tech_funding").click(function() {research("funding")});
 	$(".tech_tactics").click(function() {research("tactics")});
+	$(".tech_healing").click(function() {research("healing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

@@ -109,6 +109,7 @@ technologies["specialization"]=0
 technologies["geology"]=0
 technologies["funding"]=0
 technologies["tactics"]=0
+technologies["healing"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -120,6 +121,7 @@ people["sailor"]=0
 people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
+people["medic"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -269,6 +271,7 @@ function expedition(){
 	power+=people["pikeman"]*5
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
+	power+=people["medic"]*1
 
 	foodcost=power*2
 	watercost=power
@@ -384,10 +387,14 @@ function expedition(){
 			hp+=people["pikeman"]*30
 			hp+=people["swordman"]*50
 			hp+=people["knight"]*200
+			hp+=people["medic"]*50
 
 			hp=hp*(bonus["hp"]+1)
 
-			power=(power/2)+(hp/15)
+			healing=0
+			healing+=people["medic"]*10
+
+			power=(power/2)+(hp/15)+(healing/2)
 
 			enemy["reward"]=0;
 			enemy["peasant"]=0;
@@ -441,6 +448,7 @@ function fight(){
 	power+=people["pikeman"]*5
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
+	power+=people["medic"]*10
 
 	power=power*(bonus["power"]+1)
 
@@ -448,6 +456,7 @@ function fight(){
 	hp+=people["pikeman"]*30
 	hp+=people["swordman"]*50
 	hp+=people["knight"]*200
+	hp+=people["medic"]*50
 
 	hp=hp*(bonus["hp"]+1)
 
@@ -463,6 +472,9 @@ function fight(){
 	hp2+=enemy["mercenary"]*40
 	hp2+=enemy["soldier"]*100
 
+	healing=0
+	healing+=people["medic"]*10
+
 	combatlog="The battle starts:<br>"
 	var ronda=0;
 	for(i=0;i<=50;i++){
@@ -471,6 +483,11 @@ function fight(){
 		combatlog+="Round "+(i+1)+"<br>"
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+		if(healing>0){
+			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
+			hp+=healed;
+			combatlog+="Your medics restore "+intToString(healing)+" hp<br>"
+		}
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
@@ -1309,6 +1326,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="healing" && technologies["healing"]==0){
+
+		coincost=100;
+		knowledgecost=200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+
+			craft["coin"]-=coincost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["hp"]+=0.05
+
+			technologies["healing"]++
+
+			$(".hire_medic").show()
+			unlocked[".hire_medic"]=1;
+		}
+
+	}
 
 }
 
@@ -1427,6 +1466,21 @@ function hire(b){
 				population++
 				$(".fire_swordman").show()
 				unlocked[".fire_swordman"]=1;
+			}
+
+		}
+		else if (b=="medic"){
+
+			foodcost=1000;
+			coincost=20;
+
+			if (items["food"]>=foodcost && craft["coin"]>=coincost){
+				items["food"]-=foodcost;
+				craft["coin"]-=coincost
+				people["medic"]+=1
+				population++
+				$(".fire_medic").show()
+				unlocked[".fire_medic"]=1;
 			}
 
 		}
@@ -2347,6 +2401,20 @@ $(".hire_knight").attr('tooltip4', "Food consumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 
+foodcost=1000;
+coincost=20;
+if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
+	$(".hire_medic").addClass("unavailable")
+}
+else
+{
+	$(".hire_medic").removeClass("unavailable")
+}
+$(".hire_medic").html("Medic ("+people["medic"]+")");
+$(".hire_medic").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".hire_medic").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_medic").attr('tooltip3', "Food consumption: -0.40/s");
+$(".hire_medic").attr('tooltip5', 'Attack: 1 Hp:50 Healing: 10');
 
 //Ships
 woodcost=20000;
@@ -2860,6 +2928,23 @@ $(".tech_tactics").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFix
 $(".tech_tactics").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_tactics").attr('tooltip4', "Troops attack +20%");
 $(".tech_tactics").attr('tooltip5', "Morale maximum +2");
+
+coincost=100;
+knowledgecost=200;
+
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_healing").addClass("unavailable")
+}
+else
+{
+	$(".tech_healing").removeClass("unavailable")
+}
+$(".tech_healing").addClass((technologies["healing"] >0 ? "researched" : ""))
+$(".tech_healing").html("Healing" + (technologies["healing"] >0 ? " (researched)" : ""));
+$(".tech_healing").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_healing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_healing").attr('tooltip4', "Troops hp +5%");
+$(".tech_healing").attr('tooltip5', "Allows hiring medics to aid during combat.");
 //Research
 
 
@@ -3253,7 +3338,7 @@ if (items["food"]>=people["knight"]/2)
 	production["morale"]+=people["knight"]/100
 }
 
-
+consumption["food"]+=people["medic"]/10
 
 var inv_text="<table>"
 for(key in items){

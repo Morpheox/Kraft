@@ -17,6 +17,9 @@ function researchunlock(){
 		unlocked[".tech_funding"]=1;
 	}
 
-
+	if(bonus["military"]>=500 && unlocked[".tech_healing"]==0){
+		$(".tech_healing").show()
+		unlocked[".tech_healing"]=1;
+	}
 
 }

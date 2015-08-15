@@ -356,7 +356,7 @@ function expedition(){
 			}
 
 			if(Math.random()>0.99 && technologies["cache"]==1){
-				rnd=(Math.random()*power)/800;
+				rnd=(Math.random()*power)/500;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 				craft["chest"]+=rnd;
 				maximums["wood"]+=50*(rnd);
@@ -531,7 +531,7 @@ function fight(){
 			$(".encounter").hide()
 			craft["coin"]+=enemy["reward"];
 			if(Math.random()>0.80 && technologies["cache"]==1){
-				rnd=(Math.random()*((power/2)+(hp/15)))/500;
+				rnd=(Math.random()*((power/2)+(hp/15)))/300;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 				craft["chest"]+=rnd;
 				combatlog+="You also took "+ intToString(rnd)+" chests that they were carrying";
@@ -544,6 +544,12 @@ function fight(){
 				maximums["tin"]+=0.15*(rnd);
 				maximums["coal"]+=0.15*(rnd);
 				maximums["steel"]+=0.10*(rnd);
+			}
+			if(Math.random()>0.90 && technologies["cache"]==1){
+				rnd=Math.floor(power/300)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
+				craft["lock"]+=rnd;
+				combatlog+="You also found "+ intToString(rnd)+" lock";
 			}
 			break;
 		}
@@ -1271,7 +1277,7 @@ function research(b){
 	}
 	else if (b=="geology" && technologies["geology"]==0){
 
-		mineralcost=30000;
+		mineralcost=28000;
 		knowledgecost=50;
 		
 
@@ -2889,7 +2895,7 @@ $(".tech_specialization").attr('tooltip3', "Allows you to choose where your rese
 $(".tech_specialization").attr('tooltip4', "New technologies will be unlocked based on your research.");
 
 
-mineralcost=30000;
+mineralcost=28000;
 knowledgecost=50;
 if(items["knowledge"]<knowledgecost || items["mineral"]<mineralcost){
 	$(".tech_geology").addClass("unavailable")

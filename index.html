@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="js/prestige.js"></script>
 	<script type="text/javascript" src="js/traderates.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/technology.js"></script>
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
@@ -110,7 +111,8 @@
 			<div class="block tech_sailing"></div><br>
 			<div class="block tech_trade"></div>
 			<div class="block tech_cache"></div><br>
-			<div class="block tech_specialization"></div><br>
+			<div class="block tech_specialization"></div>
+			<div class="block tech_geology"></div><br>
 		</div>
 
 
@@ -305,6 +307,7 @@
 	$(".tech_trade").click(function() {research("trade")});
 	$(".tech_cache").click(function() {research("cache")});
 	$(".tech_specialization").click(function() {research("specialization")});
+	$(".tech_geology").click(function() {research("geology")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

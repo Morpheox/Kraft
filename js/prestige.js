@@ -186,6 +186,7 @@ technologies["sailing"]=0
 technologies["trade"]=0
 technologies["cache"]=0
 technologies["specialization"]=0
+technologies["geology"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

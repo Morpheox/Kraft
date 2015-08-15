@@ -106,7 +106,7 @@ technologies["sailing"]=0
 technologies["trade"]=0
 technologies["cache"]=0
 technologies["specialization"]=0
-
+technologies["geology"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -159,6 +159,8 @@ function develop(b){
 
 	bonus[b]+=items["knowledge"]-0.001
 	items["knowledge"]=0.001;
+
+	researchunlock()
 }
 
 function toggle(t){
@@ -1240,6 +1242,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="geology" && technologies["geology"]==0){
+
+		mineralcost=30000;
+		knoledgecost=50;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["mineral"]>=mineralcost){
+
+
+			items["mineral"]-=mineralcost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["mineral"]+=0.20;
+
+			technologies["geology"]++
+
+
+		}
+
+	}
+
 }
 
 function hire(b){
@@ -2740,9 +2764,23 @@ $(".tech_specialization").addClass((technologies["specialization"] >0 ? "researc
 $(".tech_specialization").html("Specialization" + (technologies["specialization"] >0 ? " (researched)" : ""));
 $(".tech_specialization").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_specialization").attr('tooltip3', "Allows you to choose where your research should be headed");
+$(".tech_specialization").attr('tooltip4', "New technologies will be unlocked based on your research.");
 
 
-
+mineralcost=30000;
+knoledgecost=50;
+if(items["knowledge"]<knowledgecost && items["mineral"]<mineralcost){
+	$(".tech_geology").addClass("unavailable")
+}
+else
+{
+	$(".tech_geology").removeClass("unavailable")
+}
+$(".tech_geology").addClass((technologies["specialization"] >0 ? "researched" : ""))
+$(".tech_geology").html("Specialization" + (technologies["specialization"] >0 ? " (researched)" : ""));
+$(".tech_geology").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_geology").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_geology").attr('tooltip4', "Mineral production +20%");
 
 
 
@@ -3378,6 +3416,8 @@ function load(){
 	}
 
 
+	researchunlock()
+	
 	save()
 
 	} 

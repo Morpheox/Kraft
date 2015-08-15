@@ -354,7 +354,11 @@ function expedition(){
 				reward+=parseFloat(rnd).toFixed(2) + " horse<br>";
 				craft["horse"]+=rnd;
 			}
-
+			if(Math.random()>0.95 && technologies["cache"]==1){
+				rnd=Math.round((Math.random()*power)/300)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
+				craft["lock"]+=rnd;
+			}
 			if(Math.random()>0.99 && technologies["cache"]==1){
 				rnd=(Math.random()*power)/500;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
@@ -549,7 +553,7 @@ function fight(){
 				rnd=Math.floor(power/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;
-				combatlog+="You also found "+ intToString(rnd)+" lock";
+				combatlog+="You also found "+ Math.round(rnd)+" lock";
 			}
 			break;
 		}

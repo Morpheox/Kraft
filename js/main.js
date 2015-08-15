@@ -155,7 +155,7 @@ enemy["mercenary"]=0;
 enemy["soldier"]=0;
 
 
-function research(b){
+function develop(b){
 
 	bonus[b]+=items["knowledge"]
 	items["knowledge"]=0;

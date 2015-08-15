@@ -155,7 +155,11 @@ enemy["mercenary"]=0;
 enemy["soldier"]=0;
 
 
+function research(b){
 
+	bonus[b]+=items["knowledge"]
+	items["knowledge"]=0;
+}
 function toggle(t){
 
 	if (buildstatus[t]==0){

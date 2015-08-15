@@ -2750,16 +2750,16 @@ $(".tech_specialization").attr('tooltip3', "Allows you to choose where your rese
 
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
-$(".research_economy").attr('tooltip3', "Economy its a big force, prosperity and wealth awaits for those ");
-$(".research_economy").attr('tooltip4', "who look for it.");
+$(".research_economy").attr('tooltip', "Economy its a big force, prosperity and wealth awaits for those ");
+$(".research_economy").attr('tooltip2', "who look for it.");
 
 $(".research_science").html("Science " + intToString(bonus["science"]));
-$(".research_science").attr('tooltip3', "Science leads humanity forward, it can be slow, ");
-$(".research_science").attr('tooltip4', "but it never stops evolving. ");
+$(".research_science").attr('tooltip', "Science leads humanity forward, it can be slow, ");
+$(".research_science").attr('tooltip2', "but it never stops evolving. ");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
-$(".research_military").attr('tooltip3', "The are times, when only the most powerfull get what he wants,");
-$(".research_military").attr('tooltip4', "is that you?");
+$(".research_military").attr('tooltip', "The are times, when only the most powerfull get what he wants,");
+$(".research_military").attr('tooltip2', "is that you?");
 
 
 

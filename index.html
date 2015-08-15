@@ -23,7 +23,8 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+    <div class="infokraft">Keep Craft v0.1.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
         
@@ -240,7 +241,41 @@
     </div>
   </div>
 
-
+	  <div class="modal fade" id="changelog" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title messagetitle">Changelog</h4>
+        </div>
+        <div class="modal-body messagetext">
+        <b>V 0.1.2</b>
+        <ul>
+        <li>Added 4 new techs</li>
+        <li>Now you get 1 legacy per 1000 knoledge invested</li>
+        <li>Fights now can give locks</li>
+        <li>Decreased cost of geology</li>
+        </ul>
+        <b>V 0.1.1</b>
+        <ul>
+        <li>Added tech branches after library lv8</li>
+        <li>Buffed fighting</li>
+        </ul>
+        <b>V 0.1 Beta</b>
+        <ul>
+        <li>Added prestige system</li>
+        <li>Lots of balance</li>
+        </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 </body>
 <script>

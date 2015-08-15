@@ -395,7 +395,7 @@ function expedition(){
 			healing=0
 			healing+=people["medic"]*10
 			healing=healing*(bonus["healing"]+1)
-			
+
 			power=(power/2)+(hp/15)+(healing/2)
 
 			enemy["reward"]=0;
@@ -489,7 +489,7 @@ function fight(){
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
 			hp+=healed;
-			combatlog+="Your medics restore "+intToString(healing)+" hp<br>"
+			combatlog+="Your medics restore "+intToString(healed)+" hp<br>"
 		}
 		hp2-=dmg1;
 		hp-=dmg2;
@@ -2384,7 +2384,7 @@ $(".hire_swordman").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(
 $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".hire_swordman").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
-$(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp:50');
+$(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp: 50');
 
 swordmancost=1;
 horsecost=1;
@@ -2417,7 +2417,7 @@ $(".hire_medic").html("Medic ("+people["medic"]+")");
 $(".hire_medic").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_medic").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".hire_medic").attr('tooltip3', "Food consumption: -0.40/s");
-$(".hire_medic").attr('tooltip5', 'Attack: 1 Hp:50 Healing: 10');
+$(".hire_medic").attr('tooltip5', 'Attack: 1 Hp: 50 Healing: 10');
 
 //Ships
 woodcost=20000;

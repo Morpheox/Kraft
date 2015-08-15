@@ -123,6 +123,9 @@ bonus["title"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
 bonus["storage"]=0;
+bonus["economy"]=0;
+bonus["science"]=0;
+bonus["military"]=0;
 
 for(key in items){
 	bonus[key]=0;
@@ -182,6 +185,7 @@ technologies["shipyard"]=0
 technologies["sailing"]=0
 technologies["trade"]=0
 technologies["cache"]=0
+technologies["specialization"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

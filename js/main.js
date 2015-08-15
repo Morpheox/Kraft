@@ -26,6 +26,9 @@ bonus["title"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
 bonus["storage"]=0;
+bonus["economy"]=0;
+bonus["science"]=0;
+bonus["military"]=0;
 
 var buildings=new Array();
 
@@ -102,6 +105,8 @@ technologies["shipyard"]=0
 technologies["sailing"]=0
 technologies["trade"]=0
 technologies["cache"]=0
+technologies["specialization"]=0
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -242,6 +247,26 @@ function lead(b){
 
 
 	}
+
+
+
+
+
+
+}
+function research(){
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1208,6 +1233,27 @@ function research(b){
 		}
 
 	}
+	else if (b=="specialization" && technologies["specialization"]==0){
+
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+			items["knowledge"]-=knowledgecost
+
+			technologies["specialization"]++
+			$(".research_economy").show()
+			unlocked[".research_economy"]=1;
+			$(".research_science").show()
+			unlocked[".research_science"]=1;
+			$(".research_military").show()
+			unlocked[".research_military"]=1;
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -1542,7 +1588,7 @@ function build(b){
 				case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 				case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
 				case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
-				case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;break;
+				case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;$(".tech_specialization").show();unlocked[".tech_specialization"]=1;break;
 			}
 
 		}
@@ -2696,6 +2742,38 @@ $(".tech_cache").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".tech_cache").attr('tooltip3', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_cache").attr('tooltip5', "Allows crafting chests to store resources.");
 
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost ){
+	$(".tech_specialization").addClass("unavailable")
+}
+else
+{
+	$(".tech_specialization").removeClass("unavailable")
+}
+$(".tech_specialization").addClass((technologies["specialization"] >0 ? "researched" : ""))
+$(".tech_specialization").html("Specialization" + (technologies["specialization"] >0 ? " (researched)" : ""));
+$(".tech_specialization").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_specialization").attr('tooltip3', "Allows you to choose where your research should be headed");
+
+
+
+
+
+
+//Research
+
+
+$(".research_economy").html("Economy" + intToString(bonus["economy"]));
+$(".research_economy").attr('tooltip3', "Economy its a big force, prosperity and wealth awaits for those ");
+$(".research_economy").attr('tooltip4', "who look for it.");
+
+$(".research_science").html("Science" + intToString(bonus["science"]));
+$(".research_science").attr('tooltip3', "Science leads humanity forward, it can be slow, ");
+$(".research_science").attr('tooltip4', "but it never stops evolving. ");
+
+$(".research_military").html("Military" + intToString(bonus["military"]));
+$(".research_military").attr('tooltip3', "The are times, when only the most powerfull get what he wants,");
+$(".research_military").attr('tooltip4', "is that you?");
 
 
 
@@ -3265,7 +3343,7 @@ function load(){
 			$(".tech_sailing").show();unlocked[".tech_sailing"]=1;
 			$(".tech_trade").show();unlocked[".tech_trade"]=1;
 			$(".tech_cache").show();unlocked[".tech_cache"]=1;
-
+			$(".tech_specialization").show();unlocked[".tech_specialization"]=1;
 		}
 	//RETROCOMPATIBILITY
 	if(maximums["moral"]!=0 && maximums["moral"]!=null)

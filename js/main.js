@@ -3014,7 +3014,7 @@ if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
 }
 
 if(buildings["library"]>=8){
-	items["knowledge"]+=buildings["library"]/400;
+	production["knowledge"]+=buildings["library"]/400;
 }
 //people
 production["food"]+=people["farmer"]/10;

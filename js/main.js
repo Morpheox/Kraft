@@ -107,6 +107,8 @@ technologies["trade"]=0
 technologies["cache"]=0
 technologies["specialization"]=0
 technologies["geology"]=0
+technologies["funding"]=0
+technologies["tactics"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1258,6 +1260,50 @@ function research(b){
 			bonus["mineral"]+=0.20;
 
 			technologies["geology"]++
+
+
+		}
+
+	}
+	else if (b=="funding" && technologies["funding"]==0){
+
+		goldcost=50;
+		knowledgecost=50;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["gold"]>=goldcost){
+
+
+			items["gold"]-=goldcost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["gold"]+=0.20;
+			maximums["gold"]+=2;
+
+			technologies["funding"]++
+
+
+		}
+
+	}
+		else if (b=="tactics" && technologies["tactics"]==0){
+
+		moralecost=35;
+		knowledgecost=50;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["morale"]>=moralecost){
+
+
+			items["morale"]-=moralecost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["power"]+=0.20;
+			maximums["morale"]+=2;
+
+			technologies["tactics"]++
 
 
 		}
@@ -2783,7 +2829,37 @@ $(".tech_geology").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]
 $(".tech_geology").attr('tooltip4', "Mineral production +20%");
 
 
+goldcost=50;
+knowledgecost=50;
+if(items["knowledge"]<knowledgecost || items["gold"]<goldcost){
+	$(".tech_funding").addClass("unavailable")
+}
+else
+{
+	$(".tech_funding").removeClass("unavailable")
+}
+$(".tech_funding").addClass((technologies["funding"] >0 ? "researched" : ""))
+$(".tech_funding").html("Funding" + (technologies["funding"] >0 ? " (researched)" : ""));
+$(".tech_funding").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_funding").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_funding").attr('tooltip4', "Gold production +20%");
+$(".tech_funding").attr('tooltip4', "Gold storage +2");
 
+moralecost=35;
+knowledgecost=50;
+if(items["knowledge"]<knowledgecost || items["morale"]<moralecost){
+	$(".tech_tactics").addClass("unavailable")
+}
+else
+{
+	$(".tech_tactics").removeClass("unavailable")
+}
+$(".tech_tactics").addClass((technologies["tactics"] >0 ? "researched" : ""))
+$(".tech_tactics").html("Tactics" + (technologies["tactics"] >0 ? " (researched)" : ""));
+$(".tech_tactics").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_tactics").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_tactics").attr('tooltip4', "Troops attack +20%");
+$(".tech_tactics").attr('tooltip4', "Morale maximum +2");
 //Research
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.1 beta</title>
+	<title>Keep Craft v0.1.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
+    <div class="infokraft">Keep Craft v0.1.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily</div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
         
@@ -113,6 +113,8 @@
 			<div class="block tech_cache"></div><br>
 			<div class="block tech_specialization"></div>
 			<div class="block tech_geology"></div><br>
+			<div class="block tech_funding"></div><br>
+			<div class="block tech_tactics"></div><br>
 		</div>
 
 
@@ -308,6 +310,8 @@
 	$(".tech_cache").click(function() {research("cache")});
 	$(".tech_specialization").click(function() {research("specialization")});
 	$(".tech_geology").click(function() {research("geology")});
+	$(".tech_funding").click(function() {research("funding")});
+	$(".tech_tactics").click(function() {research("tactics")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

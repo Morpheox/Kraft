@@ -514,7 +514,12 @@ function fight(){
 				population-=losses;
 				combatlog+="You lose "+losses+" knight<br>"
 			}
-
+			if(people["medic"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["medic"]-1))+1
+				people["medic"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" medics<br>"
+			}
 
 
 			break;

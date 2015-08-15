@@ -157,8 +157,8 @@ enemy["soldier"]=0;
 
 function develop(b){
 
-	bonus[b]+=items["knowledge"]
-	items["knowledge"]=0;
+	bonus[b]+=items["knowledge"]-0.001
+	items["knowledge"]=0.001;
 }
 
 function toggle(t){

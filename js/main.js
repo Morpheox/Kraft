@@ -25,6 +25,7 @@ bonus["craft"]=0;
 bonus["title"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
+bonus["healing"]=0;
 bonus["storage"]=0;
 bonus["economy"]=0;
 bonus["science"]=0;
@@ -393,7 +394,8 @@ function expedition(){
 
 			healing=0
 			healing+=people["medic"]*10
-
+			healing=healing*(bonus["healing"]+1)
+			
 			power=(power/2)+(hp/15)+(healing/2)
 
 			enemy["reward"]=0;
@@ -448,7 +450,7 @@ function fight(){
 	power+=people["pikeman"]*5
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
-	power+=people["medic"]*10
+	power+=people["medic"]*1
 
 	power=power*(bonus["power"]+1)
 
@@ -475,6 +477,7 @@ function fight(){
 	healing=0
 	healing+=people["medic"]*10
 
+	healing=healing*(bonus["healing"]+1)
 	combatlog="The battle starts:<br>"
 	var ronda=0;
 	for(i=0;i<=50;i++){
@@ -3177,27 +3180,28 @@ if(prestige["number"]>0){
 }
 
 
-
-
-
-
-power=0
+power=0;
 power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
+power+=people["medic"]*1
 
-var hp=0;
+hp=0;
 hp+=people["pikeman"]*30
 hp+=people["swordman"]*50
 hp+=people["knight"]*200
+hp+=people["medic"]*50
 
-hp=hp*(bonus["hp"]+1)
+healing=0
+healing+=people["medic"]*10
 
 foodcost=power*2
 watercost=power
 moralecost=power/5
 
 power=power*(bonus["power"]+1)
+hp=hp*(bonus["hp"]+1)
+healing=healing*(bonus["healing"]+1)
 if(items["food"]<foodcost || items["water"]<watercost || items["morale"]<moralecost){
 	$(".expedition").addClass("unavailable")
 }
@@ -3211,6 +3215,10 @@ $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(
 $(".expedition").attr('tooltip3', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".expedition").attr('tooltip5', "Send your soldiers in a expedition");
 $(".expedition").attr('tooltip6', "Total Attack: "+Math.round(power)+" Total Hp: "+Math.round(hp));
+if(healing>0){
+$(".expedition").attr('tooltip7', "Total Healing: "+Math.round(healing));
+
+}
 tradewood=600*(bonus["trade"]+1)
 trademineral=500*(bonus["trade"]+1)
 tradefood=400*(bonus["trade"]+1)

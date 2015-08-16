@@ -2335,7 +2335,7 @@ $(".build_bank").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".build_bank").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".build_bank").attr('tooltip5', 'Gold storage +2');
 $(".build_bank").attr('tooltip6', 'Gold consumption -0.10/s');
-$(".build_bank").attr('tooltip6', 'Coin production +0.02/s');
+$(".build_bank").attr('tooltip7', 'Coin production +0.02/s');
 
 //People
 foodcost=50;

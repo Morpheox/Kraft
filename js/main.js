@@ -2527,7 +2527,7 @@ else
 {
 	$(".build_crusher").removeClass("unavailable")
 }
-$(".build_crusher").html("Bank ("+buildings["bank"]+")");
+$(".build_crusher").html("Crusher ("+buildings["crusher"]+")");
 $(".build_crusher").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_crusher").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_crusher").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
@@ -3676,6 +3676,12 @@ if (items["gold"]>=buildings["bank"]/40 && buildstatus["bank"]==1)
 }
 if(buildings["library"]>=8){
 	production["knowledge"]+=buildings["library"]/400;
+}
+if (items["mineral"]>=buildings["crusher"]*2.5 && buildstatus["crusher"]==1)
+{
+	consumption["mineral"]+=buildings["crusher"]*2.5;
+	production["sand"]=buildings["crusher"]/8;
+
 }
 //people
 production["food"]+=people["farmer"]/10;

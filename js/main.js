@@ -3374,7 +3374,7 @@ if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
 }
 if (items["gold"]>=buildings["bank"]/40 && buildstatus["bank"]==1)
 {
-	consumption["gold"]+=buildings["bank"]*10
+	consumption["gold"]+=buildings["bank"]/40
 	craft["coin"]+=buildings["bank"]/200;
 }
 if(buildings["library"]>=8){

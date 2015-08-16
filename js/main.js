@@ -4,6 +4,9 @@ var items=new Array()
 
 items["wood"]=10;
 items["mineral"]=5;
+items["sand"]=0;
+items["clay"]=0;
+items["concrete"]=0;
 items["water"]=0;
 items["food"]=0;
 items["copper"]=0;
@@ -30,7 +33,7 @@ bonus["storage"]=0;
 bonus["economy"]=0;
 bonus["science"]=0;
 bonus["military"]=0;
-
+bonus["knowledge"]=0;
 var buildings=new Array();
 
 buildings["lumbermill"]=0;
@@ -54,6 +57,7 @@ buildings["relic"]=0;
 buildings["shipyard"]=0;
 buildings["docks"]=0;
 buildings["bank"]=0;
+buildings["crusher"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -117,6 +121,7 @@ technologies["studies"]=0
 technologies["organization"]=0
 technologies["culturaltrade"]=0
 technologies["intelligence"]=0
+technologies["crushing"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -156,6 +161,7 @@ craft["token"]=0
 craft["plank"]=0
 craft["supplies"]=0
 craft["lock"]=0
+craft["glass"]=0
 
 var unlocked=new Array();
 
@@ -436,7 +442,7 @@ function expedition(){
 			enemy["halberdier"]=0;
 
 			var enemytipo=Math.random()*power;
-			var stringencuentro="Enemys:<br>"
+			var stringencuentro="Enemies:<br>"
 			var rew=0;
 			if(enemytipo<25){
 				enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
@@ -469,7 +475,7 @@ function expedition(){
 
 
 			$(".encounter").show()
-			$(".expeditionresult").html("Some enemys appeared in our way.")
+			$(".expeditionresult").html("Some enemies appeared in our way.")
 			$(".encounter").html(stringencuentro)
 
 		}
@@ -1502,6 +1508,29 @@ function research(b){
 		}
 
 	}
+	else if (b=="crushing" && technologies["crushing"]==0){
+
+
+		pickaxecost=500;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost){
+
+
+			items["pickaxe"]-=pickaxecost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["crushing"]++
+			$(".build_crusher").show()
+			unlocked[".build_crusher"]=1;
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -2142,7 +2171,27 @@ function build(b){
 
 		}
 	}
+	else if (b=="crusher"){
 
+		coppercost=Math.pow(1.2,(buildings["crusher"]))*150
+		ironcost=Math.pow(1.2,(buildings["crusher"]))*100
+		steelcost=Math.pow(1.2,(buildings["crusher"]))*50
+
+
+		if (items["copper"]>=coppercost && items["steel"]>=steelcost && items["iron"]>=ironcost ){
+
+			items["copper"]-=coppercost;
+			items["iron"]-=ironcost;
+			items["steel"]-=steelcost;
+
+			maximums["sand"]+=200;
+
+			buildings["crusher"]+=1
+			$(".toggle_crusher").show()
+			unlocked[".toggle_crusher"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -2466,6 +2515,28 @@ $(".build_bank").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)
 $(".build_bank").attr('tooltip5', 'Gold storage +2');
 $(".build_bank").attr('tooltip6', 'Gold consumption -0.10/s');
 $(".build_bank").attr('tooltip7', 'Coin production +0.02/s');
+
+
+coppercost=Math.pow(1.2,(buildings["crusher"]))*150
+ironcost=Math.pow(1.2,(buildings["crusher"]))*100
+steelcost=Math.pow(1.2,(buildings["crusher"]))*50
+if(items["steel"]<steelcost || items["iron"]<ironcost || items["copper"]<coppercost){
+	$(".build_crusher").addClass("unavailable")
+}
+else
+{
+	$(".build_crusher").removeClass("unavailable")
+}
+$(".build_crusher").html("Bank ("+buildings["bank"]+")");
+$(".build_crusher").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".build_crusher").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_crusher").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".build_crusher").attr('tooltip5', 'Sand storage +100');
+$(".build_crusher").attr('tooltip6', 'Mineral consumption -10.00/s');
+$(".build_crusher").attr('tooltip7', 'Sand production +0.5/s');
+
+
+
 
 //People
 foodcost=50;
@@ -3244,6 +3315,23 @@ $(".tech_intelligence").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).to
 $(".tech_intelligence").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_intelligence").attr('tooltip4', "When you win a fight, you get a chance to steal knowledge from the enemy.");
 
+pickaxecost=500;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost){
+	$(".tech_crushing").addClass("unavailable")
+}
+else
+{
+	$(".tech_crushing").removeClass("unavailable")
+}
+$(".tech_crushing").addClass((technologies["crushing"] >0 ? "researched" : ""))
+$(".tech_crushing").html("Crushing" + (technologies["crushing"] >0 ? " (res..)" : ""));
+$(".tech_crushing").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_crushing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_crushing").attr('tooltip4', "Allows building crushing mills to produce sand.");
+
+
+
 //Research
 
 
@@ -3258,7 +3346,7 @@ $(".research_science").attr('tooltip2', "but it never stops evolving. ");
 $(".research_science").attr('tooltip4', "Also increases craft effiency");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
-$(".research_military").attr('tooltip', "The are times, when only the most powerfull get what he wants,");
+$(".research_military").attr('tooltip', "There are times, when only the most powerfull get what he wants,");
 $(".research_military").attr('tooltip2', "is that you?");
 $(".research_military").attr('tooltip4', "Also increases troops attack and hp");
 

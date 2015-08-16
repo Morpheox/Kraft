@@ -70,6 +70,7 @@
 			<div class="block build_shipyard"></div><button class="toggle toggle_shipyard" onclick='toggle("shipyard")'>Toggle</button><br>
 			<div class="block build_docks"></div><br>
 			<div class="block build_bank"></div><button class="toggle toggle_bank" onclick='toggle("bank")'>Toggle</button><br>
+			<div class="block build_crusher"></div><button class="toggle toggle_crusher" onclick='toggle("crusher")'>Toggle</button><br>
 			<br><br><br><br><br><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -125,6 +126,7 @@
 			<div class="block tech_organization"></div>
 			<div class="block tech_culturaltrade"></div>
 			<div class="block tech_intelligence"></div>
+			<div class="block tech_crushing"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -258,6 +260,13 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+         <b>V 0.1.8</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New building - crushers<br>
+        <li>New resource - sand</li>
+        <li>Corrected some typos</li>
+        </ul>
         <b>V 0.1.7</b>
         <ul>
         <li>Added new military tech</li>
@@ -348,6 +357,7 @@
 	$(".build_shipyard").click(function() {build("shipyard")});
 	$(".build_docks").click(function() {build("docks")});
 	$(".build_bank").click(function() {build("bank")});
+	$(".build_crusher").click(function() {build("crusher")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -401,6 +411,7 @@
 	$(".tech_organization").click(function() {research("organization")});
 	$(".tech_culturaltrade").click(function() {research("culturaltrade")});
 	$(".tech_intelligence").click(function() {research("intelligence")});
+	$(".tech_crushing").click(function() {research("crushing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

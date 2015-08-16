@@ -45,4 +45,8 @@ function researchunlock(){
 		$(".tech_intelligence").show()
 		unlocked[".tech_intelligence"]=1;
 	}
+	if(bonus["science"]>=1700 && unlocked[".tech_crushing"]!=1){
+		$(".tech_crushing").show()
+		unlocked[".tech_crushing"]=1;
+	}
 }

@@ -2476,7 +2476,7 @@ $(".hire_scientist").html("Scientist ("+people["scientist"]+")");
 $(".hire_scientist").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".hire_scientist").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".hire_scientist").attr('tooltip3', "Food consumption: -0.20/s");
-$(".hire_scientist").attr('tooltip3', "Coin consumption: -0.01/s");
+$(".hire_scientist").attr('tooltip4', "Coin consumption: -0.01/s");
 $(".hire_scientist").attr('tooltip5', 'Knowledge production + 0.02/s');
 
 foodcost=50

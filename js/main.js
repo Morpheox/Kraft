@@ -113,6 +113,7 @@ technologies["funding"]=0
 technologies["tactics"]=0
 technologies["healing"]=0
 technologies["savings"]=0
+technologies["studies"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -121,6 +122,7 @@ people["farmer"]=0
 people["miner"]=0
 people["foundryman"]=0
 people["sailor"]=0
+people["scientist"]=0
 people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
@@ -415,22 +417,22 @@ function expedition(){
 			if(enemytipo<25){
 				enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
 				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
-				rew+=(Math.random()*enemy["peasant"]*0.06)+(enemy["peasant"]*0.015)
+				rew+=(Math.random()*enemy["peasant"]*0.07)+(enemy["peasant"]*0.015)
 			}
 			if(enemytipo>20 && enemytipo<50){
 				enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
 				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
-				rew+=(Math.random()*enemy["bandit"]*0.12)+(enemy["bandit"]*0.03)
+				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
 			}
 			if(enemytipo>40 && enemytipo<120){
 				enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
 				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
-				rew+=(Math.random()*enemy["mercenary"]*0.28)+(enemy["mercenary"]*0.07)
+				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
 			if(enemytipo>110){
 				enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
-				rew+=(Math.random()*enemy["soldier"]*0.60)+(enemy["soldier"]*0.15)
+				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
@@ -1388,6 +1390,24 @@ function research(b){
 		}
 
 	}
+	else if (b=="studies" && technologies["studies"]==0){
+
+
+		knowledgecost=400;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+			items["knowledge"]-=knowledgecost;
+
+			technologies["studies"]++
+
+			$(".hire_scientist").show()
+			unlocked[".hire_scientist"]=1;
+		}
+
+	}
 }
 
 function hire(b){
@@ -1462,6 +1482,7 @@ function hire(b){
 			}
 
 		}
+
 		else if (b=="sailor"){
 
 			foodcost=500;
@@ -1474,6 +1495,21 @@ function hire(b){
 				population++
 				$(".fire_sailor").show()
 				unlocked[".fire_sailor"]=1;
+			}
+
+		}
+		else if (b=="scientist"){
+
+			knowledgecost=100;
+			coincost=10;
+
+			if (items["knowledge"]>=foodcost && craft["coin"]>=coincost){
+				items["knowledge"]-=knowledgecost;
+				craft["coin"]-=coincost
+				people["scientist"]+=1
+				population++
+				$(".fire_scientist").show()
+				unlocked[".fire_scientist"]=1;
 			}
 
 		}
@@ -2427,6 +2463,22 @@ $(".hire_sailor").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2
 $(".hire_sailor").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_sailor").attr('tooltip5', 'People needed for naval missions.');
 
+knowledgecost=100;
+coincost=10;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost || population>=maximums["population"]){
+	$(".hire_scientist").addClass("unavailable")
+}
+else
+{
+	$(".hire_scientist").removeClass("unavailable")
+}
+$(".hire_scientist").html("Scientist ("+people["scientist"]+")");
+$(".hire_scientist").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".hire_scientist").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_scientist").attr('tooltip3', "Food consumption: -0.20/s");
+$(".hire_scientist").attr('tooltip3', "Coin consumption: -0.01/s");
+$(".hire_scientist").attr('tooltip5', 'Knowledge production + 0.02/s');
+
 foodcost=50
 spearcost=1
 if(items["food"]<foodcost || craft["spear"]<spearcost || population>=maximums["population"]){
@@ -3037,6 +3089,20 @@ $(".tech_savings").html("Savings" + (technologies["savings"] >0 ? " (researched)
 $(".tech_savings").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_savings").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_savings").attr('tooltip4', "Allows building banks to store gold and produce coins.");
+
+knowledgecost=400;
+
+if(items["knowledge"]<knowledgecost){
+	$(".tech_studies").addClass("unavailable")
+}
+else
+{
+	$(".tech_studies").removeClass("unavailable")
+}
+$(".tech_studies").addClass((technologies["studies"] >0 ? "researched" : ""))
+$(".tech_studies").html("Studies" + (technologies["studies"] >0 ? " (researched)" : ""));
+$(".tech_studies").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_studies").attr('tooltip3', "Allows hiring scientists that use funds to gain knowledge.");
 //Research
 
 
@@ -3408,7 +3474,12 @@ if (items["mineral"]>=people["smelter"]/20 && items["food"]>=people["smelter"]/4
 		production["gold"]+=people["smelter"]/4000
 	}
 }
-
+if (craft["coin"]>=people["scientist"]/400 && items["food"]>=people["scientist"]/20)
+{
+	craft["coin"]-=people["scientist"]/400
+	consumption["food"]+=people["scientist"]/20
+	production["knowledge"]+=people["scientist"]/200
+}
 if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman"]/40 && items["coal"]>=people["foundryman"]/200)
 {
 	consumption["iron"]+=people["foundryman"]/100

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.1.3 beta</title>
+	<title>Keep Craft v0.1.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.1.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -79,6 +79,7 @@
 			<div class="block hire_miner"></div><button class="fire fire_miner" onclick='fire("miner")'>Fire 1</button><br>
 			<div class="block hire_foundryman"></div><button class="fire fire_foundryman" onclick='fire("foundryman")'>Fire 1</button><br>
 			<div class="block hire_sailor"></div><button class="fire fire_sailor" onclick='fire("sailor")'>Fire 1</button><br>
+			<div class="block hire_scientist"></div><button class="fire fire_scientist" onclick='fire("scientist")'>Fire 1</button><br>
 		</div>
 		<div id="technologies" class="technologies tab-pane fade">
 			<div class="block research_economy"></div>
@@ -120,6 +121,7 @@
 			<div class="block tech_tactics"></div>
 			<div class="block tech_healing"></div>
 			<div class="block tech_savings"></div>
+			<div class="block tech_studies"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -253,6 +255,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext">
+        <b>V 0.1.4</b>
+        <ul>
+        <li>New science tech</li>
+        <li>Added scientists</li>
+        <li>Increased fight rewards</li>
+        </ul>
         <b>V 0.1.3</b>
         <ul>
         <li>New economic tech</li>
@@ -323,6 +331,7 @@
 	$(".hire_miner").click(function() {hire("miner")});
 	$(".hire_foundryman").click(function() {hire("foundryman")});
 	$(".hire_sailor").click(function() {hire("sailor")});
+	$(".hire_scientist").click(function() {hire("scientist")});
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
 	$(".hire_knight").click(function() {hire("knight")});
@@ -364,6 +373,7 @@
 	$(".tech_tactics").click(function() {research("tactics")});
 	$(".tech_healing").click(function() {research("healing")});
 	$(".tech_savings").click(function() {research("savings")});
+	$(".tech_studies").click(function() {research("studies")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

@@ -26,4 +26,9 @@ function researchunlock(){
 		$(".tech_savings").show()
 		unlocked[".tech_savings"]=1;
 	}
+
+	if(bonus["science"]>=500 && unlocked[".tech_studies"]!=1){
+		$(".tech_studies").show()
+		unlocked[".tech_studies"]=1;
+	}
 }

@@ -3561,7 +3561,7 @@ $(".craft_chest").attr('tooltip6', "A chest used to store resources");
 tincost=50;
 sandcost=200;
 coalcost=50;
-if(items["tin"]<tincost || items["sand"]<sandcost || items["coal"]<watercost){
+if(items["tin"]<tincost || items["sand"]<sandcost || items["coal"]<coalcost){
 	$(".craft_glass").addClass("unavailable")
 }
 else

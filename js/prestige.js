@@ -204,6 +204,7 @@ technologies["organization"]=0
 technologies["culturaltrade"]=0
 technologies["intelligence"]=0
 technologies["crushing"]=0
+technologies["floatglass"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

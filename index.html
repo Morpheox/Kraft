@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.1.8 beta</title>
+	<title>Keep Craft v0.1.9 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1.8 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.1.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -127,6 +127,7 @@
 			<div class="block tech_culturaltrade"></div>
 			<div class="block tech_intelligence"></div>
 			<div class="block tech_crushing"></div>
+			<div class="block tech_floatglass"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -145,6 +146,7 @@
 		<div class="block craft_armor"></div><br>
 		<div class="block craft_supplies"></div><br>
 		<div class="block craft_chest"></div><br>
+		<div class="block craft_glass"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
@@ -260,6 +262,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.1.9</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New crafted material - glass<br>
+        </ul>
          <b>V 0.1.8</b>
         <ul>
         <li>New science tech</li>
@@ -412,6 +419,7 @@
 	$(".tech_culturaltrade").click(function() {research("culturaltrade")});
 	$(".tech_intelligence").click(function() {research("intelligence")});
 	$(".tech_crushing").click(function() {research("crushing")});
+	$(".tech_floatglass").click(function() {research("floatglass")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -423,6 +431,7 @@
 	$(".craft_armor").click(function() {crafting("armor")});
 	$(".craft_supplies").click(function() {crafting("supplies")});
 	$(".craft_chest").click(function() {crafting("chest")});
+	$(".craft_glass").click(function() {crafting("glass")});
 
 	$(".expedition").click(function() {expedition()});
         

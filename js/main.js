@@ -122,6 +122,7 @@ technologies["organization"]=0
 technologies["culturaltrade"]=0
 technologies["intelligence"]=0
 technologies["crushing"]=0
+technologies["floatglass"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -789,6 +790,24 @@ function crafting(b){
 				maximums["tin"]+=0.15*(bonus["craft"]+1);
 				maximums["coal"]+=0.15*(bonus["craft"]+1);
 				maximums["steel"]+=0.10*(bonus["craft"]+1);
+
+			}
+
+		}
+		else if (b=="glass"){
+
+			tincost=50;
+			sandcost=200;
+			coalcost=50;
+
+			if (items["tin"]>=tincost && items["sand"]>=sandcost && items["coal"]>=coalcost){
+
+				items["tin"]-=tincost;
+				items["sand"]-=sandcost;
+				items["coal"]-=coalcost;
+
+
+				craft["glass"]+=1+bonus["craft"];
 
 			}
 
@@ -1519,7 +1538,7 @@ function research(b){
 		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost){
 
 
-			items["pickaxe"]-=pickaxecost;
+			craft["pickaxe"]-=pickaxecost;
 			items["knowledge"]-=knowledgecost;
 
 
@@ -1531,6 +1550,32 @@ function research(b){
 		}
 
 	}
+	else if (b=="floatglass" && technologies["floatglass"]==0){
+
+
+		tincost=200;
+		sandcost=600;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["tin"]>=tincost && items["sand"]>=sandcost){
+
+
+			items["tin"]-=tincost;
+			items["sand"]-=sandcost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["floatglass"]++
+			$(".craft_glass").show()
+			unlocked[".craft_glass"]=1;
+
+		}
+
+	}
+
 }
 
 function hire(b){
@@ -2531,7 +2576,7 @@ $(".build_crusher").html("Crusher ("+buildings["crusher"]+")");
 $(".build_crusher").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_crusher").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_crusher").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".build_crusher").attr('tooltip5', 'Sand storage +100');
+$(".build_crusher").attr('tooltip5', 'Sand storage +200');
 $(".build_crusher").attr('tooltip6', 'Mineral consumption -10.00/s');
 $(".build_crusher").attr('tooltip7', 'Sand production +0.5/s');
 
@@ -3330,7 +3375,22 @@ $(".tech_crushing").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).to
 $(".tech_crushing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_crushing").attr('tooltip4', "Allows building crushing mills to produce sand.");
 
-
+tincost=200;
+sandcost=600;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost){
+	$(".tech_floatglass").addClass("unavailable")
+}
+else
+{
+	$(".tech_floatglass").removeClass("unavailable")
+}
+$(".tech_floatglass").addClass((technologies["floatglass"] >0 ? "researched" : ""))
+$(".tech_floatglass").html("Floatglass" + (technologies["floatglass"] >0 ? " (res..)" : ""));
+$(".tech_floatglass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
+$(".tech_floatglass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
+$(".tech_floatglass").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_floatglass").attr('tooltip5', "A process to create sheets of glass. ");
 
 //Research
 
@@ -3498,8 +3558,21 @@ $(".craft_chest").attr('tooltip4', 'Lock: '+ parseFloat(craft["lock"]).toFixed(2
 $(".craft_chest").attr('tooltip6', "A chest used to store resources");
 
 
-
-
+tincost=50;
+sandcost=200;
+coalcost=50;
+if(items["tin"]<tincost || items["sand"]<sandcost || items["coal"]<watercost){
+	$(".craft_glass").addClass("unavailable")
+}
+else
+{
+	$(".craft_glass").removeClass("unavailable")
+}
+$(".craft_glass").html("Glass");
+$(".craft_glass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
+$(".craft_glass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
+$(".craft_glass").attr('tooltip3', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
+$(".craft_glass").attr('tooltip5', "A sheet of glass");
 //Leaders
 
 if(bonus["title"]<1){

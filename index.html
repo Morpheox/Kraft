@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.1.2 beta</title>
+	<title>Keep Craft v0.1.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.1.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -68,7 +68,8 @@
 			<div class="block build_towncenter"></div><br>
 			<div class="block build_castle"></div><br>
 			<div class="block build_shipyard"></div><button class="toggle toggle_shipyard" onclick='toggle("shipyard")'>Toggle</button><br>
-			<div class="block build_docks"></div>
+			<div class="block build_docks"></div><br>
+			<div class="block build_bank"></div><button class="toggle toggle_bank" onclick='toggle("bank")'>Toggle</button><br>
 			<br><br><br><br><br><br>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -118,6 +119,7 @@
 			<div class="block tech_funding"></div>
 			<div class="block tech_tactics"></div>
 			<div class="block tech_healing"></div>
+			<div class="block tech_savings"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -251,6 +253,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext">
+        <b>V 0.1.3</b>
+        <ul>
+        <li>New economic tech</li>
+        <li>Added banks</li>
+        </ul>
         <b>V 0.1.2</b>
         <ul>
         <li>Added 4 new techs</li>
@@ -308,6 +315,7 @@
 	$(".build_relic").click(function() {build("relic")});
 	$(".build_shipyard").click(function() {build("shipyard")});
 	$(".build_docks").click(function() {build("docks")});
+	$(".build_bank").click(function() {build("bank")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -355,6 +363,7 @@
 	$(".tech_funding").click(function() {research("funding")});
 	$(".tech_tactics").click(function() {research("tactics")});
 	$(".tech_healing").click(function() {research("healing")});
+	$(".tech_savings").click(function() {research("savings")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

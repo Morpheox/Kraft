@@ -22,4 +22,8 @@ function researchunlock(){
 		unlocked[".tech_healing"]=1;
 	}
 
+	if(bonus["economy"]>=500 && unlocked[".tech_savings"]!=1){
+		$(".tech_savings").show()
+		unlocked[".tech_savings"]=1;
+	}
 }

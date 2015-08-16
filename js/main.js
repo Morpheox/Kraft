@@ -53,6 +53,7 @@ buildings["castle"]=0;
 buildings["relic"]=0;
 buildings["shipyard"]=0;
 buildings["docks"]=0;
+buildings["bank"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -111,6 +112,7 @@ technologies["geology"]=0
 technologies["funding"]=0
 technologies["tactics"]=0
 technologies["healing"]=0
+technologies["savings"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1366,7 +1368,26 @@ function research(b){
 		}
 
 	}
+	else if (b=="savings" && technologies["savings"]==0){
 
+		coincost=100;
+		knowledgecost=200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+
+			craft["coin"]-=coincost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["savings"]++
+
+			$(".build_bank").show()
+			unlocked[".build_bank"]=1;
+		}
+
+	}
 }
 
 function hire(b){
@@ -1970,6 +1991,27 @@ function build(b){
 			unlocked[".ships"]=1
 		}
 	}
+	else if (b=="bank"){
+
+		blockcost=Math.pow(1.4,(buildings["bank"]))*200
+		steelcost=Math.pow(1.4,(buildings["bank"]))*100
+		coincost=Math.pow(1.4,(buildings["bank"]))*100
+
+
+		if (craft["block"]>=blockcost && items["steel"]>=steelcost && craft["coin"]>=coincost ){
+
+			craft["block"]-=blockcost;
+			craft["coin"]-=coincost;
+			items["steel"]-=steelcost;
+
+			maximums["gold"]+=2;
+
+			buildings["bank"]+=1
+			$(".toggle_bank").show()
+			unlocked[".toggle_bank"]=1
+
+		}
+	}
 
 }
 
@@ -2276,8 +2318,24 @@ $(".build_docks").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed
 $(".build_docks").attr('tooltip4', '+1 Ship storage');
 
 
+blockcost=Math.pow(1.4,(buildings["bank"]))*200
+steelcost=Math.pow(1.4,(buildings["bank"]))*100
+coincost=Math.pow(1.4,(buildings["bank"]))*100
 
-
+if(items["steel"]<steelcost || craft["block"]<blockcost || craft["coin"]<coincost){
+	$(".build_bank").addClass("unavailable")
+}
+else
+{
+	$(".build_bank").removeClass("unavailable")
+}
+$(".build_bank").html("Bank ("+buildings["bank"]+")");
+$(".build_bank").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".build_bank").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".build_bank").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".build_bank").attr('tooltip5', 'Gold storage +2');
+$(".build_bank").attr('tooltip6', 'Gold consumption -0.10/s');
+$(".build_bank").attr('tooltip6', 'Coin production +0.02/s');
 
 //People
 foodcost=50;
@@ -2963,6 +3021,22 @@ $(".tech_healing").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2
 $(".tech_healing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_healing").attr('tooltip4', "Troops hp +5%");
 $(".tech_healing").attr('tooltip5', "Allows hiring medics to aid during combat.");
+
+coincost=100;
+knowledgecost=200;
+
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_savings").addClass("unavailable")
+}
+else
+{
+	$(".tech_savings").removeClass("unavailable")
+}
+$(".tech_savings").addClass((technologies["savings"] >0 ? "researched" : ""))
+$(".tech_savings").html("Savings" + (technologies["savings"] >0 ? " (researched)" : ""));
+$(".tech_savings").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_savings").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_savings").attr('tooltip4', "Allows building banks to store gold and produce coins.");
 //Research
 
 

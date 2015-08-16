@@ -260,3 +260,8 @@ font-size: 20px;
 .technolist{
   width:520px;
 }
+
+.changes{
+  overflow:scroll;
+  height:500px;
+}

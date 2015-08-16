@@ -196,6 +196,7 @@ technologies["tactics"]=0
 technologies["healing"]=0
 technologies["savings"]=0
 technologies["studies"]=0
+technologies["organization"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

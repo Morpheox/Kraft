@@ -114,6 +114,7 @@ technologies["tactics"]=0
 technologies["healing"]=0
 technologies["savings"]=0
 technologies["studies"]=0
+technologies["organization"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1405,6 +1406,25 @@ function research(b){
 
 			$(".hire_scientist").show()
 			unlocked[".hire_scientist"]=1;
+		}
+
+	}
+	else if (b=="organization" && technologies["organization"]==0){
+
+		blockcost=500;
+		knowledgecost=300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["block"]>=blockcost){
+
+
+			craft["block"]-=blockcost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["organization"]++
+
+			bonus["storage"]+=0.20;
 		}
 
 	}
@@ -3103,6 +3123,28 @@ $(".tech_studies").addClass((technologies["studies"] >0 ? "researched" : ""))
 $(".tech_studies").html("Studies" + (technologies["studies"] >0 ? " (researched)" : ""));
 $(".tech_studies").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_studies").attr('tooltip3', "Allows hiring scientists that use funds to gain knowledge.");
+
+blockcost=500;
+knowledgecost=300;
+if(items["knowledge"]<knowledgecost || craft["block"]<blockcost){
+	$(".tech_organization").addClass("unavailable")
+}
+else
+{
+	$(".tech_organization").removeClass("unavailable")
+}
+$(".tech_organization").addClass((technologies["organization"] >0 ? "researched" : ""))
+$(".tech_organization").html("Savings" + (technologies["organization"] >0 ? " (researched)" : ""));
+$(".tech_organization").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".tech_organization").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_organization").attr('tooltip4', "Gives a 20% bonus to all storages");
+
+
+
+
+
+
+
 //Research
 
 

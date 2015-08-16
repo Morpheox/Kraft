@@ -9,47 +9,47 @@ traderatio["copper"]=new Array()
 traderatio["iron"]=new Array()
 traderatio["steel"]=new Array()
 
-traderatio["wood"]["mineral"]=0.7;
-traderatio["wood"]["food"]=0.4;
-traderatio["wood"]["iron"]=0.0012;
-traderatio["wood"]["coal"]=0.0007;
+traderatio["wood"]["mineral"]=0.8;
+traderatio["wood"]["food"]=0.5;
+traderatio["wood"]["iron"]=0.0016;
+traderatio["wood"]["coal"]=0.001;
 
 
-traderatio["mineral"]["wood"]=0.7;
-traderatio["mineral"]["food"]=0.45;
-traderatio["mineral"]["iron"]=0.0015;
-traderatio["mineral"]["steel"]=0.00025;
-traderatio["mineral"]["copper"]=0.002;
+traderatio["mineral"]["wood"]=0.8;
+traderatio["mineral"]["food"]=0.6;
+traderatio["mineral"]["iron"]=0.002;
+traderatio["mineral"]["steel"]=0.0003;
+traderatio["mineral"]["copper"]=0.003;
 
 
-traderatio["food"]["mineral"]=0.9;
-traderatio["food"]["iron"]=0.0017;
-traderatio["food"]["coal"]=0.001;
-traderatio["food"]["steel"]=0.00035;
-traderatio["food"]["gold"]=0.0005;
+traderatio["food"]["mineral"]=1;
+traderatio["food"]["iron"]=0.0022;
+traderatio["food"]["coal"]=0.0015;
+traderatio["food"]["steel"]=0.00045;
+traderatio["food"]["gold"]=0.0008;
 
 
-traderatio["copper"]["wood"]=70;
-traderatio["copper"]["mineral"]=60;
-traderatio["copper"]["food"]=40;
+traderatio["copper"]["wood"]=80;
+traderatio["copper"]["mineral"]=70;
+traderatio["copper"]["food"]=50;
 traderatio["copper"]["iron"]=0.6;
-traderatio["copper"]["coal"]=0.2;
-traderatio["copper"]["steel"]=0.05;
+traderatio["copper"]["coal"]=0.25;
+traderatio["copper"]["steel"]=0.06;
 
 
-traderatio["iron"]["wood"]=100;
-traderatio["iron"]["mineral"]=80;
-traderatio["iron"]["food"]=50;
-traderatio["iron"]["coal"]=0.3;
-traderatio["iron"]["steel"]=0.08;
+traderatio["iron"]["wood"]=120;
+traderatio["iron"]["mineral"]=100;
+traderatio["iron"]["food"]=80;
+traderatio["iron"]["coal"]=0.4;
+traderatio["iron"]["steel"]=0.1;
 
 
-traderatio["steel"]["wood"]=1000;
-traderatio["steel"]["mineral"]=880;
-traderatio["steel"]["food"]=600;
-traderatio["steel"]["iron"]=4;
-traderatio["steel"]["coal"]=1.5;
-traderatio["steel"]["tin"]=2;
+traderatio["steel"]["wood"]=1200;
+traderatio["steel"]["mineral"]=1000;
+traderatio["steel"]["food"]=800;
+traderatio["steel"]["iron"]=5;
+traderatio["steel"]["coal"]=1.7;
+traderatio["steel"]["tin"]=2.5;
 
 function refreshtrade(){
 		amount=$(".tradeamount").val()

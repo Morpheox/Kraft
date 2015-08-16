@@ -31,4 +31,9 @@ function researchunlock(){
 		$(".tech_studies").show()
 		unlocked[".tech_studies"]=1;
 	}
+
+	if((bonus["science"]>=1000 || bonus["economy"]>=1000 || bonus["military"]>=1000) && unlocked[".tech_organization"]!=1){
+		$(".tech_organization").show()
+		unlocked[".tech_organization"]=1;
+	}
 }

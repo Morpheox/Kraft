@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.1.7 beta</title>
+	<title>Keep Craft v0.1.6 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.1.7 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.1.6 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -124,7 +124,6 @@
 			<div class="block tech_studies"></div>
 			<div class="block tech_organization"></div>
 			<div class="block tech_culturaltrade"></div>
-			<div class="block tech_intelligence"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -258,15 +257,6 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
-        <b>V 0.1.7</b>
-        <ul>
-        <li>Added new military tech</li>
-        <li>Now invested knowledge gives a little bonus<br>
-         -Economy gives global production<br>
-         -Science gives craft effiency<br>
-        -Military gives bonus attack and hp<br>
-        <li>This bonuses have diminishing returns</li>
-        </ul>
         <b>V 0.1.6</b>
         <ul>
         <li>Added new economic tech</li>
@@ -401,7 +391,6 @@
 	$(".tech_studies").click(function() {research("studies")});
 	$(".tech_organization").click(function() {research("organization")});
 	$(".tech_culturaltrade").click(function() {research("culturaltrade")});
-	$(".tech_intelligence").click(function() {research("intelligence")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

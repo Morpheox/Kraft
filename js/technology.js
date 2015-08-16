@@ -41,8 +41,4 @@ function researchunlock(){
 		$(".tech_culturaltrade").show()
 		unlocked[".tech_culturaltrade"]=1;
 	}
-	if(bonus["military"]>=1600 && unlocked[".tech_intelligence"]!=1){
-		$(".tech_intelligence").show()
-		unlocked[".tech_intelligence"]=1;
-	}
 }

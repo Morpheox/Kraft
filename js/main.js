@@ -3134,7 +3134,7 @@ else
 	$(".tech_organization").removeClass("unavailable")
 }
 $(".tech_organization").addClass((technologies["organization"] >0 ? "researched" : ""))
-$(".tech_organization").html("Savings" + (technologies["organization"] >0 ? " (researched)" : ""));
+$(".tech_organization").html("Organization" + (technologies["organization"] >0 ? " (researched)" : ""));
 $(".tech_organization").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".tech_organization").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_organization").attr('tooltip4', "Gives a 20% bonus to all storages");

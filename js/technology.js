@@ -36,4 +36,9 @@ function researchunlock(){
 		$(".tech_organization").show()
 		unlocked[".tech_organization"]=1;
 	}
+
+	if(bonus["economy"]>=1500 && unlocked[".tech_culturaltrade"]!=1){
+		$(".tech_culturaltrade").show()
+		unlocked[".tech_culturaltrade"]=1;
+	}
 }

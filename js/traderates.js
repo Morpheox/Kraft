@@ -35,7 +35,8 @@ traderatio["copper"]["food"]=50;
 traderatio["copper"]["iron"]=0.6;
 traderatio["copper"]["coal"]=0.25;
 traderatio["copper"]["steel"]=0.06;
-
+traderatio["copper"]["gold"]=0.05;
+traderatio["copper"]["tin"]=0.35;
 
 traderatio["iron"]["wood"]=120;
 traderatio["iron"]["mineral"]=100;
@@ -176,13 +177,25 @@ items[trademission["resourceget"]]+=trademission["get"];
 
 clearInterval(tickinterval);
 
-$(".docklog").html("The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]);
+var docklog="The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]+"<br> "
+
 $(".tradego").show()
 if(Math.random()>0.90){
-$(".docklog").html("The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]+"<br> You also get 1 lock");
+docklog+=("You also get 1 lock");
 craft["lock"]++
 
 }
+if(technologies["culturaltrade"]==1 && Math.random()>0.70){
+var gainings=0;
+gainings+=Math.random()*(trademission["get"]/traderatio["copper"][trademission["resourceget"]])
+if(trademission["resourceget"]=="copper"){
+gainings+=Math.random()*trademission["get"]
+}
+docklog+=("While you were there, you also learnt some things about their culture, +"+intToString(gainings)+" knowledge<br>");
+items["knowledge"]+=gainings;
+
+}
+$(".docklog").html(docklog);
 trademission["get"]=0;
 trademission["resourceget"]=0;
 trademission["time"]=0;

@@ -115,6 +115,7 @@ technologies["healing"]=0
 technologies["savings"]=0
 technologies["studies"]=0
 technologies["organization"]=0
+technologies["culturaltrade"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -163,6 +164,7 @@ enemy["peasant"]=0;
 enemy["bandit"]=0;
 enemy["mercenary"]=0;
 enemy["soldier"]=0;
+enemy["halberdier"]=0;
 
 
 function develop(b){
@@ -412,6 +414,8 @@ function expedition(){
 			enemy["bandit"]=0;
 			enemy["mercenary"]=0;
 			enemy["soldier"]=0;
+			enemy["halberdier"]=0;
+
 			var enemytipo=Math.random()*power;
 			var stringencuentro="Enemys:<br>"
 			var rew=0;
@@ -430,10 +434,15 @@ function expedition(){
 				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
 				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
-			if(enemytipo>110){
+			if(enemytipo>110 && enemytipo<280){
 				enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
 				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
+			}
+			if(enemytipo>260){
+				enemy["halberdier"]=Math.round((Math.random()*power*0.03)+(power*0.008))+1;
+				stringencuentro+=enemy["soldier"]+" Halberdier (Attack:40 Hp:160)<br>";
+				rew+=(Math.random()*enemy["soldier"]*1.2)+(enemy["soldier"]*0.30)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
@@ -476,12 +485,14 @@ function fight(){
 	power2+=enemy["bandit"]*4
 	power2+=enemy["mercenary"]*9
 	power2+=enemy["soldier"]*15
+	power2+=enemy["halberdier"]*40
 
 	hp2=0;
 	hp2+=enemy["peasant"]*8
 	hp2+=enemy["bandit"]*15
 	hp2+=enemy["mercenary"]*40
 	hp2+=enemy["soldier"]*100
+	hp2+=enemy["halberdier"]*160
 
 	healing=0
 	healing+=people["medic"]*10
@@ -503,7 +514,7 @@ function fight(){
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
-		if(hp<1){
+		if(hp<0){
 			combatlog+="You lose the combat<br>"
 			if(people["pikeman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
@@ -1428,6 +1439,25 @@ function research(b){
 		}
 
 	}
+	else if (b=="culturaltrade" && technologies["culturaltrade"]==0){
+
+		bronzecost=50;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["bronze"]>=bronzecost){
+
+
+			craft["bronze"]-=bronzecost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["culturaltrade"]++
+
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -1523,7 +1553,7 @@ function hire(b){
 			knowledgecost=100;
 			coincost=10;
 
-			if (items["knowledge"]>=foodcost && craft["coin"]>=coincost){
+			if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
 				items["knowledge"]-=knowledgecost;
 				craft["coin"]-=coincost
 				people["scientist"]+=1
@@ -1831,7 +1861,7 @@ function build(b){
 	}
 	else if (b=="barn"){
 
-		blockcost= Math.pow(1.5,(buildings["barn"]))*5
+		blockcost= Math.pow(1.4,(buildings["barn"]))*5
 
 
 		if (craft["block"]>=blockcost){
@@ -2210,7 +2240,7 @@ if(technologies["bronze"]>0){
 	$(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
 }
 
-blockcost= Math.pow(1.5,(buildings["barn"]))*5
+blockcost= Math.pow(1.4,(buildings["barn"]))*5
 if(craft["block"]<blockcost){
 	$(".build_barn").addClass("unavailable")
 }
@@ -3140,8 +3170,20 @@ $(".tech_organization").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowle
 $(".tech_organization").attr('tooltip4', "Gives a 20% bonus to all storages");
 
 
-
-
+bronzecost=50;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["bronze"]<bronzecost){
+	$(".tech_culturaltrade").addClass("unavailable")
+}
+else
+{
+	$(".tech_culturaltrade").removeClass("unavailable")
+}
+$(".tech_culturaltrade").addClass((technologies["culturaltrade"] >0 ? "researched" : ""))
+$(".tech_culturaltrade").html("Cultural trade" + (technologies["culturaltrade"] >0 ? " (res..)" : ""));
+$(".tech_culturaltrade").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".tech_culturaltrade").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_culturaltrade").attr('tooltip4', "Allows getting knowledge when trading with other civilizations.");
 
 
 

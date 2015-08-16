@@ -123,6 +123,7 @@
 			<div class="block tech_savings"></div>
 			<div class="block tech_studies"></div>
 			<div class="block tech_organization"></div>
+			<div class="block tech_culturaltrade"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -256,6 +257,14 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.1.6</b>
+        <ul>
+        <li>Added new economic tech</li>
+        <li>Reduced cost ratio of barns</li>
+        <li>New enemy unit</li>
+        <li>Fixed a bug where you lose fights with 1 hp</li>
+        <li>Fixed a bug with scientists cost</li>
+        </ul>
         <b>V 0.1.5</b>
         <ul>
         <li>New neutral tech</li>
@@ -381,6 +390,7 @@
 	$(".tech_savings").click(function() {research("savings")});
 	$(".tech_studies").click(function() {research("studies")});
 	$(".tech_organization").click(function() {research("organization")});
+	$(".tech_culturaltrade").click(function() {research("culturaltrade")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

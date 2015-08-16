@@ -116,6 +116,7 @@ technologies["savings"]=0
 technologies["studies"]=0
 technologies["organization"]=0
 technologies["culturaltrade"]=0
+technologies["intelligence"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -170,8 +171,26 @@ enemy["halberdier"]=0;
 function develop(b){
 
 	bonus[b]+=items["knowledge"]-0.001
-	items["knowledge"]=0.001;
 
+
+	if(b=="economy"){
+		bonus["global"]+=(items["knowledge"]-0.001)/(((bonus["economy"]+(items["knowledge"]/2)+100000)))
+
+	}
+	else if(b=="science"){
+		bonus["craft"]+=(items["knowledge"]*1.5)/(((bonus["science"]+(items["knowledge"]/2)+100000)))
+
+	}
+	else if(b=="military"){
+		bonus["power"]+=(items["knowledge"]*2)/(((bonus["science"]+(items["knowledge"]/2)+100000)))
+		bonus["hp"]+=(items["knowledge"]*2)/(((bonus["science"]+(items["knowledge"]/2)+100000)))
+	}
+
+
+
+
+
+	items["knowledge"]=0.001;
 	researchunlock()
 }
 
@@ -569,7 +588,13 @@ function fight(){
 				rnd=Math.floor(power/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;
-				combatlog+="You also found "+ Math.round(rnd)+" lock";
+				combatlog+="You also found "+ Math.round(rnd)+" lock<br>";
+			}
+			if(Math.random()>0.70 && technologies["intelligence"]==1){
+				rnd=(Math.random()*((power/2)+(hp/15)))/4;
+				reward+=parseFloat(rnd).toFixed(2) + " knowledge<br>";
+				items["knowledge"]+=rnd;
+				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
 			}
 			break;
 		}
@@ -1453,6 +1478,25 @@ function research(b){
 			items["knowledge"]-=knowledgecost;
 
 			technologies["culturaltrade"]++
+
+
+		}
+
+	}
+	else if (b=="intelligence" && technologies["intelligence"]==0){
+
+		steelcost=100;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["steel"]>=steelcost){
+
+
+			items["steel"]-=steelcost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["intelligence"]++
 
 
 		}
@@ -3185,7 +3229,20 @@ $(".tech_culturaltrade").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"])
 $(".tech_culturaltrade").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_culturaltrade").attr('tooltip4', "Allows getting knowledge when trading with other civilizations.");
 
-
+steelcost=100;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || items["steel"]<steelcost){
+	$(".tech_intelligence").addClass("unavailable")
+}
+else
+{
+	$(".tech_intelligence").removeClass("unavailable")
+}
+$(".tech_intelligence").addClass((technologies["intelligence"] >0 ? "researched" : ""))
+$(".tech_intelligence").html("Intelligence" + (technologies["intelligence"] >0 ? " (res..)" : ""));
+$(".tech_intelligence").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_intelligence").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_intelligence").attr('tooltip4', "When you win a fight, you get a chance to steal knowledge from the enemy.");
 
 //Research
 
@@ -3193,15 +3250,17 @@ $(".tech_culturaltrade").attr('tooltip4', "Allows getting knowledge when trading
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
 $(".research_economy").attr('tooltip', "Economy its a big force, prosperity and wealth awaits for those ");
 $(".research_economy").attr('tooltip2', "who look for it.");
+$(".research_economy").attr('tooltip4', "Also increases global production");
 
 $(".research_science").html("Science " + intToString(bonus["science"]));
 $(".research_science").attr('tooltip', "Science leads humanity forward, it can be slow, ");
 $(".research_science").attr('tooltip2', "but it never stops evolving. ");
+$(".research_science").attr('tooltip4', "Also increases craft effiency");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
 $(".research_military").attr('tooltip', "The are times, when only the most powerfull get what he wants,");
 $(".research_military").attr('tooltip2', "is that you?");
-
+$(".research_military").attr('tooltip4', "Also increases troops attack and hp");
 
 
 //crafting

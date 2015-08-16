@@ -49,4 +49,9 @@ function researchunlock(){
 		$(".tech_crushing").show()
 		unlocked[".tech_crushing"]=1;
 	}
+	
+	if(bonus["science"]>=2200 && unlocked[".tech_floatglass"]!=1){
+		$(".tech_floatglass").show()
+		unlocked[".tech_floatglass"]=1;
+	}
 }

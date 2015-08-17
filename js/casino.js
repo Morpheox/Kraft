@@ -85,6 +85,7 @@ $(".playgame2").html(remaining)
 }
 var totalwon=0;
 var locks=0;
+var opened=0;
 function openbox(x,y){
 
 
@@ -115,7 +116,11 @@ else
 $("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>L</span>")
 locks++;
 }
-
+opened++;
+if(opened>=81){
+    remaining=0;
+    craft["diamond"]+=1;
+}
 $(".totalwon").html("Total Won: "+intToString(totalwon));
 $(".playgame2").html(remaining)
 if(remaining<1){

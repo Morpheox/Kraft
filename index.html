@@ -127,7 +127,9 @@
 			<div class="block tech_culturaltrade"></div>
 			<div class="block tech_intelligence"></div>
 			<div class="block tech_crushing"></div>
+			<div class="block tech_contracts"></div>
 			<div class="block tech_floatglass"></div>
+			<div class="block tech_galleon"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -195,6 +197,7 @@
 	</div>
 	<div id="dock" class="dock tab-pane fade">
 	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br><br>
+	<div class="block hire_galleon"></div><button class="fire salvage_galleon" onclick='salvage("galleon")'>Salvage 1</button><br><br>
 	<div class="tradesea">
 	Trade mission<br>
 	Amount: <input class="tradeamount" type="number" value="1"></input><button class="maxtrade" onclick="maxtrade()">MAX</button><br><br>
@@ -262,6 +265,13 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+          <b>V 0.2</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New economic tech</li>
+        <li>New ship - the galleon<br>
+        <li>New ultra secret item<br>
+        </ul>
         <b>V 0.1.9</b>
         <ul>
         <li>New science tech</li>
@@ -379,6 +389,7 @@
 	$(".hire_medic").click(function() {hire("medic")});
 
 	$(".hire_galley").click(function() {hire("galley")});
+	$(".hire_galleon").click(function() {hire("galleon")});
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -420,6 +431,8 @@
 	$(".tech_intelligence").click(function() {research("intelligence")});
 	$(".tech_crushing").click(function() {research("crushing")});
 	$(".tech_floatglass").click(function() {research("floatglass")});
+	$(".tech_contracts").click(function() {research("contracts")});
+	$(".tech_galleon").click(function() {research("galleon")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

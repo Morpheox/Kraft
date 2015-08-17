@@ -49,9 +49,20 @@ function researchunlock(){
 		$(".tech_crushing").show()
 		unlocked[".tech_crushing"]=1;
 	}
+
+	if((bonus["science"]>=2000 || bonus["economy"]>=2000 || bonus["military"]>=2000) && unlocked[".tech_contracts"]!=1){
+		$(".tech_contracts").show()
+		unlocked[".tech_contracts"]=1;
+	}
 	
 	if(bonus["science"]>=2200 && unlocked[".tech_floatglass"]!=1){
 		$(".tech_floatglass").show()
 		unlocked[".tech_floatglass"]=1;
 	}
+	if(bonus["economy"]>=2500 && unlocked[".tech_galleon"]!=1){
+		$(".tech_galleon").show()
+		unlocked[".tech_galleon"]=1;
+	}
+
+
 }

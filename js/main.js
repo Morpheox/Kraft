@@ -123,6 +123,9 @@ technologies["culturaltrade"]=0
 technologies["intelligence"]=0
 technologies["crushing"]=0
 technologies["floatglass"]=0
+technologies["contracts"]=0
+technologies["galleon"]=0
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -145,10 +148,12 @@ people["xochiquetzal"]=0
 people["warmuk"]=0
 
 people["galley"]=0
+people["galleon"]=0
 
 var craft=new Array();
 
 craft["chest"]=0
+craft["diamond"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
@@ -571,7 +576,7 @@ function fight(){
 			break;
 		}
 		else if(hp2<1){
-
+			var reward="";
 			combatlog+="You win the combat!<br><br>";
 			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
 			$(".encounter").hide()
@@ -1575,7 +1580,58 @@ function research(b){
 		}
 
 	}
+	else if (b=="galleon" && technologies["galleon"]==0){
 
+
+		woodcost=40000;
+		plankcost=1000;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["wood"]>=woodcost && craft["plank"]>=plankcost){
+
+
+			items["wood"]-=woodcost;
+			craft["plank"]-=plankcost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["galleon"]++
+			$(".hire_galleon").show()
+			unlocked[".hire_galleon"]=1;
+
+		}
+
+	}
+	else if (b=="contracts" && technologies["contracts"]==0){
+
+
+		coincost=200;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+
+			craft["coin"]-=coincost;
+			items["knowledge"]-=knowledgecost;
+
+
+			bonus["wood"]+=0.10;
+			bonus["mineral"]+=0.10;
+			bonus["knowledge"]+=0.10;
+			bonus["morale"]+=0.10;
+
+
+			technologies["contracts"]++
+
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -1777,7 +1833,28 @@ function hire(b){
 			}
 
 		}
+		if (b=="galleon"){
 
+			plankcost=1500;
+			structurecost=300;
+
+
+			if (craft["plank"]>=plankcost && craft["structure"]>=structurecost){
+
+				craft["plank"]-=plankcost;
+				craft["structure"]-=structurecost;
+
+				people["galleon"]+=1;
+				ships++
+
+				$(".salvage_galleon").show()
+				unlocked[".salvage_galleon"]=1;
+
+
+
+			}
+
+		}
 	}
 
 
@@ -1797,6 +1874,12 @@ function salvage(b){
 			craft["plank"]+=10+(Math.random()*10);
 			craft["structure"]+=5+(Math.random()*5);
 			items["wood"]+=1000+(Math.random()*5000);
+		}
+		if(b=="galleon"){
+
+			craft["plank"]+=300+(Math.random()*300);
+			craft["structure"]+=50+(Math.random()*50);
+			items["wood"]+=20000+(Math.random()*20000);
 		}
 	}
 
@@ -2610,7 +2693,7 @@ $(".hire_smelter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2
 $(".hire_smelter").attr('tooltip2', "Mineral consumption: -0.20/s");
 $(".hire_smelter").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_smelter").attr('tooltip4', "Copper production: +0.01/s");
-if(technologies["metallurgy"]>0){
+if(technologies["metallurgy"]!=0){
 	$(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
 }
 
@@ -2769,12 +2852,25 @@ $(".hire_galley").html("Galley ("+people["galley"]+")");
 $(".hire_galley").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".hire_galley").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".hire_galley").attr('tooltip3', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
-$(".hire_galley").attr('tooltip5', "Power: 150  Structure: 2000");
-$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5000  Crew: 2');
+$(".hire_galley").attr('tooltip5', "Power: 150  Structure: 2.000");
+$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5.000  Crew: 2');
 
 
+plankcost=1500;
+structurecost=300;
 
-
+if(craft["plank"]<plankcost || craft["structure"]<structurecost || ships>=maximums["ships"]){
+	$(".hire_galleon").addClass("unavailable")
+}
+else
+{
+	$(".hire_galleon").removeClass("unavailable")
+}
+$(".hire_galleon").html("Galleon ("+people["galleon"]+")");
+$(".hire_galleon").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".hire_galleon").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
+$(".hire_galleon").attr('tooltip4', "Power: 500  Structure: 15.000");
+$(".hire_galleon").attr('tooltip5', 'Cargo capacity: 25.000  Crew: 5');
 //Technologies
 
 coppercost=1;
@@ -3378,7 +3474,7 @@ $(".tech_crushing").attr('tooltip4', "Allows building crushing mills to produce 
 tincost=200;
 sandcost=600;
 knowledgecost=500;
-if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost){
+if(items["knowledge"]<knowledgecost || items["tin"]<tincost || items["sand"]<sandcost){
 	$(".tech_floatglass").addClass("unavailable")
 }
 else
@@ -3392,6 +3488,38 @@ $(".tech_floatglass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFix
 $(".tech_floatglass").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_floatglass").attr('tooltip5', "A process to create sheets of glass. ");
 
+coincost=200;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_contracts").addClass("unavailable")
+}
+else
+{
+	$(".tech_contracts").removeClass("unavailable")
+}
+$(".tech_contracts").addClass((technologies["contracts"] >0 ? "researched" : ""))
+$(".tech_contracts").html("Contracts" + (technologies["contracts"] >0 ? " (res..)" : ""));
+$(".tech_contracts").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_contracts").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_contracts").attr('tooltip4', "Contracts increase wood, mineral, morale and knowledge production by 10%");
+
+
+woodcost=40000;
+plankcost=1000;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || items["wood"]<woodcost || craft["plank"]<plankcost){
+	$(".tech_galleon").addClass("unavailable")
+}
+else
+{
+	$(".tech_galleon").removeClass("unavailable")
+}
+$(".tech_galleon").addClass((technologies["galleon"] >0 ? "researched" : ""))
+$(".tech_galleon").html("Galleon" + (technologies["galleon"] >0 ? " (res..)" : ""));
+$(".tech_galleon").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_galleon").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_galleon").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_galleon").attr('tooltip5', "Galleons are mega ships that can carry loads of resources.");
 //Research
 
 

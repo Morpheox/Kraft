@@ -57,8 +57,10 @@ function refreshtrade(){
 		amountget=amount*traderatio[$(".selgive").val()][$(".selget").val()]
 		var cost=0;
 		cost+=people["galley"]*1
+		cost+=people["galleon"]*10
 		var crew=0;
 		crew+=people["galley"]*2
+		crew+=people["galleon"]*5
 		$(".ratiotrade").html(traderatio[$(".selgive").val()][$(".selget").val()])
 		$(".traderecieve").html("You get "+intToString(amountget)+" "+$(".selget").val()+"<br><br>Supplies: "+cost+" Crew: "+crew)
 
@@ -69,7 +71,9 @@ function maxtrade(){
 
 	var maxresources=0;
 
+
 	maxresources+=people["galley"]*5000
+	maxresources+=people["galleon"]*25000
 
 	resources=items[$(".selgive").val()]
 
@@ -98,6 +102,7 @@ function tradeship(){
 	var maxresources=0;
 
 	maxresources+=people["galley"]*5000
+	maxresources+=people["galleon"]*25000
 
 	resources=items[$(".selgive").val()]
 	resourcestrade=$(".tradeamount").val()
@@ -136,6 +141,7 @@ function tradeship(){
 
 	var cost=0;
 	cost+=people["galley"]*1
+	cost+=people["galleon"]*10
 	if (craft["supplies"]<cost){
 		$(".docklog").html("Not enough supplies for the mission.")
 		return;
@@ -143,6 +149,7 @@ function tradeship(){
 
 	var crew=0;
 	crew+=people["galley"]*2
+	crew+=people["galleon"]*5
 	if(people["sailor"]<crew){
 		$(".docklog").html("Not enought crew to support the fleet.")
 		return;

@@ -127,6 +127,7 @@ technologies["floatglass"]=0
 technologies["contracts"]=0
 technologies["galleon"]=0
 technologies["canteen"]=0
+technologies["glassblowing"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -866,6 +867,22 @@ function crafting(b){
 
 
 				craft["glass"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="bottle"){
+
+			glasscost=5;
+
+			if (craft["glass"]>=glasscost){
+
+				craft["glass"]-=glasscost;
+
+				craft["bottle"]+=1+bonus["craft"];
+
+				maximums["water"]+=1*(bonus["craft"]+1);
+
 
 			}
 
@@ -1704,6 +1721,28 @@ function research(b){
 			technologies["contracts"]++
 
 
+		}
+
+	}
+	else if (b=="glassblowing" && technologies["glassblowing"]==0){
+
+
+		glasscost=20;
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["glass"]>=glasscost){
+
+
+			craft["glass"]-=glasscost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["glassblowing"]++
+			$(".craft_bottle").show()
+			unlocked[".craft_bottle"]=1;
 		}
 
 	}
@@ -3609,6 +3648,22 @@ $(".tech_galleon").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2
 $(".tech_galleon").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_galleon").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_galleon").attr('tooltip5', "Galleons are mega ships that can carry loads of resources.");
+
+glasscost=20;
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["glass"]<glasscost){
+	$(".tech_contracts").addClass("unavailable")
+}
+else
+{
+	$(".tech_contracts").removeClass("unavailable")
+}
+$(".tech_glassblowing").addClass((technologies["contracts"] >0 ? "researched" : ""))
+$(".tech_glassblowing").html("Contracts" + (technologies["contracts"] >0 ? " (researched)" : ""));
+$(".tech_glassblowing").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".tech_glassblowing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_glassblowing").attr('tooltip4', "Allows you to craft bottles to store water and others liquids.");
+
 //Research
 
 
@@ -3790,6 +3845,20 @@ $(".craft_glass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+"
 $(".craft_glass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
 $(".craft_glass").attr('tooltip3', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
 $(".craft_glass").attr('tooltip5', "A sheet of glass");
+
+glasscost=5
+
+if(items["steel"]<steelcost || craft["bronze"]<bronzecost){
+	$(".craft_armor").addClass("unavailable")
+}
+else
+{
+	$(".craft_armor").removeClass("unavailable")
+}
+$(".craft_bottle").html("Bottle");
+$(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_bottle").attr('tooltip3', "A bottle of glass to store water and others liquids.");
+$(".craft_bottle").attr('tooltip4', "+1 water storage");
 //Leaders
 
 if(bonus["title"]<1){

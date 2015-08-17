@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.2.2 beta</title>
+	<title>Keep Craft v0.2.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.2.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.2.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -131,6 +131,7 @@
 			<div class="block tech_floatglass"></div>
 			<div class="block tech_canteen"></div>
 			<div class="block tech_galleon"></div>
+			<div class="block tech_glassblowing"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -150,6 +151,7 @@
 		<div class="block craft_supplies"></div><br>
 		<div class="block craft_chest"></div><br>
 		<div class="block craft_glass"></div><br>
+		<div class="block craft_bottle"></div><br>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
 		<div class="block hire_pikeman"></div><button class="fire fire_pikeman" onclick='fire("pikeman")'>Fire 1</button><br>
@@ -267,6 +269,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.2.3</b>
+        <ul>
+        <li>New science tech</li>
+        <li>craftable bottles</li>
+        </ul>
         <b>V 0.2.2</b>
         <ul>
         <li>Added a function for treasures, respec leaders</li>
@@ -451,6 +458,7 @@
 	$(".tech_canteen").click(function() {research("canteen")});
 	$(".tech_contracts").click(function() {research("contracts")});
 	$(".tech_galleon").click(function() {research("galleon")});
+	$(".tech_glassblowing").click(function() {research("glassblowing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -463,6 +471,7 @@
 	$(".craft_supplies").click(function() {crafting("supplies")});
 	$(".craft_chest").click(function() {crafting("chest")});
 	$(".craft_glass").click(function() {crafting("glass")});
+	$(".craft_bottle").click(function() {crafting("bottle")});
 
 	$(".expedition").click(function() {expedition()});
         

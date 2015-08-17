@@ -207,6 +207,7 @@ technologies["crushing"]=0
 technologies["floatglass"]=0
 technologies["contracts"]=0
 technologies["galleon"]=0
+technologies["glassblowing"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

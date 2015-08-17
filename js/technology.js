@@ -64,10 +64,14 @@ function researchunlock(){
 		$(".tech_galleon").show()
 		unlocked[".tech_galleon"]=1;
 	}
-	
+
 	if(bonus["military"]>=2200 && unlocked[".tech_canteen"]!=1){
 		$(".tech_canteen").show()
 		unlocked[".tech_canteen"]=1;
 	}
-	
+
+	if(bonus["science"]>=2500 && unlocked[".tech_glassblowing"]!=1){
+		$(".tech_glassblowing").show()
+		unlocked[".tech_glassblowing"]=1;
+	}
 }

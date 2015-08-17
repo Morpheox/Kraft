@@ -76,7 +76,7 @@ stringtablero+="</tr>";
 }
 
 stringtablero+="</table>";
-
+opened=0;
 remaining=5;
 $(".tablero").html(stringtablero)
 $(".playgame2").html(remaining)

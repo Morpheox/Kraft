@@ -3849,11 +3849,11 @@ $(".craft_glass").attr('tooltip5', "A sheet of glass");
 glasscost=5
 
 if(items["steel"]<steelcost || craft["bronze"]<bronzecost){
-	$(".craft_armor").addClass("unavailable")
+	$(".craft_bottle").addClass("unavailable")
 }
 else
 {
-	$(".craft_armor").removeClass("unavailable")
+	$(".craft_bottle").removeClass("unavailable")
 }
 $(".craft_bottle").html("Bottle");
 $(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))

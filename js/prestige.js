@@ -131,7 +131,7 @@ bonus["storage"]=0;
 bonus["economy"]=0;
 bonus["science"]=0;
 bonus["military"]=0;
-
+bonus["reespeccost"]=0;
 
 for(key in items){
 	bonus[key]=0;
@@ -261,6 +261,9 @@ for(key in unlocked){
 
 	$(".build_lumbermill").show()
 	unlocked[".build_lumbermill"]=1;
+
+	$(".reespec").show()
+	unlocked[".reespec"]=1;
 
 	$("#legacypane").removeClass("invisible")
 	unlocked["#legacypane"]=1;

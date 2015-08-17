@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.2.1 beta</title>
+	<title>Keep Craft v0.2.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.2.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.2.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -193,7 +193,8 @@
 	<div class="block leader_elisia"></div><br>
 	<div class="block leader_xochiquetzal"></div><br>
 	<div class="block leader_warmuk"></div><br>
-
+	<br><br>
+	<div class="block reespec"></div><br>
 
 	</div>
 	<div id="dock" class="dock tab-pane fade">
@@ -266,6 +267,16 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.2.2</b>
+        <ul>
+        <li>Added a function for treasures, respec leaders</li>
+        <li>Fixed a bug in casino game 2</li>
+        <li>Fixed medics not counting toward max population when refreshing</li>
+        <li>Fixed halberdier not showing the units number</li>
+        <li>Fixed cache cost</li>
+        <li>Fixed error in contracts tooltip</li>
+        <li>Fixed some typos</li>
+        </ul>
          <b>V 0.2.1</b>
         <ul>
         <li>New military tech</li>
@@ -465,6 +476,8 @@
     $(".leader_elisia").click(function() {lead("elisia")});
     $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
     $(".leader_warmuk").click(function() {lead("warmuk")});
+
+    $(".reespec").click(function() {reespec()});
 
 	$(".legacy_motivation").click(function() {lega("motivation")});
 	$(".legacy_depot").click(function() {lega("depot")});

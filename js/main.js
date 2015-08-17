@@ -26,6 +26,7 @@ bonus["global"]=0;
 bonus["trade"]=0;
 bonus["craft"]=0;
 bonus["title"]=0;
+bonus["reespeccost"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
 bonus["healing"]=0;
@@ -207,7 +208,45 @@ function develop(b){
 	items["knowledge"]=0.001;
 	researchunlock()
 }
+function reespec(){
+	cost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
+	if(people["xochiquetzal"]>=1){
+		if(population>(maximums["population"]-(people["xochiquetzal"]*2))){
+			alert("You can´t reespec because you would exceed maximum population, fire some workers first.")
+			return;
 
+		}
+	}
+	if(prestige["treasure"]>=cost){
+		prestige["treasure"]-=cost;
+		bonus["wood"]-=0.15*people["sucellus"]
+		bonus["water"]-=0.15*people["sucellus"]
+		bonus["food"]-=0.15*people["sucellus"]
+		bonus["copper"]-=0.10*people["eredal"]
+		bonus["iron"]-=0.10*people["eredal"]
+		bonus["steel"]-=0.10*people["eredal"]
+		bonus["mineral"]-=0.10*people["eredal"]
+		bonus["gold"]-=0.30*people["khrysos"]
+		bonus["trade"]-=0.10*people["khrysos"]
+		bonus["craft"]-=0.05*people["elisia"]
+		maximums["wood"]-=500*people["elisia"]
+		maximums["mineral"]-=500*people["elisia"]
+		maximums["population"]-=2*people["xochiquetzal"]
+		bonus["hp"]-=0.05*people["xochiquetzal"]
+		bonus["hp"]-=0.05*people["xochiquetzal"]
+		bonus["power"]-=0.10*people["warmuk"]
+		bonus["morale"]-=0.05*people["warmuk"]
+		maximums["morale"]-=2*people["warmuk"]
+		bonus["title"]+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]
+		people["sucellus"]=0
+		people["eredal"]=0
+		people["khrysos"]=0
+		people["elisia"]=0
+		people["xochiquetzal"]=0
+		people["warmuk"]=0
+		bonus["reespeccost"]+=1;
+	}
+}
 function toggle(t){
 
 	if (buildstatus[t]==0){
@@ -3801,7 +3840,17 @@ $(".leader_warmuk").attr('tooltip3', 'Increments morale production by 5%')
 $(".leader_warmuk").attr('tooltip5', "'If you run away, you will die tired'");
 
 
-
+treasurecost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
+if(prestige["treasure"]<treasurecost){
+	$(".reespec").addClass("unavailable")
+}
+else
+{
+	$(".reespec").removeClass("unavailable")
+}
+$(".reespec").html("Respec");
+$(".reespec").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
+$(".reespec").attr('tooltip3', 'Lets you get your titles back, for a cost..')
 //Others
 
 if(prestige["number"]>0){

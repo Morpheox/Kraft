@@ -1330,7 +1330,7 @@ function research(b){
 		plankcost=500;
 
 
-		if (items["mineral"]>=mineralcost && items["gold"]>=goldcost && craft["plank"]>=plankcost){
+		if (items["mineral"]>=mineralcost && items["steel"]>=steelcost && craft["plank"]>=plankcost){
 
 			craft["plank"]-=plankcost;
 			items["steel"]-=steelcost;

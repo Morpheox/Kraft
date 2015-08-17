@@ -4247,7 +4247,10 @@ function load(){
 		items["morale"]=items["moral"]
 		items["moral"]=0;
 	}
-
+	if(prestige["number"]>0){
+		$(".reespec").show()
+		unlocked[".reespec"]=1;
+	}
 	maximums["knowledge"]=buildings["library"]*100;
 	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
 

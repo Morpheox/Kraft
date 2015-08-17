@@ -612,7 +612,7 @@ function fight(){
 			}
 			if(Math.random()>0.80 && technologies["canteen"]==1){
 				rnd=(Math.random()*((power/2)+(hp/15)))/400;
-				combatlog+="You found "+ Math.round(rnd)+" bottle<br>";
+				combatlog+="You found "+ intToString(rnd)+" bottle<br>";
 				craft["bottle"]+=rnd;
 				maximums["water"]+=rnd;
 			}

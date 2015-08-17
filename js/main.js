@@ -3856,7 +3856,7 @@ else
 	$(".craft_bottle").removeClass("unavailable")
 }
 $(".craft_bottle").html("Bottle");
-$(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(items["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".craft_bottle").attr('tooltip3', "A bottle of glass to store water and others liquids.");
 $(".craft_bottle").attr('tooltip4', "+1 water storage");
 //Leaders

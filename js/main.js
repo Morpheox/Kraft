@@ -400,7 +400,7 @@ function expedition(){
 				craft["lock"]+=rnd;
 			}
 			if(Math.random()>0.95 && technologies["canteen"]==1){
-				rnd=Math.round((Math.random()*power)/300)+1;
+				rnd=(Math.random()*power)/500;
 				reward+=parseFloat(rnd).toFixed(2) + " bottle<br>";
 				craft["bottle"]+=rnd;
 				maximums["water"]+=rnd;

@@ -480,7 +480,7 @@ function expedition(){
 			}
 			if(enemytipo>260){
 				enemy["halberdier"]=Math.round((Math.random()*power*0.03)+(power*0.008))+1;
-				stringencuentro+=enemy["soldier"]+" Halberdier (Attack:40 Hp:160)<br>";
+				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
 				rew+=(Math.random()*enemy["soldier"]*1.2)+(enemy["soldier"]*0.30)
 			}
 			enemy["reward"]=rew;
@@ -612,7 +612,7 @@ function fight(){
 			}
 			if(Math.random()>0.80 && technologies["canteen"]==1){
 				rnd=(Math.random()*((power/2)+(hp/15)))/400;
-				combatlog+="You found "+ intToString(rnd)+" bottle<br>";
+				combatlog+="You found "+ intToString(rnd)+" bottles<br>";
 				craft["bottle"]+=rnd;
 				maximums["water"]+=rnd;
 			}

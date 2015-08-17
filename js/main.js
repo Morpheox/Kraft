@@ -3549,7 +3549,7 @@ else
 }
 $(".tech_contracts").addClass((technologies["contracts"] >0 ? "researched" : ""))
 $(".tech_contracts").html("Contracts" + (technologies["contracts"] >0 ? " (researched)" : ""));
-$(".tech_contracts").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_contracts").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_contracts").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_contracts").attr('tooltip4', "Contracts increase wood, mineral, morale and knowledge production by 10%");
 

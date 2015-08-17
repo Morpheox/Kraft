@@ -45,6 +45,7 @@ function researchunlock(){
 		$(".tech_intelligence").show()
 		unlocked[".tech_intelligence"]=1;
 	}
+
 	if(bonus["science"]>=1700 && unlocked[".tech_crushing"]!=1){
 		$(".tech_crushing").show()
 		unlocked[".tech_crushing"]=1;
@@ -63,6 +64,10 @@ function researchunlock(){
 		$(".tech_galleon").show()
 		unlocked[".tech_galleon"]=1;
 	}
-
-
+	
+	if(bonus["military"]>=2200 && unlocked[".tech_canteen"]!=1){
+		$(".tech_canteen").show()
+		unlocked[".tech_canteen"]=1;
+	}
+	
 }

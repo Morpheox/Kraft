@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.2.0 beta</title>
+	<title>Keep Craft v0.2.1 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.2.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.2.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -129,6 +129,7 @@
 			<div class="block tech_crushing"></div>
 			<div class="block tech_contracts"></div>
 			<div class="block tech_floatglass"></div>
+			<div class="block tech_canteen"></div>
 			<div class="block tech_galleon"></div>
 		</div>
 			<br><br><br><br><br><br>
@@ -265,6 +266,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+         <b>V 0.2.1</b>
+        <ul>
+        <li>New military tech</li>
+        <li>New item - bottles</li>
+        </ul>
           <b>V 0.2</b>
         <ul>
         <li>New neutral tech</li>
@@ -431,6 +437,7 @@
 	$(".tech_intelligence").click(function() {research("intelligence")});
 	$(".tech_crushing").click(function() {research("crushing")});
 	$(".tech_floatglass").click(function() {research("floatglass")});
+	$(".tech_canteen").click(function() {research("canteen")});
 	$(".tech_contracts").click(function() {research("contracts")});
 	$(".tech_galleon").click(function() {research("galleon")});
 

@@ -125,7 +125,7 @@ technologies["crushing"]=0
 technologies["floatglass"]=0
 technologies["contracts"]=0
 technologies["galleon"]=0
-
+technologies["canteen"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -152,22 +152,24 @@ people["galleon"]=0
 
 var craft=new Array();
 
-craft["chest"]=0
+craft["coin"]=0
 craft["diamond"]=0
+craft["chest"]=0
+craft["bottle"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
-craft["block"]=0
-craft["coin"]=0
-craft["bronze"]=0
-craft["structure"]=0
 craft["armor"]=0
+craft["block"]=0
+craft["structure"]=0
+craft["plank"]=0
+craft["glass"]=0
+craft["bronze"]=0
 craft["horse"]=0
 craft["token"]=0
-craft["plank"]=0
 craft["supplies"]=0
 craft["lock"]=0
-craft["glass"]=0
+
 
 var unlocked=new Array();
 
@@ -337,17 +339,17 @@ function expedition(){
 			reward="The expedition found:<br>";
 
 
-			if(Math.random()>0.40){
+			if(Math.random()>0.50){
 				rnd=(Math.random()*power)*25;
 				reward+=parseFloat(rnd).toFixed(2) + " wood<br>";
 				items["wood"]+=rnd;
 			}
-			if(Math.random()>0.60){
+			if(Math.random()>0.70){
 				rnd=(Math.random()*power)*15;
 				reward+=parseFloat(rnd).toFixed(2) + " minerals<br>";
 				items["mineral"]+=rnd;
 			}
-			if(Math.random()>0.75){
+			if(Math.random()>0.80){
 				rnd=(Math.random()*power)*5;
 				reward+=parseFloat(rnd).toFixed(2) + " food<br>";
 				items["food"]+=rnd;
@@ -396,6 +398,12 @@ function expedition(){
 				rnd=Math.round((Math.random()*power)/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["canteen"]==1){
+				rnd=Math.round((Math.random()*power)/300)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " bottle<br>";
+				craft["bottle"]+=rnd;
+				maximums["water"]+=rnd;
 			}
 			if(Math.random()>0.99 && technologies["cache"]==1){
 				rnd=(Math.random()*power)/500;
@@ -600,7 +608,13 @@ function fight(){
 				rnd=Math.floor(power/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;
-				combatlog+="You also found "+ Math.round(rnd)+" lock<br>";
+				combatlog+="You found "+ Math.round(rnd)+" lock<br>";
+			}
+			if(Math.random()>0.80 && technologies["canteen"]==1){
+				rnd=(Math.random()*((power/2)+(hp/15)))/400;
+				combatlog+="You found "+ Math.round(rnd)+" bottle<br>";
+				craft["bottle"]+=rnd;
+				maximums["water"]+=rnd;
 			}
 			if(Math.random()>0.70 && technologies["intelligence"]==1){
 				rnd=(Math.random()*((power/2)+(hp/15)))/4;
@@ -1576,6 +1590,28 @@ function research(b){
 			technologies["floatglass"]++
 			$(".craft_glass").show()
 			unlocked[".craft_glass"]=1;
+
+		}
+
+	}
+	else if (b=="canteen" && technologies["canteen"]==0){
+
+
+
+		knowledgecost=700;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+
+			items["knowledge"]-=knowledgecost;
+
+
+			maximums["water"]+=20;
+
+			technologies["canteen"]++
+
 
 		}
 
@@ -3487,6 +3523,20 @@ $(".tech_floatglass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(
 $(".tech_floatglass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
 $(".tech_floatglass").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_floatglass").attr('tooltip5', "A process to create sheets of glass. ");
+
+knowledgecost=700;
+if(items["knowledge"]<knowledgecost){
+	$(".tech_canteen").addClass("unavailable")
+}
+else
+{
+	$(".tech_canteen").removeClass("unavailable")
+}
+$(".tech_canteen").addClass((technologies["canteen"] >0 ? "researched" : ""))
+$(".tech_canteen").html("Canteen" + (technologies["canteen"] >0 ? " (researched)" : ""));
+$(".tech_canteen").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_canteen").attr('tooltip3', "Increases water storage by 20");
+$(".tech_canteen").attr('tooltip4', "Allows to find or steal water bottles to further increase water storage.");
 
 coincost=200;
 knowledgecost=500;

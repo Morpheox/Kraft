@@ -228,6 +228,7 @@ people["galley"]=0
 people["galleon"]=0
 craft["chest"]=0
 craft["diamond"]=0
+craft["bottle"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0

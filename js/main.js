@@ -3652,11 +3652,11 @@ $(".tech_galleon").attr('tooltip5', "Galleons are mega ships that can carry load
 glasscost=20;
 knowledgecost=500;
 if(items["knowledge"]<knowledgecost || craft["glass"]<glasscost){
-	$(".tech_contracts").addClass("unavailable")
+	$(".tech_glassblowing").addClass("unavailable")
 }
 else
 {
-	$(".tech_contracts").removeClass("unavailable")
+	$(".tech_glassblowing").removeClass("unavailable")
 }
 $(".tech_glassblowing").addClass((technologies["glassblowing"] >0 ? "researched" : ""))
 $(".tech_glassblowing").html("Glassblowing" + (technologies["glassblowing"] >0 ? " (researched)" : ""));

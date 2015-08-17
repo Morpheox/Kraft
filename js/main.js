@@ -3451,7 +3451,7 @@ else
 	$(".tech_intelligence").removeClass("unavailable")
 }
 $(".tech_intelligence").addClass((technologies["intelligence"] >0 ? "researched" : ""))
-$(".tech_intelligence").html("Intelligence" + (technologies["intelligence"] >0 ? " (res..)" : ""));
+$(".tech_intelligence").html("Intelligence" + (technologies["intelligence"] >0 ? " (researched)" : ""));
 $(".tech_intelligence").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_intelligence").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_intelligence").attr('tooltip4', "When you win a fight, you get a chance to steal knowledge from the enemy.");
@@ -3466,7 +3466,7 @@ else
 	$(".tech_crushing").removeClass("unavailable")
 }
 $(".tech_crushing").addClass((technologies["crushing"] >0 ? "researched" : ""))
-$(".tech_crushing").html("Crushing" + (technologies["crushing"] >0 ? " (res..)" : ""));
+$(".tech_crushing").html("Crushing" + (technologies["crushing"] >0 ? " (researched)" : ""));
 $(".tech_crushing").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".tech_crushing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_crushing").attr('tooltip4', "Allows building crushing mills to produce sand.");
@@ -3482,7 +3482,7 @@ else
 	$(".tech_floatglass").removeClass("unavailable")
 }
 $(".tech_floatglass").addClass((technologies["floatglass"] >0 ? "researched" : ""))
-$(".tech_floatglass").html("Floatglass" + (technologies["floatglass"] >0 ? " (res..)" : ""));
+$(".tech_floatglass").html("Float glass" + (technologies["floatglass"] >0 ? " (researched)" : ""));
 $(".tech_floatglass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
 $(".tech_floatglass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
 $(".tech_floatglass").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
@@ -3498,7 +3498,7 @@ else
 	$(".tech_contracts").removeClass("unavailable")
 }
 $(".tech_contracts").addClass((technologies["contracts"] >0 ? "researched" : ""))
-$(".tech_contracts").html("Contracts" + (technologies["contracts"] >0 ? " (res..)" : ""));
+$(".tech_contracts").html("Contracts" + (technologies["contracts"] >0 ? " (researched)" : ""));
 $(".tech_contracts").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".tech_contracts").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_contracts").attr('tooltip4', "Contracts increase wood, mineral, morale and knowledge production by 10%");
@@ -3515,7 +3515,7 @@ else
 	$(".tech_galleon").removeClass("unavailable")
 }
 $(".tech_galleon").addClass((technologies["galleon"] >0 ? "researched" : ""))
-$(".tech_galleon").html("Galleon" + (technologies["galleon"] >0 ? " (res..)" : ""));
+$(".tech_galleon").html("Galleon" + (technologies["galleon"] >0 ? " (researched)" : ""));
 $(".tech_galleon").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_galleon").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_galleon").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))

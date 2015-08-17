@@ -4144,7 +4144,7 @@ function load(){
 
 
 
-		ships=people["galley"]
+		ships=people["galley"]+people["galleon"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{

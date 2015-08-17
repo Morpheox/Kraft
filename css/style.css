@@ -265,3 +265,8 @@ font-size: 20px;
   overflow:scroll;
   height:500px;
 }
+
+.buildlist{
+  width:300px;
+  float:left;
+}

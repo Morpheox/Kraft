@@ -3035,7 +3035,7 @@ $(".hire_medic").attr('tooltip5', 'Attack: 1 Hp: 50 Healing: 10');
 
 coincost=50;
 greatswordcost=1;
-if(craft["coin"]<coincost || craft["greatsword"]<greatswordcost){
+if(craft["coin"]<coincost || craft["greatsword"]<greatswordcost || population>=maximums["population"]){
 	$(".hire_bersek").addClass("unavailable")
 }
 else

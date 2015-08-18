@@ -3047,7 +3047,7 @@ $(".hire_bersek").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)
 $(".hire_bersek").attr('tooltip2', 'Greatsword: '+ parseFloat(craft["greatsword"]).toFixed(2)+" / "+parseFloat(greatswordcost).toFixed(2))
 $(".hire_bersek").attr('tooltip3', "Food consumption: -0.80/s");
 $(".hire_bersek").attr('tooltip4', "Gold consumption: -0.01/s");
-$(".hire_bersek").attr('tooltip5', 'Morale production +0.08/s');
+$(".hire_bersek").attr('tooltip5', 'Morale production +0.20/s');
 $(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
 $(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
 
@@ -4253,7 +4253,7 @@ if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
 {
 	consumption["food"]+=people["bersek"]/5
 	consumption["gold"]+=people["bersek"]/400
-	production["morale"]+=people["bersek"]/50
+	production["morale"]+=people["bersek"]/25
 }
 
 var inv_text="<table>"

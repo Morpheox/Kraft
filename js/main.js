@@ -2635,7 +2635,7 @@ function build(b){
 		glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
 
 
-		if (craft["frame"]>=frame && craft["glass"]>=glasscost){
+		if (craft["frame"]>=framecost && craft["glass"]>=glasscost){
 
 			craft["frame"]-=frame;
 			craft["glass"]-=glasscost;

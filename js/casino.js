@@ -35,12 +35,13 @@ for(var i=0;i<9;i++){
     arrprice[i]=new Array();
 }
 var remaining=0;
-function playgame2(){
+var coinsplayed=0;
+function playgame2(b){
 
+coinsplayed=b;
 
-
-if(craft["coin"]>=5){
-craft["coin"]-=5;
+if(craft["coin"]>=coinsplayed){
+craft["coin"]-=coinsplayed;
 $(".tablero").show();
 stringtablero="<table class='tabgame'>"
 for(var i=0;i<9;i++){
@@ -49,8 +50,7 @@ stringtablero+="<tr>";
 for(var j=0;j<9;j++){
     if(Math.random()>0.80)
     {
-    arrprice[i][j]=Math.random()*5
-
+    arrprice[i][j]=Math.random()
     }
     else if(Math.random()>0.15)
     {
@@ -90,9 +90,14 @@ function openbox(x,y){
 
 
 if(arrprice[x][y]!="X" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"  && arrprice[x][y]!="L"){
-$("td[data-x="+x+"][data-y="+y+"]").html(intToString(arrprice[x][y]))
-
-totalwon+=arrprice[x][y];
+if(coinsplayed<100){
+$("td[data-x="+x+"][data-y="+y+"]").html(intToString(arrprice[x][y]*coinsplayed))
+}
+else
+{
+$("td[data-x="+x+"][data-y="+y+"]").html(Math.round(arrprice[x][y]*coinsplayed))
+}
+totalwon+=arrprice[x][y]*coinsplayed;
 remaining--
 
 }
@@ -134,8 +139,9 @@ else
     $(".tablero").html("<div class='lose'>Better luck next time!</div>")
 
 }
-    craft["lock"]+=locks;
+    craft["lock"]+=locks*coinsplayed;
     locks=0;
+    coinsplayed=0;
     $(".totalwon").html("")
     $(".playgame2").html("Play")
 }

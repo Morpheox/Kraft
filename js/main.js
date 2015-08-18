@@ -134,6 +134,7 @@ technologies["glassblowing"]=0
 technologies["architecture"]=0
 technologies["construction"]=0
 technologies["chemistry"]=0
+technologies["risk"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1903,6 +1904,29 @@ function research(b){
 			technologies["chemistry"]++
 			$(".build_laboratory").show()
 			unlocked[".build_laboratory"]=1;
+
+		}
+
+	}
+	else if (b=="risk" && technologies["risk"]==0){
+
+
+		tokencost=200
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["token"]>=tokencost){
+
+
+			craft["token"]-=tokencost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["risk"]++
+			$(".playx10").show()
+			unlocked[".playx10"]=1;
+			$(".playx100").show()
+			unlocked[".playx100"]=1;
 
 		}
 
@@ -3992,6 +4016,20 @@ $(".tech_chemistry").attr('tooltip', 'Bottle: '+ parseFloat(craft["bottle"]).toF
 $(".tech_chemistry").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_chemistry").attr('tooltip4', "Lets you build laboratories where scientists can work.");
 
+tokencost=200
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || craft["token"]<tokencost){
+	$(".tech_risk").addClass("unavailable")
+}
+else
+{
+	$(".tech_risk").removeClass("unavailable")
+}
+$(".tech_risk").addClass((technologies["risk"] >0 ? "researched" : ""))
+$(".tech_risk").html("Risk" + (technologies["risk"] >0 ? " (researched)" : ""));
+$(".tech_risk").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".tech_risk").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_risk").attr('tooltip4', "Lets you play x10 and x100 in the casino");
 //Research
 
 

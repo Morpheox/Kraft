@@ -80,6 +80,11 @@ function researchunlock(){
 		unlocked[".tech_rampage"]=1;
 	}
 
+	if(bonus["economy"]>=3200 && unlocked[".tech_risk"]!=1){
+		$(".tech_risk").show()
+		unlocked[".tech_risk"]=1;
+	}
+
 	if((bonus["science"]>=3500 || bonus["economy"]>=4000) && unlocked[".tech_construction"]!=1){
 		$(".tech_construction").show()
 		unlocked[".tech_construction"]=1;

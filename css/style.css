@@ -221,7 +221,7 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
       margin-top: 15px;
     background-color: #1AE81A;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 19px;
     text-align: center;
     width: 60px;
 }
@@ -272,5 +272,15 @@ font-size: 20px;
 }
 
 .craftline{
-  width:250px;
+  width:280px;
+}
+
+.playx10,.playx100{
+    margin-left:12px;
+    margin-top: 15px;
+    background-color: #1AE81A;
+    border-radius: 5px;
+    font-size: 19px;
+    text-align: center;
+    width: 105px;
 }

@@ -215,6 +215,7 @@ technologies["rampage"]=0
 technologies["construction"]=0
 technologies["architecture"]=0
 technologies["chemistry"]=0
+technologies["risk"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

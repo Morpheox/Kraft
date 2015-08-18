@@ -3038,10 +3038,10 @@ $(".hire_bersek").html("Bersek ("+people["bersek"]+")");
 $(".hire_bersek").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".hire_bersek").attr('tooltip2', 'Greatsword: '+ parseFloat(craft["greatsword"]).toFixed(2)+" / "+parseFloat(greatswordcost).toFixed(2))
 $(".hire_bersek").attr('tooltip3', "Food consumption: -0.80/s");
-$(".hire_bersek").attr('tooltip3', "Gold consumption: -0.01/s");
-$(".hire_bersek").attr('tooltip4', 'Morale production +0.08/s');
-$(".hire_bersek").attr('tooltip5', 'Attack: 80 Hp: 100');
-$(".hire_bersek").attr('tooltip5', 'Deals double damage the first round');
+$(".hire_bersek").attr('tooltip4', "Gold consumption: -0.01/s");
+$(".hire_bersek").attr('tooltip5', 'Morale production +0.08/s');
+$(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
+$(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
 
 //Ships
 woodcost=20000;

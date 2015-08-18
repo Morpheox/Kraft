@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.2.4 beta</title>
+	<title>Keep Craft v0.2.5 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.2.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
+    <div class="infokraft">Keep Craft v0.2.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>Dont forget to refresh from time to time, new content its added daily
     <button  data-toggle="modal" data-target="#changelog">Changelog</button></div>
 	<div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <button onclick="save()">Save</button><br><br>
@@ -74,6 +74,7 @@
 			<div class="buildlist">
 			<div class="block build_bank"></div><button class="toggle toggle_bank" onclick='toggle("bank")'>Toggle</button><br>
 			<div class="block build_crusher"></div><button class="toggle toggle_crusher" onclick='toggle("crusher")'>Toggle</button><br>
+			<div class="block build_blockyard"></div><button class="toggle toggle_blockyard" onclick='toggle("blockyard")'>Toggle</button><br>
 			</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -137,6 +138,7 @@
 			<div class="block tech_galleon"></div>
 			<div class="block tech_glassblowing"></div>
 			<div class="block tech_rampage"></div>
+			<div class="block tech_construction"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -276,6 +278,13 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.2.5</b>
+        <ul>
+        <li>New science or economy tech</li>
+        <li>New building - blockyard<br> - it automates block production</li>
+        <li>Lowered towncenter price ratio slightly</li>
+        <li>Fixed some tooltip bugs</li>
+        </ul>
          <b>V 0.2.4</b>
         <ul>
         <li>New military tech</li>
@@ -414,6 +423,7 @@
 	$(".build_docks").click(function() {build("docks")});
 	$(".build_bank").click(function() {build("bank")});
 	$(".build_crusher").click(function() {build("crusher")});
+	$(".build_blockyard").click(function() {build("blockyard")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -476,6 +486,7 @@
 	$(".tech_galleon").click(function() {research("galleon")});
 	$(".tech_glassblowing").click(function() {research("glassblowing")});
 	$(".tech_rampage").click(function() {research("rampage")});
+	$(".tech_construction").click(function() {research("construction")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

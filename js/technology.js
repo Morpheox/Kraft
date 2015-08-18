@@ -79,4 +79,9 @@ function researchunlock(){
 		$(".tech_rampage").show()
 		unlocked[".tech_rampage"]=1;
 	}
+
+	if((bonus["science"]>=4000 || bonus["economy"]>=4000) && unlocked[".tech_construction"]!=1){
+		$(".tech_construction").show()
+		unlocked[".tech_construction"]=1;
+	}
 }

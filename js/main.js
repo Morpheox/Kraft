@@ -59,6 +59,7 @@ buildings["shipyard"]=0;
 buildings["docks"]=0;
 buildings["bank"]=0;
 buildings["crusher"]=0;
+buildings["blockyard"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -128,7 +129,7 @@ technologies["contracts"]=0
 technologies["galleon"]=0
 technologies["canteen"]=0
 technologies["glassblowing"]=0
-technologies["rampage"]=0
+technologies["construction"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1813,6 +1814,29 @@ function research(b){
 		}
 
 	}
+	else if (b=="construction" && technologies["construction"]==0){
+
+
+		blockcost=2000;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["block"]>=blockcost){
+
+
+			craft["block"]-=blockcost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["construction"]++
+			$(".build_blockyard").show()
+			unlocked[".build_blockyard"]=1;
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -2341,9 +2365,9 @@ function build(b){
 	}
 	else if (b=="towncenter"){
 
-		blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
-		structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
-		coincost= Math.pow(1.3,(buildings["towncenter"]))*3
+		blockcost= Math.pow(1.25,(buildings["towncenter"]))*20
+		structurecost= Math.pow(1.25,(buildings["towncenter"]))*5
+		coincost= Math.pow(1.25,(buildings["towncenter"]))*3
 
 		if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
 
@@ -2513,6 +2537,25 @@ function build(b){
 			buildings["crusher"]+=1
 			$(".toggle_crusher").show()
 			unlocked[".toggle_crusher"]=1
+
+		}
+	}
+	else if (b=="blockyard"){
+
+		bronzecost=Math.pow(1.3,(buildings["blockyard"]))*50
+		pickaxecost=Math.pow(1.3,(buildings["blockyard"]))*500
+
+
+
+		if (craft["bronze"]>=bronzecost && craft["pickaxe"]>=pickaxecost){
+
+			craft["bronze"]-=bronzecost;
+			craft["pickaxe"]-=pickaxecost;
+
+
+			buildings["blockyard"]+=1
+			$(".toggle_blockyard").show()
+			unlocked[".toggle_blockyard"]=1
 
 		}
 	}
@@ -2730,9 +2773,9 @@ $(".build_statue").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFix
 $(".build_statue").attr('tooltip2', 'Max morale +2');
 $(".build_statue").attr('tooltip3', 'Morale production +5%');
 
-blockcost= Math.pow(1.3,(buildings["towncenter"]))*20
-structurecost= Math.pow(1.3,(buildings["towncenter"]))*5
-coincost= Math.pow(1.3,(buildings["towncenter"]))*3
+blockcost= Math.pow(1.25,(buildings["towncenter"]))*20
+structurecost= Math.pow(1.25,(buildings["towncenter"]))*5
+coincost= Math.pow(1.25,(buildings["towncenter"]))*3
 if(craft["block"]<blockcost || craft["structure"]<structurecost || craft["coin"]<coincost){
 	$(".build_towncenter").addClass("unavailable")
 }
@@ -2859,7 +2902,21 @@ $(".build_crusher").attr('tooltip5', 'Sand storage +200');
 $(".build_crusher").attr('tooltip6', 'Mineral consumption -10.00/s');
 $(".build_crusher").attr('tooltip7', 'Sand production +0.5/s');
 
-
+bronzecost=Math.pow(1.3,(buildings["blockyard"]))*50
+pickaxecost=Math.pow(1.3,(buildings["blockyard"]))*500
+if(craft["bronze"]<bronzecost || craft["pickaxe"]<pickaxecost){
+	$(".build_blockyard").addClass("unavailable")
+}
+else
+{
+	$(".build_blockyard").removeClass("unavailable")
+}
+$(".build_blockyard").html("Blockyard ("+buildings["blockyard"]+")");
+$(".build_blockyard").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".build_blockyard").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".build_blockyard").attr('tooltip4', 'Wood consumption 4.00/s');
+$(".build_blockyard").attr('tooltip5', 'Mineral consumption 8.00/s');
+$(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
 
 
 //People
@@ -3780,6 +3837,23 @@ $(".tech_rampage").attr('tooltip', 'Sword: '+ parseFloat(craft["sword"]).toFixed
 $(".tech_rampage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_rampage").attr('tooltip4', "A thousand swords were used to perfect the technic, allows crafting greatswords,");
 $(".tech_rampage").attr('tooltip5', "and hiring berseks");
+
+blockcost=2000;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || craft["block"]<blockcost){
+	$(".tech_construction").addClass("unavailable")
+}
+else
+{
+	$(".tech_construction").removeClass("unavailable")
+}
+$(".tech_construction").addClass((technologies["construction"] >0 ? "researched" : ""))
+$(".tech_construction").html("Construction" + (technologies["construction"] >0 ? " (researched)" : ""));
+$(".tech_construction").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".tech_construction").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_construction").attr('tooltip4', "Lets you build blockyards to automate block manufacturing.");
+
+
 //Research
 
 
@@ -4183,6 +4257,12 @@ if (items["mineral"]>=buildings["crusher"]*2.5 && buildstatus["crusher"]==1)
 	consumption["mineral"]+=buildings["crusher"]*2.5;
 	production["sand"]=buildings["crusher"]/8;
 
+}
+if (items["wood"]>=buildings["blockyard"] && items["mineral"]>=buildings["blockyard"]*2 && buildstatus["blockyard"]==1)
+{
+	consumption["wood"]+=buildings["blockyard"]
+	consumption["mineral"]+=buildings["blockyard"]*2
+	craft["block"]+=buildings["blockyard"]/100;
 }
 //people
 production["food"]+=people["farmer"]/10;

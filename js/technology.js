@@ -80,13 +80,19 @@ function researchunlock(){
 		unlocked[".tech_rampage"]=1;
 	}
 
-	if((bonus["science"]>=4000 || bonus["economy"]>=4000) && unlocked[".tech_construction"]!=1){
+	if((bonus["science"]>=3500 || bonus["economy"]>=4000) && unlocked[".tech_construction"]!=1){
 		$(".tech_construction").show()
 		unlocked[".tech_construction"]=1;
 	}
 
-	if((bonus["science"]>=3500 || bonus["economy"]>=4500 || bonus["military"]>=5000) && unlocked[".tech_architecture"]!=1){
+	if((bonus["science"]>=4000 || bonus["economy"]>=4500 || bonus["military"]>=5000) && unlocked[".tech_architecture"]!=1){
 		$(".tech_architecture").show()
 		unlocked[".tech_architecture"]=1;
 	}
+
+	if(bonus["science"]>=4500 && unlocked[".tech_experimentation`"]!=1){
+		$(".tech_experimentation").show()
+		unlocked[".tech_experimentation"]=1;
+	}
+
 }

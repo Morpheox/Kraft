@@ -15,6 +15,7 @@ items["iron"]=0;
 items["coal"]=0;
 items["tin"]=0;
 items["steel"]=0;
+items["chemicals"]=0;
 items["morale"]=0;
 items["knowledge"]=0;
 
@@ -60,6 +61,7 @@ buildings["docks"]=0;
 buildings["bank"]=0;
 buildings["crusher"]=0;
 buildings["blockyard"]=0;
+buildings["laboratory"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -131,6 +133,7 @@ technologies["canteen"]=0
 technologies["glassblowing"]=0
 technologies["architecture"]=0
 technologies["construction"]=0
+technologies["chemistry"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1882,6 +1885,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="chemistry" && technologies["chemistry"]==0){
+
+
+		bottlecost=50
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["bottle"]>=bottlecost){
+
+
+			craft["bottle"]-=bottlecost;
+			maximums["water"]-=bottlecost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["chemistry"]++
+			$(".build_laboratory").show()
+			unlocked[".build_laboratory"]=1;
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -2604,6 +2629,25 @@ function build(b){
 
 		}
 	}
+	else if (b=="laboratory"){
+
+		framecost=Math.pow(1.4,(buildings["laboratory"]))*5
+		glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
+
+
+		if (craft["frame"]>=frame && craft["glass"]>=glasscost){
+
+			craft["frame"]-=frame;
+			craft["glass"]-=glasscost;
+
+			maximums["chemicals"]+=5;
+
+			buildings["laboratory"]+=1
+			$(".toggle_laboratory").show()
+			unlocked[".toggle_laboratory"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -2963,6 +3007,22 @@ $(".build_blockyard").attr('tooltip4', 'Wood consumption -4.00/s');
 $(".build_blockyard").attr('tooltip5', 'Mineral consumption -8.00/s');
 $(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
 
+framecost=Math.pow(1.4,(buildings["laboratory"]))*5
+glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
+if(craft["frame"]<framecost || craft["glass"]<glasscost){
+	$(".build_laboratory").addClass("unavailable")
+}
+else
+{
+	$(".build_laboratory").removeClass("unavailable")
+}
+$(".build_laboratory").html("Laboratory ("+buildings["laboratory"]+")");
+$(".build_laboratory").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_laboratory").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".build_laboratory").attr('tooltip3', 'Chemical storage + 5');
+$(".build_laboratory").attr('tooltip4', 'Bottle consumption per scientist -0.001/s');
+$(".build_laboratory").attr('tooltip5', 'Knowledge production per scientist  +0.005/s');
+$(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.001/s');
 
 //People
 foodcost=50;
@@ -3917,6 +3977,20 @@ $(".tech_architecture").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).t
 $(".tech_architecture").attr('tooltip5', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_architecture").attr('tooltip6', "Allows crafting frames, a complex building material.");
 
+bottlecost=50
+knowledgecost=1000;
+if(items["knowledge"]<knowledgecost || craft["bottle"]<bottlecost){
+	$(".tech_chemistry").addClass("unavailable")
+}
+else
+{
+	$(".tech_chemistry").removeClass("unavailable")
+}
+$(".tech_chemistry").addClass((technologies["chemistry"] >0 ? "researched" : ""))
+$(".tech_chemistry").html("Chemistry" + (technologies["chemistry"] >0 ? " (researched)" : ""));
+$(".tech_chemistry").attr('tooltip', 'Bottle: '+ parseFloat(craft["bottle"]).toFixed(2)+" / "+parseFloat(bottlecost).toFixed(2))
+$(".tech_chemistry").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_chemistry").attr('tooltip4', "Lets you build laboratories where scientists can work.");
 
 //Research
 
@@ -4379,13 +4453,22 @@ if (craft["coin"]>=people["scientist"]/400 && items["food"]>=people["scientist"]
 	craft["coin"]-=people["scientist"]/400
 	consumption["food"]+=people["scientist"]/20
 	production["knowledge"]+=people["scientist"]/200
+
+	if(buildings["laboratory"]>=1 && buildstatus["laboratory"]==1){
+		if(craft["bottle"]>=(buildings["laboratory"]*people["scientist"]*0.00025)){
+			craft["bottle"]-=(buildings["laboratory"]*people["scientist"]*0.00025)
+			maximums["water"]-=(buildings["laboratory"]*people["scientist"]*0.00025)
+			production["knowledge"]+=(buildings["laboratory"]*people["scientist"]*0.00125)
+			production["chemicals"]+=(buildings["laboratory"]*people["scientist"]*0.00025)
+		}
+
+	}
 }
 if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman"]/40 && items["coal"]>=people["foundryman"]/200)
 {
 	consumption["iron"]+=people["foundryman"]/100
 	consumption["coal"]+=people["foundryman"]/200
 	consumption["food"]+=people["foundryman"]/40
-
 	production["steel"]+=people["foundryman"]/400
 
 }

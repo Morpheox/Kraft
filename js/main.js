@@ -3909,8 +3909,8 @@ else
 {
 	$(".tech_architecture").removeClass("unavailable")
 }
-$(".tech_architecture").addClass((technologies["construction"] >0 ? "researched" : ""))
-$(".tech_architecture").html("Construction" + (technologies["construction"] >0 ? " (researched)" : ""));
+$(".tech_architecture").addClass((technologies["architecture"] >0 ? "researched" : ""))
+$(".tech_architecture").html("Architecture" + (technologies["architecture"] >0 ? " (researched)" : ""));
 $(".tech_architecture").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".tech_architecture").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
 $(".tech_architecture").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))

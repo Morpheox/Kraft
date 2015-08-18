@@ -2700,7 +2700,7 @@ $(".build_market").html("Market ("+buildings["market"]+")");
 $(".build_market").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_market").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".build_market").attr('tooltip3', 'Allows trading');
-$(".build_market").attr('tooltip4', '+5% market trade effiency');
+$(".build_market").attr('tooltip4', '+5% market trade efficiency');
 
 blockcost= Math.pow(1.5,(buildings["kiln"]))*15
 mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
@@ -2757,7 +2757,7 @@ else
 }
 $(".build_workbench").html("Workbench ("+buildings["workbench"]+")");
 $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".build_workbench").attr('tooltip2', 'Craft effiency +8%');
+$(".build_workbench").attr('tooltip2', 'Craft efficiency +8%');
 $(".build_workbench").attr('tooltip4', 'Allows +1 items crafted per workbench');
 $(".build_workbench").attr('tooltip5', 'when active');
 
@@ -3790,7 +3790,7 @@ $(".research_economy").attr('tooltip4', "Also increases global production");
 $(".research_science").html("Science " + intToString(bonus["science"]));
 $(".research_science").attr('tooltip', "Science leads humanity forward, it can be slow, ");
 $(".research_science").attr('tooltip2', "but it never stops evolving. ");
-$(".research_science").attr('tooltip4', "Also increases craft effiency");
+$(".research_science").attr('tooltip4', "Also increases craft efficiency");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
 $(".research_military").attr('tooltip', "There are times, when only the most powerfull get what he wants,");
@@ -4022,7 +4022,7 @@ $(".leader_khrysos").attr('tooltip2', 'Increments market ratios by 10%')
 $(".leader_khrysos").attr('tooltip4', "'Everything has a price'");
 
 $(".leader_elisia").html("Elisia (lv:" + people["elisia"]+")");
-$(".leader_elisia").attr('tooltip', 'Increments craft effiency by 5%')
+$(".leader_elisia").attr('tooltip', 'Increments craft efficiency by 5%')
 $(".leader_elisia").attr('tooltip2', 'Increments wood and mineral storage by 500')
 $(".leader_elisia").attr('tooltip4', "'Making makes us human'");
 

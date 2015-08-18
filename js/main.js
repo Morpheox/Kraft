@@ -2914,8 +2914,8 @@ else
 $(".build_blockyard").html("Blockyard ("+buildings["blockyard"]+")");
 $(".build_blockyard").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".build_blockyard").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
-$(".build_blockyard").attr('tooltip4', 'Wood consumption 4.00/s');
-$(".build_blockyard").attr('tooltip5', 'Mineral consumption 8.00/s');
+$(".build_blockyard").attr('tooltip4', 'Wood consumption -4.00/s');
+$(".build_blockyard").attr('tooltip5', 'Mineral consumption -8.00/s');
 $(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
 
 

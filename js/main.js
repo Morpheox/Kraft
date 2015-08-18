@@ -495,7 +495,7 @@ function expedition(){
 			burst+=people["bersek"]*80
 			burst=burst*(bonus["power"]+1)
 
-			power=(power/2)+(hp/15)+(healing/2)+(burst/6)
+			power=(power/2)+(hp/10)+(healing/2)+(burst/6)
 
 			enemy["reward"]=0;
 			enemy["peasant"]=0;
@@ -508,27 +508,27 @@ function expedition(){
 			var stringencuentro="Enemies:<br>"
 			var rew=0;
 			if(enemytipo<25){
-				enemy["peasant"]=Math.round((Math.random()*power*0.60)+(power*0.15))+1;
+				enemy["peasant"]=Math.round((Math.random()*power*0.50)+(power*0.14))+1;
 				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
 				rew+=(Math.random()*enemy["peasant"]*0.07)+(enemy["peasant"]*0.015)
 			}
 			if(enemytipo>20 && enemytipo<50){
-				enemy["bandit"]=Math.round((Math.random()*power*0.30)+(power*0.075))+1;
+				enemy["bandit"]=Math.round((Math.random()*power*0.22)+(power*0.070))+1;
 				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
 				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
 			}
 			if(enemytipo>40 && enemytipo<120){
-				enemy["mercenary"]=Math.round((Math.random()*power*0.120)+(power*0.030))+1;
+				enemy["mercenary"]=Math.round((Math.random()*power*0.100)+(power*0.028))+1;
 				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
 				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
 			if(enemytipo>110 && enemytipo<280){
-				enemy["soldier"]=Math.round((Math.random()*power*0.06)+(power*0.015))+1;
+				enemy["soldier"]=Math.round((Math.random()*power*0.05)+(power*0.014))+1;
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
 				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
 			}
 			if(enemytipo>260){
-				enemy["halberdier"]=Math.round((Math.random()*power*0.03)+(power*0.008))+1;
+				enemy["halberdier"]=Math.round((Math.random()*power*0.022)+(power*0.007))+1;
 				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
 				rew+=(Math.random()*enemy["soldier"]*1.2)+(enemy["soldier"]*0.30)
 			}

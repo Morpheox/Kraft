@@ -90,9 +90,9 @@ function researchunlock(){
 		unlocked[".tech_architecture"]=1;
 	}
 
-	if(bonus["science"]>=4500 && unlocked[".tech_experimentation`"]!=1){
-		$(".tech_experimentation").show()
-		unlocked[".tech_experimentation"]=1;
+	if(bonus["science"]>=4500 && unlocked[".tech_chemistry"]!=1){
+		$(".tech_chemistry").show()
+		unlocked[".tech_chemistry"]=1;
 	}
 
 }

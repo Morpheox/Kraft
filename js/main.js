@@ -2637,7 +2637,7 @@ function build(b){
 
 		if (craft["frame"]>=framecost && craft["glass"]>=glasscost){
 
-			craft["frame"]-=frame;
+			craft["frame"]-=framecost;
 			craft["glass"]-=glasscost;
 
 			maximums["chemicals"]+=5;

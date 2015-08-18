@@ -3019,7 +3019,7 @@ else
 $(".build_laboratory").html("Laboratory ("+buildings["laboratory"]+")");
 $(".build_laboratory").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_laboratory").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
-$(".build_laboratory").attr('tooltip3', 'Chemical storage + 5');
+$(".build_laboratory").attr('tooltip3', 'Chemicals storage + 5');
 $(".build_laboratory").attr('tooltip4', 'Bottle consumption per scientist -0.001/s');
 $(".build_laboratory").attr('tooltip5', 'Knowledge production per scientist  +0.005/s');
 $(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.001/s');

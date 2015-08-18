@@ -47,7 +47,7 @@ else if(b=="vengeance"){
 }
 else if(b=="aegis"){
 	bonus["hp"]+=0.05
-	prestige["depot"]++
+	prestige["aegis"]++
 }
 else if(b=="bargain"){
 	bonus["trade"]+=0.05

@@ -574,7 +574,7 @@ function fight(){
 	burst+=people["bersek"]*80
 
 	burst=burst*(bonus["power"]+1)
-	
+
 	power2=0;
 	power2+=enemy["peasant"]*2
 	power2+=enemy["bandit"]*4
@@ -640,7 +640,12 @@ function fight(){
 				population-=losses;
 				combatlog+="You lose "+losses+" medics<br>"
 			}
-
+			if(people["bersek"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["bersek"]-1))+1
+				people["bersek"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" bersek<br>"
+			}
 
 			break;
 		}

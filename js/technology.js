@@ -74,4 +74,9 @@ function researchunlock(){
 		$(".tech_glassblowing").show()
 		unlocked[".tech_glassblowing"]=1;
 	}
+
+	if(bonus["military"]>=3000 && unlocked[".tech_rampage"]!=1){
+		$(".tech_rampage").show()
+		unlocked[".tech_rampage"]=1;
+	}
 }

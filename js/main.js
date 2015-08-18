@@ -128,6 +128,7 @@ technologies["contracts"]=0
 technologies["galleon"]=0
 technologies["canteen"]=0
 technologies["glassblowing"]=0
+technologies["rampage"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -141,6 +142,7 @@ people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
 people["medic"]=0
+people["bersek"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -161,6 +163,7 @@ craft["bottle"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
+craft["greatsword"]=0
 craft["armor"]=0
 craft["block"]=0
 craft["structure"]=0
@@ -353,6 +356,7 @@ function expedition(){
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
 	power+=people["medic"]*1
+	power+=people["bersek"]*80
 
 	foodcost=power*2
 	watercost=power
@@ -479,6 +483,7 @@ function expedition(){
 			hp+=people["swordman"]*50
 			hp+=people["knight"]*200
 			hp+=people["medic"]*50
+			hp+=people["bersek"]*100
 
 			hp=hp*(bonus["hp"]+1)
 
@@ -486,7 +491,10 @@ function expedition(){
 			healing+=people["medic"]*10
 			healing=healing*(bonus["healing"]+1)
 
-			power=(power/2)+(hp/15)+(healing/2)
+			burst=0;
+			burst+=people["bersek"]*80
+
+			power=(power/2)+(hp/15)+(healing/2)+(burst/5)
 
 			enemy["reward"]=0;
 			enemy["peasant"]=0;
@@ -548,6 +556,7 @@ function fight(){
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
 	power+=people["medic"]*1
+	power+=people["bersek"]*80
 
 	power=power*(bonus["power"]+1)
 
@@ -556,8 +565,12 @@ function fight(){
 	hp+=people["swordman"]*50
 	hp+=people["knight"]*200
 	hp+=people["medic"]*50
+	hp+=people["bersek"]*100
 
 	hp=hp*(bonus["hp"]+1)
+
+	burst=0;
+	burst+=people["bersek"]*80
 
 	power2=0;
 	power2+=enemy["peasant"]*2
@@ -582,7 +595,11 @@ function fight(){
 	for(i=0;i<=50;i++){
 		dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
 		dmg2=power2+(Math.random()*(power2/4))-(Math.random()*(power2/4));
+		if(i==0 && burst>0){
+		dmg1+=burst+(Math.random()*(burst/4))-(Math.random()*(burst/4));
+		}
 		combatlog+="Round "+(i+1)+"<br>"
+
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
 		if(healing>0){
@@ -590,6 +607,7 @@ function fight(){
 			hp+=healed;
 			combatlog+="Your medics restore "+intToString(healed)+" hp<br>"
 		}
+
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
@@ -882,6 +900,23 @@ function crafting(b){
 				craft["bottle"]+=1+bonus["craft"];
 
 				maximums["water"]+=1*(bonus["craft"]+1);
+
+
+			}
+
+		}
+		else if (b=="greatsword"){
+
+			steelcost=100;
+
+
+			if (items["steel"]>=steelcost){
+
+				items["steel"]-=steelcost;
+
+				craft["greatsword"]+=1+bonus["craft"];
+
+
 
 
 			}
@@ -1746,6 +1781,30 @@ function research(b){
 		}
 
 	}
+	else if (b=="rampage" && technologies["rampage"]==0){
+
+
+		swordcost=1000;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["sword"]>=swordcost){
+
+
+			craft["sword"]-=swordcost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["rampage"]++
+			$(".craft_greatsword").show()
+			unlocked[".craft_greatsword"]=1;
+			$(".hire_bersek").show()
+			unlocked[".hire_bersek"]=1;
+		}
+
+	}
 }
 
 function hire(b){
@@ -1894,6 +1953,21 @@ function hire(b){
 				population++
 				$(".fire_medic").show()
 				unlocked[".fire_medic"]=1;
+			}
+
+		}
+		else if (b=="bersek"){
+
+			coincost=50;
+			greatswordcost=1;
+
+			if (craft["coin"]>=coincost && craft["greatsword"]>=greatswordcost){
+				craft["coin"]-=coincost;
+				craft["greatsword"]-=greatswordcost;
+				people["bersek"]+=1
+				population++
+				$(".fire_bersek").show()
+				unlocked[".fire_bersek"]=1;
 			}
 
 		}
@@ -2951,6 +3025,24 @@ $(".hire_medic").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)
 $(".hire_medic").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_medic").attr('tooltip5', 'Attack: 1 Hp: 50 Healing: 10');
 
+coincost=50;
+greatswordcost=1;
+if(craft["coin"]<coincost || craft["greatsword"]<greatswordcost){
+	$(".hire_bersek").addClass("unavailable")
+}
+else
+{
+	$(".hire_bersek").removeClass("unavailable")
+}
+$(".hire_bersek").html("Bersek ("+people["bersek"]+")");
+$(".hire_bersek").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_bersek").attr('tooltip2', 'Greatsword: '+ parseFloat(craft["greatsword"]).toFixed(2)+" / "+parseFloat(greatswordcost).toFixed(2))
+$(".hire_bersek").attr('tooltip3', "Food consumption: -0.80/s");
+$(".hire_bersek").attr('tooltip3', "Gold consumption: -0.01/s");
+$(".hire_bersek").attr('tooltip4', 'Morale production +0.08/s');
+$(".hire_bersek").attr('tooltip5', 'Attack: 80 Hp: 100');
+$(".hire_bersek").attr('tooltip5', 'Deals double damage the first round');
+
 //Ships
 woodcost=20000;
 plankcost=200;
@@ -3664,6 +3756,21 @@ $(".tech_glassblowing").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).to
 $(".tech_glassblowing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_glassblowing").attr('tooltip4', "Allows you to craft bottles to store water and others liquids.");
 
+swordcost=1000;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || craft["sword"]<swordcost){
+	$(".tech_rampage").addClass("unavailable")
+}
+else
+{
+	$(".tech_rampage").removeClass("unavailable")
+}
+$(".tech_rampage").addClass((technologies["rampage"] >0 ? "researched" : ""))
+$(".tech_rampage").html("Rampage" + (technologies["rampage"] >0 ? " (researched)" : ""));
+$(".tech_rampage").attr('tooltip', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
+$(".tech_rampage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_rampage").attr('tooltip4', "A thousand swords were used to perfect the technic, allows crafting greatswords,");
+$(".tech_rampage").attr('tooltip4', "and hiring berseks");
 //Research
 
 
@@ -3848,7 +3955,7 @@ $(".craft_glass").attr('tooltip5', "A sheet of glass");
 
 glasscost=5
 
-if(items["steel"]<steelcost || craft["bronze"]<bronzecost){
+if(craft["glass"]<glasscost){
 	$(".craft_bottle").addClass("unavailable")
 }
 else
@@ -3859,6 +3966,20 @@ $(".craft_bottle").html("Bottle");
 $(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".craft_bottle").attr('tooltip3', "A bottle of glass to store water and others liquids.");
 $(".craft_bottle").attr('tooltip4', "+1 water storage");
+
+steelcost=100
+
+if(items["steel"]<steelcost){
+	$(".craft_greatsword").addClass("unavailable")
+}
+else
+{
+	$(".craft_greatsword").removeClass("unavailable")
+}
+$(".craft_greatsword").html("Greatsword");
+$(".craft_greatsword").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_greatsword").attr('tooltip3', "This double handed sword its a marvel of smithing.");
+
 //Leaders
 
 if(bonus["title"]<1){
@@ -3940,12 +4061,14 @@ power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
 power+=people["medic"]*1
+power+=people["bersek"]*80
 
 hp=0;
 hp+=people["pikeman"]*30
 hp+=people["swordman"]*50
 hp+=people["knight"]*200
 hp+=people["medic"]*50
+hp+=people["bersek"]*100
 
 healing=0
 healing+=people["medic"]*10
@@ -4118,6 +4241,13 @@ if (items["food"]>=people["knight"]/2)
 
 consumption["food"]+=people["medic"]/10
 
+if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
+{
+	consumption["food"]+=people["bersek"]/5
+	consumption["gold"]+=people["bersek"]/400
+	production["morale"]+=people["bersek"]/50
+}
+
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){
@@ -4257,7 +4387,7 @@ function load(){
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]
 
 
 

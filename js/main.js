@@ -495,7 +495,7 @@ function expedition(){
 			burst+=people["bersek"]*80
 			burst=burst*(bonus["power"]+1)
 
-			power=(power/2)+(hp/15)+(healing/2)+(burst/5)
+			power=(power/2)+(hp/15)+(healing/2)+(burst/6)
 
 			enemy["reward"]=0;
 			enemy["peasant"]=0;

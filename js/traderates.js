@@ -194,10 +194,9 @@ craft["lock"]++
 }
 if(technologies["culturaltrade"]==1 && Math.random()>0.70){
 var gainings=0;
-gainings+=Math.random()*(trademission["get"]/traderatio["copper"][trademission["resourceget"]])
-if(trademission["resourceget"]=="copper"){
-gainings=Math.random()*trademission["get"]
-}
+gainings+=people["galley"]*15
+gainings+=people["galleon"]*50
+gainings=Math.random()*gainings
 docklog+=("While you were there, you also learnt some things about their culture, +"+intToString(gainings)+" knowledge<br>");
 items["knowledge"]+=gainings;
 

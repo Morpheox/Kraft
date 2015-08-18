@@ -84,4 +84,9 @@ function researchunlock(){
 		$(".tech_construction").show()
 		unlocked[".tech_construction"]=1;
 	}
+
+	if((bonus["science"]>=3500 || bonus["economy"]>=4500 || bonus["military"]>=5000) && unlocked[".tech_architecture"]!=1){
+		$(".tech_architecture").show()
+		unlocked[".tech_architecture"]=1;
+	}
 }

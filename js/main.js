@@ -129,6 +129,7 @@ technologies["contracts"]=0
 technologies["galleon"]=0
 technologies["canteen"]=0
 technologies["glassblowing"]=0
+technologies["architecture"]=0
 technologies["construction"]=0
 
 var people=new Array();
@@ -168,6 +169,7 @@ craft["greatsword"]=0
 craft["armor"]=0
 craft["block"]=0
 craft["structure"]=0
+craft["frame"]=0
 craft["plank"]=0
 craft["glass"]=0
 craft["bronze"]=0
@@ -927,6 +929,24 @@ function crafting(b){
 
 
 
+
+			}
+
+		}
+		else if (b=="frame"){
+
+			blockcost=500;
+			structurecost=100;
+			steelcost=100;
+
+
+			if (items["steel"]>=steelcost && craft["block"]>=blockcost && craft["structure"]>=structurecost){
+
+				items["steel"]-=steelcost;
+				craft["block"]-=blockcost
+				craft["structure"]-=structurecost
+
+				craft["frame"]+=1+bonus["craft"];
 
 			}
 
@@ -1833,6 +1853,31 @@ function research(b){
 			technologies["construction"]++
 			$(".build_blockyard").show()
 			unlocked[".build_blockyard"]=1;
+
+		}
+
+	}
+	else if (b=="architecture" && technologies["architecture"]==0){
+
+
+		blockcost=1500;
+		structurecost=500;
+		steelcost=150;
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["block"]>=blockcost && craft["structure"]>=structurecost && items["steel"]>=steelcost){
+
+
+			craft["structure"]-=structurecost
+			craft["block"]-=blockcost;
+			items["steel"]-=steelcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["architecture"]++
+			$(".craft_frame").show()
+			unlocked[".craft_frame"]=1;
 
 		}
 
@@ -3853,6 +3898,25 @@ $(".tech_construction").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).to
 $(".tech_construction").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_construction").attr('tooltip4', "Lets you build blockyards to automate block manufacturing.");
 
+blockcost=1500;
+structurecost=500;
+steelcost=150;
+knowledgecost=1000;
+if(items["knowledge"]<knowledgecost || craft["block"]<blockcost || craft["structure"]<structurecost || items["steel"]<steelcost){
+	$(".tech_architecture").addClass("unavailable")
+}
+else
+{
+	$(".tech_architecture").removeClass("unavailable")
+}
+$(".tech_architecture").addClass((technologies["construction"] >0 ? "researched" : ""))
+$(".tech_architecture").html("Construction" + (technologies["construction"] >0 ? " (researched)" : ""));
+$(".tech_architecture").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".tech_architecture").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
+$(".tech_architecture").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_architecture").attr('tooltip5', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_architecture").attr('tooltip6', "Allows crafting frames, a complex building material.");
+
 
 //Research
 
@@ -4062,6 +4126,24 @@ else
 $(".craft_greatsword").html("Greatsword");
 $(".craft_greatsword").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".craft_greatsword").attr('tooltip3', "This double handed sword its a marvel of smithing.");
+
+
+blockcost=500;
+structurecost=100;
+steelcost=100;
+if(craft["block"]<blockcost || craft["structure"]<structurecost || items["steel"]<steelcost){
+	$(".craft_frame").addClass("unavailable")
+}
+else
+{
+	$(".craft_frame").removeClass("unavailable")
+}
+$(".craft_frame").html("Frame");
+$(".craft_frame").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".craft_frame").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
+$(".craft_frame").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_frame").attr('tooltip5', "Massive construction material used in big buildings.");
+
 
 //Leaders
 

@@ -493,6 +493,7 @@ function expedition(){
 
 			burst=0;
 			burst+=people["bersek"]*80
+			burst=burst*(bonus["power"]+1)
 
 			power=(power/2)+(hp/15)+(healing/2)+(burst/5)
 
@@ -572,6 +573,8 @@ function fight(){
 	burst=0;
 	burst+=people["bersek"]*80
 
+	burst=burst*(bonus["power"]+1)
+	
 	power2=0;
 	power2+=enemy["peasant"]*2
 	power2+=enemy["bandit"]*4

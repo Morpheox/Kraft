@@ -530,7 +530,7 @@ function expedition(){
 			if(enemytipo>260){
 				enemy["halberdier"]=Math.round((Math.random()*power*0.022)+(power*0.007))+1;
 				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
-				rew+=(Math.random()*enemy["soldier"]*1.2)+(enemy["soldier"]*0.30)
+				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["sohalberdierldier"]*0.30)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
@@ -3050,6 +3050,7 @@ $(".hire_bersek").attr('tooltip4', "Gold consumption: -0.01/s");
 $(".hire_bersek").attr('tooltip5', 'Morale production +0.20/s');
 $(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
 $(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
+
 
 //Ships
 woodcost=20000;

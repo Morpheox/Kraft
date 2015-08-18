@@ -530,7 +530,7 @@ function expedition(){
 			if(enemytipo>260){
 				enemy["halberdier"]=Math.round((Math.random()*power*0.022)+(power*0.007))+1;
 				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
-				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["sohalberdierldier"]*0.30)
+				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["halberdier"]*0.30)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"

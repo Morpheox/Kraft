@@ -139,7 +139,7 @@ else
     $(".tablero").html("<div class='lose'>Better luck next time!</div>")
 
 }
-    craft["lock"]+=locks*coinsplayed;
+    craft["lock"]+=locks*coinsplayed*0.2;
     locks=0;
     coinsplayed=0;
     $(".totalwon").html("")

@@ -198,6 +198,7 @@ enemy["mercenary"]=0;
 enemy["soldier"]=0;
 enemy["halberdier"]=0;
 
+var techvisible=1;
 
 function develop(b){
 
@@ -2030,6 +2031,11 @@ function research(b){
 
 		}
 
+	}
+
+	if(techvisible==0){
+	techvisible=1;
+	toggletech();
 	}
 }
 
@@ -4870,7 +4876,7 @@ function trade(b){
 
 }
 
-var techvisible=1;
+
 function toggletech(){
 	if(techvisible==1){
 		$(".researched").hide()

@@ -4684,13 +4684,6 @@ if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
 	production["morale"]+=people["bersek"]/25
 }
 
-if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["warelephant"]/2)
-{
-	consumption["food"]+=people["warelephant"]*2.5
-	consumption["water"]+=people["warelephant"]/2
-	production["morale"]+=people["warelephant"]/200
-}
-
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){

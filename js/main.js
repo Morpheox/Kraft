@@ -4162,7 +4162,7 @@ if(items["knowledge"]<knowledgecost || items["food"]<foodcost || items["water"]<
 }
 else
 {
-	$(".tech_domestication").removeClass("domestication")
+	$(".tech_domestication").removeClass("unavailable")
 }
 $(".tech_domestication").addClass((technologies["domestication"] >0 ? "researched" : ""))
 $(".tech_domestication").html("Domestication" + (technologies["domestication"] >0 ? " (researched)" : ""));

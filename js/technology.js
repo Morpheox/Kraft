@@ -106,4 +106,9 @@ function researchunlock(){
 		unlocked[".tech_chemistry"]=1;
 	}
 
+	if(bonus["military"]>=3800 && unlocked[".tech_elephantry"]!=1){
+		$(".tech_elephantry").show()
+		unlocked[".tech_elephantry"]=1;
+	}
+
 }

@@ -136,6 +136,7 @@ technologies["domestication"]=0
 technologies["construction"]=0
 technologies["chemistry"]=0
 technologies["risk"]=0
+technologies["elephantry"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -150,6 +151,7 @@ people["swordman"]=0
 people["knight"]=0
 people["medic"]=0
 people["bersek"]=0
+people["warelephant"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -365,6 +367,7 @@ function expedition(){
 	power+=people["knight"]*25
 	power+=people["medic"]*1
 	power+=people["bersek"]*80
+	power+=people["warelephant"]*100
 
 	foodcost=power*2
 	watercost=power
@@ -497,6 +500,7 @@ function expedition(){
 			hp+=people["knight"]*200
 			hp+=people["medic"]*50
 			hp+=people["bersek"]*100
+			hp+=people["warelephant"]*1200
 
 			hp=hp*(bonus["hp"]+1)
 
@@ -507,6 +511,8 @@ function expedition(){
 			burst=0;
 			burst+=people["bersek"]*80
 			burst=burst*(bonus["power"]+1)
+
+			power-=people["warelephant"]*25
 
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
 
@@ -572,6 +578,8 @@ function fight(){
 	power+=people["medic"]*1
 	power+=people["bersek"]*80
 
+	disobey=people["warelephant"]*100*(bonus["power"]+1)
+
 	power=power*(bonus["power"]+1)
 
 	hp=0;
@@ -580,6 +588,7 @@ function fight(){
 	hp+=people["knight"]*200
 	hp+=people["medic"]*50
 	hp+=people["bersek"]*100
+	hp+=people["warelephant"]*1200
 
 	hp=hp*(bonus["hp"]+1)
 
@@ -615,7 +624,13 @@ function fight(){
 		dmg1+=burst+(Math.random()*(burst/4))-(Math.random()*(burst/4));
 		}
 		combatlog+="Round "+(i+1)+"<br>"
-
+		if(disobey>0 && Math.random()>0.75){
+		combatlog+="The elephants refused to attack.<br>"
+		}
+		else
+		{
+		dmg1+=disobey+(Math.random()*(disobey/4))-(Math.random()*(disobey/4));
+		}
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
 		if(healing>0){
@@ -1914,6 +1929,27 @@ function research(b){
 		}
 
 	}
+	else if (b=="elephantry" && technologies["elephantry"]==0){
+
+
+		suppliescost=100
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["supplies"]>=suppliescost){
+
+
+			craft["supplies"]-=suppliescost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["elephantry"]++
+			$(".hire_warelephant").show()
+			unlocked[".hire_warelephant"]=1;
+
+		}
+
+	}
 	else if (b=="risk" && technologies["risk"]==0){
 
 
@@ -2120,6 +2156,21 @@ function hire(b){
 				population++
 				$(".fire_bersek").show()
 				unlocked[".fire_bersek"]=1;
+			}
+
+		}
+		else if (b=="warelephant"){
+
+			suppliescost=80;
+			elephantcost=1;
+
+			if (craft["supplies"]>=suppliescost && craft["elephant"]>=elephantcost){
+				craft["supplies"]-=suppliescost;
+				craft["elephant"]-=elephantcost;
+				people["warelephant"]+=1
+				population++
+				$(".fire_warelephant").show()
+				unlocked[".fire_warelephant"]=1;
 			}
 
 		}
@@ -3270,7 +3321,23 @@ $(".hire_bersek").attr('tooltip5', 'Morale production +0.20/s');
 $(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
 $(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
 
-
+suppliescost=100;
+elephantcost=1;
+if(craft["elephant"]<elephantcost || craft["supplies"]<suppliescost || population>=maximums["population"]){
+	$(".hire_warelephant").addClass("unavailable")
+}
+else
+{
+	$(".hire_warelephant").removeClass("unavailable")
+}
+$(".hire_warelephant").html("War elephant ("+people["warelephant"]+")");
+$(".hire_warelephant").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"]).toFixed(2)+" / "+parseFloat(suppliescost).toFixed(2))
+$(".hire_warelephant").attr('tooltip2', 'Elephant: '+ parseFloat(craft["elephant"]).toFixed(2)+" / "+parseFloat(elephantcost).toFixed(2))
+$(".hire_warelephant").attr('tooltip3', "Food consumption: -10.00/s");
+$(".hire_warelephant").attr('tooltip4', "Water consumption: -2.00/s");
+$(".hire_warelephant").attr('tooltip5', 'Morale production +0.02/s');
+$(".hire_warelephant").attr('tooltip6', 'Attack: 100 Hp: 1200');
+$(".hire_warelephant").attr('tooltip7', '25% chance to disobey and not attack');
 //Ships
 woodcost=20000;
 plankcost=200;
@@ -4064,6 +4131,24 @@ $(".tech_risk").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)
 $(".tech_risk").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_risk").attr('tooltip4', "Lets you play x10 and x100 in the casino");
 
+
+
+suppliescost=100
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || craft["supplies"]<suppliescost){
+	$(".tech_elephantry").addClass("unavailable")
+}
+else
+{
+	$(".tech_elephantry").removeClass("unavailable")
+}
+$(".tech_elephantry").addClass((technologies["elephantry"] >0 ? "researched" : ""))
+$(".tech_elephantry").html("Elephantry" + (technologies["elephantry"] >0 ? " (researched)" : ""));
+$(".tech_elephantry").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"]).toFixed(2)+" / "+parseFloat(suppliescost).toFixed(2))
+$(".tech_elephantry").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_elephantry").attr('tooltip4', "Allows you to ride elephants into war");
+
+
 foodcost=10000;
 watercost=200;
 knowledgecost=800;
@@ -4391,6 +4476,7 @@ power+=people["swordman"]*10
 power+=people["knight"]*25
 power+=people["medic"]*1
 power+=people["bersek"]*80
+power+=people["warelephant"]*100
 
 hp=0;
 hp+=people["pikeman"]*30
@@ -4398,6 +4484,7 @@ hp+=people["swordman"]*50
 hp+=people["knight"]*200
 hp+=people["medic"]*50
 hp+=people["bersek"]*100
+hp+=people["warelephant"]*1200
 
 healing=0
 healing+=people["medic"]*10
@@ -4731,7 +4818,7 @@ function load(){
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
 
 
 

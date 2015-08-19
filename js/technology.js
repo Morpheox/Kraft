@@ -90,6 +90,12 @@ function researchunlock(){
 		unlocked[".tech_construction"]=1;
 	}
 
+	if(bonus["military"]>=3800 && unlocked[".tech_domestication"]!=1){
+		$(".tech_domestication").show()
+		unlocked[".tech_domestication"]=1;
+	}
+
+
 	if((bonus["science"]>=4000 || bonus["economy"]>=4500 || bonus["military"]>=5000) && unlocked[".tech_architecture"]!=1){
 		$(".tech_architecture").show()
 		unlocked[".tech_architecture"]=1;

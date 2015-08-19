@@ -255,6 +255,7 @@ craft["supplies"]=0
 craft["lock"]=0
 craft["glass"]=0
 craft["greatsword"]=0
+craft["elephant"]=0
 population=0;
 ships=0;
 for(key in technologies){

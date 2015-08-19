@@ -132,6 +132,7 @@ technologies["galleon"]=0
 technologies["canteen"]=0
 technologies["glassblowing"]=0
 technologies["architecture"]=0
+technologies["domestication"]=0
 technologies["construction"]=0
 technologies["chemistry"]=0
 technologies["risk"]=0
@@ -163,25 +164,25 @@ people["galleon"]=0
 var craft=new Array();
 
 craft["coin"]=0
-craft["diamond"]=0
+craft["token"]=0
 craft["chest"]=0
 craft["bottle"]=0
-craft["pickaxe"]=0
-craft["spear"]=0
-craft["sword"]=0
-craft["greatsword"]=0
-craft["armor"]=0
 craft["block"]=0
 craft["structure"]=0
 craft["frame"]=0
 craft["plank"]=0
 craft["glass"]=0
 craft["bronze"]=0
+craft["pickaxe"]=0
+craft["spear"]=0
+craft["sword"]=0
+craft["greatsword"]=0
+craft["armor"]=0
 craft["horse"]=0
-craft["token"]=0
+craft["elephant"]=0
 craft["supplies"]=0
 craft["lock"]=0
-
+craft["diamond"]=0
 
 var unlocked=new Array();
 
@@ -469,6 +470,11 @@ function expedition(){
 				maximums["tin"]+=0.15*(rnd);
 				maximums["coal"]+=0.15*(rnd);
 				maximums["steel"]+=0.10*(rnd);
+			}
+			if(Math.random()>0.95 && technologies["domestication"]==1){
+				rnd=Math.round((Math.random()*power)/800)+1;
+				reward+=parseFloat(rnd).toFixed(2) + " elephant<br>";
+				craft["elephant"]+=rnd;
 			}
 			if(reward!="The expedition found:<br>")
 
@@ -1931,6 +1937,26 @@ function research(b){
 		}
 
 	}
+	else if (b=="domestication" && technologies["domestication"]==0){
+
+
+		foodcost=10000;
+		watercost=200;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["food"]>=foodcost && items["water"]>=watercost){
+
+			items["food"]-=foodcost
+			items["water"]-=watercost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["domestication"]++
+
+		}
+
+	}
 }
 
 function hire(b){
@@ -2632,6 +2658,9 @@ function build(b){
 			$(".toggle_crusher").show()
 			unlocked[".toggle_crusher"]=1
 
+			items["sand"]+=0.0001
+			refreshselect()
+
 		}
 	}
 	else if (b=="blockyard"){
@@ -2669,6 +2698,10 @@ function build(b){
 			buildings["laboratory"]+=1
 			$(".toggle_laboratory").show()
 			unlocked[".toggle_laboratory"]=1
+
+			items["chemicals"]+=0.0001
+			refreshselect()
+
 
 		}
 	}
@@ -4030,6 +4063,25 @@ $(".tech_risk").html("Risk" + (technologies["risk"] >0 ? " (researched)" : ""));
 $(".tech_risk").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_risk").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_risk").attr('tooltip4', "Lets you play x10 and x100 in the casino");
+
+foodcost=10000;
+watercost=200;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || items["food"]<foodcost || items["water"]<watercost){
+	$(".tech_domestication").addClass("unavailable")
+}
+else
+{
+	$(".tech_domestication").removeClass("domestication")
+}
+$(".tech_domestication").addClass((technologies["domestication"] >0 ? "researched" : ""))
+$(".tech_domestication").html("Domestication" + (technologies["domestication"] >0 ? " (researched)" : ""));
+$(".tech_domestication").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".tech_domestication").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
+$(".tech_domestication").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_domestication").attr('tooltip5', "Allows you to take back elephants from expeditions.");
+
+
 //Research
 
 

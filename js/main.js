@@ -4574,6 +4574,7 @@ if(prestige["number"]>0){
 	tooltipsprestige("aegis");
 	tooltipsprestige("bargain");
 	tooltipsprestige("mastery");
+	tooltipsprestige("learning");
 
 	$(".legacynum").html("Legacy: "+prestige["legacy"])
 	$(".treasurenum").html("Treasures: "+prestige["treasure"])

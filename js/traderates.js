@@ -69,7 +69,7 @@ traderatio["chemicals"]["steel"]=2.5;
 
 function refreshselect(){
 		for(gives in traderatio){
-		if(items["gives"]>0)
+		if(items[gives]>0)
 		{
    		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
 		}

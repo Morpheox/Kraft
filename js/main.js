@@ -674,7 +674,12 @@ function fight(){
 				population-=losses;
 				combatlog+="You lose "+losses+" bersek<br>"
 			}
-
+			if(people["warelephant"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["warelephant"]-1))+1
+				people["warelephant"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" war elephant<br>"
+			}
 			break;
 		}
 		else if(hp2<1){

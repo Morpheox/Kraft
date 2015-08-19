@@ -5017,7 +5017,8 @@ function load(){
 		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
 		for (key in buildstatus){
 			if(buildstatus[key]==0){
-				toggle(key);
+				buildstatus[key]==0
+				$(".build_"+t).addClass("off")
 			}
 		}
 

@@ -8,6 +8,8 @@ traderatio["food"]=new Array()
 traderatio["copper"]=new Array()
 traderatio["iron"]=new Array()
 traderatio["steel"]=new Array()
+traderatio["sand"]=new Array()
+traderatio["chemicals"]=new Array()
 
 traderatio["wood"]["mineral"]=0.8;
 traderatio["wood"]["food"]=0.5;
@@ -52,6 +54,27 @@ traderatio["steel"]["iron"]=5;
 traderatio["steel"]["coal"]=1.7;
 traderatio["steel"]["tin"]=2.5;
 
+traderatio["sand"]["wood"]=8.5;
+traderatio["sand"]["food"]=6.5;
+traderatio["sand"]["iron"]=0.02;
+traderatio["sand"]["copper"]=0.04;
+traderatio["sand"]["tin"]=0.01;
+
+traderatio["chemicals"]["wood"]=1800;
+traderatio["chemicals"]["mineral"]=1500;
+traderatio["chemicals"]["food"]=1200;
+traderatio["chemicals"]["iron"]=10;
+traderatio["chemicals"]["coal"]=4;
+traderatio["chemicals"]["steel"]=2.5;
+
+function refreshselect(){
+		for(gives in traderatio){
+		if(items["gives"]>0)
+		{
+   		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
+		}
+   	}
+}
 function refreshtrade(){
 		amount=$(".tradeamount").val()
 		amountget=amount*traderatio[$(".selgive").val()][$(".selget").val()]

@@ -288,3 +288,13 @@ font-size: 20px;
 .production{
   min-width:70px;
 }
+
+.imgdonar{
+  display: inline-block;
+}
+.imgdonar input{
+    margin-bottom:-5px;
+}
+.but{
+  margin:3px;
+}

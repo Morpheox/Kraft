@@ -197,6 +197,7 @@ enemy["bandit"]=0;
 enemy["mercenary"]=0;
 enemy["soldier"]=0;
 enemy["halberdier"]=0;
+enemy["warrior"]=0;
 
 var techvisible=1;
 
@@ -549,10 +550,15 @@ function expedition(){
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
 				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
 			}
-			if(enemytipo>260){
+			if(enemytipo>260 && enemytipo<420){
 				enemy["halberdier"]=Math.round((Math.random()*power*0.022)+(power*0.007))+1;
 				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
 				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["halberdier"]*0.30)
+			}
+			if(enemytipo>390){
+				enemy["warrior"]=Math.round((Math.random()*power*0.012)+(power*0.005))+1;
+				stringencuentro+=enemy["warrior"]+" Warrior (Attack:50 Hp:400)<br>";
+				rew+=(Math.random()*enemy["warrior"]*2)+(enemy["warrior"]*0.50)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
@@ -606,6 +612,7 @@ function fight(){
 	power2+=enemy["mercenary"]*9
 	power2+=enemy["soldier"]*15
 	power2+=enemy["halberdier"]*40
+	power2+=enemy["warrior"]*50
 
 	hp2=0;
 	hp2+=enemy["peasant"]*8
@@ -613,6 +620,7 @@ function fight(){
 	hp2+=enemy["mercenary"]*40
 	hp2+=enemy["soldier"]*100
 	hp2+=enemy["halberdier"]*160
+	hp2+=enemy["warrior"]*400
 
 	healing=0
 	healing+=people["medic"]*10
@@ -2039,7 +2047,7 @@ if(techvisible==0){
 	toggletech();
 }
 
-}, 1000);
+}, 700);
 
 
 

@@ -10,6 +10,7 @@ prestige["vengeance"]=0;
 prestige["aegis"]=0;
 prestige["bargain"]=0;
 prestige["mastery"]=0;
+prestige["learning"]=0;
 
 function lega(b){
 
@@ -53,7 +54,10 @@ else if(b=="bargain"){
 	bonus["trade"]+=0.05
 	prestige["bargain"]++
 }
-
+else if(b=="learning"){
+	bonus["knowledge"]+=0.05
+	prestige["learning"]++
+}
 }
 }
 function tooltipsprestige(b){
@@ -81,6 +85,7 @@ switch(b){
 	case "vengeance":$(".legacy_"+b).attr('tooltip3', 'Military power +5%');break;
 	case "aegis":$(".legacy_"+b).attr('tooltip3', 'Troops hp +5%');break;
 	case "bargain":$(".legacy_"+b).attr('tooltip3', 'Market ratios +5%');break;
+	case "learning":$(".legacy_"+b).attr('tooltip3', 'Knowledge production +5%');break;
 }
 
 
@@ -98,6 +103,7 @@ var legacyadd=0;
 
 legacyadd+=maximums["population"]/10;
 legacyadd+=maximums["ships"];
+legacyadd+=craft["diamond"];
 legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+bonus["title"]
 legacyadd+=(bonus["economy"]+bonus["science"]+bonus["military"])/1000
 legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
@@ -162,6 +168,7 @@ buildings["docks"]=0;
 buildings["bank"]=0;
 buildings["crusher"]=0;
 buildings["blockyard"]=0;
+buildings["bunker"]=0;
 buildings["laboratory"]=0;
 maximums["population"]=0;
 maximums["ships"]=0;
@@ -274,7 +281,7 @@ for(key in unlocked){
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea").hide()
-	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery").show()
+	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning").show()
 
 	$(".build_lumbermill").show()
 	unlocked[".build_lumbermill"]=1;
@@ -291,6 +298,7 @@ for(key in unlocked){
 	unlocked[".legacy_aegis"]=1;
 	unlocked[".legacy_bargain"]=1;
 	unlocked[".legacy_mastery"]=1;
+	unlocked[".legacy_learning"]=1;
 
 	$(".countdown").show();
 	unlocked[".countdown"]=1;
@@ -301,6 +309,7 @@ for(key in unlocked){
 	bonus["power"]+=prestige["vengeance"]*0.05
 	bonus["hp"]+=prestige["aegis"]*0.05
 	bonus["trade"]+=prestige["bargain"]*0.05
+	bonus["knowledge"]+=prestige["learning"]*0.05
 	prestige["number"]++
 
 

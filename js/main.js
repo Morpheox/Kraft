@@ -5018,7 +5018,7 @@ function load(){
 		for (key in buildstatus){
 			if(buildstatus[key]==0){
 				buildstatus[key]==0
-				$(".build_"+t).addClass("off")
+				$(".build_"+key).addClass("off")
 			}
 		}
 

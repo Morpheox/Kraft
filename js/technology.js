@@ -101,6 +101,11 @@ function researchunlock(){
 		unlocked[".tech_architecture"]=1;
 	}
 
+	if((bonus["science"]>=4000 || bonus["economy"]>=4500 || bonus["military"]>=5000) && unlocked[".tech_undergroundstorage"]!=1){
+		$(".tech_undergroundstorage").show()
+		unlocked[".tech_undergroundstorage"]=1;
+	}
+		
 	if(bonus["science"]>=4500 && unlocked[".tech_chemistry"]!=1){
 		$(".tech_chemistry").show()
 		unlocked[".tech_chemistry"]=1;

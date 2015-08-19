@@ -61,6 +61,7 @@ buildings["docks"]=0;
 buildings["bank"]=0;
 buildings["crusher"]=0;
 buildings["blockyard"]=0;
+buildings["bunker"]=0;
 buildings["laboratory"]=0;
 
 var buildstatus =new Array()
@@ -137,6 +138,7 @@ technologies["construction"]=0
 technologies["chemistry"]=0
 technologies["risk"]=0
 technologies["elephantry"]=0
+technologies["undergroundstorage"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1955,6 +1957,37 @@ function research(b){
 		}
 
 	}
+	else if (b=="undergroundstorage" && technologies["undergroundstorage"]==0){
+
+
+		chestcost=50
+		knowledgecost=500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["chest"]>=chestcost){
+
+
+			craft["chest"]-=chestcost;
+			items["knowledge"]-=knowledgecost;
+
+			maximums["wood"]-=50*chestcost
+			maximums["mineral"]-=25*chestcost
+			maximums["food"]-=10*chestcost
+			maximums["copper"]-=0.3*chestcost
+			maximums["gold"]-=0.05*chestcost
+			maximums["iron"]-=0.2*chestcost
+			maximums["tin"]-=0.15*chestcost
+			maximums["coal"]-=0.15*chestcost
+			maximums["steel"]-=0.10*chestcost
+
+			technologies["undergroundstorage"]++
+			$(".build_bunker").show()
+			unlocked[".build_bunker"]=1;
+
+		}
+
+	}
 	else if (b=="risk" && technologies["risk"]==0){
 
 
@@ -2738,6 +2771,28 @@ function build(b){
 
 		}
 	}
+		else if (b=="bunker"){
+
+		framecost= Math.pow(1.4,(buildings["bunker"]))*5
+		pickaxecost=Math.pow(1.4, (buildings["bunker"]))*500
+
+		if (craft["pickaxe"]>=pickaxecost && craft["frame"]>=framecost){
+
+			craft["pickaxe"]-=pickaxecost;
+			craft["frame"]-=framecost
+
+			maximums["wood"]+=4000;
+			maximums["mineral"]+=4000;
+			maximums["sand"]+=4000;
+			maximums["clay"]+=500;
+			maximums["concrete"]+=500;
+
+
+			buildings["bunker"]+=1
+
+		}
+
+	}
 	else if (b=="laboratory"){
 
 		framecost=Math.pow(1.4,(buildings["laboratory"]))*5
@@ -3119,6 +3174,22 @@ $(".build_blockyard").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"])
 $(".build_blockyard").attr('tooltip4', 'Wood consumption -4.00/s');
 $(".build_blockyard").attr('tooltip5', 'Mineral consumption -8.00/s');
 $(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
+
+framecost= Math.pow(1.4,(buildings["bunker"]))*5
+pickaxecost=Math.pow(1.4, (buildings["bunker"]))*500
+if(craft["frame"]<framecost || craft["pickaxe"]<pickaxecost){
+	$(".build_bunker").addClass("unavailable")
+}
+else
+{
+	$(".build_bunker").removeClass("unavailable")
+}
+$(".build_bunker").html("Bunker ("+buildings["bunker"]+")");
+$(".build_bunker").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_bunker").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".build_bunker").attr('tooltip4', 'Provides storage for bulk materials.');
+$(".build_bunker").attr('tooltip5', 'Wood, mineral and sand storage + 4000');
+$(".build_bunker").attr('tooltip6', 'Clay and concrete storage +500');
 
 framecost=Math.pow(1.4,(buildings["laboratory"]))*5
 glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
@@ -4152,6 +4223,22 @@ $(".tech_elephantry").html("Elephantry" + (technologies["elephantry"] >0 ? " (re
 $(".tech_elephantry").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"]).toFixed(2)+" / "+parseFloat(suppliescost).toFixed(2))
 $(".tech_elephantry").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_elephantry").attr('tooltip4', "Allows you to ride elephants into war");
+
+
+chestcost=50
+knowledgecost=500;
+if(items["knowledge"]<knowledgecost || craft["chest"]<chestcost){
+	$(".tech_undergroundstorage").addClass("unavailable")
+}
+else
+{
+	$(".tech_undergroundstorage").removeClass("unavailable")
+}
+$(".tech_undergroundstorage").addClass((technologies["undergroundstorage"] >0 ? "researched" : ""))
+$(".tech_undergroundstorage").html("Underground storage" + (technologies["undergroundstorage"] >0 ? " (res..)" : ""));
+$(".tech_undergroundstorage").attr('tooltip', 'Chest: '+ parseFloat(craft["chest"]).toFixed(2)+" / "+parseFloat(chestcost).toFixed(2))
+$(".tech_undergroundstorage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_undergroundstorage").attr('tooltip4', "Allows building bunkers to store bulk materials");
 
 
 foodcost=10000;

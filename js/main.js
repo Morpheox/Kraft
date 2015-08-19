@@ -4684,6 +4684,13 @@ if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
 	production["morale"]+=people["bersek"]/25
 }
 
+if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["warelephant"]/2)
+{
+	consumption["food"]+=people["warelephant"]*2.5;
+	consumption["water"]+=people["warelephant"]/2;
+	production["morale"]+=people["warelephant"]/200;
+}
+
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){
@@ -4695,6 +4702,7 @@ for(key in items){
 		inv_text+="<tr>"
 	}
 }
+
 inv_text+="</table>"
 $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);

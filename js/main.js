@@ -3187,7 +3187,7 @@ else
 $(".build_bunker").html("Bunker ("+buildings["bunker"]+")");
 $(".build_bunker").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_bunker").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
-$(".build_bunker").attr('tooltip4', 'Provides storage for bulk materials.');
+$(".build_bunker").attr('tooltip3', 'Provides storage for bulk materials.');
 $(".build_bunker").attr('tooltip5', 'Wood, mineral and sand storage + 4000');
 $(".build_bunker").attr('tooltip6', 'Clay and concrete storage +500');
 

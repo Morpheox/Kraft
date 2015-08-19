@@ -2774,7 +2774,7 @@ function build(b){
 		else if (b=="bunker"){
 
 		framecost= Math.pow(1.4,(buildings["bunker"]))*5
-		pickaxecost=Math.pow(1.4, (buildings["bunker"]))*500
+		pickaxecost=Math.pow(1.4, (buildings["bunker"]))*750
 
 		if (craft["pickaxe"]>=pickaxecost && craft["frame"]>=framecost){
 
@@ -3176,7 +3176,7 @@ $(".build_blockyard").attr('tooltip5', 'Mineral consumption -8.00/s');
 $(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
 
 framecost= Math.pow(1.4,(buildings["bunker"]))*5
-pickaxecost=Math.pow(1.4, (buildings["bunker"]))*500
+pickaxecost=Math.pow(1.4, (buildings["bunker"]))*750
 if(craft["frame"]<framecost || craft["pickaxe"]<pickaxecost){
 	$(".build_bunker").addClass("unavailable")
 }

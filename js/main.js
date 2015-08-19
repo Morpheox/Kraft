@@ -2032,6 +2032,15 @@ function research(b){
 		}
 
 	}
+setTimeout(function(){
+
+if(techvisible==0){
+	techvisible=1;
+	toggletech();
+}
+
+}, 1000);
+
 
 
 }
@@ -4840,10 +4849,7 @@ for(key in items){
 
 
 calculatecost();
-if(techvisible==0){
-	techvisible=1;
-	toggletech();
-}
+
 
 }
 function trade(b){

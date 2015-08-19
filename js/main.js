@@ -4901,6 +4901,7 @@ function save(){
 	Cookies.set('population', population,{ expires: 9999 });
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
+	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
 }
 
 function load(){
@@ -5012,7 +5013,15 @@ function load(){
 	if (typeof Cookies.get( 'prestige') != 'undefined'){
 		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
 	}
+	if (typeof Cookies.get( 'buildstatus') != 'undefined'){
+		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
+		for (key in buildstatus){
+			if(buildstatus[key]==0){
+				toggle(key);
+			}
+		}
 
+	}
 
 	researchunlock()
 

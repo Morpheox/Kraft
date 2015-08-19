@@ -2033,10 +2033,7 @@ function research(b){
 
 	}
 
-	if(techvisible==0){
-	techvisible=1;
-	toggletech();
-	}
+
 }
 
 function hire(b){
@@ -4843,7 +4840,10 @@ for(key in items){
 
 
 calculatecost();
-
+if(techvisible==0){
+	techvisible=1;
+	toggletech();
+}
 
 }
 function trade(b){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.3.3 beta</title>
+	<title>Keep Craft v0.3.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -20,10 +20,11 @@
 	<script type="text/javascript" src="js/traderates.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/technology.js"></script>
+	<script type="text/javascript" src="js/expansion.js"></script>
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.3.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, dont forget to refresh   <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
+    <div class="infokraft">Keep Craft v0.3.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, dont forget to refresh   <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -31,7 +32,7 @@
 </form>
 
 </div>
-	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="legacynum"></div><div class="treasurenum"></div>
+	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <br><br>
             
 	<ul class="nav nav-tabs">
@@ -154,7 +155,7 @@
 			<div class="block tech_undergroundstorage"></div>
 			<div class="block tech_elephantry"></div>
 			<div class="block tech_chemistry"></div>
-
+			<div class="block tech_expansion"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -243,6 +244,15 @@
 
 
 	</div><br><br>
+	<div class="expansionsea">
+	Expansion mission<br>
+	If you lose, all your ships will be destroyed.<br><br>
+	<div class="expansionlog">
+		
+
+	</div><br><br>
+	<button class="expand" onclick="expand()">Fight</button>
+	</div><br><br>
 	<div class="docklog">
 
 	</div>
@@ -300,6 +310,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.3.4</b>
+        <ul>
+		<li>Added a new feature, ship fights</li>
+		<li>Unlocked by a tech at 6000 in any branch</li>
+		<li>With ships fights you can conquer new territory</li>
+		<li>This territory will be used to build different outposts in an upcoming patch</li>
+		<li>Outposts will give different bonuses, population, and titles</li>
+		<li>If you lose in a fleet fight, you will lose all your ships</li>
+        </ul>
          <b>V 0.3.3</b>
         <ul>
 		<li>Added new legacy perk</li>
@@ -468,7 +487,7 @@
 	setInterval(function(){ save()}, 20000);
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory").hide()
 	$(".playx10,.playx100").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
@@ -568,6 +587,7 @@
 	$(".tech_domestication").click(function() {research("domestication")});
 	$(".tech_elephantry").click(function() {research("elephantry")});
 	$(".tech_undergroundstorage").click(function() {research("undergroundstorage")});
+	$(".tech_expansion").click(function() {research("expansion")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -635,6 +655,7 @@
 	}
 
 	refreshselect()
+	filllog();
 
 </script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

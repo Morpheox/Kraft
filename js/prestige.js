@@ -139,6 +139,7 @@ bonus["economy"]=0;
 bonus["science"]=0;
 bonus["military"]=0;
 bonus["reespeccost"]=0;
+bonus["territory"]=0;
 
 for(key in items){
 	bonus[key]=0;
@@ -226,6 +227,7 @@ technologies["chemistry"]=0
 technologies["risk"]=0
 technologies["elephantry"]=0
 technologies["undergroundstorage"]=0
+technologies["expansion"]=0
 people["woodcutter"]=0
 people["smelter"]=0
 people["farmer"]=0

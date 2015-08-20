@@ -116,4 +116,8 @@ function researchunlock(){
 		unlocked[".tech_elephantry"]=1;
 	}
 
+	if((bonus["science"]>=6000 || bonus["economy"]>=6000 || bonus["military"]>=6000) && unlocked[".tech_expansion"]!=1){
+		$(".tech_expansion").show()
+		unlocked[".tech_expansion"]=1;
+	}
 }

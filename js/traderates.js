@@ -68,6 +68,7 @@ traderatio["chemicals"]["coal"]=4;
 traderatio["chemicals"]["steel"]=2.5;
 
 function refreshselect(){
+	$(".selgive").html("")
 		for(gives in traderatio){
 		if(items[gives]>0)
 		{

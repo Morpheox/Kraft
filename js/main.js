@@ -36,6 +36,9 @@ bonus["economy"]=0;
 bonus["science"]=0;
 bonus["military"]=0;
 bonus["knowledge"]=0;
+bonus["territory"]=0;
+bonus["expansion"]=0;
+
 var buildings=new Array();
 
 buildings["lumbermill"]=0;
@@ -139,6 +142,7 @@ technologies["chemistry"]=0
 technologies["risk"]=0
 technologies["elephantry"]=0
 technologies["undergroundstorage"]=0
+technologies["expansion"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2040,6 +2044,33 @@ function research(b){
 		}
 
 	}
+	else if (b=="expansion" && technologies["expansion"]==0){
+
+
+		suppliescost=200;
+		plankcost=2000;
+
+		
+
+
+		if (craft["supplies"]>=suppliescost && craft["plank"]>=plankcost){
+
+			craft["supplies"]-=suppliescost
+			craft["plank"]-=plankcost
+
+
+			technologies["expansion"]++
+			$(".expansionsea").show()
+			unlocked[".expansionsea"]=1;
+			$(".territory").show()
+			unlocked[".territory"]=1;
+
+		}
+
+	}
+
+
+
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4814,7 +4845,7 @@ $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
 $(".ships").html("Ships: "+ships+" / "+ +maximums["ships"]);
 $(".titles").html("Titles: "+bonus["title"]);
-
+$(".territory").html("Territory: "+bonus["territory"]);
 var inv_text="<table>"
 for(key in craft){
 	if(craft[key]!=0){

@@ -4307,7 +4307,20 @@ $(".tech_domestication").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).
 $(".tech_domestication").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_domestication").attr('tooltip5', "Allows you to take back elephants from expeditions.");
 
-
+suppliescost=200;
+plankcost=2000;
+if(craft["plank"]<plankcost || craft["supplies"]<suppliescost){
+	$(".tech_expansion").addClass("unavailable")
+}
+else
+{
+	$(".tech_expansion").removeClass("unavailable")
+}
+$(".tech_expansion").addClass((technologies["expansion"] >0 ? "researched" : ""))
+$(".tech_expansion").html("Expansion" + (technologies["expansion"] >0 ? " (researched)" : ""));
+$(".tech_expansion").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"]).toFixed(2)+" / "+parseFloat(suppliescost).toFixed(2))
+$(".tech_expansion").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_expansion").attr('tooltip4', "Allows you to conquest new territory by fleet fights.");
 //Research
 
 

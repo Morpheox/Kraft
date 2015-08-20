@@ -208,7 +208,7 @@ items[trademission["resourceget"]]+=trademission["get"];
 
 clearInterval(tickinterval);
 
-var docklog="The fleet its back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]+"<br> "
+var docklog="The fleet is back!<br> You recieve "+intToString(trademission["get"])+" "+trademission["resourceget"]+"<br> "
 
 $(".tradego").show()
 if(Math.random()>0.90){

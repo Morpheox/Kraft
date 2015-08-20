@@ -133,6 +133,7 @@ technologies["crushing"]=0
 technologies["floatglass"]=0
 technologies["contracts"]=0
 technologies["galleon"]=0
+technologies["wareconomy"]=0
 technologies["canteen"]=0
 technologies["glassblowing"]=0
 technologies["architecture"]=0
@@ -1966,6 +1967,30 @@ function research(b){
 			technologies["elephantry"]++
 			$(".hire_warelephant").show()
 			unlocked[".hire_warelephant"]=1;
+
+		}
+
+	}
+	else if (b=="wareconomy" && technologies["wareconomy"]==0){
+
+
+		goldcost=60;
+		moralecost=50;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["morale"]>=moralecost && items["gold"]>=goldcost){
+
+			items["gold"]-=goldcost
+			items["morale"]-=moralecost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["gold"]+=0.10
+			bonus["food"]+=0.10
+
+			technologies["wareconomy"]++
+
 
 		}
 
@@ -4066,6 +4091,23 @@ $(".tech_culturaltrade").html("Cultural trade" + (technologies["culturaltrade"] 
 $(".tech_culturaltrade").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".tech_culturaltrade").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_culturaltrade").attr('tooltip4', "Allows getting knowledge when trading with other civilizations.");
+
+goldcost=60;
+moralecost=50;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || items["gold"]<goldcost || items["morale"]<moralecost){
+	$(".tech_wareconomy").addClass("unavailable")
+}
+else
+{
+	$(".tech_wareconomy").removeClass("unavailable")
+}
+$(".tech_wareconomy").addClass((technologies["wareconomy"] >0 ? "researched" : ""))
+$(".tech_wareconomy").html("War economy" + (technologies["wareconomy"] >0 ? " (researched)" : ""));
+$(".tech_wareconomy").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_wareconomy").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_wareconomy").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_wareconomy").attr('tooltip5', "Increases gold and food production by 10%.");
 
 steelcost=100;
 knowledgecost=500;

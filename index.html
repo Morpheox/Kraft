@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.3.4 beta</title>
+	<title>Keep Craft v0.3.5 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -24,7 +24,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.3.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, dont forget to refresh   <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
+    <div class="infokraft">Keep Craft v0.3.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, dont forget to refresh   <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -151,6 +151,7 @@
 			<div class="block tech_rampage"></div>
 			<div class="block tech_construction"></div>
 			<div class="block tech_domestication"></div>
+			<div class="block tech_wareconomy"></div>
 			<div class="block tech_architecture"></div>
 			<div class="block tech_undergroundstorage"></div>
 			<div class="block tech_elephantry"></div>
@@ -310,6 +311,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+         <b>V 0.3.5</b>
+        <ul>
+		<li>New dual military-economy tech</li>
+		<li>Fixed some ui errors.</li>
+        </ul>
         <b>V 0.3.4</b>
         <ul>
 		<li>Added a new feature, ship fights</li>
@@ -586,8 +592,11 @@
 	$(".tech_risk").click(function() {research("risk")});
 	$(".tech_domestication").click(function() {research("domestication")});
 	$(".tech_elephantry").click(function() {research("elephantry")});
+	$(".tech_wareconomy").click(function() {research("wareconomy")});
 	$(".tech_undergroundstorage").click(function() {research("undergroundstorage")});
 	$(".tech_expansion").click(function() {research("expansion")});
+
+
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

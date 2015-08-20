@@ -218,6 +218,7 @@ technologies["crushing"]=0
 technologies["floatglass"]=0
 technologies["contracts"]=0
 technologies["galleon"]=0
+technologies["wareconomy"]=0
 technologies["glassblowing"]=0
 technologies["rampage"]=0
 technologies["domestication"]=0

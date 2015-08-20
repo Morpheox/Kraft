@@ -4528,7 +4528,7 @@ else
 }
 $(".craft_greatsword").html("Greatsword");
 $(".craft_greatsword").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
-$(".craft_greatsword").attr('tooltip3', "This double handed sword its a marvel of smithing.");
+$(".craft_greatsword").attr('tooltip3', "This double handed sword is a marvel of smithing.");
 
 
 blockcost=500;

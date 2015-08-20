@@ -105,7 +105,7 @@ function maxtrade(){
 		resources=maxresources
 	}
 
-	$(".tradeamount").val(resources.toFixed(2))
+	$(".tradeamount").val((resources-0.001).toFixed(2))
 	refreshtrade();
 
 }

@@ -24,14 +24,14 @@ stringencuentro+=enemyship["boat"]+" Boat (Power:50 Structure:300)<br>";
 if (force>=50 && force<120)
 {
 enemyship["trireme"]=Math.round(force*0.04)+1;
-stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3000)<br>";
+stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3.000)<br>";
 }
 if (force>120)
 {
 enemyship["trireme"]=Math.round(force*0.04)+1;
-stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3000)<br>";
+stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3.000)<br>";
 enemyship["turtleship"]=Math.round(force*0.01)+1;
-stringencuentro+=enemyship["turtleship"]+" Turtle ship (Power:150 Structure:10000)<br><br>";
+stringencuentro+=enemyship["turtleship"]+" Turtle ship (Power:150 Structure:10.000)<br><br>";
 }
 
 stringencuentro+="Territory protected: "+intToString(Math.pow(1.2,(bonus["expansion"]))*200)

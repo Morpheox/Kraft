@@ -4231,7 +4231,7 @@ $(".tech_rampage").addClass((technologies["rampage"] >0 ? "researched" : ""))
 $(".tech_rampage").html("Rampage" + (technologies["rampage"] >0 ? " (researched)" : ""));
 $(".tech_rampage").attr('tooltip', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".tech_rampage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_rampage").attr('tooltip4', "A thousand swords were used to perfect the technic, allows crafting greatswords,");
+$(".tech_rampage").attr('tooltip4', "A thousand swords were used to perfect the technique, allows crafting greatswords,");
 $(".tech_rampage").attr('tooltip5', "and hiring berseks");
 
 blockcost=2000;

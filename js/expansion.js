@@ -102,10 +102,10 @@ if(crew<people["sailor"]){
 			rewardstructure=0;
 
 			rewardplank+=Math.random()*people["galley"]*100
-			rewardplank+=Math.random()*people["galley"]*500
+			rewardplank+=Math.random()*people["galleon"]*500
 
 			rewardstructure+=Math.random()*people["galley"]*30
-			rewardstructure+=Math.random()*people["galley"]*200
+			rewardstructure+=Math.random()*people["galleon"]*200
 			combatlog+="You managed to salvage:<br>"
 
 			craft["plank"]+=rewardplank;

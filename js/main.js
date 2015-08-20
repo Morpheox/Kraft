@@ -4858,7 +4858,7 @@ $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
 $(".ships").html("Ships: "+ships+" / "+ +maximums["ships"]);
 $(".titles").html("Titles: "+bonus["title"]);
-$(".territory").html("Territory: "+bonus["territory"]);
+$(".territory").html("Territory: "+intToString(bonus["territory"]));
 var inv_text="<table>"
 for(key in craft){
 	if(craft[key]!=0){

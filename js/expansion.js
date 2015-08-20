@@ -45,7 +45,7 @@ function expand(){
 
 crew=0
 crew+=people["galley"]*2;
-crew+=people["galley"]*5;
+crew+=people["galleon"]*5;
 
 if(trademission["time"]>=1){
 	alert("Your ships are already on a mission")
@@ -55,7 +55,7 @@ if(ships<1){
 	alert("You dont have any ships.")
 	return;
 }
-if(crew<people["sailor"]){
+if(crew>people["sailor"]){
 	alert("You need " + crew+ " sailors for this mission.")
 	return;
 }
@@ -96,7 +96,7 @@ if(crew<people["sailor"]){
 		hp-=dmg2;
 		combatlog+="Your fleet structure: "+Math.round(hp) +" / Enemy fleet structure: "+Math.round(hp2)+"<br><br>";
 		if(hp<0){
-			combatlog+="You lose the combat.<br> All your ships are destroyed.<br>"
+			combatlog+="You lose the combat.<br> All your ships are destroyed.<br> All your sailors died<br>"
 
 			rewardplank=0;
 			rewardstructure=0;
@@ -107,7 +107,8 @@ if(crew<people["sailor"]){
 			rewardstructure+=Math.random()*people["galley"]*30
 			rewardstructure+=Math.random()*people["galleon"]*200
 			combatlog+="You managed to salvage:<br>"
-
+			population-=people["sailor"];
+			people["sailor"]=0;
 			craft["plank"]+=rewardplank;
 			craft["structure"]+=rewardstructure;
 			combatlog+=intToString(rewardplank)+" plank<br>"

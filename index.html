@@ -85,6 +85,9 @@
 			<div class="block build_blockyard"></div><button class="toggle toggle_blockyard" onclick='toggle("blockyard")'>Toggle</button>
 			<div class="block build_bunker"></div>
 			<div class="block build_laboratory"></div><button class="toggle toggle_laboratory" onclick='toggle("laboratory")'>Toggle</button>
+			<div class="block build_tradeoutpost"></div>
+			<div class="block build_scienceoutpost"></div>
+			<div class="block build_militaryoutpost"></div>
 			</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -522,6 +525,9 @@
 	$(".build_blockyard").click(function() {build("blockyard")});
 	$(".build_laboratory").click(function() {build("laboratory")});
 	$(".build_bunker").click(function() {build("bunker")});
+	$(".build_tradeoutpost").click(function() {build("tradeoutpost")});
+	$(".build_scienceoutpost").click(function() {build("scienceoutpost")});
+	$(".build_militaryoutpost").click(function() {build("militaryoutpost")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});

@@ -66,6 +66,11 @@ buildings["crusher"]=0;
 buildings["blockyard"]=0;
 buildings["bunker"]=0;
 buildings["laboratory"]=0;
+buildings["tradeoutpost"]=0;
+buildings["scienceoutpost"]=0;
+buildings["militaryoutpost"]=0;
+
+
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -132,6 +137,7 @@ technologies["intelligence"]=0
 technologies["crushing"]=0
 technologies["floatglass"]=0
 technologies["contracts"]=0
+technologies["rampage"]=0
 technologies["galleon"]=0
 technologies["wareconomy"]=0
 technologies["canteen"]=0

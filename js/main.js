@@ -5154,7 +5154,10 @@ function load(){
 			}
 		}
 
-
+		if(buildings["library"]>=7){
+		$(".tech_wrapping").show()
+		unlocked[".tech_wrapping"]=1;
+		}
 
 
 
@@ -5179,7 +5182,7 @@ function load(){
 	if (typeof Cookies.get( 'prestige') != 'undefined'){
 		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
 	}
-	
+
 	if (typeof Cookies.get( 'buildstatus') != 'undefined'){
 		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
 		for (key in buildstatus){

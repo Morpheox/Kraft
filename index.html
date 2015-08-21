@@ -34,7 +34,7 @@
 <a href="https://www.reddit.com/r/Keep_Craft/" target="blank" >Subreddit</a> <a class="a2" href="https://www.reddit.com/r/Keep_Craft/wiki/index" target="blank">Wiki</a>
 
 </div>
-	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
+	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <br><br>
             
 	<ul class="nav nav-tabs">
@@ -281,6 +281,31 @@
 	</div>
 
 
+	  <div class="modal fade" id="importmodal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          Copy or paste here your save<br>
+          <h4 class="modal-title messagetitle">Import</h4>
+        </div>
+        <div class="modal-body messagetext">
+		<textarea class="inputtxt">
+			
+
+
+		</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="decode()">Import!</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 	  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">

@@ -5127,7 +5127,89 @@ function save(){
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
 }
+function encode(){
+encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
+encodestring+=JSON.stringify(buildings)+"--"+JSON.stringify( maximums)+"--"+JSON.stringify(technologies)+"--"
+encodestring+=JSON.stringify(people)+"--"+JSON.stringify(craft)+"--"+JSON.stringify(unlocked)+"--"
+encodestring+=JSON.stringify(population)+"--"+JSON.stringify(trademission)+"--"
+encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)
+b64string=btoa(encodestring);
+$('.inputtxt').val(b64string)
+}
 
+function decode(){
+var result=atob($('.inputtxt').val())
+result= result.split("--")
+console.log(result)
+items = update(items,JSON.parse(result[0]));
+bonus = update(bonus,JSON.parse(result[1]));
+buildings = update(buildings,JSON.parse(result[2]));
+maximums = update(maximums,JSON.parse(result[3]));
+technologies = update(technologies,JSON.parse(result[4]));
+people = update(people,JSON.parse(result[5]));
+craft = update(craft,JSON.parse(result[6]));
+unlocked = update(unlocked,JSON.parse(result[7]));
+population = update(population,JSON.parse(result[8]));
+trademission = update(prestige,JSON.parse(result[9]));
+prestige = update(prestige,JSON.parse(result[10]));
+buildstatus = update(prestige,JSON.parse(result[11]));
+
+		population = Cookies.get('population');
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
+
+
+
+
+		ships=people["galley"]+people["galleon"]
+		for(key in unlocked){
+			if (unlocked[key]==1)
+			{
+				$(key).show().removeClass("invisible")
+			}
+		}
+
+		if(buildings["library"]>=7){
+		$(".tech_wrapping").show()
+		unlocked[".tech_wrapping"]=1;
+		}
+
+	if (typeof Cookies.get( 'trademission') != 'undefined'){
+		trademission = update(trademission,JSON.parse(Cookies.get('trademission')));
+		if(trademission["time"]>0){
+			tickinterval = setInterval(function(){ ticktrade()}, 1000);
+			$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
+			$(".tradego").hide()
+		}
+
+	}
+
+	if (typeof Cookies.get( 'prestige') != 'undefined'){
+		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
+	}
+
+	if (typeof Cookies.get( 'buildstatus') != 'undefined'){
+		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
+		for (key in buildstatus){
+			if(buildstatus[key]==0){
+				buildstatus[key]==0
+				$(".build_"+key).addClass("off")
+			}
+		}
+
+	}
+
+	researchunlock()
+	if(prestige["number"]>0){
+		$(".reespec").show()
+		unlocked[".reespec"]=1;
+	}
+
+	refreshselect()
+	filllog();
+
+
+
+}
 function load(){
 
 	if (typeof Cookies.get( 'items') != 'undefined'){

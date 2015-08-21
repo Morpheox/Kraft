@@ -152,6 +152,7 @@ technologies["elephantry"]=0
 technologies["undergroundstorage"]=0
 technologies["expansion"]=0
 technologies["investigation"]=0
+technologies["internationalization"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -490,6 +491,7 @@ function expedition(){
 				maximums["tin"]+=0.15*(rnd);
 				maximums["coal"]+=0.15*(rnd);
 				maximums["steel"]+=0.10*(rnd);
+
 			}
 			if(Math.random()>0.95 && technologies["domestication"]==1){
 				rnd=Math.round((Math.random()*power)/800)+1;
@@ -2138,6 +2140,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="internationalization" && technologies["internationalization"]==0){
+
+
+		goldcost=70;
+		bronzecost=300;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["gold"]>=goldcost && craft["bronze"]>=bronzecost){
+
+			items["gold"]-=goldcost
+			craft["bronze"]-=bronzecost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["internationalization"]++
+			$(".build_tradeoutpost").show()
+			unlocked[".build_tradeoutpost"]=1;
+
+		}
+
+	}
 
 setTimeout(function(){
 
@@ -2939,7 +2963,7 @@ function build(b){
 
 		framecost=Math.pow(1.3,(buildings["scienceoutpost"]))*10
 		glasscost=Math.pow(1.3,(buildings["scienceoutpost"]))*20
-		territorycost=Math.pow(1.2,(buildings["scienceoutpost"]))*400
+		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
 
 		if (craft["frame"]>=framecost && craft["glass"]>=glasscost && bonus["territory"]>=territorycost){
 
@@ -2953,7 +2977,24 @@ function build(b){
 
 		}
 	}
+	else if (b=="tradeoutpost"){
 
+		framecost=Math.pow(1.3,(buildings["tradeoutpost"]))*10
+		coincost=Math.pow(1.3,(buildings["tradeoutpost"]))*300
+		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
+
+		if (craft["frame"]>=framecost && craft["coin"]>=coincost && bonus["territory"]>=territorycost){
+
+			craft["frame"]-=framecost;
+			craft["coin"]-=coincost;
+			bonus["territory"]-=territorycost
+
+			buildings["tradeoutpost"]+=1
+			maximums["population"]+=10;
+			bonus["title"]+=1;
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -3346,7 +3387,7 @@ $(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.0
 
 framecost=Math.pow(1.3,(buildings["scienceoutpost"]))*10
 glasscost=Math.pow(1.3,(buildings["scienceoutpost"]))*20
-territorycost=Math.pow(1.2,(buildings["scienceoutpost"]))*400
+territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
 if(craft["frame"]<framecost || craft["glass"]<glasscost || bonus["territory"]<territorycost){
 	$(".build_scienceoutpost").addClass("unavailable")
 }
@@ -3362,8 +3403,23 @@ $(".build_scienceoutpost").attr('tooltip5', 'Knowledge production +0.02/s');
 $(".build_scienceoutpost").attr('tooltip6', 'Max population +10');
 $(".build_scienceoutpost").attr('tooltip7', 'Grants 1 title per outpost');
 
-
-
+framecost=Math.pow(1.3,(buildings["tradeoutpost"]))*10
+coincost=Math.pow(1.3,(buildings["tradeoutpost"]))*300
+territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
+if(craft["frame"]<framecost || craft["coin"]<coincost || bonus["territory"]<territorycost){
+	$(".build_tradeoutpost").addClass("unavailable")
+}
+else
+{
+	$(".build_tradeoutpost").removeClass("unavailable")
+}
+$(".build_tradeoutpost").html("Trade outpost ("+buildings["tradeoutpost"]+")");
+$(".build_tradeoutpost").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_tradeoutpost").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".build_tradeoutpost").attr('tooltip3', 'Territory: '+ parseFloat(bonus["territory"]).toFixed(2)+" / "+parseFloat(territorycost).toFixed(2))
+$(".build_tradeoutpost").attr('tooltip5', 'Gold production +0.01/s');
+$(".build_tradeoutpost").attr('tooltip6', 'Max population +10');
+$(".build_tradeoutpost").attr('tooltip7', 'Grants 1 title per outpost');
 
 //People
 foodcost=50;
@@ -4479,6 +4535,22 @@ $(".tech_investigation").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemic
 $(".tech_investigation").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_investigation").attr('tooltip4', "Allows you to build scientific outposts in conquered territory.");
 
+goldcost=70;
+bronzecost=300;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || items["gold"]<goldcost || craft["bronze"]<bronzecost){
+	$(".tech_internationalization").addClass("unavailable")
+}
+else
+{
+	$(".tech_internationalization").removeClass("unavailable")
+}
+$(".tech_internationalization").addClass((technologies["internationalization"] >0 ? "researched" : ""))
+$(".tech_internationalization").html("Internationalization" + (technologies["internationalization"] >0 ? " (res..)" : ""));
+$(".tech_internationalization").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_internationalization").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".tech_internationalization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_internationalization").attr('tooltip5', "Allows you to build trade outposts in conquered territory.");
 //Research
 
 
@@ -4866,6 +4938,7 @@ production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
+production["gold"]+=buildings["tradeoutpost"]/400;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

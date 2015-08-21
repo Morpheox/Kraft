@@ -131,4 +131,9 @@ function researchunlock(){
 		unlocked[".tech_investigation"]=1;
 	}
 
+	if(bonus["economy"]>=6800 && unlocked[".tech_internationalization"]!=1){
+		$(".tech_internationalization").show()
+		unlocked[".tech_internationalization"]=1;
+	}
+
 }

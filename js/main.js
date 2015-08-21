@@ -4865,7 +4865,7 @@ production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
-production["knowledge"]+=buildings["scienceoutpost"]/400;
+production["knowledge"]+=buildings["scienceoutpost"]/200;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

@@ -81,7 +81,7 @@ $(".legacy_"+b).attr('tooltip', 'Legacy: '+ prestige["legacy"]+" / "+Math.round(
 switch(b){
 	case "motivation":$(".legacy_"+b).attr('tooltip3', 'Global production +1%');break;
 	case "depot":$(".legacy_"+b).attr('tooltip3', 'All storages +1%');break;
-	case "mastery":$(".legacy_"+b).attr('tooltip3', 'Craft effiency +1%');break;
+	case "mastery":$(".legacy_"+b).attr('tooltip3', 'Craft efficiency +1%');break;
 	case "vengeance":$(".legacy_"+b).attr('tooltip3', 'Military power +5%');break;
 	case "aegis":$(".legacy_"+b).attr('tooltip3', 'Troops hp +5%');break;
 	case "bargain":$(".legacy_"+b).attr('tooltip3', 'Market ratios +5%');break;

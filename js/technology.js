@@ -126,7 +126,7 @@ function researchunlock(){
 		unlocked[".tech_expansion"]=1;
 	}
 
-	if(bonus["science"]>=6800 && unlocked[".tech_chemistry"]!=1){
+	if(bonus["science"]>=6800 && unlocked[".tech_investigation"]!=1){
 		$(".tech_investigation").show()
 		unlocked[".tech_investigation"]=1;
 	}

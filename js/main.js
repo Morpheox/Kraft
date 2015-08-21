@@ -537,6 +537,7 @@ function expedition(){
 			enemy["mercenary"]=0;
 			enemy["soldier"]=0;
 			enemy["halberdier"]=0;
+			enemy["warrior"]=0;
 
 			var enemytipo=Math.random()*power;
 			var stringencuentro="Enemies:<br>"

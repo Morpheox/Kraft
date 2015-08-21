@@ -143,6 +143,11 @@ function tradeship(){
 		return;
 
 	}
+	if(resourcestrade<0){
+		$(".docklog").html("You cant send negative amounts, that's madness.")
+		return;
+
+	}
 	if(isNaN($(".tradeamount").val()))
 	{
 		$(".docklog").html("Incorrect trade amount.")

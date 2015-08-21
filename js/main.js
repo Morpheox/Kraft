@@ -251,20 +251,20 @@ function reespec(){
 	}
 	if(prestige["treasure"]>=cost){
 		prestige["treasure"]-=cost;
-		bonus["wood"]-=0.15*people["sucellus"]
-		bonus["water"]-=0.15*people["sucellus"]
-		bonus["food"]-=0.15*people["sucellus"]
+		bonus["wood"]-=0.20*people["sucellus"]
+		bonus["water"]-=0.20*people["sucellus"]
+		bonus["food"]-=0.20*people["sucellus"]
+		maximums["water"]-=5*people["sucellus"]
 		bonus["copper"]-=0.10*people["eredal"]
 		bonus["iron"]-=0.10*people["eredal"]
 		bonus["steel"]-=0.10*people["eredal"]
 		bonus["mineral"]-=0.10*people["eredal"]
-		bonus["gold"]-=0.30*people["khrysos"]
+		bonus["gold"]-=0.25*people["khrysos"]
 		bonus["trade"]-=0.10*people["khrysos"]
 		bonus["craft"]-=0.05*people["elisia"]
 		maximums["wood"]-=500*people["elisia"]
 		maximums["mineral"]-=500*people["elisia"]
 		maximums["population"]-=2*people["xochiquetzal"]
-		bonus["hp"]-=0.05*people["xochiquetzal"]
 		bonus["hp"]-=0.05*people["xochiquetzal"]
 		bonus["power"]-=0.10*people["warmuk"]
 		bonus["morale"]-=0.05*people["warmuk"]
@@ -301,10 +301,10 @@ function lead(b){
 	if(bonus["title"]>=1){
 		if (b=="sucellus"){
 
-			bonus["wood"]+=0.15
-			bonus["food"]+=0.15
-			bonus["water"]+=0.15
-
+			bonus["wood"]+=0.20
+			bonus["food"]+=0.20
+			bonus["water"]+=0.20
+			maximums["water"]+=5
 			bonus["title"]--
 			people["sucellus"]+=1;
 
@@ -324,7 +324,7 @@ function lead(b){
 		}
 		else if (b=="khrysos"){
 
-			bonus["gold"]+=0.30
+			bonus["gold"]+=0.25
 			bonus["trade"]+=0.10
 
 			bonus["title"]--
@@ -4799,15 +4799,16 @@ else
 }
 
 $(".leader_sucellus").html("Sucellus (lv:" + people["sucellus"]+")");
-$(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 15%')
-$(".leader_sucellus").attr('tooltip3', "'Nature its not optional'");
+$(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 20%')
+$(".leader_sucellus").attr('tooltip2', 'Increments maximum water by +5')
+$(".leader_sucellus").attr('tooltip4', "'Nature its not optional'");
 
 $(".leader_eredal").html("Eredal (lv:" + people["eredal"]+")");
 $(".leader_eredal").attr('tooltip', 'Increments mineral, copper, iron and steel production by 10%')
 $(".leader_eredal").attr('tooltip3', "'Metal till death'");
 
 $(".leader_khrysos").html("Khrysos (lv:" + people["khrysos"]+")");
-$(".leader_khrysos").attr('tooltip', 'Increments gold production by 30%')
+$(".leader_khrysos").attr('tooltip', 'Increments gold production by 25%')
 $(".leader_khrysos").attr('tooltip2', 'Increments market ratios by 10%')
 $(".leader_khrysos").attr('tooltip4', "'Everything has a price'");
 

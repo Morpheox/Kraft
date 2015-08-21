@@ -151,6 +151,7 @@ technologies["risk"]=0
 technologies["elephantry"]=0
 technologies["undergroundstorage"]=0
 technologies["expansion"]=0
+technologies["investigation"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2117,8 +2118,26 @@ function research(b){
 		}
 
 	}
+	else if (b=="investigation" && technologies["investigation"]==0){
 
 
+		chemicalscost=15;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["chemicals"]>=chemicalscost){
+
+			items["chemicals"]-=chemicalscost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["investigation"]++
+			$(".build_scienceoutpost").show()
+			unlocked[".build_scienceoutpost"]=1;
+
+		}
+
+	}
 
 setTimeout(function(){
 
@@ -2916,6 +2935,25 @@ function build(b){
 
 		}
 	}
+	else if (b=="scienceoutpost"){
+
+		framecost=Math.pow(1.3,(buildings["laboratory"]))*10
+		glasscost=Math.pow(1.3,(buildings["laboratory"]))*20
+		territorycost=Math.pow(1.2,(buildings["laboratory"]))*400
+
+		if (craft["frame"]>=framecost && craft["glass"]>=glasscost && bonus["territory"]>=territorycost){
+
+			craft["frame"]-=framecost;
+			craft["glass"]-=glasscost;
+			bonus["territory"]-=territorycost
+
+			buildings["scienceoutpost"]+=1
+			maximums["population"]+=10;
+			bonus["title"]+=1;
+
+		}
+	}
+
 }
 
 function calculatecost(){
@@ -3305,6 +3343,27 @@ $(".build_laboratory").attr('tooltip3', 'Chemicals storage + 5');
 $(".build_laboratory").attr('tooltip4', 'Bottle consumption per scientist -0.001/s');
 $(".build_laboratory").attr('tooltip5', 'Knowledge production per scientist  +0.005/s');
 $(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.001/s');
+
+framecost=Math.pow(1.3,(buildings["laboratory"]))*10
+glasscost=Math.pow(1.3,(buildings["laboratory"]))*20
+territorycost=Math.pow(1.2,(buildings["laboratory"]))*400
+if(craft["frame"]<framecost || craft["glass"]<glasscost || bonus["territory"]<territorycost){
+	$(".build_scienceoutpost").addClass("unavailable")
+}
+else
+{
+	$(".build_scienceoutpost").removeClass("unavailable")
+}
+$(".build_scienceoutpost").html("Scientific outpost ("+buildings["laboratory"]+")");
+$(".build_scienceoutpost").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_scienceoutpost").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".build_scienceoutpost").attr('tooltip3', 'Territory: '+ parseFloat(bonus["territory"]).toFixed(2)+" / "+parseFloat(territorycost).toFixed(2))
+$(".build_scienceoutpost").attr('tooltip5', 'Knowledge production +0.02/s');
+$(".build_scienceoutpost").attr('tooltip6', 'Max population +10');
+$(".build_scienceoutpost").attr('tooltip7', 'Grants 1 title per outpost');
+
+
+
 
 //People
 foodcost=50;
@@ -4404,6 +4463,22 @@ $(".tech_expansion").html("Expansion" + (technologies["expansion"] >0 ? " (resea
 $(".tech_expansion").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"]).toFixed(2)+" / "+parseFloat(suppliescost).toFixed(2))
 $(".tech_expansion").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_expansion").attr('tooltip4', "Allows you to conquest new territory by fleet fights.");
+
+chemicalscost=15;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || items["chemicals"]<chemicalscost){
+	$(".tech_investigation").addClass("unavailable")
+}
+else
+{
+	$(".tech_investigation").removeClass("unavailable")
+}
+$(".tech_investigation").addClass((technologies["investigation"] >0 ? "researched" : ""))
+$(".tech_investigation").html("Investigation" + (technologies["investigation"] >0 ? " (researched)" : ""));
+$(".tech_investigation").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
+$(".tech_investigation").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_investigation").attr('tooltip4', "Allows you to build scientific outposts in conquered territory.");
+
 //Research
 
 
@@ -4790,6 +4865,7 @@ production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
+production["knowledge"]+=buildings["scienceoutpost"]/400;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

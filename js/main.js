@@ -3354,7 +3354,7 @@ else
 {
 	$(".build_scienceoutpost").removeClass("unavailable")
 }
-$(".build_scienceoutpost").html("Scientific outpost ("+buildings["laboratory"]+")");
+$(".build_scienceoutpost").html("Scientific outpost ("+buildings["scienceoutpost"]+")");
 $(".build_scienceoutpost").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_scienceoutpost").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".build_scienceoutpost").attr('tooltip3', 'Territory: '+ parseFloat(bonus["territory"]).toFixed(2)+" / "+parseFloat(territorycost).toFixed(2))

@@ -3926,7 +3926,7 @@ else
 	$(".tech_wrapping").removeClass("unavailable")
 }
 $(".tech_wrapping").addClass((technologies["wrapping"] >0 ? "researched" : ""))
-$(".tech_wrapping").html("Cavalry" + (technologies["wrapping"] >0 ? " (researched)" : ""));
+$(".tech_wrapping").html("Wrapping" + (technologies["wrapping"] >0 ? " (researched)" : ""));
 $(".tech_wrapping").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_wrapping").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_wrapping").attr('tooltip4', "Increases all storages by 10%");

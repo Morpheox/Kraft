@@ -175,7 +175,7 @@ function tradeship(){
 	crew+=people["galley"]*2
 	crew+=people["galleon"]*5
 	if(people["sailor"]<crew){
-		$(".docklog").html("Not enought crew to support the fleet.")
+		$(".docklog").html("Not enough  crew to support the fleet.")
 		return;
 	}
 

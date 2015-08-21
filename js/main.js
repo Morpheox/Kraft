@@ -5186,7 +5186,7 @@ function toggletech(){
 }
 function save(){
 	
-	document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+
 
 	Cookies.set( 'items', JSON.stringify(items) ,{ expires: 9999 });
 	Cookies.set( 'bonus', JSON.stringify(bonus) ,{ expires: 9999 });

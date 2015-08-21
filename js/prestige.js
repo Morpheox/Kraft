@@ -203,6 +203,7 @@ technologies["leadership"]=0
 technologies["armament"]=0
 technologies["gambling"]=0
 technologies["redeem"]=0
+technologies["wrapping"]=0
 technologies["shipyard"]=0
 technologies["sailing"]=0
 technologies["trade"]=0

@@ -120,6 +120,7 @@ technologies["leadership"]=0
 technologies["armament"]=0
 technologies["gambling"]=0
 technologies["redeem"]=0
+technologies["wrapping"]=0
 technologies["shipyard"]=0
 technologies["sailing"]=0
 technologies["trade"]=0
@@ -1441,6 +1442,22 @@ function research(b){
 		}
 
 	}
+	else if (b=="wrapping" && technologies["wrapping"]==0){
+
+		woodcost=20000;
+		mineralcost=10000;
+
+		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
+
+			bonus["storage"]+=0.10;
+			items["wood"]-=woodcost;
+			items["mineral"]-=mineralcost;
+
+			technologies["wrapping"]++
+
+		}
+
+	}
 	else if (b=="shipyard" && technologies["shipyard"]==0){
 
 		woodcost=25000;
@@ -2535,7 +2552,7 @@ function build(b){
 				case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
 				case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
 				case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-				case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;break;
+				case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;$(".tech_wrapping").show();unlocked[".tech_wrapping"]=1;break;
 				case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;$(".tech_specialization").show();unlocked[".tech_specialization"]=1;break;
 			}
 
@@ -3898,6 +3915,23 @@ $(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" :
 $(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_redeem").attr('tooltip3', "Allows reedeming tokens in the casino.");
 
+
+woodcost=20000;
+mineralcost=10000;
+if(items["wood"]<woodcost || items["mineral"]<mineralcost){
+	$(".tech_wrapping").addClass("unavailable")
+}
+else
+{
+	$(".tech_wrapping").removeClass("unavailable")
+}
+$(".tech_wrapping").addClass((technologies["wrapping"] >0 ? "researched" : ""))
+$(".tech_wrapping").html("Cavalry" + (technologies["wrapping"] >0 ? " (researched)" : ""));
+$(".tech_wrapping").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_wrapping").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_wrapping").attr('tooltip4', "Increases all storages by 10%");
+
+
 woodcost=25000;
 if(items["wood"]<woodcost ){
 	$(".tech_shipyard").addClass("unavailable")
@@ -5074,6 +5108,7 @@ function load(){
 			$(".tech_armament").show();unlocked[".tech_armament"]=1;
 			$(".tech_gambling").show();unlocked[".tech_gambling"]=1;
 			$(".tech_redeem").show();unlocked[".tech_redeem"]=1;
+			$(".tech_wrapping").show();unlocked[".tech_wrapping"]=1;
 		}
 		if(buildings["library"]>=8){
 			$(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;

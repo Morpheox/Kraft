@@ -308,3 +308,14 @@ font-size: 20px;
   border:1px solid black;
   padding:3px;
 }
+
+.infokraft a, input{
+
+  color:blue;
+
+  font-size:16px;
+}
+
+.a2{
+  margin-left:15px;
+}

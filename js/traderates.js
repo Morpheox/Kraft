@@ -212,7 +212,7 @@ var docklog="The fleet is back!<br> You recieve "+intToString(trademission["get"
 
 $(".tradego").show()
 if(Math.random()>0.90){
-docklog+=("You also get 1 lock");
+docklog+=("You also get 1 lock<br>");
 craft["lock"]++
 
 }

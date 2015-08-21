@@ -5173,30 +5173,6 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 		unlocked[".tech_wrapping"]=1;
 		}
 
-	if (typeof Cookies.get( 'trademission') != 'undefined'){
-		trademission = update(trademission,JSON.parse(Cookies.get('trademission')));
-		if(trademission["time"]>0){
-			tickinterval = setInterval(function(){ ticktrade()}, 1000);
-			$(".docklog").html("Trade Mission<br>Time remaining: "+totime(trademission["time"]));
-			$(".tradego").hide()
-		}
-
-	}
-
-	if (typeof Cookies.get( 'prestige') != 'undefined'){
-		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
-	}
-
-	if (typeof Cookies.get( 'buildstatus') != 'undefined'){
-		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
-		for (key in buildstatus){
-			if(buildstatus[key]==0){
-				buildstatus[key]==0
-				$(".build_"+key).addClass("off")
-			}
-		}
-
-	}
 
 	researchunlock()
 	if(prestige["number"]>0){

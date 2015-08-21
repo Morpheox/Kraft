@@ -5209,7 +5209,9 @@ function load(){
 function update(array1, array2){
 
 	for (key in array2){
+		if(array2[key]!='u' && array2[key]!='undefined' && array2[key]!= undefined ){
 		array1[key]=array2[key]
+		}
 	}
 
 	return array1

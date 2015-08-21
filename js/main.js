@@ -5212,6 +5212,10 @@ function update(array1, array2){
 		if( key!='u' && key!='undefined' && key!= undefined && array2[key]!='u' && array2[key]!='undefined' && array2[key]!= undefined ){
 		array1[key]=array2[key]
 		}
+		else
+		{
+		console.log("error")
+		}
 	}
 
 	return array1

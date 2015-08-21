@@ -3344,9 +3344,9 @@ $(".build_laboratory").attr('tooltip4', 'Bottle consumption per scientist -0.001
 $(".build_laboratory").attr('tooltip5', 'Knowledge production per scientist  +0.005/s');
 $(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.001/s');
 
-framecost=Math.pow(1.3,(buildings["laboratory"]))*10
-glasscost=Math.pow(1.3,(buildings["laboratory"]))*20
-territorycost=Math.pow(1.2,(buildings["laboratory"]))*400
+framecost=Math.pow(1.3,(buildings["scienceoutpost"]))*10
+glasscost=Math.pow(1.3,(buildings["scienceoutpost"]))*20
+territorycost=Math.pow(1.2,(buildings["scienceoutpost"]))*400
 if(craft["frame"]<framecost || craft["glass"]<glasscost || bonus["territory"]<territorycost){
 	$(".build_scienceoutpost").addClass("unavailable")
 }

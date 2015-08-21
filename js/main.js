@@ -5153,73 +5153,13 @@ function load(){
 				$(key).show().removeClass("invisible")
 			}
 		}
-		switch(buildings["library"]){
-			case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;
-			case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
-			case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-			case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-			case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-			case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-		}
 
-		if(buildings["library"]>=4){
-			$(".tech_currency").show();unlocked[".tech_currency"]=1;
-			$(".tech_exchange").show();unlocked[".tech_exchange"]=1;
-			$(".tech_coin").show();unlocked[".tech_coin"]=1;
-		}
 
-		if(buildings["library"]>=5){
-			$(".tech_bronze").show();unlocked[".tech_bronze"]=1;
-			$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;
-		}
 
-		if(buildings["library"]>=6){
-			$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;
-			$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;
-			$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;
-		}
 
-		if(buildings["library"]>=7){
-			$(".tech_leadership").show();unlocked[".tech_leadership"]=1;
-			$(".tech_armament").show();unlocked[".tech_armament"]=1;
-			$(".tech_gambling").show();unlocked[".tech_gambling"]=1;
-			$(".tech_redeem").show();unlocked[".tech_redeem"]=1;
-			$(".tech_wrapping").show();unlocked[".tech_wrapping"]=1;
-		}
-		if(buildings["library"]>=8){
-			$(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;
-			$(".tech_sailing").show();unlocked[".tech_sailing"]=1;
-			$(".tech_trade").show();unlocked[".tech_trade"]=1;
-			$(".tech_cache").show();unlocked[".tech_cache"]=1;
-			$(".tech_specialization").show();unlocked[".tech_specialization"]=1;
-		}
-	//RETROCOMPATIBILITY
-	if(maximums["moral"]!=0 && maximums["moral"]!=null)
-	{
-		maximums["morale"]=maximums["moral"]
-		maximums["moral"]=0
-		items["morale"]=items["moral"]
-		items["moral"]=0;
-	}
 
-	maximums["knowledge"]=buildings["library"]*100;
-	maximums["tin"]=(buildings["warehouse"]*4)+(buildings["towncenter"]*10)
 
-	if(technologies["bronze"]==1){
-		$(".build_statue").show()
-		unlocked[".build_statue"]=1;
-	}
 
-	if(buildings["workbench"]>0){
-		$(".craftamount").show()
-		unlocked[".craftamount"]=1
-	}
-
-	if(craft["pickaxe"]<0){
-		craft["pickaxe"]=0;
-	}
-
-	bonus["hp"]=people["xochiquetzal"]*0.05
 	//END RETROCOMPATIBILITY
 
 
@@ -5235,9 +5175,11 @@ function load(){
 		}
 
 	}
+
 	if (typeof Cookies.get( 'prestige') != 'undefined'){
 		prestige = update(prestige,JSON.parse(Cookies.get('prestige')));
 	}
+	
 	if (typeof Cookies.get( 'buildstatus') != 'undefined'){
 		buildstatus = update(buildstatus,JSON.parse(Cookies.get('buildstatus')));
 		for (key in buildstatus){

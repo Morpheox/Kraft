@@ -4755,7 +4755,7 @@ $(".tech_fireship").html("Fireship" + (technologies["fireship"] >0 ? " (research
 $(".tech_fireship").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_fireship").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".tech_fireship").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_fireship").attr('tooltip5', "Allows you to build fire ships, an agressive military ship..");
+$(".tech_fireship").attr('tooltip5', "Allows you to build fire ships, an agressive military ship.");
 
 //Research
 

@@ -3816,7 +3816,7 @@ $(".hire_fireship").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFix
 $(".hire_fireship").attr('tooltip3', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
 $(".hire_fireship").attr('tooltip4', "Power: 0  Structure: 4,000");
 $(".hire_fireship").attr('tooltip5', 'Cargo capacity: 0  Crew: 3');
-$(".hire_fireship").attr('tooltip6', 'Throws fire that deal 100 damage/s per round');
+$(".hire_fireship").attr('tooltip6', 'Throws fire that deal 100 damage per round');
 $(".hire_fireship").attr('tooltip7', 'This effect stacks');
 //Technologies
 

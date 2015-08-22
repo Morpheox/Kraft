@@ -153,6 +153,7 @@ technologies["undergroundstorage"]=0
 technologies["expansion"]=0
 technologies["investigation"]=0
 technologies["internationalization"]=0
+technologies["camps"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2162,7 +2163,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="camps" && technologies["camps"]==0){
 
+
+		horsecost=10;
+		elephantcost=2;
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["horse"]>=horsecost && craft["elephant"]>=elephantcost){
+
+			craft["horse"]-=horsecost
+			craft["elephant"]-=elephantcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["camps"]++
+			$(".build_militaryoutpost").show()
+			unlocked[".build_militaryoutpost"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -2995,6 +3017,27 @@ function build(b){
 
 		}
 	}
+	else if (b=="militaryoutpost"){
+
+		framecost=Math.pow(1.3,(buildings["militaryoutpost"]))*10
+		swordcost=Math.pow(1.3,(buildings["militaryoutpost"]))*400
+		armorcost=Math.pow(1.3,(buildings["militaryoutpost"]))*20
+		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
+
+		if (craft["frame"]>=framecost && craft["coin"]>=coincost && craft["sword"]>=swordcost && bonus["territory"]>=territorycost){
+
+			craft["frame"]-=framecost;
+			craft["coin"]-=coincost;
+			craft["sword"]-=swordcost
+			bonus["territory"]-=territorycost
+
+			maximums["morale"]+=3;
+			buildings["militaryoutpost"]+=1;
+			maximums["population"]+=10;
+			bonus["title"]+=1;
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -3420,6 +3463,30 @@ $(".build_tradeoutpost").attr('tooltip3', 'Territory: '+ parseFloat(bonus["terri
 $(".build_tradeoutpost").attr('tooltip5', 'Gold production +0.01/s');
 $(".build_tradeoutpost").attr('tooltip6', 'Max population +10');
 $(".build_tradeoutpost").attr('tooltip7', 'Grants 1 title per outpost');
+
+framecost=Math.pow(1.3,(buildings["militaryoutpost"]))*10
+swordcost=Math.pow(1.3,(buildings["militaryoutpost"]))*400
+armorcost=Math.pow(1.3,(buildings["militaryoutpost"]))*20
+territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
+if(craft["frame"]<framecost || craft["sword"]<swordcost || craft["armor"]<armorcost || bonus["territory"]<territorycost){
+	$(".build_militaryoutpost").addClass("unavailable")
+}
+else
+{
+	$(".build_militaryoutpost").removeClass("unavailable")
+}
+$(".build_militaryoutpost").html("Military outpost ("+buildings["militaryoutpost"]+")");
+$(".build_militaryoutpost").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_militaryoutpost").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
+$(".build_militaryoutpost").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
+$(".build_militaryoutpost").attr('tooltip4', 'Territory: '+ parseFloat(bonus["territory"]).toFixed(2)+" / "+parseFloat(territorycost).toFixed(2))
+$(".build_militaryoutpost").attr('tooltip5', 'Max morale +3');
+$(".build_militaryoutpost").attr('tooltip6', 'Max population +10');
+$(".build_militaryoutpost").attr('tooltip7', 'Grants 1 title per outpost');
+
+
+
+
 
 //People
 foodcost=50;
@@ -4551,6 +4618,23 @@ $(".tech_internationalization").attr('tooltip', 'Gold: '+ parseFloat(items["gold
 $(".tech_internationalization").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".tech_internationalization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_internationalization").attr('tooltip5', "Allows you to build trade outposts in conquered territory.");
+
+horsecost=10;
+elephantcost=2;
+knowledgecost=800;
+if(items["knowledge"]<knowledgecost || craft["horse"]<horsecost || craft["elephant"]<elephantcost){
+	$(".tech_camps").addClass("unavailable")
+}
+else
+{
+	$(".tech_camps").removeClass("unavailable")
+}
+$(".tech_camps").addClass((technologies["camps"] >0 ? "researched" : ""))
+$(".tech_camps").html("Camps" + (technologies["camps"] >0 ? " (res..)" : ""));
+$(".tech_camps").attr('tooltip', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
+$(".tech_camps").attr('tooltip2', 'Elephant: '+ parseFloat(craft["elephant"]).toFixed(2)+" / "+parseFloat(elephantcost).toFixed(2))
+$(".tech_camps").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_camps").attr('tooltip5', "Allows you to build military outposts in conquered territory.");
 //Research
 
 

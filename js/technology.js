@@ -135,5 +135,11 @@ function researchunlock(){
 		$(".tech_internationalization").show()
 		unlocked[".tech_internationalization"]=1;
 	}
+	
+	if(bonus["military"]>=6800 && unlocked[".tech_camps"]!=1){
+		$(".tech_camps").show()
+		unlocked[".tech_camps"]=1;
+	}
+
 
 }

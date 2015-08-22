@@ -4630,7 +4630,7 @@ else
 	$(".tech_camps").removeClass("unavailable")
 }
 $(".tech_camps").addClass((technologies["camps"] >0 ? "researched" : ""))
-$(".tech_camps").html("Camps" + (technologies["camps"] >0 ? " (res..)" : ""));
+$(".tech_camps").html("Camps" + (technologies["camps"] >0 ? " (researched)" : ""));
 $(".tech_camps").attr('tooltip', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
 $(".tech_camps").attr('tooltip2', 'Elephant: '+ parseFloat(craft["elephant"]).toFixed(2)+" / "+parseFloat(elephantcost).toFixed(2))
 $(".tech_camps").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))

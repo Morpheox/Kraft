@@ -62,16 +62,16 @@ if(crew>people["sailor"]){
 }
 	power=0;
 
-	power+=people["galley"]*150
-	power+=people["galleon"]*500
+	power+=people["galley"]*150*(bonus["shippower"]+1)
+	power+=people["galleon"]*500*(bonus["shippower"]+1)
 
 	hp=0;
-	hp+=people["galley"]*2000
-	hp+=people["galleon"]*15000
-	hp+=people["fireship"]*4000
+	hp+=people["galley"]*2000*(bonus["shiphp"]+1)
+	hp+=people["galleon"]*15000*(bonus["shiphp"]+1)
+	hp+=people["fireship"]*4000*(bonus["shiphp"]+1)
 
 	burn=0;
-	burn+=people["fireship"]*100
+	burn+=people["fireship"]*100*(bonus["shippower"]+1)
 
 	power2=0;
 	power2+=enemyship["boat"]*50

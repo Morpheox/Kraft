@@ -39,6 +39,9 @@ bonus["knowledge"]=0;
 bonus["territory"]=0;
 bonus["expansion"]=0;
 bonus["invest"]=0;
+bonus["shipspeed"]=0;
+bonus["shiphp"]=0;
+bonus["shippower"]=0;
 
 var buildings=new Array();
 
@@ -157,6 +160,7 @@ technologies["internationalization"]=0
 technologies["camps"]=0
 technologies["investment"]=0
 technologies["fireship"]=0
+technologies["careening"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2231,7 +2235,30 @@ function research(b){
 		}
 
 	}
+	else if (b=="careening" && technologies["careening"]==0){
 
+
+		woodcost=80000
+		plankcost=1000
+		knowledgecost=800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["plank"]>=plankcost && items["wood"]>=woodcost){
+
+			craft["plank"]-=plankcost
+			items["wood"]-=woodcost
+			items["knowledge"]-=knowledgecost;
+
+			bonus["shipspeed"]+=30
+			bonus["shiphp"]+=0.20
+
+			technologies["careening"]++
+
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4728,6 +4755,7 @@ $(".tech_internationalization").attr('tooltip2', 'Bronze: '+ parseFloat(craft["b
 $(".tech_internationalization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_internationalization").attr('tooltip5', "Allows you to build trade outposts in conquered territory.");
 
+
 horsecost=10;
 elephantcost=2;
 knowledgecost=800;
@@ -4762,6 +4790,24 @@ $(".tech_fireship").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(
 $(".tech_fireship").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".tech_fireship").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_fireship").attr('tooltip5', "Allows you to build fire ships, an agressive military ship.");
+
+woodcost=80000
+plankcost=1000
+knowledgecost=800;
+
+if(items["knowledge"]<knowledgecost || craft["plank"]<plankcost || items["wood"]<woodcost){
+	$(".tech_careening").addClass("unavailable")
+}
+else
+{
+	$(".tech_careening").removeClass("unavailable")
+}
+$(".tech_careening").addClass((technologies["careening"] >0 ? "researched" : ""))
+$(".tech_careening").html("Careening" + (technologies["careening"] >0 ? " (researched)" : ""));
+$(".tech_careening").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_careening").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_careening").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_careening").attr('tooltip5', "Reduces trade mission time by 30s, and increases ships hp by 20%");
 
 //Research
 

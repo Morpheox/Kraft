@@ -151,4 +151,9 @@ function researchunlock(){
 		unlocked[".tech_fireship"]=1;
 	}
 
+	if(bonus["science"]>=7500 && unlocked[".tech_careening"]!=1){
+		$(".tech_careening").show()
+		unlocked[".tech_careening"]=1;
+	}
+
 }

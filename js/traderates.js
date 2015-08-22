@@ -186,7 +186,7 @@ function tradeship(){
 
 	craft["supplies"]-=cost;
 
-		trademission["time"]=300;
+		trademission["time"]=300-bonus["shipspeed"];
 		trademission["get"]=amountget;
 		trademission["resourceget"]=$(".selget").val();
 

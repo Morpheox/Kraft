@@ -5279,7 +5279,6 @@ function save(){
 	Cookies.set( 'technologies', JSON.stringify(technologies) ,{ expires: 9999 });
 	Cookies.set( 'people', JSON.stringify(people) ,{ expires: 9999 });
 	Cookies.set( 'craft', JSON.stringify(craft) ,{ expires: 9999 });
-	Cookies.set( 'unlocked', JSON.stringify(unlocked) ,{ expires: 9999 });
 	Cookies.set('population', population,{ expires: 9999 });
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
@@ -5373,11 +5372,11 @@ function load(){
 		people = update(people,JSON.parse(Cookies.get( 'people')));
 		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 
-		try{
+		if(typeof Cookies.get( 'unlock1') != 'undefined'){
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock1'))));
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock2'))));
 		}
-		catch(err){
+		else{
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 		}
 

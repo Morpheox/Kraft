@@ -46,6 +46,7 @@ function expand(){
 crew=0
 crew+=people["galley"]*2;
 crew+=people["galleon"]*5;
+crew+=people["fireship"]*3;
 
 if(trademission["time"]>=1){
 	alert("Your ships are already on a mission")
@@ -67,6 +68,10 @@ if(crew>people["sailor"]){
 	hp=0;
 	hp+=people["galley"]*2000
 	hp+=people["galleon"]*15000
+	hp+=people["fireship"]*4000
+
+	burn=0;
+	burn+=people["fireship"]*100
 
 	power2=0;
 	power2+=enemyship["boat"]*50
@@ -79,7 +84,7 @@ if(crew>people["sailor"]){
 	hp2+=enemyship["turtleship"]*10000
 
 
-
+	totalburn=0;
 	combatlog="The encounter starts:<br>"
 	var ronda=0;
 
@@ -87,12 +92,16 @@ if(crew>people["sailor"]){
 		dmg1=power+(Math.random()*(power/3))-(Math.random()*(power/3));
 		dmg2=power2+(Math.random()*(power2/3))-(Math.random()*(power2/3));
 
+
 		combatlog+="Round "+(i+1)+"<br>"
 
 		combatlog+="Your ships deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy ships deal "+intToString(dmg2)+" damage<br>"
-
-		hp2-=dmg1;
+		if(burn>0){
+			totalburn+=burn+(Math.random()*(burn/3))-(Math.random()*(burn/3));
+			combatlog+="The enemy ships burn for "+intToString(totalburn)+" damage<br>"		
+		}
+		hp2-=(dmg1+totalburn);
 		hp-=dmg2;
 		combatlog+="Your fleet structure: "+Math.round(hp) +" / Enemy fleet structure: "+Math.round(hp2)+"<br><br>";
 		if(hp<0){
@@ -103,9 +112,11 @@ if(crew>people["sailor"]){
 
 			rewardplank+=Math.random()*people["galley"]*100
 			rewardplank+=Math.random()*people["galleon"]*500
+			rewardplank+=Math.random()*people["fireship"]*200
 
 			rewardstructure+=Math.random()*people["galley"]*30
 			rewardstructure+=Math.random()*people["galleon"]*200
+
 			combatlog+="You managed to salvage:<br>"
 			population-=people["sailor"];
 			people["sailor"]=0;
@@ -115,7 +126,7 @@ if(crew>people["sailor"]){
 			combatlog+=intToString(rewardstructure)+" structure<br>";
 			people["galley"]=0;
 			people["galleon"]=0;
-
+			people["fireship"]=0;
 			ships=0;
 
 			break;

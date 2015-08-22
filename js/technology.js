@@ -105,6 +105,11 @@ function researchunlock(){
 		$(".tech_undergroundstorage").show()
 		unlocked[".tech_undergroundstorage"]=1;
 	}
+
+	if(bonus["economy"]>=4200 && unlocked[".tech_investment"]!=1){
+		$(".tech_investment").show()
+		unlocked[".tech_investment"]=1;
+	}
 		
 	if(bonus["science"]>=4500 && unlocked[".tech_chemistry"]!=1){
 		$(".tech_chemistry").show()
@@ -141,5 +146,9 @@ function researchunlock(){
 		unlocked[".tech_camps"]=1;
 	}
 
+	if(bonus["military"]>=7600 && unlocked[".tech_fireship"]!=1){
+		$(".tech_fireship").show()
+		unlocked[".tech_fireship"]=1;
+	}
 
 }

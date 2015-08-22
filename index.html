@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.4.1 beta</title>
+	<title>Keep Craft v0.4.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -24,7 +24,7 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.4.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.4.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -156,6 +156,7 @@
 			<div class="block tech_risk"></div>
 			<div class="block tech_rampage"></div>
 			<div class="block tech_construction"></div>
+			<div class="block tech_investment"></div>
 			<div class="block tech_domestication"></div>
 			<div class="block tech_wareconomy"></div>
 			<div class="block tech_architecture"></div>
@@ -166,6 +167,7 @@
 			<div class="block tech_internationalization"></div>
 			<div class="block tech_investigation"></div>
 			<div class="block tech_camps"></div>
+			<div class="block tech_fireship"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -243,6 +245,7 @@
 	<div id="dock" class="dock tab-pane fade">
 	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br>
 	<div class="block hire_galleon"></div><button class="fire salvage_galleon" onclick='salvage("galleon")'>Salvage 1</button><br><br>
+	<div class="block hire_fireship"></div><button class="fire salvage_fireship" onclick='salvage("fireship")'>Salvage 1</button><br><br>
 	<div class="tradesea">
 	Trade mission<br>
 	Amount: <input class="tradeamount" type="number" value="1"></input><button class="maxtrade" onclick="maxtrade()">MAX</button><br><br>
@@ -346,6 +349,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.4.2</b>
+        <ul>
+		<li>New economic tech</li>
+		<li>New military tech</li>
+		<li>New military ship - The fire ship</li>
+        </ul>
         <b>V 0.4.1</b>
         <ul>
 		<li>Fixed the critical bug of everything dissapearing after refreshing</li>
@@ -616,6 +625,7 @@
 
 	$(".hire_galley").click(function() {hire("galley")});
 	$(".hire_galleon").click(function() {hire("galleon")});
+	$(".hire_fireship").click(function() {hire("fireship")});
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -675,6 +685,8 @@
 	$(".tech_internationalization").click(function() {research("internationalization")});
 	$(".tech_investigation").click(function() {research("investigation")});
 	$(".tech_camps").click(function() {research("camps")});
+	$(".tech_investment").click(function() {research("investment")});
+	$(".tech_fireship").click(function() {research("fireship")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

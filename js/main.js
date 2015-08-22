@@ -38,6 +38,7 @@ bonus["military"]=0;
 bonus["knowledge"]=0;
 bonus["territory"]=0;
 bonus["expansion"]=0;
+bonus["invest"]=0;
 
 var buildings=new Array();
 
@@ -154,6 +155,8 @@ technologies["expansion"]=0
 technologies["investigation"]=0
 technologies["internationalization"]=0
 technologies["camps"]=0
+technologies["investment"]=0
+technologies["fireship"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -179,6 +182,7 @@ people["warmuk"]=0
 
 people["galley"]=0
 people["galleon"]=0
+people["fireship"]=0
 
 var craft=new Array();
 
@@ -2077,6 +2081,26 @@ function research(b){
 		}
 
 	}
+	else if (b=="investment" && technologies["investment"]==0){
+
+
+		coincost=1000
+		knowledgecost=300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+
+			craft["coin"]-=coincost;
+			items["knowledge"]-=knowledgecost;
+
+			technologies["investment"]++
+			bonus["invest"]=2000
+
+		}
+
+	}
 	else if (b=="domestication" && technologies["domestication"]==0){
 
 
@@ -2185,6 +2209,29 @@ function research(b){
 		}
 
 	}
+	else if (b=="fireship" && technologies["fireship"]==0){
+
+
+		woodcost=80000
+		framecost=5
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["frame"]>=framecost && items["wood"]>=woodcost){
+
+			craft["frame"]-=framecost
+			items["wood"]-=woodcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["fireship"]++
+			$(".hire_fireship").show()
+			unlocked[".hire_fireship"]=1;
+
+		}
+
+	}
+
 setTimeout(function(){
 
 if(techvisible==0){
@@ -2443,6 +2490,30 @@ function hire(b){
 
 				$(".salvage_galleon").show()
 				unlocked[".salvage_galleon"]=1;
+
+
+
+			}
+
+		}
+		if (b=="fireship"){
+
+			plankcost=1000;
+			steelcost=200;
+			coalcost=300;
+
+
+			if (craft["plank"]>=plankcost && items["coal"]>=coalcost && items["steel"]>=steelcost){
+
+				craft["plank"]-=plankcost;
+				items["coal"]-=coalcost;
+				items["steel"]-=steelcost;
+
+				people["fireship"]+=1;
+				ships++
+
+				$(".salvage_fireship").show()
+				unlocked[".salvage_fireship"]=1;
 
 
 
@@ -3728,6 +3799,25 @@ $(".hire_galleon").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed
 $(".hire_galleon").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
 $(".hire_galleon").attr('tooltip4', "Power: 500  Structure: 15,000");
 $(".hire_galleon").attr('tooltip5', 'Cargo capacity: 25,000  Crew: 5');
+
+plankcost=1000;
+steelcost=200;
+coalcost=300;
+if(craft["plank"]<plankcost || items["steel"]<steelcost || items["coal"]<coalcost || ships>=maximums["ships"]){
+	$(".hire_fireship").addClass("unavailable")
+}
+else
+{
+	$(".hire_fireship").removeClass("unavailable")
+}
+$(".hire_fireship").html("Fireship ("+people["fireship"]+")");
+$(".hire_fireship").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".hire_fireship").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".hire_fireship").attr('tooltip3', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
+$(".hire_fireship").attr('tooltip4', "Power: 0  Structure: 4,000");
+$(".hire_fireship").attr('tooltip5', 'Cargo capacity: 0  Crew: 3');
+$(".hire_fireship").attr('tooltip6', 'Throws fire that deal 100 damage/s per round');
+$(".hire_fireship").attr('tooltip7', 'This effect stacks');
 //Technologies
 
 coppercost=1;
@@ -4521,7 +4611,20 @@ $(".tech_risk").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)
 $(".tech_risk").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_risk").attr('tooltip4', "Lets you play x10 and x100 in the casino");
 
-
+coincost=1000
+knowledgecost=300;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_investment").addClass("unavailable")
+}
+else
+{
+	$(".tech_investment").removeClass("unavailable")
+}
+$(".tech_investment").addClass((technologies["investment"] >0 ? "researched" : ""))
+$(".tech_investment").html("Investment" + (technologies["investment"] >0 ? " (researched)" : ""));
+$(".tech_investment").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_investment").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_investment").attr('tooltip4', "Gives back 2000 coins at a rate of 0.1/s");
 
 suppliescost=100
 knowledgecost=800;
@@ -4635,6 +4738,25 @@ $(".tech_camps").attr('tooltip', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2
 $(".tech_camps").attr('tooltip2', 'Elephant: '+ parseFloat(craft["elephant"]).toFixed(2)+" / "+parseFloat(elephantcost).toFixed(2))
 $(".tech_camps").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_camps").attr('tooltip5', "Allows you to build military outposts in conquered territory.");
+
+woodcost=80000
+framecost=5
+knowledgecost=1000;
+
+if(items["knowledge"]<knowledgecost || craft["frame"]<framecost || items["wood"]<woodcost){
+	$(".tech_fireship").addClass("unavailable")
+}
+else
+{
+	$(".tech_fireship").removeClass("unavailable")
+}
+$(".tech_fireship").addClass((technologies["fireship"] >0 ? "researched" : ""))
+$(".tech_fireship").html("Fireship" + (technologies["fireship"] >0 ? " (researched)" : ""));
+$(".tech_fireship").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_fireship").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".tech_fireship").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_fireship").attr('tooltip5', "Allows you to build fire ships, an agressive military ship..");
+
 //Research
 
 
@@ -5157,6 +5279,13 @@ if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["wareleph
 	consumption["water"]+=people["warelephant"]/2;
 	production["morale"]+=people["warelephant"]/200;
 }
+
+if (bonus["invest"]>=0.025)
+{
+	bonus["invest"]-=0.025
+	craft["coin"]+=0.025
+}
+
 
 var inv_text="<table>"
 for(key in items){

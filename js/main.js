@@ -5284,15 +5284,6 @@ function save(){
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
-
-encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
-encodestring+=JSON.stringify(buildings)+"--"+JSON.stringify( maximums)+"--"+JSON.stringify(technologies)+"--"
-encodestring+=JSON.stringify(people)+"--"+JSON.stringify(craft)+"--"+JSON.stringify(unlocked)+"--"
-encodestring+=JSON.stringify(population)+"--"+JSON.stringify(trademission)+"--"
-encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)
-b64string=btoa(encodestring);
-
-Cookies.set('everything', b64string,{ expires: 9999 });
 }
 function encode(){
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
@@ -5320,13 +5311,6 @@ population = update(population,JSON.parse(result[8]));
 trademission = update(prestige,JSON.parse(result[9]));
 prestige = update(prestige,JSON.parse(result[10]));
 buildstatus = update(prestige,JSON.parse(result[11]));
-
-
-
-
-
-
-
 
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
@@ -5370,37 +5354,12 @@ function load(){
 		technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
 		people = update(people,JSON.parse(Cookies.get( 'people')));
 		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
-
-try{
-unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
-}
-catch(err){
- var result=Cookies.get( 'everything')
-unlocked = update(unlocked,JSON.parse(result[7]));
-}
+		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
 
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
 
-try{
-unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
-}
-catch(err){
- var result=atob($('.inputtxt').val())
-result= result.split("--")
-console.log(result)
-items = update(items,JSON.parse(result[0]));
-bonus = update(bonus,JSON.parse(result[1]));
-buildings = update(buildings,JSON.parse(result[2]));
-maximums = update(maximums,JSON.parse(result[3]));
-technologies = update(technologies,JSON.parse(result[4]));
-people = update(people,JSON.parse(result[5]));
-craft = update(craft,JSON.parse(result[6]));
-population = update(population,JSON.parse(result[8]));
-trademission = update(prestige,JSON.parse(result[9]));
-prestige = update(prestige,JSON.parse(result[10]));
-buildstatus = update(prestige,JSON.parse(result[11]));
-}
+
 
 
 		ships=people["galley"]+people["galleon"]

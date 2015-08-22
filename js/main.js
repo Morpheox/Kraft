@@ -5284,7 +5284,24 @@ function save(){
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
-	Cookies.set( 'unlocked', btoa(JSON.stringify(unlocked)) ,{ expires: 9999 });
+
+	var unlock1=new Array()
+	var unlock2=new Array()
+	var i=0;
+	for(key in unlocked)
+	{
+		i++
+		if(i<60){
+			unlock1[key]=unlocked[key]
+		}
+		else
+		{
+			unlock2[key]=unlocked[key]
+		}
+	}
+
+	Cookies.set( 'unlock1', btoa(JSON.stringify(unlock1)) ,{ expires: 9999 });
+	Cookies.set( 'unlock2', btoa(JSON.stringify(unlock2)) ,{ expires: 9999 });
 }
 function encode(){
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
@@ -5357,7 +5374,8 @@ function load(){
 		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
 
 		try{
-		unlocked = update(unlocked,JSON.parse(atob(Cookies.get( 'unlocked'))));
+		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock1'))));
+		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock2'))));
 		}
 		catch(err){
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));

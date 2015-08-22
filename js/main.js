@@ -5286,21 +5286,27 @@ function save(){
 
 	var unlock1=new Array()
 	var unlock2=new Array()
+	var unlock3=new Array()
 	var i=0;
 	for(key in unlocked)
 	{
 		i++
-		if(i<60){
+		if(i<100){
 			unlock1[key]=unlocked[key]
+		}
+		else if(i<200)
+		{
+			unlock2[key]=unlocked[key]
 		}
 		else
 		{
-			unlock2[key]=unlocked[key]
+			unlock3[key]=unlocked[key]
 		}
 	}
 
 	Cookies.set( 'unlock1', btoa(JSON.stringify(unlock1)) ,{ expires: 9999 });
 	Cookies.set( 'unlock2', btoa(JSON.stringify(unlock2)) ,{ expires: 9999 });
+	Cookies.set( 'unlock3', btoa(JSON.stringify(unlock2)) ,{ expires: 9999 });
 }
 function encode(){
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
@@ -5375,6 +5381,7 @@ function load(){
 		if(typeof Cookies.get( 'unlock1') != 'undefined'){
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock1'))));
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock2'))));
+		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock3'))));
 		}
 		else{
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));

@@ -5284,6 +5284,7 @@ function save(){
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
+	Cookies.set( 'unlocked', btoa(JSON.stringify(unlocked)) ,{ expires: 9999 });
 }
 function encode(){
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
@@ -5354,7 +5355,13 @@ function load(){
 		technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
 		people = update(people,JSON.parse(Cookies.get( 'people')));
 		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
+
+		try{
+		unlocked = update(unlocked,JSON.parse(atob(Cookies.get( 'unlocked'))));
+		}
+		catch(err){
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
+		}
 
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]

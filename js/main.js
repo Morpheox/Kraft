@@ -5382,9 +5382,11 @@ function load(){
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock1'))));
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock2'))));
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock3'))));
+		console.log('new');
 		}
 		else{
 		unlocked = update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
+		console.log('old');
 		}
 
 		population = Cookies.get('population');

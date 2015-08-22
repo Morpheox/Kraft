@@ -2546,6 +2546,12 @@ function salvage(b){
 			craft["structure"]+=50+(Math.random()*50);
 			items["wood"]+=20000+(Math.random()*20000);
 		}
+		if(b=="fireship"){
+
+			craft["plank"]+=200+(Math.random()*300);
+			items["steel"]+=50+(Math.random()*50);
+			items["wood"]+=5000+(Math.random()*20000);
+		}
 	}
 
 
@@ -5470,7 +5476,7 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 
 
 
-		ships=people["galley"]+people["galleon"]
+		ships=people["galley"]+people["galleon"]+people["fireship"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{
@@ -5524,7 +5530,7 @@ function load(){
 
 
 
-		ships=people["galley"]+people["galleon"]
+		ships=people["galley"]+people["galleon"]+people["fireship"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{

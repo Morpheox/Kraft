@@ -3709,8 +3709,8 @@ $(".hire_galley").html("Galley ("+people["galley"]+")");
 $(".hire_galley").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".hire_galley").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".hire_galley").attr('tooltip3', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
-$(".hire_galley").attr('tooltip5', "Power: 150  Structure: 2.000");
-$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5.000  Crew: 2');
+$(".hire_galley").attr('tooltip5', "Power: 150  Structure: 2,000");
+$(".hire_galley").attr('tooltip6', 'Cargo capacity: 5,000  Crew: 2');
 
 
 plankcost=1500;
@@ -3726,8 +3726,8 @@ else
 $(".hire_galleon").html("Galleon ("+people["galleon"]+")");
 $(".hire_galleon").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".hire_galleon").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
-$(".hire_galleon").attr('tooltip4', "Power: 500  Structure: 15.000");
-$(".hire_galleon").attr('tooltip5', 'Cargo capacity: 25.000  Crew: 5');
+$(".hire_galleon").attr('tooltip4', "Power: 500  Structure: 15,000");
+$(".hire_galleon").attr('tooltip5', 'Cargo capacity: 25,000  Crew: 5');
 //Technologies
 
 coppercost=1;

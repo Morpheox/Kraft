@@ -42,6 +42,7 @@ bonus["invest"]=0;
 bonus["shipspeed"]=0;
 bonus["shiphp"]=0;
 bonus["shippower"]=0;
+bonus["shipcargo"]=0;
 
 var buildings=new Array();
 
@@ -163,6 +164,7 @@ technologies["fireship"]=0
 technologies["careening"]=0
 technologies["deals"]=0
 technologies["finding"]=0
+technologies["seacaptain"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -185,6 +187,7 @@ people["khrysos"]=0
 people["elisia"]=0
 people["xochiquetzal"]=0
 people["warmuk"]=0
+people["foehn"]=0
 
 people["galley"]=0
 people["galleon"]=0
@@ -281,13 +284,17 @@ function reespec(){
 		bonus["power"]-=0.10*people["warmuk"]
 		bonus["morale"]-=0.05*people["warmuk"]
 		maximums["morale"]-=2*people["warmuk"]
-		bonus["title"]+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]
+		bonus["shippower"]-=0.10*people["foehn"]
+		bonus["shiphp"]-=0.10*people["foehn"]
+		bonus["shipcargo"]-=0.15*people["foehn"]
+		bonus["title"]+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+people["foehn"]
 		people["sucellus"]=0
 		people["eredal"]=0
 		people["khrysos"]=0
 		people["elisia"]=0
 		people["xochiquetzal"]=0
 		people["warmuk"]=0
+		people["foehn"]=0
 		bonus["reespeccost"]+=1;
 	}
 }
@@ -376,7 +383,17 @@ function lead(b){
 
 
 		}
+		else if (b=="foehn"){
 
+			bonus["shippower"]+=0.10;
+			bonus["shiphp"]+=0.10;
+			bonus["shipcargo"]+=0.15;
+
+			bonus["title"]--
+			people["foehn"]+=1;
+
+
+		}
 
 
 
@@ -2318,6 +2335,29 @@ function research(b){
 
 			technologies["finding"]++
 
+
+		}
+
+	}
+	else if (b=="seacaptain" && technologies["seacaptain"]==0){
+
+
+		plankcost=3000;
+		coincost=800;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["plank"]>=plankcost && craft["coin"]>=coincost){
+
+			craft["plank"]-=plankcost
+			craft["coin"]-=coincost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["seacaptain"]++
+
+			$(".leader_foehn").show()
+			unlocked[".leader_foehn"]=1;
 
 		}
 
@@ -4906,6 +4946,22 @@ $(".tech_finding").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFi
 $(".tech_finding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_finding").attr('tooltip5', "Allows you to find more complex materials in expeditions, like sand, clay or bricks.");
 
+plankcost=3000;
+coincost=800;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost || craft["plank"]<plankcost){
+	$(".tech_seacaptain").addClass("unavailable")
+}
+else
+{
+	$(".tech_seacaptain").removeClass("unavailable")
+}
+$(".tech_seacaptain").addClass((technologies["seacaptain"] >0 ? "researched" : ""))
+$(".tech_seacaptain").html("Sea captain" + (technologies["seacaptain"] >0 ? " (researched)" : ""));
+$(".tech_seacaptain").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_seacaptain").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_seacaptain").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_seacaptain").attr('tooltip5', "Unlocks a new leader.");
 
 //Research
 
@@ -5143,6 +5199,7 @@ if(bonus["title"]<1){
 	$(".leader_elisia").addClass("unavailable")
 	$(".leader_xochiquetzal").addClass("unavailable")
 	$(".leader_warmuk").addClass("unavailable")
+	$(".leader_foehn").addClass("unavailable")
 }
 else
 {
@@ -5152,6 +5209,7 @@ else
 	$(".leader_elisia").removeClass("unavailable")
 	$(".leader_xochiquetzal").removeClass("unavailable")
 	$(".leader_warmuk").removeClass("unavailable")
+	$(".leader_foehn").removeClass("unavailable")
 }
 
 $(".leader_sucellus").html("Sucellus (lv:" + people["sucellus"]+")");
@@ -5183,6 +5241,12 @@ $(".leader_warmuk").attr('tooltip', 'Increments troops attack by 10%')
 $(".leader_warmuk").attr('tooltip2', 'Increments max morale by 2')
 $(".leader_warmuk").attr('tooltip3', 'Increments morale production by 5%')
 $(".leader_warmuk").attr('tooltip5', "'If you run away, you will die tired'");
+
+$(".leader_foehn").html("Foehn (lv:" + people["foehn"]+")");
+$(".leader_foehn").attr('tooltip', 'Increments ships power by 10%')
+$(".leader_foehn").attr('tooltip2', 'Increments ships structure by 10%')
+$(".leader_foehn").attr('tooltip3', 'Increments ships cargo capacity by 15%')
+$(".leader_foehn").attr('tooltip5', "'Take what you can, give nothing back.'");
 
 
 treasurecost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)

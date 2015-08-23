@@ -165,4 +165,9 @@ function researchunlock(){
 		$(".tech_finding").show()
 		unlocked[".tech_finding"]=1;
 	}
+
+	if((bonus["economy"]>=10000 || bonus["military"]>=10000) && unlocked[".tech_seacaptain"]!=1){
+		$(".tech_seacaptain").show()
+		unlocked[".tech_seacaptain"]=1;
+	}
 }

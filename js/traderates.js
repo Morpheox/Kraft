@@ -96,8 +96,8 @@ function maxtrade(){
 	var maxresources=0;
 
 
-	maxresources+=people["galley"]*5000
-	maxresources+=people["galleon"]*25000
+	maxresources+=people["galley"]*5000*(bonus["shipcargo"]+1)
+	maxresources+=people["galleon"]*25000*(bonus["shipcargo"]+1)
 
 	resources=items[$(".selgive").val()]
 
@@ -125,8 +125,8 @@ function tradeship(){
 
 	var maxresources=0;
 
-	maxresources+=people["galley"]*5000
-	maxresources+=people["galleon"]*25000
+	maxresources+=people["galley"]*5000*(bonus["shipcargo"]+1)
+	maxresources+=people["galleon"]*25000*(bonus["shipcargo"]+1)
 
 	resources=items[$(".selgive").val()]
 	resourcestrade=$(".tradeamount").val()

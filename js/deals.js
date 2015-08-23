@@ -15,6 +15,7 @@ mratio["supplies"]=2
 mratio["frame"]=500
 mratio["token"]=1
 mratio["glass"]=50
+mratio["plank"]=20
 
 function newDeal(){
 trademission["done"]=0;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.4.4 beta</title>
+	<title>Keep Craft v0.4.5 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="js/deals.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.4.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.4.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -171,6 +171,7 @@
 			<div class="block tech_deals"></div>
 			<div class="block tech_careening"></div>
 			<div class="block tech_fireship"></div>
+			<div class="block tech_finding"></div>
 
 		</div>
 			<br><br><br><br><br><br>
@@ -360,6 +361,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.4.5</b>
+        <ul>
+		<li>New military tech</li>
+		<li>New resource - clay</li>
+		<li>New item - brick</li>
+        </ul>
         <b>V 0.4.4</b>
         <ul>
 		<li>New economic tech</li>
@@ -709,6 +716,7 @@
 	$(".tech_fireship").click(function() {research("fireship")});
 	$(".tech_careening").click(function() {research("careening")});
 	$(".tech_deals").click(function() {research("deals")});
+	$(".tech_finding").click(function() {research("finding")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

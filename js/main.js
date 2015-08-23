@@ -162,6 +162,7 @@ technologies["investment"]=0
 technologies["fireship"]=0
 technologies["careening"]=0
 technologies["deals"]=0
+technologies["finding"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -198,6 +199,7 @@ craft["bottle"]=0
 craft["block"]=0
 craft["structure"]=0
 craft["frame"]=0
+craft["brick"]=0
 craft["plank"]=0
 craft["glass"]=0
 craft["bronze"]=0
@@ -437,6 +439,11 @@ function expedition(){
 				reward+=parseFloat(rnd).toFixed(2) + " food<br>";
 				items["food"]+=rnd;
 			}
+			if(Math.random()>0.85 && technologies["finding"]==1){
+				rnd=(Math.random()*power);
+				reward+=parseFloat(rnd).toFixed(2) + " sand<br>";
+				items["sand"]+=rnd;
+			}
 			if(Math.random()>0.925){
 				rnd=(Math.random()*power)/5;
 				reward+=parseFloat(rnd).toFixed(2) + " copper<br>";
@@ -471,6 +478,16 @@ function expedition(){
 				rnd=Math.round((Math.random()*power)/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " coin<br>";
 				craft["coin"]+=rnd;
+			}
+			if(Math.random()>0.90 && technologies["finding"]==1){
+				rnd=(Math.random()*power)/50;
+				reward+=parseFloat(rnd).toFixed(2) + " clay<br>";
+				items["clay"]+=rnd;
+			}
+			if(Math.random()>0.95 && technologies["finding"]==1){
+				rnd=(Math.random()*power)/500;
+				reward+=parseFloat(rnd).toFixed(2) + " brick<br>";
+				craft["brick"]+=rnd;
 			}
 			if(Math.random()>0.90 && technologies["husbandry"]==1){
 				rnd=Math.round((Math.random()*power)/300)+1;
@@ -508,6 +525,7 @@ function expedition(){
 				reward+=parseFloat(rnd).toFixed(2) + " elephant<br>";
 				craft["elephant"]+=rnd;
 			}
+
 			if(reward!="The expedition found:<br>")
 
 			{
@@ -2278,6 +2296,27 @@ function research(b){
 			bonus["shiphp"]+=0.20
 
 			technologies["careening"]++
+
+
+		}
+
+	}
+	else if (b=="finding" && technologies["finding"]==0){
+
+
+		moralecost=60;
+		foodcost=20000;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["morale"]>=moralecost && items["food"]>=foodcost){
+
+			items["morale"]-=moralecost
+			items["food"]-=foodcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["finding"]++
 
 
 		}
@@ -4849,6 +4888,23 @@ $(".tech_deals").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+
 $(".tech_deals").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_deals").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_deals").attr('tooltip5', "A merchant will appear in the market every 10 min with a new offer.");
+
+moralecost=60;
+foodcost=20000;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || items["morale"]<moralecost || items["food"]<foodcost){
+	$(".tech_finding").addClass("unavailable")
+}
+else
+{
+	$(".tech_finding").removeClass("unavailable")
+}
+$(".tech_finding").addClass((technologies["finding"] >0 ? "researched" : ""))
+$(".tech_finding").html("Finding" + (technologies["finding"] >0 ? " (researched)" : ""));
+$(".tech_finding").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
+$(".tech_finding").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_finding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_finding").attr('tooltip5', "Allows you to find more complex materials in expeditions, like sand, clay or bricks.");
 
 
 //Research

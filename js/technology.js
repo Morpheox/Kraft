@@ -161,4 +161,8 @@ function researchunlock(){
 		unlocked[".tech_deals"]=1;
 	}
 
+	if(bonus["military"]>=9000 && unlocked[".tech_finding"]!=1){
+		$(".tech_finding").show()
+		unlocked[".tech_finding"]=1;
+	}
 }

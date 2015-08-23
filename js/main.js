@@ -4665,7 +4665,7 @@ $(".tech_glassblowing").addClass((technologies["glassblowing"] >0 ? "researched"
 $(".tech_glassblowing").html("Glassblowing" + (technologies["glassblowing"] >0 ? " (researched)" : ""));
 $(".tech_glassblowing").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".tech_glassblowing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_glassblowing").attr('tooltip4', "Allows you to craft bottles to store water and others liquids.");
+$(".tech_glassblowing").attr('tooltip4', "Allows you to craft bottles to store water and other liquids.");
 
 swordcost=1000;
 knowledgecost=800;

@@ -2669,18 +2669,30 @@ function salvage(b){
 			craft["plank"]+=10+(Math.random()*10);
 			craft["structure"]+=5+(Math.random()*5);
 			items["wood"]+=1000+(Math.random()*5000);
+			if(people["fireship"]<1){
+				$(".salvage_galley").hide()
+				unlocked[".salvage_galley"]=0;
+			}
 		}
 		if(b=="galleon"){
 
 			craft["plank"]+=300+(Math.random()*300);
 			craft["structure"]+=50+(Math.random()*50);
 			items["wood"]+=20000+(Math.random()*20000);
+			if(people["fireship"]<1){
+				$(".salvage_galleon").hide()
+				unlocked[".salvage_galleon"]=0;
+			}
 		}
 		if(b=="fireship"){
 
 			craft["plank"]+=200+(Math.random()*300);
 			items["steel"]+=50+(Math.random()*50);
 			items["wood"]+=5000+(Math.random()*20000);
+			if(people["fireship"]<1){
+				$(".salvage_fireship").hide()
+				unlocked[".salvage_fireship"]=1;
+			}
 		}
 	}
 

@@ -5487,7 +5487,7 @@ function save(){
 
 	Cookies.set( 'unlock1', btoa(JSON.stringify(unlock1)) ,{ expires: 9999 });
 	Cookies.set( 'unlock2', btoa(JSON.stringify(unlock2)) ,{ expires: 9999 });
-	Cookies.set( 'unlock3', btoa(JSON.stringify(unlock2)) ,{ expires: 9999 });
+	Cookies.set( 'unlock3', btoa(JSON.stringify(unlock3)) ,{ expires: 9999 });
 }
 function encode(){
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"

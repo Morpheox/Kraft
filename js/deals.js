@@ -20,7 +20,7 @@ function newDeal(){
 trademission["done"]=0;
 trademission["merchanttime"]=600
 trademission["merchantcraft"]=randomKey(mratio)
-trademission["marchantratio"]=(Math.random()*mratio[trademission["merchantcraft"]])+(mratio[trademission["merchantcraft"]]/1.5)
+trademission["marchantratio"]=(Math.random()*mratio[trademission["merchantcraft"]])+(mratio[trademission["merchantcraft"]]/2)
 trademission["merchantnumber"]=(Math.random()*maximums["gold"]*10)/mratio[trademission["merchantcraft"]]
 
 $(".deallog").html("A merchant arrived at your market<br><br>I Offer you this fine "+intToString(trademission["merchantnumber"])+" "+trademission["merchantcraft"]+"<br>For only "+intToString(trademission["merchantnumber"]*trademission["marchantratio"])+" coins.")

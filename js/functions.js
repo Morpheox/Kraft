@@ -21,7 +21,7 @@ function intToStringRound(value) {
     if (shortValue % 1 != 0)  shortNum = shortValue.toFixed(1);
     return shortValue+suffixes[suffixNum];
     }
-    else {return Math.round(value);}
+    else {return Math.floor(value);}
     }
 function totime(b){
 

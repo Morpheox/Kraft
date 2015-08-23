@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.4.3 beta</title>
+	<title>Keep Craft v0.4.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -22,9 +22,10 @@
 	<script type="text/javascript" src="js/technology.js"></script>
 	<script type="text/javascript" src="js/expansion.js"></script>
 	<script type="text/javascript" src="js/casino.js"></script>
+	<script type="text/javascript" src="js/deals.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.4.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.4.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -167,8 +168,10 @@
 			<div class="block tech_internationalization"></div>
 			<div class="block tech_investigation"></div>
 			<div class="block tech_camps"></div>
+			<div class="block tech_deals"></div>
 			<div class="block tech_careening"></div>
 			<div class="block tech_fireship"></div>
+
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -229,7 +232,14 @@
 	All trades cost 1 coin: <br><br>
 	<div class="trade trade_wood"></div><br>
 	<div class="trade trade_mineral"></div><br>
-	<div class="trade trade_food"></div><br>
+	<div class="trade trade_food"></div><br><br><br>
+
+	<div class="deals">
+	<div class="deallog">
+	</div><br><div class="dealtime">
+	</div><br><br>
+	<button class="btndeal" onclick="deal()">Deal</button>
+	</div>
 	</div>
 	<div id="leader" class="leader tab-pane fade">
 	Cost 1 title per lv<br>
@@ -350,6 +360,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.4.4</b>
+        <ul>
+		<li>New economic tech</li>
+		<li>This tech makes a merchant appear in the market every 10 mins with trade offers, some may be good, some may be a steal.</li>
+        </ul>
         <b>V 0.4.3</b>
         <ul>
 		<li>New science maritime tech</li>
@@ -580,7 +595,7 @@
 	setInterval(function(){ save()}, 20000);
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
 	$(".playx10,.playx100").hide()
 
 	$(".build_lumbermill").click(function() {build("lumbermill")});
@@ -693,6 +708,7 @@
 	$(".tech_investment").click(function() {research("investment")});
 	$(".tech_fireship").click(function() {research("fireship")});
 	$(".tech_careening").click(function() {research("careening")});
+	$(".tech_deals").click(function() {research("deals")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -754,6 +770,12 @@
 
 </script>
 <script>
+if(technologies["deals"]==1){
+	setInterval(function(){ tickdeal()}, 1000);
+fillDeal();
+}
+</script>
+<script>
 	if(prestige["number"]>0){
 		$(".reespec").show()
 		unlocked[".reespec"]=1;
@@ -766,6 +788,9 @@
 
 <script>
 		update(unlocked,JSON.parse(Cookies.get( 'unlocked')));
+
+</script>
+<script>
 
 </script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

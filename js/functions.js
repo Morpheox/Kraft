@@ -59,3 +59,12 @@ function clearListCookies()
     }
 
 }
+
+function randomKey(obj) {
+    var ret;
+    var c = 0;
+    for (var key in obj)
+        if (Math.random() < 1/++c)
+           ret = key;
+    return ret;
+}

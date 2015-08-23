@@ -156,4 +156,9 @@ function researchunlock(){
 		unlocked[".tech_careening"]=1;
 	}
 
+	if(bonus["economy"]>=7600 && unlocked[".tech_deals"]!=1){
+		$(".tech_deals").show()
+		unlocked[".tech_deals"]=1;
+	}
+
 }

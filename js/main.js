@@ -161,6 +161,7 @@ technologies["camps"]=0
 technologies["investment"]=0
 technologies["fireship"]=0
 technologies["careening"]=0
+technologies["deals"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2232,6 +2233,29 @@ function research(b){
 			$(".hire_fireship").show()
 			unlocked[".hire_fireship"]=1;
 
+		}
+
+	}
+	else if (b=="deals" && technologies["deals"]==0){
+
+
+		goldcost=100
+		coincost=1500
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=framecost && items["gold"]>=goldcost){
+
+			craft["coin"]-=coincost
+			items["gold"]-=goldcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["deals"]++
+			$(".deals").show()
+			unlocked[".deals"]=1;
+			newDeal();
+			setInterval(function(){ tickdeal()}, 1000);
 		}
 
 	}
@@ -4809,6 +4833,24 @@ $(".tech_careening").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFi
 $(".tech_careening").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_careening").attr('tooltip5', "Reduces trade mission time by 30s, and increases ships hp by 20%");
 
+goldcost=100
+coincost=1500
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost || items["gold"]<goldcost){
+	$(".tech_deals").addClass("unavailable")
+}
+else
+{
+	$(".tech_deals").removeClass("unavailable")
+}
+$(".tech_deals").addClass((technologies["deals"] >0 ? "researched" : ""))
+$(".tech_deals").html("Dealing" + (technologies["deals"] >0 ? " (researched)" : ""));
+$(".tech_deals").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".tech_deals").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_deals").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_deals").attr('tooltip5', "A merchant will appear in the market every 10 min with a new offer.");
+
+
 //Research
 
 
@@ -5545,7 +5587,10 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 	refreshselect()
 	filllog();
 
-
+if(technologies["deals"]==1){
+	setInterval(function(){ tickdeal()}, 1000);
+fillDeal();
+}
 
 }
 function load(){

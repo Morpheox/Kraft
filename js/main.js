@@ -74,7 +74,7 @@ buildings["laboratory"]=0;
 buildings["tradeoutpost"]=0;
 buildings["scienceoutpost"]=0;
 buildings["militaryoutpost"]=0;
-
+buildings["quarry"]=0;
 
 
 var buildstatus =new Array()
@@ -165,6 +165,7 @@ technologies["careening"]=0
 technologies["deals"]=0
 technologies["finding"]=0
 technologies["seacaptain"]=0
+technologies["openmining"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2339,6 +2340,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="openmining" && technologies["openmining"]==0){
+
+
+		mineralcost=80000;
+		pickaxecost=3000;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost && items["mineral"]>=mineralcost){
+
+			craft["pickaxe"]-=pickaxecost
+			items["food"]-=foodcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["openmining"]++
+			$(".build_quarry").show()
+			unlocked[".build_quarry"]=1;
+
+		}
+
+	}
 	else if (b=="seacaptain" && technologies["seacaptain"]==0){
 
 
@@ -3257,6 +3280,23 @@ function build(b){
 
 		}
 	}
+	else if (b=="quarry"){
+
+		mineralcost=Math.pow(1.2,(buildings["quarry"]))*50000
+		pickaxecost=Math.pow(1.2,(buildings["quarry"]))*500
+
+
+		if (items["mineral"]>=mineralcost && craft["pickaxe"]>=pickaxecost){
+
+			items["mineral"]-=mineralcost;
+			craft["pickaxe"]-=pickaxecost;
+
+
+			buildings["quarry"]+=1
+
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -3704,8 +3744,19 @@ $(".build_militaryoutpost").attr('tooltip6', 'Max population +10');
 $(".build_militaryoutpost").attr('tooltip7', 'Grants 1 title per outpost');
 
 
-
-
+mineralcost=Math.pow(1.2,(buildings["quarry"]))*50000
+pickaxecost=Math.pow(1.2,(buildings["quarry"]))*500
+if(items["mineral"]<mineralcost || craft["pickaxe"]<pickaxecost){
+	$(".build_quarry").addClass("unavailable")
+}
+else
+{
+	$(".build_quarry").removeClass("unavailable")
+}
+$(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
+$(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".build_quarry").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".build_quarry").attr('tooltip4', 'Clay production +0.20/s');
 
 //People
 foodcost=50;
@@ -4958,6 +5009,24 @@ $(".tech_finding").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFi
 $(".tech_finding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_finding").attr('tooltip5', "Allows you to find more complex materials in expeditions, like sand, clay or bricks.");
 
+mineralcost=80000;
+pickaxecost=3000;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost || items["mineral"]<mineralcost){
+	$(".tech_openmining").addClass("unavailable")
+}
+else
+{
+	$(".tech_openmining").removeClass("unavailable")
+}
+$(".tech_openmining").addClass((technologies["openmining"] >0 ? "researched" : ""))
+$(".tech_openmining").html("Open mining" + (technologies["openmining"] >0 ? " (researched)" : ""));
+$(".tech_openmining").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_openmining").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_openmining").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_openmining").attr('tooltip5', "Allows you to build quarrys to extract clay from the ground.");
+
+
 plankcost=3000;
 coincost=800;
 knowledgecost=1200;
@@ -5372,6 +5441,7 @@ production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
 production["gold"]+=buildings["tradeoutpost"]/400;
+production["clay"]+=buildings["quarry"]/400;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

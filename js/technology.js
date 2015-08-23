@@ -170,4 +170,9 @@ function researchunlock(){
 		$(".tech_seacaptain").show()
 		unlocked[".tech_seacaptain"]=1;
 	}
+
+	if(bonus["science"]>=8900 && unlocked[".tech_openmining"]!=1){
+		$(".tech_openmining").show()
+		unlocked[".tech_openmining"]=1;
+	}
 }

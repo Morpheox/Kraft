@@ -5899,6 +5899,7 @@ $("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #doc
 $(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
 $(".playx10,.playx100").hide()
 
+$(".block").removeClass("researched");
 
 var result=atob($('.inputtxt').val())
 result= result.split("--")

@@ -161,6 +161,11 @@ function researchunlock(){
 		unlocked[".tech_deals"]=1;
 	}
 
+	if(bonus["science"]>=8900 && unlocked[".tech_openmining"]!=1){
+		$(".tech_openmining").show()
+		unlocked[".tech_openmining"]=1;
+	}
+
 	if(bonus["military"]>=9000 && unlocked[".tech_finding"]!=1){
 		$(".tech_finding").show()
 		unlocked[".tech_finding"]=1;
@@ -171,8 +176,13 @@ function researchunlock(){
 		unlocked[".tech_seacaptain"]=1;
 	}
 
-	if(bonus["science"]>=8900 && unlocked[".tech_openmining"]!=1){
-		$(".tech_openmining").show()
-		unlocked[".tech_openmining"]=1;
+	if((bonus["economy"]>=10000 || bonus["science"]>=10000) && unlocked[".tech_woodwork"]!=1){
+		$(".tech_woodwork").show()
+		unlocked[".tech_woodwork"]=1;
+	}
+
+	if((bonus["science"]>=10000 || bonus["economy"]>=10000 || bonus["military"]>=10000) && unlocked[".tech_masonry"]!=1){
+		$(".tech_masonry").show()
+		unlocked[".tech_masonry"]=1;
 	}
 }

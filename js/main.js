@@ -75,7 +75,7 @@ buildings["tradeoutpost"]=0;
 buildings["scienceoutpost"]=0;
 buildings["militaryoutpost"]=0;
 buildings["quarry"]=0;
-
+buildings["carpentry"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -166,6 +166,9 @@ technologies["deals"]=0
 technologies["finding"]=0
 technologies["seacaptain"]=0
 technologies["openmining"]=0
+technologies["masonry"]=0
+technologies["woodwork"]=0
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1050,6 +1053,23 @@ function crafting(b){
 				craft["structure"]-=structurecost
 
 				craft["frame"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="brick"){
+
+			sandcost=500;
+			claycost=150;
+
+
+			if (items["clay"]>=claycost && items["sand"]>=sandcost){
+
+				items["sand"]-=sandcost;
+				items["clay"]-=claycost
+
+
+				craft["brick"]+=1+bonus["craft"];
 
 			}
 
@@ -2385,6 +2405,50 @@ function research(b){
 		}
 
 	}
+	else if (b=="masonry" && technologies["masonry"]==0){
+
+
+		framecost=20;
+		blockcost=3000;
+		knowledgecost=1300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["block"]>=blockcost && craft["frame"]>=framecost){
+
+			craft["block"]-=blockcost
+			craft["frame"]-=framecost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["masonry"]++
+
+			$(".craft_brick").show()
+			unlocked[".craft_brick"]=1;
+
+		}
+
+	}
+	else if (b=="woodwork" && technologies["woodwork"]==0){
+
+
+		woodcost=90000;
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["wood"]>=woodcost){
+
+			items["wood"]-=woodcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["woodwork"]++
+			buildstatus["carpentry"]=1;
+			$(".build_carpentry").show()
+			unlocked[".build_carpentry"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3297,6 +3361,25 @@ function build(b){
 
 		}
 	}
+	else if (b=="carpentry"){
+
+		framecost=Math.pow(1.4,(buildings["carpentry"]))*5
+		brickcost=Math.pow(1.4,(buildings["carpentry"]))*20
+
+
+
+		if (craft["brick"]>=brickcost && craft["frame"]>=framecost){
+
+			craft["brick"]-=brickcost;
+			craft["pickaxe"]-=framecost;
+
+
+			buildings["carpentry"]+=1
+			$(".toggle_carpentry").show()
+			unlocked[".toggle_carpentry"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -3757,6 +3840,22 @@ $(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
 $(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_quarry").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".build_quarry").attr('tooltip4', 'Clay production +0.20/s');
+
+framecost=Math.pow(1.4,(buildings["carpentry"]))*5
+brickcost=Math.pow(1.4,(buildings["carpentry"]))*20
+if(craft["frame"]<framecost || craft["brick"]<brickcost){
+	$(".build_carpentry").addClass("unavailable")
+}
+else
+{
+	$(".build_carpentry").removeClass("unavailable")
+}
+$(".build_carpentry").html("Carpentry ("+buildings["carpentry"]+")");
+$(".build_carpentry").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_carpentry").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_carpentry").attr('tooltip4', 'Wood consumption -5.00/s');
+$(".build_carpentry").attr('tooltip5', 'Iron consumption -0.10/s');
+$(".build_carpentry").attr('tooltip6', 'Structure production +0.005/s');
 
 //People
 foodcost=50;
@@ -5045,6 +5144,37 @@ $(".tech_seacaptain").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFix
 $(".tech_seacaptain").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip5', "Unlocks a new leader.");
 
+framecost=20;
+blockcost=3000;
+knowledgecost=1300;
+if(items["knowledge"]<knowledgecost || craft["frame"]<framecost || craft["block"]<blockcost){
+	$(".tech_masonry").addClass("unavailable")
+}
+else
+{
+	$(".tech_masonry").removeClass("unavailable")
+}
+$(".tech_masonry").addClass((technologies["masonry"] >0 ? "researched" : ""))
+$(".tech_masonry").html("Masonry" + (technologies["masonry"] >0 ? " (researched)" : ""));
+$(".tech_masonry").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".tech_masonry").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".tech_masonry").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_masonry").attr('tooltip5', "Allows you to craft bricks used in buildings.");
+
+woodcost=90000;
+knowledgecost=1000;
+if(items["knowledge"]<knowledgecost || items["wood"]<woodcost){
+	$(".tech_woodwork").addClass("unavailable")
+}
+else
+{
+	$(".tech_woodwork").removeClass("unavailable")
+}
+$(".tech_woodwork").addClass((technologies["woodwork"] >0 ? "researched" : ""))
+$(".tech_woodwork").html("Woodwork" + (technologies["woodwork"] >0 ? " (researched)" : ""));
+$(".tech_woodwork").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_woodwork").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_woodwork").attr('tooltip4', "Allows you to build carpentries to automate structure crafting.");
 //Research
 
 
@@ -5271,7 +5401,19 @@ $(".craft_frame").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"])
 $(".craft_frame").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".craft_frame").attr('tooltip5', "Massive construction material used in big buildings.");
 
-
+sandcost=500;
+claycost=150;
+if(items["sand"]<sandcost || items["clay"]<claycost){
+	$(".craft_glass").addClass("unavailable")
+}
+else
+{
+	$(".craft_glass").removeClass("unavailable")
+}
+$(".craft_brick").html("Brick");
+$(".craft_brick").attr('tooltip', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
+$(".craft_brick").attr('tooltip2', 'Clay: '+ parseFloat(items["clay"]).toFixed(2)+" / "+parseFloat(claycost).toFixed(2))
+$(".craft_brick").attr('tooltip4', "Bricks are a modular construction material.");
 //Leaders
 
 if(bonus["title"]<1){
@@ -5487,6 +5629,13 @@ if (items["wood"]>=buildings["blockyard"] && items["mineral"]>=buildings["blocky
 	consumption["wood"]+=buildings["blockyard"]
 	consumption["mineral"]+=buildings["blockyard"]*2
 	craft["block"]+=buildings["blockyard"]/100;
+}
+
+if (items["wood"]>=buildings["carpentry"]*1.25 && items["iron"]>=buildings["carpentry"]*0.025 && buildstatus["carpentry"]==1)
+{
+	consumption["wood"]+=buildings["carpentry"]*1.25
+	consumption["iron"]+=buildings["carpentry"]*0.025 
+	craft["structure"]+=buildings["carpentry"]/800;
 }
 //people
 production["food"]+=people["farmer"]/10;

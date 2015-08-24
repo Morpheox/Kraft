@@ -5018,6 +5018,7 @@ if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost || items["mi
 else
 {
 	$(".tech_openmining").removeClass("unavailable")
+
 }
 $(".tech_openmining").addClass((technologies["openmining"] >0 ? "researched" : ""))
 $(".tech_openmining").html("Open mining" + (technologies["openmining"] >0 ? " (researched)" : ""));
@@ -5744,6 +5745,12 @@ $('.inputtxt').val(b64string)
 }
 
 function decode(){
+
+$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
+$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
+$(".playx10,.playx100").hide()
+
+
 var result=atob($('.inputtxt').val())
 result= result.split("--")
 console.log(result)

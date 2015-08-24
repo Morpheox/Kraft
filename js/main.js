@@ -168,7 +168,7 @@ technologies["seacaptain"]=0
 technologies["openmining"]=0
 technologies["masonry"]=0
 technologies["woodwork"]=0
-
+technologies["multitasking"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2449,6 +2449,25 @@ function research(b){
 		}
 
 	}
+	else if (b=="multitasking" && technologies["multitasking"]==0){
+
+
+		pickaxecost=2000;
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost){
+
+			craft["pickaxe"]-=pickaxecost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["multitasking"]++
+
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3914,7 +3933,9 @@ $(".hire_miner").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+
 $(".hire_miner").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".hire_miner").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
-
+if(technologies["multitasking"]==1){
+$(".hire_miner").attr('tooltip5', 'Clay production +0.05/s');
+}
 foodcost=200
 coincost=1
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
@@ -5126,6 +5147,21 @@ $(".tech_openmining").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"])
 $(".tech_openmining").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_openmining").attr('tooltip5', "Allows you to build quarrys to extract clay from the ground.");
 
+pickaxecost=2000;
+knowledgecost=1000;
+if(craft["pickaxe"]<pickaxecost || items["knowledge"]<knowledgecost){
+	$(".tech_multitasking").addClass("unavailable")
+}
+else
+{
+	$(".tech_multitasking").removeClass("unavailable")
+
+}
+$(".tech_multitasking").addClass((technologies["multitasking"] >0 ? "researched" : ""))
+$(".tech_multitasking").html("Multitasking" + (technologies["multitasking"] >0 ? " (researched)" : ""));
+$(".tech_multitasking").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_multitasking").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_multitasking").attr('tooltip4', "Miners now also extract some clay.");
 
 plankcost=3000;
 coincost=800;
@@ -5175,6 +5211,8 @@ $(".tech_woodwork").html("Woodwork" + (technologies["woodwork"] >0 ? " (research
 $(".tech_woodwork").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_woodwork").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_woodwork").attr('tooltip4', "Allows you to build carpentries to automate structure crafting.");
+
+
 //Research
 
 
@@ -5649,6 +5687,9 @@ if (items["food"]>=people["miner"]/40)
 {
 	consumption["food"]+=people["miner"]/40
 	production["mineral"]+=people["miner"]/4
+	if(technologies["multitasking"]==1){
+		production["clay"]+=people["miner"]/80
+	}
 }
 
 if (items["food"]>=people["sailor"]/20)

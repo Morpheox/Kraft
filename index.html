@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.4.8 beta</title>
+	<title>Keep Craft v0.4.9 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="js/deals.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.4.8 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.4.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -178,6 +178,8 @@
 			<div class="block tech_seacaptain"></div>
 			<div class="block tech_masonry"></div>
 			<div class="block tech_woodwork"></div>
+			<div class="block tech_multitasking"></div>
+			
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -368,6 +370,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.4.9</b>
+        <ul>
+		<li>New economy tech</li>
+		<li>It allows miners to extract clay</li>
+		<li>Fixed glass and brick interface error</li>
+        </ul>
         <b>V 0.4.8</b>
         <ul>
 		<li>New neutral tech</li>
@@ -748,6 +756,7 @@
 	$(".tech_openmining").click(function() {research("openmining")});
 	$(".tech_masonry").click(function() {research("masonry")});
 	$(".tech_woodwork").click(function() {research("woodwork")});
+	$(".tech_multitasking").click(function() {research("multitasking")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

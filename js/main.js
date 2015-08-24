@@ -758,7 +758,7 @@ function fight(){
 			}
 			break;
 		}
-		else if(hp2<1){
+		else if(hp2<0){
 			var reward="";
 			combatlog+="You win the combat!<br><br>";
 			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";

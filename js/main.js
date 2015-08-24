@@ -5404,11 +5404,11 @@ $(".craft_frame").attr('tooltip5', "Massive construction material used in big bu
 sandcost=500;
 claycost=150;
 if(items["sand"]<sandcost || items["clay"]<claycost){
-	$(".craft_glass").addClass("unavailable")
+	$(".craft_brick").addClass("unavailable")
 }
 else
 {
-	$(".craft_glass").removeClass("unavailable")
+	$(".craft_brick").removeClass("unavailable")
 }
 $(".craft_brick").html("Brick");
 $(".craft_brick").attr('tooltip', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))

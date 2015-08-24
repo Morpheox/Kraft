@@ -186,7 +186,7 @@ function researchunlock(){
 		unlocked[".tech_masonry"]=1;
 	}
 
-	if(bonus["economy"]>=9000 && unlocked[".tech_multitasking"]!=1){
+	if(bonus["economy"]>=9300 && unlocked[".tech_multitasking"]!=1){
 		$(".tech_multitasking").show()
 		unlocked[".tech_multitasking"]=1;
 	}

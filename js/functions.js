@@ -104,5 +104,5 @@ function srvTime(){
        success: function(data) {
 
        }
-      });
+      }).responseText;
      }

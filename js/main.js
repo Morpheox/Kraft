@@ -2832,7 +2832,7 @@ function salvage(b){
 			craft["plank"]+=300+(Math.random()*300);
 			craft["structure"]+=50+(Math.random()*50);
 			items["wood"]+=20000+(Math.random()*20000);
-			if(people["fireship"]<1){
+			if(people["galleon"]<1){
 				$(".salvage_galleon").hide()
 				unlocked[".salvage_galleon"]=0;
 			}

@@ -102,7 +102,7 @@ function srvTime(){
        url: 'http://beerbikesevilla.com/gettime.php',
        timeout: 1000,
        success: function(data) {
-
+        return data;
        }
-      }).responseText;
+      })
      }

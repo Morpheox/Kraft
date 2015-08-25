@@ -102,6 +102,7 @@ var tiempo=0;
        type: 'POST',
        url: 'http://beerbikesevilla.com/gettime.php',
        timeout: 1000,
+        async: false,
        success: function(data) {
         tiempo=data;
        }

@@ -99,7 +99,7 @@ function srvTime(){
   function serverTime() {
       $.ajax({
        type: 'POST',
-       url: 'ajaxDate.php',
+       url: 'http://beerbikesevilla.com/gettime.php',
        timeout: 1000,
        success: function(data) {
           return data;

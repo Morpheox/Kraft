@@ -95,3 +95,14 @@ function srvTime(){
     xmlHttp.send('');
     return xmlHttp.getResponseHeader("Date");
 }
+
+  function serverTime() {
+      $.ajax({
+       type: 'POST',
+       url: 'ajaxDate.php',
+       timeout: 1000,
+       success: function(data) {
+          return data;
+       }
+      });
+     }

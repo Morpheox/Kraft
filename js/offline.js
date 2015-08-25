@@ -49,9 +49,9 @@ if (items["wood"]>=buildings["kiln"]*2 && buildstatus["kiln"]==1)
 	production["coal"]=buildings["kiln"]/100;
 
 }
-if (items["wood"]>=buildings["shipyard"]*2.5 && buildstatus["shipyard"]==1)
+if (items["wood"]>=buildings["shipyard"]*40 && buildstatus["shipyard"]==1)
 {
-	consumption["wood"]+=buildings["shipyard"]*2.5
+	consumption["wood"]+=buildings["shipyard"]*40
 	craft["plank"]+=buildings["shipyard"]/20;
 }
 if (items["gold"]>=buildings["bank"]/10 && buildstatus["bank"]==1)

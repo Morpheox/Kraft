@@ -195,7 +195,10 @@ function researchunlock(){
 		$(".tech_masonry").show()
 		unlocked[".tech_masonry"]=1;
 	}
-
+	if((bonus["science"]>=12000 || bonus["military"]>=12000) && unlocked[".tech_quenching"]!=1){
+		$(".tech_quenching").show()
+		unlocked[".tech_quenching"]=1;
+	}
 
 
 

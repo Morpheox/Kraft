@@ -171,6 +171,7 @@ technologies["masonry"]=0
 technologies["woodwork"]=0
 technologies["multitasking"]=0
 technologies["commodities"]=0
+technologies["quenching"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2486,6 +2487,30 @@ function research(b){
 			technologies["commodities"]++
 			$(".trade_sand").show()
 			unlocked[".trade_sand"]=1;
+
+		}
+
+	}
+	else if (b=="quenching" && technologies["quenching"]==0){
+
+
+		ironcost=500;
+		steelcost=250;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["steel"]>=steelcost && items["iron"]>=ironcost){
+
+			items["steel"]-=steelcost
+			items["iron"]-=ironcost
+			items["knowledge"]-=knowledgecost;
+
+			bonus["iron"]+=0.25
+			bonus["steel"]+=0.25
+
+			technologies["quenching"]++
+
 
 		}
 
@@ -5248,6 +5273,25 @@ $(".tech_commodities").html("Commodities" + (technologies["commodities"] >0 ? " 
 $(".tech_commodities").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_commodities").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_commodities").attr('tooltip4', "Allows you to buy sand on the market");
+
+ironcost=500;
+steelcost=250;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || items["iron"]<ironcost || items["steel"]<steelcost){
+	$(".tech_quenching").addClass("unavailable")
+}
+else
+{
+	$(".tech_quenching").removeClass("unavailable")
+}
+$(".tech_quenching").addClass((technologies["quenching"] >0 ? "researched" : ""))
+$(".tech_quenching").html("Quenching" + (technologies["quenching"] >0 ? " (researched)" : ""));
+$(".tech_quenching").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_quenching").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_quenching").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_quenching").attr('tooltip5', "Increases iron and steel production by 25%");
+
+
 //Research
 
 

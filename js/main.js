@@ -77,6 +77,7 @@ buildings["scienceoutpost"]=0;
 buildings["militaryoutpost"]=0;
 buildings["quarry"]=0;
 buildings["carpentry"]=0;
+buildings["blastfurnace"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -172,6 +173,7 @@ technologies["woodwork"]=0
 technologies["multitasking"]=0
 technologies["commodities"]=0
 technologies["quenching"]=0
+technologies["castiron"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2515,6 +2517,27 @@ function research(b){
 		}
 
 	}
+	else if (b=="castiron" && technologies["castiron"]==0){
+
+
+		brickcost=50;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["brick"]>=brickcost){
+
+			craft["brick"]-=brickcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["castiron"]++
+
+			$(".build_blastfurnace").show()
+			unlocked[".build_blastfurnace"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3014,8 +3037,8 @@ function build(b){
 	else if (b=="foundry"){
 
 
-		mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
-		coppercost=Math.pow(1.4, (buildings["foundry"]))*5
+		mineralcost= Math.pow(1.3,(buildings["foundry"]))*500;
+		coppercost=Math.pow(1.3, (buildings["foundry"]))*5
 
 		if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
 			items["mineral"]-=mineralcost;
@@ -3446,6 +3469,20 @@ function build(b){
 
 		}
 	}
+	else if (b=="blastfurnace"){
+
+		brickcost=Math.pow(1.4,(buildings["blastfurnace"]))*25
+
+		if (craft["brick"]>=brickcost){
+
+			craft["brick"]-=brickcost;
+			buildstatus["blastfurnace"]=1;
+			buildings["blastfurnace"]+=1;
+			$(".toggle_blastfurnace").show()
+			unlocked[".toggle_blastfurnace"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -3569,8 +3606,8 @@ $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_banner").attr('tooltip3', 'Max morale +1');
 
-mineralcost= Math.pow(1.4,(buildings["foundry"]))*500;
-coppercost=Math.pow(1.4, (buildings["foundry"]))*5
+mineralcost= Math.pow(1.3,(buildings["foundry"]))*500;
+coppercost=Math.pow(1.3, (buildings["foundry"]))*5
 if(items["mineral"]<mineralcost || items["copper"]<coppercost){
 	$(".build_foundry").addClass("unavailable")
 }
@@ -3922,6 +3959,19 @@ $(".build_carpentry").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toF
 $(".build_carpentry").attr('tooltip4', 'Wood consumption -5.00/s');
 $(".build_carpentry").attr('tooltip5', 'Iron consumption -0.10/s');
 $(".build_carpentry").attr('tooltip6', 'Structure production +0.005/s');
+
+brickcost=Math.pow(1.4,(buildings["blastfurnace"]))*25
+if(craft["brick"]<brickcost){
+	$(".build_blastfurnace").addClass("unavailable")
+}
+else
+{
+	$(".build_blastfurnace").removeClass("unavailable")
+}
+$(".build_blastfurnace").html("Blast furnace ("+buildings["blastfurnace"]+")");
+$(".build_blastfurnace").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_blastfurnace").attr('tooltip2', 'Mineral consumption per foundryman -0.25/s');
+$(".build_blastfurnace").attr('tooltip3', 'Iron production per foundryman +0.01/s');
 
 //People
 foodcost=50;
@@ -5291,7 +5341,20 @@ $(".tech_quenching").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFi
 $(".tech_quenching").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_quenching").attr('tooltip5', "Increases iron and steel production by 25%");
 
-
+brickcost=50;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["brick"]<brickcost){
+	$(".tech_castiron").addClass("unavailable")
+}
+else
+{
+	$(".tech_castiron").removeClass("unavailable")
+}
+$(".tech_castiron").addClass((technologies["castiron"] >0 ? "researched" : ""))
+$(".tech_castiron").html("Cast iron" + (technologies["castiron"] >0 ? " (researched)" : ""));
+$(".tech_castiron").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".tech_castiron").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_castiron").attr('tooltip4', "New techniques allows you to build blast furnaces.");
 //Research
 
 
@@ -5810,7 +5873,14 @@ if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman
 	consumption["coal"]+=people["foundryman"]/200
 	consumption["food"]+=people["foundryman"]/40
 	production["steel"]+=people["foundryman"]/400
+	if(buildings["blastfurnace"]>=1 && buildstatus["blastfurnace"]==1){
 
+		if(items["mineral"]>=(buildings["blastfurnace"]*people["foundryman"]*0.0625)){
+			consumption["mineral"]+=(buildings["blastfurnace"]*people["foundryman"]*0.0625)
+			production["iron"]+=(buildings["blastfurnace"]*people["foundryman"]*0.0025)
+		}
+
+	}
 }
 
 

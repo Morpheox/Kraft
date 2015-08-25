@@ -200,6 +200,10 @@ function researchunlock(){
 		unlocked[".tech_quenching"]=1;
 	}
 
+	if((bonus["science"]>=11000 || bonus["military"]>=15000 || bonus["economy"]>=13000) && unlocked[".tech_castiron"]!=1){
+		$(".tech_castiron").show()
+		unlocked[".tech_castiron"]=1;
+	}
 
 
 }

@@ -15,7 +15,7 @@ mratio["supplies"]=2
 mratio["frame"]=500
 mratio["token"]=1
 mratio["glass"]=50
-mratio["plank"]=20
+mratio["plank"]=10
 mratio["brick"]=20
 
 function newDeal(){

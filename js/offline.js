@@ -135,7 +135,13 @@ if (items["iron"]>=people["foundryman"]/20 && items["food"]>=people["foundryman"
 	consumption["coal"]+=people["foundryman"]/50
 	consumption["food"]+=people["foundryman"]/10
 	production["steel"]+=people["foundryman"]/100
+	if(buildings["blastfurnace"]>=1 && buildstatus["blastfurnace"]==1){
+		if(items["mineral"]>=(buildings["blastfurnace"]*people["foundryman"]*0.25)){
+			consumption["mineral"]+=(buildings["blastfurnace"]*people["foundryman"]*0.25)
+			production["iron"]+=(buildings["blastfurnace"]*people["foundryman"]*0.01)
+		}
 
+	}
 }
 
 if (items["food"]>=people["pikeman"]/10)

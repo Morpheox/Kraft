@@ -95,7 +95,7 @@ function srvTime(){
     xmlHttp.send('');
     return xmlHttp.getResponseHeader("Date");
 }
-    var tiempo=0;
+var tiempo=0;
   function serverTime() {
 
     $.ajax({

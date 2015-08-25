@@ -105,7 +105,10 @@ var tiempo=0;
         async: false,
        success: function(data) {
         tiempo=data;
-       }
+       },
+       error: function () {
+        tiempo=new Date(srvTime()).getTime() / 1000;
+      }
       })
 
     return tiempo;

@@ -2,7 +2,7 @@ function warp(){
 
 
 
-datenew=new Date(srvTime()).getTime() / 1000
+datenew=parseInt(serverTime())
 dateold= bonus["savetime"]
 
 warping=datenew-dateold

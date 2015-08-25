@@ -161,6 +161,11 @@ function researchunlock(){
 		unlocked[".tech_deals"]=1;
 	}
 
+	if(bonus["economy"]>=8500 && unlocked[".tech_commodities"]!=1){
+		$(".tech_commodities").show()
+		unlocked[".tech_commodities"]=1;
+	}
+
 	if(bonus["science"]>=8900 && unlocked[".tech_openmining"]!=1){
 		$(".tech_openmining").show()
 		unlocked[".tech_openmining"]=1;
@@ -169,6 +174,11 @@ function researchunlock(){
 	if(bonus["military"]>=9000 && unlocked[".tech_finding"]!=1){
 		$(".tech_finding").show()
 		unlocked[".tech_finding"]=1;
+	}
+
+	if(bonus["economy"]>=9300 && unlocked[".tech_multitasking"]!=1){
+		$(".tech_multitasking").show()
+		unlocked[".tech_multitasking"]=1;
 	}
 
 	if((bonus["economy"]>=10000 || bonus["military"]>=10000) && unlocked[".tech_seacaptain"]!=1){
@@ -186,9 +196,8 @@ function researchunlock(){
 		unlocked[".tech_masonry"]=1;
 	}
 
-	if(bonus["economy"]>=9300 && unlocked[".tech_multitasking"]!=1){
-		$(".tech_multitasking").show()
-		unlocked[".tech_multitasking"]=1;
-	}
+
+
+
 }
 

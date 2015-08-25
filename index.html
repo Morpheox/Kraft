@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.5.0 beta</title>
+	<title>Keep Craft v0.5.1 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.5.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.5.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -175,11 +175,13 @@
 			<div class="block tech_careening"></div>
 			<div class="block tech_fireship"></div>
 			<div class="block tech_finding"></div>
+			<div class="block tech_multitasking"></div>
+			<div class="block tech_commodities"></div>
 			<div class="block tech_openmining"></div>
 			<div class="block tech_seacaptain"></div>
 			<div class="block tech_masonry"></div>
 			<div class="block tech_woodwork"></div>
-			<div class="block tech_multitasking"></div>
+
 			
 		</div>
 			<br><br><br><br><br><br>
@@ -242,8 +244,8 @@
 	All trades cost 1 coin: <br><br>
 	<div class="trade trade_wood"></div><br>
 	<div class="trade trade_mineral"></div><br>
-	<div class="trade trade_food"></div><br><br><br>
-
+	<div class="trade trade_food"></div><br>
+	<div class="trade trade_sand"></div><br><br><br>
 	<div class="deals">
 	<div class="deallog">
 	</div><br><div class="dealtime">
@@ -371,6 +373,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.5.1</b>
+        <ul>
+		<li>New economy tech</li>
+		<li>It allows to buy sand on the market</li>
+        </ul>
         <b>V 0.5.0</b>
         <ul>
 		<li>The most wanted feature its here!, Offline gainings</li>
@@ -646,7 +653,7 @@
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
 	$(".playx10,.playx100").hide()
-
+	$(".trade_sand").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
 	$(".build_pasture").click(function() {build("pasture")});
@@ -766,6 +773,7 @@
 	$(".tech_masonry").click(function() {research("masonry")});
 	$(".tech_woodwork").click(function() {research("woodwork")});
 	$(".tech_multitasking").click(function() {research("multitasking")});
+	$(".tech_commodities").click(function() {research("commodities")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -788,6 +796,7 @@
     $(".trade_wood").click(function() {trade("wood")});
     $(".trade_mineral").click(function() {trade("mineral")});
     $(".trade_food").click(function() {trade("food")});
+    $(".trade_sand").click(function() {trade("sand")});
 
     $(".leader_sucellus").click(function() {lead("sucellus")});
     $(".leader_eredal").click(function() {lead("eredal")});

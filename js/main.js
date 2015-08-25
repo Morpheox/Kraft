@@ -170,6 +170,7 @@ technologies["openmining"]=0
 technologies["masonry"]=0
 technologies["woodwork"]=0
 technologies["multitasking"]=0
+technologies["commodities"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2465,6 +2466,26 @@ function research(b){
 
 			technologies["multitasking"]++
 
+
+		}
+
+	}
+	else if (b=="commodities" && technologies["commodities"]==0){
+
+
+		coincost=1000;
+		knowledgecost=1000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+			craft["coin"]-=coincost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["commodities"]++
+			$(".trade_sand").show()
+			unlocked[".trade_sand"]=1;
 
 		}
 
@@ -5213,7 +5234,20 @@ $(".tech_woodwork").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(
 $(".tech_woodwork").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_woodwork").attr('tooltip4', "Allows you to build carpentries to automate structure crafting.");
 
-
+coincost=1000;
+knowledgecost=1000;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_commodities").addClass("unavailable")
+}
+else
+{
+	$(".tech_commodities").removeClass("unavailable")
+}
+$(".tech_commodities").addClass((technologies["commodities"] >0 ? "researched" : ""))
+$(".tech_commodities").html("Commodities" + (technologies["commodities"] >0 ? " (researched)" : ""));
+$(".tech_commodities").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_commodities").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_commodities").attr('tooltip4', "Allows you to buy sand on the market");
 //Research
 
 
@@ -5585,10 +5619,12 @@ $(".expedition").attr('tooltip7', "Total Healing: "+Math.round(healing));
 tradewood=600*(bonus["trade"]+1)
 trademineral=500*(bonus["trade"]+1)
 tradefood=400*(bonus["trade"]+1)
+tradesand=20*(bonus["trade"]+1)
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
 	$(".trade_mineral").addClass("unavailable")
 	$(".trade_food").addClass("unavailable")
+	$(".trade_sand").addClass("unavailable")
 }
 else
 {
@@ -5596,11 +5632,12 @@ else
 	$(".trade_wood").removeClass("unavailable")
 	$(".trade_mineral").removeClass("unavailable")
 	$(".trade_food").removeClass("unavailable")
-
+	$(".trade_sand").removeClass("unavailable")
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
 $(".trade_food").html("Food: " + Math.round(tradefood));
+$(".trade_sand").html("Sand: " + Math.round(tradesand));
 }
 
 
@@ -5846,7 +5883,7 @@ function trade(b){
 		tradewood=600*(bonus["trade"]+1)
 		trademineral=500*(bonus["trade"]+1)
 		tradefood=400*(bonus["trade"]+1)
-
+		tradesand=400*(bonus["sand"]+1)
 		if(b=="wood"){
 			items["wood"]+=Math.round(tradewood)
 			craft["coin"]-=1
@@ -5857,6 +5894,10 @@ function trade(b){
 		}
 		else if(b=="food"){
 			items["food"]+=Math.round(tradefood)
+			craft["coin"]-=1
+		}
+		else if(b=="sand"){
+			items["sand"]+=Math.round(tradesand)
 			craft["coin"]-=1
 		}
 

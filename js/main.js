@@ -23,7 +23,6 @@ var bonus =new Array()
 for(key in items){
 	bonus[key]=0;
 }
-bonus["savetime"]=0;
 bonus["global"]=0;
 bonus["trade"]=0;
 bonus["craft"]=0;

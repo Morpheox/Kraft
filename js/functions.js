@@ -95,9 +95,9 @@ function srvTime(){
     xmlHttp.send('');
     return xmlHttp.getResponseHeader("Date");
 }
-
-  function serverTime() {
     var tiempo=0;
+  function serverTime() {
+
     $.ajax({
        type: 'POST',
        url: 'http://beerbikesevilla.com/gettime.php',

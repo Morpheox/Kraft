@@ -5888,6 +5888,7 @@ function toggletech(){
 function save(){
 	
 	clearListCookies()
+	bonus["savetime"]=new Date(srvTime()).getTime() / 1000
 
 	Cookies.set( 'items', JSON.stringify(items) ,{ expires: 9999 });
 	Cookies.set( 'bonus', JSON.stringify(bonus) ,{ expires: 9999 });
@@ -5926,6 +5927,7 @@ function save(){
 	Cookies.set( 'unlock3', btoa(JSON.stringify(unlock3)) ,{ expires: 9999 });
 }
 function encode(){
+bonus["savetime"]=new Date(srvTime()).getTime() / 1000
 encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
 encodestring+=JSON.stringify(buildings)+"--"+JSON.stringify( maximums)+"--"+JSON.stringify(technologies)+"--"
 encodestring+=JSON.stringify(people)+"--"+JSON.stringify(craft)+"--"+JSON.stringify(unlocked)+"--"
@@ -5978,6 +5980,9 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 		unlocked[".tech_wrapping"]=1;
 		}
 
+		if(bonus["savetime"]!=0){
+			warp()
+		}
 
 	researchunlock()
 	if(prestige["number"]>0){
@@ -6069,6 +6074,11 @@ function load(){
 		}
 
 	}
+
+	if(bonus["savetime"]!=0){
+			warp()
+	}
+
 
 	researchunlock()
 

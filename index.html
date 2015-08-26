@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.5.3 beta</title>
+	<title>Keep Craft v0.5.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.5.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.5.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -36,7 +36,7 @@
 <a href="https://www.reddit.com/r/Keep_Craft/" target="blank" >Subreddit</a> <a class="a2" href="https://www.reddit.com/r/Keep_Craft/wiki/index" target="blank">Wiki</a>
 
 </div>
-	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
+	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> 		 <button class='but'  data-toggle="modal" data-target="#options">Options</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <br><br>
             
 	<ul class="nav nav-tabs">
@@ -310,7 +310,28 @@
 	</div>
 	</div>
 
-
+	  
+	  <div class="modal fade" id="options" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title messagetitle">Options</h4>
+        </div>
+        <div class="modal-body messagetext">
+		 <button class='but' onclick="cleartheme()" >Clear theme</button><br>
+		 <button class='but'  onclick="darktheme()" >Dark theme</button><br>
+		 <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 	  <div class="modal fade" id="importmodal" role="dialog">
     <div class="modal-dialog">
     
@@ -374,6 +395,14 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.5.4</b>
+        <ul>
+		<li>New dark theme option</li>
+		<li>9 new trade routes for tin and coal</li>
+		<li>Reduced autosave time to 60s to increase performance</li>
+		<li>Fixed game freezing sometimes</li>
+		<li>Fixed tooltip erros</li>
+        </ul>
         <b>V 0.5.3</b>
         <ul>
         <li>New neutral tech</li>
@@ -882,7 +911,15 @@ fillDeal();
 
 </script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
 
+function darktheme() {
+    $("#estilo").attr("href", "css/darktheme.css");
+}
+function cleartheme() {
+    $("#estilo").attr("href", "css/style.css");
+}
+</script>
 
 
 <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>

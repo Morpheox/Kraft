@@ -1,0 +1,347 @@
+html,body{
+margin:0;
+padding:0;
+background-color:#272822!important;
+}
+body{
+background-color:#272822!important;
+color:#F8F8F2!important;
+}
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+.modal-dialog{
+background-color:#FFF!important;
+color:black!important;
+
+}
+  .block{
+  	border:1px solid #BBB;
+  	cursor:pointer;
+  	padding:5px;
+  	width:220px;
+    margin-top:10px;
+    display: inline-block;
+    font-size:15px;
+    color:white;
+}
+-webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none;
+  }
+  .block[style*="display: none;"]{
+    padding:0px;
+    margin-top:0px;
+    width:0px;
+  }
+  .block:hover:after{
+    background: rgba(255,255,255,.95);
+    border-radius: 5px;
+    color: #000;
+    content: attr(tooltip) "\A" attr(tooltip2) "\A" attr(tooltip3) "\A" attr(tooltip4) "\A" attr(tooltip5) "\A" attr(tooltip6) "\A" attr(tooltip7);;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    margin-left:20px;
+    width: auto;
+    height:auto;
+     white-space: pre;
+}
+
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy{
+	float:left;
+	position: relative;
+	padding:25px;
+  color:#ddd;
+}
+.inventory{
+
+}
+.inventory td{
+  padding:1px;
+
+}
+.amount{
+  padding-left:3px;
+  padding-right:3px;
+}
+.bonus{
+  color:green;
+  font-size:12px;
+}
+
+.fire{
+margin-left:5px;
+display: inline;
+font-size:10px;
+}
+.toggle{
+margin-left:5px;
+display: inline;
+font-size:10px;
+}
+.off{
+  background-color:rgba(255,0,0,0.5)!important;
+}
+.invisible{
+  visibility: hidden;
+  width:0;
+}
+.betresult{
+    font-size:40px;
+    text-align:center
+}
+.betamount{
+  color:black;
+}
+.casinorewards{
+
+
+
+
+  margin-bottom:25px;
+  padding:5px;
+}
+.casinogame1{
+  width:400px;
+  height:230px;
+  text-align:center;
+  border:1px solid #BBB;
+  padding:15px;
+  display: inline-block;
+
+}
+.casinogame2{
+  width:400px;
+  height:410px;
+  border:1px solid #BBB;
+  padding:15px;
+  display: inline-block;
+
+}
+.infokraft{
+    float:right
+}
+
+.expeditionresult{
+  margin-top:15px;
+}
+
+.trade{
+    border:1px solid #BBB;
+    cursor:pointer;
+    padding:5px;
+    width:200px!important;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.bonus{
+  color:green;
+  font-size:12px;
+    text-align:right;
+}
+
+.researched{
+    background-color:rgba(0,220,0,0.2);
+  color:rgba(255,255,255,0.9);
+-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+-moz-box-shadow:0px 0px 0px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
+}
+
+.toggletech,.resetbutton{
+    border:1px solid #BBB;
+    cursor:pointer;
+    padding:5px;
+    width:220px;
+    color:black;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.population, .titles, .ships, .legacynum, .treasurenum,.territory{
+  display:inline;
+}
+
+.titles, .ships, .legacynum, .treasurenum,.territory{
+  margin-left:20px;
+}
+
+.unavailable:not(.researched){
+
+  color:rgba(153,153,153,1);
+-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+-moz-box-shadow:0px 0px 0px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
+}
+
+.encounter{
+  padding:15px;
+  border:1px solid #BBB;
+  margin-top:15px;
+}
+
+.fight{
+  background-color:rgba(255,0,0,0.9);
+  font-size:16px;
+  color:white;
+    border-radius:3px;
+    padding:5px;
+          border: 1px solid white;
+}
+.retreat{
+  background-color:gray;
+  font-size:16px;
+  color:white;
+  border-radius:3px;
+      padding:5px;
+      border: 1px solid white;
+      margin-left:10px;
+}
+
+
+.tablero{
+  padding:10px;
+  background-color:black;
+  color:white;
+  width:300px;
+  height:300px;
+}
+
+.tabgame td{
+  height:30px;
+  width:30px;
+  font-size:11px;
+  text-align:center;
+}
+
+.tabgame td button{
+  font-size:18px;
+}
+
+.lose{
+  width:300px;
+  height:300px;
+  text-align:center;
+  line-height: 300px;
+  font-size:22px;
+}
+
+.playgame2{
+      margin-top: 15px;
+    background-color: #1AE81A;
+    border-radius: 5px;
+    font-size: 19px;
+    text-align: center;
+    width: 60px;
+    color:black;
+}
+
+.casinogame1 button{
+margin-top: 15px;
+border-radius: 5px;
+font-size: 20px;
+color:black;
+}
+
+.remaings{
+  font-size:24px;
+  margin-left:15px;
+}
+
+.tradesea,.expansionsea{
+  border:1px solid white;
+  padding:15px;
+  text-align:center;
+  width:400px;
+}
+
+.ratiotrade,.selgive,.selget{
+  display: inline;
+  margin-left:5px;
+}
+
+.lockrew{
+    text-shadow: 0 0 8px #46FF06;
+    color: green;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.technolist{
+  width:520px;
+}
+
+.changes{
+  overflow:scroll;
+  height:500px;
+}
+
+.buildlist{
+  width:300px;
+  float:left;
+}
+
+.craftline{
+  width:280px;
+}
+
+.playx10,.playx100{
+    margin-left:12px;
+    margin-top: 15px;
+    background-color: #1AE81A;
+    border-radius: 5px;
+    font-size: 19px;
+    text-align: center;
+    width: 105px;
+}
+
+.production{
+  min-width:70px;
+}
+
+.imgdonar{
+  display: inline-block;
+}
+.imgdonar input{
+    margin-bottom:-5px;
+}
+.but{
+  margin:3px;
+  color:black;
+}
+
+.casinolog{
+  height:30px;
+}
+
+.expansionlog{
+  text-align:left;
+  border:1px solid white;
+  padding:3px;
+}
+
+.infokraft a, input{
+
+  color:lightblue;
+
+  font-size:16px;
+}
+
+.a2{
+  margin-left:15px;
+}
+
+.inputtxt{
+  width:90%;
+  height:300px;
+}
+
+.deals{
+  border:1px solid #BBB;
+  padding:15px;
+  text-align:center;
+  width:400px;
+}

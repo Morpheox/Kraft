@@ -46,6 +46,16 @@ traderatio["iron"]["food"]=80;
 traderatio["iron"]["coal"]=0.4;
 traderatio["iron"]["steel"]=0.1;
 
+traderatio["tin"]["mineral"]=175;
+traderatio["tin"]["food"]=100;
+traderatio["tin"]["coal"]=0.7;
+traderatio["tin"]["iron"]=1.3;
+
+traderatio["coal"]["mineral"]=200;
+traderatio["coal"]["food"]=150;
+traderatio["coal"]["tin"]=1.1;
+traderatio["coal"]["iron"]=1;
+traderatio["coal"]["gold"]=0.1;
 
 traderatio["steel"]["wood"]=1200;
 traderatio["steel"]["mineral"]=1000;

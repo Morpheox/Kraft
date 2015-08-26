@@ -3419,10 +3419,10 @@ function build(b){
 		armorcost=Math.pow(1.3,(buildings["militaryoutpost"]))*20
 		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
 
-		if (craft["frame"]>=framecost && craft["coin"]>=coincost && craft["sword"]>=swordcost && bonus["territory"]>=territorycost){
+		if (craft["frame"]>=framecost && craft["armor"]>=armorcost && craft["sword"]>=swordcost && bonus["territory"]>=territorycost){
 
 			craft["frame"]-=framecost;
-			craft["coin"]-=coincost;
+			craft["armor"]-=armorcost;
 			craft["sword"]-=swordcost
 			bonus["territory"]-=territorycost
 

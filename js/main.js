@@ -3460,7 +3460,7 @@ function build(b){
 		if (craft["brick"]>=brickcost && craft["frame"]>=framecost){
 
 			craft["brick"]-=brickcost;
-			craft["pickaxe"]-=framecost;
+			craft["frame"]-=framecost;
 
 
 			buildings["carpentry"]+=1

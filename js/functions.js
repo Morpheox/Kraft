@@ -98,18 +98,6 @@ function srvTime(){
 var tiempo=0;
   function serverTime() {
 
-    $.ajax({
-       type: 'POST',
-       url: 'http://beerbikesevilla.com/gettime.php',
-       timeout: 5000,
-        async: false,
-       success: function(data) {
-        tiempo=data;
-       },
-       error: function () {
-        tiempo=new Date(srvTime()).getTime() / 1000;
-      }
-      })
+    return (new Date).getTime()/1000;
 
-    return tiempo;
      }

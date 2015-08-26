@@ -10,6 +10,8 @@ traderatio["iron"]=new Array()
 traderatio["steel"]=new Array()
 traderatio["sand"]=new Array()
 traderatio["chemicals"]=new Array()
+traderatio["tin"]=new Array()
+traderatio["coal"]=new Array()
 
 traderatio["wood"]["mineral"]=0.8;
 traderatio["wood"]["food"]=0.5;

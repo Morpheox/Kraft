@@ -2377,7 +2377,7 @@ function research(b){
 		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost && items["mineral"]>=mineralcost){
 
 			craft["pickaxe"]-=pickaxecost
-			items["food"]-=foodcost
+			items["mineral"]-=mineralcost
 			items["knowledge"]-=knowledgecost;
 
 			technologies["openmining"]++

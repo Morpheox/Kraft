@@ -5475,7 +5475,7 @@ $(".tech_explosives").addClass((technologies["explosives"] >0 ? "researched" : "
 $(".tech_explosives").html("Explosives" + (technologies["explosives"] >0 ? " (researched)" : ""));
 $(".tech_explosives").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_explosives").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_explosives").attr('tooltip4', "Increases iron and steel production by 25%");
+$(".tech_explosives").attr('tooltip4', "Allows you to craft gunpowder.");
 
 
 ironcost=500;

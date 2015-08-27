@@ -175,6 +175,8 @@ technologies["commodities"]=0
 technologies["quenching"]=0
 technologies["castiron"]=0
 technologies["commerce"]=0
+technologies["insecticides"]=0
+technologies["explosives"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -223,11 +225,13 @@ craft["spear"]=0
 craft["sword"]=0
 craft["greatsword"]=0
 craft["armor"]=0
+craft["gunpowder"]=0
 craft["horse"]=0
 craft["elephant"]=0
 craft["supplies"]=0
 craft["lock"]=0
 craft["diamond"]=0
+
 
 var unlocked=new Array();
 
@@ -1078,6 +1082,27 @@ function crafting(b){
 
 
 				craft["brick"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="gunpowder"){
+
+
+			sandcost=300;
+			coalcost=100;
+			bronzecost=10;
+			chemicalscost=5;
+
+
+			if (items["sand"]>=sandcost && items["coal"]>=coalcost && items["chemicals"]>=chemicalscost && craft["bronze"]>=bronzecost){
+
+				items["sand"]-=sandcost;
+				items["coal"]-=coalcost
+				items["chemicals"]-=chemicalscost
+				craft["bronze"]-=bronzecost
+
+				craft["gunpowder"]+=1+bonus["craft"];
 
 			}
 
@@ -2537,6 +2562,45 @@ function research(b){
 
 			$(".build_blastfurnace").show()
 			unlocked[".build_blastfurnace"]=1;
+
+		}
+
+	}
+	else if (b=="insecticides" && technologies["insecticides"]==0){
+
+
+		chemicalscost=20;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["chemicals"]>=chemicalscost){
+
+			items["chemicals"]-=chemicalscost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["insecticides"]++
+			bonus["food"]+=0.40
+
+		}
+
+	}
+	else if (b=="explosives" && technologies["explosives"]==0){
+
+
+		moralecost=70;
+		knowledgecost=1300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["morale"]>=moralecost){
+
+			items["morale"]-=moralecost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["explosives"]++
+			$(".craft_gunpowder").show()
+			unlocked[".craft_gunpowder"]=1;
 
 		}
 
@@ -5398,6 +5462,21 @@ $(".tech_commerce").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(
 $(".tech_commerce").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_commerce").attr('tooltip4', "Allows you to hire marketers");
 
+moralecost=70;
+knowledgecost=1300;
+if(items["knowledge"]<knowledgecost || items["morale"]<moralecost){
+	$(".tech_explosives").addClass("unavailable")
+}
+else
+{
+	$(".tech_explosives").removeClass("unavailable")
+}
+$(".tech_explosives").addClass((technologies["explosives"] >0 ? "researched" : ""))
+$(".tech_explosives").html("Explosives" + (technologies["explosives"] >0 ? " (researched)" : ""));
+$(".tech_explosives").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_explosives").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_explosives").attr('tooltip4', "Increases iron and steel production by 25%");
+
 
 ironcost=500;
 steelcost=250;
@@ -5430,6 +5509,24 @@ $(".tech_castiron").html("Cast iron" + (technologies["castiron"] >0 ? " (researc
 $(".tech_castiron").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".tech_castiron").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_castiron").attr('tooltip4', "New techniques allows you to build blast furnaces.");
+
+
+chemicalscost=20;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || items["chemicals"]<chemicalscost){
+	$(".tech_insecticides").addClass("unavailable")
+}
+else
+{
+	$(".tech_insecticides").removeClass("unavailable")
+}
+$(".tech_insecticides").addClass((technologies["insecticides"] >0 ? "researched" : ""))
+$(".tech_insecticides").html("Insecticides" + (technologies["insecticides"] >0 ? " (researched)" : ""));
+$(".tech_insecticides").attr('tooltip', 'Brick: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
+$(".tech_insecticides").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_insecticides").attr('tooltip4', "Increases food production by 40%");
+
+
 //Research
 
 
@@ -5669,6 +5766,26 @@ $(".craft_brick").html("Brick");
 $(".craft_brick").attr('tooltip', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
 $(".craft_brick").attr('tooltip2', 'Clay: '+ parseFloat(items["clay"]).toFixed(2)+" / "+parseFloat(claycost).toFixed(2))
 $(".craft_brick").attr('tooltip4', "Bricks are a modular construction material.");
+
+sandcost=300;
+coalcost=100;
+bronzecost=10;
+chemicalscost=5;
+
+if(items["sand"]<sandcost || items["coal"]<coalcost || items["chemicals"]<chemicalscost || craft["bronze"]<bronzecost){
+	$(".craft_gunpowder").addClass("unavailable")
+}
+else
+{
+	$(".craft_gunpowder").removeClass("unavailable")
+}
+$(".craft_gunpowder").html("Gunpowder");
+$(".craft_gunpowder").attr('tooltip', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
+$(".craft_gunpowder").attr('tooltip2', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
+$(".craft_gunpowder").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".craft_gunpowder").attr('tooltip4', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
+$(".craft_gunpowder").attr('tooltip5', "A powder used for explosives and ammunition.");
+
 //Leaders
 
 if(bonus["title"]<1){

@@ -210,5 +210,15 @@ function researchunlock(){
 		unlocked[".tech_commerce"]=1;
 	}
 
+	if(bonus["science"]>=13500 && unlocked[".tech_insecticides"]!=1){
+		$(".tech_insecticides").show()
+		unlocked[".tech_insecticides"]=1;
+	}
+
+	if(bonus["military"]>=13500 && unlocked[".tech_explosives"]!=1){
+		$(".tech_explosives").show()
+		unlocked[".tech_explosives"]=1;
+	}
+
 }
 

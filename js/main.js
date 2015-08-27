@@ -174,6 +174,7 @@ technologies["multitasking"]=0
 technologies["commodities"]=0
 technologies["quenching"]=0
 technologies["castiron"]=0
+technologies["commerce"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -183,6 +184,8 @@ people["miner"]=0
 people["foundryman"]=0
 people["sailor"]=0
 people["scientist"]=0
+people["marketer"]=0
+
 people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
@@ -2538,6 +2541,27 @@ function research(b){
 		}
 
 	}
+	else if (b=="commerce" && technologies["commerce"]==0){
+
+
+		coincost=2000;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+
+			craft["brick"]-=brickcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["commerce"]++
+
+			$(".hire_marketer").show()
+			unlocked[".hire_marketer"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -2639,6 +2663,7 @@ function hire(b){
 			}
 
 		}
+		
 		else if (b=="scientist"){
 
 			knowledgecost=100;
@@ -2651,6 +2676,21 @@ function hire(b){
 				population++
 				$(".fire_scientist").show()
 				unlocked[".fire_scientist"]=1;
+			}
+
+		}
+		else if (b=="marketer"){
+
+			coincost=500;
+			goldcost=100;
+
+			if (items["gold"]>=goldcost && craft["coin"]>=coincost){
+				items["gold"]-=goldcost;
+				craft["coin"]-=coincost
+				people["marketer"]+=1
+				population++
+				$(".fire_marketer").show()
+				unlocked[".fire_marketer"]=1;
 			}
 
 		}
@@ -4081,6 +4121,25 @@ $(".hire_scientist").attr('tooltip3', "Food consumption: -0.20/s");
 $(".hire_scientist").attr('tooltip4', "Coin consumption: -0.01/s");
 $(".hire_scientist").attr('tooltip5', 'Knowledge production + 0.02/s');
 
+coincost=500;
+goldcost=100;
+if(items["gold"]<goldcost || craft["coin"]<coincost || population>=maximums["population"]){
+	$(".hire_marketer").addClass("unavailable")
+}
+else
+{
+	$(".hire_marketer").removeClass("unavailable")
+}
+$(".hire_marketer").html("Marketer ("+people["marketer"]+")");
+$(".hire_marketer").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
+$(".hire_marketer").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_marketer").attr('tooltip3', "Food consumption: -0.20/s");
+$(".hire_marketer").attr('tooltip4', "Coin consumption: -0.05/s");
+$(".hire_marketer").attr('tooltip5', 'Bronze production +0.001/s');
+$(".hire_marketer").attr('tooltip6', 'Brick production +0.0005/s');
+$(".hire_marketer").attr('tooltip7', 'Glass production +0.0005/s');
+
+
 foodcost=50
 spearcost=1
 if(items["food"]<foodcost || craft["spear"]<spearcost || population>=maximums["population"]){
@@ -5324,6 +5383,22 @@ $(".tech_commodities").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFix
 $(".tech_commodities").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_commodities").attr('tooltip4', "Allows you to buy sand on the market");
 
+coincost=2000;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
+	$(".tech_commerce").addClass("unavailable")
+}
+else
+{
+	$(".tech_commerce").removeClass("unavailable")
+}
+$(".tech_commerce").addClass((technologies["commerce"] >0 ? "researched" : ""))
+$(".tech_commerce").html("Commerce" + (technologies["commerce"] >0 ? " (researched)" : ""));
+$(".tech_commerce").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_commerce").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_commerce").attr('tooltip4', "Allows you to hire marketers");
+
+
 ironcost=500;
 steelcost=250;
 knowledgecost=1200;
@@ -5867,6 +5942,19 @@ if (craft["coin"]>=people["scientist"]/400 && items["food"]>=people["scientist"]
 
 	}
 }
+if (craft["coin"]>=people["marketer"]*0.0125 && items["food"]>=people["marketer"]/20)
+{
+	craft["coin"]-=people["marketer"]*0.0125
+	consumption["food"]+=people["marketer"]/20
+	craft["bronze"]+=0.00025
+	craft["brick"]+=0.000125
+	craft["glass"]+=0.000125
+}
+
+
+
+
+
 if (items["iron"]>=people["foundryman"]/100 && items["food"]>=people["foundryman"]/40 && items["coal"]>=people["foundryman"]/200)
 {
 	consumption["iron"]+=people["foundryman"]/100
@@ -6093,6 +6181,9 @@ $('.inputtxt').val(b64string)
 }
 
 function decode(){
+for(var key in unlocked){
+	unlocked[key]=0;
+}
 
 $("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
 $(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
@@ -6177,7 +6268,7 @@ function load(){
 		}
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
 
 
 

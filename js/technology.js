@@ -205,6 +205,10 @@ function researchunlock(){
 		unlocked[".tech_castiron"]=1;
 	}
 
+	if(bonus["economy"]>=11500 && unlocked[".tech_commerce"]!=1){
+		$(".tech_commerce").show()
+		unlocked[".tech_commerce"]=1;
+	}
 
 }
 

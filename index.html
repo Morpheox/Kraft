@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.5.4 beta</title>
+	<title>Keep Craft v0.5.5 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.5.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.5.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -106,6 +106,7 @@
 			<div class="block hire_foundryman"></div><button class="fire fire_foundryman" onclick='fire("foundryman")'>Fire 1</button><br>
 			<div class="block hire_sailor"></div><button class="fire fire_sailor" onclick='fire("sailor")'>Fire 1</button><br>
 			<div class="block hire_scientist"></div><button class="fire fire_scientist" onclick='fire("scientist")'>Fire 1</button><br>
+			<div class="block hire_marketer"></div><button class="fire fire_marketer" onclick='fire("marketer")'>Fire 1</button><br>
 		</div>
 		<div id="technologies" class="technologies tab-pane fade">
 			<div class="block research_economy"></div>
@@ -183,6 +184,7 @@
 			<div class="block tech_masonry"></div>
 			<div class="block tech_woodwork"></div>
 			<div class="block tech_quenching"></div>
+			<div class="block tech_commerce"></div>
 			<div class="block tech_castiron"></div>
 		</div>
 			<br><br><br><br><br><br>
@@ -395,6 +397,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.5.5</b>
+        <ul>
+        <li>New economic tech</li>
+        <li>New job - The marketer</li>
+        <li>Fixed import bug</li>
+        </ul>
         <b>V 0.5.4</b>
         <ul>
 		<li>New dark theme option</li>
@@ -736,6 +744,7 @@
 	$(".hire_foundryman").click(function() {hire("foundryman")});
 	$(".hire_sailor").click(function() {hire("sailor")});
 	$(".hire_scientist").click(function() {hire("scientist")});
+	$(".hire_marketer").click(function() {hire("marketer")});
 
 	$(".hire_pikeman").click(function() {hire("pikeman")});
 	$(".hire_swordman").click(function() {hire("swordman")});
@@ -819,6 +828,7 @@
 	$(".tech_commodities").click(function() {research("commodities")});
 	$(".tech_quenching").click(function() {research("quenching")});
 	$(".tech_castiron").click(function() {research("castiron")});
+	$(".tech_commerce").click(function() {research("commerce")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

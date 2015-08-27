@@ -4680,7 +4680,7 @@ else
 $(".tech_leadership").addClass((technologies["leadership"] >0 ? "researched" : ""))
 $(".tech_leadership").html("Leadership" + (technologies["leadership"] >0 ? " (researched)" : ""));
 $(".tech_leadership").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".tech_leadership").attr('tooltip3', "Unlocks castles, wich can grant titles to powerful leaders.");
+$(".tech_leadership").attr('tooltip3', "Unlocks castles, which can grant titles to powerful leaders.");
 
 spearcost=50
 swordcost=25

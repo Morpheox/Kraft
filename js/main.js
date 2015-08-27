@@ -4586,7 +4586,7 @@ $(".tech_steel").addClass((technologies["steel"] >0 ? "researched" : ""))
 $(".tech_steel").html("Steel" + (technologies["steel"] >0 ? " (researched)" : ""));
 $(".tech_steel").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_steel").attr('tooltip2', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
-$(".tech_steel").attr('tooltip3', "Unlocks foundrymans experts in steel");
+$(".tech_steel").attr('tooltip3', "Unlocks foundrymens experts in steel");
 
 steelcost=5;
 coincost=5;

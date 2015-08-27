@@ -5946,9 +5946,9 @@ if (craft["coin"]>=people["marketer"]*0.0125 && items["food"]>=people["marketer"
 {
 	craft["coin"]-=people["marketer"]*0.0125
 	consumption["food"]+=people["marketer"]/20
-	craft["bronze"]+=0.00025
-	craft["brick"]+=0.000125
-	craft["glass"]+=0.000125
+	craft["bronze"]+=0.00025*people["marketer"]
+	craft["brick"]+=0.000125*people["marketer"]
+	craft["glass"]+=0.000125*people["marketer"]
 }
 
 

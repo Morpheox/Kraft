@@ -129,6 +129,17 @@ if (craft["coin"]>=people["scientist"]/100 && items["food"]>=people["scientist"]
 	}
 }
 
+
+if (craft["coin"]>=people["marketer"]*0.05 && items["food"]>=people["marketer"]/5)
+{
+	craft["coin"]-=people["marketer"]*0.05
+	consumption["food"]+=people["marketer"]/5
+	craft["bronze"]+=0.001*people["marketer"]
+	craft["brick"]+=0.0005*people["marketer"]
+	craft["glass"]+=0.0005*people["marketer"]
+}
+
+
 if (items["iron"]>=people["foundryman"]/20 && items["food"]>=people["foundryman"]/10 && items["coal"]>=people["foundryman"]/50)
 {
 	consumption["iron"]+=people["foundryman"]/20

@@ -5522,7 +5522,7 @@ else
 }
 $(".tech_insecticides").addClass((technologies["insecticides"] >0 ? "researched" : ""))
 $(".tech_insecticides").html("Insecticides" + (technologies["insecticides"] >0 ? " (researched)" : ""));
-$(".tech_insecticides").attr('tooltip', 'Brick: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
+$(".tech_insecticides").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".tech_insecticides").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_insecticides").attr('tooltip4', "Increases food production by 40%");
 

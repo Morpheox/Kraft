@@ -52,7 +52,7 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]=Math.random()
     }
-    else if(Math.random()>0.20)
+    else if(Math.random()>0.15)
     {
     arrprice[i][j]="X" 
     }

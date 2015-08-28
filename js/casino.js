@@ -52,13 +52,24 @@ for(var j=0;j<9;j++){
     {
     arrprice[i][j]=Math.random()
     }
-    else if(Math.random()>0.15)
+    else if(Math.random()>0.20)
     {
     arrprice[i][j]="X" 
     }
     else if(Math.random()>0.35)
     {
+    if(Math.random()>0.5)
+    {
     arrprice[i][j]="GG"
+    }
+    else if(Math.random()>0.5)
+    {
+    arrprice[i][j]="bomb"
+    }
+    else
+    {
+    arrprice[i][j]="lines"
+    }
     }
     else if(Math.random()>0.35)
     {
@@ -69,7 +80,7 @@ for(var j=0;j<9;j++){
     arrprice[i][j]="L"   
     }
 
-stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+")' >O</button></td>"
+stringtablero+="<td data-x='"+i+"' data-y='"+j+"' class='tablerotd'><button onclick='openbox("+i+","+j+",0)' >O</button></td>"
 }
 
 stringtablero+="</tr>";
@@ -86,10 +97,14 @@ $(".playgame2").html(remaining)
 var totalwon=0;
 var locks=0;
 var opened=0;
-function openbox(x,y){
+function openbox(x,y,z){
 
+if(arrprice[x][y]=="opened"){
+    return
+}
 
-if(arrprice[x][y]!="X" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"  && arrprice[x][y]!="L"){
+if(!isNaN(arrprice[x][y])){
+
 if(coinsplayed<100){
 $("td[data-x="+x+"][data-y="+y+"]").html(intToString(arrprice[x][y]*coinsplayed))
 }
@@ -101,27 +116,71 @@ totalwon+=arrprice[x][y]*coinsplayed;
 remaining--
 
 }
-else if(arrprice[x][y]!="GG" && arrprice[x][y]!="GGG" && arrprice[x][y]!="L")
+else if(arrprice[x][y]=="X")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("X")
 remaining--
 }
-else if(arrprice[x][y]!="GGG" && arrprice[x][y]!="L")
+else if(arrprice[x][y]=="GG")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("+1")
 remaining++  
 }
-else if(arrprice[x][y]!="L")
+else if(arrprice[x][y]=="GGG")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("+5")
 remaining+=5
 }
-else
+else if(arrprice[x][y]=="L")
 {
 $("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>L</span>")
 locks++;
 }
-opened++;
+else if(arrprice[x][y]=="bomb")
+{
+remaining--
+openbox(x+1,y+1,1)
+openbox(x,y+1,1)
+openbox(x+1,y,1)
+openbox(x+1,y-1,1)
+openbox(x-1,y+1,1)
+openbox(x-1,y-1,1)
+openbox(x-1,y,1)
+openbox(x,y-1,1)
+$("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>B</span>")
+}
+else if(arrprice[x][y]=="lines")
+{
+remaining--
+$("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>+</span>")
+arrprice[x][y]="opened"
+openbox(x,0,1)
+openbox(x,1,1)
+openbox(x,2,1)
+openbox(x,3,1)
+openbox(x,4,1)
+openbox(x,5,1)
+openbox(x,6,1)
+openbox(x,7,1)
+openbox(x,8,1)
+openbox(0,y,1)
+openbox(1,y,1)
+openbox(2,y,1)
+openbox(3,y,1)
+openbox(4,y,1)
+openbox(5,y,1)
+openbox(6,y,1)
+openbox(7,y,1)
+openbox(8,y,1)
+
+}
+
+if(z==1 && arrprice[x][y]!="opened" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"){
+remaining++
+}
+
+arrprice[x][y]="opened"
+
 if(opened>=81){
     remaining=0;
     craft["diamond"]+=1;

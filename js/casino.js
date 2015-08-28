@@ -140,7 +140,7 @@ locks++;
 }
 else if(arrprice[x][y]=="bomb")
 {
-remaining--
+
 arrprice[x][y]="opened"
 $("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>B</span>")
 openbox(x+1,y+1,1)
@@ -151,10 +151,11 @@ openbox(x-1,y+1,1)
 openbox(x-1,y-1,1)
 openbox(x-1,y,1)
 openbox(x,y-1,1)
+remaining--
 }
 else if(arrprice[x][y]=="lines")
 {
-remaining--
+
 $("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>+</span>")
 arrprice[x][y]="opened"
 openbox(x,0,1)
@@ -175,7 +176,7 @@ openbox(5,y,1)
 openbox(6,y,1)
 openbox(7,y,1)
 openbox(8,y,1)
-
+remaining--
 }
 
 if(z==1 && arrprice[x][y]!="opened" && arrprice[x][y]!="GG" && arrprice[x][y]!="GGG"){

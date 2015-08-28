@@ -5893,7 +5893,7 @@ $(".reespec").html("Respec");
 $(".reespec").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
 $(".reespec").attr('tooltip3', 'Lets you get your titles back, for a cost..')
 
-treasurecost = Math.floor(Math.pow(1.7,(bonus["warpcost"]))*5)
+treasurecost = Math.floor(Math.pow(1.5,(bonus["warpcost"]))*5)
 if(prestige["treasure"]<treasurecost){
 	$(".legacy_warp").addClass("unavailable")
 }

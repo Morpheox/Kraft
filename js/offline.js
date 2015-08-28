@@ -230,7 +230,7 @@ for(key in items){
 }
 
 function legacywarp(){
-treasurecost = Math.floor(Math.pow(1.7,(bonus["warpcost"]))*5)
+treasurecost = Math.floor(Math.pow(1.5,(bonus["warpcost"]))*5)
 
 if(prestige["treasure"]>=treasurecost){
 prestige["treasure"]-=treasurecost

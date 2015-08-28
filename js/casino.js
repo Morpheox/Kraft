@@ -139,6 +139,7 @@ locks++;
 else if(arrprice[x][y]=="bomb")
 {
 remaining--
+arrprice[x][y]="opened"
 openbox(x+1,y+1,1)
 openbox(x,y+1,1)
 openbox(x+1,y,1)

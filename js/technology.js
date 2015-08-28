@@ -220,5 +220,10 @@ function researchunlock(){
 		unlocked[".tech_explosives"]=1;
 	}
 
+	if(bonus["economy"]>=14000 && unlocked[".tech_safes"]!=1){
+		$(".tech_safes").show()
+		unlocked[".tech_safes"]=1;
+	}
+
 }
 

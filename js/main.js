@@ -177,6 +177,7 @@ technologies["castiron"]=0
 technologies["commerce"]=0
 technologies["insecticides"]=0
 technologies["explosives"]=0
+technologies["safes"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2622,6 +2623,27 @@ function research(b){
 
 			$(".hire_marketer").show()
 			unlocked[".hire_marketer"]=1;
+
+		}
+
+	}
+	else if (b=="safes" && technologies["safes"]==0){
+
+
+		lockcost=100;
+		knowledgecost=1200;
+		
+
+		if (items["knowledge"]>=knowledgecost && craft["lock"]>=lockcost){
+
+			craft["lock"]-=lockcost
+			items["knowledge"]-=knowledgecost;
+
+			maximums["gold"]+=30
+
+			technologies["safes"]++
+
+
 
 		}
 
@@ -5526,7 +5548,20 @@ $(".tech_insecticides").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemica
 $(".tech_insecticides").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_insecticides").attr('tooltip4', "Increases food production by 40%");
 
-
+lockcost=100;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["lock"]<lockcost){
+	$(".tech_safes").addClass("unavailable")
+}
+else
+{
+	$(".tech_safes").removeClass("unavailable")
+}
+$(".tech_safes").addClass((technologies["safes"] >0 ? "researched" : ""))
+$(".tech_safes").html("Safes" + (technologies["safes"] >0 ? " (researched)" : ""));
+$(".tech_safes").attr('tooltip', 'Lock: '+ parseFloat(craft["lock"]).toFixed(2)+" / "+parseFloat(lockcost).toFixed(2))
+$(".tech_safes").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_safes").attr('tooltip4', "Increases gold storage by 30");
 //Research
 
 

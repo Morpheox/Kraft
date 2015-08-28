@@ -44,6 +44,7 @@ bonus["shipspeed"]=0;
 bonus["shiphp"]=0;
 bonus["shippower"]=0;
 bonus["shipcargo"]=0;
+bonus["warpcost"]=0
 
 var buildings=new Array();
 
@@ -5891,6 +5892,19 @@ else
 $(".reespec").html("Respec");
 $(".reespec").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
 $(".reespec").attr('tooltip3', 'Lets you get your titles back, for a cost..')
+
+treasurecost = Math.floor(Math.pow(1.7,(bonus["warpcost"]))*5)
+if(prestige["treasure"]<treasurecost){
+	$(".legacy_warp").addClass("unavailable")
+}
+else
+{
+	$(".legacy_warp").removeClass("unavailable")
+}
+$(".legacy_warp").html("Boost economy");
+$(".legacy_warp").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
+$(".legacy_warp").attr('tooltip3', 'Gives you 30 min of production')
+
 //Others
 
 if(prestige["number"]>0){
@@ -6336,6 +6350,15 @@ function decode(){
 for(var key in unlocked){
 	unlocked[key]=0;
 }
+
+	unlocked[".legacy_motivation"]=1;
+	unlocked[".legacy_depot"]=1;
+	unlocked[".legacy_vengeance"]=1;
+	unlocked[".legacy_aegis"]=1;
+	unlocked[".legacy_bargain"]=1;
+	unlocked[".legacy_mastery"]=1;
+	unlocked[".legacy_learning"]=1;
+	unlocked[".legacy_warp"]=1;
 
 $("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
 $(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()

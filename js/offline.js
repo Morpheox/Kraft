@@ -11,7 +11,12 @@ if (warping>604800){
 warping=604800
 }
 
-for(var w=0;w<warping;w++){
+warptime(warping)
+}
+
+function warptime(t){
+
+for(var w=0;w<t;w++){
 
 	var production =new Array()
 	for(key in items){
@@ -211,4 +216,27 @@ for(key in items){
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+}
+
+function legacywarp(){
+treasurecost = Math.floor(Math.pow(1.7,(bonus["warpcost"]))*5)
+
+if(prestige["treasure"]>=treasurecost){
+prestige["treasure"]-=treasurecost
+
+warptime(1800)
+bonus["warpcost"]++
+
+}
 }

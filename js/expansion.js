@@ -5,7 +5,7 @@ var enemyship=new Array()
 enemyship["boat"]=0;
 enemyship["trireme"]=0;
 enemyship["turtleship"]=0;
-
+enemyship["blastship"]=0;
 
 function filllog(){
 
@@ -13,7 +13,7 @@ var force=Math.pow(1.3,(bonus["expansion"]))*30
 enemyship["boat"]=0;
 enemyship["trireme"]=0;
 enemyship["turtleship"]=0;
-
+enemyship["blastship"]=0;
 
 stringencuentro=""
 if (force<50)
@@ -21,17 +21,25 @@ if (force<50)
 enemyship["boat"]=Math.round(force*0.2)+1;
 stringencuentro+=enemyship["boat"]+" Boat (Power:50 Structure:300)<br>";
 }
-if (force>=50 && force<120)
+if (force>=50 && force<=120)
 {
 enemyship["trireme"]=Math.round(force*0.04)+1;
 stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3.000)<br>";
 }
-if (force>120)
+if (force>120 && force<=900)
 {
 enemyship["trireme"]=Math.round(force*0.04)+1;
 stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3.000)<br>";
 enemyship["turtleship"]=Math.round(force*0.01)+1;
 stringencuentro+=enemyship["turtleship"]+" Turtle ship (Power:150 Structure:10.000)<br><br>";
+}
+if (force>900){
+enemyship["trireme"]=Math.round(force*0.02)+2;
+stringencuentro+=enemyship["trireme"]+" Trireme (Power:200 Structure:3.000)<br>";
+enemyship["turtleship"]=Math.round(force*0.01)+1;
+stringencuentro+=enemyship["turtleship"]+" Turtle ship (Power:150 Structure:10.000)<br>";
+enemyship["blastship"]=Math.round(force*0.005)+1;
+stringencuentro+=enemyship["blastship"]+" Blast ship (Power:800 Structure:8.000)<br><br>";
 }
 
 stringencuentro+="Territory protected: "+intToString(Math.pow(1.2,(bonus["expansion"]))*200)
@@ -77,12 +85,13 @@ if(crew>people["sailor"]){
 	power2+=enemyship["boat"]*50
 	power2+=enemyship["trireme"]*200
 	power2+=enemyship["turtleship"]*150
+	power2+=enemyship["blastship"]*800
 
 	hp2=0;
 	hp2+=enemyship["boat"]*300
 	hp2+=enemyship["trireme"]*3000
 	hp2+=enemyship["turtleship"]*10000
-
+	hp2+=enemyship["blastship"]*8000
 
 	totalburn=0;
 	combatlog="The encounter starts:<br>"

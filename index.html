@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.5.7 beta</title>
+	<title>Keep Craft v0.5.8 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.5.7 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.5.8 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -310,9 +310,9 @@
 	<div class="block legacy_vengeance"></div><br>
 	<div class="block legacy_aegis"></div><br>
 	<div class="block legacy_bargain"></div><br>
-	<div class="block legacy_learning"></div><br>
+	<div class="block legacy_learning"></div><br><br><br><br>
 
-
+	<div class="block legacy_warp"></div>
 	</div>
 	</div>
 
@@ -401,6 +401,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.5.8</b>
+        <ul>
+        <li>New use for treasures - Boost economy</li>
+        <li>Boost economy gives you 30 min of production, it costs more each time in the same continent.</li>
+        <li>New enemy ship - The blast ship</li>
+        </ul>
         <b>V 0.5.7</b>
         <ul>
         <li>New economic tech</li>
@@ -889,6 +895,7 @@
 	$(".legacy_bargain").click(function() {lega("bargain")});
 	$(".legacy_mastery").click(function() {lega("mastery")});
 	$(".legacy_learning").click(function() {lega("learning")});
+	$(".legacy_warp").click(function() {legacywarp()});
 
 	unlocked[".legacy_motivation"]=1;
 	unlocked[".legacy_depot"]=1;
@@ -897,6 +904,7 @@
 	unlocked[".legacy_bargain"]=1;
 	unlocked[".legacy_mastery"]=1;
 	unlocked[".legacy_learning"]=1;
+	unlocked[".legacy_warp"]=1;
 
    	$(".research_military").click(function() {develop("military")});
    	$(".research_economy").click(function() {develop("economy")});

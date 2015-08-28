@@ -102,7 +102,9 @@ function openbox(x,y,z){
 if(arrprice[x][y]=="opened"){
     return
 }
-
+if(x<0 || y<0 || x>8 || y>8){
+    return
+}
 if(!isNaN(arrprice[x][y])){
 
 if(coinsplayed<100){
@@ -140,6 +142,7 @@ else if(arrprice[x][y]=="bomb")
 {
 remaining--
 arrprice[x][y]="opened"
+$("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>B</span>")
 openbox(x+1,y+1,1)
 openbox(x,y+1,1)
 openbox(x+1,y,1)
@@ -148,7 +151,6 @@ openbox(x-1,y+1,1)
 openbox(x-1,y-1,1)
 openbox(x-1,y,1)
 openbox(x,y-1,1)
-$("td[data-x="+x+"][data-y="+y+"]").html("<span class='lockrew'>B</span>")
 }
 else if(arrprice[x][y]=="lines")
 {
@@ -181,7 +183,7 @@ remaining++
 }
 
 arrprice[x][y]="opened"
-
+opened++
 if(opened>=81){
     remaining=0;
     craft["diamond"]+=1;

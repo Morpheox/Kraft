@@ -5298,7 +5298,7 @@ else
 	$(".tech_packaging").removeClass("unavailable")
 }
 $(".tech_packaging").addClass((technologies["packaging"] >0 ? "researched" : ""))
-$(".tech_packaging").html("Packaging" + (technologies["packaging"] >0 ? " (res..)" : ""));
+$(".tech_packaging").html("Packaging" + (technologies["packaging"] >0 ? " (researched)" : ""));
 $(".tech_packaging").attr('tooltip', 'Chest: '+ parseFloat(craft["chest"]).toFixed(2)+" / "+parseFloat(chestcost).toFixed(2))
 $(".tech_packaging").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_packaging").attr('tooltip4', "Allows to build compressor to increase storage space of other buildings");

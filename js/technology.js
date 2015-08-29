@@ -225,5 +225,9 @@ function researchunlock(){
 		unlocked[".tech_safes"]=1;
 	}
 
+	if((bonus["science"]>=20000 || bonus["military"]>=20000 || bonus["economy"]>=20000) && unlocked[".tech_packaging"]!=1){
+		$(".tech_packaging").show()
+		unlocked[".tech_packaging"]=1;
+	}
 }
 

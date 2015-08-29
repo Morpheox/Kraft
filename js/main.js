@@ -79,6 +79,7 @@ buildings["militaryoutpost"]=0;
 buildings["quarry"]=0;
 buildings["carpentry"]=0;
 buildings["blastfurnace"]=0;
+buildings["compressor"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -179,6 +180,7 @@ technologies["commerce"]=0
 technologies["insecticides"]=0
 technologies["explosives"]=0
 technologies["safes"]=0
+technologies["packaging"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2649,6 +2651,37 @@ function research(b){
 		}
 
 	}
+	else if (b=="packaging" && technologies["packaging"]==0){
+
+
+		chestcost=200
+		knowledgecost=1300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["chest"]>=chestcost){
+
+
+			craft["chest"]-=chestcost;
+			items["knowledge"]-=knowledgecost;
+
+			maximums["wood"]-=50*chestcost
+			maximums["mineral"]-=25*chestcost
+			maximums["food"]-=10*chestcost
+			maximums["copper"]-=0.3*chestcost
+			maximums["gold"]-=0.05*chestcost
+			maximums["iron"]-=0.2*chestcost
+			maximums["tin"]-=0.15*chestcost
+			maximums["coal"]-=0.15*chestcost
+			maximums["steel"]-=0.10*chestcost
+
+			technologies["packaging"]++
+			$(".build_compressor").show()
+			unlocked[".build_compressor"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3610,6 +3643,26 @@ function build(b){
 
 		}
 	}
+	else if (b=="compressor"){
+
+		brickcost=Math.pow(1.2,(buildings["compressor"]))*500
+		glasscost=Math.pow(1.2,(buildings["compressor"]))*50
+		framecost=Math.pow(1.2,(buildings["compressor"]))*25
+
+
+		if (craft["brick"]>=brickcost && craft["glass"]>=glasscost && craft["frame"]>=framecost){
+
+			craft["brick"]-=brickcost;
+			craft["glass"]-=glasscost;
+			craft["frame"]-=framecost;
+
+			bonus["storage"]+=0.05
+
+			buildings["compressor"]+=1;
+
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -4099,6 +4152,22 @@ $(".build_blastfurnace").html("Blast furnace ("+buildings["blastfurnace"]+")");
 $(".build_blastfurnace").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".build_blastfurnace").attr('tooltip2', 'Mineral consumption per foundryman -0.25/s');
 $(".build_blastfurnace").attr('tooltip3', 'Iron production per foundryman +0.01/s');
+
+brickcost=Math.pow(1.2,(buildings["compressor"]))*500
+glasscost=Math.pow(1.2,(buildings["compressor"]))*50
+framecost=Math.pow(1.2,(buildings["compressor"]))*25
+if(craft["brick"]<brickcost || craft["glass"]<glasscost || craft["frame"]<framecost){
+	$(".build_compressor").addClass("unavailable")
+}
+else
+{
+	$(".build_compressor").removeClass("unavailable")
+}
+$(".build_compressor").html("Compressor ("+buildings["compressor"]+")");
+$(".build_compressor").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_compressor").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".build_compressor").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_compressor").attr('tooltip5', 'Increases all storages by 5%');
 
 //People
 foodcost=50;
@@ -5218,6 +5287,21 @@ $(".tech_undergroundstorage").html("Underground storage" + (technologies["underg
 $(".tech_undergroundstorage").attr('tooltip', 'Chest: '+ parseFloat(craft["chest"]).toFixed(2)+" / "+parseFloat(chestcost).toFixed(2))
 $(".tech_undergroundstorage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_undergroundstorage").attr('tooltip4', "Allows building bunkers to store bulk materials");
+
+chestcost=200
+knowledgecost=1300;
+if(items["knowledge"]<knowledgecost || craft["chest"]<chestcost){
+	$(".tech_packaging").addClass("unavailable")
+}
+else
+{
+	$(".tech_packaging").removeClass("unavailable")
+}
+$(".tech_packaging").addClass((technologies["packaging"] >0 ? "researched" : ""))
+$(".tech_packaging").html("Packaging" + (technologies["packaging"] >0 ? " (res..)" : ""));
+$(".tech_packaging").attr('tooltip', 'Chest: '+ parseFloat(craft["chest"]).toFixed(2)+" / "+parseFloat(chestcost).toFixed(2))
+$(".tech_packaging").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_packaging").attr('tooltip4', "Allows to build compressor to increase storage space of other buildings");
 
 
 foodcost=10000;

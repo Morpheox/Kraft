@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.5.9 beta</title>
+	<title>Keep Craft v0.6.0 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.5.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.6.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -95,6 +95,7 @@
 			<div class="block build_quarry"></div>
 			<div class="block build_carpentry"></div><button class="toggle toggle_carpentry" onclick='toggle("carpentry")'>Toggle</button>
 			<div class="block build_blastfurnace"></div><button class="toggle toggle_blastfurnace" onclick='toggle("blastfurnace")'>Toggle</button>	
+			<div class="block build_compressor"></div>
 			</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -189,6 +190,7 @@
 			<div class="block tech_castiron"></div>
 			<div class="block tech_explosives"></div>
 			<div class="block tech_safes"></div>
+			<div class="block tech_packaging"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -401,9 +403,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+         <b>V 0.6.0</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New building - compressors</li>
+        <li>Compressors increase all storages by 5%</li>
+        </ul>
          <b>V 0.5.9</b>
         <ul>
-        <li>Complete casino game 2 rework, now it might require some thinking, i leave it for yourselfs to figure it out.
+        <li>Complete casino game 2 rework, now it might require some thinking, i leave it for yourselfs to figure it out.</li>
         </ul>
         <b>V 0.5.8</b>
         <ul>
@@ -761,6 +769,7 @@
 	$(".build_quarry").click(function() {build("quarry")});
 	$(".build_carpentry").click(function() {build("carpentry")});
 	$(".build_blastfurnace").click(function() {build("blastfurnace")});
+	$(".build_compressor").click(function() {build("compressor")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -857,6 +866,7 @@
 	$(".tech_insecticides").click(function() {research("insecticides")});
 	$(".tech_explosives").click(function() {research("explosives")});
 	$(".tech_safes").click(function() {research("safes")});
+	$(".tech_packaging").click(function() {research("packaging")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

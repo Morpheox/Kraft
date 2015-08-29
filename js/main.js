@@ -2615,9 +2615,9 @@ function research(b){
 		
 
 
-		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coin){
 
-			craft["brick"]-=brickcost
+			craft["coin"]-=coin
 			items["knowledge"]-=knowledgecost;
 
 			technologies["commerce"]++

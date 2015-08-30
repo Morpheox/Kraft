@@ -25,7 +25,7 @@ color:black!important;
     display: inline-block;
     font-size:15px;
     color:white;
-}
+
 -webkit-user-select: none; /* Chrome/Safari */        
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none;
@@ -83,6 +83,7 @@ color:black!important;
 margin-left:5px;
 display: inline;
 font-size:10px;
+color:black!important;
 }
 .toggle{
 margin-left:5px;
@@ -356,4 +357,8 @@ color:black;
   padding:15px;
   text-align:center;
   width:400px;
+}
+
+.deals button{
+  color:black!important;
 }

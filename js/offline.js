@@ -194,6 +194,12 @@ if (items["food"]>=people["warelephant"]*10 && items["water"]>=people["warelepha
 	production["morale"]+=people["warelephant"]*50;
 }
 
+if (items["food"]>=people["musketeer"]/2.5)
+{
+	consumption["food"]+=people["musketeer"]/2.5;
+	production["morale"]+=people["musketeer"]*0.05;
+}
+
 if (bonus["invest"]>=0.1)
 {
 	bonus["invest"]-=0.1

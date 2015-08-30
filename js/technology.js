@@ -219,7 +219,14 @@ function researchunlock(){
 		$(".tech_explosives").show()
 		unlocked[".tech_explosives"]=1;
 	}
-
+	if(bonus["military"]>=16000 && unlocked[".tech_ammunition"]!=1){
+		$(".tech_ammunition").show()
+		unlocked[".tech_ammunition"]=1;
+	}
+	if(bonus["military"]>=18000 && unlocked[".tech_gunnery"]!=1){
+		$(".tech_gunnery").show()
+		unlocked[".tech_gunnery"]=1;
+	}
 	if(bonus["economy"]>=14000 && unlocked[".tech_safes"]!=1){
 		$(".tech_safes").show()
 		unlocked[".tech_safes"]=1;

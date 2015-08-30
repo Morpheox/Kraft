@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.6.0 beta</title>
+	<title>Keep Craft v0.6.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.6.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.6.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -191,6 +191,8 @@
 			<div class="block tech_explosives"></div>
 			<div class="block tech_safes"></div>
 			<div class="block tech_packaging"></div>
+			<div class="block tech_ammunition"></div>
+			<div class="block tech_gunnery"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -215,7 +217,9 @@
 		<div class="block craft_greatsword"></div>
 		<div class="block craft_frame"></div>
 		<div class="block craft_brick"></div>
-		<div class="block craft_gunpowder"></div><br><br><br><br><br>
+		<div class="block craft_gunpowder"></div>
+		<div class="block craft_ammo"></div>
+		<div class="block craft_musket"></div><br><br><br><br><br>
 	</div>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
@@ -225,6 +229,8 @@
 		<div class="block hire_medic"></div><button class="fire fire_medic" onclick='fire("medic")'>Fire 1</button><br>
 		<div class="block hire_bersek"></div><button class="fire fire_bersek" onclick='fire("bersek")'>Fire 1</button><br>
 		<div class="block hire_warelephant"></div><button class="fire fire_warelephant" onclick='fire("warelephant")'>Fire 1</button><br>
+		<div class="block hire_musketeer"></div><button class="fire fire_musketeer" onclick='fire("musketeer")'>Fire 1</button><br><br>
+
 		<div class="block expedition"></div><br>
 		<div class="encounter"></div><br>
 		<div class="expeditionresult"></div><br>
@@ -403,6 +409,21 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.6.2</b>
+        <ul>
+        <li>New military tech</li>
+        <li>New item - muskets</li>
+        <li>New military unit - musketeers</li>
+        <li>Musketeers need one round to reload, if you run out of ammo, they stop firing.</li>
+        <li>They require less resources than normal for they attack power</li>
+        <li>Fixed some dark theme bugs</li>
+        </ul>
+         <b>V 0.6.1</b>
+        <ul>
+        <li>New military tech</li>
+        <li>New craft - Ammo</li>
+        <li>Now the game remembers the theme selected</li>
+        </ul>
          <b>V 0.6.0</b>
         <ul>
         <li>New neutral tech</li>
@@ -786,6 +807,7 @@
 	$(".hire_medic").click(function() {hire("medic")});
 	$(".hire_bersek").click(function() {hire("bersek")});
 	$(".hire_warelephant").click(function() {hire("warelephant")});
+	$(".hire_musketeer").click(function() {hire("musketeer")});
 
 	$(".hire_galley").click(function() {hire("galley")});
 	$(".hire_galleon").click(function() {hire("galleon")});
@@ -867,6 +889,8 @@
 	$(".tech_explosives").click(function() {research("explosives")});
 	$(".tech_safes").click(function() {research("safes")});
 	$(".tech_packaging").click(function() {research("packaging")});
+	$(".tech_ammunition").click(function() {research("ammunition")});
+	$(".tech_gunnery").click(function() {research("gunnery")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -884,6 +908,8 @@
 	$(".craft_frame").click(function() {crafting("frame")});
 	$(".craft_brick").click(function() {crafting("brick")});
 	$(".craft_gunpowder").click(function() {crafting("gunpowder")});
+	$(".craft_ammo").click(function() {crafting("ammo")});
+	$(".craft_musket").click(function() {crafting("musket")});
 
 	$(".expedition").click(function() {expedition()});
         
@@ -966,13 +992,24 @@ fillDeal();
 
 function darktheme() {
     $("#estilo").attr("href", "css/darktheme.css");
+    bonus["theme"]="dark";
 }
 function cleartheme() {
+    $("#estilo").attr("href", "css/style.css");
+    bonus["theme"]="clear";
+}
+
+</script>
+<script>
+
+if(bonus["theme"]=="dark"){
+    $("#estilo").attr("href", "css/darktheme.css");
+}
+if(bonus["theme"]=="clear"){
     $("#estilo").attr("href", "css/style.css");
 }
 
 </script>
-
 
 <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
 <a href="http://www.histats.com" target="_blank" title="acesso" ><script  type="text/javascript" >

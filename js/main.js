@@ -44,7 +44,8 @@ bonus["shipspeed"]=0;
 bonus["shiphp"]=0;
 bonus["shippower"]=0;
 bonus["shipcargo"]=0;
-bonus["warpcost"]=0
+bonus["warpcost"]=0;
+bonus["theme"]=0;
 
 var buildings=new Array();
 
@@ -181,6 +182,10 @@ technologies["insecticides"]=0
 technologies["explosives"]=0
 technologies["safes"]=0
 technologies["packaging"]=0
+technologies["ammunition"]=0
+technologies["gunnery"]=0
+
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -198,6 +203,7 @@ people["knight"]=0
 people["medic"]=0
 people["bersek"]=0
 people["warelephant"]=0
+people["musketeer"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -214,6 +220,7 @@ people["fireship"]=0
 var craft=new Array();
 
 craft["coin"]=0
+craft["ammo"]=0
 craft["token"]=0
 craft["chest"]=0
 craft["bottle"]=0
@@ -228,6 +235,7 @@ craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
 craft["greatsword"]=0
+craft["musket"]=0
 craft["armor"]=0
 craft["gunpowder"]=0
 craft["horse"]=0
@@ -435,6 +443,7 @@ function expedition(){
 	power+=people["medic"]*1
 	power+=people["bersek"]*80
 	power+=people["warelephant"]*100
+	power+=people["musketeer"]*75
 
 	foodcost=power*2
 	watercost=power
@@ -585,6 +594,7 @@ function expedition(){
 			hp+=people["medic"]*50
 			hp+=people["bersek"]*100
 			hp+=people["warelephant"]*1200
+			hp+=people["musketeer"]*400
 
 			hp=hp*(bonus["hp"]+1)
 
@@ -597,7 +607,8 @@ function expedition(){
 			burst=burst*(bonus["power"]+1)
 
 			power-=people["warelephant"]*25
-
+			power+=people["musketeer"]*25
+			
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
 
 			enemy["reward"]=0;
@@ -670,6 +681,8 @@ function fight(){
 
 	disobey=people["warelephant"]*100*(bonus["power"]+1)
 
+	reload=people["musketeer"]*200*(bonus["power"]+1)
+
 	power=power*(bonus["power"]+1)
 
 	hp=0;
@@ -679,6 +692,7 @@ function fight(){
 	hp+=people["medic"]*50
 	hp+=people["bersek"]*100
 	hp+=people["warelephant"]*1200
+	hp+=people["musketeer"]*400
 
 	hp=hp*(bonus["hp"]+1)
 
@@ -715,6 +729,7 @@ function fight(){
 		if(i==0 && burst>0){
 		dmg1+=burst+(Math.random()*(burst/4))-(Math.random()*(burst/4));
 		}
+
 		combatlog+="Round "+(i+1)+"<br>"
 		if(disobey>0 && Math.random()>0.75){
 		combatlog+="The elephants refused to attack.<br>"
@@ -722,6 +737,19 @@ function fight(){
 		else
 		{
 		dmg1+=disobey+(Math.random()*(disobey/4))-(Math.random()*(disobey/4));
+		}
+		if(i%2==0 && reload>0){
+		dmg1+=reload+(Math.random()*(reload/4))-(Math.random()*(reload/4));
+		}
+		else if(craft["ammo"]>=people["musketeer"])
+		{
+		combatlog+="The musketeers are reloading.<br>"
+		craft["ammo"]-=people["musketeer"]
+		combatlog+="-"+people["musketeer"]+" ammo <br>"
+		}
+		else
+		{
+		combatlog+="You ran out of ammo.<br>"
 		}
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
@@ -771,6 +799,12 @@ function fight(){
 				people["warelephant"]-=losses;
 				population-=losses;
 				combatlog+="You lose "+losses+" war elephant<br>"
+			}
+			if(people["musketeer"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["musketeer"]-1))+1
+				people["musketeer"]-=losses;
+				population-=losses;
+				combatlog+="You lose "+losses+" musketeers<br>"
 			}
 			break;
 		}
@@ -1107,6 +1141,44 @@ function crafting(b){
 				craft["bronze"]-=bronzecost
 
 				craft["gunpowder"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="ammo"){
+
+
+
+			ironcost=50;
+			gunpowdercost=10;
+
+
+			if (items["iron"]>=ironcost && craft["gunpowder"]>=gunpowdercost){
+
+				items["iron"]-=ironcost;
+				craft["gunpowder"]-=gunpowdercost
+
+
+				craft["ammo"]+=500+(bonus["craft"]*500);
+
+			}
+
+		}
+		else if (b=="musket"){
+
+			woodcost=500;
+			ironcost=500;
+			steelcost=300;
+
+
+
+			if (items["iron"]>=ironcost && items["wood"]>=woodcost && items["steel"]>=steelcost){
+
+				items["iron"]-=ironcost;
+				items["wood"]-=woodcost
+				items["steel"]-=steelcost
+
+				craft["musket"]+=1+bonus["craft"];
 
 			}
 
@@ -2682,6 +2754,77 @@ function research(b){
 		}
 
 	}
+	else if (b=="ammunition" && technologies["ammunition"]==0){
+
+
+		gunpowdercost=50;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["gunpowder"]>=gunpowdercost){
+
+
+			craft["gunpowder"]-=gunpowdercost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["ammunition"]++
+			$(".craft_ammo").show()
+			unlocked[".craft_ammo"]=1;
+
+		}
+
+	}
+	else if (b=="ammunition" && technologies["ammunition"]==0){
+
+
+		gunpowdercost=50;
+		knowledgecost=1200;
+
+
+		if (items["knowledge"]>=knowledgecost && craft["gunpowder"]>=gunpowdercost){
+
+
+			craft["gunpowder"]-=gunpowdercost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["ammunition"]++
+			$(".craft_ammo").show()
+			unlocked[".craft_ammo"]=1;
+
+		}
+
+	}
+	else if (b=="gunnery" && technologies["gunnery"]==0){
+
+
+		ironcost=500;
+		ammocost=1000;
+		knowledgecost=1200;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["iron"]>=ironcost && craft["ammo"]>=ammocost){
+
+			items["gunpowder"]-=ironcost;
+			craft["gunpowder"]-=gunpowdercost;
+			items["knowledge"]-=knowledgecost;
+
+
+
+			technologies["gunnery"]++
+			$(".craft_musket").show()
+			unlocked[".craft_musket"]=1;
+			$(".hire_musketeer").show()
+			unlocked[".hire_musketeer"]=1;
+		}
+
+	}
+
 setTimeout(function(){
 
 if(techvisible==0){
@@ -2887,6 +3030,24 @@ function hire(b){
 				population++
 				$(".fire_warelephant").show()
 				unlocked[".fire_warelephant"]=1;
+			}
+
+		}
+		else if (b=="musketeer"){
+
+			coincost=100;
+			musketcost=1;
+			armorcost=1;
+
+			if (craft["coin"]>=coincost && craft["musket"]>=musketcost && craft["armor"]>=armorcost){
+
+				craft["coin"]-=coincost;
+				craft["musket"]-=musketcost;
+				craft["armor"]-=armorcost;
+				people["musketeer"]+=1
+				population++
+				$(".fire_musketeer").show()
+				unlocked[".fire_musketeer"]=1;
 			}
 
 		}
@@ -4396,6 +4557,28 @@ $(".hire_warelephant").attr('tooltip4', "Water consumption: -2.00/s");
 $(".hire_warelephant").attr('tooltip5', 'Morale production +0.02/s');
 $(".hire_warelephant").attr('tooltip6', 'Attack: 100 Hp: 1200');
 $(".hire_warelephant").attr('tooltip7', '25% chance to disobey and not attack');
+
+
+coincost=100;
+musketcost=1;
+armorcost=1;
+if(craft["musk"]<musketcost || craft["armor"]<armorcost || craft["coin"]<coincost || population>=maximums["population"]){
+	$(".hire_musketeer").addClass("unavailable")
+}
+else
+{
+	$(".hire_musketeer").removeClass("unavailable")
+}
+$(".hire_musketeer").html("Musketeer ("+people["musketeer"]+")");
+$(".hire_musketeer").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_musketeer").attr('tooltip2', 'Armor: '+ parseFloat(craft["armor"]).toFixed(2)+" / "+parseFloat(armorcost).toFixed(2))
+$(".hire_musketeer").attr('tooltip3', 'Musket: '+ parseFloat(craft["musket"]).toFixed(2)+" / "+parseFloat(musketcost).toFixed(2))
+$(".hire_musketeer").attr('tooltip4', "Food consumption: -0.40/s");
+$(".hire_musketeer").attr('tooltip5', 'Morale production +0.05/s');
+$(".hire_musketeer").attr('tooltip6', 'Attack: 200 Hp: 400');
+$(".hire_musketeer").attr('tooltip7', 'They need to reload between attacks');
+
+
 //Ships
 woodcost=20000;
 plankcost=200;
@@ -5647,6 +5830,47 @@ $(".tech_safes").html("Safes" + (technologies["safes"] >0 ? " (researched)" : ""
 $(".tech_safes").attr('tooltip', 'Lock: '+ parseFloat(craft["lock"]).toFixed(2)+" / "+parseFloat(lockcost).toFixed(2))
 $(".tech_safes").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_safes").attr('tooltip4', "Increases gold storage by 30");
+
+
+		gunpowdercost=50;
+		knowledgecost=1200;
+
+if(items["knowledge"]<knowledgecost || craft["gunpowder"]<gunpowdercost){
+	$(".tech_ammunition").addClass("unavailable")
+}
+else
+{
+	$(".tech_ammunition").removeClass("unavailable")
+}
+$(".tech_ammunition").addClass((technologies["ammunition"] >0 ? "researched" : ""))
+$(".tech_ammunition").html("Ammunition" + (technologies["ammunition"] >0 ? " (researched)" : ""));
+$(".tech_ammunition").attr('tooltip', 'Gunpowder: '+ parseFloat(craft["gunpowder"]).toFixed(2)+" / "+parseFloat(gunpowdercost).toFixed(2))
+$(".tech_ammunition").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_ammunition").attr('tooltip4', "Allows you to craft ammo");
+
+
+ironcost=500;
+ammocost=1000;
+knowledgecost=1200;
+if(items["knowledge"]<knowledgecost || craft["ammo"]<ammocost || items["iron"]<ironcost){
+	$(".tech_gunnery").addClass("unavailable")
+}
+else
+{
+	$(".tech_gunnery").removeClass("unavailable")
+}
+$(".tech_gunnery").addClass((technologies["gunnery"] >0 ? "researched" : ""))
+$(".tech_gunnery").html("Gunnery" + (technologies["gunnery"] >0 ? " (researched)" : ""));
+$(".tech_gunnery").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_gunnery").attr('tooltip2', 'Ammo: '+ parseFloat(craft["ammo"]).toFixed(2)+" / "+parseFloat(ammocost).toFixed(2))
+$(".tech_gunnery").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_gunnery").attr('tooltip4', "Allows you to craft musket and hire musketeers");
+
+
+
+
+
+
 //Research
 
 
@@ -5906,6 +6130,44 @@ $(".craft_gunpowder").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"]).t
 $(".craft_gunpowder").attr('tooltip4', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".craft_gunpowder").attr('tooltip5', "A powder used for explosives and ammunition.");
 
+ironcost=50;
+gunpowdercost=10;
+if(items["iron"]<ironcost || craft["gunpowder"]<gunpowdercost){
+	$(".craft_ammo").addClass("unavailable")
+}
+else
+{
+	$(".craft_ammo").removeClass("unavailable")
+}
+$(".craft_ammo").html("Ammo");
+$(".craft_ammo").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".craft_ammo").attr('tooltip2', 'Gunpowder: '+ parseFloat(craft["gunpowder"]).toFixed(2)+" / "+parseFloat(gunpowdercost).toFixed(2))
+$(".craft_ammo").attr('tooltip4', "Iron shells and gunpowder, x500 pack");
+
+
+
+
+woodcost=500;
+ironcost=500;
+steelcost=300;
+
+if(items["wood"]<woodcost || items["iron"]<ironcost || items["steel"]<steelcost){
+	$(".craft_musket").addClass("unavailable")
+}
+else
+{
+	$(".craft_musket").removeClass("unavailable")
+}
+$(".craft_musket").html("Musket");
+$(".craft_musket").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".craft_musket").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".craft_musket").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_musket").attr('tooltip5', "A rudimentary fire weapon.");
+
+
+
+
+
 //Leaders
 
 if(bonus["title"]<1){
@@ -6012,6 +6274,7 @@ power+=people["knight"]*25
 power+=people["medic"]*1
 power+=people["bersek"]*80
 power+=people["warelephant"]*100
+power+=people["musketeer"]*75
 
 hp=0;
 hp+=people["pikeman"]*30
@@ -6020,6 +6283,7 @@ hp+=people["knight"]*200
 hp+=people["medic"]*50
 hp+=people["bersek"]*100
 hp+=people["warelephant"]*1200
+hp+=people["musketeer"]*400
 
 healing=0
 healing+=people["medic"]*10
@@ -6027,6 +6291,8 @@ healing+=people["medic"]*10
 foodcost=power*2
 watercost=power
 moralecost=power/5
+
+power+=people["musketeer"]*125
 
 power=power*(bonus["power"]+1)
 hp=hp*(bonus["hp"]+1)
@@ -6256,6 +6522,11 @@ if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["wareleph
 	consumption["water"]+=people["warelephant"]/2;
 	production["morale"]+=people["warelephant"]/200;
 }
+if (items["food"]>=people["musketeer"]/10)
+{
+	consumption["food"]+=people["musketeer"]/10;
+	production["morale"]+=people["musketeer"]*0.0125;
+}
 
 if (bonus["invest"]>=0.025)
 {
@@ -6467,7 +6738,7 @@ prestige = update(prestige,JSON.parse(result[10]));
 buildstatus = update(prestige,JSON.parse(result[11]));
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]
 
 
 
@@ -6527,7 +6798,7 @@ function load(){
 		}
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]
 
 
 

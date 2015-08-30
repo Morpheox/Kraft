@@ -750,6 +750,7 @@ function fight(){
 		else
 		{
 		combatlog+="You ran out of ammo.<br>"
+		reload=0;
 		}
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"

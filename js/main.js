@@ -731,14 +731,14 @@ function fight(){
 		}
 
 		combatlog+="Round "+(i+1)+"<br>"
-		if(disobey>0 && Math.random()>0.75 && craft["ammo"]>=people["musketeer"]){
+		if(disobey>0 && Math.random()>0.75){
 		combatlog+="The elephants refused to attack.<br>"
 		}
 		else
 		{
 		dmg1+=disobey+(Math.random()*(disobey/4))-(Math.random()*(disobey/4));
 		}
-		if(i%2==0 && reload>0){
+		if(i%2!=0 && reload>0){
 		dmg1+=reload+(Math.random()*(reload/4))-(Math.random()*(reload/4));
 		}
 		else if(craft["ammo"]>=people["musketeer"])

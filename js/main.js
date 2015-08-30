@@ -6335,7 +6335,7 @@ function trade(b){
 		tradewood=600*(bonus["trade"]+1)
 		trademineral=500*(bonus["trade"]+1)
 		tradefood=400*(bonus["trade"]+1)
-		tradesand=400*(bonus["sand"]+1)
+		tradesand=20*(bonus["trade"]+1)
 		if(b=="wood"){
 			items["wood"]+=Math.round(tradewood)
 			craft["coin"]-=1

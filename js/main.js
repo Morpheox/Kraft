@@ -608,7 +608,7 @@ function expedition(){
 
 			power-=people["warelephant"]*25
 			power+=people["musketeer"]*25
-			
+
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
 
 			enemy["reward"]=0;
@@ -6142,7 +6142,7 @@ else
 $(".craft_ammo").html("Ammo");
 $(".craft_ammo").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".craft_ammo").attr('tooltip2', 'Gunpowder: '+ parseFloat(craft["gunpowder"]).toFixed(2)+" / "+parseFloat(gunpowdercost).toFixed(2))
-$(".craft_ammo").attr('tooltip4', "Iron shells and gunpowder, x500 pack");
+$(".craft_ammo").attr('tooltip4', "Iron shells and gunpowder x500");
 
 
 

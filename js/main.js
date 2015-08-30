@@ -731,7 +731,7 @@ function fight(){
 		}
 
 		combatlog+="Round "+(i+1)+"<br>"
-		if(disobey>0 && Math.random()>0.75){
+		if(disobey>0 && Math.random()>0.75 && craft["ammo"]>=people["musketeer"]){
 		combatlog+="The elephants refused to attack.<br>"
 		}
 		else

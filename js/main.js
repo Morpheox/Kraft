@@ -607,7 +607,7 @@ function expedition(){
 			burst=burst*(bonus["power"]+1)
 
 			power-=people["warelephant"]*25
-			power+=people["musketeer"]*25
+			power+=people["musketeer"]*50
 
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
 

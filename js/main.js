@@ -738,16 +738,16 @@ function fight(){
 		{
 		dmg1+=disobey+(Math.random()*(disobey/4))-(Math.random()*(disobey/4));
 		}
-		if(i%2!=0 && reload>=0){
+		if(i%2!=0 && reload>0){
 		dmg1+=reload+(Math.random()*(reload/4))-(Math.random()*(reload/4));
 		}
-		else if(craft["ammo"]>=people["musketeer"])
+		else if(reload>0 && craft["ammo"]>=people["musketeer"])
 		{
 		combatlog+="The musketeers are reloading.<br>"
 		craft["ammo"]-=people["musketeer"]
 		combatlog+="-"+people["musketeer"]+" ammo <br>"
 		}
-		else
+		else if(reload>0)
 		{
 		combatlog+="You ran out of ammo.<br>"
 		reload=0;

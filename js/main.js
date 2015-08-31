@@ -184,7 +184,7 @@ technologies["safes"]=0
 technologies["packaging"]=0
 technologies["ammunition"]=0
 technologies["gunnery"]=0
-
+technologies["wisdom"]=0
 
 
 var people=new Array();
@@ -212,6 +212,7 @@ people["elisia"]=0
 people["xochiquetzal"]=0
 people["warmuk"]=0
 people["foehn"]=0
+people["alfear"]=0
 
 people["galley"]=0
 people["galleon"]=0
@@ -315,7 +316,9 @@ function reespec(){
 		bonus["shippower"]-=0.10*people["foehn"]
 		bonus["shiphp"]-=0.10*people["foehn"]
 		bonus["shipcargo"]-=0.15*people["foehn"]
-		bonus["title"]+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+people["foehn"]
+		bonus["knowledge"]-=0.10*people["alfear"]
+		maximums["knowledge"]-=100*people["alfear"]
+		bonus["title"]+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+people["foehn"]+people["alfear"]
 		people["sucellus"]=0
 		people["eredal"]=0
 		people["khrysos"]=0
@@ -422,7 +425,17 @@ function lead(b){
 
 
 		}
+		else if (b=="alfear"){
 
+			bonus["knowledge"]+=0.10;
+			maximums["knowledge"]+=100;
+
+
+			bonus["title"]--
+			people["alfear"]+=1;
+
+
+		}
 
 
 
@@ -2511,6 +2524,27 @@ function research(b){
 
 			$(".leader_foehn").show()
 			unlocked[".leader_foehn"]=1;
+
+		}
+
+	}
+	else if (b=="wisdom" && technologies["wisdom"]==0){
+
+
+
+		knowledgecost=1300;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+
+			items["knowledge"]-=knowledgecost;
+
+			technologies["wisdom"]++
+
+			$(".leader_alfear").show()
+			unlocked[".leader_alfear"]=1;
 
 		}
 
@@ -5689,7 +5723,23 @@ $(".tech_seacaptain").html("Sea captain" + (technologies["seacaptain"] >0 ? " (r
 $(".tech_seacaptain").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_seacaptain").attr('tooltip5', "Unlocks a new leader.");
+$(".tech_seacaptain").attr('tooltip5', "Unlocks a new  leader.");
+
+knowledgecost=1300;
+if(items["knowledge"]<knowledgecost){
+	$(".tech_wisdom").addClass("unavailable")
+}
+else
+{
+	$(".tech_wisdom").removeClass("unavailable")
+}
+$(".tech_wisdom").addClass((technologies["wisdom"] >0 ? "researched" : ""))
+$(".tech_wisdom").html("Wisdom" + (technologies["wisdom"] >0 ? " (researched)" : ""));
+$(".tech_wisdom").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_wisdom").attr('tooltip3', "Unlocks a new leader.");
+
+
+
 
 framecost=20;
 blockcost=3000;
@@ -6179,6 +6229,7 @@ if(bonus["title"]<1){
 	$(".leader_xochiquetzal").addClass("unavailable")
 	$(".leader_warmuk").addClass("unavailable")
 	$(".leader_foehn").addClass("unavailable")
+	$(".leader_alfear").addClass("unavailable")
 }
 else
 {
@@ -6189,6 +6240,8 @@ else
 	$(".leader_xochiquetzal").removeClass("unavailable")
 	$(".leader_warmuk").removeClass("unavailable")
 	$(".leader_foehn").removeClass("unavailable")
+	$(".leader_alfear").removeClass("unavailable")
+
 }
 
 $(".leader_sucellus").html("Sucellus (lv:" + people["sucellus"]+")");
@@ -6227,6 +6280,10 @@ $(".leader_foehn").attr('tooltip2', 'Increments ships structure by 10%')
 $(".leader_foehn").attr('tooltip3', 'Increments ships cargo capacity by 15%')
 $(".leader_foehn").attr('tooltip5', "'Take what you can, give nothing back.'");
 
+$(".leader_alfear").html("Alfear (lv:" + people["alfear"]+")");
+$(".leader_alfear").attr('tooltip', 'Increments knowledge production by 10%')
+$(".leader_alfear").attr('tooltip2', 'Increments knowledge maximum by 100')
+$(".leader_alfear").attr('tooltip4', "'For even the very wise cannot see all ends.''");
 
 treasurecost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
 if(prestige["treasure"]<treasurecost){

@@ -104,7 +104,7 @@ var legacyadd=0;
 legacyadd+=maximums["population"]/10;
 legacyadd+=maximums["ships"];
 legacyadd+=craft["diamond"];
-legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+people["foehn"]+bonus["title"]
+legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"]+people["xochiquetzal"]+people["warmuk"]+people["foehn"]+people["alfear"]+bonus["title"]
 legacyadd+=(bonus["economy"]+bonus["science"]+bonus["military"])/1000
 legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
 

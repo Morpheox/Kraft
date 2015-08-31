@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.6.2 beta</title>
+	<title>Keep Craft v0.6.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.6.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.6.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -190,6 +190,7 @@
 			<div class="block tech_castiron"></div>
 			<div class="block tech_explosives"></div>
 			<div class="block tech_safes"></div>
+			<div class="block tech_wisdom"></div>
 			<div class="block tech_ammunition"></div>
 			<div class="block tech_gunnery"></div>
 			<div class="block tech_packaging"></div>
@@ -277,6 +278,7 @@
 	<div class="block leader_xochiquetzal"></div><br>
 	<div class="block leader_warmuk"></div><br>
 	<div class="block leader_foehn"></div><br>
+	<div class="block leader_alfear"></div><br>
 	<br><br>
 	<div class="block reespec"></div><br>
 
@@ -409,6 +411,12 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.6.3</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New leader - Alfear</li>
+        <li>Named after Alfear for his work on the wiki</li>
+        </ul>
         <b>V 0.6.2</b>
         <ul>
         <li>New military tech</li>
@@ -891,6 +899,7 @@
 	$(".tech_packaging").click(function() {research("packaging")});
 	$(".tech_ammunition").click(function() {research("ammunition")});
 	$(".tech_gunnery").click(function() {research("gunnery")});
+	$(".tech_wisdom").click(function() {research("wisdom")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -925,6 +934,7 @@
     $(".leader_xochiquetzal").click(function() {lead("xochiquetzal")});
     $(".leader_warmuk").click(function() {lead("warmuk")});
     $(".leader_foehn").click(function() {lead("foehn")});
+    $(".leader_alfear").click(function() {lead("alfear")});
 
     $(".reespec").click(function() {reespec()});
 

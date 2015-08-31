@@ -236,5 +236,11 @@ function researchunlock(){
 		$(".tech_packaging").show()
 		unlocked[".tech_packaging"]=1;
 	}
+
+	if(bonus["science"]>=16000 && unlocked[".tech_wisdom"]!=1){
+		$(".tech_wisdom").show()
+		unlocked[".tech_wisdom"]=1;
+	}
+
 }
 

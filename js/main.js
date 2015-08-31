@@ -326,6 +326,7 @@ function reespec(){
 		people["xochiquetzal"]=0
 		people["warmuk"]=0
 		people["foehn"]=0
+		people["alfear"]=0
 		bonus["reespeccost"]+=1;
 	}
 }

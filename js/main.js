@@ -2690,9 +2690,9 @@ function research(b){
 		
 
 
-		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coin){
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
 
-			craft["coin"]-=coin
+			craft["coin"]-=coincost
 			items["knowledge"]-=knowledgecost;
 
 			technologies["commerce"]++
@@ -2811,8 +2811,8 @@ function research(b){
 
 		if (items["knowledge"]>=knowledgecost && items["iron"]>=ironcost && craft["ammo"]>=ammocost){
 
-			items["gunpowder"]-=ironcost;
-			craft["gunpowder"]-=gunpowdercost;
+			craft["ammo"]-=ammocost;
+			items["iron"]-=ironcost;
 			items["knowledge"]-=knowledgecost;
 
 

@@ -4563,7 +4563,7 @@ $(".hire_warelephant").attr('tooltip7', '25% chance to disobey and not attack');
 coincost=100;
 musketcost=1;
 armorcost=1;
-if(craft["musk"]<musketcost || craft["armor"]<armorcost || craft["coin"]<coincost || population>=maximums["population"]){
+if(craft["musket"]<musketcost || craft["armor"]<armorcost || craft["coin"]<coincost || population>=maximums["population"]){
 	$(".hire_musketeer").addClass("unavailable")
 }
 else

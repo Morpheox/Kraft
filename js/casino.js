@@ -99,10 +99,10 @@ var locks=0;
 var opened=0;
 function openbox(x,y,z){
 
-if(arrprice[x][y]=="opened"){
+if(x<0 || y<0 || x>8 || y>8){
     return
 }
-if(x<0 || y<0 || x>8 || y>8){
+if(arrprice[x][y]=="opened"){
     return
 }
 if(!isNaN(arrprice[x][y])){

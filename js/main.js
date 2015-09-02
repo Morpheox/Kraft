@@ -6014,7 +6014,7 @@ $(".tech_windward").html("Windward" + (technologies["windward"] >0 ? " (research
 $(".tech_windward").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_windward").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_windward").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_windward").attr('tooltip4', "Allows you to build caravels.");
+$(".tech_windward").attr('tooltip5', "Allows you to build caravels.");
 
 
 //Research

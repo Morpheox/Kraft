@@ -242,5 +242,10 @@ function researchunlock(){
 		unlocked[".tech_wisdom"]=1;
 	}
 
+	if(bonus["science"]>=25000 && unlocked[".tech_windward"]!=1){
+		$(".tech_windward").show()
+		unlocked[".tech_windward"]=1;
+	}
 }
+
 

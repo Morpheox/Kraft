@@ -185,7 +185,7 @@ technologies["packaging"]=0
 technologies["ammunition"]=0
 technologies["gunnery"]=0
 technologies["wisdom"]=0
-
+technologies["windward"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -217,6 +217,7 @@ people["alfear"]=0
 people["galley"]=0
 people["galleon"]=0
 people["fireship"]=0
+people["caravel"]=0
 
 var craft=new Array();
 
@@ -2860,7 +2861,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="windward" && technologies["windward"]==0){
 
+
+		woodcost=200000
+		plankcost=10000
+		knowledgecost=1500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["plank"]>=plankcost && items["wood"]>=woodcost){
+
+			craft["plank"]-=plankcost
+			items["wood"]-=woodcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["windward"]++
+			$(".hire_caravel").show()
+			unlocked[".hire_caravel"]=1;
+
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3183,6 +3205,32 @@ function hire(b){
 			}
 
 		}
+		if (b=="caravel"){
+
+			woodcost=100000;
+			ironcost=500;
+			plankcost=1000;
+			
+
+
+
+			if (craft["plank"]>=plankcost && items["iron"]>=ironcost && items["wood"]>=woodcost){
+
+				craft["plank"]-=plankcost;
+				items["wood"]-=woodcost;
+				items["iron"]-=ironcost;
+
+				people["caravel"]+=1;
+				ships++
+
+				$(".salvage_caravel").show()
+				unlocked[".salvage_caravel"]=1;
+
+
+
+			}
+
+		}
 	}
 
 
@@ -3225,6 +3273,17 @@ function salvage(b){
 			if(people["fireship"]<1){
 				$(".salvage_fireship").hide()
 				unlocked[".salvage_fireship"]=1;
+			}
+		}
+		if(b=="caravel"){
+
+			craft["plank"]+=200+(Math.random()*300);
+			items["wood"]+=5000+(Math.random()*20000);
+			items["steel"]+=100+(Math.random()*50);
+
+			if(people["caravel"]<1){
+				$(".salvage_caravel").hide()
+				unlocked[".salvage_caravel"]=1;
 			}
 		}
 	}
@@ -4668,6 +4727,26 @@ $(".hire_fireship").attr('tooltip4', "Power: 0  Structure: 4,000");
 $(".hire_fireship").attr('tooltip5', 'Cargo capacity: 0  Crew: 3');
 $(".hire_fireship").attr('tooltip6', 'Throws fire that deal 100 damage per round');
 $(".hire_fireship").attr('tooltip7', 'This effect stacks');
+
+plankcost=1000;
+woodcost=100000;
+ironcost=500;
+if(craft["plank"]<plankcost || items["wood"]<woodcost || items["iron"]<ironcost || ships>=maximums["ships"]){
+	$(".hire_caravel").addClass("unavailable")
+}
+else
+{
+	$(".hire_caravel").removeClass("unavailable")
+}
+$(".hire_caravel").html("Caravel ("+people["caravel"]+")");
+$(".hire_caravel").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".hire_caravel").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".hire_caravel").attr('tooltip3', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".hire_caravel").attr('tooltip4', "Power: 200  Structure: 6,000");
+$(".hire_caravel").attr('tooltip5', 'Cargo capacity: 10.000  Crew: 3');
+$(".hire_caravel").attr('tooltip6', 'Throws chains that lower enemy attack by 50 per round');
+$(".hire_caravel").attr('tooltip7', 'Reduces trade mission time slightly');
+
 //Technologies
 
 coppercost=1;
@@ -5919,8 +5998,23 @@ $(".tech_gunnery").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]
 $(".tech_gunnery").attr('tooltip4', "Allows you to craft musket and hire musketeers");
 
 
+woodcost=200000
+plankcost=10000
+knowledgecost=1500;
 
-
+if(items["knowledge"]<knowledgecost || craft["plank"]<plankcost || items["wood"]<woodcost){
+	$(".tech_windward").addClass("unavailable")
+}
+else
+{
+	$(".tech_windward").removeClass("unavailable")
+}
+$(".tech_windward").addClass((technologies["windward"] >0 ? "researched" : ""))
+$(".tech_windward").html("Windward" + (technologies["windward"] >0 ? " (researched)" : ""));
+$(".tech_windward").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".tech_windward").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
+$(".tech_windward").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_windward").attr('tooltip4', "Allows you to build caravels.");
 
 
 //Research
@@ -6802,7 +6896,7 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 
 
 
-		ships=people["galley"]+people["galleon"]+people["fireship"]
+		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{
@@ -6862,7 +6956,7 @@ function load(){
 
 
 
-		ships=people["galley"]+people["galleon"]+people["fireship"]
+		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{

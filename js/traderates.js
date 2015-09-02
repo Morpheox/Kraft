@@ -94,9 +94,11 @@ function refreshtrade(){
 		var cost=0;
 		cost+=people["galley"]*1
 		cost+=people["galleon"]*10
+		cost+=people["caravel"]*3
 		var crew=0;
 		crew+=people["galley"]*2
 		crew+=people["galleon"]*5
+		crew+=people["caravel"]*3
 		$(".ratiotrade").html(traderatio[$(".selgive").val()][$(".selget").val()])
 		$(".traderecieve").html("You get "+intToString(amountget)+" "+$(".selget").val()+"<br><br>Supplies: "+cost+" Crew: "+crew)
 
@@ -110,6 +112,7 @@ function maxtrade(){
 
 	maxresources+=people["galley"]*5000*(bonus["shipcargo"]+1)
 	maxresources+=people["galleon"]*25000*(bonus["shipcargo"]+1)
+	maxresources+=people["caravel"]*10000*(bonus["shipcargo"]+1)
 
 	resources=items[$(".selgive").val()]
 
@@ -139,6 +142,7 @@ function tradeship(){
 
 	maxresources+=people["galley"]*5000*(bonus["shipcargo"]+1)
 	maxresources+=people["galleon"]*25000*(bonus["shipcargo"]+1)
+	maxresources+=people["caravel"]*10000*(bonus["shipcargo"]+1)
 
 	resources=items[$(".selgive").val()]
 	resourcestrade=$(".tradeamount").val()
@@ -183,6 +187,7 @@ function tradeship(){
 	var cost=0;
 	cost+=people["galley"]*1
 	cost+=people["galleon"]*10
+	cost+=people["caravel"]*3
 	if (craft["supplies"]<cost){
 		$(".docklog").html("Not enough supplies for the mission.")
 		return;
@@ -191,6 +196,8 @@ function tradeship(){
 	var crew=0;
 	crew+=people["galley"]*2
 	crew+=people["galleon"]*5
+	crew+=people["caravel"]*3
+
 	if(people["sailor"]<crew){
 		$(".docklog").html("Not enough  crew to support the fleet.")
 		return;
@@ -198,7 +205,7 @@ function tradeship(){
 
 	craft["supplies"]-=cost;
 
-		trademission["time"]=300-bonus["shipspeed"];
+		trademission["time"]=Math.ceil((300-bonus["shipspeed"])/((people["caravel"]*0.05)+1));
 		trademission["get"]=amountget;
 		trademission["resourceget"]=$(".selget").val();
 
@@ -237,6 +244,8 @@ if(technologies["culturaltrade"]==1 && Math.random()>0.70){
 var gainings=0;
 gainings+=people["galley"]*15
 gainings+=people["galleon"]*50
+gainings+=people["caravel"]*20
+
 gainings=Math.random()*gainings
 docklog+=("While you were there, you also learnt some things about their culture, +"+intToString(gainings)+" knowledge<br>");
 items["knowledge"]+=gainings;

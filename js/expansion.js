@@ -55,6 +55,7 @@ crew=0
 crew+=people["galley"]*2;
 crew+=people["galleon"]*5;
 crew+=people["fireship"]*3;
+crew+=people["caravel"]*3;
 
 if(trademission["time"]>=1){
 	alert("Your ships are already on a mission")
@@ -72,14 +73,19 @@ if(crew>people["sailor"]){
 
 	power+=people["galley"]*150*(bonus["shippower"]+1)
 	power+=people["galleon"]*500*(bonus["shippower"]+1)
+	power+=people["caravel"]*200*(bonus["shippower"]+1)
 
 	hp=0;
 	hp+=people["galley"]*2000*(bonus["shiphp"]+1)
 	hp+=people["galleon"]*15000*(bonus["shiphp"]+1)
 	hp+=people["fireship"]*4000*(bonus["shiphp"]+1)
+	hp+=people["caravel"]*6000*(bonus["shiphp"]+1)
 
 	burn=0;
 	burn+=people["fireship"]*100*(bonus["shippower"]+1)
+
+	chains=0
+	chains+=people["caravel"]*50
 
 	power2=0;
 	power2+=enemyship["boat"]*50
@@ -104,8 +110,17 @@ if(crew>people["sailor"]){
 
 		combatlog+="Round "+(i+1)+"<br>"
 
+
 		combatlog+="Your ships deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy ships deal "+intToString(dmg2)+" damage<br>"
+		if(chains>0 && power2>0){
+			totalchains=chains+(Math.random()*(chains/3))-(Math.random()*(chains/3));
+			combatlog+="You incapacitate enemy ships for -"+intToString(totalchains)+" power<br>"
+			power2-=totalchains
+			if(power2<0){
+				power2=0;
+			}
+		}
 		if(burn>0){
 			totalburn+=burn+(Math.random()*(burn/3))-(Math.random()*(burn/3));
 			combatlog+="The enemy ships burn for "+intToString(totalburn)+" damage<br>"		
@@ -122,6 +137,7 @@ if(crew>people["sailor"]){
 			rewardplank+=Math.random()*people["galley"]*100
 			rewardplank+=Math.random()*people["galleon"]*500
 			rewardplank+=Math.random()*people["fireship"]*200
+			rewardplank+=Math.random()*people["caravel"]*250
 
 			rewardstructure+=Math.random()*people["galley"]*30
 			rewardstructure+=Math.random()*people["galleon"]*200
@@ -136,6 +152,7 @@ if(crew>people["sailor"]){
 			people["galley"]=0;
 			people["galleon"]=0;
 			people["fireship"]=0;
+			people["caravel"]=0;
 			ships=0;
 
 			break;

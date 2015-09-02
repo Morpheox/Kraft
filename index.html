@@ -194,6 +194,7 @@
 			<div class="block tech_ammunition"></div>
 			<div class="block tech_gunnery"></div>
 			<div class="block tech_packaging"></div>
+			<div class="block tech_windward"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -286,7 +287,8 @@
 	<div id="dock" class="dock tab-pane fade">
 	<div class="block hire_galley"></div><button class="fire salvage_galley" onclick='salvage("galley")'>Salvage 1</button><br>
 	<div class="block hire_galleon"></div><button class="fire salvage_galleon" onclick='salvage("galleon")'>Salvage 1</button><br>
-	<div class="block hire_fireship"></div><button class="fire salvage_fireship" onclick='salvage("fireship")'>Salvage 1</button><br><br>
+	<div class="block hire_fireship"></div><button class="fire salvage_fireship" onclick='salvage("fireship")'>Salvage 1</button><br>
+	<div class="block hire_caravel"></div><button class="fire salvage_caravel" onclick='salvage("caravel")'>Salvage 1</button><br><br>
 	<div class="tradesea">
 	Trade mission<br>
 	Amount: <input class="tradeamount" type="number" value="1"></input><button class="maxtrade" onclick="maxtrade()">MAX</button><br><br>
@@ -820,6 +822,7 @@
 	$(".hire_galley").click(function() {hire("galley")});
 	$(".hire_galleon").click(function() {hire("galleon")});
 	$(".hire_fireship").click(function() {hire("fireship")});
+	$(".hire_caravel").click(function() {hire("caravel")});
 
 	$(".tech_coppertools").click(function() {research("coppertools")});
 	$(".tech_pickaxe").click(function() {research("pickaxe")});
@@ -900,6 +903,8 @@
 	$(".tech_ammunition").click(function() {research("ammunition")});
 	$(".tech_gunnery").click(function() {research("gunnery")});
 	$(".tech_wisdom").click(function() {research("wisdom")});
+	$(".tech_windward").click(function() {research("windward")});
+
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

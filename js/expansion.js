@@ -85,7 +85,7 @@ if(crew>people["sailor"]){
 	burn+=people["fireship"]*100*(bonus["shippower"]+1)
 
 	chains=0
-	chains+=people["caravel"]*50
+	chains+=people["caravel"]*75
 
 	power2=0;
 	power2+=enemyship["boat"]*50

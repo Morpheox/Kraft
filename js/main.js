@@ -4744,7 +4744,7 @@ $(".hire_caravel").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixe
 $(".hire_caravel").attr('tooltip3', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".hire_caravel").attr('tooltip4', "Power: 200  Structure: 6,000");
 $(".hire_caravel").attr('tooltip5', 'Cargo capacity: 10.000  Crew: 3');
-$(".hire_caravel").attr('tooltip6', 'Throws chains that lower enemy attack by 50 per round');
+$(".hire_caravel").attr('tooltip6', 'Throws chains that lower enemy attack by 75 per round');
 $(".hire_caravel").attr('tooltip7', 'Reduces trade mission time slightly');
 
 //Technologies

@@ -46,6 +46,7 @@ bonus["shippower"]=0;
 bonus["shipcargo"]=0;
 bonus["warpcost"]=0;
 bonus["theme"]=0;
+bonus["exprew"]=0;
 
 var buildings=new Array();
 
@@ -186,6 +187,7 @@ technologies["ammunition"]=0
 technologies["gunnery"]=0
 technologies["wisdom"]=0
 technologies["windward"]=0
+technologies["carrying"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -464,7 +466,7 @@ function expedition(){
 	watercost=power
 	moralecost=power/5
 
-	power=power*(bonus["power"]+1)
+	power=power*(bonus["power"]+1)*(bonus["exprew"]+1)
 
 	if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
 
@@ -621,8 +623,10 @@ function expedition(){
 			burst+=people["bersek"]*80
 			burst=burst*(bonus["power"]+1)
 
-			power-=people["warelephant"]*25
-			power+=people["musketeer"]*50
+			power=power/(bonus["exprew"]+1)
+
+			power-=people["warelephant"]*25*(bonus["power"]+1)
+			power+=people["musketeer"]*25*(bonus["power"]+1)
 
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
 
@@ -2879,6 +2883,28 @@ function research(b){
 			technologies["windward"]++
 			$(".hire_caravel").show()
 			unlocked[".hire_caravel"]=1;
+
+		}
+
+	}
+	else if (b=="carrying" && technologies["carrying"]==0){
+
+
+		horsecost=100
+		moralecost=120
+		knowledgecost=1500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["horse"]>=horsecost && items["morale"]>=moralecost){
+
+			craft["horse"]-=horsecost;
+			items["morale"]-=moralecost;
+			items["knowledge"]-=knowledgecost;
+
+			bonus["exprew"]+=0.50;
+			technologies["carrying"]++
+
 
 		}
 
@@ -6016,7 +6042,23 @@ $(".tech_windward").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFix
 $(".tech_windward").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_windward").attr('tooltip5', "Allows you to build caravels.");
 
+horsecost=100
+moralecost=120
+knowledgecost=1500;
 
+if(items["knowledge"]<knowledgecost || craft["horse"]<horsecost || items["morale"]<moralecost){
+	$(".tech_carrying").addClass("unavailable")
+}
+else
+{
+	$(".tech_carrying").removeClass("unavailable")
+}
+$(".tech_carrying").addClass((technologies["carrying"] >0 ? "researched" : ""))
+$(".tech_carrying").html("Carrying" + (technologies["carrying"] >0 ? " (researched)" : ""));
+$(".tech_carrying").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_carrying").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
+$(".tech_carrying").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_carrying").attr('tooltip5', "Increases the amount of resources you get on expeditions by 50%");
 //Research
 
 

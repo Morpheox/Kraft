@@ -246,6 +246,11 @@ function researchunlock(){
 		$(".tech_windward").show()
 		unlocked[".tech_windward"]=1;
 	}
+
+	if(bonus["military"]>=25000 && unlocked[".tech_carrying"]!=1){
+		$(".tech_carrying").show()
+		unlocked[".tech_carrying"]=1;
+	}
 }
 
 

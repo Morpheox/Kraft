@@ -4469,7 +4469,7 @@ $(".build_compressor").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).to
 $(".build_compressor").attr('tooltip5', 'Increases all storages by 5%');
 
 tokencost=Math.pow(1.15,(buildings["share"]))*1000
-if(craft["brick"]<brickcost){
+if(craft["´token"]<tokencost){
 	$(".build_share").addClass("unavailable")
 }
 else
@@ -6602,7 +6602,7 @@ production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
 production["gold"]+=buildings["tradeoutpost"]/400;
-production["clay"]+=buildings["quarry"]/400;
+production["clay"]+=buildings["quarry"]/20;
 craft["token"]+=buildings["share"]/40;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)

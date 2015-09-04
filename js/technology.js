@@ -251,6 +251,11 @@ function researchunlock(){
 		$(".tech_carrying").show()
 		unlocked[".tech_carrying"]=1;
 	}
+
+	if(bonus["economy"]>=23000 && unlocked[".tech_shareholding"]!=1){
+		$(".tech_shareholding").show()
+		unlocked[".tech_shareholding"]=1;
+	}
 }
 
 

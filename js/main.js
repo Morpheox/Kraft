@@ -82,6 +82,7 @@ buildings["quarry"]=0;
 buildings["carpentry"]=0;
 buildings["blastfurnace"]=0;
 buildings["compressor"]=0;
+buildings["share"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -188,6 +189,8 @@ technologies["gunnery"]=0
 technologies["wisdom"]=0
 technologies["windward"]=0
 technologies["carrying"]=0
+technologies["shareholding"]=0
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -2818,28 +2821,6 @@ function research(b){
 		}
 
 	}
-	else if (b=="ammunition" && technologies["ammunition"]==0){
-
-
-		gunpowdercost=50;
-		knowledgecost=1200;
-
-
-		if (items["knowledge"]>=knowledgecost && craft["gunpowder"]>=gunpowdercost){
-
-
-			craft["gunpowder"]-=gunpowdercost;
-			items["knowledge"]-=knowledgecost;
-
-
-
-			technologies["ammunition"]++
-			$(".craft_ammo").show()
-			unlocked[".craft_ammo"]=1;
-
-		}
-
-	}
 	else if (b=="gunnery" && technologies["gunnery"]==0){
 
 
@@ -2906,6 +2887,28 @@ function research(b){
 			technologies["carrying"]++
 
 
+		}
+
+	}
+	else if (b=="shareholding" && technologies["shareholding"]==0){
+
+
+		tokencost=5000;
+		coincost=5000;
+		knowledgecost=1500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["token"]>=tokencost && craft["coin"]>=coincost){
+
+			craft["token"]-=tokencost;
+			craft["coin"]-=coincost;
+			items["knowledge"]-=knowledgecost;
+
+			
+			technologies["shareholding"]++
+			$(".build_share").show()
+			unlocked[".build_share"]=1;
 		}
 
 	}
@@ -3945,6 +3948,20 @@ function build(b){
 
 		}
 	}
+	else if (b=="share"){
+
+		tokencost=Math.pow(1.15,(buildings["share"]))*1000
+
+
+		if (craft["token"]>=tokencost){
+
+			craft["token"]-=tokencost;
+
+			buildings["share"]+=1;
+
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -4450,6 +4467,21 @@ $(".build_compressor").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toF
 $(".build_compressor").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".build_compressor").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_compressor").attr('tooltip5', 'Increases all storages by 5%');
+
+tokencost=Math.pow(1.15,(buildings["share"]))*1000
+if(craft["brick"]<brickcost){
+	$(".build_share").addClass("unavailable")
+}
+else
+{
+	$(".build_share").removeClass("unavailable")
+}
+$(".build_share").html("Share ("+buildings["share"]+")");
+$(".build_share").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".build_share").attr('tooltip3', 'Token production +0.1/s');
+
+
+
 
 //People
 foodcost=50;
@@ -6059,6 +6091,23 @@ $(".tech_carrying").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFi
 $(".tech_carrying").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
 $(".tech_carrying").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_carrying").attr('tooltip5', "Increases the amount of resources you get on expeditions by 50%");
+
+tokencost=5000;
+coincost=5000;
+knowledgecost=1500;
+if(items["knowledge"]<knowledgecost || craft["token"]<tokencost || craft["coin"]<coincost){
+	$(".tech_shareholding").addClass("unavailable")
+}
+else
+{
+	$(".tech_shareholding").removeClass("unavailable")
+}
+$(".tech_shareholding").addClass((technologies["shareholding"] >0 ? "researched" : ""))
+$(".tech_shareholding").html("Shareholding" + (technologies["shareholding"] >0 ? " (researched)" : ""));
+$(".tech_shareholding").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_shareholding").attr('tooltip2', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".tech_shareholding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_shareholding").attr('tooltip5', "Allows you to redeem tokens on the casino for casino shares.");
 //Research
 
 
@@ -6554,6 +6603,7 @@ production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
 production["gold"]+=buildings["tradeoutpost"]/400;
 production["clay"]+=buildings["quarry"]/400;
+craft["token"]+=buildings["share"]/40;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {

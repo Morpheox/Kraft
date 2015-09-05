@@ -79,6 +79,10 @@ traderatio["chemicals"]["iron"]=10;
 traderatio["chemicals"]["coal"]=4;
 traderatio["chemicals"]["steel"]=2.5;
 
+
+
+
+
 function refreshselect(){
 	$(".selgive").html("")
 		for(gives in traderatio){

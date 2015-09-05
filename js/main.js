@@ -14,6 +14,9 @@ items["gold"]=0;
 items["iron"]=0;
 items["coal"]=0;
 items["tin"]=0;
+items["nickel"]=0;
+items["silicon"]=0;
+items["lithium"]=0;
 items["steel"]=0;
 items["chemicals"]=0;
 items["morale"]=0;
@@ -83,6 +86,7 @@ buildings["carpentry"]=0;
 buildings["blastfurnace"]=0;
 buildings["compressor"]=0;
 buildings["share"]=0;
+buildings["repository"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -190,7 +194,9 @@ technologies["wisdom"]=0
 technologies["windward"]=0
 technologies["carrying"]=0
 technologies["shareholding"]=0
-
+technologies["steamengine"]=0
+technologies["safestorage"]=0
+technologies["metalwork"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -238,6 +244,8 @@ craft["brick"]=0
 craft["plank"]=0
 craft["glass"]=0
 craft["bronze"]=0
+craft["plate"]=0
+craft["engine"]=0
 craft["pickaxe"]=0
 craft["spear"]=0
 craft["sword"]=0
@@ -570,6 +578,11 @@ function expedition(){
 				reward+=parseFloat(rnd).toFixed(2) + " bottle<br>";
 				craft["bottle"]+=rnd;
 				maximums["water"]+=rnd;
+			}
+			if(Math.random()>0.90 && technologies["safestorage"]==1){
+				rnd=(Math.random()*power)/500;
+				reward+=parseFloat(rnd).toFixed(2) + " nickel<br>";
+				items["nickel"]+=rnd;
 			}
 			if(Math.random()>0.99 && technologies["cache"]==1){
 				rnd=(Math.random()*power)/500;
@@ -1202,6 +1215,45 @@ function crafting(b){
 				items["steel"]-=steelcost
 
 				craft["musket"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="plate"){
+
+			coppercost=500;
+			ironcost=300;
+			nickelcost=15;
+
+
+
+
+			if (items["copper"]>=coppercost && items["iron"]>=ironcost && items["nickel"]>=nickelcost){
+
+				items["iron"]-=ironcost;
+				items["copper"]-=coppercost
+				items["nickel"]-=nickelcost
+
+				craft["plate"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="engine"){
+
+			steelcost=400;
+			platecost=300;
+			bronzecost=200;
+
+
+
+			if (items["steel"]>=steelcost && craft["plate"]>=platecost && craft["bronze"]>=bronzecost){
+
+				items["steel"]-=steelcost
+				craft["plate"]-=platecost;
+				craft["bronze"]-=bronzecost;
+
+				craft["engine"]+=1+bonus["craft"];
 
 			}
 
@@ -2912,6 +2964,74 @@ function research(b){
 		}
 
 	}
+	else if (b=="safestorage" && technologies["safestorage"]==0){
+
+
+		framecost=100;
+		glasscost=300;
+		knowledgecost=1600;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["frame"]>=framecost && craft["glass"]>=glasscost){
+
+			craft["frame"]-=framecost;
+			craft["glass"]-=glasscost;
+			items["knowledge"]-=knowledgecost;
+
+			traderatio["wood"]["nickel"]=0.00015;
+			traderatio["mineral"]["nickel"]=0.00018;
+
+			technologies["safestorage"]++
+			$(".build_repository").show()
+			unlocked[".build_repository"]=1;
+		}
+
+	}
+	else if (b=="metalwork" && technologies["metalwork"]==0){
+
+
+		ironcost=750;
+		steelcost=400;
+		knowledgecost=1700;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["iron"]>=ironcost && items["steel"]>=steelcost){
+
+			items["iron"]-=ironcost;
+			items["steel"]-=steelcost;
+			items["knowledge"]-=knowledgecost;
+
+			
+			technologies["metalwork"]++
+			$(".craft_plate").show()
+			unlocked[".craft_plate"]=1;
+		}
+
+	}
+	else if (b=="steamengine" && technologies["steamengine"]==0){
+
+
+		ironcost=800;
+		platecost=50;
+		knowledgecost=1800;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["plate"]>=platecost && items["iron"]>=ironcost){
+
+			craft["plate"]-=platecost;
+			items["iron"]-=ironcost;
+			items["knowledge"]-=knowledgecost;
+
+			
+			technologies["steamengine"]++
+			$(".craft_engine").show()
+			unlocked[".craft_engine"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3962,6 +4082,32 @@ function build(b){
 
 		}
 	}
+	else if (b=="repository"){
+
+		blockcost=Math.pow(1.2,(buildings["repository"]))*5000
+		glasscost=Math.pow(1.2,(buildings["repository"]))*100
+		bottlecost=Math.pow(1.2,(buildings["repository"]))*10
+
+
+		if (craft["block"]>=blockcost && craft["glass"]>=glasscost && craft["bottle"]>=bottlecost){
+
+			craft["block"]-=blockcost;
+			craft["glass"]-=glasscost;
+			craft["bottle"]-=bottlecost;
+			maximums["water"]-=bottlecost;
+
+			buildings["repository"]+=1;
+
+			maximums["tin"]+=5;
+			maximums["chemicals"]+=3;
+			maximums["steel"]+=5;
+			maximums["nickel"]+=5;
+			maximums["silicon"]+=2;
+			maximums["lithium"]+=1;
+
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -4422,6 +4568,10 @@ $(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
 $(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_quarry").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".build_quarry").attr('tooltip4', 'Clay production +0.20/s');
+if(technologies["safestorage"]==1){
+$(".build_quarry").attr('tooltip5', 'Nickel production +0.001/s');
+}
+
 
 framecost=Math.pow(1.4,(buildings["carpentry"]))*5
 brickcost=Math.pow(1.4,(buildings["carpentry"]))*20
@@ -4481,7 +4631,21 @@ $(".build_share").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(
 $(".build_share").attr('tooltip3', 'Token production +0.1/s');
 
 
-
+blockcost=Math.pow(1.2,(buildings["repository"]))*5000
+glasscost=Math.pow(1.2,(buildings["repository"]))*100
+bottlecost=Math.pow(1.2,(buildings["repository"]))*10
+if(craft["block"]<blockcost || craft["glass"]<glasscost || craft["bottle"]<bottlecost){
+	$(".build_repository").addClass("unavailable")
+}
+else
+{
+	$(".build_repository").removeClass("unavailable")
+}
+$(".build_repository").html("Repository ("+buildings["repository"]+")");
+$(".build_repository").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
+$(".build_repository").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".build_repository").attr('tooltip3', 'Bottle: '+ parseFloat(craft["bottle"]).toFixed(2)+" / "+parseFloat(bottlecost).toFixed(2))
+$(".build_repository").attr('tooltip5', 'Provides storage for complex materials');
 
 //People
 foodcost=50;
@@ -6108,6 +6272,63 @@ $(".tech_shareholding").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFi
 $(".tech_shareholding").attr('tooltip2', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_shareholding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_shareholding").attr('tooltip5', "Allows you to redeem tokens on the casino for casino shares.");
+
+framecost=100;
+glasscost=300;
+knowledgecost=1600;
+if(items["knowledge"]<knowledgecost || craft["glass"]<glasscost || craft["frame"]<framecost){
+	$(".tech_shareholding").addClass("unavailable")
+}
+else
+{
+	$(".tech_shareholding").removeClass("unavailable")
+}
+$(".tech_safestorage").addClass((technologies["safestorage"] >0 ? "researched" : ""))
+$(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (res..)" : ""));
+$(".tech_safestorage").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".tech_safestorage").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
+$(".tech_safestorage").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_safestorage").attr('tooltip5', "Allows you to build repositories to store complex materials");
+$(".tech_safestorage").attr('tooltip6', "Quarries now also produce nickel");
+$(".tech_safestorage").attr('tooltip7', "You can also get nickel on expeditions or trade routes.");
+
+
+
+ironcost=750;
+steelcost=400;
+knowledgecost=1700;
+
+if(items["knowledge"]<knowledgecost || items["iron"]<ironcost || items["steel"]<steelcost){
+	$(".tech_metalwork").addClass("unavailable")
+}
+else
+{
+	$(".tech_metalwork").removeClass("unavailable")
+}
+$(".tech_metalwork").addClass((technologies["metalwork"] >0 ? "researched" : ""))
+$(".tech_metalwork").html("Metalwork" + (technologies["metalwork"] >0 ? " (researched)" : ""));
+$(".tech_metalwork").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_metalwork").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".tech_metalwork").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_metalwork").attr('tooltip5', "Allows you to craft more stainless steel plates.");
+
+
+ironcost=800;
+platecost=500;
+knowledgecost=1800;
+if(items["knowledge"]<knowledgecost || items["iron"]<ironcost || craft["plate"]<platecost){
+	$(".tech_steamengine").addClass("unavailable")
+}
+else
+{
+	$(".tech_steamengine").removeClass("unavailable")
+}
+$(".tech_steamengine").addClass((technologies["steamengine"] >0 ? "researched" : ""))
+$(".tech_steamengine").html("Steam engine" + (technologies["steamgine"] >0 ? " (res...)" : ""));
+$(".tech_steamengine").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".tech_steamengine").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".tech_steamengine").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_steamengine").attr('tooltip5', "Allows you to build steam powered engines.");
 //Research
 
 
@@ -6402,7 +6623,39 @@ $(".craft_musket").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixe
 $(".craft_musket").attr('tooltip5', "A rudimentary fire weapon.");
 
 
+coppercost=500;
+ironcost=300;
+nickelcost=15;
 
+if(items["copper"]<coppercost || items["iron"]<ironcost || items["nickel"]<nickelcost){
+	$(".craft_plate").addClass("unavailable")
+}
+else
+{
+	$(".craft_plate").removeClass("unavailable")
+}
+$(".craft_plate").html("Plate");
+$(".craft_plate").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
+$(".craft_plate").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".craft_plate").attr('tooltip3', 'Nickel: '+ parseFloat(items["nickel"]).toFixed(2)+" / "+parseFloat(nickelcost).toFixed(2))
+$(".craft_plate").attr('tooltip5', "A plate made of complex alloy.");
+
+
+steelcost=400;
+platecost=300;
+bronzecost=200;
+if(craft["plate"]<platecost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
+	$(".craft_engine").addClass("unavailable")
+}
+else
+{
+	$(".craft_engine").removeClass("unavailable")
+}
+$(".craft_engine").html("Engine");
+$(".craft_engine").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".craft_engine").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
+$(".craft_engine").attr('tooltip3', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".craft_engine").attr('tooltip5', "A steam powered engine.");
 
 
 //Leaders
@@ -6603,6 +6856,9 @@ production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
 production["gold"]+=buildings["tradeoutpost"]/400;
 production["clay"]+=buildings["quarry"]/20;
+if(technologies["safestorage"]==1){
+production["nickel"]+=buildings["quarry"]/4000;
+}
 craft["token"]+=buildings["share"]/40;
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
@@ -7005,6 +7261,13 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 			warp()
 		}
 
+		if(technologies["safestorage"]==1){
+
+		traderatio["wood"]["nickel"]=0.00015;
+		traderatio["mineral"]["nickel"]=0.00018;
+
+		}
+
 	researchunlock()
 	if(prestige["number"]>0){
 		$(".reespec").show()
@@ -7066,6 +7329,13 @@ function load(){
 
 
 	//END RETROCOMPATIBILITY
+
+if(technologies["safestorage"]==1){
+
+traderatio["wood"]["nickel"]=0.00015;
+traderatio["mineral"]["nickel"]=0.00018;
+
+}
 
 
 

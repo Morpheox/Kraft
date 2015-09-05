@@ -256,6 +256,22 @@ function researchunlock(){
 		$(".tech_shareholding").show()
 		unlocked[".tech_shareholding"]=1;
 	}
+	
+	if((bonus["science"]>=35000 || bonus["military"]>=35000 || bonus["economy"]>=35000) && unlocked[".tech_safestorage"]!=1){
+		$(".tech_safestorage").show()
+		unlocked[".tech_safestorage"]=1;
+	}
+
+	if((bonus["science"]>=40000 || bonus["military"]>=40000 || bonus["economy"]>=40000) && unlocked[".tech_metalwork"]!=1){
+		$(".tech_metalwork").show()
+		unlocked[".tech_metalwork"]=1;
+	}
+
+	if((bonus["science"]>=45000 || bonus["military"]>=45000 || bonus["economy"]>=45000) && unlocked[".tech_steamengine"]!=1){
+		$(".tech_steamengine").show()
+		unlocked[".tech_steamengine"]=1;
+	}
+
 }
 
 

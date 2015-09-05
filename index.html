@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.6.6 beta</title>
+	<title>Keep Craft v0.6.9 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="js/offline.js"></script>
 </head>
 <body>
-    <div class="infokraft">Keep Craft v0.6.6 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.6.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
     <form class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="K8L65XFQZWZQS">
@@ -96,6 +96,7 @@
 			<div class="block build_carpentry"></div><button class="toggle toggle_carpentry" onclick='toggle("carpentry")'>Toggle</button>
 			<div class="block build_blastfurnace"></div><button class="toggle toggle_blastfurnace" onclick='toggle("blastfurnace")'>Toggle</button>	
 			<div class="block build_compressor"></div>
+			<div class="block build_repository"></div>
 			</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -197,6 +198,9 @@
 			<div class="block tech_shareholding"></div>
 			<div class="block tech_windward"></div>
 			<div class="block tech_carrying"></div>
+			<div class="block tech_safestorage"></div>
+			<div class="block tech_metalwork"></div>
+			<div class="block tech_steamengine"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -223,7 +227,9 @@
 		<div class="block craft_brick"></div>
 		<div class="block craft_gunpowder"></div>
 		<div class="block craft_ammo"></div>
-		<div class="block craft_musket"></div><br><br><br><br><br>
+		<div class="block craft_musket"></div>
+		<div class="block craft_plate"></div>
+		<div class="block craft_engine"></div><br><br><br><br><br>
 	</div>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
@@ -416,6 +422,25 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.6.9</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New craftable - steam engines</li>
+        <li>Made craft list double column so its easier on the screen</li>
+        </ul>
+        <b>V 0.6.8</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New craftable - plates</li>
+        <li>Fixed shareholding tooltip</li>
+        <li>Fixed clay production bug</li>
+        </ul>
+        <b>V 0.6.7</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New building - repository</li>
+        <li>New resource - nickel</li>
+        </ul>
         <b>V 0.6.6</b>
         <ul>
         <li>New economic tech</li>
@@ -822,6 +847,7 @@
 	$(".build_blastfurnace").click(function() {build("blastfurnace")});
 	$(".build_compressor").click(function() {build("compressor")});
 	$(".build_share").click(function() {build("share")});
+	$(".build_repository").click(function() {build("repository")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -927,6 +953,9 @@
 	$(".tech_windward").click(function() {research("windward")});
 	$(".tech_carrying").click(function() {research("carrying")});
 	$(".tech_shareholding").click(function() {research("shareholding")});
+	$(".tech_steamengine").click(function() {research("steamengine")});
+	$(".tech_metalwork").click(function() {research("metalwork")});
+	$(".tech_safestorage").click(function() {research("safestorage")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -946,6 +975,8 @@
 	$(".craft_gunpowder").click(function() {crafting("gunpowder")});
 	$(".craft_ammo").click(function() {crafting("ammo")});
 	$(".craft_musket").click(function() {crafting("musket")});
+	$(".craft_plate").click(function() {crafting("plate")});
+	$(".craft_engine").click(function() {crafting("engine")});
 
 	$(".expedition").click(function() {expedition()});
         

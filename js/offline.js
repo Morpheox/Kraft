@@ -35,7 +35,9 @@ production["knowledge"]+=buildings["scienceoutpost"]/50;
 production["gold"]+=buildings["tradeoutpost"]/100;
 production["clay"]+=buildings["quarry"]/5;
 craft["token"]+=buildings["share"]/10;
-
+if(technologies["safestorage"]==1){
+production["nickel"]+=buildings["quarry"]/1000;
+}
 if (items["water"]>=buildings["pasture"]/5 && buildstatus["pasture"]==1)
 {
 	consumption["water"]+=buildings["pasture"]/5

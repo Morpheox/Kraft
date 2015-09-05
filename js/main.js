@@ -6310,11 +6310,11 @@ $(".tech_metalwork").html("Metalwork" + (technologies["metalwork"] >0 ? " (resea
 $(".tech_metalwork").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_metalwork").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_metalwork").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_metalwork").attr('tooltip5', "Allows you to craft more stainless steel plates.");
+$(".tech_metalwork").attr('tooltip5', "Allows you to craft alloy plates.");
 
 
 ironcost=800;
-platecost=500;
+platecost=50;
 knowledgecost=1800;
 if(items["knowledge"]<knowledgecost || items["iron"]<ironcost || craft["plate"]<platecost){
 	$(".tech_steamengine").addClass("unavailable")

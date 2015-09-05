@@ -4619,7 +4619,7 @@ $(".build_compressor").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).to
 $(".build_compressor").attr('tooltip5', 'Increases all storages by 5%');
 
 tokencost=Math.pow(1.15,(buildings["share"]))*1000
-if(craft["´token"]<tokencost){
+if(craft["token"]<tokencost){
 	$(".build_share").addClass("unavailable")
 }
 else

@@ -6324,7 +6324,7 @@ else
 	$(".tech_steamengine").removeClass("unavailable")
 }
 $(".tech_steamengine").addClass((technologies["steamengine"] >0 ? "researched" : ""))
-$(".tech_steamengine").html("Steam engine" + (technologies["steamgine"] >0 ? " (res...)" : ""));
+$(".tech_steamengine").html("Steam engine" + (technologies["steamengine"] >0 ? " (res...)" : ""));
 $(".tech_steamengine").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_steamengine").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))

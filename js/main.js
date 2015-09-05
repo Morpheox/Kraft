@@ -6277,11 +6277,11 @@ framecost=100;
 glasscost=300;
 knowledgecost=1600;
 if(items["knowledge"]<knowledgecost || craft["glass"]<glasscost || craft["frame"]<framecost){
-	$(".tech_shareholding").addClass("unavailable")
+	$(".tech_safestorage").addClass("unavailable")
 }
 else
 {
-	$(".tech_shareholding").removeClass("unavailable")
+	$(".tech_safestorage").removeClass("unavailable")
 }
 $(".tech_safestorage").addClass((technologies["safestorage"] >0 ? "researched" : ""))
 $(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (res..)" : ""));

@@ -3227,7 +3227,7 @@ function hire(b){
 		}
 		else if (b=="warelephant"){
 
-			suppliescost=80;
+			suppliescost=100;
 			elephantcost=1;
 
 			if (craft["supplies"]>=suppliescost && craft["elephant"]>=elephantcost){

@@ -763,8 +763,9 @@ function fight(){
 
 	disobey=people["warelephant"]*100*(bonus["power"]+1)
 
-	reload=people["musketeer"]*200*(bonus["power"]+1)
-	reload=people["lighttank"]*500*(bonus["power"]+1)
+	reload=0;
+	reload+=people["musketeer"]*200*(bonus["power"]+1)
+	reload+=people["lighttank"]*500*(bonus["power"]+1)
 
 	power=power*(bonus["power"]+1)
 

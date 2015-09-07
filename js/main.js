@@ -691,7 +691,7 @@ function expedition(){
 				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
 			}
 			if(enemytipo>=100 && enemytipo<150){
-				enemy["mercenary"]=Math.round((Math.random()*power*0.100)+(power*0.028))+1;
+				enemy["mercenary"]=Math.round((Math.random()*power*0.090)+(power*0.018))+1;
 				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40 armor:5)<br>";
 				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
@@ -707,7 +707,7 @@ function expedition(){
 				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
 			if(enemytipo>=200 && enemytipo<280){
-				enemy["soldier"]=Math.round((Math.random()*power*0.05)+(power*0.014))+1;
+				enemy["soldier"]=Math.round((Math.random()*power*0.04)+(power*0.010))+1;
 				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100 armor:10)<br>";
 				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
 			}

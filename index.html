@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.6.9 beta</title>
+	<title>Keep Craft v0.7.0 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.6.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.7.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -204,6 +204,8 @@
 			<div class="block tech_safestorage"></div>
 			<div class="block tech_metalwork"></div>
 			<div class="block tech_steamengine"></div>
+			<div class="block tech_armoredcombat"></div>
+
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -242,7 +244,8 @@
 		<div class="block hire_medic"></div><button class="fire fire_medic" onclick='fire("medic")'>Fire 1</button><br>
 		<div class="block hire_bersek"></div><button class="fire fire_bersek" onclick='fire("bersek")'>Fire 1</button><br>
 		<div class="block hire_warelephant"></div><button class="fire fire_warelephant" onclick='fire("warelephant")'>Fire 1</button><br>
-		<div class="block hire_musketeer"></div><button class="fire fire_musketeer" onclick='fire("musketeer")'>Fire 1</button><br><br>
+		<div class="block hire_musketeer"></div><button class="fire fire_musketeer" onclick='fire("musketeer")'>Fire 1</button><br>
+		<div class="block hire_lighttank"></div><button class="fire fire_lighttank" onclick='fire("lighttank")'>Fire 1</button><br><br>
 
 		<div class="block expedition"></div><br>
 		<div class="encounter"></div><br>
@@ -425,6 +428,19 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.7.0</b>
+        <ul>
+        <li>Combat system rebalance</li>
+        <li>New mechanic - armor</li>
+        <li>Armor reduces the damage taken</li>
+        <li>Swordmen and knights get armor</li>
+        <li>Enemy units mercenaries and soldiers get armor too</li>
+        <li>New military tech</li>
+       	<li>New military unit - light tanks</li>
+       	<li>Light tanks dont require or produce morale,water or food</li>
+       	<li>They only need coal to run, and ammo in fights</li>
+       	<li>They take 3 population slots</li>
+        </ul>
         <b>V 0.6.9</b>
         <ul>
         <li>New neutral tech</li>
@@ -869,6 +885,8 @@
 	$(".hire_warelephant").click(function() {hire("warelephant")});
 	$(".hire_musketeer").click(function() {hire("musketeer")});
 
+	$(".hire_lighttank").click(function() {hire("lighttank")});
+
 	$(".hire_galley").click(function() {hire("galley")});
 	$(".hire_galleon").click(function() {hire("galleon")});
 	$(".hire_fireship").click(function() {hire("fireship")});
@@ -959,6 +977,7 @@
 	$(".tech_steamengine").click(function() {research("steamengine")});
 	$(".tech_metalwork").click(function() {research("metalwork")});
 	$(".tech_safestorage").click(function() {research("safestorage")});
+	$(".tech_armoredcombat").click(function() {research("armoredcombat")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

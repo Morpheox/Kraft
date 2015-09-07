@@ -197,6 +197,7 @@ technologies["shareholding"]=0
 technologies["steamengine"]=0
 technologies["safestorage"]=0
 technologies["metalwork"]=0
+technologies["armoredcombat"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -215,6 +216,8 @@ people["medic"]=0
 people["bersek"]=0
 people["warelephant"]=0
 people["musketeer"]=0
+
+people["lighttank"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -270,6 +273,7 @@ enemy["mercenary"]=0;
 enemy["soldier"]=0;
 enemy["halberdier"]=0;
 enemy["warrior"]=0;
+enemy["rifleman"]=0;
 
 var techvisible=1;
 
@@ -473,19 +477,22 @@ function expedition(){
 	power+=people["warelephant"]*100
 	power+=people["musketeer"]*75
 
+
 	foodcost=power*2
 	watercost=power
 	moralecost=power/5
-
+	coalcost=0
+	coalcost+=people["lighttank"]*50
+	power+=people["lighttank"]*500
 	power=power*(bonus["power"]+1)*(bonus["exprew"]+1)
 
-	if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost){
+	if(power>0 && items["food"]>=foodcost && items["water"]>=watercost && items["morale"]>=moralecost && items["coal"]>=coalcost){
 
 
 		items["food"]-=foodcost;
 		items["water"]-=watercost;
 		items["morale"]-=moralecost;
-
+		items["coal"]-=coalcost;
 
 		$(".expeditionresult").html("")
 		$(".encounter").hide()
@@ -628,6 +635,7 @@ function expedition(){
 			hp+=people["bersek"]*100
 			hp+=people["warelephant"]*1200
 			hp+=people["musketeer"]*400
+			hp+=people["lighttank"]*5000
 
 			hp=hp*(bonus["hp"]+1)
 
@@ -642,9 +650,15 @@ function expedition(){
 			power=power/(bonus["exprew"]+1)
 
 			power-=people["warelephant"]*25*(bonus["power"]+1)
+			power-=people["lighttank"]*250*(bonus["power"]+1)
 			power+=people["musketeer"]*25*(bonus["power"]+1)
 
-			power=(power/2)+(hp/10)+(healing/2)+(burst/10)
+			armor=0;
+			armor+=people["swordman"]*3
+			armor+=people["knight"]*10
+			armor+=people["lighttank"]*50
+
+			power=(power/2)+(hp/10)+(healing/2)+(burst/10)+(armor/2)
 
 			enemy["reward"]=0;
 			enemy["peasant"]=0;
@@ -653,6 +667,7 @@ function expedition(){
 			enemy["soldier"]=0;
 			enemy["halberdier"]=0;
 			enemy["warrior"]=0;
+			enemy["rifleman"]=0;
 
 			var enemytipo=Math.random()*power;
 			var stringencuentro="Enemies:<br>"
@@ -662,30 +677,62 @@ function expedition(){
 				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
 				rew+=(Math.random()*enemy["peasant"]*0.07)+(enemy["peasant"]*0.015)
 			}
-			if(enemytipo>20 && enemytipo<50){
+			if(enemytipo>=25 && enemytipo<50){
 				enemy["bandit"]=Math.round((Math.random()*power*0.22)+(power*0.070))+1;
 				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
 				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
 			}
-			if(enemytipo>40 && enemytipo<120){
+			if(enemytipo>=50 && enemytipo<100){
+				enemy["peasant"]=Math.round((Math.random()*power*0.25)+(power*0.07))+1;
+				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
+				rew+=(Math.random()*enemy["peasant"]*0.07)+(enemy["peasant"]*0.015)
+				enemy["bandit"]=Math.round((Math.random()*power*0.11)+(power*0.035))+1;
+				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
+				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
+			}
+			if(enemytipo>=100 && enemytipo<150){
 				enemy["mercenary"]=Math.round((Math.random()*power*0.100)+(power*0.028))+1;
-				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40)<br>";
+				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40 armor:5)<br>";
 				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
 			}
-			if(enemytipo>110 && enemytipo<280){
+			if(enemytipo>=150 && enemytipo<200){
+				enemy["peasant"]=Math.round((Math.random()*power*0.22)+(power*0.05))+1;
+				stringencuentro+=enemy["peasant"]+" Peasants (Attack:2 Hp:8)<br>";
+				rew+=(Math.random()*enemy["peasant"]*0.07)+(enemy["peasant"]*0.015)
+				enemy["bandit"]=Math.round((Math.random()*power*0.07)+(power*0.015))+1;
+				stringencuentro+=enemy["bandit"]+" Bandits (Attack:4 Hp:15)<br>";
+				rew+=(Math.random()*enemy["bandit"]*0.14)+(enemy["bandit"]*0.03)
+				enemy["mercenary"]=Math.round((Math.random()*power*0.01)+(power*0.01))+1;
+				stringencuentro+=enemy["mercenary"]+" Mercenarys (Attack:9 Hp:40 armor:5)<br>";
+				rew+=(Math.random()*enemy["mercenary"]*0.32)+(enemy["mercenary"]*0.07)
+			}
+			if(enemytipo>=200 && enemytipo<280){
 				enemy["soldier"]=Math.round((Math.random()*power*0.05)+(power*0.014))+1;
-				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100)<br>";
+				stringencuentro+=enemy["soldier"]+" Soldiers (Attack:15 Hp:100 armor:10)<br>";
 				rew+=(Math.random()*enemy["soldier"]*0.68)+(enemy["soldier"]*0.15)
 			}
-			if(enemytipo>260 && enemytipo<420){
+			if(enemytipo>=280 && enemytipo<420){
 				enemy["halberdier"]=Math.round((Math.random()*power*0.022)+(power*0.007))+1;
 				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
 				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["halberdier"]*0.30)
 			}
-			if(enemytipo>390){
-				enemy["warrior"]=Math.round((Math.random()*power*0.012)+(power*0.005))+1;
+			if(enemytipo>=420 && enemytipo<600){
+				enemy["warrior"]=Math.round((Math.random()*power*0.011)+(power*0.005))+1;
 				stringencuentro+=enemy["warrior"]+" Warrior (Attack:50 Hp:400)<br>";
 				rew+=(Math.random()*enemy["warrior"]*2)+(enemy["warrior"]*0.50)
+			}
+			if(enemytipo>=600 && enemytipo<800){
+				enemy["halberdier"]=Math.round((Math.random()*power*0.011)+(power*0.0034))+1;
+				stringencuentro+=enemy["halberdier"]+" Halberdier (Attack:40 Hp:160)<br>";
+				rew+=(Math.random()*enemy["halberdier"]*1.2)+(enemy["halberdier"]*0.30)
+				enemy["warrior"]=Math.round((Math.random()*power*0.005)+(power*0.0024))+1;
+				stringencuentro+=enemy["warrior"]+" Warrior (Attack:50 Hp:400)<br>";
+				rew+=(Math.random()*enemy["warrior"]*2)+(enemy["warrior"]*0.50)
+			}
+			if(enemytipo>=800){
+				enemy["rifleman"]=Math.round((Math.random()*power*0.005)+(power*0.0022))+1;
+				stringencuentro+=enemy["rifleman"]+" Rifleman (Attack:200 Hp:400)<br>";
+				rew+=(Math.random()*enemy["rifleman"]*5)+(enemy["rifleman"]*1.5)
 			}
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
@@ -717,6 +764,7 @@ function fight(){
 	disobey=people["warelephant"]*100*(bonus["power"]+1)
 
 	reload=people["musketeer"]*200*(bonus["power"]+1)
+	reload=people["lighttank"]*500*(bonus["power"]+1)
 
 	power=power*(bonus["power"]+1)
 
@@ -728,8 +776,18 @@ function fight(){
 	hp+=people["bersek"]*100
 	hp+=people["warelephant"]*1200
 	hp+=people["musketeer"]*400
+	hp+=people["lighttank"]*5000
 
 	hp=hp*(bonus["hp"]+1)
+
+	armor=0
+	armor+=people["swordman"]*3
+	armor+=people["knight"]*10
+	armor+=people["lighttank"]*50
+
+	armor2=0
+	armor2+=enemy["mercenary"]*5
+	armor2+=enemy["soldier"]*10
 
 	burst=0;
 	burst+=people["bersek"]*80
@@ -743,6 +801,7 @@ function fight(){
 	power2+=enemy["soldier"]*15
 	power2+=enemy["halberdier"]*40
 	power2+=enemy["warrior"]*50
+	power2+=enemy["rifleman"]*200
 
 	hp2=0;
 	hp2+=enemy["peasant"]*8
@@ -751,6 +810,7 @@ function fight(){
 	hp2+=enemy["soldier"]*100
 	hp2+=enemy["halberdier"]*160
 	hp2+=enemy["warrior"]*400
+	hp2+=enemy["rifleman"]*400
 
 	healing=0
 	healing+=people["medic"]*10
@@ -776,11 +836,14 @@ function fight(){
 		if(i%2!=0 && reload>0){
 		dmg1+=reload+(Math.random()*(reload/4))-(Math.random()*(reload/4));
 		}
-		else if(reload>0 && craft["ammo"]>=people["musketeer"])
+		else if(reload>0 && craft["ammo"]>=(people["musketeer"]+(people["lighttank"]*4)))
 		{
-		combatlog+="The musketeers are reloading.<br>"
-		craft["ammo"]-=people["musketeer"]
-		combatlog+="-"+people["musketeer"]+" ammo <br>"
+		combatlog+="The troops are reloading.<br>"
+		ammocost=0;
+		ammocost+=people["musketeer"]
+		ammocost+=people["lighttank"]*4
+		combatlog+="-"+ammocost+" ammo <br>"
+		craft["ammo"]-=ammocost;
 		}
 		else if(reload>0)
 		{
@@ -789,6 +852,26 @@ function fight(){
 		}
 		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
 		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+
+
+		if(armor>0){
+
+			dmg2-=armor;
+			combatlog+="You block "+armor+" damage<br>"
+			if(dmg2<0){
+				dmg2=0;
+			}
+		}
+		if(armor2>0){
+
+			dmg1-=armor2;
+			combatlog+="The enemy blocks "+armor2+" damage<br>"
+			if(dmg1<0){
+				dmg1=0;
+			}
+		}
+
+
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
 			hp+=healed;
@@ -3032,6 +3115,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="armoredcombat" && technologies["armoredcombat"]==0){
+
+
+		moralecost=130;
+		platecost=500;
+		knowledgecost=2000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && items["morale"]>=moralecost && craft["plate"]>=platecost){
+
+			items["morale"]-=moralecost;
+			craft["plate"]-=platecost;
+			items["knowledge"]-=knowledgecost;
+
+			
+			technologies["armoredcombat"]++
+			$(".hire_lighttank").show()
+			unlocked[".hire_lighttank"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3258,6 +3363,24 @@ function hire(b){
 			}
 
 		}
+		else if (b=="lighttank" && (population+3)<=maximums["population"]){
+
+			platecost=200;
+			enginecost=2;
+
+
+			if (craft["engine"]>=enginecost && craft["plate"]>=platecost){
+
+				craft["plate"]-=platecost;
+				craft["engine"]-=enginecost;
+
+				people["lighttank"]+=1
+				population+=3
+				$(".fire_lighttank").show()
+				unlocked[".fire_lighttank"]=1;
+			}
+
+		}
 	}
 	if (b=="knight"){
 
@@ -3446,6 +3569,10 @@ function fire(b){
 
 		people[b]-=1
 		population--
+		if(b=="lighttank"){
+		population-=2;
+
+		}
 		if (people[b]==0){
 			$(".fire_"+b).hide()
 			unlocked[".fire_"+b]=0;
@@ -4805,7 +4932,7 @@ $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFix
 $(".hire_swordman").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
 $(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp: 50');
-
+$(".hire_swordman").attr('tooltip5', 'Armor: 3');
 swordmancost=1;
 horsecost=1;
 armorcost=1;
@@ -4823,7 +4950,7 @@ $(".hire_knight").attr('tooltip3', 'Armor: '+ parseFloat(craft["armor"]).toFixed
 $(".hire_knight").attr('tooltip4', "Food consumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
-
+$(".hire_knight").attr('tooltip7', 'Armor: 10');
 foodcost=1000;
 coincost=20;
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
@@ -4895,6 +5022,22 @@ $(".hire_musketeer").attr('tooltip5', 'Morale production +0.05/s');
 $(".hire_musketeer").attr('tooltip6', 'Attack: 200 Hp: 400');
 $(".hire_musketeer").attr('tooltip7', 'They need to reload between attacks');
 
+platecost=200;
+enginecost=2;
+if(craft["plate"]<platecost || craft["engine"]<enginecost || population+2>=maximums["population"]){
+	$(".hire_lighttank").addClass("unavailable")
+}
+else
+{
+	$(".hire_lighttank").removeClass("unavailable")
+}
+$(".hire_lighttank").html("Light tank ("+people["lighttank"]+")");
+$(".hire_lighttank").attr('tooltip', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".hire_lighttank").attr('tooltip2', 'Engine: '+ parseFloat(craft["engine"]).toFixed(2)+" / "+parseFloat(enginecost).toFixed(2))
+$(".hire_lighttank").attr('tooltip4', 'Attack: 500 Hp: 5000');
+$(".hire_lighttank").attr('tooltip5', 'Armor: 50 Crew: 3');
+$(".hire_lighttank").attr('tooltip6', 'Coal per expedition: 50');
+$(".hire_lighttank").attr('tooltip7', 'They need to reload between attacks (4 ammo)');
 
 //Ships
 woodcost=20000;
@@ -6329,6 +6472,23 @@ $(".tech_steamengine").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFix
 $(".tech_steamengine").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip5', "Allows you to build steam powered engines.");
+
+moralecost=130;
+platecost=500;
+knowledgecost=2000;
+if(items["knowledge"]<knowledgecost || items["morale"]<moralecost || craft["plate"]<platecost){
+	$(".tech_armoredcombat").addClass("unavailable")
+}
+else
+{
+	$(".tech_armoredcombat").removeClass("unavailable")
+}
+$(".tech_armoredcombat").addClass((technologies["armoredcombat"] >0 ? "researched" : ""))
+$(".tech_armoredcombat").html("Armored combat" + (technologies["armoredcombat"] >0 ? " (res...)" : ""));
+$(".tech_armoredcombat").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_armoredcombat").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".tech_armoredcombat").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_armoredcombat").attr('tooltip5', "Allows you to build armored tanks to ride into battle");
 //Research
 
 
@@ -6789,12 +6949,19 @@ foodcost=power*2
 watercost=power
 moralecost=power/5
 
+coalcost=0;
+coalcost+=people["lighttank"]*50;
+
+
 power+=people["musketeer"]*125
+
+power+=people["lighttank"]*500
+hp+=people["lighttank"]*5000
 
 power=power*(bonus["power"]+1)
 hp=hp*(bonus["hp"]+1)
 healing=healing*(bonus["healing"]+1)
-if(items["food"]<foodcost || items["water"]<watercost || items["morale"]<moralecost){
+if(items["food"]<foodcost || items["water"]<watercost || items["morale"]<moralecost || items["coal"]<coalcost){
 	$(".expedition").addClass("unavailable")
 }
 else
@@ -6805,6 +6972,9 @@ $(".expedition").html("Expedition");
 $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".expedition").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".expedition").attr('tooltip3', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+if(coalcost>0){
+$(".expedition").attr('tooltip4', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
+}
 $(".expedition").attr('tooltip5', "Send your soldiers in a expedition");
 $(".expedition").attr('tooltip6', "Total Attack: "+Math.round(power)+" Total Hp: "+Math.round(hp));
 if(healing>0){

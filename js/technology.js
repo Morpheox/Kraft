@@ -272,6 +272,11 @@ function researchunlock(){
 		unlocked[".tech_steamengine"]=1;
 	}
 
+	if(bonus["military"]>=50000 && unlocked[".tech_armoredcombat"]!=1){
+		$(".tech_armoredcombat").show()
+		unlocked[".tech_armoredcombat"]=1;
+	}
+
 }
 
 

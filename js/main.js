@@ -850,14 +850,13 @@ function fight(){
 		combatlog+="You ran out of ammo.<br>"
 		reload=0;
 		}
-		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
-		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+
 
 
 		if(armor>0){
 
 			dmg2-=armor;
-			combatlog+="You block "+armor+" damage<br>"
+			combatlog+="Your troops block "+armor+" damage<br>"
 			if(dmg2<0){
 				dmg2=0;
 			}
@@ -871,6 +870,8 @@ function fight(){
 			}
 		}
 
+		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
+		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
 
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));

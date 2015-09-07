@@ -925,6 +925,12 @@ function fight(){
 				population-=losses;
 				combatlog+="You lose "+losses+" musketeers<br>"
 			}
+			if(people["lighttank"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["lighttank"]-1))+1
+				people["lighttank"]-=losses;
+				population-=losses*3;
+				combatlog+="You lose "+losses+" light tanks<br>"
+			}
 			break;
 		}
 		else if(hp2<0){
@@ -4932,7 +4938,8 @@ $(".hire_swordman").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFix
 $(".hire_swordman").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
 $(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp: 50');
-$(".hire_swordman").attr('tooltip5', 'Armor: 3');
+$(".hire_swordman").attr('tooltip6', 'Armor: 3');
+
 swordmancost=1;
 horsecost=1;
 armorcost=1;
@@ -4951,6 +4958,7 @@ $(".hire_knight").attr('tooltip4', "Food consumption: -2.00/s");
 $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 $(".hire_knight").attr('tooltip7', 'Armor: 10');
+
 foodcost=1000;
 coincost=20;
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){

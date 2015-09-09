@@ -3551,7 +3551,7 @@ if(trains<maximums["trains"]){
 
 			if (items["steel"]>=steelcost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
 
-				items["wood"]-=woodcost
+				items["steel"]-=steelcost
 				craft["plate"]-=platecost;
 				craft["engine"]-=enginecost;
 

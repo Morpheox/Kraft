@@ -6569,7 +6569,7 @@ else
 	$(".tech_safestorage").removeClass("unavailable")
 }
 $(".tech_safestorage").addClass((technologies["safestorage"] >0 ? "researched" : ""))
-$(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (res..)" : ""));
+$(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (researched)" : ""));
 $(".tech_safestorage").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".tech_safestorage").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".tech_safestorage").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
@@ -6609,7 +6609,7 @@ else
 	$(".tech_steamengine").removeClass("unavailable")
 }
 $(".tech_steamengine").addClass((technologies["steamengine"] >0 ? "researched" : ""))
-$(".tech_steamengine").html("Steam engine" + (technologies["steamengine"] >0 ? " (res...)" : ""));
+$(".tech_steamengine").html("Steam engine" + (technologies["steamengine"] >0 ? " (researched)" : ""));
 $(".tech_steamengine").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_steamengine").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
@@ -6643,7 +6643,7 @@ else
 	$(".tech_railtransport").removeClass("unavailable")
 }
 $(".tech_railtransport").addClass((technologies["railtransport"] >0 ? "researched" : ""))
-$(".tech_railtransport").html("Rail transport" + (technologies["railtransport"] >0 ? " (res...)" : ""));
+$(".tech_railtransport").html("Rail transport" + (technologies["railtransport"] >0 ? " (researched)" : ""));
 $(".tech_railtransport").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_railtransport").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_railtransport").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))

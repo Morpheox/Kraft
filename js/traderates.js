@@ -108,7 +108,7 @@ function refreshselecttrain(){
    	}
 }
 function refreshtrain(){
-if(trademission["trainbuy"]!="nothing")
+if($(".tradetrainselect").val()!="nothing")
 {
 trademission["trainbuy"]=$(".tradetrainselect").val()
 $(".tradetrainlog").html(tradetrain[trademission["trainbuy"]]+" "+trademission["trainbuy"]+" per coin.")

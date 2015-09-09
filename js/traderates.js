@@ -115,6 +115,7 @@ $(".tradetrainlog").html("Trading "+tradetrain[trademission["trainbuy"]]+" "+tra
 }
 else
 {
+trademission["trainbuy"]=$(".tradetrainselect").val()
 $(".tradetrainlog").html("Trading stopped")	
 }
 }

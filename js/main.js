@@ -5249,9 +5249,9 @@ $(".hire_cargotrain").html("Cargo train ("+people["cargotrain"]+")");
 $(".hire_cargotrain").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".hire_cargotrain").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".hire_cargotrain").attr('tooltip3', 'Engine: '+ parseFloat(craft["engine"]).toFixed(2)+" / "+parseFloat(enginecost).toFixed(2))
-$(".hire_cargotrain").attr('tooltip4', "Coal consumption -0.02/s");
-$(".hire_cargotrain").attr('tooltip5', 'Crew: 3');
-$(".hire_cargotrain").attr('tooltip6', 'Trade amount: 3 coins/minute');
+$(".hire_cargotrain").attr('tooltip5', "Coal consumption -0.02/s");
+$(".hire_cargotrain").attr('tooltip6', 'Crew: 3');
+$(".hire_cargotrain").attr('tooltip7', 'Trade amount: 3 coins/minute');
 
 
 //Technologies

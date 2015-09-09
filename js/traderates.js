@@ -79,8 +79,16 @@ traderatio["chemicals"]["iron"]=10;
 traderatio["chemicals"]["coal"]=4;
 traderatio["chemicals"]["steel"]=2.5;
 
+var tradetrain=new Array()
 
-
+tradetrain["wood"]=500;
+tradetrain["mineral"]=400;
+tradetrain["food"]=300;
+tradetrain["copper"]=3;
+tradetrain["iron"]=2;
+tradetrain["coal"]=1;
+tradetrain["tin"]=1;
+tradetrain["steel"]=0.25;
 
 
 function refreshselect(){
@@ -91,6 +99,24 @@ function refreshselect(){
    		    $(".selgive").append("<option value='"+gives+"'>"+gives+"</option>")
 		}
    	}
+}
+function refreshselecttrain(){
+	$(".tradetrainselect").html("")
+	 $(".tradetrainselect").append("<option value='nothing'>Stop trading</option>")
+		for(gets in tradetrain){
+   		    $(".tradetrainselect").append("<option value='"+gets+"'>"+gets+"</option>")
+   	}
+}
+function refreshtrain(){
+if(trademission["trainbuy"]!="nothing")
+{
+trademission["trainbuy"]=$(".tradetrainselect").val()
+$(".tradetrainlog").html(tradetrain[trademission["trainbuy"]]+" "+trademission["trainbuy"]+" per coin.")
+}
+else
+{
+$(".tradetrainlog").html("Trading stopped")	
+}
 }
 function refreshtrade(){
 		amount=$(".tradeamount").val()
@@ -135,7 +161,7 @@ var trademission=new Array()
 trademission["get"]=0;
 trademission["resourceget"]=0;
 trademission["time"]=0;
-
+trademission["trainbuy"]="nothing";
 
 
 var tickinterval;
@@ -285,7 +311,11 @@ $(document).ready(function(){
 		refreshtrade()
 	})
 
+	$(".tradetrainselect").on("change",function(){
 
+		refreshtrain();
+
+	})
 
 	$(".selget").on("change",function(){
 		refreshtrade()

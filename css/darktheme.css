@@ -362,3 +362,16 @@ color:black;
 .deals button{
   color:black!important;
 }
+
+.tradetrain{
+  border:1px solid #BBB;
+  padding:15px;
+  text-align:center;
+  width:400px;
+    margin-top:15px;
+  margin-bottom:15px;
+}
+
+.tradetrain select{
+  color:black!important;
+}

@@ -276,7 +276,11 @@ function researchunlock(){
 		$(".tech_armoredcombat").show()
 		unlocked[".tech_armoredcombat"]=1;
 	}
-
+	
+	if(bonus["economy"]>=50000 && unlocked[".tech_railtransport"]!=1){
+		$(".tech_railtransport").show()
+		unlocked[".tech_railtransport"]=1;
+	}
 }
 
 

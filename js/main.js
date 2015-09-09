@@ -87,6 +87,7 @@ buildings["blastfurnace"]=0;
 buildings["compressor"]=0;
 buildings["share"]=0;
 buildings["repository"]=0;
+buildings["trainstation"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -97,6 +98,7 @@ var maximums=new Array()
 
 maximums["population"]=0;
 maximums["ships"]=0;
+maximums["trains"]=0;
 maximums["bet"]=0;
 
 
@@ -108,7 +110,7 @@ maximums["mineral"]=20
 
 var population=0;
 var ships=0;
-
+var trains=0;
 
 var technologies=new Array()
 
@@ -198,6 +200,7 @@ technologies["steamengine"]=0
 technologies["safestorage"]=0
 technologies["metalwork"]=0
 technologies["armoredcombat"]=0
+technologies["railtransport"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -218,6 +221,8 @@ people["warelephant"]=0
 people["musketeer"]=0
 
 people["lighttank"]=0
+
+people["cargotrain"]=0
 
 people["sucellus"]=0
 people["eredal"]=0
@@ -3145,6 +3150,28 @@ function research(b){
 		}
 
 	}
+	else if (b=="railtransport" && technologies["railtransport"]==0){
+
+
+		coincost=10000;
+		platecost=300;
+		knowledgecost=2000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost && craft["plate"]>=platecost){
+
+			craft["coin"]-=coincost;
+			craft["plate"]-=platecost;
+			items["knowledge"]-=knowledgecost;
+
+			
+			technologies["railtransport"]++
+			$(".build_trainstation").show()
+			unlocked[".build_trainstation"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -3513,14 +3540,41 @@ function hire(b){
 		}
 	}
 
+if(trains<maximums["trains"]){
+		if (b=="cargotrain" && (population+3)<=maximums["population"]){
+
+			steelcost=500;
+			platecost=500;
+			enginecost=8;
 
 
+
+			if (items["steel"]>=steelcost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
+
+				items["wood"]-=woodcost
+				craft["plate"]-=platecost;
+				craft["engine"]-=enginecost;
+
+				people["cargotrain"]+=1;
+
+				trains++
+				population+=3;
+
+				$(".salvage_cargotrain").show()
+				unlocked[".salvage_cargotrain"]=1;
+
+
+
+			}
+
+		}
+}
 }
 function salvage(b){
 	if (people[b]>0){
 
 		people[b]-=1
-		ships--
+		
 		if (people[b]==0){
 			$(".salvage_"+b).hide()
 			unlocked[".salvage_"+b]=0;
@@ -3530,6 +3584,7 @@ function salvage(b){
 			craft["plank"]+=10+(Math.random()*10);
 			craft["structure"]+=5+(Math.random()*5);
 			items["wood"]+=1000+(Math.random()*5000);
+			ships--
 			if(people["galley"]<1){
 				$(".salvage_galley").hide()
 				unlocked[".salvage_galley"]=0;
@@ -3540,6 +3595,7 @@ function salvage(b){
 			craft["plank"]+=300+(Math.random()*300);
 			craft["structure"]+=50+(Math.random()*50);
 			items["wood"]+=20000+(Math.random()*20000);
+			ships--
 			if(people["galleon"]<1){
 				$(".salvage_galleon").hide()
 				unlocked[".salvage_galleon"]=0;
@@ -3550,6 +3606,7 @@ function salvage(b){
 			craft["plank"]+=200+(Math.random()*300);
 			items["steel"]+=50+(Math.random()*50);
 			items["wood"]+=5000+(Math.random()*20000);
+			ships--
 			if(people["fireship"]<1){
 				$(".salvage_fireship").hide()
 				unlocked[".salvage_fireship"]=1;
@@ -3559,11 +3616,23 @@ function salvage(b){
 
 			craft["plank"]+=200+(Math.random()*300);
 			items["wood"]+=5000+(Math.random()*20000);
-			items["steel"]+=100+(Math.random()*50);
-
+			items["iron"]+=100+(Math.random()*50);
+			ships--
 			if(people["caravel"]<1){
 				$(".salvage_caravel").hide()
 				unlocked[".salvage_caravel"]=1;
+			}
+		}
+		if(b=="cargotrain"){
+
+			craft["plate"]+=100+(Math.random()*100);
+			items["steel"]+=100+(Math.random()*100);
+			craft["engine"]+=1+(Math.random()*2);
+			trains--
+			population-=3;
+			if(people["cargotrain"]<1){
+				$(".salvage_cargotrain").hide()
+				unlocked[".salvage_cargotrain"]=1;
 			}
 		}
 	}
@@ -4243,6 +4312,33 @@ function build(b){
 
 		}
 	}
+	else if (b=="trainstation"){
+
+		woodcost=Math.pow(1.2,(buildings["trainstation"]))*100000
+		ironcost=Math.pow(1.2,(buildings["trainstation"]))*500
+		framecost= Math.pow(1.2,(buildings["trainstation"]))*50
+
+
+
+		if (craft["frame"]>=framecost && items["iron"]>=ironcost && items["wood"]>=woodcost){
+
+			craft["frame"]-=framecost;
+			items["iron"]-=ironcost;
+			items["wood"]-=woodcost;
+
+			maximums["trains"]+=2;
+
+			buildings["trainstation"]+=1
+
+
+			$(".hire_cargotrain").show()
+			unlocked[".hire_cargotrain"]=1
+			$(".trains").show()
+			unlocked[".trains"]=1
+			$(".tradetrain").show()
+			unlocked[".tradetrain"]=1;
+		}
+	}
 }
 
 function calculatecost(){
@@ -4782,6 +4878,23 @@ $(".build_repository").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).to
 $(".build_repository").attr('tooltip3', 'Bottle: '+ parseFloat(craft["bottle"]).toFixed(2)+" / "+parseFloat(bottlecost).toFixed(2))
 $(".build_repository").attr('tooltip5', 'Provides storage for complex materials');
 
+woodcost=Math.pow(1.2,(buildings["trainstation"]))*100000
+ironcost=Math.pow(1.2,(buildings["trainstation"]))*500
+framecost= Math.pow(1.2,(buildings["trainstation"]))*50
+if(craft["frame"]<framecost || items["iron"]<ironcost || items["wood"]<woodcost){
+	$(".build_trainstation").addClass("unavailable")
+}
+else
+{
+	$(".build_trainstation").removeClass("unavailable")
+}
+$(".build_trainstation").html("Train station ("+buildings["trainstation"]+")");
+$(".build_trainstation").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
+$(".build_trainstation").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_trainstation").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_trainstation").attr('tooltip5', '+2 train capacity');
+
+
 //People
 foodcost=50;
 if(items["food"]<foodcost || population>=maximums["population"]){
@@ -5121,6 +5234,25 @@ $(".hire_caravel").attr('tooltip4', "Power: 200  Structure: 6,000");
 $(".hire_caravel").attr('tooltip5', 'Cargo capacity: 10.000  Crew: 3');
 $(".hire_caravel").attr('tooltip6', 'Throws chains that lower enemy attack by 75 per round');
 $(".hire_caravel").attr('tooltip7', 'Reduces trade mission time slightly');
+
+steelcost=500;
+platecost=500;
+enginecost=8;
+if(craft["plate"]<platecost || craft["engine"]<enginecost || items["steel"]<steelcost || trains>=maximums["trains"] || population+2>=maximums["population"]){
+	$(".hire_cargotrain").addClass("unavailable")
+}
+else
+{
+	$(".hire_cargotrain").removeClass("unavailable")
+}
+$(".hire_cargotrain").html("Cargo train ("+people["cargotrain"]+")");
+$(".hire_cargotrain").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".hire_cargotrain").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".hire_cargotrain").attr('tooltip3', 'Engine: '+ parseFloat(craft["engine"]).toFixed(2)+" / "+parseFloat(enginecost).toFixed(2))
+$(".hire_cargotrain").attr('tooltip4', "Coal consumption -0.02/s");
+$(".hire_cargotrain").attr('tooltip5', 'Crew: 3');
+$(".hire_cargotrain").attr('tooltip6', 'Trade amount: 3 coins/minute');
+
 
 //Technologies
 
@@ -6499,6 +6631,25 @@ $(".tech_armoredcombat").attr('tooltip', 'Morale: '+ parseFloat(items["morale"])
 $(".tech_armoredcombat").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_armoredcombat").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_armoredcombat").attr('tooltip5', "Allows you to build armored tanks to ride into battle");
+
+coincost=10000;
+platecost=300;
+knowledgecost=2000;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost || craft["plate"]<platecost){
+	$(".tech_railtransport").addClass("unavailable")
+}
+else
+{
+	$(".tech_railtransport").removeClass("unavailable")
+}
+$(".tech_railtransport").addClass((technologies["railtransport"] >0 ? "researched" : ""))
+$(".tech_railtransport").html("Rail transport" + (technologies["railtransport"] >0 ? " (res...)" : ""));
+$(".tech_railtransport").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_railtransport").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".tech_railtransport").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_railtransport").attr('tooltip5', "Trains are a good way to keep your economy moving.");
+
+
 //Research
 
 
@@ -7029,6 +7180,15 @@ function refresh(){
 		consumption[key]=0;
 	}
 //buildings
+if(items["coal"]>=people["cargotrain"]*0.005){
+	consumption["coal"]+=people["cargotrain"]*0.005
+	if(trademission["trainbuy"]!="nothing" && craft["coin"]>=people["cargotrain"]*0.0125){
+		craft["coin"]-=people["cargotrain"]*0.0125
+		production[trademission["trainbuy"]]+=people["cargotrain"]*tradetrain[trademission["trainbuy"]]*0.0125
+	}
+}
+
+
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;
@@ -7044,20 +7204,20 @@ craft["token"]+=buildings["share"]/40;
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {
 	consumption["water"]+=buildings["pasture"]/20
-	production["food"]=buildings["pasture"]/20;
+	production["food"]+=buildings["pasture"]/20;
 }
 if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 {
 	consumption["mineral"]+=buildings["foundry"]/8
-	production["iron"]=buildings["foundry"]/200;
+	production["iron"]+=buildings["foundry"]/200;
 	if(technologies["bronze"]>0){
-		production["tin"]=buildings["foundry"]/800;
+		production["tin"]+=buildings["foundry"]/800;
 	}
 }
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 {
 	consumption["wood"]+=buildings["kiln"]/2
-	production["coal"]=buildings["kiln"]/400;
+	production["coal"]+=buildings["kiln"]/400;
 
 }
 if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
@@ -7076,7 +7236,7 @@ if(buildings["library"]>=8){
 if (items["mineral"]>=buildings["crusher"]*2.5 && buildstatus["crusher"]==1)
 {
 	consumption["mineral"]+=buildings["crusher"]*2.5;
-	production["sand"]=buildings["crusher"]/8;
+	production["sand"]+=buildings["crusher"]/8;
 
 }
 if (items["wood"]>=buildings["blockyard"] && items["mineral"]>=buildings["blockyard"]*2 && buildstatus["blockyard"]==1)
@@ -7232,6 +7392,7 @@ inv_text+="</table>"
 $(".inventory").html(inv_text);
 $(".population").html("Population: "+population+" / "+ +maximums["population"]);
 $(".ships").html("Ships: "+ships+" / "+ +maximums["ships"]);
+$(".trains").html("Trains: "+trains+" / "+ +maximums["trains"]);
 $(".titles").html("Titles: "+bonus["title"]);
 $(".territory").html("Territory: "+intToString(bonus["territory"]));
 var inv_text="<table>"
@@ -7419,9 +7580,9 @@ prestige = update(prestige,JSON.parse(result[10]));
 buildstatus = update(prestige,JSON.parse(result[11]));
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
 
-
+		trains=people["cargotrain"]
 
 
 		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
@@ -7453,7 +7614,7 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 		$(".reespec").show()
 		unlocked[".reespec"]=1;
 	}
-
+	$('.tradetrainselect').val(trademission["trainbuy"]);
 	refreshselect()
 	filllog();
 
@@ -7486,9 +7647,9 @@ function load(){
 		}
 
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
 
-
+		trains=people["cargotrain"]
 
 
 		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
@@ -7552,7 +7713,7 @@ traderatio["mineral"]["nickel"]=0.00018;
 
 
 	researchunlock()
-
+	$('.tradetrainselect').val(trademission["trainbuy"]);
 	save()
 
 	} 

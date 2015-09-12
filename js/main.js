@@ -50,6 +50,7 @@ bonus["shipcargo"]=0;
 bonus["warpcost"]=0;
 bonus["theme"]=0;
 bonus["exprew"]=0;
+bonus["booking"]=0;
 
 var buildings=new Array();
 
@@ -201,6 +202,8 @@ technologies["safestorage"]=0
 technologies["metalwork"]=0
 technologies["armoredcombat"]=0
 technologies["railtransport"]=0
+technologies["academicpublishing"]=0
+technologies["triforce"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -241,6 +244,7 @@ people["caravel"]=0
 var craft=new Array();
 
 craft["coin"]=0
+craft["book"]=0
 craft["ammo"]=0
 craft["token"]=0
 craft["chest"]=0
@@ -1350,6 +1354,21 @@ function crafting(b){
 				craft["bronze"]-=bronzecost;
 
 				craft["engine"]+=1+bonus["craft"];
+
+			}
+
+		}
+		else if (b=="book"){
+
+			knowledgecost=2500;
+
+
+
+			if (items["knowledge"]>=knowledgecost){
+
+				items["knowledge"]-=knowledgecost
+
+				craft["book"]+=1+bonus["booking"];
 
 			}
 
@@ -3169,6 +3188,39 @@ function research(b){
 			technologies["railtransport"]++
 			$(".build_trainstation").show()
 			unlocked[".build_trainstation"]=1;
+		}
+
+	}
+		else if (b=="triforce" && technologies["triforce"]==0){
+
+
+		knowledgecost=3000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+		bonus["knowledge"]+=0.30;
+		bonus["gold"]+=0.30
+		bonus["morale"]+=0.30
+		bonus["storage"]+=0.30
+		bonus["craft"]+=0.30
+			
+			technologies["triforce"]++
+
+		}
+
+	}
+	else if (b=="academicpublishing" && technologies["academicpublishing"]==0){
+
+
+		knowledgecost=2500;
+		
+		if (items["knowledge"]>=knowledgecost){
+			
+			technologies["academicpublishing"]++
+			$(".craft_book").show()
+			unlocked[".craft_book"]=1;
 		}
 
 	}
@@ -6649,6 +6701,36 @@ $(".tech_railtransport").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).
 $(".tech_railtransport").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_railtransport").attr('tooltip5', "Trains are a good way to keep your economy moving.");
 
+knowledgecost=2500;
+if(items["knowledge"]<knowledgecost){
+	$(".tech_academicpublishing").addClass("unavailable")
+}
+else
+{
+	$(".tech_academicpublishing").removeClass("unavailable")
+}
+$(".tech_academicpublishing").addClass((technologies["academicpublishing"] >0 ? "researched" : ""))
+$(".tech_academicpublishing").html("Academic Publishing" + (technologies["academicpublishing"] >0 ? " (res..)" : ""));
+$(".tech_academicpublishing").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowledge in scientific papers.");
+
+
+knowledgecost=3000;
+if(items["knowledge"]<knowledgecost){
+	$(".tech_triforce").addClass("unavailable")
+}
+else
+{
+	$(".tech_triforce").removeClass("unavailable")
+}
+$(".tech_triforce").addClass((technologies["triforce"] >0 ? "researched" : ""))
+$(".tech_triforce").html("Triforce" + (technologies["triforce"] >0 ? " (researched)" : ""));
+$(".tech_triforce").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_triforce").attr('tooltip3', "+30% gold production");
+$(".tech_triforce").attr('tooltip4', "+30% knowledge production");
+$(".tech_triforce").attr('tooltip5', "+30% morale production");
+$(".tech_triforce").attr('tooltip6', "+30% storage space");
+$(".tech_triforce").attr('tooltip7', "+30% craft efficiency");
 
 //Research
 
@@ -6978,7 +7060,17 @@ $(".craft_engine").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFi
 $(".craft_engine").attr('tooltip3', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".craft_engine").attr('tooltip5', "A steam powered engine.");
 
-
+knowledgecost=2500;
+if(items["knowledge"]<knowledgecost){
+	$(".craft_book").addClass("unavailable")
+}
+else
+{
+	$(".craft_book").removeClass("unavailable")
+}
+$(".craft_book").html("Book");
+$(".craft_book").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".craft_book").attr('tooltip3', "Scientific papers wich can be used to research new technologies");
 //Leaders
 
 if(bonus["title"]<1){

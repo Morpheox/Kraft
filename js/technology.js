@@ -281,6 +281,17 @@ function researchunlock(){
 		$(".tech_railtransport").show()
 		unlocked[".tech_railtransport"]=1;
 	}
+
+	if(bonus["science"]>=70000 && unlocked[".tech_academicpublishing"]!=1){
+		$(".tech_academicpublishing").show()
+		unlocked[".tech_academicpublishing"]=1;
+	}
+	if((bonus["science"]>=100000 && bonus["military"]>=100000 && bonus["economy"]>=100000) && unlocked[".tech_triforce"]!=1){
+		$(".tech_triforce").show()
+		unlocked[".tech_triforce"]=1;
+	}
+
+
 }
 
 

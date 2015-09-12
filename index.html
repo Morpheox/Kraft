@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.7.1 beta</title>
+	<title>Keep Craft v0.7.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.7.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.7.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -118,6 +118,7 @@
 			<div class="block research_economy"></div>
 			<div class="block research_science"></div>
 			<div class="block research_military"></div><br>
+			<div class="block craft_book"></div><br>
 		<button class="toggletech" onclick="toggletech()">Hide researched technologies</button><br><br>
 		<div class="technolist">
 			<div class="block tech_coppertools"></div>
@@ -207,6 +208,8 @@
 			<div class="block tech_steamengine"></div>
 			<div class="block tech_armoredcombat"></div>
 			<div class="block tech_railtransport"></div>
+			<div class="block tech_academicpublishing"></div>
+			<div class="block tech_triforce"></div>
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -235,7 +238,8 @@
 		<div class="block craft_ammo"></div>
 		<div class="block craft_musket"></div>
 		<div class="block craft_plate"></div>
-		<div class="block craft_engine"></div><br><br><br><br><br>
+		<div class="block craft_engine"></div>
+		<br><br><br><br><br>
 	</div>
 	</div>
 	<div id="military" class="soldiers tab-pane fade">
@@ -435,6 +439,20 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.7.3</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New object - books</li>
+        <li>Books will be used as currency for new techs</li>
+       	<li>Books give 1 legacy when exploring a new continent</li>
+       	<li>Book crafting its not affected by craft efficiency</li>
+        <li>Science will be able to create them, economy and military will get them with other means</li>
+        </ul>
+        <b>V 0.7.2</b>
+        <ul>
+        <li>New bonus tech unlocked by leveling all 3 branches to 100k</li>
+        <li>Some minor interface issues fixed</li>
+        </ul>
         <b>V 0.7.1</b>
         <ul>
         <li>New economic tech</li>
@@ -1001,6 +1019,8 @@
 	$(".tech_safestorage").click(function() {research("safestorage")});
 	$(".tech_armoredcombat").click(function() {research("armoredcombat")});
 	$(".tech_railtransport").click(function() {research("railtransport")});
+	$(".tech_academicpublishing").click(function() {research("academicpublishing")});
+	$(".tech_triforce").click(function() {research("triforce")});
 
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
@@ -1023,6 +1043,7 @@
 	$(".craft_musket").click(function() {crafting("musket")});
 	$(".craft_plate").click(function() {crafting("plate")});
 	$(".craft_engine").click(function() {crafting("engine")});
+	$(".craft_book").click(function() {crafting("book")});
 
 	$(".expedition").click(function() {expedition()});
         

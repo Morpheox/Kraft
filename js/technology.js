@@ -282,6 +282,10 @@ function researchunlock(){
 		unlocked[".tech_railtransport"]=1;
 	}
 
+	if(bonus["science"]>=50000 && unlocked[".tech_industrialization"]!=1){
+		$(".tech_industrialization").show()
+		unlocked[".tech_industrialization"]=1;
+	}
 	if(bonus["science"]>=70000 && unlocked[".tech_academicpublishing"]!=1){
 		$(".tech_academicpublishing").show()
 		unlocked[".tech_academicpublishing"]=1;

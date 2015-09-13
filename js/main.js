@@ -51,6 +51,7 @@ bonus["warpcost"]=0;
 bonus["theme"]=0;
 bonus["exprew"]=0;
 bonus["booking"]=0;
+bonus["auto"]=0;
 
 var buildings=new Array();
 
@@ -89,6 +90,7 @@ buildings["compressor"]=0;
 buildings["share"]=0;
 buildings["repository"]=0;
 buildings["trainstation"]=0;
+buildings["workshop"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -202,6 +204,7 @@ technologies["safestorage"]=0
 technologies["metalwork"]=0
 technologies["armoredcombat"]=0
 technologies["railtransport"]=0
+technologies["industrialization"]=0
 technologies["academicpublishing"]=0
 technologies["triforce"]=0
 
@@ -3191,23 +3194,24 @@ function research(b){
 		}
 
 	}
-		else if (b=="triforce" && technologies["triforce"]==0){
+	else if (b=="industrialization" && technologies["industrialization"]==0){
 
-
-		knowledgecost=3000;
+		chemicalscost=100;
+		platecost=300;
+		knowledgecost=2000;
 		
 
 
-		if (items["knowledge"]>=knowledgecost){
+		if (items["knowledge"]>=knowledgecost && items["chemicals"]>=chemicalscost && craft["plate"]>=platecost){
 
-		bonus["knowledge"]+=0.30;
-		bonus["gold"]+=0.30
-		bonus["morale"]+=0.30
-		bonus["storage"]+=0.30
-		bonus["craft"]+=0.30
+			items["chemicals"]-=chemicalscost;
+			craft["plate"]-=platecost;
+			items["knowledge"]-=knowledgecost;
+
 			
-			technologies["triforce"]++
-
+			technologies["industrialization"]++
+			$(".build_workshop").show()
+			unlocked[".build_workshop"]=1;
 		}
 
 	}
@@ -3218,9 +3222,34 @@ function research(b){
 		
 		if (items["knowledge"]>=knowledgecost){
 			
+			items["knowledge"]-=knowledgecost;
+
 			technologies["academicpublishing"]++
 			$(".craft_book").show()
 			unlocked[".craft_book"]=1;
+		}
+
+	}
+	else if (b=="triforce" && technologies["triforce"]==0){
+
+
+		knowledgecost=3000;
+		
+
+
+		if (items["knowledge"]>=knowledgecost){
+
+
+		items["knowledge"]-=knowledgecost;
+
+		bonus["knowledge"]+=0.30;
+		bonus["gold"]+=0.30
+		bonus["morale"]+=0.30
+		bonus["storage"]+=0.30
+		bonus["craft"]+=0.30
+			
+			technologies["triforce"]++
+
 		}
 
 	}
@@ -4391,6 +4420,32 @@ function build(b){
 			unlocked[".tradetrain"]=1;
 		}
 	}
+	else if (b=="workshop"){
+
+		brickcost= Math.pow(1.3,(buildings["trainstation"]))*500
+		platecost=Math.pow(1.3,(buildings["trainstation"]))*500
+		enginecost=Math.pow(1.3,(buildings["trainstation"]))*10
+	
+
+
+
+		if (craft["frame"]>=framecost && items["iron"]>=ironcost && items["wood"]>=woodcost){
+
+			craft["brick"]-=brickcost;
+			craft["plate"]-=platecost;
+			craft["engine"]-=enginecost;
+
+			bonus["craft"]+=0.10
+			
+			buildstatus["workshop"]=1;
+			buildings["workshop"]+=1
+
+
+			$(".toggle_workshop").show()
+			unlocked[".toggle_workshop"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -4945,6 +5000,30 @@ $(".build_trainstation").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toF
 $(".build_trainstation").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_trainstation").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_trainstation").attr('tooltip5', '+2 train capacity');
+
+brickcost= Math.pow(1.3,(buildings["trainstation"]))*500
+platecost=Math.pow(1.3,(buildings["trainstation"]))*500
+enginecost=Math.pow(1.3,(buildings["trainstation"]))*10
+
+if(craft["brick"]<brickcost || craft["plate"]<platecost || craft["engine"]<enginecost){
+	$(".build_workshop").addClass("unavailable")
+}
+else
+{
+	$(".build_workshop").removeClass("unavailable")
+}
+$(".build_workshop").html("Workshop ("+buildings["workshop"]+")");
+$(".build_workshop").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_workshop").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".build_workshop").attr('tooltip3', 'Engine: '+ parseFloat(craft["engine"]).toFixed(2)+" / "+parseFloat(enginecost).toFixed(2))
+$(".build_workshop").attr('tooltip4', '+10% craft efficiency');
+$(".build_workshop").attr('tooltip5', '+10% autocraft efficiency when active');
+$(".build_workshop").attr('tooltip6', 'Coal consumption: -0.03/s');
+$(".build_workshop").attr('tooltip7', 'Chemicals consumption: -0.01/s');
+
+
+
+
 
 
 //People
@@ -6701,6 +6780,25 @@ $(".tech_railtransport").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).
 $(".tech_railtransport").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_railtransport").attr('tooltip5', "Trains are a good way to keep your economy moving.");
 
+chemicalscost=100;
+platecost=300;
+knowledgecost=2000;
+if(items["knowledge"]<knowledgecost || items["chemicals"]<chemicalscost || craft["plate"]<platecost){
+	$(".tech_industrialization").addClass("unavailable")
+}
+else
+{
+	$(".tech_industrialization").removeClass("unavailable")
+}
+$(".tech_industrialization").addClass((technologies["industrialization"] >0 ? "researched" : ""))
+$(".tech_industrialization").html("Industrialization" + (technologies["industrialization"] >0 ? " (researched)" : ""));
+$(".tech_industrialization").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
+$(".tech_industrialization").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".tech_industrialization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_industrialization").attr('tooltip5', "Further developments has increased the efficiency of crafting.");
+
+
+
 knowledgecost=2500;
 if(items["knowledge"]<knowledgecost){
 	$(".tech_academicpublishing").addClass("unavailable")
@@ -7280,6 +7378,17 @@ if(items["coal"]>=people["cargotrain"]*0.005){
 	}
 }
 
+if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.0075 && items["chemicals"]>=buildings["workshop"]*0.0025){
+
+	consumption["coal"]+=buildings["workshop"]*0.0075
+	consumption["chemicals"]+=buildings["workshop"]*0.0025
+	bonus["auto"]=buildings["workshop"]*0.10
+}
+else
+{
+bonus["auto"]=0
+}
+
 
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
@@ -7291,7 +7400,7 @@ production["clay"]+=buildings["quarry"]/20;
 if(technologies["safestorage"]==1){
 production["nickel"]+=buildings["quarry"]/4000;
 }
-craft["token"]+=buildings["share"]/40;
+craft["token"]+=(buildings["share"]/40)*(bonus["auto"]+1);
 
 if (items["water"]>=buildings["pasture"]/20 && buildstatus["pasture"]==1)
 {
@@ -7315,12 +7424,12 @@ if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 if (items["wood"]>=buildings["shipyard"]*10 && buildstatus["shipyard"]==1)
 {
 	consumption["wood"]+=buildings["shipyard"]*10
-	craft["plank"]+=buildings["shipyard"]/80;
+	craft["plank"]+=(buildings["shipyard"]/80)*(bonus["auto"]+1);
 }
 if (items["gold"]>=buildings["bank"]/40 && buildstatus["bank"]==1)
 {
 	consumption["gold"]+=buildings["bank"]/40
-	craft["coin"]+=buildings["bank"]/200;
+	craft["coin"]+=(buildings["bank"]/200)*(bonus["auto"]+1);
 }
 if(buildings["library"]>=8){
 	production["knowledge"]+=buildings["library"]/400;
@@ -7342,7 +7451,7 @@ if (items["wood"]>=buildings["carpentry"]*1.25 && items["iron"]>=buildings["carp
 {
 	consumption["wood"]+=buildings["carpentry"]*1.25
 	consumption["iron"]+=buildings["carpentry"]*0.025 
-	craft["structure"]+=buildings["carpentry"]/800;
+	craft["structure"]+=(buildings["carpentry"]/800)*(bonus["auto"]+1);
 }
 //people
 production["food"]+=people["farmer"]/10;
@@ -7395,9 +7504,9 @@ if (craft["coin"]>=people["marketer"]*0.0125 && items["food"]>=people["marketer"
 {
 	craft["coin"]-=people["marketer"]*0.0125
 	consumption["food"]+=people["marketer"]/20
-	craft["bronze"]+=0.00025*people["marketer"]
-	craft["brick"]+=0.000125*people["marketer"]
-	craft["glass"]+=0.000125*people["marketer"]
+	craft["bronze"]+=0.00025*people["marketer"]*(bonus["auto"]+1)
+	craft["brick"]+=0.000125*people["marketer"]*(bonus["auto"]+1)
+	craft["glass"]+=0.000125*people["marketer"]*(bonus["auto"]+1)
 }
 
 

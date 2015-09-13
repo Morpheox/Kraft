@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.7.3 beta</title>
+	<title>Keep Craft v0.7.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.7.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.7.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -206,8 +206,9 @@
 			<div class="block tech_safestorage"></div>
 			<div class="block tech_metalwork"></div>
 			<div class="block tech_steamengine"></div>
-			<div class="block tech_armoredcombat"></div>
 			<div class="block tech_railtransport"></div>
+			<div class="block tech_industrialization"></div>
+			<div class="block tech_armoredcombat"></div>
 			<div class="block tech_academicpublishing"></div>
 			<div class="block tech_triforce"></div>
 		</div>
@@ -218,7 +219,8 @@
 	<div  id="crafting" class="crafting tab-pane fade">
 	<div class="craftline">
 		<div class="craftamount"></div>
-		<div class="block build_workbench"></div><button class="toggle toggle_workbench" onclick='toggle("workbench")'>Toggle</button><br><br>
+		<div class="block build_workbench"></div><button class="toggle toggle_workbench" onclick='toggle("workbench")'>Toggle</button><br>
+		<div class="block build_workshop"></div><button class="toggle toggle_workshop" onclick='toggle("workshop")'>Toggle</button><br><br>
 		<div class="block craft_pickaxe"></div>
 		<div class="block craft_spear"></div>
 		<div class="block craft_sword"></div>
@@ -439,6 +441,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.7.4</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New building - Workshop</li>
+        <li>Workshops increase craft effiency</li>
+        <li>They also increase autocraft effiency when active</li>
+        <li>Autocraft includes banks, shipyards, marketeers...</li>
+        <li>Fixed some technologies cost</li>
+        </ul>
         <b>V 0.7.3</b>
         <ul>
         <li>New science tech</li>
@@ -905,6 +916,7 @@
 	$(".build_share").click(function() {build("share")});
 	$(".build_repository").click(function() {build("repository")});
 	$(".build_trainstation").click(function() {build("trainstation")});
+	$(".build_workshop").click(function() {build("workshop")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -1019,6 +1031,7 @@
 	$(".tech_safestorage").click(function() {research("safestorage")});
 	$(".tech_armoredcombat").click(function() {research("armoredcombat")});
 	$(".tech_railtransport").click(function() {research("railtransport")});
+	$(".tech_industrialization").click(function() {research("industrialization")});
 	$(".tech_academicpublishing").click(function() {research("academicpublishing")});
 	$(".tech_triforce").click(function() {research("triforce")});
 

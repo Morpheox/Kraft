@@ -4444,14 +4444,14 @@ function build(b){
 	}
 	else if (b=="workshop"){
 
-		brickcost= Math.pow(1.3,(buildings["trainstation"]))*500
-		platecost=Math.pow(1.3,(buildings["trainstation"]))*500
-		enginecost=Math.pow(1.3,(buildings["trainstation"]))*10
+		brickcost= Math.pow(1.3,(buildings["workshop"]))*500
+		platecost=Math.pow(1.3,(buildings["workshop"]))*500
+		enginecost=Math.pow(1.3,(buildings["workshop"]))*10
 	
 
 
 
-		if (craft["frame"]>=framecost && items["iron"]>=ironcost && items["wood"]>=woodcost){
+		if (craft["frame"]>=framecost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
 
 			craft["brick"]-=brickcost;
 			craft["plate"]-=platecost;
@@ -5023,9 +5023,9 @@ $(".build_trainstation").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).to
 $(".build_trainstation").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_trainstation").attr('tooltip5', '+2 train capacity');
 
-brickcost= Math.pow(1.3,(buildings["trainstation"]))*500
-platecost=Math.pow(1.3,(buildings["trainstation"]))*500
-enginecost=Math.pow(1.3,(buildings["trainstation"]))*10
+brickcost= Math.pow(1.3,(buildings["workshop"]))*500
+platecost=Math.pow(1.3,(buildings["workshop"]))*500
+enginecost=Math.pow(1.3,(buildings["workshop"]))*10
 
 if(craft["brick"]<brickcost || craft["plate"]<platecost || craft["engine"]<enginecost){
 	$(".build_workshop").addClass("unavailable")

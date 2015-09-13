@@ -6837,11 +6837,11 @@ $(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowled
 coincost=5000;
 bookcost=10;
 if(craft["book"]<bookcost && craft["coin"]<coincost ){
-	$(".tech_academicpublishing").addClass("unavailable")
+	$(".tech_logistics").addClass("unavailable")
 }
 else
 {
-	$(".tech_academicpublishing").removeClass("unavailable")
+	$(".tech_logistics").removeClass("unavailable")
 }
 $(".tech_logistics").addClass((technologies["logistics"] >0 ? "researched" : ""))
 $(".tech_logistics").html("Logistics" + (technologies["logistics"] >0 ? " (researched)" : ""));

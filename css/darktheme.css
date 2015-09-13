@@ -375,3 +375,14 @@ color:black;
 .tradetrain select{
   color:black!important;
 }
+
+.craftclick{
+  cursor:pointer;
+  -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none;
+}
+
+.craftclick:hover{
+  color:orange;
+}

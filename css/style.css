@@ -341,3 +341,14 @@ font-size: 20px;
   margin-top:15px;
   margin-bottom:15px;
 }
+
+.craftclick{
+  cursor:pointer;
+  -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none;
+}
+
+.craftclick:hover{
+  color:orange;
+}

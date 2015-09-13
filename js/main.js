@@ -207,6 +207,7 @@ technologies["railtransport"]=0
 technologies["industrialization"]=0
 technologies["academicpublishing"]=0
 technologies["triforce"]=0
+technologies["logistics"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1177,7 +1178,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="glass"){
+		else if (b=="glass" && technologies["floatglass"]==1){
 
 			tincost=50;
 			sandcost=200;
@@ -1195,7 +1196,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="bottle"){
+		else if (b=="bottle" && technologies["glassblowing"]==1){
 
 			glasscost=5;
 
@@ -1211,7 +1212,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="greatsword"){
+		else if (b=="greatsword" && technologies["rampage"]==1){
 
 			steelcost=100;
 
@@ -1228,7 +1229,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="frame"){
+		else if (b=="frame" && technologies["architecture"]==1){
 
 			blockcost=500;
 			structurecost=100;
@@ -1246,7 +1247,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="brick"){
+		else if (b=="brick" && technologies["masonry"]==1){
 
 			sandcost=500;
 			claycost=150;
@@ -1263,7 +1264,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="gunpowder"){
+		else if (b=="gunpowder" && technologies["explosives"]==1){
 
 
 			sandcost=300;
@@ -1284,7 +1285,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="ammo"){
+		else if (b=="ammo" && technologies["ammunition"]==1){
 
 
 
@@ -1303,7 +1304,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="musket"){
+		else if (b=="musket" && technologies["gunnery"]==1){
 
 			woodcost=500;
 			ironcost=500;
@@ -1322,7 +1323,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="plate"){
+		else if (b=="plate" && technologies["metalwork"]==1){
 
 			coppercost=500;
 			ironcost=300;
@@ -1342,7 +1343,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="engine"){
+		else if (b=="engine" && technologies["steamengine"]==1){
 
 			steelcost=400;
 			platecost=300;
@@ -1361,7 +1362,7 @@ function crafting(b){
 			}
 
 		}
-		else if (b=="book"){
+		else if (b=="book" && technologies["academicpublishing"]==1){
 
 			knowledgecost=2500;
 
@@ -3230,6 +3231,27 @@ function research(b){
 		}
 
 	}
+
+	else if (b=="logistics" && technologies["logistics"]==0){
+
+
+		coincost=5000;
+		bookcost=10;
+
+
+		
+		if (craft["coin"]>=coincost && craft["book"]>=bookcost){
+			
+			craft["coin"]-=coincost;
+			craft["book"]-=bookcost;
+
+			technologies["logistics"]++
+
+		}
+
+	}
+
+
 	else if (b=="triforce" && technologies["triforce"]==0){
 
 
@@ -4436,7 +4458,7 @@ function build(b){
 			craft["engine"]-=enginecost;
 
 			bonus["craft"]+=0.10
-			
+
 			buildstatus["workshop"]=1;
 			buildings["workshop"]+=1
 
@@ -6812,6 +6834,23 @@ $(".tech_academicpublishing").html("Academic Publishing" + (technologies["academ
 $(".tech_academicpublishing").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowledge in scientific papers.");
 
+coincost=5000;
+bookcost=10;
+if(craft["book"]<bookcost && craft["coin"]<coincost ){
+	$(".tech_academicpublishing").addClass("unavailable")
+}
+else
+{
+	$(".tech_academicpublishing").removeClass("unavailable")
+}
+$(".tech_logistics").addClass((technologies["logistics"] >0 ? "researched" : ""))
+$(".tech_logistics").html("Logistics" + (technologies["logistics"] >0 ? " (researched)" : ""));
+$(".tech_logistics").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_logistics").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_logistics").attr('tooltip4', "Logistics provide a shortcut to crafting.");
+$(".tech_logistics").attr('tooltip5', "Allows you to craft materials directly by clicking its name on the list.");
+
+
 
 knowledgecost=3000;
 if(items["knowledge"]<knowledgecost){
@@ -7195,13 +7234,18 @@ else
 }
 
 $(".leader_sucellus").html("Sucellus (lv:" + people["sucellus"]+")");
-$(".leader_sucellus").attr('tooltip', 'Increments wood, water and food production by 20%')
-$(".leader_sucellus").attr('tooltip2', 'Increments maximum water by +5')
-$(".leader_sucellus").attr('tooltip4', "'Nature its not optional'");
+$(".leader_sucellus").attr('tooltip', 'Increments wood production by 20%')
+$(".leader_sucellus").attr('tooltip2', 'Increments water production by 20%')
+$(".leader_sucellus").attr('tooltip3', 'Increments food production by 20%')
+$(".leader_sucellus").attr('tooltip4', 'Increments maximum water by +5')
+$(".leader_sucellus").attr('tooltip6', "'Nature its not optional'");
 
 $(".leader_eredal").html("Eredal (lv:" + people["eredal"]+")");
-$(".leader_eredal").attr('tooltip', 'Increments mineral, copper, iron and steel production by 10%')
-$(".leader_eredal").attr('tooltip3', "'Metal till death'");
+$(".leader_eredal").attr('tooltip', 'Increments mineral production by 10%')
+$(".leader_eredal").attr('tooltip2', 'Increments copper production by 10%')
+$(".leader_eredal").attr('tooltip3', 'Increments iron production by 10%')
+$(".leader_eredal").attr('tooltip4', 'Increments steel production by 10%')
+$(".leader_eredal").attr('tooltip6', "'Metal till death'");
 
 $(".leader_khrysos").html("Khrysos (lv:" + people["khrysos"]+")");
 $(".leader_khrysos").attr('tooltip', 'Increments gold production by 25%')
@@ -7599,7 +7643,14 @@ $(".territory").html("Territory: "+intToString(bonus["territory"]));
 var inv_text="<table>"
 for(key in craft){
 	if(craft[key]!=0){
-		inv_text+="<tr><td>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
+		if(technologies["logistics"]==1)
+		{
+			inv_text+="<tr><td class='craftclick' onclick='crafting(\""+key+"\")'>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
+		}
+		else
+		{
+			inv_text+="<tr><td>"+key+":</td><td align='right'> "+parseFloat(craft[key]).toFixed(2);
+		}
 		inv_text+="</td></tr>"
 	}
 }

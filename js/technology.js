@@ -290,6 +290,13 @@ function researchunlock(){
 		$(".tech_academicpublishing").show()
 		unlocked[".tech_academicpublishing"]=1;
 	}
+
+	if((bonus["science"]>=85000 || bonus["economy"]>=85000)&& unlocked[".tech_logistics"]!=1){
+		$(".tech_logistics").show()
+		unlocked[".tech_logistics"]=1;
+	}
+
+
 	if((bonus["science"]>=100000 && bonus["military"]>=100000 && bonus["economy"]>=100000) && unlocked[".tech_triforce"]!=1){
 		$(".tech_triforce").show()
 		unlocked[".tech_triforce"]=1;

@@ -35,6 +35,20 @@ if(items["coal"]>=people["cargotrain"]*0.02){
 		production[trademission["trainbuy"]]+=people["cargotrain"]*tradetrain[trademission["trainbuy"]]*0.05
 	}
 }
+
+if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.03 && items["chemicals"]>=buildings["workshop"]*0.01){
+
+	consumption["coal"]+=buildings["workshop"]*0.03
+	consumption["chemicals"]+=buildings["workshop"]*0.01
+	bonus["auto"]=buildings["workshop"]*0.10
+}
+else
+{
+bonus["auto"]=0
+}
+
+
+
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;
 production["water"]+=buildings["fountain"]/2.5;
@@ -42,7 +56,7 @@ production["gold"]+=buildings["casino"]/250;
 production["knowledge"]+=buildings["scienceoutpost"]/50;
 production["gold"]+=buildings["tradeoutpost"]/100;
 production["clay"]+=buildings["quarry"]/5;
-craft["token"]+=buildings["share"]/10;
+craft["token"]+=(buildings["share"]/10)*(bonus["auto"]+1);
 if(technologies["safestorage"]==1){
 production["nickel"]+=buildings["quarry"]/1000;
 }
@@ -68,12 +82,12 @@ if (items["wood"]>=buildings["kiln"]*2 && buildstatus["kiln"]==1)
 if (items["wood"]>=buildings["shipyard"]*40 && buildstatus["shipyard"]==1)
 {
 	consumption["wood"]+=buildings["shipyard"]*40
-	craft["plank"]+=buildings["shipyard"]/20;
+	craft["plank"]+=(buildings["shipyard"]/20)*(bonus["auto"]+1);
 }
 if (items["gold"]>=buildings["bank"]/10 && buildstatus["bank"]==1)
 {
 	consumption["gold"]+=buildings["bank"]/10
-	craft["coin"]+=buildings["bank"]/50;
+	craft["coin"]+=(buildings["bank"]/50)*(bonus["auto"]+1);
 }
 if(buildings["library"]>=8){
 	production["knowledge"]+=buildings["library"]/100;
@@ -88,14 +102,14 @@ if (items["wood"]>=buildings["blockyard"] && items["mineral"]>=buildings["blocky
 {
 	consumption["wood"]+=buildings["blockyard"]*4
 	consumption["mineral"]+=buildings["blockyard"]*8
-	craft["block"]+=buildings["blockyard"]/25;
+	craft["block"]+=(buildings["blockyard"]/25)*(bonus["auto"]+1);
 }
 
 if (items["wood"]>=buildings["carpentry"]*5 && items["iron"]>=buildings["carpentry"]*0.1 && buildstatus["carpentry"]==1)
 {
 	consumption["wood"]+=buildings["carpentry"]*5
 	consumption["iron"]+=buildings["carpentry"]*0.1
-	craft["structure"]+=buildings["carpentry"]/200;
+	craft["structure"]+=(buildings["carpentry"]/200)*(bonus["auto"]+1);
 }
 //people
 production["food"]+=people["farmer"]/2.5;
@@ -150,9 +164,9 @@ if (craft["coin"]>=people["marketer"]*0.05 && items["food"]>=people["marketer"]/
 {
 	craft["coin"]-=people["marketer"]*0.05
 	consumption["food"]+=people["marketer"]/5
-	craft["bronze"]+=0.001*people["marketer"]
-	craft["brick"]+=0.0005*people["marketer"]
-	craft["glass"]+=0.0005*people["marketer"]
+	craft["bronze"]+=0.001*people["marketer"]*(bonus["auto"]+1)
+	craft["brick"]+=0.0005*people["marketer"]*(bonus["auto"]+1)
+	craft["glass"]+=0.0005*people["marketer"]*(bonus["auto"]+1)
 }
 
 

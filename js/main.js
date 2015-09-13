@@ -6848,7 +6848,7 @@ $(".tech_logistics").html("Logistics" + (technologies["logistics"] >0 ? " (resea
 $(".tech_logistics").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_logistics").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_logistics").attr('tooltip4', "Logistics provide a shortcut to crafting.");
-$(".tech_logistics").attr('tooltip5', "Allows you to craft materials directly by clicking its name on the list.");
+$(".tech_logistics").attr('tooltip5', "Allows you to craft materials directly by clicking its name on the inventory.");
 
 
 

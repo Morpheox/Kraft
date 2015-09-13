@@ -6836,7 +6836,7 @@ $(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowled
 
 coincost=5000;
 bookcost=10;
-if(craft["book"]<bookcost && craft["coin"]<coincost ){
+if(craft["book"]<bookcost || craft["coin"]<coincost ){
 	$(".tech_logistics").addClass("unavailable")
 }
 else

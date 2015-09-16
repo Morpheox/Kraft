@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.7.5 beta</title>
+	<title>Keep Craft v0.7.6 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.7.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.7.6 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -351,7 +351,8 @@
 	<div class="block legacy_vengeance"></div><br>
 	<div class="block legacy_aegis"></div><br>
 	<div class="block legacy_bargain"></div><br>
-	<div class="block legacy_learning"></div><br><br><br><br>
+	<div class="block legacy_learning"></div><br>
+	<div class="block legacy_memory"></div><br><br><br><br>
 
 	<div class="block legacy_warp"></div>
 	</div>
@@ -442,6 +443,16 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+       	<b>V 0.7.6</b>
+        <ul>
+        <li>Legacy rebalance patch</li>
+        <li>New legacy perk - memory</li>
+        <li>Memory increases the amount of legacy you get on next trips by 2%</li>
+        <li>Decreased the price increase of perks from 20% to 5% each level</li>
+        <li>Increased mastery perk craft bonus from 1% to 1.5%</li>
+        <li>Decreased depot perk storage bonus from 1% to 0.5%</li>
+        <li>Old points bonuses will be recalculated next time you reset</li>
+        </ul>
         <b>V 0.7.5</b>
         <ul>
         <li>New economy or science tech</li>
@@ -1092,6 +1103,7 @@
 	$(".legacy_bargain").click(function() {lega("bargain")});
 	$(".legacy_mastery").click(function() {lega("mastery")});
 	$(".legacy_learning").click(function() {lega("learning")});
+	$(".legacy_memory").click(function() {lega("memory")});
 	$(".legacy_warp").click(function() {legacywarp()});
 
 	unlocked[".legacy_motivation"]=1;
@@ -1102,6 +1114,7 @@
 	unlocked[".legacy_mastery"]=1;
 	unlocked[".legacy_learning"]=1;
 	unlocked[".legacy_warp"]=1;
+	unlocked[".legacy_memory"]=1;
 
    	$(".research_military").click(function() {develop("military")});
    	$(".research_economy").click(function() {develop("economy")});
@@ -1126,6 +1139,8 @@ fillDeal();
 	if(prestige["number"]>0){
 		$(".reespec").show()
 		unlocked[".reespec"]=1;
+		$(".legacy_memory").show()
+		unlocked[".legacy_memory"]=1;
 	}
 
 	refreshselect()

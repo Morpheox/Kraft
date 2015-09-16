@@ -52,6 +52,7 @@ bonus["theme"]=0;
 bonus["exprew"]=0;
 bonus["booking"]=0;
 bonus["auto"]=0;
+bonus["legacy"]=0;
 
 var buildings=new Array();
 
@@ -7313,7 +7314,8 @@ if(prestige["number"]>0){
 	tooltipsprestige("bargain");
 	tooltipsprestige("mastery");
 	tooltipsprestige("learning");
-
+	tooltipsprestige("memory");
+	
 	$(".legacynum").html("Legacy: "+prestige["legacy"])
 	$(".treasurenum").html("Treasures: "+prestige["treasure"])
 }

@@ -11,6 +11,7 @@ prestige["aegis"]=0;
 prestige["bargain"]=0;
 prestige["mastery"]=0;
 prestige["learning"]=0;
+prestige["memory"]=0;
 
 function lega(b){
 
@@ -18,7 +19,7 @@ if(prestige[b]==0){
 	legacycost=Math.pow(5,(prestige["upgrades"]))*1
 }
 else{
-	legacycost=Math.ceil(Math.pow(1.2,(prestige[b])))
+	legacycost=Math.ceil(Math.pow(1.05,(prestige[b])))
 }
 
 if( legacycost<=prestige["legacy"]){
@@ -35,11 +36,11 @@ if(b=="motivation"){
 	prestige["motivation"]++
 }
 else if(b=="depot"){
-	bonus["storage"]+=0.01
+	bonus["storage"]+=0.005
 	prestige["depot"]++
 }
 else if(b=="mastery"){
-	bonus["craft"]+=0.01
+	bonus["craft"]+=0.015
 	prestige["mastery"]++
 }
 else if(b=="vengeance"){
@@ -58,6 +59,11 @@ else if(b=="learning"){
 	bonus["knowledge"]+=0.05
 	prestige["learning"]++
 }
+else if(b=="memory"){
+	bonus["legacy"]+=0.02
+	prestige["memory"]++
+}
+
 }
 }
 function tooltipsprestige(b){
@@ -65,7 +71,7 @@ if(prestige[b]==0){
 	legacycost=Math.pow(5,(prestige["upgrades"]))*1
 }
 else{
-	legacycost=Math.ceil(Math.pow(1.2,(prestige[b])))
+	legacycost=Math.ceil(Math.pow(1.05,(prestige[b])))
 }
 
 if(prestige["legacy"]<legacycost){
@@ -80,12 +86,13 @@ $(".legacy_"+b).attr('tooltip', 'Legacy: '+ prestige["legacy"]+" / "+Math.round(
 
 switch(b){
 	case "motivation":$(".legacy_"+b).attr('tooltip3', 'Global production +1%');break;
-	case "depot":$(".legacy_"+b).attr('tooltip3', 'All storages +1%');break;
-	case "mastery":$(".legacy_"+b).attr('tooltip3', 'Craft efficiency +1%');break;
+	case "depot":$(".legacy_"+b).attr('tooltip3', 'All storages +0.5%');break;
+	case "mastery":$(".legacy_"+b).attr('tooltip3', 'Craft efficiency +1.5%');break;
 	case "vengeance":$(".legacy_"+b).attr('tooltip3', 'Military power +5%');break;
 	case "aegis":$(".legacy_"+b).attr('tooltip3', 'Troops hp +5%');break;
 	case "bargain":$(".legacy_"+b).attr('tooltip3', 'Market ratios +5%');break;
 	case "learning":$(".legacy_"+b).attr('tooltip3', 'Knowledge production +5%');break;
+	case "memory":$(".legacy_"+b).attr('tooltip3', 'Legacy obtained +2%');break;
 }
 
 
@@ -109,7 +116,8 @@ legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"
 legacyadd+=(bonus["economy"]+bonus["science"]+bonus["military"])/1000
 legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
 
-prestige["legacy"]+=Math.floor(legacyadd);
+
+prestige["legacy"]+=Math.floor(legacyadd)*(bonus["legacy"]+1);
 
 
 
@@ -164,7 +172,7 @@ for(key in unlocked){
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain").hide()
 	$(".trade_sand").hide()
-	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp").show()
+	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
 	$(".block").removeClass("researched");
 	$(".build_lumbermill").show()
 	unlocked[".build_lumbermill"]=1;
@@ -183,16 +191,18 @@ for(key in unlocked){
 	unlocked[".legacy_mastery"]=1;
 	unlocked[".legacy_learning"]=1;
 	unlocked[".legacy_warp"]=1;
+	unlocked[".legacy_memory"]=1;
 	$(".countdown").show();
 	unlocked[".countdown"]=1;
 
 	bonus["global"]+=prestige["motivation"]*0.01
-	bonus["storage"]+=prestige["depot"]*0.01
-	bonus["craft"]+=prestige["mastery"]*0.01
+	bonus["storage"]+=prestige["depot"]*0.005
+	bonus["craft"]+=prestige["mastery"]*0.015
 	bonus["power"]+=prestige["vengeance"]*0.05
 	bonus["hp"]+=prestige["aegis"]*0.05
 	bonus["trade"]+=prestige["bargain"]*0.05
 	bonus["knowledge"]+=prestige["learning"]*0.05
+	bonus["legacy"]+=prestige["memory"]*0.02
 	prestige["number"]++
 
 

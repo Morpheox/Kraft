@@ -40,7 +40,7 @@ padding:0;
      white-space: pre;
 }
 
-.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy{
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities{
 	float:left;
 	position: relative;
 	padding:25px;
@@ -351,4 +351,17 @@ font-size: 20px;
 
 .craftclick:hover{
   color:orange;
+}
+
+.energytab{
+  border:1px solid black;
+  padding:15px;
+  text-align:center;
+  width:400px;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.progress-bar{
+  text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

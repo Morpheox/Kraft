@@ -6,6 +6,7 @@ items["wood"]=10;
 items["mineral"]=5;
 items["sand"]=0;
 items["clay"]=0;
+items["cement"]=0;
 items["concrete"]=0;
 items["water"]=0;
 items["food"]=0;
@@ -21,6 +22,7 @@ items["steel"]=0;
 items["chemicals"]=0;
 items["morale"]=0;
 items["knowledge"]=0;
+
 
 var bonus =new Array()
 for(key in items){
@@ -53,6 +55,7 @@ bonus["exprew"]=0;
 bonus["booking"]=0;
 bonus["auto"]=0;
 bonus["legacy"]=0;
+bonus["energy"]=0;
 
 var buildings=new Array();
 
@@ -92,6 +95,8 @@ buildings["share"]=0;
 buildings["repository"]=0;
 buildings["trainstation"]=0;
 buildings["workshop"]=0;
+buildings["powerplant"]=0;
+buildings["cementkiln"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -104,7 +109,7 @@ maximums["population"]=0;
 maximums["ships"]=0;
 maximums["trains"]=0;
 maximums["bet"]=0;
-
+maximums["energy"]=0;
 
 for(key in items){
 	maximums[key]=0;
@@ -198,6 +203,7 @@ technologies["ammunition"]=0
 technologies["gunnery"]=0
 technologies["wisdom"]=0
 technologies["windward"]=0
+technologies["mineralcoal"]=0;
 technologies["carrying"]=0
 technologies["shareholding"]=0
 technologies["steamengine"]=0
@@ -209,6 +215,8 @@ technologies["industrialization"]=0
 technologies["academicpublishing"]=0
 technologies["triforce"]=0
 technologies["logistics"]=0
+technologies["electricity"]=0
+technologies["pyroprocessing"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -3040,6 +3048,26 @@ function research(b){
 		}
 
 	}
+	else if (b=="mineralcoal" && technologies["mineralcoal"]==0){
+
+
+		pickaxecost=10000;
+		coalcost=500;
+		knowledgecost=1500;
+		
+
+
+		if (items["knowledge"]>=knowledgecost && craft["pickaxe"]>=pickaxecost && items["coal"]>=coalcost){
+
+			craft["pickaxe"]-=pickaxecost
+			items["coal"]-=coalcost
+			items["knowledge"]-=knowledgecost;
+
+			technologies["mineralcoal"]++
+
+		}
+
+	}
 	else if (b=="carrying" && technologies["carrying"]==0){
 
 
@@ -3251,7 +3279,50 @@ function research(b){
 		}
 
 	}
+	else if (b=="electricity" && technologies["electricity"]==0){
 
+
+
+		bookcost=10;
+		knowledgecost=2800;
+
+		
+		if (items["knowledge"]>=knowledgecost && craft["book"]>=bookcost){
+			
+			items["knowledge"]-=knowledgecost;
+			craft["book"]-=bookcost;
+
+			technologies["electricity"]++
+			$(".build_powerplant").show()
+			unlocked[".build_powerplant"]=1;
+			$("#facilitiespane").removeClass("invisible")
+			unlocked["#facilitiespane"]=1;
+		}
+
+	}
+	else if (b=="pyroprocessing" && technologies["pyroprocessing"]==0){
+
+
+
+		mineralcost=200000;
+		claycost=10000
+		bookcost=5;
+
+		
+		if (items["mineral"]>=mineralcost && items["clay"]>=claycost && craft["book"]>=bookcost){
+			
+			items["mineral"]-=mineralcost;
+			items["clay"]-=claycost;
+			craft["book"]-=bookcost;
+
+			technologies["pyroprocessing"]++
+			$(".build_cementkiln").show()
+			unlocked[".build_cementkiln"]=1;
+			$("#facilitiespane").removeClass("invisible")
+			unlocked["#facilitiespane"]=1;
+		}
+
+	}
 
 	else if (b=="triforce" && technologies["triforce"]==0){
 
@@ -4218,6 +4289,7 @@ function build(b){
 			maximums["mineral"]+=4000;
 			maximums["sand"]+=4000;
 			maximums["clay"]+=500;
+			maximums["cement"]+=500;
 			maximums["concrete"]+=500;
 
 
@@ -4466,6 +4538,48 @@ function build(b){
 
 			$(".toggle_workshop").show()
 			unlocked[".toggle_workshop"]=1
+
+		}
+	}
+	else if (b=="powerplant"){
+
+		framecost= Math.pow(1.1,(buildings["powerplant"]))*300
+		platecost=Math.pow(1.1,(buildings["powerplant"]))*500
+	
+
+		if (craft["frame"]>=framecost && craft["plate"]>=platecost){
+
+			craft["frame"]-=framecost;
+			craft["plate"]-=platecost;
+
+			maximums["energy"]+=100;
+
+			buildstatus["powerplant"]=1;
+			buildings["powerplant"]+=1
+
+
+			$(".toggle_powerplant").show()
+			unlocked[".toggle_powerplant"]=1
+
+		}
+	}
+	else if (b=="cementkiln"){
+
+		steelcost = Math.pow(1.3,(buildings["cementkiln"]))*600
+		platecost = Math.pow(1.3,(buildings["cementkiln"]))*200
+	
+
+		if (items["steel"]>=steelcost && craft["plate"]>=platecost){
+
+			items["steel"]-=steelcost;
+			craft["plate"]-=platecost;
+
+			buildstatus["cementkiln"]=1;
+			buildings["cementkiln"]+=1
+
+
+			$(".toggle_cementkiln").show()
+			unlocked[".toggle_cementkiln"]=1
 
 		}
 	}
@@ -4929,8 +5043,11 @@ $(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
 $(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_quarry").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".build_quarry").attr('tooltip4', 'Clay production +0.20/s');
+if(technologies["mineralcoal"]==1){
+$(".build_quarry").attr('tooltip5', 'Coal production +0.02/s');
+}
 if(technologies["safestorage"]==1){
-$(".build_quarry").attr('tooltip5', 'Nickel production +0.001/s');
+$(".build_quarry").attr('tooltip6', 'Nickel production +0.001/s');
 }
 
 
@@ -5046,7 +5163,39 @@ $(".build_workshop").attr('tooltip7', 'Chemicals consumption: -0.01/s');
 
 
 
+framecost= Math.pow(1.1,(buildings["powerplant"]))*300
+platecost=Math.pow(1.1,(buildings["powerplant"]))*500
+if(craft["frame"]<framecost || craft["plate"]<platecost){
+	$(".build_powerplant").addClass("unavailable")
+}
+else
+{
+	$(".build_powerplant").removeClass("unavailable")
+}
+$(".build_powerplant").html("Power plant ("+buildings["powerplant"]+")");
+$(".build_powerplant").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_powerplant").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".build_powerplant").attr('tooltip4', 'Coal consumption: -0.05/s');
+$(".build_powerplant").attr('tooltip5', 'Water consumption: -2.00/s');
+$(".build_powerplant").attr('tooltip6', 'Energy production: 1 MWh');
+$(".build_powerplant").attr('tooltip7', 'Energy storage: 100 KWh');
 
+steelcost = Math.pow(1.3,(buildings["cementkiln"]))*600
+platecost = Math.pow(1.3,(buildings["cementkiln"]))*200
+if(items["steel"]<steelcost || craft["plate"]<platecost){
+	$(".build_cementkiln").addClass("unavailable")
+}
+else
+{
+	$(".build_cementkiln").removeClass("unavailable")
+}
+$(".build_cementkiln").html("Cement kiln ("+buildings["cementkiln"]+")");
+$(".build_cementkiln").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
+$(".build_cementkiln").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".build_cementkiln").attr('tooltip4', 'Mineral consumption: -100.00/s');
+$(".build_cementkiln").attr('tooltip5', 'Clay consumption: -2.00/s');
+$(".build_cementkiln").attr('tooltip6', 'Energy consumption: 300 KWh');
+$(".build_cementkiln").attr('tooltip7', 'Cement production: +0.1/s');
 
 
 //People
@@ -6677,6 +6826,24 @@ $(".tech_windward").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFix
 $(".tech_windward").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_windward").attr('tooltip5', "Allows you to build caravels.");
 
+pickaxecost=10000;
+coalcost=500;
+knowledgecost=1500;
+if(items["knowledge"]<knowledgecost || craft["pickaxe"]<pickaxecost || items["coal"]<coalcost){
+	$(".tech_mineralcoal").addClass("unavailable")
+}
+else
+{
+	$(".tech_mineralcoal").removeClass("unavailable")
+}
+$(".tech_mineralcoal").addClass((technologies["mineralcoal"] >0 ? "researched" : ""))
+$(".tech_mineralcoal").html("Mineral Coal" + (technologies["mineralcoal"] >0 ? " (researched)" : ""));
+$(".tech_mineralcoal").attr('tooltip', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
+$(".tech_mineralcoal").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
+$(".tech_mineralcoal").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_mineralcoal").attr('tooltip5', "Quarries now also produce coal.");
+
+
 horsecost=100
 moralecost=120
 knowledgecost=1500;
@@ -6851,6 +7018,38 @@ $(".tech_logistics").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixe
 $(".tech_logistics").attr('tooltip4', "Logistics provide a shortcut to crafting.");
 $(".tech_logistics").attr('tooltip5', "Allows you to craft materials directly by clicking its name on the inventory.");
 
+knowledgecost=2800;
+bookcost=10;
+if(craft["book"]<bookcost || items["knowledge"]<knowledgecost ){
+	$(".tech_electricity").addClass("unavailable")
+}
+else
+{
+	$(".tech_electricity").removeClass("unavailable")
+}
+$(".tech_electricity").addClass((technologies["electricity"] >0 ? "researched" : ""))
+$(".tech_electricity").html("Electricity" + (technologies["electricity"] >0 ? " (researched)" : ""));
+$(".tech_electricity").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_electricity").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_electricity").attr('tooltip4', "Grants you to the knowledge of handling electricity");
+$(".tech_electricity").attr('tooltip5', "Allows you to build powerplants");
+
+mineralcost=200000;
+claycost=10000
+bookcost=5;
+if(craft["book"]<bookcost || items["clay"]<claycost || items["mineral"]<mineralcost){
+	$(".tech_pyroprocessing").addClass("unavailable")
+}
+else
+{
+	$(".tech_pyroprocessing").removeClass("unavailable")
+}
+$(".tech_pyroprocessing").addClass((technologies["pyroprocessing"] >0 ? "researched" : ""))
+$(".tech_pyroprocessing").html("Pyroprocessing" + (technologies["pyroprocessing"] >0 ? " (researched)" : ""));
+$(".tech_pyroprocessing").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
+$(".tech_pyroprocessing").attr('tooltip2', 'Clay: '+ parseFloat(items["clay"]).toFixed(2)+" / "+parseFloat(claycost).toFixed(2))
+$(".tech_pyroprocessing").attr('tooltip3', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_pyroprocessing").attr('tooltip5', "Allows you to build cement kilns");
 
 
 knowledgecost=3000;
@@ -7406,6 +7605,8 @@ $(".trade_sand").html("Sand: " + Math.round(tradesand));
 
 function refresh(){
 
+	var energypro=0;
+	var energycon=0;
 
 	var production =new Array()
 	for(key in items){
@@ -7435,6 +7636,32 @@ else
 bonus["auto"]=0
 }
 
+if (items["coal"]>=buildings["powerplant"]*0.0125 &&  items["water"]>=buildings["powerplant"]*0.5 && buildstatus["powerplant"]==1)
+{
+	consumption["water"]+=buildings["powerplant"]*0.5
+	consumption["coal"]+=buildings["powerplant"]*0.0125
+	energypro+=(0.25/3.6)*buildings["powerplant"];
+	bonus["energy"]+=(0.25/3.6)*buildings["powerplant"];
+}
+else if(buildings["powerplant"]>0)
+{
+		buildstatus["powerplant"]=0;
+		$(".build_powerplant").addClass("off")
+}
+
+if (items["mineral"]>=buildings["cementkiln"]*25  &&  items["water"]>=buildings["cementkiln"]*0.5 &&  bonus["energy"]>=(0.075/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+{
+	consumption["mineral"]+=buildings["cementkiln"]*25
+	consumption["clay"]+=buildings["cementkiln"]*0.5
+	production["cement"]+=buildings["cementkiln"]*0.025
+	energycon+=(0.075/3.6)*buildings["cementkiln"];
+	bonus["energy"]-=(0.075/3.6)*buildings["cementkiln"];
+}
+else if(buildings["cementkiln"]>0)
+{
+		buildstatus["cementkiln"]=0;
+		$(".build_cementkiln").addClass("off")
+}
 
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
@@ -7442,9 +7669,12 @@ production["water"]+=buildings["fountain"]/10;
 production["gold"]+=buildings["casino"]/1000;
 production["knowledge"]+=buildings["scienceoutpost"]/200;
 production["gold"]+=buildings["tradeoutpost"]/400;
-production["clay"]+=buildings["quarry"]/20;
+production["clay"]+=buildings["quarry"]*0.05;
 if(technologies["safestorage"]==1){
 production["nickel"]+=buildings["quarry"]/4000;
+}
+if(technologies["mineralcoal"]==1){
+production["coal"]+=buildings["quarry"]*0.005;
 }
 craft["token"]+=(buildings["share"]/40)*(bonus["auto"]+1);
 
@@ -7461,6 +7691,7 @@ if (items["mineral"]>=buildings["foundry"]/8 && buildstatus["foundry"]==1)
 		production["tin"]+=buildings["foundry"]/800;
 	}
 }
+
 if (items["wood"]>=buildings["kiln"]/2 && buildstatus["kiln"]==1)
 {
 	consumption["wood"]+=buildings["kiln"]/2
@@ -7689,7 +7920,30 @@ for(key in items){
 
 }
 
+if(maximums["energy"]>0){
 
+
+
+var energynet=energypro-energycon
+
+if(bonus["energy"]<0){
+	bonus["energy"]=0;
+}
+if(bonus["energy"]>maximums["energy"]){
+	bonus["energy"]=maximums["energy"];
+}
+
+var energyrel=Math.round((bonus["energy"]/maximums["energy"])*100)
+
+$(".progress-bar").prop("aria-valuenow",energyrel)
+$(".progress-bar").css("width",energyrel+"%")
+$(".progress-bar").text(intToString(bonus["energy"])+"KWh")
+var energytext=""
+energytext+="Energy production: <span style='color:green'>+" +intToString(energypro*3.6*4)+" MWh</span><br>"
+energytext+="Energy consumption:<span style='color:red'>-" +intToString(energycon*3.6*4)+" MWh</span><br>"
+energytext+="Energy capacity:" +intToString(maximums["energy"])+" KWh<br>"
+$(".energylog").html(energytext)
+}
 
 calculatecost();
 
@@ -7809,9 +8063,10 @@ for(var key in unlocked){
 	unlocked[".legacy_bargain"]=1;
 	unlocked[".legacy_mastery"]=1;
 	unlocked[".legacy_learning"]=1;
+	unlocked[".legacy_memory"]=1;
 	unlocked[".legacy_warp"]=1;
 
-$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
+$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
 $(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
 $(".playx10,.playx100").hide()
 
@@ -7862,6 +8117,8 @@ buildstatus = update(prestige,JSON.parse(result[11]));
 		traderatio["mineral"]["nickel"]=0.00018;
 
 		}
+
+maximums["cement"]=buildings["bunker"]*500
 
 	researchunlock()
 	if(prestige["number"]>0){
@@ -7922,7 +8179,7 @@ function load(){
 
 
 
-
+maximums["cement"]=buildings["bunker"]*500
 	//END RETROCOMPATIBILITY
 
 if(technologies["safestorage"]==1){

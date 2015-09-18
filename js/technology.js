@@ -291,17 +291,29 @@ function researchunlock(){
 		unlocked[".tech_academicpublishing"]=1;
 	}
 
+	if(bonus["science"]>=30000 && unlocked[".tech_mineralcoal"]!=1){
+		$(".tech_mineralcoal").show()
+		unlocked[".tech_mineralcoal"]=1;
+	}
+
 	if((bonus["science"]>=85000 || bonus["economy"]>=85000)&& unlocked[".tech_logistics"]!=1){
 		$(".tech_logistics").show()
 		unlocked[".tech_logistics"]=1;
 	}
 
+	if((bonus["science"]>=100000 || bonus["military"]>=100000 || bonus["economy"]>=100000) && unlocked[".tech_electricity"]!=1){
+		$(".tech_electricity").show()
+		unlocked[".tech_electricity"]=1;
+	}
 
 	if((bonus["science"]>=100000 && bonus["military"]>=100000 && bonus["economy"]>=100000) && unlocked[".tech_triforce"]!=1){
 		$(".tech_triforce").show()
 		unlocked[".tech_triforce"]=1;
 	}
-
+	if((bonus["science"]>=100000 && bonus["military"]>=100000 && bonus["economy"]>=100000) && unlocked[".tech_pyroprocessing"]!=1){
+		$(".tech_pyroprocessing").show()
+		unlocked[".tech_pyroprocessing"]=1;
+	}
 
 }
 

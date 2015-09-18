@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.7.6 beta</title>
+	<title>Keep Craft v0.7.9 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.7.6 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.7.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -44,6 +44,7 @@
             
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#build">Buildings</a></li>
+		<li id="facilitiespane"><a data-toggle="tab" href="#facilities">Facilities</a></li>
 		<li id="jobspane"><a data-toggle="tab" href="#jobs">Jobs</a></li>
 		<li id="technologiespane"><a data-toggle="tab" href="#technologies">Technologies</a></li>
 		<li id="craftingpane"><a data-toggle="tab" href="#crafting">Crafting</a></li>
@@ -103,6 +104,20 @@
 			<div class="block build_trainstation"></div>
 			</div>
 			<br><br><br><br><br><br>
+		</div>
+		<div id="facilities" class="facilities tab-pane fade">
+		<div class="energytab">
+		<div class="progress" style="width:90%">
+		  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+		    0kwh
+		  </div>
+		</div>
+		<div class="energylog">
+
+		</div>
+		</div>
+			<div class="block build_powerplant"></div><button class="toggle toggle_powerplant" onclick='toggle("powerplant")'>Toggle</button>
+			<div class="block build_cementkiln"></div><button class="toggle toggle_cementkiln" onclick='toggle("cementkiln")'>Toggle</button>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
 			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
@@ -204,6 +219,7 @@
 			<div class="block tech_windward"></div>
 			<div class="block tech_carrying"></div>
 			<div class="block tech_safestorage"></div>
+			<div class="block tech_mineralcoal"></div>
 			<div class="block tech_metalwork"></div>
 			<div class="block tech_steamengine"></div>
 			<div class="block tech_railtransport"></div>
@@ -211,7 +227,11 @@
 			<div class="block tech_armoredcombat"></div>
 			<div class="block tech_academicpublishing"></div>
 			<div class="block tech_logistics"></div>
+			<div class="block tech_electricity"></div>
+			<div class="block tech_pyroprocessing"></div>
 			<div class="block tech_triforce"></div>
+
+
 		</div>
 			<br><br><br><br><br><br>
 		</div>
@@ -443,6 +463,29 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.7.9</b>
+        <ul>
+        <li>New neutral tech</li>
+        <li>New material - cement</li>
+        <li>New facility - cement kilns</li>
+        <li>Cement its stored on bunkers</li>
+        </ul>
+        <b>V 0.7.8</b>
+        <ul>
+        <li>Energy patch</li>
+        <li>A new neutral tech - electricity, its introduced</li>
+        <li>All new buildings that require or produce electricity will be organized on a new tab, and will be called facilities to distinguish them easily</li>
+        <li>Energy production, consumption and storage its measured in KWh, so a plant wich produces 1KWh, will produce that amount in 1 hour</li>
+        <li>If one of these new buildings runs out of electricity or other resources, it will automatically turn off, so take that in mind when offlining.</li>
+        <li>New facility - Power plants</li>
+       	<li>Power plants produce energy and have a small capacity included, they consume coal and water to produce it.</li>
+        </ul>
+        <b>V 0.7.7</b>
+        <ul>
+        <li>New science tech </li>
+        <li>This tech allows quarries to produce coal</li>
+        <li>Fixed clay production</li>
+        </ul>
        	<b>V 0.7.6</b>
         <ul>
         <li>Legacy rebalance patch</li>
@@ -896,7 +939,7 @@
 	setInterval(function(){ refresh()}, 250);
 	setInterval(function(){ save()}, 60000);
 
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane").addClass("invisible");
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand").hide()
@@ -937,6 +980,8 @@
 	$(".build_repository").click(function() {build("repository")});
 	$(".build_trainstation").click(function() {build("trainstation")});
 	$(".build_workshop").click(function() {build("workshop")});
+	$(".build_powerplant").click(function() {build("powerplant")});
+	$(".build_cementkiln").click(function() {build("cementkiln")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -1055,6 +1100,9 @@
 	$(".tech_academicpublishing").click(function() {research("academicpublishing")});
 	$(".tech_triforce").click(function() {research("triforce")});
 	$(".tech_logistics").click(function() {research("logistics")});
+	$(".tech_mineralcoal").click(function() {research("mineralcoal")});
+	$(".tech_electricity").click(function() {research("electricity")});
+	$(".tech_pyroprocessing").click(function() {research("pyroprocessing")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -1150,6 +1198,8 @@ fillDeal();
 		$(".salvage_galley").show()
 		unlocked[".salvage_galley"]=1;
 	}
+
+	;
 </script>
 
 <script>

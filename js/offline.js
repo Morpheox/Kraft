@@ -16,6 +16,9 @@ warptime(warping)
 
 function warptime(t){
 
+	var energypro=0;
+	var energycon=0;
+
 for(var w=0;w<t;w++){
 
 	var production =new Array()
@@ -48,6 +51,30 @@ bonus["auto"]=0
 }
 
 
+if (items["coal"]>=buildings["powerplant"]*0.05 &&  items["water"]>=buildings["powerplant"]*2 && buildstatus["powerplant"]==1)
+{
+	consumption["water"]+=buildings["powerplant"]*2
+	consumption["coal"]+=buildings["powerplant"]*0.05
+	bonus["energy"]+=(1/3.6)*buildings["powerplant"];
+}
+else if(buildings["powerplant"]>0)
+{
+		buildstatus["powerplant"]=0;
+		$(".build_powerplant").addClass("off")
+}
+
+if (items["mineral"]>=buildings["cementkiln"]*100  &&  items["water"]>=buildings["cementkiln"]*2 &&  bonus["energy"]>=(0.03/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+{
+	consumption["mineral"]+=buildings["cementkiln"]*100
+	consumption["clay"]+=buildings["cementkiln"]*2
+	production["cement"]+=buildings["cementkiln"]*0.025
+	bonus["energy"]-=(0.3/3.6)*buildings["cementkiln"];
+}
+else if(buildings["cementkiln"]>0)
+{
+		buildstatus["cementkiln"]=0;
+		$(".build_cementkiln").addClass("off")
+}
 
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;
@@ -55,10 +82,14 @@ production["water"]+=buildings["fountain"]/2.5;
 production["gold"]+=buildings["casino"]/250;
 production["knowledge"]+=buildings["scienceoutpost"]/50;
 production["gold"]+=buildings["tradeoutpost"]/100;
-production["clay"]+=buildings["quarry"]/5;
+production["clay"]+=buildings["quarry"]*0.20;
+
 craft["token"]+=(buildings["share"]/10)*(bonus["auto"]+1);
 if(technologies["safestorage"]==1){
 production["nickel"]+=buildings["quarry"]/1000;
+}
+if(technologies["mineralcoal"]==1){
+production["coal"]+=buildings["quarry"]*0.02;
 }
 if (items["water"]>=buildings["pasture"]/5 && buildstatus["pasture"]==1)
 {
@@ -244,6 +275,14 @@ for(key in items){
 	}
 
 }
+
+if(bonus["energy"]<0){
+	bonus["energy"]=0;
+}
+if(bonus["energy"]>maximums["energy"]){
+	bonus["energy"]=maximums["energy"];
+}
+
 
 }
 

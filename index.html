@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.7.9 beta</title>
+	<title>Keep Craft v0.8.0 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.7.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -133,6 +133,7 @@
 			<div class="block research_economy"></div>
 			<div class="block research_science"></div>
 			<div class="block research_military"></div><br>
+			<div class="block craft_patent"></div>
 			<div class="block craft_book"></div><br>
 		<button class="toggletech" onclick="toggletech()">Hide researched technologies</button><br><br>
 		<div class="technolist">
@@ -225,6 +226,7 @@
 			<div class="block tech_railtransport"></div>
 			<div class="block tech_industrialization"></div>
 			<div class="block tech_armoredcombat"></div>
+			<div class="block tech_patents"></div>
 			<div class="block tech_academicpublishing"></div>
 			<div class="block tech_logistics"></div>
 			<div class="block tech_electricity"></div>
@@ -463,6 +465,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.8.0</b>
+        <ul>
+        <li>Fixed the import/export feature, no more missing perks or legacy</li>
+        <li>Decreased the price of plates</li>
+        <li>Decrease the plate cost of engines</li>
+        <li>New economy tech</li>
+        <li>This tech allows to buy books with coins</li>
+        <li>Science books renamed to scientific papers, they still craft the same item</li>
+        </ul>
         <b>V 0.7.9</b>
         <ul>
         <li>New neutral tech</li>
@@ -1098,6 +1109,7 @@
 	$(".tech_railtransport").click(function() {research("railtransport")});
 	$(".tech_industrialization").click(function() {research("industrialization")});
 	$(".tech_academicpublishing").click(function() {research("academicpublishing")});
+	$(".tech_patents").click(function() {research("patents")});
 	$(".tech_triforce").click(function() {research("triforce")});
 	$(".tech_logistics").click(function() {research("logistics")});
 	$(".tech_mineralcoal").click(function() {research("mineralcoal")});
@@ -1124,8 +1136,8 @@
 	$(".craft_musket").click(function() {crafting("musket")});
 	$(".craft_plate").click(function() {crafting("plate")});
 	$(".craft_engine").click(function() {crafting("engine")});
+	$(".craft_patent").click(function() {crafting("patent")});
 	$(".craft_book").click(function() {crafting("book")});
-
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});

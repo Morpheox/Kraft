@@ -286,6 +286,12 @@ function researchunlock(){
 		$(".tech_industrialization").show()
 		unlocked[".tech_industrialization"]=1;
 	}
+	
+	if(bonus["economy"]>=65000 && unlocked[".tech_patents"]!=1){
+		$(".tech_patents").show()
+		unlocked[".tech_patents"]=1;
+	}
+
 	if(bonus["science"]>=70000 && unlocked[".tech_academicpublishing"]!=1){
 		$(".tech_academicpublishing").show()
 		unlocked[".tech_academicpublishing"]=1;

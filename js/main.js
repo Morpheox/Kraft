@@ -213,10 +213,12 @@ technologies["armoredcombat"]=0
 technologies["railtransport"]=0
 technologies["industrialization"]=0
 technologies["academicpublishing"]=0
+technologies["patents"]=0
 technologies["triforce"]=0
 technologies["logistics"]=0
 technologies["electricity"]=0
 technologies["pyroprocessing"]=0
+
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1334,9 +1336,9 @@ function crafting(b){
 		}
 		else if (b=="plate" && technologies["metalwork"]==1){
 
-			coppercost=500;
-			ironcost=300;
-			nickelcost=15;
+			coppercost=400;
+			ironcost=200;
+			nickelcost=10;
 
 
 
@@ -1355,7 +1357,7 @@ function crafting(b){
 		else if (b=="engine" && technologies["steamengine"]==1){
 
 			steelcost=400;
-			platecost=300;
+			platecost=100;
 			bronzecost=200;
 
 
@@ -1380,6 +1382,19 @@ function crafting(b){
 			if (items["knowledge"]>=knowledgecost){
 
 				items["knowledge"]-=knowledgecost
+
+				craft["book"]+=1+bonus["booking"];
+
+			}
+
+		}
+		else if (b=="patent" && technologies["patents"]==1){
+
+			coincost=2500;
+
+			if (craft["coin"]>=coincost){
+
+				craft["coin"]-=coincost
 
 				craft["book"]+=1+bonus["booking"];
 
@@ -3260,7 +3275,23 @@ function research(b){
 		}
 
 	}
+	else if (b=="patents" && technologies["patents"]==0){
 
+
+		coincost=10000;
+		knowledgecost=2000;
+		
+		if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
+			
+			items["knowledge"]-=knowledgecost;
+			craft["coin"]-=coincost
+
+			technologies["patents"]++
+			$(".craft_patent").show()
+			unlocked[".craft_patent"]=1;
+		}
+
+	}
 	else if (b=="logistics" && technologies["logistics"]==0){
 
 
@@ -7000,7 +7031,23 @@ else
 $(".tech_academicpublishing").addClass((technologies["academicpublishing"] >0 ? "researched" : ""))
 $(".tech_academicpublishing").html("Academic Publishing" + (technologies["academicpublishing"] >0 ? " (res..)" : ""));
 $(".tech_academicpublishing").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowledge in scientific papers.");
+$(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowledge in books of scientific papers.");
+
+coincost=10000;
+knowledgecost=2000;
+if(items["knowledge"]<knowledgecost || craft["coin"]<coincost ){
+	$(".tech_patents").addClass("unavailable")
+}
+else
+{
+	$(".tech_patents").removeClass("unavailable")
+}
+$(".tech_patents").addClass((technologies["patents"] >0 ? "researched" : ""))
+$(".tech_patents").html("Patents" + (technologies["patents"] >0 ? " (researched)" : ""));
+$(".tech_patents").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_patents").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_patents").attr('tooltip4', "Allows you to buy patents to further advance your research.");
+
 
 coincost=5000;
 bookcost=10;
@@ -7363,9 +7410,11 @@ $(".craft_musket").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixe
 $(".craft_musket").attr('tooltip5', "A rudimentary fire weapon.");
 
 
-coppercost=500;
-ironcost=300;
-nickelcost=15;
+
+coppercost=400;
+ironcost=200;
+nickelcost=10;
+
 
 if(items["copper"]<coppercost || items["iron"]<ironcost || items["nickel"]<nickelcost){
 	$(".craft_plate").addClass("unavailable")
@@ -7382,8 +7431,9 @@ $(".craft_plate").attr('tooltip5', "A plate made of complex alloy.");
 
 
 steelcost=400;
-platecost=300;
+platecost=100;
 bronzecost=200;
+
 if(craft["plate"]<platecost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
 	$(".craft_engine").addClass("unavailable")
 }
@@ -7405,9 +7455,21 @@ else
 {
 	$(".craft_book").removeClass("unavailable")
 }
-$(".craft_book").html("Book");
+$(".craft_book").html("Scientific papers");
 $(".craft_book").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".craft_book").attr('tooltip3', "Scientific papers wich can be used to research new technologies");
+$(".craft_book").attr('tooltip3', "Book with scientific papers wich can be used to research new technologies");
+
+coincost=2500;
+if(craft["coin"]<coincost){
+	$(".craft_patent").addClass("unavailable")
+}
+else
+{
+	$(".craft_patent").removeClass("unavailable")
+}
+$(".craft_patent").html("Patent");
+$(".craft_patent").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".craft_patent").attr('tooltip3', "Book with all sorts of blueprints and inventions wich can be used for new technologies.");
 //Leaders
 
 if(bonus["title"]<1){
@@ -8084,9 +8146,9 @@ people = update(people,JSON.parse(result[5]));
 craft = update(craft,JSON.parse(result[6]));
 unlocked = update(unlocked,JSON.parse(result[7]));
 population = update(population,JSON.parse(result[8]));
-trademission = update(prestige,JSON.parse(result[9]));
+trademission = update(trademission,JSON.parse(result[9]));
 prestige = update(prestige,JSON.parse(result[10]));
-buildstatus = update(prestige,JSON.parse(result[11]));
+buildstatus = update(buildstatus,JSON.parse(result[11]));
 
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)

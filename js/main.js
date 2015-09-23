@@ -1,7 +1,6 @@
 
 var items=new Array()
 
-
 items["wood"]=10;
 items["mineral"]=5;
 items["sand"]=0;
@@ -122,6 +121,7 @@ var ships=0;
 var trains=0;
 
 var technologies=new Array()
+var autotechnologies=new Array()
 
 technologies["coppertools"]=0
 technologies["pickaxe"]=0
@@ -4555,7 +4555,7 @@ function build(b){
 
 
 
-		if (craft["frame"]>=framecost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
+		if (craft["brick"]>=brickcost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
 
 			craft["brick"]-=brickcost;
 			craft["plate"]-=platecost;
@@ -5188,10 +5188,9 @@ $(".build_workshop").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFix
 $(".build_workshop").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".build_workshop").attr('tooltip3', 'Engine: '+ parseFloat(craft["engine"]).toFixed(2)+" / "+parseFloat(enginecost).toFixed(2))
 $(".build_workshop").attr('tooltip4', '+10% craft efficiency');
-$(".build_workshop").attr('tooltip5', '+10% autocraft efficiency when active');
-$(".build_workshop").attr('tooltip6', 'Coal consumption: -0.03/s');
-$(".build_workshop").attr('tooltip7', 'Chemicals consumption: -0.01/s');
-
+$(".build_workshop").attr('tooltip5', 'Coal consumption: -0.03/s');
+$(".build_workshop").attr('tooltip6', 'Chemicals consumption: -0.01/s');
+$(".build_workshop").attr('tooltip7', '+10% autocraft efficiency when active');
 
 
 framecost= Math.pow(1.1,(buildings["powerplant"]))*300
@@ -7783,7 +7782,7 @@ if (items["wood"]>=buildings["blockyard"] && items["mineral"]>=buildings["blocky
 {
 	consumption["wood"]+=buildings["blockyard"]
 	consumption["mineral"]+=buildings["blockyard"]*2
-	craft["block"]+=buildings["blockyard"]/100;
+	craft["block"]+=(buildings["blockyard"]/100)*(bonus["auto"]+1);
 }
 
 if (items["wood"]>=buildings["carpentry"]*1.25 && items["iron"]>=buildings["carpentry"]*0.025 && buildstatus["carpentry"]==1)
@@ -8008,7 +8007,7 @@ $(".energylog").html(energytext)
 }
 
 calculatecost();
-
+autorefresh();
 
 }
 function trade(b){
@@ -8077,6 +8076,7 @@ function save(){
 	Cookies.set('trademission', trademission,{ expires: 9999 });
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
+	Cookies.set('autotechnologies', autotechnologies,{ expires: 9999 });
 
 	var unlock1=new Array()
 	var unlock2=new Array()
@@ -8108,7 +8108,7 @@ encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
 encodestring+=JSON.stringify(buildings)+"--"+JSON.stringify( maximums)+"--"+JSON.stringify(technologies)+"--"
 encodestring+=JSON.stringify(people)+"--"+JSON.stringify(craft)+"--"+JSON.stringify(unlocked)+"--"
 encodestring+=JSON.stringify(population)+"--"+JSON.stringify(trademission)+"--"
-encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)
+encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)+"--"+JSON.stringify(autotechnologies)
 b64string=btoa(encodestring);
 $('.inputtxt').val(b64string)
 }
@@ -8150,6 +8150,10 @@ trademission = update(trademission,JSON.parse(result[9]));
 prestige = update(prestige,JSON.parse(result[10]));
 buildstatus = update(buildstatus,JSON.parse(result[11]));
 
+if(result[12]!=null){
+autotechnologies = update(autotechnologies,JSON.parse(result[12]));
+
+}
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
 
@@ -8223,7 +8227,7 @@ function load(){
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
 
 		trains=people["cargotrain"]
-
+		
 
 		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
 		for(key in unlocked){
@@ -8238,7 +8242,9 @@ function load(){
 		unlocked[".tech_wrapping"]=1;
 		}
 
-
+		if(typeof Cookies.get( 'autotechnologies') != 'undefined'){
+		autotechnologies = update(autotechnologies,JSON.parse(Cookies.get( 'autotechnologies')));
+		}
 
 
 maximums["cement"]=buildings["bunker"]*500

@@ -1,5 +1,6 @@
 function researchunlock(){
 
+	autounlock()
 
 	if(bonus["science"]>=100 && unlocked[".tech_geology"]!=1){
 		$(".tech_geology").show()
@@ -322,5 +323,220 @@ function researchunlock(){
 	}
 
 }
+function buyautotech(a,b,c){
+
+bookcost=Math.pow(1.1,(a))*10
+
+if(craft["book"]>=bookcost && autotechnologies[b]==0){
+craft["book"]-=bookcost
+autotechnologies[b]=1;
+bonus[c]+=Math.floor(Math.pow(1.05,(a/5))*5)/100;
+}
+
+setTimeout(function(){
+
+if(techvisible==0){
+	techvisible=1;
+	toggletech();
+}
+
+}, 700);
 
 
+}
+function autorefresh(){
+
+var j=0;
+for(var i=100000;i<bonus["science"];i=i*1.1){
+j++
+var techname="tscience"+j
+bookcost=Math.pow(1.1,(j))*10
+
+
+var k=j%5
+
+
+if(craft["book"]<bookcost){
+	$(".tech_"+techname).addClass("unavailable")
+}
+else
+{
+	$(".tech_"+techname).removeClass("unavailable")
+}
+
+$(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
+$(".tech_"+techname).html(capitalize(autoscience[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+var effect=""
+var amount=Math.floor(Math.pow(1.05,(j/5))*5);
+switch(k){
+case 0: effect="Knowledge production +"+amount+"%";break;
+case 1: effect="Wood production +"+amount+"%";break;
+case 2: effect="Mineral production +"+amount+"%";break;
+case 3: effect="Craft efficiency +"+amount+"%";break;
+case 4: effect="Maximum storage +"+amount+"%";break;
+}
+$(".tech_"+techname).attr('tooltip3', effect);
+
+
+
+}
+j=0;
+for(var i=100000;i<bonus["economy"];i=i*1.1){
+j++
+var techname="teconomy"+j
+bookcost=Math.pow(1.1,(j))*10
+
+
+var k=j%5
+
+
+if(craft["book"]<bookcost){
+	$(".tech_"+techname).addClass("unavailable")
+}
+else
+{
+	$(".tech_"+techname).removeClass("unavailable")
+}
+
+$(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
+$(".tech_"+techname).html(capitalize(autoeconomy[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+var effect=""
+var amount=Math.floor(Math.pow(1.05,(j/5))*5);
+switch(k){
+case 0: effect="Gold production +"+amount+"%";break;
+case 1: effect="Trade ratios +"+amount+"%";break;
+case 2: effect="Copper production +"+amount+"%";break;
+case 3: effect="Coal production +"+amount+"%";break;
+case 4: effect="Nickel production +"+amount+"%";break;
+}
+$(".tech_"+techname).attr('tooltip3', effect);
+
+
+
+}
+j=0;
+for(var i=100000;i<bonus["military"];i=i*1.1){
+j++
+var techname="tmilitary"+j
+bookcost=Math.pow(1.1,(j))*10
+
+
+var k=j%5
+
+
+if(craft["book"]<bookcost){
+	$(".tech_"+techname).addClass("unavailable")
+}
+else
+{
+	$(".tech_"+techname).removeClass("unavailable")
+}
+
+$(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
+$(".tech_"+techname).html(capitalize(automilitary[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+var effect=""
+var amount=Math.floor(Math.pow(1.05,(j/5))*5);
+switch(k){
+case 0: effect="Morale production +"+amount+"%";break;
+case 1: effect="Water production +"+amount+"%";break;
+case 2: effect="Food production +"+amount+"%";break;
+case 3: effect="Troops power +"+amount+"%";break;
+case 4: effect="Troops hp +"+amount+"%";break;
+}
+$(".tech_"+techname).attr('tooltip3', effect);
+
+
+
+}
+
+
+
+
+
+}
+
+var autoscience=new Array()
+autoscience[0]="knowledge"
+autoscience[1]="wood"
+autoscience[2]="mineral"
+autoscience[3]="craft"
+autoscience[4]="storage"
+
+var automilitary=new Array()
+automilitary[0]="morale"
+automilitary[1]="water"
+automilitary[2]="food"
+automilitary[3]="power"
+automilitary[4]="hp"
+
+var autoeconomy=new Array()
+autoeconomy[0]="gold"
+autoeconomy[1]="trade"
+autoeconomy[2]="copper"
+autoeconomy[3]="coal"
+autoeconomy[4]="nickel"
+
+function autounlock(){
+
+var j=0;
+$(".autotech").remove()
+
+for(var i=100000;i<bonus["science"];i=i*1.1){
+j++
+var k=j%5
+
+var techname="tscience"+j
+if(autotechnologies[techname]==null)
+{
+autotechnologies[techname]=0;
+}
+$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoscience[k]+"')")
+
+}
+j=0;
+for(var i=100000;i<bonus["economy"];i=i*1.1){
+j++
+var k=j%5
+
+var techname="teconomy"+j
+if(autotechnologies[techname]==null)
+{
+autotechnologies[techname]=0;
+}
+$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoeconomy[k]+"')")
+
+}
+j=0;
+for(var i=100000;i<bonus["military"];i=i*1.1){
+j++
+var k=j%5
+
+var techname="tmilitary"+j
+if(autotechnologies[techname]==null)
+{
+autotechnologies[techname]=0;
+}
+$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoeconomy[k]+"')")
+
+}
+
+autorefresh()
+if(techvisible==0){
+	techvisible=1;
+	toggletech();
+}
+
+
+
+
+
+
+
+
+}

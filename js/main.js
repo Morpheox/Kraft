@@ -8185,7 +8185,7 @@ autotechnologies = update(autotechnologies,JSON.parse(result[12]));
 		}
 
 maximums["cement"]=buildings["bunker"]*500
-
+maximums["trains"]=buildings["trainstation"]*2
 	researchunlock()
 	if(prestige["number"]>0){
 		$(".reespec").show()
@@ -8248,6 +8248,7 @@ function load(){
 
 
 maximums["cement"]=buildings["bunker"]*500
+maximums["trains"]=buildings["trainstation"]*2
 	//END RETROCOMPATIBILITY
 
 if(technologies["safestorage"]==1){

@@ -140,6 +140,7 @@ for (key in buildings){
 maximums["population"]=0;
 maximums["ships"]=0;
 maximums["bet"]=0;
+maximums["trains"]=0;
 maximums["wood"]=50
 maximums["mineral"]=20
 items["wood"]=10;

@@ -78,7 +78,10 @@ color:black!important;
   color:green;
   font-size:12px;
 }
-
+.facilitiesbuild{
+  width:300px;
+  float:left;
+}
 .fire{
 margin-left:5px;
 display: inline;

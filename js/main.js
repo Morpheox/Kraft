@@ -96,6 +96,7 @@ buildings["trainstation"]=0;
 buildings["workshop"]=0;
 buildings["powerplant"]=0;
 buildings["cementkiln"]=0;
+buildings["university"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -218,6 +219,7 @@ technologies["triforce"]=0
 technologies["logistics"]=0
 technologies["electricity"]=0
 technologies["pyroprocessing"]=0
+technologies["education"]=0
 
 
 var people=new Array();
@@ -3378,6 +3380,25 @@ function research(b){
 		}
 
 	}
+	else if (b=="education" && technologies["education"]==0){
+
+
+		bookcost=20;
+		knowledgecost=3000;
+
+
+		if (items["knowledge"]>=knowledgecost && craft["book"]>=bookcost){
+
+
+		items["knowledge"]-=knowledgecost;
+		craft["book"]-=bookcost
+			
+		technologies["education"]++
+		$(".build_university").show()
+		unlocked[".build_university"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4614,6 +4635,30 @@ function build(b){
 
 		}
 	}
+	else if (b=="university"){
+
+		cementcost = Math.pow(1.3,(buildings["university"]))*15000
+		brickcost = Math.pow(1.3,(buildings["university"]))*1000
+		framecost = Math.pow(1.3,(buildings["university"]))*500
+
+	
+
+		if (items["cement"]>=cementcost && craft["frame"]>=framecost && craft["brick"]>=brickcost){
+
+			items["cement"]-=cementcost;
+			craft["brick"]-=brickcost;
+			craft["frame"]-=framecost;
+
+			buildstatus["university"]=1;
+			buildings["university"]+=1
+
+			maximums["knowledge"]+=200;
+
+			$(".toggle_university").show()
+			unlocked[".toggle_university"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -5227,8 +5272,33 @@ $(".build_cementkiln").attr('tooltip5', 'Clay consumption: -2.00/s');
 $(".build_cementkiln").attr('tooltip6', 'Energy consumption: 300 KWh');
 $(".build_cementkiln").attr('tooltip7', 'Cement production: +0.1/s');
 
+cementcost = Math.pow(1.3,(buildings["university"]))*15000
+brickcost = Math.pow(1.3,(buildings["university"]))*1000
+framecost = Math.pow(1.3,(buildings["university"]))*500
+if(items["cement"]<cementcost || craft["brick"]<brickcost || craft["frame"]<framecost){
+	$(".build_university").addClass("unavailable")
+}
+else
+{
+	$(".build_university").removeClass("unavailable")
+}
+$(".build_university").html("University ("+buildings["university"]+")");
+$(".build_university").attr('tooltip', 'Cement: '+ parseFloat(items["cement"]).toFixed(2)+" / "+parseFloat(cementcost).toFixed(2))
+$(".build_university").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_university").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
+$(".build_university").attr('tooltip4', 'Knowledge storage +200');
+$(".build_university").attr('tooltip5', 'Energy consumption: 500 KWh');
+$(".build_university").attr('tooltip6', 'Knowledge production: +0.05/s');
+$(".build_university").attr('tooltip7', 'Book production +0.001/s');
+
+
+
+
+
+
 
 //People
+
 foodcost=50;
 if(items["food"]<foodcost || population>=maximums["population"]){
 	$(".hire_woodcutter").addClass("unavailable")
@@ -7115,7 +7185,20 @@ $(".tech_triforce").attr('tooltip5', "+30% morale production");
 $(".tech_triforce").attr('tooltip6', "+30% storage space");
 $(".tech_triforce").attr('tooltip7', "+30% craft efficiency");
 
-//Research
+bookcost=20;
+knowledgecost=3000;
+if(items["knowledge"]<knowledgecost || craft["book"]<bookcost){
+	$(".tech_education").addClass("unavailable")
+}
+else
+{
+	$(".tech_education").removeClass("unavailable")
+}
+$(".tech_education").addClass((technologies["education"] >0 ? "researched" : ""))
+$(".tech_education").html("Education" + (technologies["education"] >0 ? " (researched)" : ""));
+$(".tech_education").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
+$(".tech_education").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_education").attr('tooltip4', "Allows the building of universities");
 
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
@@ -7456,7 +7539,7 @@ else
 }
 $(".craft_book").html("Scientific papers");
 $(".craft_book").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
-$(".craft_book").attr('tooltip3', "Book with scientific papers wich can be used to research new technologies");
+$(".craft_book").attr('tooltip3', "Book with scientific papers which can be used to research new technologies");
 
 coincost=2500;
 if(craft["coin"]<coincost){
@@ -7468,7 +7551,7 @@ else
 }
 $(".craft_patent").html("Patent");
 $(".craft_patent").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".craft_patent").attr('tooltip3', "Book with all sorts of blueprints and inventions wich can be used for new technologies.");
+$(".craft_patent").attr('tooltip3', "Book with all sorts of blueprints and inventions which can be used for new technologies.");
 //Leaders
 
 if(bonus["title"]<1){
@@ -7722,6 +7805,19 @@ else if(buildings["cementkiln"]>0)
 {
 		buildstatus["cementkiln"]=0;
 		$(".build_cementkiln").addClass("off")
+}
+
+if (bonus["energy"]>=(0.125/3.6)*buildings["university"] && buildstatus["university"]==1)
+{
+	craft["book"]+=0.000025*(bonus["auto"]+1);
+	production["knowledge"]+=buildings["university"]*0.0125
+	energycon+=(0.125/3.6)*buildings["university"];
+	bonus["energy"]-=(0.125/3.6)*buildings["university"];
+}
+else if(buildings["university"]>0)
+{
+		buildstatus["university"]=0;
+		$(".build_university").addClass("off")
 }
 
 production["wood"]+=buildings["lumbermill"]/20;

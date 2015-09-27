@@ -271,7 +271,10 @@ font-size: 20px;
   width:300px;
   float:left;
 }
-
+.facilitiesbuild{
+  width:300px;
+  float:left;
+}
 .craftline{
   width:500px;
 }

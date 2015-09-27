@@ -75,7 +75,18 @@ else if(buildings["cementkiln"]>0)
 		buildstatus["cementkiln"]=0;
 		$(".build_cementkiln").addClass("off")
 }
-
+if (bonus["energy"]>=(0.5/3.6)*buildings["university"] && buildstatus["university"]==1)
+{
+	craft["book"]+=0.0001*(bonus["auto"]+1);
+	production["knowledge"]+=buildings["university"]*0.05
+	energycon+=(0.5/3.6)*buildings["university"];
+	bonus["energy"]-=(0.5/3.6)*buildings["university"];
+}
+else if(buildings["university"]>0)
+{
+		buildstatus["university"]=0;
+		$(".build_university").addClass("off")
+}
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;
 production["water"]+=buildings["fountain"]/2.5;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.1 beta</title>
+	<title>Keep Craft v0.8.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.8.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -116,8 +116,11 @@
 
 		</div>
 		</div>
+		<div class="facilitiesbuild">
 			<div class="block build_powerplant"></div><button class="toggle toggle_powerplant" onclick='toggle("powerplant")'>Toggle</button>
 			<div class="block build_cementkiln"></div><button class="toggle toggle_cementkiln" onclick='toggle("cementkiln")'>Toggle</button>
+			<div class="block build_university"></div><button class="toggle toggle_university" onclick='toggle("university")'>Toggle</button>
+			</div>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
 			<div class="block hire_woodcutter"></div><button class="fire fire_woodcutter" onclick='fire("woodcutter")'>Fire 1</button><br>
@@ -232,7 +235,8 @@
 			<div class="block tech_electricity"></div>
 			<div class="block tech_pyroprocessing"></div>
 			<div class="block tech_triforce"></div>
-
+			<div class="block tech_education"></div>
+			<br><br><br>
 
 		</div>
 			<br><br><br><br><br><br>
@@ -465,6 +469,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.8.2</b>
+        <ul>
+        <li>New science tech</li>
+        <li>New facility - university</li>
+        <li>Universities produce and store knowledge, as well as books</li>
+        <li>Reduced mastery techs cost</li>
+        <li>Fixed some typos</li>
+        
+        </ul>
         <b>V 0.8.1</b>
         <ul>
         <li>This patch introduces, not one or two, but infinite new technologies</li>
@@ -1003,6 +1016,7 @@
 	$(".build_workshop").click(function() {build("workshop")});
 	$(".build_powerplant").click(function() {build("powerplant")});
 	$(".build_cementkiln").click(function() {build("cementkiln")});
+	$(".build_university").click(function() {build("university")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -1125,6 +1139,7 @@
 	$(".tech_mineralcoal").click(function() {research("mineralcoal")});
 	$(".tech_electricity").click(function() {research("electricity")});
 	$(".tech_pyroprocessing").click(function() {research("pyroprocessing")});
+	$(".tech_education").click(function() {research("education")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

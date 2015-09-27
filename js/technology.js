@@ -322,10 +322,16 @@ function researchunlock(){
 		unlocked[".tech_pyroprocessing"]=1;
 	}
 
+	if(bonus["science"]>=150000 && unlocked[".tech_education"]!=1){
+		$(".tech_education").show()
+		unlocked[".tech_education"]=1;
+	}
+
+
 }
 function buyautotech(a,b,c){
 
-bookcost=Math.pow(1.1,(a))*10
+bookcost=Math.pow(1.1,(a))*5
 
 if(craft["book"]>=bookcost && autotechnologies[b]==0){
 craft["book"]-=bookcost
@@ -350,7 +356,7 @@ var j=0;
 for(var i=100000;i<bonus["science"];i=i*1.1){
 j++
 var techname="tscience"+j
-bookcost=Math.pow(1.1,(j))*10
+bookcost=Math.pow(1.1,(j))*5
 
 
 var k=j%5
@@ -365,7 +371,7 @@ else
 }
 
 $(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
-$(".tech_"+techname).html(capitalize(autoscience[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).html(capitalize(autoscience[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (res..)" : ""));
 $(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 var effect=""
 var amount=Math.floor(Math.pow(1.05,(j/5))*5);
@@ -385,7 +391,7 @@ j=0;
 for(var i=100000;i<bonus["economy"];i=i*1.1){
 j++
 var techname="teconomy"+j
-bookcost=Math.pow(1.1,(j))*10
+bookcost=Math.pow(1.1,(j))*5
 
 
 var k=j%5
@@ -420,7 +426,7 @@ j=0;
 for(var i=100000;i<bonus["military"];i=i*1.1){
 j++
 var techname="tmilitary"+j
-bookcost=Math.pow(1.1,(j))*10
+bookcost=Math.pow(1.1,(j))*5
 
 
 var k=j%5

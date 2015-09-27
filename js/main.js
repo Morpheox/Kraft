@@ -5289,7 +5289,7 @@ $(".build_university").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).to
 $(".build_university").attr('tooltip4', 'Knowledge storage +200');
 $(".build_university").attr('tooltip5', 'Energy consumption: 500 KWh');
 $(".build_university").attr('tooltip6', 'Knowledge production: +0.05/s');
-$(".build_university").attr('tooltip7', 'Book production +0.001/s');
+$(".build_university").attr('tooltip7', 'Book production +0.0001/s');
 
 
 

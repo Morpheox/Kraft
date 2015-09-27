@@ -406,7 +406,7 @@ else
 }
 
 $(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
-$(".tech_"+techname).html(capitalize(autoeconomy[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).html(capitalize(autoeconomy[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (res..)" : ""));
 $(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 var effect=""
 var amount=Math.floor(Math.pow(1.05,(j/5))*5);
@@ -441,7 +441,7 @@ else
 }
 
 $(".tech_"+techname).addClass((autotechnologies[techname] >0 ? "researched" : ""))
-$(".tech_"+techname).html(capitalize(automilitary[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (researched)" : ""));
+$(".tech_"+techname).html(capitalize(automilitary[k])+" mastery "+ Math.ceil(j/5) + (autotechnologies[techname] >0 ? " (res..)" : ""));
 $(".tech_"+techname).attr('tooltip', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 var effect=""
 var amount=Math.floor(Math.pow(1.05,(j/5))*5);

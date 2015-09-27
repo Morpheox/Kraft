@@ -77,7 +77,7 @@ else if(buildings["cementkiln"]>0)
 }
 if (bonus["energy"]>=(0.5/3.6)*buildings["university"] && buildstatus["university"]==1)
 {
-	craft["book"]+=0.0001*(bonus["auto"]+1);
+	craft["book"]+=buildings["university"]*0.0001*(bonus["auto"]+1);
 	production["knowledge"]+=buildings["university"]*0.05
 	energycon+=(0.5/3.6)*buildings["university"];
 	bonus["energy"]-=(0.5/3.6)*buildings["university"];

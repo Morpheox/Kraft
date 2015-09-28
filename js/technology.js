@@ -488,7 +488,7 @@ autoeconomy[4]="nickel"
 function autounlock(){
 
 var j=0;
-$(".autotech").remove()
+$(".autolist").html("")
 
 for(var i=100000;i<bonus["science"];i=i*1.1){
 j++
@@ -499,7 +499,7 @@ if(autotechnologies[techname]==null)
 {
 autotechnologies[techname]=0;
 }
-$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$(".autolist").append('<div class="block autotech tech_'+techname+'"></div> ')
 $('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoscience[k]+"')")
 
 }
@@ -513,7 +513,7 @@ if(autotechnologies[techname]==null)
 {
 autotechnologies[techname]=0;
 }
-$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$(".autolist").append('<div class="block autotech tech_'+techname+'"></div> ')
 $('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoeconomy[k]+"')")
 
 }
@@ -527,7 +527,7 @@ if(autotechnologies[techname]==null)
 {
 autotechnologies[techname]=0;
 }
-$(".technolist").append('<div class="block autotech tech_'+techname+'"></div> ')
+$(".autolist").append('<div class="block autotech tech_'+techname+'"></div> ')
 $('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoeconomy[k]+"')")
 
 }

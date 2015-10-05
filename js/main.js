@@ -7627,7 +7627,7 @@ $(".leader_foehn").attr('tooltip5', "'Take what you can, give nothing back.'");
 $(".leader_alfear").html("Alfear (lv:" + people["alfear"]+")");
 $(".leader_alfear").attr('tooltip', 'Increments knowledge production by 10%')
 $(".leader_alfear").attr('tooltip2', 'Increments knowledge maximum by 100')
-$(".leader_alfear").attr('tooltip4', "'For even the very wise cannot see all ends.''");
+$(".leader_alfear").attr('tooltip4', "'For even the very wise cannot see all ends.'");
 
 treasurecost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
 if(prestige["treasure"]<treasurecost){

@@ -286,6 +286,7 @@ craft["horse"]=0
 craft["elephant"]=0
 craft["supplies"]=0
 craft["lock"]=0
+craft["artifact"]=0
 craft["diamond"]=0
 
 
@@ -999,6 +1000,11 @@ function fight(){
 				reward+=parseFloat(rnd).toFixed(2) + " knowledge<br>";
 				items["knowledge"]+=rnd;
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
+			}
+			if(Math.random()>0.999){
+				combatlog+="You found an extrange artifact<br>";
+				craft["artifact"]+=rnd;
+				items["knowledge"]+=rnd;
 			}
 			break;
 		}

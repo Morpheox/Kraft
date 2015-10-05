@@ -117,7 +117,7 @@ legacyadd+=(bonus["economy"]+bonus["science"]+bonus["military"])/1000
 legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
 
 
-prestige["legacy"]+=Math.floor((legacyadd)*(bonus["legacy"]+1));
+prestige["legacy"]+=Math.floor((legacyadd)*(bonus["legacy"]+(craft["artifact"]/100)+1));
 
 
 

@@ -528,7 +528,7 @@ if(autotechnologies[techname]==null)
 autotechnologies[techname]=0;
 }
 $(".autolist").append('<div class="block autotech tech_'+techname+'"></div> ')
-$('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+autoeconomy[k]+"')")
+$('.tech_'+techname).attr("onclick","buyautotech("+j+",'"+techname+"','"+automilitary[k]+"')")
 
 }
 

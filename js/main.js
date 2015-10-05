@@ -1003,8 +1003,8 @@ function fight(){
 			}
 			if(Math.random()>0.999){
 				combatlog+="You found an extrange artifact<br>";
-				craft["artifact"]+=rnd;
-				items["knowledge"]+=rnd;
+				craft["artifact"]+=1;
+
 			}
 			break;
 		}

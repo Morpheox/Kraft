@@ -3263,6 +3263,7 @@ function research(b){
 
 			
 			technologies["industrialization"]++
+			buildstatus["workshop"]=1;
 			$(".build_workshop").show()
 			unlocked[".build_workshop"]=1;
 		}
@@ -4589,8 +4590,6 @@ function build(b){
 			craft["engine"]-=enginecost;
 
 			bonus["craft"]+=0.10
-
-			buildstatus["workshop"]=1;
 			buildings["workshop"]+=1
 
 
@@ -7775,8 +7774,8 @@ if(items["coal"]>=people["cargotrain"]*0.005){
 	}
 }
 
-if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.0075 && items["chemicals"]>=buildings["workshop"]*0.0025){
-
+if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.0075 && items["chemicals"]>=buildings["workshop"]*0.0025)
+{
 	consumption["coal"]+=buildings["workshop"]*0.0075
 	consumption["chemicals"]+=buildings["workshop"]*0.0025
 	bonus["auto"]=buildings["workshop"]*0.10

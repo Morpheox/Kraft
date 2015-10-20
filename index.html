@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.2 beta</title>
+	<title>Keep Craft v0.8.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -120,6 +120,7 @@
 			<div class="block build_powerplant"></div><button class="toggle toggle_powerplant" onclick='toggle("powerplant")'>Toggle</button>
 			<div class="block build_cementkiln"></div><button class="toggle toggle_cementkiln" onclick='toggle("cementkiln")'>Toggle</button>
 			<div class="block build_university"></div><button class="toggle toggle_university" onclick='toggle("university")'>Toggle</button>
+			<div class="block build_concretemixer"></div><button class="toggle toggle_concretemixer" onclick='toggle("concretemixer")'>Toggle</button>
 			</div>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -470,6 +471,14 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+	    <b>V 0.8.3</b>
+        <ul>
+        <li>New tech</li>
+        <li>New facility - concrete mixer</li>
+        <li>Concrete mixers produce concrete</li>
+                
+        </ul>	
+		
         <b>V 0.8.2</b>
         <ul>
         <li>New science tech</li>
@@ -1018,6 +1027,7 @@
 	$(".build_powerplant").click(function() {build("powerplant")});
 	$(".build_cementkiln").click(function() {build("cementkiln")});
 	$(".build_university").click(function() {build("university")});
+	$(".build_concretemixer").click(function() {build("concretemixer")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});

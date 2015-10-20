@@ -63,7 +63,7 @@ else if(buildings["powerplant"]>0)
 		$(".build_powerplant").addClass("off")
 }
 
-if (items["mineral"]>=buildings["cementkiln"]*100  &&  items["water"]>=buildings["cementkiln"]*2 &&  bonus["energy"]>=(0.03/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+if (items["mineral"]>=buildings["cementkiln"]*100  &&  items["clay"]>=buildings["cementkiln"]*2 &&  bonus["energy"]>=(0.03/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
 {
 	consumption["mineral"]+=buildings["cementkiln"]*100
 	consumption["clay"]+=buildings["cementkiln"]*2
@@ -86,6 +86,20 @@ else if(buildings["university"]>0)
 {
 		buildstatus["university"]=0;
 		$(".build_university").addClass("off")
+}
+if (items["mineral"]>=buildings["concretemixer"]*50  &&  items["watercost"]>=buildings["concretemixer"]*10 && items["cementcost"]>=buildings["concretemixer"]*0.5 &&  bonus["energy"]>=(0.5/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+{
+	consumption["mineral"]+=buildings["concretemixer"]*50
+	consumption["water"]+=buildings["concretemixer"]*10
+	consumption["cement"]+=buildings["concretemixer"]*2
+	production["concrete"]+=buildings["concretemixer"]*0.05
+	energycon+=(0.5/3.6)*buildings["concretemixer"];
+	bonus["energy"]-=(0.5/3.6)*buildings["concretemixer"];
+}
+else if(buildings["concretemixer"]>0)
+{
+		buildstatus["concretemixer"]=0;
+		$(".build_concretemixer").addClass("off")
 }
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;

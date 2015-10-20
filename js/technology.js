@@ -326,6 +326,10 @@ function researchunlock(){
 		$(".tech_education").show()
 		unlocked[".tech_education"]=1;
 	}
+	if((bonus["science"]>=150000 || bonus["military"]>=150000 || bonus["economy"]>=150000) && unlocked[".tech_cementhydration"]!=1){
+		$(".tech_cementhydration").show()
+		unlocked[".tech_cementhydration"]=1;
+	}
 
 
 }

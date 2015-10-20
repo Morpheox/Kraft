@@ -221,6 +221,7 @@ technologies["logistics"]=0
 technologies["electricity"]=0
 technologies["pyroprocessing"]=0
 technologies["education"]=0
+technologies["cementhydration"]=0
 
 
 var people=new Array();

@@ -3408,7 +3408,7 @@ function research(b){
 		}
 
 	}
-	else if (b=="tech_cementhydration" && technologies["tech_cementhydration"]==0){
+	else if (b=="cementhydration" && technologies["cementhydration"]==0){
 
 		claycost=15000;
 		bookcost=20;
@@ -3418,11 +3418,9 @@ function research(b){
 			items["clay"]-=claycost;
 			craft["book"]-=bookcost;
 
-			technologies["tech_cementhydration"]++
+			technologies["cementhydration"]++
 			$(".build_concretemixer").show()
 			unlocked[".build_concretemixer"]=1;
-			$("#facilitiespane").removeClass("invisible")
-			unlocked["#facilitiespane"]=1;
 		}
 
 	}
@@ -4688,13 +4686,11 @@ function build(b){
 	else if (b=="concretemixer"){
 
 		brickcost = Math.pow(1.25,(buildings["concretemixer"]))*1000
-		ironcost = Math.pow(1.25,(buildings["concretemixer"]))*2500
 		platecost = Math.pow(1.25,(buildings["concretemixer"]))*200
 	
-		if (craft["brick"]>=birckcost && items["iron"]>=ironcost && craft["plate"]>=platecost){
+		if (craft["brick"]>=brickcost && craft["plate"]>=platecost){
 
 			craft["brick"]-=brickcost;
-			items["iron"]-=ironcost;
 			craft["plate"]-=platecost;
 
 			buildstatus["concretemixer"]=1;
@@ -5337,7 +5333,6 @@ $(".build_university").attr('tooltip6', 'Knowledge production: +0.05/s');
 $(".build_university").attr('tooltip7', 'Book production +0.0001/s');
 
 brickcost = Math.pow(1.25,(buildings["concretemixer"]))*1000
-ironcost = Math.pow(1.25,(buildings["concretemixer"]))*2500
 platecost = Math.pow(1.25,(buildings["concretemixer"]))*200
 if(craft["brick"]<brickcost || craft["plate"]<platecost || items["iron"]<ironcost){
 	$(".build_concretemixer").addClass("unavailable")
@@ -5347,14 +5342,13 @@ else
 	$(".build_concretemixer").removeClass("unavailable")
 }
 $(".build_concretemixer").html("Concrete Mixer ("+buildings["concretemixer"]+")");
-$(".build_concretemixer").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
-$(".build_concretemixer").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
-$(".build_concretemixer").attr('tooltip3', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
-$(".build_concretemixer").attr('tooltip5', 'Mineral consumption: -50.00/s');
-$(".build_concretemixer").attr('tooltip6', 'Water consumption: -10.00/s');
-$(".build_concretemixer").attr('tooltip7', 'Cement consumption: -2.00/s');
-$(".build_concretemixer").attr('tooltip8', 'Energy consumption: 500 KWh');
-$(".build_concretemixer").attr('tooltip9', 'Concrete production: +0.05/s');
+$(".build_concretemixer").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_concretemixer").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
+$(".build_concretemixer").attr('tooltip3', 'Mineral consumption: -50.00/s');
+$(".build_concretemixer").attr('tooltip4', 'Water consumption: -10.00/s');
+$(".build_concretemixer").attr('tooltip5', 'Cement consumption: -2.00/s');
+$(".build_concretemixer").attr('tooltip6', 'Energy consumption: 500 KWh');
+$(".build_concretemixer").attr('tooltip7', 'Concrete production: +0.05/s');
 
 
 
@@ -7896,9 +7890,9 @@ else if(buildings["university"]>0)
 		buildstatus["university"]=0;
 		$(".build_university").addClass("off")
 }
-if (items["mineral"]>=buildings["concretemixer"]*125  &&  items["watercost"]>=buildings["concretemixer"]*0.5 && items["cementcost"]>=buildings["concretemixer"]*0.5 &&  bonus["energy"]>=(0.125/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+if (items["mineral"]>=buildings["concretemixer"]*12.5  &&  items["water"]>=buildings["concretemixer"]*0.5 && items["cement"]>=buildings["concretemixer"]*0.5 &&  bonus["energy"]>=(0.125/3.6)*buildings["concretemixer"] && buildstatus["concretemixer"]==1)
 {
-	consumption["mineral"]+=buildings["concretemixer"]*125
+	consumption["mineral"]+=buildings["concretemixer"]*12.5
 	consumption["water"]+=buildings["concretemixer"]*2.5
 	consumption["cement"]+=buildings["concretemixer"]*0.5
 	production["concrete"]+=buildings["concretemixer"]*0.0125

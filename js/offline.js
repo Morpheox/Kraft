@@ -87,7 +87,7 @@ else if(buildings["university"]>0)
 		buildstatus["university"]=0;
 		$(".build_university").addClass("off")
 }
-if (items["mineral"]>=buildings["concretemixer"]*50  &&  items["watercost"]>=buildings["concretemixer"]*10 && items["cementcost"]>=buildings["concretemixer"]*0.5 &&  bonus["energy"]>=(0.5/3.6)*buildings["cementkiln"] && buildstatus["cementkiln"]==1)
+if (items["mineral"]>=buildings["concretemixer"]*50  &&  items["water"]>=buildings["concretemixer"]*10 && items["cement"]>=buildings["concretemixer"]*0.5 &&  bonus["energy"]>=(0.5/3.6)*buildings["concretemixer"] && buildstatus["concretemixer"]==1)
 {
 	consumption["mineral"]+=buildings["concretemixer"]*50
 	consumption["water"]+=buildings["concretemixer"]*10

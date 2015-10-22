@@ -5342,7 +5342,7 @@ else
 	$(".build_concretemixer").removeClass("unavailable")
 }
 $(".build_concretemixer").html("Concrete Mixer ("+buildings["concretemixer"]+")");
-$(".build_concretemixer").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_concretemixer").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".build_concretemixer").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".build_concretemixer").attr('tooltip3', 'Mineral consumption: -50.00/s');
 $(".build_concretemixer").attr('tooltip4', 'Water consumption: -10.00/s');

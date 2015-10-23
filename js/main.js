@@ -1034,7 +1034,7 @@ function retreat(){
 }
 function crafting(b){
 	var tocraft=1;
-	if(buildstatus["workbench"]==1){
+	if(buildstatus["workbench"]==1 && b!="book" && b!="patent"){
 		tocraft=buildings["workbench"]+1;
 	}
 	for(i=0;i<tocraft;i++)

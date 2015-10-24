@@ -55,6 +55,7 @@ bonus["booking"]=0;
 bonus["auto"]=0;
 bonus["legacy"]=0;
 bonus["energy"]=0;
+bonus["rush"]=0;
 
 var buildings=new Array();
 
@@ -1002,6 +1003,12 @@ function fight(){
 				reward+=parseFloat(rnd).toFixed(2) + " knowledge<br>";
 				items["knowledge"]+=rnd;
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
+			}
+			if(Math.random()>0.98){
+				combatlog+="You found a diamond!<br>";
+				craft["diamond"]+=1;
+				diamonize();
+
 			}
 			if(Math.random()>0.999){
 				combatlog+="You found an extrange artifact<br>";
@@ -7714,10 +7721,47 @@ else
 {
 	$(".legacy_warp").removeClass("unavailable")
 }
-$(".legacy_warp").html("Boost economy");
+$(".legacy_warp").html("Rush economy");
 $(".legacy_warp").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
 $(".legacy_warp").attr('tooltip3', 'Gives you 30 min of production')
 
+diamondcost=1
+if(craft["diamond"]<diamondcost){
+	$(".rush1").addClass("unavailable")
+}
+else
+{
+	$(".rush1").removeClass("unavailable")
+}
+$(".rush1").html("Boost 1 hour");
+$(".rush1").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush1").attr('tooltip3', 'Doubles your production for 1 hour')
+
+diamondcost=20
+if(craft["diamond"]<diamondcost){
+	$(".rush24").addClass("unavailable")
+}
+else
+{
+	$(".rush24").removeClass("unavailable")
+}
+$(".rush24").html("Boost 1 day");
+$(".rush24").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush24").attr('tooltip3', 'Doubles your production for 1 day')
+
+diamondcost=100
+if(craft["diamond"]<diamondcost){
+	$(".rush7").addClass("unavailable")
+}
+else
+{
+	$(".rush7").removeClass("unavailable")
+}
+$(".rush7").html("Boost 1 week");
+$(".rush7").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush7").attr('tooltip3', 'Doubles your production for 1 week')
+
+$(".currentrush").html("Remaining boost "+totimehour(bonus["rush"]))
 //Others
 
 if(prestige["number"]>0){
@@ -8094,14 +8138,17 @@ if (bonus["invest"]>=0.025)
 	bonus["invest"]-=0.025
 	craft["coin"]+=0.025
 }
-
-
+var rushbonus=1
+if(bonus["rush"]>=1){
+	bonus["rush"]--
+	rushbonus=2
+}
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){
-		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key]*(bonus["storage"]+1))+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
+		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key]*(bonus["storage"]+1))+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key])).toFixed(2)+")</td> ";
 		if (bonus[key]>0 || bonus["global"]>0){
-			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
+			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%"+(rushbonus >1 ? " x2" : "")+"</td>";
 		}
 
 		inv_text+="<tr>"
@@ -8357,7 +8404,9 @@ autotechnologies = update(autotechnologies,JSON.parse(result[12]));
 		if(bonus["savetime"]!=0){
 			warp()
 		}
-
+		if(craft["diamond"]>=1){
+			diamonize()
+		}
 		if(technologies["safestorage"]==1){
 
 		traderatio["wood"]["nickel"]=0.00015;
@@ -8422,7 +8471,10 @@ function load(){
 		$(".tech_wrapping").show()
 		unlocked[".tech_wrapping"]=1;
 		}
-
+		
+		if(craft["diamond"]>=1){
+			diamonize()
+		}
 		if(typeof Cookies.get( 'autotechnologies') != 'undefined'){
 		autotechnologies = update(autotechnologies,JSON.parse(Cookies.get( 'autotechnologies')));
 		}
@@ -8498,4 +8550,29 @@ function update(array1, array2){
 	}
 
 	return array1
+}
+
+
+function diamonize(){
+
+unlocked[".rush1"]=1
+unlocked[".rush24"]=1
+unlocked[".rush7"]=1
+unlocked[".currentrush"]=1
+$(".rush1").show()
+$(".rush24").show()
+$(".rush7").show()
+$(".currentrush").show()
+}
+
+function rush(a,b){
+
+if(craft["diamond"]>=b){
+
+craft["diamond"]-=b
+bonus["rush"]+=a*14400
+
+
+
+}
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.3 beta</title>
+	<title>Keep Craft v0.8.4 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 
 
 
-    <div class="infokraft">Keep Craft v0.8.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.4 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -326,7 +326,12 @@
 	</div><br><div class="dealtime">
 	</div><br><br>
 	<button class="btndeal" onclick="deal()">Deal</button>
-	</div>
+	</div><br><br>
+	<div class="block rush1"></div><br>
+	<div class="block rush24"></div><br>
+	<div class="block rush7"></div><br>
+	<br>
+	<div class="currentrush"></div>
 	</div>
 	<div id="leader" class="leader tab-pane fade">
 	Cost 1 title per lv<br>
@@ -472,6 +477,15 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+       	<b>V 0.8.4</b>
+        <ul>
+        <li>Diamond update patch</li>
+        <li>Now diamonds can be obtained as fight loot</li>
+        <li>When you get a diamond, you unlock a new section on the market</li>
+        <li>This section allows you to double your production for 1 hour, 1 day or 1 week in exchange for diamonds</li>
+        <li>This its not the same as a 100% bonus, it doubles your production after your current bonuses</li>
+        <li>Fixed the mastery techs not resseting correctly after exploring a new continent</li>  
+        </ul>	
 	    <b>V 0.8.3</b>
         <ul>
         <li>New tech</li>
@@ -985,7 +999,7 @@
 	setInterval(function(){ save()}, 60000);
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
@@ -1203,6 +1217,10 @@
 	$(".legacy_learning").click(function() {lega("learning")});
 	$(".legacy_memory").click(function() {lega("memory")});
 	$(".legacy_warp").click(function() {legacywarp()});
+
+	$(".rush1").click(function() {rush(1,1)});
+	$(".rush24").click(function() {rush(24,20)});
+	$(".rush7").click(function() {rush(168,100)});
 
 	unlocked[".legacy_motivation"]=1;
 	unlocked[".legacy_depot"]=1;

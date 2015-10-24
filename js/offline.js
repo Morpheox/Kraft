@@ -286,13 +286,17 @@ if (bonus["invest"]>=0.1)
 	bonus["invest"]-=0.1
 	craft["coin"]+=0.1
 }
-
+var rushbonus=1
+if(bonus["rush"]>=4){
+	bonus["rush"]-=4
+	rushbonus=2
+}
 for(key in items){
 
-	var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
+	var result=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key]
 
 	if((items[key]+result)<(maximums[key]*(bonus["storage"]+1))){
-		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
+		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key];
 	}
 	else
 	{

@@ -924,55 +924,55 @@ function fight(){
 				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
 				people["pikeman"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" pikeman<br>"
+				combatlog+="You lost "+losses+" pikeman<br>"
 			}
 			if(people["swordman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["swordman"]-1))+1
 				people["swordman"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" swordman<br>"
+				combatlog+="You lost "+losses+" swordman<br>"
 			}
 			if(people["knight"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["knight"]-1))+1
 				people["knight"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" knight<br>"
+				combatlog+="You lost "+losses+" knight<br>"
 			}
 			if(people["medic"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["medic"]-1))+1
 				people["medic"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" medics<br>"
+				combatlog+="You lost "+losses+" medics<br>"
 			}
 			if(people["bersek"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["bersek"]-1))+1
 				people["bersek"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" bersek<br>"
+				combatlog+="You lost "+losses+" bersek<br>"
 			}
 			if(people["warelephant"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["warelephant"]-1))+1
 				people["warelephant"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" war elephant<br>"
+				combatlog+="You lost "+losses+" war elephant<br>"
 			}
 			if(people["musketeer"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["musketeer"]-1))+1
 				people["musketeer"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" musketeers<br>"
+				combatlog+="You lost "+losses+" musketeers<br>"
 			}
 			if(people["lighttank"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["lighttank"]-1))+1
 				people["lighttank"]-=losses;
 				population-=losses*3;
-				combatlog+="You lose "+losses+" light tanks<br>"
+				combatlog+="You lost "+losses+" light tanks<br>"
 			}
 			break;
 		}
 		else if(hp2<0){
 			var reward="";
-			combatlog+="You win the combat!<br><br>";
+			combatlog+="Your troops won the combat!<br><br>";
 			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
 			$(".encounter").hide()
 			craft["coin"]+=enemy["reward"];
@@ -1010,7 +1010,7 @@ function fight(){
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
 			}
 			if(Math.random()>0.999){
-				combatlog+="You found an extrange artifact<br>";
+				combatlog+="You found an strange artifact<br>";
 				craft["artifact"]+=1;
 
 			}
@@ -1021,7 +1021,7 @@ function fight(){
 	}
 
 	if(i>49){
-		combatlog+="The combat ends in a draw<br>"
+		combatlog+="The combat ended in a draw<br>"
 	}
 
 	$(".expeditionresult").html(combatlog)

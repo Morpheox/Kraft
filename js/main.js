@@ -335,7 +335,7 @@ function reespec(){
 	cost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
 	if(people["xochiquetzal"]>=1){
 		if(population>(maximums["population"]-(people["xochiquetzal"]*2))){
-			alert("You can´t reespec because you would exceed maximum population, fire some workers first.")
+			alert('A Leader Respec would cause you to exceed the population maximum.\nFire ' + (maximums["population"]-people["xochiquetzal"]*2-population) + ' workers and try again.')
 			return;
 
 		}
@@ -649,7 +649,7 @@ function expedition(){
 			else
 			{
 
-				$(".expeditionresult").html("The expedition didn´t find anything useful.")
+				$(".expeditionresult").html("The expedition did not find anything useful.")
 			}
 
 
@@ -769,7 +769,7 @@ function expedition(){
 
 
 			$(".encounter").show()
-			$(".expeditionresult").html("Some enemies appeared in our way.")
+			$(".expeditionresult").html("Some enemies appeared in our way!")
 			$(".encounter").html(stringencuentro)
 
 		}
@@ -846,7 +846,7 @@ function fight(){
 	healing+=people["medic"]*10
 
 	healing=healing*(bonus["healing"]+1)
-	combatlog="The battle starts:<br>"
+	combatlog="The battle began!<br>"
 	var ronda=0;
 	for(i=0;i<=50;i++){
 		dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
@@ -868,7 +868,13 @@ function fight(){
 		}
 		else if(reload>0 && craft["ammo"]>=(people["musketeer"]+(people["lighttank"]*4)))
 		{
-		combatlog+="The troops are reloading.<br>"
+			if(i==0){
+			combatlog+="The troops loaded their weapons.<br>"
+			}
+			else
+			{
+			combatlog+="The troops reloaded their weapons.<br>"
+			}
 		ammocost=0;
 		ammocost+=people["musketeer"]
 		ammocost+=people["lighttank"]*4
@@ -877,7 +883,7 @@ function fight(){
 		}
 		else if(reload>0)
 		{
-		combatlog+="You ran out of ammo.<br>"
+		combatlog+="Your troops ran out of ammo.<br>"
 		reload=0;
 		}
 
@@ -886,7 +892,7 @@ function fight(){
 		if(armor>0){
 
 			dmg2-=armor;
-			combatlog+="Your troops block "+armor+" damage<br>"
+			combatlog+="Your troops blocked "+armor+" damage<br>"
 			if(dmg2<0){
 				dmg2=0;
 			}
@@ -894,26 +900,26 @@ function fight(){
 		if(armor2>0){
 
 			dmg1-=armor2;
-			combatlog+="The enemy blocks "+armor2+" damage<br>"
+			combatlog+="The enemy blocked "+armor2+" damage<br>"
 			if(dmg1<0){
 				dmg1=0;
 			}
 		}
 
-		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
-		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+		combatlog+="Your troops dealt "+intToString(dmg1)+" damage<br>"
+		combatlog+="The enemy dealt "+intToString(dmg2)+" damage<br>"
 
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
 			hp+=healed;
-			combatlog+="Your medics restore "+intToString(healed)+" hp<br>"
+			combatlog+="Your medics restored "+intToString(healed)+" hp<br>"
 		}
 
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
 		if(hp<0){
-			combatlog+="You lose the combat<br>"
+			combatlog+="You lost the combat<br>"
 			if(people["pikeman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
 				people["pikeman"]-=losses;
@@ -6080,7 +6086,7 @@ else
 $(".tech_redeem").addClass((technologies["redeem"] >0 ? "researched" : ""))
 $(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" : ""));
 $(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
-$(".tech_redeem").attr('tooltip3', "Allows reedeming tokens in the casino.");
+$(".tech_redeem").attr('tooltip3', "Allows redeeming tokens in the casino.");
 
 
 woodcost=20000;
@@ -7273,19 +7279,19 @@ $(".tech_cementhydration").attr('tooltip4', "Allows you to build concrete mixers
 
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
-$(".research_economy").attr('tooltip', "Economy its a big force, prosperity and wealth awaits for those ");
-$(".research_economy").attr('tooltip2', "who look for it.");
-$(".research_economy").attr('tooltip4', "Also increases global production");
+$(".research_economy").attr('tooltip', "The economy is a lucrative force. Prosperity and wealth await");
+$(".research_economy").attr('tooltip2', "those who seek to harness it.");
+$(".research_economy").attr('tooltip4', "Increases global production");
 
 $(".research_science").html("Science " + intToString(bonus["science"]));
-$(".research_science").attr('tooltip', "Science leads humanity forward, it can be slow, ");
-$(".research_science").attr('tooltip2', "but it never stops evolving. ");
-$(".research_science").attr('tooltip4', "Also increases craft efficiency");
+$(".research_science").attr('tooltip', "Science is an evolutionary force. Progress can be slow,");
+$(".research_science").attr('tooltip2', "but it will never stop pushing humanity forward.");
+$(".research_science").attr('tooltip4', "Increases craft efficiency");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
-$(".research_military").attr('tooltip', "There are times, when only the most powerfull get what he wants,");
-$(".research_military").attr('tooltip2', "is that you?");
-$(".research_military").attr('tooltip4', "Also increases troops attack and hp");
+$(".research_military").attr('tooltip', "The military are a powerful force. There are times when");
+$(".research_military").attr('tooltip2', "only might can make right. Is it now?");
+$(".research_military").attr('tooltip4', "Increases troops attack and hp");
 
 
 //crafting

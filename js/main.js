@@ -1010,7 +1010,7 @@ function fight(){
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
 			}
 			if(Math.random()>0.999){
-				combatlog+="You found an strange artifact<br>";
+				combatlog+="You found a strange artifact<br>";
 				craft["artifact"]+=1;
 
 			}

@@ -5340,7 +5340,7 @@ $(".build_university").attr('tooltip7', 'Book production +0.0001/s');
 
 brickcost = Math.pow(1.25,(buildings["concretemixer"]))*1000
 platecost = Math.pow(1.25,(buildings["concretemixer"]))*200
-if(craft["brick"]<brickcost || craft["plate"]<platecost || items["iron"]<ironcost){
+if(craft["brick"]<brickcost || craft["plate"]<platecost){
 	$(".build_concretemixer").addClass("unavailable")
 }
 else

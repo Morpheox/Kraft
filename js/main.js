@@ -7289,16 +7289,19 @@ $(".research_economy").html("Economy " + intToString(bonus["economy"]));
 $(".research_economy").attr('tooltip', "The economy is a lucrative force. Prosperity and wealth await");
 $(".research_economy").attr('tooltip2', "those who seek to harness it.");
 $(".research_economy").attr('tooltip4', "Increases global production");
+if(bonus["economy"]>100000) {$(".research_economy").attr('tooltip6', 'An additional investment of ' + parseFloat(Math.pow(1.1,Math.round(Math.ceil(Math.log(bonus["economy"]/100000)/Math.log(1.1),0)))*100000-bonus["economy"]).toFixed(2) + ' knowledge will unlock the next AutoTech.');}
 
 $(".research_science").html("Science " + intToString(bonus["science"]));
 $(".research_science").attr('tooltip', "Science is an evolutionary force. Progress can be slow,");
 $(".research_science").attr('tooltip2', "but it will never stop pushing humanity forward.");
 $(".research_science").attr('tooltip4', "Increases craft efficiency");
+if(bonus["science"]>100000) {$(".research_science").attr('tooltip6', 'An additional investment of ' + parseFloat(Math.pow(1.1,Math.round(Math.ceil(Math.log(bonus["science"]/100000)/Math.log(1.1),0)))*100000-bonus["science"]).toFixed(2) + ' knowledge will unlock the next AutoTech.');}
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
 $(".research_military").attr('tooltip', "The military are a powerful force. There are times when");
 $(".research_military").attr('tooltip2', "only might can make right. Is it now?");
 $(".research_military").attr('tooltip4', "Increases troops attack and hp");
+if(bonus["military"]>100000) {$(".research_military").attr('tooltip6', 'An additional investment of ' + parseFloat(Math.pow(1.1,Math.round(Math.ceil(Math.log(bonus["military"]/100000)/Math.log(1.1),0)))*100000-bonus["military"]).toFixed(2) + ' knowledge will unlock the next AutoTech.');}
 
 
 //crafting

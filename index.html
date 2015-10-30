@@ -24,28 +24,6 @@
 	<script type="text/javascript" src="js/casino.js"></script>
 	<script type="text/javascript" src="js/deals.js"></script>
 	<script type="text/javascript" src="js/offline.js"></script>
-	
-$(function() {
-    $('block').hover(function() {
-        var $div = $(this).next('div');
-        var div_width = $div.width();
-        var div_offeset_top = ($(this).offset().top + $div.height());
-        var div_offeset_left = ($(this).offset().left + div_width + 30);
-
-        if ($(window).height() < div_offeset_top) {
-            $div.css('top', -(div_offeset_top - $(window).height()));
-        }
-        if ($(window).width() < div_offeset_left) {
-            $div.css('left', -(div_width + 10));
-        }
-        $div.show();
-    },
-    function() {
-        $(this).next('div').removeAttr('style').hide();
-    });
-});
-	
-	
 </head>
 <body>
 

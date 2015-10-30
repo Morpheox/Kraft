@@ -55,6 +55,7 @@ bonus["booking"]=0;
 bonus["auto"]=0;
 bonus["legacy"]=0;
 bonus["energy"]=0;
+bonus["rush"]=0;
 
 var buildings=new Array();
 
@@ -335,7 +336,7 @@ function reespec(){
 	cost = Math.floor(Math.pow(1.7,(bonus["reespeccost"]))*5)
 	if(people["xochiquetzal"]>=1){
 		if(population>(maximums["population"]-(people["xochiquetzal"]*2))){
-			alert("You can´t reespec because you would exceed maximum population, fire some workers first.")
+			alert('A Leader Respec would cause you to exceed the population maximum.\nFire ' + (maximums["population"]-people["xochiquetzal"]*2-population) + ' workers and try again.')
 			return;
 
 		}
@@ -649,7 +650,7 @@ function expedition(){
 			else
 			{
 
-				$(".expeditionresult").html("The expedition didn´t find anything useful.")
+				$(".expeditionresult").html("The expedition did not find anything useful.")
 			}
 
 
@@ -769,7 +770,7 @@ function expedition(){
 
 
 			$(".encounter").show()
-			$(".expeditionresult").html("Some enemies appeared in our way.")
+			$(".expeditionresult").html("Some enemies appeared in our way!")
 			$(".encounter").html(stringencuentro)
 
 		}
@@ -846,7 +847,7 @@ function fight(){
 	healing+=people["medic"]*10
 
 	healing=healing*(bonus["healing"]+1)
-	combatlog="The battle starts:<br>"
+	combatlog="The battle began!<br>"
 	var ronda=0;
 	for(i=0;i<=50;i++){
 		dmg1=power+(Math.random()*(power/4))-(Math.random()*(power/4));
@@ -868,7 +869,13 @@ function fight(){
 		}
 		else if(reload>0 && craft["ammo"]>=(people["musketeer"]+(people["lighttank"]*4)))
 		{
-		combatlog+="The troops are reloading.<br>"
+			if(i==0){
+			combatlog+="The troops loaded their weapons.<br>"
+			}
+			else
+			{
+			combatlog+="The troops reloaded their weapons.<br>"
+			}
 		ammocost=0;
 		ammocost+=people["musketeer"]
 		ammocost+=people["lighttank"]*4
@@ -877,7 +884,7 @@ function fight(){
 		}
 		else if(reload>0)
 		{
-		combatlog+="You ran out of ammo.<br>"
+		combatlog+="Your troops ran out of ammo.<br>"
 		reload=0;
 		}
 
@@ -886,7 +893,7 @@ function fight(){
 		if(armor>0){
 
 			dmg2-=armor;
-			combatlog+="Your troops block "+armor+" damage<br>"
+			combatlog+="Your troops blocked "+armor+" damage<br>"
 			if(dmg2<0){
 				dmg2=0;
 			}
@@ -894,79 +901,79 @@ function fight(){
 		if(armor2>0){
 
 			dmg1-=armor2;
-			combatlog+="The enemy blocks "+armor2+" damage<br>"
+			combatlog+="The enemy blocked "+armor2+" damage<br>"
 			if(dmg1<0){
 				dmg1=0;
 			}
 		}
 
-		combatlog+="Your soldiers deals "+intToString(dmg1)+" damage<br>"
-		combatlog+="The enemy deals "+intToString(dmg2)+" damage<br>"
+		combatlog+="Your troops dealt "+intToString(dmg1)+" damage<br>"
+		combatlog+="The enemy dealt "+intToString(dmg2)+" damage<br>"
 
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
 			hp+=healed;
-			combatlog+="Your medics restore "+intToString(healed)+" hp<br>"
+			combatlog+="Your medics restored "+intToString(healed)+" hp<br>"
 		}
 
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
 		if(hp<0){
-			combatlog+="You lose the combat<br>"
+			combatlog+="You lost the combat<br>"
 			if(people["pikeman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
 				people["pikeman"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" pikeman<br>"
+				combatlog+="You lost "+losses+" pikeman<br>"
 			}
 			if(people["swordman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["swordman"]-1))+1
 				people["swordman"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" swordman<br>"
+				combatlog+="You lost "+losses+" swordman<br>"
 			}
 			if(people["knight"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["knight"]-1))+1
 				people["knight"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" knight<br>"
+				combatlog+="You lost "+losses+" knight<br>"
 			}
 			if(people["medic"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["medic"]-1))+1
 				people["medic"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" medics<br>"
+				combatlog+="You lost "+losses+" medics<br>"
 			}
 			if(people["bersek"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["bersek"]-1))+1
 				people["bersek"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" bersek<br>"
+				combatlog+="You lost "+losses+" bersek<br>"
 			}
 			if(people["warelephant"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["warelephant"]-1))+1
 				people["warelephant"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" war elephant<br>"
+				combatlog+="You lost "+losses+" war elephant<br>"
 			}
 			if(people["musketeer"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["musketeer"]-1))+1
 				people["musketeer"]-=losses;
 				population-=losses;
-				combatlog+="You lose "+losses+" musketeers<br>"
+				combatlog+="You lost "+losses+" musketeers<br>"
 			}
 			if(people["lighttank"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["lighttank"]-1))+1
 				people["lighttank"]-=losses;
 				population-=losses*3;
-				combatlog+="You lose "+losses+" light tanks<br>"
+				combatlog+="You lost "+losses+" light tanks<br>"
 			}
 			break;
 		}
 		else if(hp2<0){
 			var reward="";
-			combatlog+="You win the combat!<br><br>";
+			combatlog+="Your troops won the combat!<br><br>";
 			combatlog+="You won "+ intToString(enemy["reward"])+" coins<br>";
 			$(".encounter").hide()
 			craft["coin"]+=enemy["reward"];
@@ -1003,8 +1010,14 @@ function fight(){
 				items["knowledge"]+=rnd;
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
 			}
+			if(Math.random()>0.98){
+				combatlog+="You found a diamond!<br>";
+				craft["diamond"]+=1;
+				diamonize();
+
+			}
 			if(Math.random()>0.999){
-				combatlog+="You found an extrange artifact<br>";
+				combatlog+="You found a strange artifact<br>";
 				craft["artifact"]+=1;
 
 			}
@@ -1015,7 +1028,7 @@ function fight(){
 	}
 
 	if(i>49){
-		combatlog+="The combat ends in a draw<br>"
+		combatlog+="The combat ended in a draw<br>"
 	}
 
 	$(".expeditionresult").html(combatlog)
@@ -1034,7 +1047,7 @@ function retreat(){
 }
 function crafting(b){
 	var tocraft=1;
-	if(buildstatus["workbench"]==1){
+	if(buildstatus["workbench"]==1 && b!="book" && b!="patent"){
 		tocraft=buildings["workbench"]+1;
 	}
 	for(i=0;i<tocraft;i++)
@@ -5334,7 +5347,7 @@ $(".build_university").attr('tooltip7', 'Book production +0.0001/s');
 
 brickcost = Math.pow(1.25,(buildings["concretemixer"]))*1000
 platecost = Math.pow(1.25,(buildings["concretemixer"]))*200
-if(craft["brick"]<brickcost || craft["plate"]<platecost || items["iron"]<ironcost){
+if(craft["brick"]<brickcost || craft["plate"]<platecost){
 	$(".build_concretemixer").addClass("unavailable")
 }
 else
@@ -5342,7 +5355,7 @@ else
 	$(".build_concretemixer").removeClass("unavailable")
 }
 $(".build_concretemixer").html("Concrete Mixer ("+buildings["concretemixer"]+")");
-$(".build_concretemixer").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
+$(".build_concretemixer").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".build_concretemixer").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".build_concretemixer").attr('tooltip3', 'Mineral consumption: -50.00/s');
 $(".build_concretemixer").attr('tooltip4', 'Water consumption: -10.00/s');
@@ -6080,7 +6093,7 @@ else
 $(".tech_redeem").addClass((technologies["redeem"] >0 ? "researched" : ""))
 $(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" : ""));
 $(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
-$(".tech_redeem").attr('tooltip3', "Allows reedeming tokens in the casino.");
+$(".tech_redeem").attr('tooltip3', "Allows redeeming tokens in the casino.");
 
 
 woodcost=20000;
@@ -7273,19 +7286,19 @@ $(".tech_cementhydration").attr('tooltip4', "Allows you to build concrete mixers
 
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
-$(".research_economy").attr('tooltip', "Economy its a big force, prosperity and wealth awaits for those ");
-$(".research_economy").attr('tooltip2', "who look for it.");
-$(".research_economy").attr('tooltip4', "Also increases global production");
+$(".research_economy").attr('tooltip', "The economy is a lucrative force. Prosperity and wealth await");
+$(".research_economy").attr('tooltip2', "those who seek to harness it.");
+$(".research_economy").attr('tooltip4', "Increases global production");
 
 $(".research_science").html("Science " + intToString(bonus["science"]));
-$(".research_science").attr('tooltip', "Science leads humanity forward, it can be slow, ");
-$(".research_science").attr('tooltip2', "but it never stops evolving. ");
-$(".research_science").attr('tooltip4', "Also increases craft efficiency");
+$(".research_science").attr('tooltip', "Science is an evolutionary force. Progress can be slow,");
+$(".research_science").attr('tooltip2', "but it will never stop pushing humanity forward.");
+$(".research_science").attr('tooltip4', "Increases craft efficiency");
 
 $(".research_military").html("Military " + intToString(bonus["military"]));
-$(".research_military").attr('tooltip', "There are times, when only the most powerfull get what he wants,");
-$(".research_military").attr('tooltip2', "is that you?");
-$(".research_military").attr('tooltip4', "Also increases troops attack and hp");
+$(".research_military").attr('tooltip', "The military are a powerful force. There are times when");
+$(".research_military").attr('tooltip2', "only might can make right. Is it now?");
+$(".research_military").attr('tooltip4', "Increases troops attack and hp");
 
 
 //crafting
@@ -7714,10 +7727,47 @@ else
 {
 	$(".legacy_warp").removeClass("unavailable")
 }
-$(".legacy_warp").html("Boost economy");
+$(".legacy_warp").html("Rush economy");
 $(".legacy_warp").attr('tooltip', 'Treasures: '+ parseFloat(prestige["treasure"]).toFixed(2)+" / "+parseFloat(treasurecost).toFixed(2))
 $(".legacy_warp").attr('tooltip3', 'Gives you 30 min of production')
 
+diamondcost=1
+if(craft["diamond"]<diamondcost){
+	$(".rush1").addClass("unavailable")
+}
+else
+{
+	$(".rush1").removeClass("unavailable")
+}
+$(".rush1").html("Boost 1 hour");
+$(".rush1").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush1").attr('tooltip3', 'Doubles your production for 1 hour')
+
+diamondcost=20
+if(craft["diamond"]<diamondcost){
+	$(".rush24").addClass("unavailable")
+}
+else
+{
+	$(".rush24").removeClass("unavailable")
+}
+$(".rush24").html("Boost 1 day");
+$(".rush24").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush24").attr('tooltip3', 'Doubles your production for 1 day')
+
+diamondcost=100
+if(craft["diamond"]<diamondcost){
+	$(".rush7").addClass("unavailable")
+}
+else
+{
+	$(".rush7").removeClass("unavailable")
+}
+$(".rush7").html("Boost 1 week");
+$(".rush7").attr('tooltip', 'Diamond: '+ parseFloat(craft["diamond"]).toFixed(2)+" / "+parseFloat(diamondcost).toFixed(2))
+$(".rush7").attr('tooltip3', 'Doubles your production for 1 week')
+
+$(".currentrush").html("Remaining boost "+totimehour(bonus["rush"]))
 //Others
 
 if(prestige["number"]>0){
@@ -8094,14 +8144,17 @@ if (bonus["invest"]>=0.025)
 	bonus["invest"]-=0.025
 	craft["coin"]+=0.025
 }
-
-
+var rushbonus=1
+if(bonus["rush"]>=1){
+	bonus["rush"]--
+	rushbonus=2
+}
 var inv_text="<table>"
 for(key in items){
 	if(items[key]!=0){
-		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key]*(bonus["storage"]+1))+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1))-consumption[key])).toFixed(2)+")</td> ";
+		inv_text+="<tr><td class='resource'>"+key+": </td><td class='amount' align='center'>"+intToString(items[key])+" / "+ intToStringRound(maximums[key]*(bonus["storage"]+1))+"</td><td class='production' align='right'> ("+parseFloat(4*((production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key])).toFixed(2)+")</td> ";
 		if (bonus[key]>0 || bonus["global"]>0){
-			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%</td>";
+			inv_text+= "<td class='bonus'>+"+Math.round((bonus[key]+bonus["global"])*100)+"%"+(rushbonus >1 ? " x2" : "")+"</td>";
 		}
 
 		inv_text+="<tr>"
@@ -8357,7 +8410,9 @@ autotechnologies = update(autotechnologies,JSON.parse(result[12]));
 		if(bonus["savetime"]!=0){
 			warp()
 		}
-
+		if(craft["diamond"]>=1){
+			diamonize()
+		}
 		if(technologies["safestorage"]==1){
 
 		traderatio["wood"]["nickel"]=0.00015;
@@ -8422,7 +8477,10 @@ function load(){
 		$(".tech_wrapping").show()
 		unlocked[".tech_wrapping"]=1;
 		}
-
+		
+		if(craft["diamond"]>=1){
+			diamonize()
+		}
 		if(typeof Cookies.get( 'autotechnologies') != 'undefined'){
 		autotechnologies = update(autotechnologies,JSON.parse(Cookies.get( 'autotechnologies')));
 		}
@@ -8498,4 +8556,29 @@ function update(array1, array2){
 	}
 
 	return array1
+}
+
+
+function diamonize(){
+
+unlocked[".rush1"]=1
+unlocked[".rush24"]=1
+unlocked[".rush7"]=1
+unlocked[".currentrush"]=1
+$(".rush1").show()
+$(".rush24").show()
+$(".rush7").show()
+$(".currentrush").show()
+}
+
+function rush(a,b){
+
+if(craft["diamond"]>=b){
+
+craft["diamond"]-=b
+bonus["rush"]+=a*14400
+
+
+
+}
 }

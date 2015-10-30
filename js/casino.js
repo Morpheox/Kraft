@@ -188,6 +188,7 @@ opened++
 if(opened>=81){
     remaining=0;
     craft["diamond"]+=1;
+    diamonize();
 }
 $(".totalwon").html("Total Won: "+intToString(totalwon));
 $(".playgame2").html(remaining)

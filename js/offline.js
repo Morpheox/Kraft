@@ -67,7 +67,7 @@ if (items["mineral"]>=buildings["cementkiln"]*100  &&  items["clay"]>=buildings[
 {
 	consumption["mineral"]+=buildings["cementkiln"]*100
 	consumption["clay"]+=buildings["cementkiln"]*2
-	production["cement"]+=buildings["cementkiln"]*0.025
+	production["cement"]+=buildings["cementkiln"]*0.1
 	bonus["energy"]-=(0.3/3.6)*buildings["cementkiln"];
 }
 else if(buildings["cementkiln"]>0)
@@ -286,13 +286,17 @@ if (bonus["invest"]>=0.1)
 	bonus["invest"]-=0.1
 	craft["coin"]+=0.1
 }
-
+var rushbonus=1
+if(bonus["rush"]>=4){
+	bonus["rush"]-=4
+	rushbonus=2
+}
 for(key in items){
 
-	var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
+	var result=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key]
 
 	if((items[key]+result)<(maximums[key]*(bonus["storage"]+1))){
-		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
+		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key];
 	}
 	else
 	{

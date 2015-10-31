@@ -321,8 +321,8 @@ function develop(b){
 
 	}
 	else if(b=="military"){
-		bonus["power"]+=(items["knowledge"]*2)/(((bonus["science"]+(items["knowledge"]/2)+100000)))
-		bonus["hp"]+=(items["knowledge"]*2)/(((bonus["science"]+(items["knowledge"]/2)+100000)))
+		bonus["power"]+=(items["knowledge"]*2)/(((bonus["military"]+(items["knowledge"]/2)+100000)))
+		bonus["hp"]+=(items["knowledge"]*2)/(((bonus["military"]+(items["knowledge"]/2)+100000)))
 	}
 
 

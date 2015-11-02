@@ -158,6 +158,11 @@ for (key in craft){
 	craft[key]=0
 }
 
+for (key in autotechnologies){
+	autotechnologies[key]=0
+}
+
+
 population=0;
 ships=0;
 for(key in technologies){
@@ -171,7 +176,7 @@ for(key in unlocked){
 }
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane, #facilitiespane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush").hide()
 	$(".trade_sand").hide()
 	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
 	$(".block").removeClass("researched");

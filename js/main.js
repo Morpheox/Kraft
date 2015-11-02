@@ -8203,10 +8203,10 @@ $(".betamount").attr("max",maximums["bet"]);
 $(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
 for(key in items){
 
-	var result=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key]
+	var result=((production[key]*(bonus[key]+bonus["global"]+1))*rushbonus)-consumption[key]
 
 	if((items[key]+result)<(maximums[key]*(bonus["storage"]+1))){
-		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1))-consumption[key];
+		items[key]+=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key];
 	}
 	else
 	{

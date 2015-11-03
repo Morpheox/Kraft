@@ -895,9 +895,9 @@ function fight(){
 			dmg2-=armor;
 			if(dmg2<0){
 				dmg2=0;
-				combatlog+="Your troops' armor blocks all damage!<br>"
+				combatlog+="Your troop's armor blocks all damage!<br>"
 			} else {
-				combatlog+="Your troops' armor blocks "+armor+" damage.<br>"
+				combatlog+="Your troop's armor blocks "+armor+" damage.<br>"
 			}
 		}
 		if(armor2>0){

@@ -874,7 +874,7 @@ function fight(){
 			}
 			else
 			{
-			combatlog+="Your troops are ready to fire.<br>"
+			combatlog+="Your troops are reloading.<br>"
 			}
 		ammocost=0;
 		ammocost+=people["musketeer"]

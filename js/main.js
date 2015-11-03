@@ -858,7 +858,7 @@ function fight(){
 
 		combatlog+="Round "+(i+1)+"<br>"
 		if(disobey>0 && Math.random()>0.75){
-		combatlog+="The elephants refused to attack.<br>"
+		combatlog+="The elephants stubbornly refuse to attack.<br>"
 		}
 		else
 		{
@@ -870,11 +870,11 @@ function fight(){
 		else if(reload>0 && craft["ammo"]>=(people["musketeer"]+(people["lighttank"]*4)))
 		{
 			if(i==0){
-			combatlog+="The troops loaded their weapons.<br>"
+			combatlog+="Your troops load their weapons.<br>"
 			}
 			else
 			{
-			combatlog+="The troops reloaded their weapons.<br>"
+			combatlog+="Your troops are ready to fire.<br>"
 			}
 		ammocost=0;
 		ammocost+=people["musketeer"]
@@ -884,7 +884,7 @@ function fight(){
 		}
 		else if(reload>0)
 		{
-		combatlog+="Your troops ran out of ammo.<br>"
+		combatlog+="Your troops are out of ammo!<br>"
 		reload=0;
 		}
 
@@ -893,81 +893,99 @@ function fight(){
 		if(armor>0){
 
 			dmg2-=armor;
-			combatlog+="Your troops blocked "+armor+" damage<br>"
 			if(dmg2<0){
 				dmg2=0;
+				combatlog+="Your troops' armor blocks all damage!<br>"
+			} else {
+				combatlog+="Your troops' armor blocks "+armor+" damage.<br>"
 			}
 		}
 		if(armor2>0){
 
 			dmg1-=armor2;
-			combatlog+="The enemy blocked "+armor2+" damage<br>"
+			
 			if(dmg1<0){
 				dmg1=0;
+				combatlog+="The enemy's armor blocks all damage!<br>"
+			} else {
+				combatlog+="The enemy's armor blocks "+armor2+" damage.<br>"
 			}
 		}
-
-		combatlog+="Your troops dealt "+intToString(dmg1)+" damage<br>"
-		combatlog+="The enemy dealt "+intToString(dmg2)+" damage<br>"
+		if(i==0 && burst>0){
+			combatlog+="Your troops smash into the enemy lines and deal "+intToString(dmg1)+" damage!<br>"
+		} else if(dmg1>power*1.1){
+			combatlog+="Your troops find a weak spot and deal "+intToString(dmg1)+" damage!<br>"
+		} else if(dmg1<power*.9){
+			combatlog+="Your troops hesitate, and only deal "+intToString(dmg1)+" damage.<br>"
+		} else {
+			combatlog+="Your troops deal "+intToString(dmg1)+" damage.<br>"
+		}
+		if(dmg2>power2*1.1){
+			combatlog+="The enemy finds a weak spot and deals "+intToString(dmg1)+" damage!<br>"
+		} else if(dmg2<power2*.9){
+			combatlog+="The enemy hesitates, and only deals "+intToString(dmg1)+" damage.<br>"
+		} else {
+			combatlog+="The enemy deals "+intToString(dmg1)+" damage.<br>"
+		}		
 
 		if(healing>0){
 			healed=healing+(Math.random()*(healing/8))-(Math.random()*(healing/8));
 			hp+=healed;
-			combatlog+="Your medics restored "+intToString(healed)+" hp<br>"
+			combatlog+="Your medics restore "+intToString(healed)+" hp.<br>"
 		}
 
 		hp2-=dmg1;
 		hp-=dmg2;
 		combatlog+="Your hp: "+Math.round(hp) +" / Enemy hp: "+Math.round(hp2)+"<br><br>";
 		if(hp<0){
-			combatlog+="You lost the combat<br>"
+			combatlog+="You lost the combat...<br>"
 			if(people["pikeman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["pikeman"]-1))+1
 				people["pikeman"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" pikeman<br>"
+				combatlog+="You lost "+losses+" pikeman.<br>"
 			}
 			if(people["swordman"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["swordman"]-1))+1
 				people["swordman"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" swordman<br>"
+				combatlog+="You lost "+losses+" swordman.<br>"
 			}
 			if(people["knight"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["knight"]-1))+1
 				people["knight"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" knight<br>"
+				combatlog+="You lost "+losses+" knights.<br>"
 			}
 			if(people["medic"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["medic"]-1))+1
 				people["medic"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" medics<br>"
+				combatlog+="You lost "+losses+" medics.<br>"
 			}
 			if(people["bersek"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["bersek"]-1))+1
 				people["bersek"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" bersek<br>"
+				combatlog+="You lost "+losses+" berseks.<br>"
 			}
 			if(people["warelephant"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["warelephant"]-1))+1
 				people["warelephant"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" war elephant<br>"
+				combatlog+="You lost "+losses+" war elephants.<br>"
 			}
 			if(people["musketeer"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["musketeer"]-1))+1
 				people["musketeer"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" musketeers<br>"
+				combatlog+="You lost "+losses+" musketeers.<br>"
 			}
 			if(people["lighttank"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["lighttank"]-1))+1
 				people["lighttank"]-=losses;
 				population-=losses*3;
-				combatlog+="You lost "+losses+" light tanks<br>"
+				combatlog+="You lost "+losses+" light tanks.<br>"
 			}
 			break;
 		}
@@ -981,7 +999,7 @@ function fight(){
 				rnd=(Math.random()*((power/2)+(hp/15)))/300;
 				reward+=parseFloat(rnd).toFixed(2) + " chest<br>";
 				craft["chest"]+=rnd;
-				combatlog+="You took "+ intToString(rnd)+" chests that they were carrying<br>";
+				combatlog+="You took "+ intToString(rnd)+" chests that they were carrying.<br>";
 				maximums["wood"]+=50*(rnd);
 				maximums["mineral"]+=25*(rnd);
 				maximums["food"]+=10*(rnd);
@@ -996,11 +1014,11 @@ function fight(){
 				rnd=Math.floor(power/300)+1;
 				reward+=parseFloat(rnd).toFixed(2) + " lock<br>";
 				craft["lock"]+=rnd;
-				combatlog+="You found "+ Math.round(rnd)+" lock<br>";
+				combatlog+="You found "+ Math.round(rnd)+" locks.<br>";
 			}
 			if(Math.random()>0.80 && technologies["canteen"]==1){
 				rnd=(Math.random()*((power/2)+(hp/15)))/400;
-				combatlog+="You found "+ intToString(rnd)+" bottles<br>";
+				combatlog+="You found "+ intToString(rnd)+" bottles.<br>";
 				craft["bottle"]+=rnd;
 				maximums["water"]+=rnd;
 			}
@@ -1008,18 +1026,16 @@ function fight(){
 				rnd=(Math.random()*((power/2)+(hp/15)))/4;
 				reward+=parseFloat(rnd).toFixed(2) + " knowledge<br>";
 				items["knowledge"]+=rnd;
-				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy<br>";
+				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy.<br>";
 			}
 			if(Math.random()>0.98){
 				combatlog+="You found a diamond!<br>";
 				craft["diamond"]+=1;
 				diamonize();
-
 			}
 			if(Math.random()>0.999){
-				combatlog+="You found a strange artifact<br>";
+				combatlog+="You found a strange artifact!<br>";
 				craft["artifact"]+=1;
-
 			}
 			break;
 		}
@@ -1028,16 +1044,12 @@ function fight(){
 	}
 
 	if(i>49){
-		combatlog+="The combat ended in a draw<br>"
+		combatlog+="The combat ended in a draw...<br>"
 	}
 
 	$(".expeditionresult").html(combatlog)
 	$(".encounter").html("")
 	$(".encounter").hide()
-
-
-
-
 }
 
 

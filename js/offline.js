@@ -67,7 +67,7 @@ if (items["mineral"]>=buildings["cementkiln"]*100  &&  items["clay"]>=buildings[
 {
 	consumption["mineral"]+=buildings["cementkiln"]*100
 	consumption["clay"]+=buildings["cementkiln"]*2
-	production["cement"]+=buildings["cementkiln"]*0.025
+	production["cement"]+=buildings["cementkiln"]*0.1
 	bonus["energy"]-=(0.3/3.6)*buildings["cementkiln"];
 }
 else if(buildings["cementkiln"]>0)

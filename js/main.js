@@ -921,11 +921,11 @@ function fight(){
 			combatlog+="Your troops deal "+intToString(dmg1)+" damage.<br>"
 		}
 		if(dmg2>power2*1.1){
-			combatlog+="The enemy finds a weak spot and deals "+intToString(dmg1)+" damage!<br>"
+			combatlog+="The enemy finds a weak spot and deals "+intToString(dmg2)+" damage!<br>"
 		} else if(dmg2<power2*.9){
-			combatlog+="The enemy hesitates, and only deals "+intToString(dmg1)+" damage.<br>"
+			combatlog+="The enemy hesitates, and only deals "+intToString(dmg2)+" damage.<br>"
 		} else {
-			combatlog+="The enemy deals "+intToString(dmg1)+" damage.<br>"
+			combatlog+="The enemy deals "+intToString(dmg2)+" damage.<br>"
 		}		
 
 		if(healing>0){

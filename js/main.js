@@ -917,7 +917,7 @@ function fight(){
 			combatlog+="Your troops find a weak spot and deal "+intToString(dmg1)+" damage!<br>"
 		} else if(dmg1<(power+disobey+reload)*.85){
 			combatlog+="Your troops hesitate, and only deal "+intToString(dmg1)+" damage.<br>"
-		} else {
+		} else if(dmg1>0){
 			combatlog+="Your troops deal "+intToString(dmg1)+" damage.<br>"
 		}
 		if(dmg2>power2*1.15){

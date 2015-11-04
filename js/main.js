@@ -913,16 +913,16 @@ function fight(){
 		}
 		if(i==0 && burst>0){
 			combatlog+="Your troops smash into the enemy lines and deal "+intToString(dmg1)+" damage!<br>"
-		} else if(dmg1>power*1.1){
+		} else if(dmg1>(power+disobey+reload)*1.15){
 			combatlog+="Your troops find a weak spot and deal "+intToString(dmg1)+" damage!<br>"
-		} else if(dmg1<power*.9){
+		} else if(dmg1<(power+disobey+reload)*.85){
 			combatlog+="Your troops hesitate, and only deal "+intToString(dmg1)+" damage.<br>"
 		} else {
 			combatlog+="Your troops deal "+intToString(dmg1)+" damage.<br>"
 		}
-		if(dmg2>power2*1.1){
+		if(dmg2>power2*1.15){
 			combatlog+="The enemy finds a weak spot and deals "+intToString(dmg2)+" damage!<br>"
-		} else if(dmg2<power2*.9){
+		} else if(dmg2<power2*.85){
 			combatlog+="The enemy hesitates, and only deals "+intToString(dmg2)+" damage.<br>"
 		} else {
 			combatlog+="The enemy deals "+intToString(dmg2)+" damage.<br>"

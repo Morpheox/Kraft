@@ -99,6 +99,7 @@ buildings["powerplant"]=0;
 buildings["cementkiln"]=0;
 buildings["concretemixer"]=0;
 buildings["university"]=0;
+buildings["toolfactory"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -223,7 +224,7 @@ technologies["electricity"]=0
 technologies["pyroprocessing"]=0
 technologies["education"]=0
 technologies["cementhydration"]=0
-
+technologies["workforce"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -279,6 +280,7 @@ craft["bronze"]=0
 craft["plate"]=0
 craft["engine"]=0
 craft["pickaxe"]=0
+craft["toolbox"]=0
 craft["spear"]=0
 craft["sword"]=0
 craft["greatsword"]=0
@@ -3449,7 +3451,22 @@ function research(b){
 		}
 
 	}
-	
+	else if (b=="workforce" && technologies["workforce"]==0){
+
+		concretecost=15000;
+		bookcost=30;
+		
+		if (items["concrete"]>=concretecost && craft["book"]>=bookcost){
+
+			items["concrete"]-=concretecost;
+			craft["book"]-=bookcost;
+
+			technologies["workforce"]++
+			$(".build_toolfactory").show()
+			unlocked[".build_toolfactory"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4725,6 +4742,23 @@ function build(b){
 			unlocked[".toggle_concretemixer"]=1
 		}
 	}
+	else if (b=="toolfactory"){
+
+		brickcost = Math.pow(1.20,(buildings["toolfactory"]))*2500
+		concretecost = Math.pow(1.20,(buildings["toolfactory"]))*10000
+	
+		if (craft["brick"]>=brickcost && items["concrete"]>=concretecost){
+
+			craft["brick"]-=brickcost;
+			items["concrete"]-=concretecost;
+
+			buildstatus["toolfactory"]=1;
+			buildings["toolfactory"]+=1
+
+			$(".toggle_toolfactory").show()
+			unlocked[".toggle_toolfactory"]=1
+		}
+	}
 }
 
 function calculatecost(){
@@ -5376,8 +5410,23 @@ $(".build_concretemixer").attr('tooltip6', 'Energy consumption: 500 KWh');
 $(".build_concretemixer").attr('tooltip7', 'Concrete production: +0.05/s');
 
 
-
-
+brickcost = Math.pow(1.20,(buildings["toolfactory"]))*2500
+concretecost = Math.pow(1.20,(buildings["toolfactory"]))*10000
+if(craft["brick"]<brickcost || items["concrete"]<concretecost){
+	$(".build_toolfactory").addClass("unavailable")
+}
+else
+{
+	$(".build_toolfactory").removeClass("unavailable")
+}
+$(".build_toolfactory").html("Tool factory ("+buildings["toolfactory"]+")");
+$(".build_toolfactory").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_toolfactory").attr('tooltip2', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
+$(".build_toolfactory").attr('tooltip3', 'Steel consumption: -2.00/s');
+$(".build_toolfactory").attr('tooltip4', 'Copper consumption: -5.00/s');
+$(".build_toolfactory").attr('tooltip5', 'Energy consumption: 1000 KWh');
+$(".build_toolfactory").attr('tooltip6', 'Pickaxe production: +0.25/s');
+$(".build_toolfactory").attr('tooltip7', 'Toolbox production: +0.001/s');
 //People
 
 foodcost=50;
@@ -7296,6 +7345,21 @@ $(".tech_cementhydration").attr('tooltip', 'Clay: '+ parseFloat(items["clay"]).t
 $(".tech_cementhydration").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_cementhydration").attr('tooltip4', "Allows you to build concrete mixers");
 
+concretecost=15000;
+bookcost=30;
+if(craft["book"]<bookcost || items["concrete"]<concretecost){
+	$(".tech_workforce").addClass("unavailable")
+}
+else
+{
+	$(".tech_workforce").removeClass("unavailable")
+}
+$(".tech_workforce").addClass((technologies["workforce"] >0 ? "researched" : ""))
+$(".tech_workforce").html("Work force" + (technologies["workforce"] >0 ? " (researched)" : ""));
+$(".tech_workforce").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
+$(".tech_workforce").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_workforce").attr('tooltip4', "Allows you to build tool factories to provide industrial tools.");
+
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
 $(".research_economy").attr('tooltip', "The economy is a lucrative force. Prosperity and wealth await");
@@ -7968,7 +8032,20 @@ else if(buildings["concretemixer"]>0)
 		buildstatus["concretemixer"]=0;
 		$(".build_concretemixer").addClass("off")
 }
-
+if (items["steel"]>=buildings["toolfactory"]*0.5 && items["copper"]>=buildings["toolfactory"]*1.25 &&  bonus["energy"]>=(0.25/3.6)*buildings["toolfactory"] && buildstatus["toolfactory"]==1)
+{
+	consumption["steel"]+=buildings["toolfactory"]*0.5
+	consumption["copper"]+=buildings["toolfactory"]*1.25
+	craft["pickaxe"]+=buildings["toolfactory"]*0.125*(bonus["auto"]+1);
+	craft["toolbox"]+=buildings["toolfactory"]*0.00025*(bonus["auto"]+1);
+	energycon+=(0.25/3.6)*buildings["toolfactory"];
+	bonus["energy"]-=(0.25/3.6)*buildings["toolfactory"];
+}
+else if(buildings["toolfactory"]>0)
+{
+		buildstatus["toolfactory"]=0;
+		$(".build_toolfactory").addClass("off")
+}
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;
 production["water"]+=buildings["fountain"]/10;

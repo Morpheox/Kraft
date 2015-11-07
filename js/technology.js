@@ -330,7 +330,10 @@ function researchunlock(){
 		$(".tech_cementhydration").show()
 		unlocked[".tech_cementhydration"]=1;
 	}
-
+	if(bonus["economy"]>=200000 && unlocked[".tech_workforce"]!=1){
+		$(".tech_workforce").show()
+		unlocked[".tech_workforce"]=1;
+	}
 
 }
 function buyautotech(a,b,c){

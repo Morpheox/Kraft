@@ -101,6 +101,20 @@ else if(buildings["concretemixer"]>0)
 		buildstatus["concretemixer"]=0;
 		$(".build_concretemixer").addClass("off")
 }
+if (items["steel"]>=buildings["toolfactory"]*2 && items["copper"]>=buildings["toolfactory"]*5 &&  bonus["energy"]>=(1/3.6)*buildings["toolfactory"] && buildstatus["toolfactory"]==1)
+{
+	consumption["steel"]+=buildings["toolfactory"]*2
+	consumption["copper"]+=buildings["toolfactory"]*5
+	craft["pickaxe"]+=buildings["toolfactory"]*0.5*(bonus["auto"]+1);
+	craft["toolbox"]+=buildings["toolfactory"]*0.001*(bonus["auto"]+1);
+	energycon+=(1/3.6)*buildings["toolfactory"];
+	bonus["energy"]-=(1/3.6)*buildings["toolfactory"];
+}
+else if(buildings["toolfactory"]>0)
+{
+		buildstatus["toolfactory"]=0;
+		$(".build_toolfactory").addClass("off")
+}
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;
 production["water"]+=buildings["fountain"]/2.5;

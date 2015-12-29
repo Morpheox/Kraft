@@ -115,6 +115,21 @@ else if(buildings["toolfactory"]>0)
 		buildstatus["toolfactory"]=0;
 		$(".build_toolfactory").addClass("off")
 }
+
+if (items["morale"]>=buildings["barracks"]*3 && bonus["energy"]>=(0.8/3.6)*buildings["barracks"] && buildstatus["barracks"]==1)
+{
+	consumption["morale"]+=buildings["barracks"]*3
+
+	craft["plans"]+=buildings["barracks"]*0.1*(bonus["auto"]+1);
+	energycon+=(0.8/3.6)*buildings["barracks"];
+	bonus["energy"]-=(0.8/3.6)*buildings["barracks"];
+}
+else if(buildings["barracks"]>0)
+{
+		buildstatus["barracks"]=0;
+		$(".build_barracks").addClass("off")
+}
+
 production["wood"]+=buildings["lumbermill"]/5;
 production["mineral"]+=buildings["mine"]/5;
 production["water"]+=buildings["fountain"]/2.5;

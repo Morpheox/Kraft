@@ -100,6 +100,7 @@ buildings["cementkiln"]=0;
 buildings["concretemixer"]=0;
 buildings["university"]=0;
 buildings["toolfactory"]=0;
+buildings["barracks"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -225,6 +226,8 @@ technologies["pyroprocessing"]=0
 technologies["education"]=0
 technologies["cementhydration"]=0
 technologies["workforce"]=0
+technologies["militarization"]=0
+technologies["wargames"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -266,6 +269,7 @@ var craft=new Array();
 
 craft["coin"]=0
 craft["book"]=0
+craft["plans"]=0
 craft["ammo"]=0
 craft["token"]=0
 craft["chest"]=0
@@ -1030,6 +1034,12 @@ function fight(){
 				items["knowledge"]+=rnd;
 				combatlog+="Your intelligence service stole "+ Math.round(rnd)+" knowledge from the enemy.<br>";
 			}
+			if(Math.random()>0.50 && technologies["wargames"]==1){
+				rnd=(Math.random()*((power/2)+(hp/15)))/4;
+				reward+=parseFloat(rnd).toFixed(2) + " plans<br>";
+				craft["plans"]+=rnd;
+				combatlog+="Your intelligence service produced  "+ Math.round(rnd)+" new plans.<br>";
+			}
 			if(Math.random()>0.98){
 				combatlog+="You found a diamond!<br>";
 				craft["diamond"]+=1;
@@ -1419,6 +1429,21 @@ function crafting(b){
 			if (items["knowledge"]>=knowledgecost){
 
 				items["knowledge"]-=knowledgecost
+
+				craft["book"]+=1+bonus["booking"];
+
+			}
+
+		}
+		else if (b=="strategy" && technologies["wargames"]==1){
+
+			planscost=2500;
+
+
+
+			if (craft["plans"]>=planscost){
+
+				craft["plans"]-=planscost
 
 				craft["book"]+=1+bonus["booking"];
 
@@ -3467,6 +3492,40 @@ function research(b){
 		}
 
 	}
+	else if (b=="wargames" && technologies["wargames"]==0){
+
+		moralecost=250;
+		bookcost=20;
+		
+		if (items["morale"]>=moralecost && craft["book"]>=bookcost){
+
+			items["morale"]-=moralecost
+			craft["book"]-=bookcost;
+
+			technologies["wargames"]++
+			$(".craft_strategy").show()
+			unlocked[".craft_strategy"]=1;
+		}
+
+	}
+	else if (b=="militarization" && technologies["militarization"]==0){
+
+		spearcost=300000;
+		swordcost=100000;
+		bookcost=30;
+		
+		if (craft["spear"]>=spearcost && craft["sword"]>=swordcost && craft["book"]>=bookcost){
+
+			craft["spear"]-=spearcost;
+			craft["sword"]-=swordcost;
+			craft["book"]-=bookcost;
+
+			technologies["militarization"]++
+			$(".build_barracks").show()
+			unlocked[".build_barracks"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4759,6 +4818,23 @@ function build(b){
 			unlocked[".toggle_toolfactory"]=1
 		}
 	}
+	else if (b=="barracks"){
+
+		concretecost = Math.pow(1.20,(buildings["barracks"]))*20000
+	
+		if (items["concrete"]>=concretecost){
+
+			items["concrete"]-=concretecost;
+
+			maximums["population"]+=5;
+
+			buildstatus["barracks"]=1;
+			buildings["barracks"]+=1
+
+			$(".toggle_barracks").show()
+			unlocked[".toggle_barracks"]=1
+		}
+	}
 }
 
 function calculatecost(){
@@ -5427,6 +5503,21 @@ $(".build_toolfactory").attr('tooltip4', 'Copper consumption: -5.00/s');
 $(".build_toolfactory").attr('tooltip5', 'Energy consumption: 1000 KWh');
 $(".build_toolfactory").attr('tooltip6', 'Pickaxe production: +0.25/s');
 $(".build_toolfactory").attr('tooltip7', 'Toolbox production: +0.001/s');
+
+concretecost = Math.pow(1.20,(buildings["barracks"]))*20000
+if(items["concrete"]<concretecost){
+	$(".build_barracks").addClass("unavailable")
+}
+else
+{
+	$(".build_barracks").removeClass("unavailable")
+}
+$(".build_barracks").html("Barracks ("+buildings["barracks"]+")");
+$(".build_barracks").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
+$(".build_barracks").attr('tooltip3', 'Max population: +5');
+$(".build_barracks").attr('tooltip5', 'Energy consumption: 800 KWh');
+$(".build_barracks").attr('tooltip6', 'Morale consumption: -3.00/s');
+$(".build_barracks").attr('tooltip7', 'Plans production: +0.1/s');
 //People
 
 foodcost=50;
@@ -7360,6 +7451,38 @@ $(".tech_workforce").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"])
 $(".tech_workforce").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_workforce").attr('tooltip4', "Allows you to build tool factories to provide industrial tools.");
 
+spearcost=300000;
+swordcost=100000;
+bookcost=30;
+if(craft["book"]<bookcost || craft["sword"]<swordcost || craft["spear"]<spearcost){
+	$(".tech_militarization").addClass("unavailable")
+}
+else
+{
+	$(".tech_militarization").removeClass("unavailable")
+}
+$(".tech_militarization").addClass((technologies["militarization"] >0 ? "researched" : ""))
+$(".tech_militarization").html("Militarization" + (technologies["militarization"] >0 ? " (researched)" : ""));
+$(".tech_militarization").attr('tooltip', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
+$(".tech_militarization").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
+$(".tech_militarization").attr('tooltip3', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_militarization").attr('tooltip5', "Allows you to build barracks");
+
+moralecost=250;
+bookcost=20;
+if(items["morale"]<moralecost || craft["book"]<bookcost){
+	$(".tech_wargames").addClass("unavailable")
+}
+else
+{
+	$(".tech_wargames").removeClass("unavailable")
+}
+$(".tech_wargames").addClass((technologies["wargames"] >0 ? "researched" : ""))
+$(".tech_wargames").html("War games" + (technologies["wargames"] >0 ? " (researched)" : ""));
+$(".tech_wargames").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
+$(".tech_wargames").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_wargames").attr('tooltip4', "Allows you to gather plans from the enemy and use them to make strategies.");
+
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
 $(".research_economy").attr('tooltip', "The economy is a lucrative force. Prosperity and wealth await");
@@ -7703,6 +7826,18 @@ $(".craft_book").html("Scientific papers");
 $(".craft_book").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".craft_book").attr('tooltip3', "Book with scientific papers which can be used to research new technologies");
 
+planscost=2500;
+if(craft["plans"]<planscost){
+	$(".craft_strategy").addClass("unavailable")
+}
+else
+{
+	$(".craft_strategy").removeClass("unavailable")
+}
+$(".craft_strategy").html("Strategy");
+$(".craft_strategy").attr('tooltip', 'Plans: '+ parseFloat(craft["plans"]).toFixed(2)+" / "+parseFloat(planscost).toFixed(2))
+$(".craft_strategy").attr('tooltip3', "Book with military plans");
+
 coincost=2500;
 if(craft["coin"]<coincost){
 	$(".craft_patent").addClass("unavailable")
@@ -8041,10 +8176,19 @@ if (items["steel"]>=buildings["toolfactory"]*0.5 && items["copper"]>=buildings["
 	energycon+=(0.25/3.6)*buildings["toolfactory"];
 	bonus["energy"]-=(0.25/3.6)*buildings["toolfactory"];
 }
-else if(buildings["toolfactory"]>0)
+
+if (items["morale"]>=buildings["barracks"]*0.75 && bonus["energy"]>=(0.20/3.6)*buildings["barracks"] && buildstatus["barracks"]==1)
 {
-		buildstatus["toolfactory"]=0;
-		$(".build_toolfactory").addClass("off")
+	consumption["morale"]+=buildings["barracks"]*0.75
+
+	craft["plans"]+=buildings["barracks"]*0.025*(bonus["auto"]+1);
+	energycon+=(0.20/3.6)*buildings["barracks"];
+	bonus["energy"]-=(0.20/3.6)*buildings["barracks"];
+}
+else if(buildings["barracks"]>0)
+{
+		buildstatus["barracks"]=0;
+		$(".build_barracks").addClass("off")
 }
 production["wood"]+=buildings["lumbermill"]/20;
 production["mineral"]+=buildings["mine"]/20;

@@ -334,7 +334,14 @@ function researchunlock(){
 		$(".tech_workforce").show()
 		unlocked[".tech_workforce"]=1;
 	}
-
+	if(bonus["military"]>=200000 && unlocked[".tech_wargames"]!=1){
+		$(".tech_wargames").show()
+		unlocked[".tech_wargames"]=1;
+	}
+	if(bonus["military"]>=250000 && unlocked[".tech_militarization"]!=1){
+		$(".tech_militarization").show()
+		unlocked[".tech_militarization"]=1;
+	}
 }
 function buyautotech(a,b,c){
 

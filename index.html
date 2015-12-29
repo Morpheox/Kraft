@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.5 beta</title>
+	<title>Keep Craft v0.8.7 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -27,9 +27,9 @@
 </head>
 <body>
 
+s
 
-
-    <div class="infokraft">Keep Craft v0.8.5 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.7 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -122,6 +122,7 @@
 			<div class="block build_university"></div><button class="toggle toggle_university" onclick='toggle("university")'>Toggle</button>
 			<div class="block build_concretemixer"></div><button class="toggle toggle_concretemixer" onclick='toggle("concretemixer")'>Toggle</button>
 			<div class="block build_toolfactory"></div><button class="toggle toggle_toolfactory" onclick='toggle("toolfactory")'>Toggle</button>
+			<div class="block build_barracks"></div><button class="toggle toggle_barracks" onclick='toggle("barracks")'>Toggle</button>
 			</div>
 		</div>
 		<div id="jobs" class="people tab-pane fade">
@@ -139,7 +140,8 @@
 			<div class="block research_science"></div>
 			<div class="block research_military"></div><br>
 			<div class="block craft_patent"></div>
-			<div class="block craft_book"></div><br>
+			<div class="block craft_book"></div>
+			<div class="block craft_strategy"></div><br>
 		<button class="toggletech" onclick="toggletech()">Hide researched technologies</button><br><br>
 		<div class="technolist">
 			<div class="block tech_coppertools"></div>
@@ -239,7 +241,9 @@
 			<div class="block tech_triforce"></div>
 			<div class="block tech_education"></div>
 			<div class="block tech_cementhydration"></div>
+			<div class="block tech_wargames"></div>
 			<div class="block tech_workforce"></div>
+			<div class="block tech_militarization"></div>
 			<br><br><br>
 			<div class="autolist">
 			</div>
@@ -479,6 +483,18 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.8.7</b>
+        <ul>
+        <li>New military tech</li>
+        <li>New building - Barracks</li>
+        <li>Barracks provide housing and planification for your troops.</li>
+        </ul>	
+        <b>V 0.8.6</b>
+        <ul>
+        <li>New military tech</li>
+        <li>New item - Plans</li>
+        <li>New way to get books</li>
+        </ul>	
        	<b>V 0.8.5</b>
         <ul>
         <li>New economy tech</li>
@@ -1057,6 +1073,7 @@
 	$(".build_university").click(function() {build("university")});
 	$(".build_concretemixer").click(function() {build("concretemixer")});
 	$(".build_toolfactory").click(function() {build("toolfactory")});
+	$(".build_barracks").click(function() {build("barracks")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -1182,6 +1199,8 @@
 	$(".tech_education").click(function() {research("education")});
 	$(".tech_cementhydration").click(function() {research("cementhydration")});
 	$(".tech_workforce").click(function() {research("workforce")});
+	$(".tech_wargames").click(function() {research("wargames")});
+	$(".tech_militarization").click(function() {research("militarization")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -1205,6 +1224,7 @@
 	$(".craft_engine").click(function() {crafting("engine")});
 	$(".craft_patent").click(function() {crafting("patent")});
 	$(".craft_book").click(function() {crafting("book")});
+	$(".craft_strategy").click(function() {crafting("strategy")});
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});

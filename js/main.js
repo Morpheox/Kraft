@@ -8599,7 +8599,7 @@ if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
 {
 	consumption["food"]+=people["bersek"]/5
 	consumption["gold"]+=people["bersek"]/400
-	production["morale"]+=people["bersek"]/25
+	production["morale"]+=people["bersek"]/20
 }
 
 if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["warelephant"]/2)

@@ -7391,7 +7391,7 @@ else
 {
 	$(".tech_shareholding").removeClass("unavailable")
 }
-if(unlocked[".tech_shareholding" && technologies["shareholding"] == 0]){
+if(unlocked[".tech_shareholding"] && technologies["shareholding"] == 0]){
   $(".tech_shareholding").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
 }
 $(".tech_shareholding").addClass((technologies["shareholding"] >0 ? "researched" : ""))
@@ -7621,7 +7621,7 @@ else
 {
 	$(".tech_triforce").removeClass("unavailable")
 }
-if(unlocked[".tech_triforce" && technologies["triforce"] == 0]){
+if(unlocked[".tech_triforce"] && technologies["triforce"] == 0]){
   $(".tech_triforce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
 }
 $(".tech_triforce").addClass((technologies["triforce"] >0 ? "researched" : ""))
@@ -7642,7 +7642,7 @@ else
 {
 	$(".tech_education").removeClass("unavailable")
 }
-if(unlocked[".tech_education" && technologies["education"] == 0]){
+if(unlocked[".tech_education"] && technologies["education"] == 0]){
   $(".tech_education").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
 }
 $(".tech_education").addClass((technologies["education"] >0 ? "researched" : ""))
@@ -7660,7 +7660,7 @@ else
 {
 	$(".tech_cementhydration").removeClass("unavailable")
 }
-if(unlocked[".tech_cementhydration" && technologies["cementhydration"] == 0]){
+if(unlocked[".tech_cementhydration"] && technologies["cementhydration"] == 0]){
   $(".tech_cementhydration").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost) ? 'color: red' : '');
 }
 $(".tech_cementhydration").addClass((technologies["cementhydration"] >0 ? "researched" : ""))
@@ -7678,7 +7678,7 @@ else
 {
 	$(".tech_workforce").removeClass("unavailable")
 }
-if(unlocked[".tech_workforce" && technologies["workforce"] == 0]){
+if(unlocked[".tech_workforce"] && technologies["workforce"] == 0]){
   $(".tech_workforce").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: red' : '');
 }
 $(".tech_workforce").addClass((technologies["workforce"] >0 ? "researched" : ""))
@@ -7713,7 +7713,7 @@ else
 {
 	$(".tech_wargames").removeClass("unavailable")
 }
-if(unlocked[".tech_wargames" && technologies["wargames"] == 0]){
+if(unlocked[".tech_wargames"] && technologies["wargames"] == 0]){
   $(".tech_wargames").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: red' : '');
 }
 $(".tech_wargames").addClass((technologies["wargames"] >0 ? "researched" : ""))

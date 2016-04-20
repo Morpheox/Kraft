@@ -8232,8 +8232,10 @@ if(prestige["number"]>0){
 	tooltipsprestige("mastery");
 	tooltipsprestige("learning");
 	tooltipsprestige("memory");
-	
-	$(".legacynum").html("Legacy: "+prestige["legacy"])
+  
+  legacyadd = getlegacyadd();
+  legacyaddstr = legacyadd > 0 ? " (" + legacyadd + ")" : "";
+	$(".legacynum").html("Legacy: "+prestige["legacy"]+legacyaddstr)
 	$(".treasurenum").html("Treasures: "+prestige["treasure"])
 }
 
@@ -8679,6 +8681,7 @@ $(".buildings").html(build_text);*/
 
 $(".betamount").attr("max",maximums["bet"]);
 $(".craftamount").html("Items crafted: "+intToString((1+bonus["craft"]))+"<br>")
+
 for(key in items){
 
 	var result=(production[key]*(bonus[key]+bonus["global"]+1)*rushbonus)-consumption[key]

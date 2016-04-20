@@ -98,13 +98,7 @@ switch(b){
 
 }
 
-
-function resetgame(){
-
-$(".nav-tabs a[href='#build']").tab("show");
-
-prestige["number"]++
-prestige["treasure"]+=Math.floor(craft["chest"]);
+function getlegacyadd(){
 
 var legacyadd=0;
 
@@ -116,10 +110,17 @@ legacyadd+=people["sucellus"]+people["eredal"]+people["khrysos"]+people["elisia"
 legacyadd+=(bonus["economy"]+bonus["science"]+bonus["military"])/1000
 legacyadd+=(Math.pow(1.4,(buildings["library"]))*1)-1
 
+return Math.floor((legacyadd)*(bonus["legacy"]+(craft["artifact"]/100)+1));
 
-prestige["legacy"]+=Math.floor((legacyadd)*(bonus["legacy"]+(craft["artifact"]/100)+1));
+}
 
+function resetgame(){
 
+$(".nav-tabs a[href='#build']").tab("show");
+
+prestige["number"]++
+prestige["treasure"]+=Math.floor(craft["chest"]);
+prestige["legacy"]+=getlegacyadd();
 
 
 for (key in bonus){
@@ -131,7 +132,6 @@ for(key in items){
 	bonus[key]=0;
 	maximums[key]=0;
 }
-
 
 for (key in buildings){
 	buildings[key]=0

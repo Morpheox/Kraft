@@ -4849,7 +4849,7 @@ else
 {
 	$(".build_lumbermill").removeClass("unavailable")
 }
-$(".build_lumbermill").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+$(".build_lumbermill").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
@@ -4863,7 +4863,7 @@ else
 {
 	$(".build_mine").removeClass("unavailable")
 }
-$(".build_mine").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+$(".build_mine").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -4879,7 +4879,7 @@ else
 	$(".build_warehouse").removeClass("unavailable")
 }
 if(unlocked[".build_warehouse"]){
-  $(".build_warehouse").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".build_warehouse").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".build_warehouse").html("Warehouse ("+buildings["warehouse"]+")");
 $(".build_warehouse").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
@@ -4896,7 +4896,7 @@ else
 	$(".build_fountain").removeClass("unavailable")
 }
 if(unlocked[".build_fountain"]){
-  $(".build_fountain").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".build_fountain").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".build_fountain").html("Fountain ("+buildings["fountain"]+")");
 $(".build_fountain").attr('tooltip',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -4912,7 +4912,7 @@ else
 	$(".build_pasture").removeClass("unavailable")
 }
 if(unlocked[".build_pasture"]){
-  $(".build_pasture").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".build_pasture").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".build_pasture").html("Pasture ("+buildings["pasture"]+")");
 $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -4930,7 +4930,7 @@ else
 	$(".build_house").removeClass("unavailable")
 }
 if(unlocked[".build_house"]){
-  $(".build_house").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: red' : '');
+  $(".build_house").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
 }
 $(".build_house").html("House ("+buildings["house"]+")");
 $(".build_house").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -4948,7 +4948,7 @@ else
 	$(".build_library").removeClass("unavailable")
 }
 if(unlocked[".build_library"]){
-  $(".build_library").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".build_library").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".build_library").html("Library ("+buildings["library"]+")");
 $(".build_library").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -4972,7 +4972,7 @@ else
 	$(".build_banner").removeClass("unavailable")
 }
 if(unlocked[".build_banner"]){
-  $(".build_banner").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".build_banner").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".build_banner").html("Banner ("+buildings["banner"]+")");
 $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -4989,7 +4989,7 @@ else
 	$(".build_foundry").removeClass("unavailable")
 }
 if(unlocked[".build_foundry"]){
-  $(".build_foundry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".build_foundry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -5023,7 +5023,7 @@ else
 	$(".build_casino").removeClass("unavailable")
 }
 if(unlocked[".build_casino"]){
-  $(".build_casino").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".build_casino").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".build_casino").html("Casino ("+buildings["casino"]+")");
 $(".build_casino").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -5043,7 +5043,7 @@ else
 	$(".build_market").removeClass("unavailable")
 }
 if(unlocked[".build_market"]){
-  $(".build_market").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".build_market").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".build_market").html("Market ("+buildings["market"]+")");
 $(".build_market").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -5061,7 +5061,7 @@ else
 	$(".build_kiln").removeClass("unavailable")
 }
 if(unlocked[".build_kiln"]){
-  $(".build_kiln").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".build_kiln").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
 $(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -5108,7 +5108,7 @@ else
 	$(".build_workbench").removeClass("unavailable")
 }
 if(unlocked[".build_workbench"]){
-  $(".build_workbench").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".build_workbench").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".build_workbench").html("Workbench ("+buildings["workbench"]+")");
 $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
@@ -5126,7 +5126,7 @@ else
 	$(".build_castle").removeClass("unavailable")
 }
 if(unlocked[".build_castle"]){
-  $(".build_castle").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".build_castle").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".build_castle").html("Castle ("+buildings["castle"]+")");
 $(".build_castle").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -5156,7 +5156,7 @@ else
 	$(".build_shipyard").removeClass("unavailable")
 }
 if(unlocked[".build_shipyard"]){
-  $(".build_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".build_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".build_shipyard").html("Shipyard ("+buildings["shipyard"]+")");
 $(".build_shipyard").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -5174,7 +5174,7 @@ else
 	$(".build_docks").removeClass("unavailable")
 }
 if(unlocked[".build_docks"]){
-  $(".build_docks").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".build_docks").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".build_docks").html("Docks ("+buildings["docks"]+")");
 $(".build_docks").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
@@ -5192,7 +5192,7 @@ else
 	$(".build_bank").removeClass("unavailable")
 }
 if(unlocked[".build_bank"]){
-  $(".build_bank").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".build_bank").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".build_bank").html("Bank ("+buildings["bank"]+")");
 $(".build_bank").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -5213,7 +5213,7 @@ else
 	$(".build_crusher").removeClass("unavailable")
 }
 if(unlocked[".build_crusher"]){
-  $(".build_crusher").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".build_crusher").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".build_crusher").html("Crusher ("+buildings["crusher"]+")");
 $(".build_crusher").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -5337,7 +5337,7 @@ else
 	$(".build_quarry").removeClass("unavailable")
 }
 if(unlocked[".build_quarry"]){
-  $(".build_quarry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".build_quarry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
 $(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -5434,7 +5434,7 @@ else
 	$(".build_trainstation").removeClass("unavailable")
 }
 if(unlocked[".build_trainstation"]){
-  $(".build_trainstation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".build_trainstation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".build_trainstation").html("Train station ("+buildings["trainstation"]+")");
 $(".build_trainstation").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -5488,7 +5488,7 @@ else
 	$(".build_cementkiln").removeClass("unavailable")
 }
 if(unlocked[".build_cementkiln"]){
-  $(".build_cementkiln").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".build_cementkiln").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".build_cementkiln").html("Cement kiln ("+buildings["cementkiln"]+")");
 $(".build_cementkiln").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
@@ -5509,7 +5509,7 @@ else
 	$(".build_university").removeClass("unavailable")
 }
 if(unlocked[".build_university"]){
-  $(".build_university").attr('style', (maximums["cement"]*(bonus["storage"]+1)<cementcost) ? 'color: red' : '');
+  $(".build_university").attr('style', (maximums["cement"]*(bonus["storage"]+1)<cementcost) ? 'color: coral' : '');
 }
 $(".build_university").html("University ("+buildings["university"]+")");
 $(".build_university").attr('tooltip', 'Cement: '+ parseFloat(items["cement"]).toFixed(2)+" / "+parseFloat(cementcost).toFixed(2))
@@ -5548,7 +5548,7 @@ else
 	$(".build_toolfactory").removeClass("unavailable")
 }
 if(unlocked[".build_toolfactory"]){
-  $(".build_toolfactory").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: red' : '');
+  $(".build_toolfactory").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
 }
 $(".build_toolfactory").html("Tool factory ("+buildings["toolfactory"]+")");
 $(".build_toolfactory").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
@@ -5568,7 +5568,7 @@ else
 	$(".build_barracks").removeClass("unavailable")
 }
 if(unlocked[".build_barracks"]){
-  $(".build_barracks").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: red' : '');
+  $(".build_barracks").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
 }
 $(".build_barracks").html("Barracks ("+buildings["barracks"]+")");
 $(".build_barracks").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
@@ -5948,7 +5948,7 @@ else
 	$(".tech_coppertools").removeClass("unavailable")
 }
 if(unlocked[".tech_coppertools"] && technologies["coppertools"] == 0){
-  $(".tech_coppertools").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".tech_coppertools").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".tech_coppertools").addClass((technologies["coppertools"] >0 ? "researched" : ""))
 $(".tech_coppertools").html("Copper tools" + (technologies["coppertools"] >0 ? " (researched)" : ""));
@@ -5965,7 +5965,7 @@ else
 	$(".tech_pickaxe").removeClass("unavailable")
 }
 if(unlocked[".tech_pickaxe"] && technologies["pickaxe"] == 0){
-  $(".tech_pickaxe").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".tech_pickaxe").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".tech_pickaxe").addClass((technologies["pickaxe"] >0 ? "researched" : ""))
 $(".tech_pickaxe").html("Pickaxe" + (technologies["pickaxe"] >0 ? " (researched)" : ""));
@@ -5983,7 +5983,7 @@ else
 	$(".tech_spear").removeClass("unavailable")
 }
 if(unlocked[".tech_spear"] && technologies["spear"] == 0){
-  $(".tech_spear").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".tech_spear").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".tech_spear").addClass((technologies["spear"] >0 ? "researched" : ""))
 $(".tech_spear").html("Basic weapons" + (technologies["spear"] >0 ? " (researched)" : ""));
@@ -6000,7 +6000,7 @@ else
 	$(".tech_exploration").removeClass("unavailable")
 }
 if(unlocked[".tech_exploration"] && technologies["exploration"] == 0){
-  $(".tech_exploration").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: red' : '');
+  $(".tech_exploration").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
 }
 $(".tech_exploration").addClass((technologies["exploration"] >0 ? "researched" : ""))
 $(".tech_exploration").html("Exploration" + (technologies["exploration"] >0 ? " (researched)" : ""));
@@ -6018,7 +6018,7 @@ else
 	$(".tech_ironfoundry").removeClass("unavailable")
 }
 if(unlocked[".tech_ironfoundry"] && technologies["ironfoundry"] == 0){
-  $(".tech_ironfoundry").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: red' : '');
+  $(".tech_ironfoundry").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
 }
 $(".tech_ironfoundry").addClass((technologies["ironfoundry"] >0 ? "researched" : ""))
 $(".tech_ironfoundry").html("Iron Foundry" + (technologies["ironfoundry"] >0 ? " (researched)" : ""));
@@ -6038,7 +6038,7 @@ else
 	$(".tech_metallurgy").removeClass("unavailable")
 }
 if(unlocked[".tech_metallurgy"] && technologies["metallurgy"] == 0){
-  $(".tech_metallurgy").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".tech_metallurgy").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".tech_metallurgy").addClass((technologies["metallurgy"] >0 ? "researched" : ""))
 $(".tech_metallurgy").html("Metallurgy" + (technologies["metallurgy"] >0 ? " (researched)" : ""));
@@ -6058,7 +6058,7 @@ else
 	$(".tech_sword").removeClass("unavailable")
 }
 if(unlocked[".tech_sword"] && technologies["sword"] == 0){
-  $(".tech_sword").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".tech_sword").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".tech_sword").addClass((technologies["sword"] >0 ? "researched" : ""))
 $(".tech_sword").html("Iron Sword" + (technologies["sword"] >0 ? " (researched)" : ""));
@@ -6077,7 +6077,7 @@ else
 	$(".tech_storage").removeClass("unavailable")
 }
 if(unlocked[".tech_storage"] && technologies["storage"] == 0){
-  $(".tech_storage").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".tech_storage").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".tech_storage").addClass((technologies["storage"] >0 ? "researched" : ""))
 $(".tech_storage").html("Storage management" + (technologies["storage"] >0 ? " (res...)" : ""));
@@ -6095,7 +6095,7 @@ else
 	$(".tech_currency").removeClass("unavailable")
 }
 if(unlocked[".tech_currency"] && technologies["currency"] == 0){
-  $(".tech_currency").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_currency").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_currency").addClass((technologies["currency"] >0 ? "researched" : ""))
 $(".tech_currency").html("Currency" + (technologies["currency"] >0 ? " (researched)" : ""));
@@ -6112,7 +6112,7 @@ else
 	$(".tech_coin").removeClass("unavailable")
 }
 if(unlocked[".tech_coin"] && technologies["coin"] == 0){
-  $(".tech_coin").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_coin").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_coin").addClass((technologies["coin"] >0 ? "researched" : ""))
 $(".tech_coin").html("Coin forging" + (technologies["coin"] >0 ? " (researched)" : ""));
@@ -6130,7 +6130,7 @@ else
 	$(".tech_exchange").removeClass("unavailable")
 }
 if(unlocked[".tech_exchange"] && technologies["exchange"] == 0){
-  $(".tech_exchange").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: red' : '');
+  $(".tech_exchange").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
 }
 $(".tech_exchange").addClass((technologies["exchange"] >0 ? "researched" : ""))
 $(".tech_exchange").html("Exchange" + (technologies["exchange"] >0 ? " (researched)" : ""));
@@ -6148,7 +6148,7 @@ else
 	$(".tech_bronze").removeClass("unavailable")
 }
 if(unlocked[".tech_bronze"] && technologies["bronze"] == 0){
-  $(".tech_bronze").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: red' : '');
+  $(".tech_bronze").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
 }
 $(".tech_bronze").addClass((technologies["bronze"] >0 ? "researched" : ""))
 $(".tech_bronze").html("Bronze" + (technologies["bronze"] >0 ? " (researched)" : ""));
@@ -6181,7 +6181,7 @@ else
 	$(".tech_charcoal").removeClass("unavailable")
 }
 if(unlocked[".tech_charcoal"] && technologies["charcoal"] == 0){
-  $(".tech_charcoal").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".tech_charcoal").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".tech_charcoal").addClass((technologies["charcoal"] >0 ? "researched" : ""))
 $(".tech_charcoal").html("Charcoal" + (technologies["charcoal"] >0 ? " (researched)" : ""));
@@ -6199,7 +6199,7 @@ else
 	$(".tech_steel").removeClass("unavailable")
 }
 if(unlocked[".tech_steel"] && technologies["steel"] == 0){
-  $(".tech_steel").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: red' : '');
+  $(".tech_steel").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: coral' : '');
 }
 $(".tech_steel").addClass((technologies["steel"] >0 ? "researched" : ""))
 $(".tech_steel").html("Steel" + (technologies["steel"] >0 ? " (researched)" : ""));
@@ -6217,7 +6217,7 @@ else
 	$(".tech_manufacturing").removeClass("unavailable")
 }
 if(unlocked[".tech_manufacturing"] && technologies["manufacturing"] == 0){
-  $(".tech_manufacturing").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".tech_manufacturing").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".tech_manufacturing").addClass((technologies["manufacturing"] >0 ? "researched" : ""))
 $(".tech_manufacturing").html("Manufacturing" + (technologies["manufacturing"] >0 ? " (researched)" : ""));
@@ -6237,7 +6237,7 @@ else
 	$(".tech_centralisation").removeClass("unavailable")
 }
 if(unlocked[".tech_centralisation"] && technologies["centralisation"] == 0){
-  $(".tech_centralisation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_centralisation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_centralisation").addClass((technologies["centralisation"] >0 ? "researched" : ""))
 $(".tech_centralisation").html("Centralisation" + (technologies["centralisation"] >0 ? " (researched)" : ""));
@@ -6256,7 +6256,7 @@ else
 	$(".tech_steeltools").removeClass("unavailable")
 }
 if(unlocked[".tech_steeltools"] && technologies["steeltools"] == 0){
-  $(".tech_steeltools").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".tech_steeltools").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".tech_steeltools").addClass((technologies["steeltools"] >0 ? "researched" : ""))
 $(".tech_steeltools").html("Steel tools" + (technologies["steeltools"] >0 ? " (researched)" : ""));
@@ -6274,7 +6274,7 @@ else
 	$(".tech_husbandry").removeClass("unavailable")
 }
 if(unlocked[".tech_husbandry"] && technologies["husbandry"] == 0){
-  $(".tech_husbandry").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: red' : '');
+  $(".tech_husbandry").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
 }
 $(".tech_husbandry").addClass((technologies["husbandry"] >0 ? "researched" : ""))
 $(".tech_husbandry").html("Husbandry" + (technologies["husbandry"] >0 ? " (researched)" : ""));
@@ -6291,7 +6291,7 @@ else
 	$(".tech_cavalry").removeClass("unavailable")
 }
 if(unlocked[".tech_cavalry"] && technologies["cavalry"] == 0){
-  $(".tech_cavalry").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".tech_cavalry").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".tech_cavalry").addClass((technologies["cavalry"] >0 ? "researched" : ""))
 $(".tech_cavalry").html("Cavalry" + (technologies["cavalry"] >0 ? " (researched)" : ""));
@@ -6365,7 +6365,7 @@ else
 	$(".tech_wrapping").removeClass("unavailable")
 }
 if(unlocked[".tech_wrapping"] && technologies["wrapping"] == 0){
-  $(".tech_wrapping").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".tech_wrapping").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".tech_wrapping").addClass((technologies["wrapping"] >0 ? "researched" : ""))
 $(".tech_wrapping").html("Wrapping" + (technologies["wrapping"] >0 ? " (researched)" : ""));
@@ -6382,7 +6382,7 @@ else
 	$(".tech_shipyard").removeClass("unavailable")
 }
 if(unlocked[".tech_shipyard"] && technologies["shipyard"] == 0){
-  $(".tech_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".tech_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".tech_shipyard").addClass((technologies["shipyard"] >0 ? "researched" : ""))
 $(".tech_shipyard").html("Shipyard" + (technologies["shipyard"] >0 ? " (researched)" : ""));
@@ -6413,7 +6413,7 @@ else
 	$(".tech_trade").removeClass("unavailable")
 }
 if(unlocked[".tech_trade"] && technologies["trade"] == 0){
-  $(".tech_trade").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_trade").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_trade").addClass((technologies["trade"] >0 ? "researched" : ""))
 $(".tech_trade").html("Trade" + (technologies["trade"] >0 ? " (researched)" : ""));
@@ -6433,7 +6433,7 @@ else
 	$(".tech_cache").removeClass("unavailable")
 }
 if(unlocked[".tech_cache"] && technologies["cache"] == 0){
-  $(".tech_cache").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".tech_cache").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".tech_cache").addClass((technologies["cache"] >0 ? "researched" : ""))
 $(".tech_cache").html("Cache" + (technologies["cache"] >0 ? " (researched)" : ""));
@@ -6466,7 +6466,7 @@ else
 	$(".tech_geology").removeClass("unavailable")
 }
 if(unlocked[".tech_geology"] && technologies["geology"] == 0){
-  $(".tech_geology").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".tech_geology").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".tech_geology").addClass((technologies["geology"] >0 ? "researched" : ""))
 $(".tech_geology").html("Geology" + (technologies["geology"] >0 ? " (researched)" : ""));
@@ -6484,7 +6484,7 @@ else
 	$(".tech_funding").removeClass("unavailable")
 }
 if(unlocked[".tech_funding"] && technologies["funding"] == 0){
-  $(".tech_funding").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_funding").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_funding").addClass((technologies["funding"] >0 ? "researched" : ""))
 $(".tech_funding").html("Funding" + (technologies["funding"] >0 ? " (researched)" : ""));
@@ -6503,7 +6503,7 @@ else
 	$(".tech_tactics").removeClass("unavailable")
 }
 if(unlocked[".tech_tactics"] && technologies["tactics"] == 0){
-  $(".tech_tactics").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: red' : '');
+  $(".tech_tactics").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
 }
 $(".tech_tactics").addClass((technologies["tactics"] >0 ? "researched" : ""))
 $(".tech_tactics").html("Tactics" + (technologies["tactics"] >0 ? " (researched)" : ""));
@@ -6597,7 +6597,7 @@ else
 	$(".tech_wareconomy").removeClass("unavailable")
 }
 if(unlocked[".tech_wareconomy"] && technologies["wareconomy"] == 0){
-  $(".tech_wareconomy").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: red' : '');
+  $(".tech_wareconomy").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
 }
 $(".tech_wareconomy").addClass((technologies["wareconomy"] >0 ? "researched" : ""))
 $(".tech_wareconomy").html("War economy" + (technologies["wareconomy"] >0 ? " (researched)" : ""));
@@ -6616,7 +6616,7 @@ else
 	$(".tech_intelligence").removeClass("unavailable")
 }
 if(unlocked[".tech_intelligence"] && technologies["intelligence"] == 0){
-  $(".tech_intelligence").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: red' : '');
+  $(".tech_intelligence").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
 }
 $(".tech_intelligence").addClass((technologies["intelligence"] >0 ? "researched" : ""))
 $(".tech_intelligence").html("Intelligence" + (technologies["intelligence"] >0 ? " (researched)" : ""));
@@ -6650,7 +6650,7 @@ else
 	$(".tech_floatglass").removeClass("unavailable")
 }
 if(unlocked[".tech_floatglass"] && technologies["floatglass"] == 0){
-  $(".tech_floatglass").attr('style', (maximums["tin"]*(bonus["storage"]+1)<tincost || maximums["sand"]*(bonus["storage"]+1)<sandcost) ? 'color: red' : '');
+  $(".tech_floatglass").attr('style', (maximums["tin"]*(bonus["storage"]+1)<tincost || maximums["sand"]*(bonus["storage"]+1)<sandcost) ? 'color: coral' : '');
 }
 $(".tech_floatglass").addClass((technologies["floatglass"] >0 ? "researched" : ""))
 $(".tech_floatglass").html("Float glass" + (technologies["floatglass"] >0 ? " (researched)" : ""));
@@ -6699,7 +6699,7 @@ else
 	$(".tech_galleon").removeClass("unavailable")
 }
 if(unlocked[".tech_galleon"] && technologies["galleon"] == 0){
-  $(".tech_galleon").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".tech_galleon").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".tech_galleon").addClass((technologies["galleon"] >0 ? "researched" : ""))
 $(".tech_galleon").html("Galleon" + (technologies["galleon"] >0 ? " (researched)" : ""));
@@ -6766,7 +6766,7 @@ else
 	$(".tech_architecture").removeClass("unavailable")
 }
 if(unlocked[".tech_architecture"] && technologies["architecture"] == 0){
-  $(".tech_architecture").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_architecture").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_architecture").addClass((technologies["architecture"] >0 ? "researched" : ""))
 $(".tech_architecture").html("Architecture" + (technologies["architecture"] >0 ? " (researched)" : ""));
@@ -6786,7 +6786,7 @@ else
 	$(".tech_chemistry").removeClass("unavailable")
 }
 if(unlocked[".tech_chemistry"] && technologies["chemistry"] == 0){
-  $(".tech_chemistry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_chemistry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_chemistry").addClass((technologies["chemistry"] >0 ? "researched" : ""))
 $(".tech_chemistry").html("Chemistry" + (technologies["chemistry"] >0 ? " (researched)" : ""));
@@ -6865,7 +6865,7 @@ else
 	$(".tech_packaging").removeClass("unavailable")
 }
 if(unlocked[".tech_packaging"] && technologies["packaging"] == 0){
-  $(".tech_packaging").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_packaging").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_packaging").addClass((technologies["packaging"] >0 ? "researched" : ""))
 $(".tech_packaging").html("Packaging" + (technologies["packaging"] >0 ? " (researched)" : ""));
@@ -6884,7 +6884,7 @@ else
 	$(".tech_domestication").removeClass("unavailable")
 }
 if(unlocked[".tech_domestication"] && technologies["domestication"] == 0){
-  $(".tech_domestication").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost) ? 'color: red' : '');
+  $(".tech_domestication").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost) ? 'color: coral' : '');
 }
 $(".tech_domestication").addClass((technologies["domestication"] >0 ? "researched" : ""))
 $(".tech_domestication").html("Domestication" + (technologies["domestication"] >0 ? " (researched)" : ""));
@@ -6918,7 +6918,7 @@ else
 	$(".tech_investigation").removeClass("unavailable")
 }
 if(unlocked[".tech_investigation"] && technologies["investigation"] == 0){
-  $(".tech_investigation").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost) ? 'color: red' : '');
+  $(".tech_investigation").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost) ? 'color: coral' : '');
 }
 $(".tech_investigation").addClass((technologies["investigation"] >0 ? "researched" : ""))
 $(".tech_investigation").html("Investigation" + (technologies["investigation"] >0 ? " (researched)" : ""));
@@ -6937,7 +6937,7 @@ else
 	$(".tech_internationalization").removeClass("unavailable")
 }
 if(unlocked[".tech_internationalization"] && technologies["internationalization"] == 0){
-  $(".tech_internationalization").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: red' : '');
+  $(".tech_internationalization").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
 }
 $(".tech_internationalization").addClass((technologies["internationalization"] >0 ? "researched" : ""))
 $(".tech_internationalization").html("Internationalization" + (technologies["internationalization"] >0 ? " (res..)" : ""));
@@ -6974,7 +6974,7 @@ else
 	$(".tech_fireship").removeClass("unavailable")
 }
 if(unlocked[".tech_fireship"] && technologies["fireship"] == 0){
-  $(".tech_fireship").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".tech_fireship").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".tech_fireship").addClass((technologies["fireship"] >0 ? "researched" : ""))
 $(".tech_fireship").html("Fireship" + (technologies["fireship"] >0 ? " (researched)" : ""));
@@ -6994,7 +6994,7 @@ else
 	$(".tech_careening").removeClass("unavailable")
 }
 if(unlocked[".tech_careening"] && technologies["careening"] == 0){
-  $(".tech_careening").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: red' : '');
+  $(".tech_careening").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
 }
 $(".tech_careening").addClass((technologies["careening"] >0 ? "researched" : ""))
 $(".tech_careening").html("Careening" + (technologies["careening"] >0 ? " (researched)" : ""));
@@ -7014,7 +7014,7 @@ else
 	$(".tech_deals").removeClass("unavailable")
 }
 if(unlocked[".tech_deals"] && technologies["deals"] == 0){
-  $(".tech_deals").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_deals").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_deals").addClass((technologies["deals"] >0 ? "researched" : ""))
 $(".tech_deals").html("Dealing" + (technologies["deals"] >0 ? " (researched)" : ""));
@@ -7034,7 +7034,7 @@ else
 	$(".tech_finding").removeClass("unavailable")
 }
 if(unlocked[".tech_finding"] && technologies["finding"] == 0){
-  $(".tech_finding").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_finding").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_finding").addClass((technologies["finding"] >0 ? "researched" : ""))
 $(".tech_finding").html("Finding" + (technologies["finding"] >0 ? " (researched)" : ""));
@@ -7054,7 +7054,7 @@ else
 	$(".tech_openmining").removeClass("unavailable")
 }
 if(unlocked[".tech_openmining"] && technologies["openmining"] == 0){
-  $(".tech_openmining").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_openmining").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_openmining").addClass((technologies["openmining"] >0 ? "researched" : ""))
 $(".tech_openmining").html("Open mining" + (technologies["openmining"] >0 ? " (researched)" : ""));
@@ -7073,7 +7073,7 @@ else
 	$(".tech_multitasking").removeClass("unavailable")
 }
 if(unlocked[".tech_multitasking"] && technologies["multitasking"] == 0){
-  $(".tech_multitasking").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_multitasking").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_multitasking").addClass((technologies["multitasking"] >0 ? "researched" : ""))
 $(".tech_multitasking").html("Multitasking" + (technologies["multitasking"] >0 ? " (researched)" : ""));
@@ -7092,7 +7092,7 @@ else
 	$(".tech_seacaptain").removeClass("unavailable")
 }
 if(unlocked[".tech_seacaptain"] && technologies["seacaptain"] == 0){
-  $(".tech_seacaptain").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_seacaptain").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_seacaptain").addClass((technologies["seacaptain"] >0 ? "researched" : ""))
 $(".tech_seacaptain").html("Sea captain" + (technologies["seacaptain"] >0 ? " (researched)" : ""));
@@ -7110,7 +7110,7 @@ else
 	$(".tech_wisdom").removeClass("unavailable")
 }
 if(unlocked[".tech_wisdom"] && technologies["wisdom"] == 0){
-  $(".tech_wisdom").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_wisdom").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_wisdom").addClass((technologies["wisdom"] >0 ? "researched" : ""))
 $(".tech_wisdom").html("Wisdom" + (technologies["wisdom"] >0 ? " (researched)" : ""));
@@ -7128,7 +7128,7 @@ else
 	$(".tech_masonry").removeClass("unavailable")
 }
 if(unlocked[".tech_masonry"] && technologies["masonry"] == 0){
-  $(".tech_masonry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_masonry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_masonry").addClass((technologies["masonry"] >0 ? "researched" : ""))
 $(".tech_masonry").html("Masonry" + (technologies["masonry"] >0 ? " (researched)" : ""));
@@ -7147,7 +7147,7 @@ else
 	$(".tech_woodwork").removeClass("unavailable")
 }
 if(unlocked[".tech_woodwork"] && technologies["woodwork"] == 0){
-  $(".tech_woodwork").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_woodwork").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_woodwork").addClass((technologies["woodwork"] >0 ? "researched" : ""))
 $(".tech_woodwork").html("Woodwork" + (technologies["woodwork"] >0 ? " (researched)" : ""));
@@ -7165,7 +7165,7 @@ else
 	$(".tech_commodities").removeClass("unavailable")
 }
 if(unlocked[".tech_commodities"] && technologies["commodities"] == 0){
-  $(".tech_commodities").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_commodities").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_commodities").addClass((technologies["commodities"] >0 ? "researched" : ""))
 $(".tech_commodities").html("Commodities" + (technologies["commodities"] >0 ? " (researched)" : ""));
@@ -7183,7 +7183,7 @@ else
 	$(".tech_commerce").removeClass("unavailable")
 }
 if(unlocked[".tech_commerce"] && technologies["commerce"] == 0){
-  $(".tech_commerce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_commerce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_commerce").addClass((technologies["commerce"] >0 ? "researched" : ""))
 $(".tech_commerce").html("Commerce" + (technologies["commerce"] >0 ? " (researched)" : ""));
@@ -7201,7 +7201,7 @@ else
 	$(".tech_explosives").removeClass("unavailable")
 }
 if(unlocked[".tech_explosives"] && technologies["explosives"] == 0){
-  $(".tech_explosives").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_explosives").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_explosives").addClass((technologies["explosives"] >0 ? "researched" : ""))
 $(".tech_explosives").html("Explosives" + (technologies["explosives"] >0 ? " (researched)" : ""));
@@ -7220,7 +7220,7 @@ else
 	$(".tech_quenching").removeClass("unavailable")
 }
 if(unlocked[".tech_quenching"] && technologies["quenching"] == 0){
-  $(".tech_quenching").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_quenching").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_quenching").addClass((technologies["quenching"] >0 ? "researched" : ""))
 $(".tech_quenching").html("Quenching" + (technologies["quenching"] >0 ? " (researched)" : ""));
@@ -7239,7 +7239,7 @@ else
 	$(".tech_castiron").removeClass("unavailable")
 }
 if(unlocked[".tech_castiron"] && technologies["castiron"] == 0){
-  $(".tech_castiron").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_castiron").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_castiron").addClass((technologies["castiron"] >0 ? "researched" : ""))
 $(".tech_castiron").html("Cast iron" + (technologies["castiron"] >0 ? " (researched)" : ""));
@@ -7257,7 +7257,7 @@ else
 	$(".tech_insecticides").removeClass("unavailable")
 }
 if(unlocked[".tech_insecticides"] && technologies["insecticides"] == 0){
-  $(".tech_insecticides").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_insecticides").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_insecticides").addClass((technologies["insecticides"] >0 ? "researched" : ""))
 $(".tech_insecticides").html("Insecticides" + (technologies["insecticides"] >0 ? " (researched)" : ""));
@@ -7275,7 +7275,7 @@ else
 	$(".tech_safes").removeClass("unavailable")
 }
 if(unlocked[".tech_safes"] && technologies["safes"] == 0){
-  $(".tech_safes").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_safes").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_safes").addClass((technologies["safes"] >0 ? "researched" : ""))
 $(".tech_safes").html("Safes" + (technologies["safes"] >0 ? " (researched)" : ""));
@@ -7293,7 +7293,7 @@ else
 	$(".tech_ammunition").removeClass("unavailable")
 }
 if(unlocked[".tech_ammunition"] && technologies["ammunition"] == 0){
-  $(".tech_ammunition").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_ammunition").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_ammunition").addClass((technologies["ammunition"] >0 ? "researched" : ""))
 $(".tech_ammunition").html("Ammunition" + (technologies["ammunition"] >0 ? " (researched)" : ""));
@@ -7312,7 +7312,7 @@ else
 	$(".tech_gunnery").removeClass("unavailable")
 }
 if(unlocked[".tech_gunnery"] && technologies["gunnery"] == 0){
-  $(".tech_gunnery").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_gunnery").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_gunnery").addClass((technologies["gunnery"] >0 ? "researched" : ""))
 $(".tech_gunnery").html("Gunnery" + (technologies["gunnery"] >0 ? " (researched)" : ""));
@@ -7332,7 +7332,7 @@ else
 	$(".tech_windward").removeClass("unavailable")
 }
 if(unlocked[".tech_windward"] && technologies["windward"] == 0){
-  $(".tech_windward").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_windward").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_windward").addClass((technologies["windward"] >0 ? "researched" : ""))
 $(".tech_windward").html("Windward" + (technologies["windward"] >0 ? " (researched)" : ""));
@@ -7352,7 +7352,7 @@ else
 	$(".tech_mineralcoal").removeClass("unavailable")
 }
 if(unlocked[".tech_mineralcoal"] && technologies["mineralcoal"] == 0){
-  $(".tech_mineralcoal").attr('style', (maximums["coal"]*(bonus["storage"]+1)<coalcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_mineralcoal").attr('style', (maximums["coal"]*(bonus["storage"]+1)<coalcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_mineralcoal").addClass((technologies["mineralcoal"] >0 ? "researched" : ""))
 $(".tech_mineralcoal").html("Mineral Coal" + (technologies["mineralcoal"] >0 ? " (researched)" : ""));
@@ -7372,7 +7372,7 @@ else
 	$(".tech_carrying").removeClass("unavailable")
 }
 if(unlocked[".tech_carrying"] && technologies["carrying"] == 0){
-  $(".tech_carrying").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_carrying").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_carrying").addClass((technologies["carrying"] >0 ? "researched" : ""))
 $(".tech_carrying").html("Carrying" + (technologies["carrying"] >0 ? " (researched)" : ""));
@@ -7392,7 +7392,7 @@ else
 	$(".tech_shareholding").removeClass("unavailable")
 }
 if(unlocked[".tech_shareholding"] && technologies["shareholding"] == 0){
-  $(".tech_shareholding").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_shareholding").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_shareholding").addClass((technologies["shareholding"] >0 ? "researched" : ""))
 $(".tech_shareholding").html("Shareholding" + (technologies["shareholding"] >0 ? " (researched)" : ""));
@@ -7412,7 +7412,7 @@ else
 	$(".tech_safestorage").removeClass("unavailable")
 }
 if(unlocked[".tech_safestorage"] && technologies["safestorage"] == 0){
-  $(".tech_safestorage").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_safestorage").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_safestorage").addClass((technologies["safestorage"] >0 ? "researched" : ""))
 $(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (researched)" : ""));
@@ -7434,7 +7434,7 @@ else
 	$(".tech_metalwork").removeClass("unavailable")
 }
 if(unlocked[".tech_metalwork"] && technologies["metalwork"] == 0){
-  $(".tech_metalwork").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_metalwork").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_metalwork").addClass((technologies["metalwork"] >0 ? "researched" : ""))
 $(".tech_metalwork").html("Metalwork" + (technologies["metalwork"] >0 ? " (researched)" : ""));
@@ -7454,7 +7454,7 @@ else
 	$(".tech_steamengine").removeClass("unavailable")
 }
 if(unlocked[".tech_steamengine"] && technologies["steamengine"] == 0){
-  $(".tech_steamengine").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: red' : '');
+  $(".tech_steamengine").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
 }
 $(".tech_steamengine").addClass((technologies["steamengine"] >0 ? "researched" : ""))
 $(".tech_steamengine").html("Steam engine" + (technologies["steamengine"] >0 ? " (researched)" : ""));
@@ -7474,7 +7474,7 @@ else
 	$(".tech_armoredcombat").removeClass("unavailable")
 }
 if(unlocked[".tech_armoredcombat"] && technologies["armoredcombat"] == 0){
-  $(".tech_armoredcombat").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_armoredcombat").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_armoredcombat").addClass((technologies["armoredcombat"] >0 ? "researched" : ""))
 $(".tech_armoredcombat").html("Armored combat" + (technologies["armoredcombat"] >0 ? " (res...)" : ""));
@@ -7494,7 +7494,7 @@ else
 	$(".tech_railtransport").removeClass("unavailable")
 }
 if(unlocked[".tech_railtransport"] && technologies["railtransport"] == 0){
-  $(".tech_railtransport").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_railtransport").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_railtransport").addClass((technologies["railtransport"] >0 ? "researched" : ""))
 $(".tech_railtransport").html("Rail transport" + (technologies["railtransport"] >0 ? " (researched)" : ""));
@@ -7514,7 +7514,7 @@ else
 	$(".tech_industrialization").removeClass("unavailable")
 }
 if(unlocked[".tech_industrialization"] && technologies["industrialization"] == 0){
-  $(".tech_industrialization").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_industrialization").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_industrialization").addClass((technologies["industrialization"] >0 ? "researched" : ""))
 $(".tech_industrialization").html("Industrialization" + (technologies["industrialization"] >0 ? " (researched)" : ""));
@@ -7532,7 +7532,7 @@ else
 	$(".tech_academicpublishing").removeClass("unavailable")
 }
 if(unlocked[".tech_academicpublishing"] && technologies["academicpublishing"] == 0){
-  $(".tech_academicpublishing").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_academicpublishing").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_academicpublishing").addClass((technologies["academicpublishing"] >0 ? "researched" : ""))
 $(".tech_academicpublishing").html("Academic Publishing" + (technologies["academicpublishing"] >0 ? " (res..)" : ""));
@@ -7549,7 +7549,7 @@ else
 	$(".tech_patents").removeClass("unavailable")
 }
 if(unlocked[".tech_patents"] && technologies["patents"] == 0){
-  $(".tech_patents").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_patents").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_patents").addClass((technologies["patents"] >0 ? "researched" : ""))
 $(".tech_patents").html("Patents" + (technologies["patents"] >0 ? " (researched)" : ""));
@@ -7583,7 +7583,7 @@ else
 	$(".tech_electricity").removeClass("unavailable")
 }
 if(unlocked[".tech_electricity"] && technologies["electricity"] == 0){
-  $(".tech_electricity").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_electricity").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_electricity").addClass((technologies["electricity"] >0 ? "researched" : ""))
 $(".tech_electricity").html("Electricity" + (technologies["electricity"] >0 ? " (researched)" : ""));
@@ -7603,7 +7603,7 @@ else
 	$(".tech_pyroprocessing").removeClass("unavailable")
 }
 if(unlocked[".tech_pyroprocessing"] && technologies["pyroprocessing"] == 0){
-  $(".tech_pyroprocessing").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: red' : '');
+  $(".tech_pyroprocessing").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
 }
 $(".tech_pyroprocessing").addClass((technologies["pyroprocessing"] >0 ? "researched" : ""))
 $(".tech_pyroprocessing").html("Pyroprocessing" + (technologies["pyroprocessing"] >0 ? " (researched)" : ""));
@@ -7622,7 +7622,7 @@ else
 	$(".tech_triforce").removeClass("unavailable")
 }
 if(unlocked[".tech_triforce"] && technologies["triforce"] == 0){
-  $(".tech_triforce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_triforce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_triforce").addClass((technologies["triforce"] >0 ? "researched" : ""))
 $(".tech_triforce").html("Triforce" + (technologies["triforce"] >0 ? " (researched)" : ""));
@@ -7643,7 +7643,7 @@ else
 	$(".tech_education").removeClass("unavailable")
 }
 if(unlocked[".tech_education"] && technologies["education"] == 0){
-  $(".tech_education").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: red' : '');
+  $(".tech_education").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
 }
 $(".tech_education").addClass((technologies["education"] >0 ? "researched" : ""))
 $(".tech_education").html("Education" + (technologies["education"] >0 ? " (researched)" : ""));
@@ -7661,7 +7661,7 @@ else
 	$(".tech_cementhydration").removeClass("unavailable")
 }
 if(unlocked[".tech_cementhydration"] && technologies["cementhydration"] == 0){
-  $(".tech_cementhydration").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost) ? 'color: red' : '');
+  $(".tech_cementhydration").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost) ? 'color: coral' : '');
 }
 $(".tech_cementhydration").addClass((technologies["cementhydration"] >0 ? "researched" : ""))
 $(".tech_cementhydration").html("Cement Hydration" + (technologies["cementhydration"] >0 ? " (researched)" : ""));
@@ -7679,7 +7679,7 @@ else
 	$(".tech_workforce").removeClass("unavailable")
 }
 if(unlocked[".tech_workforce"] && technologies["workforce"] == 0){
-  $(".tech_workforce").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: red' : '');
+  $(".tech_workforce").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
 }
 $(".tech_workforce").addClass((technologies["workforce"] >0 ? "researched" : ""))
 $(".tech_workforce").html("Work force" + (technologies["workforce"] >0 ? " (researched)" : ""));
@@ -7714,7 +7714,7 @@ else
 	$(".tech_wargames").removeClass("unavailable")
 }
 if(unlocked[".tech_wargames"] && technologies["wargames"] == 0){
-  $(".tech_wargames").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: red' : '');
+  $(".tech_wargames").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
 }
 $(".tech_wargames").addClass((technologies["wargames"] >0 ? "researched" : ""))
 $(".tech_wargames").html("War games" + (technologies["wargames"] >0 ? " (researched)" : ""));
@@ -8283,7 +8283,7 @@ else
 	$(".expedition").removeClass("unavailable")
 }
 if(unlocked[".expedition"]){
-  $(".expedition").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost|| maximums["morale"]*(bonus["storage"]+1)<moralecost|| maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: red' : '');
+  $(".expedition").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost|| maximums["morale"]*(bonus["storage"]+1)<moralecost|| maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: coral' : '');
 }
 $(".expedition").html("Expedition");
 $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))

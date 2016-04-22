@@ -7,8 +7,8 @@ padding:0;
     display: inline-block;
     width: 5em;
   }
-.unavailable{
-	color:red!important;
+.unattainable{
+  color:red!important;
 }
   .block{
   	border:1px solid black;

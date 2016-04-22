@@ -11,6 +11,10 @@ color:#F8F8F2!important;
     display: inline-block;
     width: 5em;
   }
+.unattainable{
+  color:coral!important;
+}
+
 .modal-dialog{
 background-color:#FFF!important;
 color:black!important;

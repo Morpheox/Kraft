@@ -4839,8 +4839,20 @@ function build(b){
 
 function calculatecost(){
 
+function set_unattainable(element, unattainable){
+  if(unattainable){
+    $(element).addClass("unattainable"); 
+  } else {
+    $(element).removeClass("unattainable"); 
+  }
+}
+
+
+
 
 //Buildings
+
+
 woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 if(items["wood"]<woodcost){
 	$(".build_lumbermill").addClass("unavailable")
@@ -4849,10 +4861,12 @@ else
 {
 	$(".build_lumbermill").removeClass("unavailable")
 }
-$(".build_lumbermill").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".build_lumbermill", unattainable);
 $(".build_lumbermill").html("Lumbermill ("+buildings["lumbermill"]+")");
 $(".build_lumbermill").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_lumbermill").attr('tooltip2', "Wood production: +0.20/s");
+
 
 woodcost= Math.pow(1.1,(buildings["mine"]))*2
 mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
@@ -4863,11 +4877,13 @@ else
 {
 	$(".build_mine").removeClass("unavailable")
 }
-$(".build_mine").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_mine", unattainable);
 $(".build_mine").html("Mine ("+buildings["mine"]+")");
 $(".build_mine").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_mine").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
 $(".build_mine").attr('tooltip3', "Mineral production: +0.20/s");
+
 
 woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
 mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
@@ -4878,9 +4894,8 @@ else
 {
 	$(".build_warehouse").removeClass("unavailable")
 }
-if(unlocked[".build_warehouse"]){
-  $(".build_warehouse").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_warehouse", unattainable);
 $(".build_warehouse").html("Warehouse ("+buildings["warehouse"]+")");
 $(".build_warehouse").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2) )
 $(".build_warehouse").attr('tooltip2',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
@@ -4895,9 +4910,8 @@ else
 {
 	$(".build_fountain").removeClass("unavailable")
 }
-if(unlocked[".build_fountain"]){
-  $(".build_fountain").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_fountain", unattainable);
 $(".build_fountain").html("Fountain ("+buildings["fountain"]+")");
 $(".build_fountain").attr('tooltip',"Minerals: "+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2) )
 $(".build_fountain").attr('tooltip2', "Water production: +0.40/s");
@@ -4911,9 +4925,8 @@ else
 {
 	$(".build_pasture").removeClass("unavailable")
 }
-if(unlocked[".build_pasture"]){
-  $(".build_pasture").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".build_pasture", unattainable);
 $(".build_pasture").html("Pasture ("+buildings["pasture"]+")");
 $(".build_pasture").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_pasture").attr('tooltip2', "Water consumption: -0.20/s");
@@ -4929,14 +4942,14 @@ else
 {
 	$(".build_house").removeClass("unavailable")
 }
-if(unlocked[".build_house"]){
-  $(".build_house").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost
+set_unattainable(".build_house", unattainable);
 $(".build_house").html("House ("+buildings["house"]+")");
 $(".build_house").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_house").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_house").attr('tooltip3', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".build_house").attr('tooltip4', "Max population +3");
+
 
 woodcost= Math.pow(1.9,(buildings["library"]))*300
 mineralcost=Math.pow(1.9, (buildings["library"]))*100
@@ -4947,9 +4960,8 @@ else
 {
 	$(".build_library").removeClass("unavailable")
 }
-if(unlocked[".build_library"]){
-  $(".build_library").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_library", unattainable);
 $(".build_library").html("Library ("+buildings["library"]+")");
 $(".build_library").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_library").attr('tooltip2', 'Minerals: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -4962,6 +4974,7 @@ $(".build_library").attr('tooltip4', 'Knowledge production +0.01/s');
 $(".build_library").attr('tooltip5', 'Knowledge maximum + 100');
 }
 
+
 woodcost= Math.pow(1.7,(buildings["banner"]))*100;
 coppercost=Math.pow(1.7, (buildings["banner"]))*1;
 if(items["wood"]<woodcost || items["copper"]<coppercost){
@@ -4971,9 +4984,8 @@ else
 {
 	$(".build_banner").removeClass("unavailable")
 }
-if(unlocked[".build_banner"]){
-  $(".build_banner").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".build_banner", unattainable);
 $(".build_banner").html("Banner ("+buildings["banner"]+")");
 $(".build_banner").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_banner").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -4988,9 +5000,8 @@ else
 {
 	$(".build_foundry").removeClass("unavailable")
 }
-if(unlocked[".build_foundry"]){
-  $(".build_foundry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".build_foundry", unattainable);
 $(".build_foundry").html("Foundry ("+buildings["foundry"]+")");
 $(".build_foundry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_foundry").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
@@ -4999,6 +5010,7 @@ $(".build_foundry").attr('tooltip4', "Iron production: +0.02/s");
 if(technologies["bronze"]>0){
 	$(".build_foundry").attr('tooltip5', "Tin production: +0.005/s");
 }
+
 
 blockcost= Math.pow(1.4,(buildings["barn"]))*5
 if(craft["block"]<blockcost){
@@ -5022,9 +5034,8 @@ else
 {
 	$(".build_casino").removeClass("unavailable")
 }
-if(unlocked[".build_casino"]){
-  $(".build_casino").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".build_casino", unattainable);
 $(".build_casino").html("Casino ("+buildings["casino"]+")");
 $(".build_casino").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_casino").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
@@ -5032,6 +5043,7 @@ $(".build_casino").attr('tooltip3', 'Allows betting in the casino');
 $(".build_casino").attr('tooltip4', 'Gold production +0.004/s');
 $(".build_casino").attr('tooltip5', 'Max bet +0.5');
 $(".build_casino").attr('tooltip6', 'Max gold +1');
+
 
 woodcost= Math.pow(1.6,(buildings["market"]))*500
 coincost= Math.pow(1.6,(buildings["market"]))*1
@@ -5042,9 +5054,8 @@ else
 {
 	$(".build_market").removeClass("unavailable")
 }
-if(unlocked[".build_market"]){
-  $(".build_market").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".build_market", unattainable);
 $(".build_market").html("Market ("+buildings["market"]+")");
 $(".build_market").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_market").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
@@ -5060,9 +5071,8 @@ else
 {
 	$(".build_kiln").removeClass("unavailable")
 }
-if(unlocked[".build_kiln"]){
-  $(".build_kiln").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_kiln", unattainable);
 $(".build_kiln").html("Kiln ("+buildings["kiln"]+")");
 $(".build_kiln").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_kiln").attr('tooltip2', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -5107,14 +5117,14 @@ else
 {
 	$(".build_workbench").removeClass("unavailable")
 }
-if(unlocked[".build_workbench"]){
-  $(".build_workbench").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".build_workbench", unattainable);
 $(".build_workbench").html("Workbench ("+buildings["workbench"]+")");
 $(".build_workbench").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".build_workbench").attr('tooltip2', 'Craft efficiency +8%');
 $(".build_workbench").attr('tooltip4', 'Allows +1 items crafted per workbench');
 $(".build_workbench").attr('tooltip5', 'when active');
+
 
 blockcost= Math.pow(1.6,(buildings["castle"]))*50
 goldcost= Math.pow(1.6,(buildings["castle"]))*5
@@ -5125,14 +5135,14 @@ else
 {
 	$(".build_castle").removeClass("unavailable")
 }
-if(unlocked[".build_castle"]){
-  $(".build_castle").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".build_castle", unattainable);
 $(".build_castle").html("Castle ("+buildings["castle"]+")");
 $(".build_castle").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_castle").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".build_castle").attr('tooltip4', 'Unlocks leaders to rule the realm.');
 $(".build_castle").attr('tooltip5', '+1 title per level');
+
 
 tokencost= Math.pow(1.2,(buildings["relic"]))*20
 if(craft["token"]<tokencost){
@@ -5146,6 +5156,7 @@ $(".build_relic").html("Relic ("+buildings["relic"]+")");
 $(".build_relic").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".build_relic").attr('tooltip3', 'Global production +1%');
 
+
 woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
 structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
 if(items["wood"]<woodcost || craft["structure"]<structurecost){
@@ -5155,14 +5166,14 @@ else
 {
 	$(".build_shipyard").removeClass("unavailable")
 }
-if(unlocked[".build_shipyard"]){
-  $(".build_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".build_shipyard", unattainable);
 $(".build_shipyard").html("Shipyard ("+buildings["shipyard"]+")");
 $(".build_shipyard").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_shipyard").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"]).toFixed(2)+" / "+parseFloat(structurecost).toFixed(2))
 $(".build_shipyard").attr('tooltip4', 'Wood consumption -40.00/s');
 $(".build_shipyard").attr('tooltip5', 'Plank production +0.05/s');
+
 
 ironcost=Math.pow(1.3,(buildings["docks"]))*100
 plankcost= Math.pow(1.3,(buildings["docks"]))*50
@@ -5173,13 +5184,13 @@ else
 {
 	$(".build_docks").removeClass("unavailable")
 }
-if(unlocked[".build_docks"]){
-  $(".build_docks").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".build_docks", unattainable);
 $(".build_docks").html("Docks ("+buildings["docks"]+")");
 $(".build_docks").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_docks").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".build_docks").attr('tooltip4', '+1 Ship storage');
+
 
 blockcost=Math.pow(1.4,(buildings["bank"]))*200
 steelcost=Math.pow(1.4,(buildings["bank"]))*100
@@ -5191,9 +5202,8 @@ else
 {
 	$(".build_bank").removeClass("unavailable")
 }
-if(unlocked[".build_bank"]){
-  $(".build_bank").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".build_bank", unattainable);
 $(".build_bank").html("Bank ("+buildings["bank"]+")");
 $(".build_bank").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".build_bank").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
@@ -5201,6 +5211,7 @@ $(".build_bank").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)
 $(".build_bank").attr('tooltip5', 'Gold storage +2');
 $(".build_bank").attr('tooltip6', 'Gold consumption -0.10/s');
 $(".build_bank").attr('tooltip7', 'Coin production +0.02/s');
+
 
 coppercost=Math.pow(1.2,(buildings["crusher"]))*150
 ironcost=Math.pow(1.2,(buildings["crusher"]))*100
@@ -5212,9 +5223,8 @@ else
 {
 	$(".build_crusher").removeClass("unavailable")
 }
-if(unlocked[".build_crusher"]){
-  $(".build_crusher").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".build_crusher", unattainable);
 $(".build_crusher").html("Crusher ("+buildings["crusher"]+")");
 $(".build_crusher").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".build_crusher").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
@@ -5222,6 +5232,7 @@ $(".build_crusher").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFix
 $(".build_crusher").attr('tooltip5', 'Sand storage +200');
 $(".build_crusher").attr('tooltip6', 'Mineral consumption -10.00/s');
 $(".build_crusher").attr('tooltip7', 'Sand production +0.5/s');
+
 
 bronzecost=Math.pow(1.3,(buildings["blockyard"]))*50
 pickaxecost=Math.pow(1.3,(buildings["blockyard"]))*500
@@ -5239,6 +5250,7 @@ $(".build_blockyard").attr('tooltip4', 'Wood consumption -4.00/s');
 $(".build_blockyard").attr('tooltip5', 'Mineral consumption -8.00/s');
 $(".build_blockyard").attr('tooltip6', 'Block production +0.04/s');
 
+
 framecost= Math.pow(1.4,(buildings["bunker"]))*5
 pickaxecost=Math.pow(1.4, (buildings["bunker"]))*750
 if(craft["frame"]<framecost || craft["pickaxe"]<pickaxecost){
@@ -5252,6 +5264,7 @@ $(".build_bunker").html("Bunker ("+buildings["bunker"]+")");
 $(".build_bunker").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_bunker").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".build_bunker").attr('tooltip4', 'Provides storage for bulk materials.');
+
 
 framecost=Math.pow(1.4,(buildings["laboratory"]))*5
 glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
@@ -5269,6 +5282,7 @@ $(".build_laboratory").attr('tooltip3', 'Chemicals storage + 5');
 $(".build_laboratory").attr('tooltip4', 'Bottle consumption per scientist -0.001/s');
 $(".build_laboratory").attr('tooltip5', 'Knowledge production per scientist  +0.005/s');
 $(".build_laboratory").attr('tooltip6', 'Chemicals production per scientist +0.001/s');
+
 
 framecost=Math.pow(1.3,(buildings["scienceoutpost"]))*10
 glasscost=Math.pow(1.3,(buildings["scienceoutpost"]))*20
@@ -5288,6 +5302,7 @@ $(".build_scienceoutpost").attr('tooltip5', 'Knowledge production +0.02/s');
 $(".build_scienceoutpost").attr('tooltip6', 'Max population +10');
 $(".build_scienceoutpost").attr('tooltip7', 'Grants 1 title per outpost');
 
+
 framecost=Math.pow(1.3,(buildings["tradeoutpost"]))*10
 coincost=Math.pow(1.3,(buildings["tradeoutpost"]))*300
 territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
@@ -5305,6 +5320,7 @@ $(".build_tradeoutpost").attr('tooltip3', 'Territory: '+ parseFloat(bonus["terri
 $(".build_tradeoutpost").attr('tooltip5', 'Gold production +0.01/s');
 $(".build_tradeoutpost").attr('tooltip6', 'Max population +10');
 $(".build_tradeoutpost").attr('tooltip7', 'Grants 1 title per outpost');
+
 
 framecost=Math.pow(1.3,(buildings["militaryoutpost"]))*10
 swordcost=Math.pow(1.3,(buildings["militaryoutpost"]))*400
@@ -5336,9 +5352,8 @@ else
 {
 	$(".build_quarry").removeClass("unavailable")
 }
-if(unlocked[".build_quarry"]){
-  $(".build_quarry").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".build_quarry", unattainable);
 $(".build_quarry").html("Quarry ("+buildings["quarry"]+")");
 $(".build_quarry").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".build_quarry").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
@@ -5349,6 +5364,7 @@ $(".build_quarry").attr('tooltip5', 'Coal production +0.02/s');
 if(technologies["safestorage"]==1){
 $(".build_quarry").attr('tooltip6', 'Nickel production +0.001/s');
 }
+
 
 framecost=Math.pow(1.4,(buildings["carpentry"]))*5
 brickcost=Math.pow(1.4,(buildings["carpentry"]))*20
@@ -5366,6 +5382,7 @@ $(".build_carpentry").attr('tooltip4', 'Wood consumption -5.00/s');
 $(".build_carpentry").attr('tooltip5', 'Iron consumption -0.10/s');
 $(".build_carpentry").attr('tooltip6', 'Structure production +0.005/s');
 
+
 brickcost=Math.pow(1.4,(buildings["blastfurnace"]))*25
 if(craft["brick"]<brickcost){
 	$(".build_blastfurnace").addClass("unavailable")
@@ -5378,6 +5395,7 @@ $(".build_blastfurnace").html("Blast furnace ("+buildings["blastfurnace"]+")");
 $(".build_blastfurnace").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".build_blastfurnace").attr('tooltip2', 'Mineral consumption per foundryman -0.25/s');
 $(".build_blastfurnace").attr('tooltip3', 'Iron production per foundryman +0.01/s');
+
 
 brickcost=Math.pow(1.2,(buildings["compressor"]))*500
 glasscost=Math.pow(1.2,(buildings["compressor"]))*50
@@ -5395,6 +5413,7 @@ $(".build_compressor").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).to
 $(".build_compressor").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_compressor").attr('tooltip5', 'Increases all storages by 5%');
 
+
 tokencost=Math.pow(1.15,(buildings["share"]))*1000
 if(craft["token"]<tokencost){
 	$(".build_share").addClass("unavailable")
@@ -5406,6 +5425,7 @@ else
 $(".build_share").html("Share ("+buildings["share"]+")");
 $(".build_share").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".build_share").attr('tooltip3', 'Token production +0.1/s');
+
 
 blockcost=Math.pow(1.2,(buildings["repository"]))*5000
 glasscost=Math.pow(1.2,(buildings["repository"]))*100
@@ -5423,6 +5443,7 @@ $(".build_repository").attr('tooltip2', 'Glass: '+ parseFloat(craft["glass"]).to
 $(".build_repository").attr('tooltip3', 'Bottle: '+ parseFloat(craft["bottle"]).toFixed(2)+" / "+parseFloat(bottlecost).toFixed(2))
 $(".build_repository").attr('tooltip5', 'Provides storage for complex materials');
 
+
 woodcost=Math.pow(1.2,(buildings["trainstation"]))*100000
 ironcost=Math.pow(1.2,(buildings["trainstation"]))*500
 framecost= Math.pow(1.2,(buildings["trainstation"]))*50
@@ -5433,14 +5454,14 @@ else
 {
 	$(".build_trainstation").removeClass("unavailable")
 }
-if(unlocked[".build_trainstation"]){
-  $(".build_trainstation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".build_trainstation", unattainable);
 $(".build_trainstation").html("Train station ("+buildings["trainstation"]+")");
 $(".build_trainstation").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".build_trainstation").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".build_trainstation").attr('tooltip3', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".build_trainstation").attr('tooltip5', '+2 train capacity');
+
 
 brickcost= Math.pow(1.3,(buildings["workshop"]))*500
 platecost=Math.pow(1.3,(buildings["workshop"]))*500
@@ -5461,6 +5482,7 @@ $(".build_workshop").attr('tooltip5', 'Coal consumption: -0.03/s');
 $(".build_workshop").attr('tooltip6', 'Chemicals consumption: -0.01/s');
 $(".build_workshop").attr('tooltip7', '+10% autocraft efficiency when active');
 
+
 framecost= Math.pow(1.1,(buildings["powerplant"]))*300
 platecost=Math.pow(1.1,(buildings["powerplant"]))*500
 if(craft["frame"]<framecost || craft["plate"]<platecost){
@@ -5478,6 +5500,7 @@ $(".build_powerplant").attr('tooltip5', 'Water consumption: -2.00/s');
 $(".build_powerplant").attr('tooltip6', 'Energy production: 1 MWh');
 $(".build_powerplant").attr('tooltip7', 'Energy storage: 100 KWh');
 
+
 steelcost = Math.pow(1.3,(buildings["cementkiln"]))*600
 platecost = Math.pow(1.3,(buildings["cementkiln"]))*200
 if(items["steel"]<steelcost || craft["plate"]<platecost){
@@ -5487,9 +5510,8 @@ else
 {
 	$(".build_cementkiln").removeClass("unavailable")
 }
-if(unlocked[".build_cementkiln"]){
-  $(".build_cementkiln").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".build_cementkiln", unattainable);
 $(".build_cementkiln").html("Cement kiln ("+buildings["cementkiln"]+")");
 $(".build_cementkiln").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".build_cementkiln").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
@@ -5497,6 +5519,7 @@ $(".build_cementkiln").attr('tooltip4', 'Mineral consumption: -100.00/s');
 $(".build_cementkiln").attr('tooltip5', 'Clay consumption: -2.00/s');
 $(".build_cementkiln").attr('tooltip6', 'Energy consumption: 300 KWh');
 $(".build_cementkiln").attr('tooltip7', 'Cement production: +0.1/s');
+
 
 cementcost = Math.pow(1.3,(buildings["university"]))*15000
 brickcost = Math.pow(1.3,(buildings["university"]))*1000
@@ -5508,9 +5531,8 @@ else
 {
 	$(".build_university").removeClass("unavailable")
 }
-if(unlocked[".build_university"]){
-  $(".build_university").attr('style', (maximums["cement"]*(bonus["storage"]+1)<cementcost) ? 'color: coral' : '');
-}
+unattainable=maximums["cement"]*(bonus["storage"]+1)<cementcost
+set_unattainable(".build_university", unattainable);
 $(".build_university").html("University ("+buildings["university"]+")");
 $(".build_university").attr('tooltip', 'Cement: '+ parseFloat(items["cement"]).toFixed(2)+" / "+parseFloat(cementcost).toFixed(2))
 $(".build_university").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
@@ -5547,9 +5569,8 @@ else
 {
 	$(".build_toolfactory").removeClass("unavailable")
 }
-if(unlocked[".build_toolfactory"]){
-  $(".build_toolfactory").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
-}
+unattainable=maximums["concrete"]*(bonus["storage"]+1)<concretecost
+set_unattainable(".build_toolfactory", unattainable);
 $(".build_toolfactory").html("Tool factory ("+buildings["toolfactory"]+")");
 $(".build_toolfactory").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".build_toolfactory").attr('tooltip2', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
@@ -5559,6 +5580,7 @@ $(".build_toolfactory").attr('tooltip5', 'Energy consumption: 1000 KWh');
 $(".build_toolfactory").attr('tooltip6', 'Pickaxe production: +0.25/s');
 $(".build_toolfactory").attr('tooltip7', 'Toolbox production: +0.001/s');
 
+
 concretecost = Math.pow(1.20,(buildings["barracks"]))*20000
 if(items["concrete"]<concretecost){
 	$(".build_barracks").addClass("unavailable")
@@ -5567,9 +5589,8 @@ else
 {
 	$(".build_barracks").removeClass("unavailable")
 }
-if(unlocked[".build_barracks"]){
-  $(".build_barracks").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
-}
+unattainable=maximums["concrete"]*(bonus["storage"]+1)<concretecost
+set_unattainable(".build_barracks", unattainable);
 $(".build_barracks").html("Barracks ("+buildings["barracks"]+")");
 $(".build_barracks").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
 $(".build_barracks").attr('tooltip3', 'Max population: +5');
@@ -5578,7 +5599,10 @@ $(".build_barracks").attr('tooltip6', 'Morale consumption: -3.00/s');
 $(".build_barracks").attr('tooltip7', 'Plans production: +0.1/s');
 
 
+
+
 //People
+
 
 foodcost=50;
 if(items["food"]<foodcost || population>=maximums["population"]){
@@ -5592,6 +5616,7 @@ $(".hire_woodcutter").html("Woodcutter ("+people["woodcutter"]+")");
 $(".hire_woodcutter").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_woodcutter").attr('tooltip2', "Food consumption: -0.10/s");
 $(".hire_woodcutter").attr('tooltip3', "Wood production: +1.00/s");
+
 
 foodcost=50;
 if(items["food"]<foodcost || population>=maximums["population"]){
@@ -5610,6 +5635,7 @@ if(technologies["metallurgy"]!=0){
 	$(".hire_smelter").attr('tooltip5', "Gold production: +0.001/s");	
 }
 
+
 woodcost=50
 if(items["wood"]<woodcost || population>=maximums["population"]){
 	$(".hire_farmer").addClass("unavailable")
@@ -5621,6 +5647,7 @@ else
 $(".hire_farmer").html("Farmer ("+people["farmer"]+")");
 $(".hire_farmer").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".hire_farmer").attr('tooltip2', "Food production: +0.40/s");
+
 
 foodcost=50
 pickaxecost=1
@@ -5639,6 +5666,8 @@ $(".hire_miner").attr('tooltip4', 'Mineral production +1.00/s');
 if(technologies["multitasking"]==1){
 $(".hire_miner").attr('tooltip5', 'Clay production +0.05/s');
 }
+
+
 foodcost=200
 coincost=1
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
@@ -5656,6 +5685,7 @@ $(".hire_foundryman").attr('tooltip4', "Iron consumption: -0.05/s");
 $(".hire_foundryman").attr('tooltip5', "Coal consumption: -0.02/s");
 $(".hire_foundryman").attr('tooltip6', 'Steel production +0.01/s');
 
+
 foodcost=500;
 coincost=5;
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
@@ -5670,6 +5700,7 @@ $(".hire_sailor").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)
 $(".hire_sailor").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".hire_sailor").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_sailor").attr('tooltip5', 'People needed for naval missions.');
+
 
 knowledgecost=100;
 coincost=10;
@@ -5686,6 +5717,7 @@ $(".hire_scientist").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixe
 $(".hire_scientist").attr('tooltip3', "Food consumption: -0.20/s");
 $(".hire_scientist").attr('tooltip4', "Coin consumption: -0.01/s");
 $(".hire_scientist").attr('tooltip5', 'Knowledge production + 0.02/s');
+
 
 coincost=500;
 goldcost=100;
@@ -5722,6 +5754,7 @@ $(".hire_pikeman").attr('tooltip3', "Food consumption: -0.10/s");
 $(".hire_pikeman").attr('tooltip4', 'Morale production +0.02/s');
 $(".hire_pikeman").attr('tooltip5', 'Attack: 5 Hp: 30');
 
+
 foodcost=150
 swordcost=1
 if(items["food"]<foodcost || craft["sword"]<swordcost || population>=maximums["population"]){
@@ -5738,6 +5771,7 @@ $(".hire_swordman").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_swordman").attr('tooltip4', 'Morale production +0.01/s');
 $(".hire_swordman").attr('tooltip5', 'Attack: 10 Hp: 50');
 $(".hire_swordman").attr('tooltip6', 'Armor: 3');
+
 
 swordmancost=1;
 horsecost=1;
@@ -5758,6 +5792,7 @@ $(".hire_knight").attr('tooltip5', 'Morale production +0.04/s');
 $(".hire_knight").attr('tooltip6', 'Attack: 25 Hp: 200');
 $(".hire_knight").attr('tooltip7', 'Armor: 10');
 
+
 foodcost=1000;
 coincost=20;
 if(items["food"]<foodcost || craft["coin"]<coincost || population>=maximums["population"]){
@@ -5772,6 +5807,7 @@ $(".hire_medic").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+
 $(".hire_medic").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".hire_medic").attr('tooltip3', "Food consumption: -0.40/s");
 $(".hire_medic").attr('tooltip5', 'Attack: 1 Hp: 50 Healing: 10');
+
 
 coincost=50;
 greatswordcost=1;
@@ -5790,6 +5826,7 @@ $(".hire_bersek").attr('tooltip4', "Gold consumption: -0.01/s");
 $(".hire_bersek").attr('tooltip5', 'Morale production +0.20/s');
 $(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
 $(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
+
 
 suppliescost=100;
 elephantcost=1;
@@ -5829,6 +5866,7 @@ $(".hire_musketeer").attr('tooltip5', 'Morale production +0.05/s');
 $(".hire_musketeer").attr('tooltip6', 'Attack: 200 Hp: 400');
 $(".hire_musketeer").attr('tooltip7', 'They need to reload between attacks');
 
+
 platecost=200;
 enginecost=2;
 if(craft["plate"]<platecost || craft["engine"]<enginecost || population+2>=maximums["population"]){
@@ -5846,7 +5884,12 @@ $(".hire_lighttank").attr('tooltip5', 'Armor: 50 Crew: 3');
 $(".hire_lighttank").attr('tooltip6', 'Coal per expedition: 50');
 $(".hire_lighttank").attr('tooltip7', 'They need to reload between attacks (4 ammo)');
 
+
+
+
 //Ships
+
+
 woodcost=20000;
 plankcost=200;
 structurecost=50;
@@ -5937,7 +5980,10 @@ $(".hire_cargotrain").attr('tooltip6', 'Crew: 3');
 $(".hire_cargotrain").attr('tooltip7', 'Trade amount: 3 coins/minute');
 
 
+
+
 //Technologies
+
 
 coppercost=1;
 if(items["copper"]<coppercost){
@@ -5947,13 +5993,13 @@ else
 {
 	$(".tech_coppertools").removeClass("unavailable")
 }
-if(unlocked[".tech_coppertools"] && technologies["coppertools"] == 0){
-  $(".tech_coppertools").attr('style', (maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".tech_coppertools", unattainable);
 $(".tech_coppertools").addClass((technologies["coppertools"] >0 ? "researched" : ""))
 $(".tech_coppertools").html("Copper tools" + (technologies["coppertools"] >0 ? " (researched)" : ""));
 $(".tech_coppertools").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".tech_coppertools").attr('tooltip2', "Increments wood and mineral production by 20%");
+
 
 woodcost=100;
 coppercost=3;
@@ -5964,14 +6010,14 @@ else
 {
 	$(".tech_pickaxe").removeClass("unavailable")
 }
-if(unlocked[".tech_pickaxe"] && technologies["pickaxe"] == 0){
-  $(".tech_pickaxe").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".tech_pickaxe", unattainable);
 $(".tech_pickaxe").addClass((technologies["pickaxe"] >0 ? "researched" : ""))
 $(".tech_pickaxe").html("Pickaxe" + (technologies["pickaxe"] >0 ? " (researched)" : ""));
 $(".tech_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".tech_pickaxe").attr('tooltip3', "Allows the crafting of pickaxes and hiring of miners");
+
 
 woodcost=200;
 coppercost=5;
@@ -5982,14 +6028,14 @@ else
 {
 	$(".tech_spear").removeClass("unavailable")
 }
-if(unlocked[".tech_spear"] && technologies["spear"] == 0){
-  $(".tech_spear").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".tech_spear", unattainable);
 $(".tech_spear").addClass((technologies["spear"] >0 ? "researched" : ""))
 $(".tech_spear").html("Basic weapons" + (technologies["spear"] >0 ? " (researched)" : ""));
 $(".tech_spear").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_spear").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".tech_spear").attr('tooltip3', "Allows the crafting of spears and hiring of pikeman");
+
 
 foodcost=100;
 if(items["food"]<foodcost){
@@ -5999,13 +6045,13 @@ else
 {
 	$(".tech_exploration").removeClass("unavailable")
 }
-if(unlocked[".tech_exploration"] && technologies["exploration"] == 0){
-  $(".tech_exploration").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost
+set_unattainable(".tech_exploration", unattainable);
 $(".tech_exploration").addClass((technologies["exploration"] >0 ? "researched" : ""))
 $(".tech_exploration").html("Exploration" + (technologies["exploration"] >0 ? " (researched)" : ""));
 $(".tech_exploration").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_exploration").attr('tooltip2', "Allows exploration expeditions");
+
 
 woodcost=1000;
 mineralcost=500;
@@ -6017,15 +6063,15 @@ else
 {
 	$(".tech_ironfoundry").removeClass("unavailable")
 }
-if(unlocked[".tech_ironfoundry"] && technologies["ironfoundry"] == 0){
-  $(".tech_ironfoundry").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["food"]*(bonus["storage"]+1)<foodcost
+set_unattainable(".tech_ironfoundry", unattainable);
 $(".tech_ironfoundry").addClass((technologies["ironfoundry"] >0 ? "researched" : ""))
 $(".tech_ironfoundry").html("Iron Foundry" + (technologies["ironfoundry"] >0 ? " (researched)" : ""));
 $(".tech_ironfoundry").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_ironfoundry").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_ironfoundry").attr('tooltip3', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_ironfoundry").attr('tooltip4', "Allows the construction of foundrys");
+
 
 foodcost=200;
 coppercost=10;
@@ -6037,9 +6083,8 @@ else
 {
 	$(".tech_metallurgy").removeClass("unavailable")
 }
-if(unlocked[".tech_metallurgy"] && technologies["metallurgy"] == 0){
-  $(".tech_metallurgy").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost || maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".tech_metallurgy", unattainable);
 $(".tech_metallurgy").addClass((technologies["metallurgy"] >0 ? "researched" : ""))
 $(".tech_metallurgy").html("Metallurgy" + (technologies["metallurgy"] >0 ? " (researched)" : ""));
 $(".tech_metallurgy").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
@@ -6047,6 +6092,7 @@ $(".tech_metallurgy").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).t
 $(".tech_metallurgy").attr('tooltip3', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_metallurgy").attr('tooltip4', "Provides 10% bonus to copper and iron production");
 $(".tech_metallurgy").attr('tooltip5', "Allows smelters to smelt a bit of gold");
+
 
 foodcost=500;
 ironcost=10;
@@ -6057,14 +6103,14 @@ else
 {
 	$(".tech_sword").removeClass("unavailable")
 }
-if(unlocked[".tech_sword"] && technologies["sword"] == 0){
-  $(".tech_sword").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".tech_sword", unattainable);
 $(".tech_sword").addClass((technologies["sword"] >0 ? "researched" : ""))
 $(".tech_sword").html("Iron Sword" + (technologies["sword"] >0 ? " (researched)" : ""));
 $(".tech_sword").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_sword").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_sword").attr('tooltip3', "Allows the crafting of Iron Swords and the hiring of swordman");
+
 
 woodcost=500
 mineralcost=500
@@ -6076,15 +6122,15 @@ else
 {
 	$(".tech_storage").removeClass("unavailable")
 }
-if(unlocked[".tech_storage"] && technologies["storage"] == 0){
-  $(".tech_storage").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".tech_storage", unattainable);
 $(".tech_storage").addClass((technologies["storage"] >0 ? "researched" : ""))
 $(".tech_storage").html("Storage management" + (technologies["storage"] >0 ? " (res...)" : ""));
 $(".tech_storage").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_storage").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_storage").attr('tooltip3', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_storage").attr('tooltip4', "Unlocks better storage methods");
+
 
 goldcost=2;
 if(items["gold"]<goldcost){
@@ -6094,13 +6140,13 @@ else
 {
 	$(".tech_currency").removeClass("unavailable")
 }
-if(unlocked[".tech_currency"] && technologies["currency"] == 0){
-  $(".tech_currency").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_currency", unattainable);
 $(".tech_currency").addClass((technologies["currency"] >0 ? "researched" : ""))
 $(".tech_currency").html("Currency" + (technologies["currency"] >0 ? " (researched)" : ""));
 $(".tech_currency").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_currency").attr('tooltip2', "Unlocks casinos");
+
 
 ironcost=20;
 goldcost=5;
@@ -6111,14 +6157,14 @@ else
 {
 	$(".tech_coin").removeClass("unavailable")
 }
-if(unlocked[".tech_coin"] && technologies["coin"] == 0){
-  $(".tech_coin").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_coin", unattainable);
 $(".tech_coin").addClass((technologies["coin"] >0 ? "researched" : ""))
 $(".tech_coin").html("Coin forging" + (technologies["coin"] >0 ? " (researched)" : ""));
 $(".tech_coin").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_coin").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_coin").attr('tooltip3', "Allows forging gold coins");
+
 
 foodcost=800
 coincost=3
@@ -6129,14 +6175,14 @@ else
 {
 	$(".tech_exchange").removeClass("unavailable")
 }
-if(unlocked[".tech_exchange"] && technologies["exchange"] == 0){
-  $(".tech_exchange").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost
+set_unattainable(".tech_exchange", unattainable);
 $(".tech_exchange").addClass((technologies["exchange"] >0 ? "researched" : ""))
 $(".tech_exchange").html("Exchange" + (technologies["exchange"] >0 ? " (researched)" : ""));
 $(".tech_exchange").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_exchange").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_exchange").attr('tooltip3', "Allow the construction of markets");
+
 
 ironcost=40;
 coppercost=40;
@@ -6147,9 +6193,8 @@ else
 {
 	$(".tech_bronze").removeClass("unavailable")
 }
-if(unlocked[".tech_bronze"] && technologies["bronze"] == 0){
-  $(".tech_bronze").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["copper"]*(bonus["storage"]+1)<coppercost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
+set_unattainable(".tech_bronze", unattainable);
 $(".tech_bronze").addClass((technologies["bronze"] >0 ? "researched" : ""))
 $(".tech_bronze").html("Bronze" + (technologies["bronze"] >0 ? " (researched)" : ""));
 $(".tech_bronze").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
@@ -6171,6 +6216,7 @@ $(".tech_bronzetools").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"]).t
 $(".tech_bronzetools").attr('tooltip2', "Increments wood, mineral, and food production by 20%");
 $(".tech_bronzetools").attr('tooltip3', "Increments iron, copper, and tin production by 10%");
 
+
 woodcost=4000
 mineralcost=2000
 if(items["wood"]<woodcost || items["mineral"]<mineralcost ){
@@ -6180,14 +6226,14 @@ else
 {
 	$(".tech_charcoal").removeClass("unavailable")
 }
-if(unlocked[".tech_charcoal"] && technologies["charcoal"] == 0){
-  $(".tech_charcoal").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".tech_charcoal", unattainable);
 $(".tech_charcoal").addClass((technologies["charcoal"] >0 ? "researched" : ""))
 $(".tech_charcoal").html("Charcoal" + (technologies["charcoal"] >0 ? " (researched)" : ""));
 $(".tech_charcoal").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_charcoal").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_charcoal").attr('tooltip3', "Unlocks kilns");
+
 
 ironcost=50;
 coalcost=50;
@@ -6198,14 +6244,14 @@ else
 {
 	$(".tech_steel").removeClass("unavailable")
 }
-if(unlocked[".tech_steel"] && technologies["steel"] == 0){
-  $(".tech_steel").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["coal"]*(bonus["storage"]+1)<coalcost
+set_unattainable(".tech_steel", unattainable);
 $(".tech_steel").addClass((technologies["steel"] >0 ? "researched" : ""))
 $(".tech_steel").html("Steel" + (technologies["steel"] >0 ? " (researched)" : ""));
 $(".tech_steel").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_steel").attr('tooltip2', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
 $(".tech_steel").attr('tooltip3', "Unlocks foundrymen, experts in steel");
+
 
 steelcost=5;
 coincost=5;
@@ -6216,14 +6262,14 @@ else
 {
 	$(".tech_manufacturing").removeClass("unavailable")
 }
-if(unlocked[".tech_manufacturing"] && technologies["manufacturing"] == 0){
-  $(".tech_manufacturing").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".tech_manufacturing", unattainable);
 $(".tech_manufacturing").addClass((technologies["manufacturing"] >0 ? "researched" : ""))
 $(".tech_manufacturing").html("Manufacturing" + (technologies["manufacturing"] >0 ? " (researched)" : ""));
 $(".tech_manufacturing").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_manufacturing").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_manufacturing").attr('tooltip3', "Enhances crafting by allowing the building of workbenchs");
+
 
 woodcost=5000
 mineralcost=5000
@@ -6236,9 +6282,8 @@ else
 {
 	$(".tech_centralisation").removeClass("unavailable")
 }
-if(unlocked[".tech_centralisation"] && technologies["centralisation"] == 0){
-  $(".tech_centralisation").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_centralisation", unattainable);
 $(".tech_centralisation").addClass((technologies["centralisation"] >0 ? "researched" : ""))
 $(".tech_centralisation").html("Centralisation" + (technologies["centralisation"] >0 ? " (researched)" : ""));
 $(".tech_centralisation").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
@@ -6246,6 +6291,7 @@ $(".tech_centralisation").attr('tooltip2', 'Mineral: '+ parseFloat(items["minera
 $(".tech_centralisation").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".tech_centralisation").attr('tooltip4', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_centralisation").attr('tooltip5', "Allows the building of towncenters");
+
 
 steelcost=10;
 if(items["steel"]<steelcost){
@@ -6255,9 +6301,8 @@ else
 {
 	$(".tech_steeltools").removeClass("unavailable")
 }
-if(unlocked[".tech_steeltools"] && technologies["steeltools"] == 0){
-  $(".tech_steeltools").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".tech_steeltools", unattainable);
 $(".tech_steeltools").addClass((technologies["steeltools"] >0 ? "researched" : ""))
 $(".tech_steeltools").html("Steel tools" + (technologies["steeltools"] >0 ? " (researched)" : ""));
 $(".tech_steeltools").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
@@ -6273,13 +6318,13 @@ else
 {
 	$(".tech_husbandry").removeClass("unavailable")
 }
-if(unlocked[".tech_husbandry"] && technologies["husbandry"] == 0){
-  $(".tech_husbandry").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost
+set_unattainable(".tech_husbandry", unattainable);
 $(".tech_husbandry").addClass((technologies["husbandry"] >0 ? "researched" : ""))
 $(".tech_husbandry").html("Husbandry" + (technologies["husbandry"] >0 ? " (researched)" : ""));
 $(".tech_husbandry").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_husbandry").attr('tooltip3', "Allow soldiers to bring back horses found on expeditions");
+
 
 goldcost=25;
 steelcost=25;
@@ -6290,14 +6335,14 @@ else
 {
 	$(".tech_cavalry").removeClass("unavailable")
 }
-if(unlocked[".tech_cavalry"] && technologies["cavalry"] == 0){
-  $(".tech_cavalry").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".tech_cavalry", unattainable);
 $(".tech_cavalry").addClass((technologies["cavalry"] >0 ? "researched" : ""))
 $(".tech_cavalry").html("Cavalry" + (technologies["cavalry"] >0 ? " (researched)" : ""));
 $(".tech_cavalry").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_cavalry").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_cavalry").attr('tooltip4', "Grants swordmen training to become armored knights");
+
 
 coincost=25;
 if(craft["coin"]<coincost ){
@@ -6355,6 +6400,7 @@ $(".tech_redeem").html("Redeem" + (technologies["redeem"] >0 ? " (researched)" :
 $(".tech_redeem").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_redeem").attr('tooltip3', "Allows redeeming tokens in the casino.");
 
+
 woodcost=20000;
 mineralcost=10000;
 if(items["wood"]<woodcost || items["mineral"]<mineralcost){
@@ -6364,14 +6410,14 @@ else
 {
 	$(".tech_wrapping").removeClass("unavailable")
 }
-if(unlocked[".tech_wrapping"] && technologies["wrapping"] == 0){
-  $(".tech_wrapping").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".tech_wrapping", unattainable);
 $(".tech_wrapping").addClass((technologies["wrapping"] >0 ? "researched" : ""))
 $(".tech_wrapping").html("Wrapping" + (technologies["wrapping"] >0 ? " (researched)" : ""));
 $(".tech_wrapping").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_wrapping").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_wrapping").attr('tooltip4', "Increases all storages by 10%");
+
 
 woodcost=25000;
 if(items["wood"]<woodcost ){
@@ -6381,13 +6427,13 @@ else
 {
 	$(".tech_shipyard").removeClass("unavailable")
 }
-if(unlocked[".tech_shipyard"] && technologies["shipyard"] == 0){
-  $(".tech_shipyard").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".tech_shipyard", unattainable);
 $(".tech_shipyard").addClass((technologies["shipyard"] >0 ? "researched" : ""))
 $(".tech_shipyard").html("Shipyard" + (technologies["shipyard"] >0 ? " (researched)" : ""));
 $(".tech_shipyard").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_shipyard").attr('tooltip3', "Unlocks the buildings of shipyards.");
+
 
 plankcost=100;
 if(craft["plank"]<plankcost ){
@@ -6402,6 +6448,7 @@ $(".tech_sailing").html("Sailing" + (technologies["sailing"] >0 ? " (researched)
 $(".tech_sailing").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_sailing").attr('tooltip3', "Allows building docks to store ships.");
 
+
 foodcost=7000;
 goldcost=45;
 coincost=50;
@@ -6412,15 +6459,15 @@ else
 {
 	$(".tech_trade").removeClass("unavailable")
 }
-if(unlocked[".tech_trade"] && technologies["trade"] == 0){
-  $(".tech_trade").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_trade", unattainable);
 $(".tech_trade").addClass((technologies["trade"] >0 ? "researched" : ""))
 $(".tech_trade").html("Trade" + (technologies["trade"] >0 ? " (researched)" : ""));
 $(".tech_trade").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_trade").attr('tooltip2', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_trade").attr('tooltip3', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_trade").attr('tooltip5', "Allows hiring sailors to embark on trade missions.");
+
 
 mineralcost=22500;
 steelcost=100;
@@ -6432,15 +6479,15 @@ else
 {
 	$(".tech_cache").removeClass("unavailable")
 }
-if(unlocked[".tech_cache"] && technologies["cache"] == 0){
-  $(".tech_cache").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".tech_cache", unattainable);
 $(".tech_cache").addClass((technologies["cache"] >0 ? "researched" : ""))
 $(".tech_cache").html("Cache" + (technologies["cache"] >0 ? " (researched)" : ""));
 $(".tech_cache").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_cache").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_cache").attr('tooltip3', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_cache").attr('tooltip5', "Allows crafting chests to store resources.");
+
 
 knowledgecost=500;
 if(items["knowledge"]<knowledgecost ){
@@ -6456,6 +6503,7 @@ $(".tech_specialization").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowl
 $(".tech_specialization").attr('tooltip3', "Allows you to choose where your research should be headed");
 $(".tech_specialization").attr('tooltip4', "New technologies will be unlocked based on your research.");
 
+
 mineralcost=28000;
 knowledgecost=50;
 if(items["knowledge"]<knowledgecost || items["mineral"]<mineralcost){
@@ -6465,14 +6513,14 @@ else
 {
 	$(".tech_geology").removeClass("unavailable")
 }
-if(unlocked[".tech_geology"] && technologies["geology"] == 0){
-  $(".tech_geology").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".tech_geology", unattainable);
 $(".tech_geology").addClass((technologies["geology"] >0 ? "researched" : ""))
 $(".tech_geology").html("Geology" + (technologies["geology"] >0 ? " (researched)" : ""));
 $(".tech_geology").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_geology").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_geology").attr('tooltip4', "Mineral production +20%");
+
 
 goldcost=50;
 knowledgecost=50;
@@ -6483,15 +6531,15 @@ else
 {
 	$(".tech_funding").removeClass("unavailable")
 }
-if(unlocked[".tech_funding"] && technologies["funding"] == 0){
-  $(".tech_funding").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_funding", unattainable);
 $(".tech_funding").addClass((technologies["funding"] >0 ? "researched" : ""))
 $(".tech_funding").html("Funding" + (technologies["funding"] >0 ? " (researched)" : ""));
 $(".tech_funding").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_funding").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_funding").attr('tooltip4', "Gold production +20%");
 $(".tech_funding").attr('tooltip5', "Gold storage +2");
+
 
 moralecost=35;
 knowledgecost=50;
@@ -6502,15 +6550,15 @@ else
 {
 	$(".tech_tactics").removeClass("unavailable")
 }
-if(unlocked[".tech_tactics"] && technologies["tactics"] == 0){
-  $(".tech_tactics").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
-}
+unattainable=maximums["morale"]*(bonus["storage"]+1)<moralecost
+set_unattainable(".tech_tactics", unattainable);
 $(".tech_tactics").addClass((technologies["tactics"] >0 ? "researched" : ""))
 $(".tech_tactics").html("Tactics" + (technologies["tactics"] >0 ? " (researched)" : ""));
 $(".tech_tactics").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_tactics").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_tactics").attr('tooltip4', "Troops attack +20%");
 $(".tech_tactics").attr('tooltip5', "Morale maximum +2");
+
 
 coincost=100;
 knowledgecost=200;
@@ -6528,6 +6576,7 @@ $(".tech_healing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]
 $(".tech_healing").attr('tooltip4', "Troops hp +5%");
 $(".tech_healing").attr('tooltip5', "Allows hiring medics to aid during combat.");
 
+
 coincost=100;
 knowledgecost=200;
 if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
@@ -6543,6 +6592,7 @@ $(".tech_savings").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2
 $(".tech_savings").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_savings").attr('tooltip4', "Allows building banks to store gold and produce coins.");
 
+
 knowledgecost=400;
 if(items["knowledge"]<knowledgecost){
 	$(".tech_studies").addClass("unavailable")
@@ -6555,6 +6605,7 @@ $(".tech_studies").addClass((technologies["studies"] >0 ? "researched" : ""))
 $(".tech_studies").html("Studies" + (technologies["studies"] >0 ? " (researched)" : ""));
 $(".tech_studies").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_studies").attr('tooltip3', "Allows hiring scientists that use funds to gain knowledge.");
+
 
 blockcost=500;
 knowledgecost=300;
@@ -6571,6 +6622,7 @@ $(".tech_organization").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).to
 $(".tech_organization").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_organization").attr('tooltip4', "Gives a 20% bonus to all storages");
 
+
 bronzecost=50;
 knowledgecost=500;
 if(items["knowledge"]<knowledgecost || craft["bronze"]<bronzecost){
@@ -6586,6 +6638,7 @@ $(".tech_culturaltrade").attr('tooltip', 'Bronze: '+ parseFloat(craft["bronze"])
 $(".tech_culturaltrade").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_culturaltrade").attr('tooltip4', "Allows getting knowledge when trading with other civilizations.");
 
+
 goldcost=60;
 moralecost=50;
 knowledgecost=800;
@@ -6596,15 +6649,15 @@ else
 {
 	$(".tech_wareconomy").removeClass("unavailable")
 }
-if(unlocked[".tech_wareconomy"] && technologies["wareconomy"] == 0){
-  $(".tech_wareconomy").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["morale"]*(bonus["storage"]+1)<moralecost
+set_unattainable(".tech_wareconomy", unattainable);
 $(".tech_wareconomy").addClass((technologies["wareconomy"] >0 ? "researched" : ""))
 $(".tech_wareconomy").html("War economy" + (technologies["wareconomy"] >0 ? " (researched)" : ""));
 $(".tech_wareconomy").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_wareconomy").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_wareconomy").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_wareconomy").attr('tooltip5', "Increases gold and food production by 10%.");
+
 
 steelcost=100;
 knowledgecost=500;
@@ -6615,14 +6668,14 @@ else
 {
 	$(".tech_intelligence").removeClass("unavailable")
 }
-if(unlocked[".tech_intelligence"] && technologies["intelligence"] == 0){
-  $(".tech_intelligence").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost
+set_unattainable(".tech_intelligence", unattainable);
 $(".tech_intelligence").addClass((technologies["intelligence"] >0 ? "researched" : ""))
 $(".tech_intelligence").html("Intelligence" + (technologies["intelligence"] >0 ? " (researched)" : ""));
 $(".tech_intelligence").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_intelligence").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_intelligence").attr('tooltip4', "When you win a fight, you get a chance to steal knowledge from the enemy.");
+
 
 pickaxecost=500;
 knowledgecost=500;
@@ -6639,6 +6692,7 @@ $(".tech_crushing").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).to
 $(".tech_crushing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_crushing").attr('tooltip4', "Allows building crushing mills to produce sand.");
 
+
 tincost=200;
 sandcost=600;
 knowledgecost=500;
@@ -6649,15 +6703,15 @@ else
 {
 	$(".tech_floatglass").removeClass("unavailable")
 }
-if(unlocked[".tech_floatglass"] && technologies["floatglass"] == 0){
-  $(".tech_floatglass").attr('style', (maximums["tin"]*(bonus["storage"]+1)<tincost || maximums["sand"]*(bonus["storage"]+1)<sandcost) ? 'color: coral' : '');
-}
+unattainable=maximums["tin"]*(bonus["storage"]+1)<tincost || maximums["sand"]*(bonus["storage"]+1)<sandcost
+set_unattainable(".tech_floatglass", unattainable);
 $(".tech_floatglass").addClass((technologies["floatglass"] >0 ? "researched" : ""))
 $(".tech_floatglass").html("Float glass" + (technologies["floatglass"] >0 ? " (researched)" : ""));
 $(".tech_floatglass").attr('tooltip', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
 $(".tech_floatglass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)+" / "+parseFloat(sandcost).toFixed(2))
 $(".tech_floatglass").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_floatglass").attr('tooltip5', "A process to create sheets of glass. ");
+
 
 knowledgecost=700;
 if(items["knowledge"]<knowledgecost){
@@ -6672,6 +6726,7 @@ $(".tech_canteen").html("Canteen" + (technologies["canteen"] >0 ? " (researched)
 $(".tech_canteen").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_canteen").attr('tooltip3', "Increases water storage by 20");
 $(".tech_canteen").attr('tooltip4', "Allows to find or steal water bottles to further increase water storage.");
+
 
 coincost=200;
 knowledgecost=500;
@@ -6688,6 +6743,7 @@ $(".tech_contracts").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed
 $(".tech_contracts").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_contracts").attr('tooltip4', "Contracts increase wood, mineral, morale and knowledge production by 10%");
 
+
 woodcost=40000;
 plankcost=1000;
 knowledgecost=800;
@@ -6698,15 +6754,15 @@ else
 {
 	$(".tech_galleon").removeClass("unavailable")
 }
-if(unlocked[".tech_galleon"] && technologies["galleon"] == 0){
-  $(".tech_galleon").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".tech_galleon", unattainable);
 $(".tech_galleon").addClass((technologies["galleon"] >0 ? "researched" : ""))
 $(".tech_galleon").html("Galleon" + (technologies["galleon"] >0 ? " (researched)" : ""));
 $(".tech_galleon").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_galleon").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_galleon").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_galleon").attr('tooltip5', "Galleons are mega ships that can carry loads of resources.");
+
 
 glasscost=20;
 knowledgecost=500;
@@ -6722,6 +6778,7 @@ $(".tech_glassblowing").html("Glassblowing" + (technologies["glassblowing"] >0 ?
 $(".tech_glassblowing").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).toFixed(2)+" / "+parseFloat(glasscost).toFixed(2))
 $(".tech_glassblowing").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_glassblowing").attr('tooltip4', "Allows you to craft bottles to store water and other liquids.");
+
 
 swordcost=1000;
 knowledgecost=800;
@@ -6739,6 +6796,7 @@ $(".tech_rampage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]
 $(".tech_rampage").attr('tooltip4', "A thousand swords were used to perfect the technique, allows crafting greatswords,");
 $(".tech_rampage").attr('tooltip5', "and hiring berseks");
 
+
 blockcost=2000;
 knowledgecost=800;
 if(items["knowledge"]<knowledgecost || craft["block"]<blockcost){
@@ -6754,6 +6812,7 @@ $(".tech_construction").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).to
 $(".tech_construction").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_construction").attr('tooltip4', "Lets you build blockyards to automate block manufacturing.");
 
+
 blockcost=1500;
 structurecost=500;
 steelcost=150;
@@ -6765,9 +6824,8 @@ else
 {
 	$(".tech_architecture").removeClass("unavailable")
 }
-if(unlocked[".tech_architecture"] && technologies["architecture"] == 0){
-  $(".tech_architecture").attr('style', (maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_architecture", unattainable);
 $(".tech_architecture").addClass((technologies["architecture"] >0 ? "researched" : ""))
 $(".tech_architecture").html("Architecture" + (technologies["architecture"] >0 ? " (researched)" : ""));
 $(".tech_architecture").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
@@ -6775,6 +6833,7 @@ $(".tech_architecture").attr('tooltip2', 'Structure: '+ parseFloat(craft["struct
 $(".tech_architecture").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_architecture").attr('tooltip4', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_architecture").attr('tooltip6', "Allows crafting frames, a complex building material.");
+
 
 bottlecost=50
 knowledgecost=1000;
@@ -6785,14 +6844,14 @@ else
 {
 	$(".tech_chemistry").removeClass("unavailable")
 }
-if(unlocked[".tech_chemistry"] && technologies["chemistry"] == 0){
-  $(".tech_chemistry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_chemistry", unattainable);
 $(".tech_chemistry").addClass((technologies["chemistry"] >0 ? "researched" : ""))
 $(".tech_chemistry").html("Chemistry" + (technologies["chemistry"] >0 ? " (researched)" : ""));
 $(".tech_chemistry").attr('tooltip', 'Bottle: '+ parseFloat(craft["bottle"]).toFixed(2)+" / "+parseFloat(bottlecost).toFixed(2))
 $(".tech_chemistry").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_chemistry").attr('tooltip4', "Lets you build laboratories where scientists can work.");
+
 
 tokencost=200
 knowledgecost=800;
@@ -6809,6 +6868,7 @@ $(".tech_risk").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)
 $(".tech_risk").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_risk").attr('tooltip4', "Lets you play x10 and x100 in the casino");
 
+
 coincost=1000
 knowledgecost=300;
 if(items["knowledge"]<knowledgecost || craft["coin"]<coincost){
@@ -6823,6 +6883,7 @@ $(".tech_investment").html("Investment" + (technologies["investment"] >0 ? " (re
 $(".tech_investment").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_investment").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_investment").attr('tooltip4', "Gives back 2000 coins at a rate of 0.1/s");
+
 
 suppliescost=100
 knowledgecost=800;
@@ -6855,6 +6916,7 @@ $(".tech_undergroundstorage").attr('tooltip', 'Chest: '+ parseFloat(craft["chest
 $(".tech_undergroundstorage").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_undergroundstorage").attr('tooltip4', "Allows building bunkers to store bulk materials");
 
+
 chestcost=200
 knowledgecost=1300;
 if(items["knowledge"]<knowledgecost || craft["chest"]<chestcost){
@@ -6864,14 +6926,14 @@ else
 {
 	$(".tech_packaging").removeClass("unavailable")
 }
-if(unlocked[".tech_packaging"] && technologies["packaging"] == 0){
-  $(".tech_packaging").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_packaging", unattainable);
 $(".tech_packaging").addClass((technologies["packaging"] >0 ? "researched" : ""))
 $(".tech_packaging").html("Packaging" + (technologies["packaging"] >0 ? " (researched)" : ""));
 $(".tech_packaging").attr('tooltip', 'Chest: '+ parseFloat(craft["chest"]).toFixed(2)+" / "+parseFloat(chestcost).toFixed(2))
 $(".tech_packaging").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_packaging").attr('tooltip4', "Allows to build compressor to increase storage space of other buildings");
+
 
 foodcost=10000;
 watercost=200;
@@ -6883,15 +6945,15 @@ else
 {
 	$(".tech_domestication").removeClass("unavailable")
 }
-if(unlocked[".tech_domestication"] && technologies["domestication"] == 0){
-  $(".tech_domestication").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost
+set_unattainable(".tech_domestication", unattainable);
 $(".tech_domestication").addClass((technologies["domestication"] >0 ? "researched" : ""))
 $(".tech_domestication").html("Domestication" + (technologies["domestication"] >0 ? " (researched)" : ""));
 $(".tech_domestication").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_domestication").attr('tooltip2', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".tech_domestication").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_domestication").attr('tooltip5', "Allows you to take back elephants from expeditions.");
+
 
 suppliescost=200;
 plankcost=2000;
@@ -6908,6 +6970,7 @@ $(".tech_expansion").attr('tooltip', 'Supplies: '+ parseFloat(craft["supplies"])
 $(".tech_expansion").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_expansion").attr('tooltip4', "Allows you to conquest new territory by fleet fights.");
 
+
 chemicalscost=15;
 knowledgecost=800;
 if(items["knowledge"]<knowledgecost || items["chemicals"]<chemicalscost){
@@ -6917,14 +6980,14 @@ else
 {
 	$(".tech_investigation").removeClass("unavailable")
 }
-if(unlocked[".tech_investigation"] && technologies["investigation"] == 0){
-  $(".tech_investigation").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost) ? 'color: coral' : '');
-}
+unattainable=maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost
+set_unattainable(".tech_investigation", unattainable);
 $(".tech_investigation").addClass((technologies["investigation"] >0 ? "researched" : ""))
 $(".tech_investigation").html("Investigation" + (technologies["investigation"] >0 ? " (researched)" : ""));
 $(".tech_investigation").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".tech_investigation").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_investigation").attr('tooltip4', "Allows you to build scientific outposts in conquered territory.");
+
 
 goldcost=70;
 bronzecost=300;
@@ -6936,15 +6999,15 @@ else
 {
 	$(".tech_internationalization").removeClass("unavailable")
 }
-if(unlocked[".tech_internationalization"] && technologies["internationalization"] == 0){
-  $(".tech_internationalization").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost
+set_unattainable(".tech_internationalization", unattainable);
 $(".tech_internationalization").addClass((technologies["internationalization"] >0 ? "researched" : ""))
 $(".tech_internationalization").html("Internationalization" + (technologies["internationalization"] >0 ? " (res..)" : ""));
 $(".tech_internationalization").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_internationalization").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".tech_internationalization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_internationalization").attr('tooltip5', "Allows you to build trade outposts in conquered territory.");
+
 
 horsecost=10;
 elephantcost=2;
@@ -6963,6 +7026,7 @@ $(".tech_camps").attr('tooltip2', 'Elephant: '+ parseFloat(craft["elephant"]).to
 $(".tech_camps").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_camps").attr('tooltip5', "Allows you to build military outposts in conquered territory.");
 
+
 woodcost=80000
 framecost=5
 knowledgecost=1000;
@@ -6973,15 +7037,15 @@ else
 {
 	$(".tech_fireship").removeClass("unavailable")
 }
-if(unlocked[".tech_fireship"] && technologies["fireship"] == 0){
-  $(".tech_fireship").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".tech_fireship", unattainable);
 $(".tech_fireship").addClass((technologies["fireship"] >0 ? "researched" : ""))
 $(".tech_fireship").html("Fireship" + (technologies["fireship"] >0 ? " (researched)" : ""));
 $(".tech_fireship").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_fireship").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".tech_fireship").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_fireship").attr('tooltip5', "Allows you to build fire ships, an agressive military ship.");
+
 
 woodcost=80000
 plankcost=1000
@@ -6993,15 +7057,15 @@ else
 {
 	$(".tech_careening").removeClass("unavailable")
 }
-if(unlocked[".tech_careening"] && technologies["careening"] == 0){
-  $(".tech_careening").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost
+set_unattainable(".tech_careening", unattainable);
 $(".tech_careening").addClass((technologies["careening"] >0 ? "researched" : ""))
 $(".tech_careening").html("Careening" + (technologies["careening"] >0 ? " (researched)" : ""));
 $(".tech_careening").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_careening").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_careening").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_careening").attr('tooltip5', "Reduces trade mission time by 30s, and increases ships hp by 20%");
+
 
 goldcost=100
 coincost=1500
@@ -7013,15 +7077,15 @@ else
 {
 	$(".tech_deals").removeClass("unavailable")
 }
-if(unlocked[".tech_deals"] && technologies["deals"] == 0){
-  $(".tech_deals").attr('style', (maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["gold"]*(bonus["storage"]+1)<goldcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_deals", unattainable);
 $(".tech_deals").addClass((technologies["deals"] >0 ? "researched" : ""))
 $(".tech_deals").html("Dealing" + (technologies["deals"] >0 ? " (researched)" : ""));
 $(".tech_deals").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".tech_deals").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_deals").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_deals").attr('tooltip5', "A merchant will appear in the market every 10 min with a new offer.");
+
 
 foodcost=20000;
 moralecost=60;
@@ -7033,15 +7097,15 @@ else
 {
 	$(".tech_finding").removeClass("unavailable")
 }
-if(unlocked[".tech_finding"] && technologies["finding"] == 0){
-  $(".tech_finding").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_finding", unattainable);
 $(".tech_finding").addClass((technologies["finding"] >0 ? "researched" : ""))
 $(".tech_finding").html("Finding" + (technologies["finding"] >0 ? " (researched)" : ""));
 $(".tech_finding").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".tech_finding").attr('tooltip2', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_finding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_finding").attr('tooltip5', "Allows you to find more complex materials in expeditions, like sand, clay or bricks.");
+
 
 mineralcost=80000;
 pickaxecost=3000;
@@ -7053,15 +7117,15 @@ else
 {
 	$(".tech_openmining").removeClass("unavailable")
 }
-if(unlocked[".tech_openmining"] && technologies["openmining"] == 0){
-  $(".tech_openmining").attr('style', (maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["mineral"]*(bonus["storage"]+1)<mineralcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_openmining", unattainable);
 $(".tech_openmining").addClass((technologies["openmining"] >0 ? "researched" : ""))
 $(".tech_openmining").html("Open mining" + (technologies["openmining"] >0 ? " (researched)" : ""));
 $(".tech_openmining").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".tech_openmining").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".tech_openmining").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_openmining").attr('tooltip5', "Allows you to build quarrys to extract clay from the ground.");
+
 
 pickaxecost=2000;
 knowledgecost=1000;
@@ -7072,14 +7136,14 @@ else
 {
 	$(".tech_multitasking").removeClass("unavailable")
 }
-if(unlocked[".tech_multitasking"] && technologies["multitasking"] == 0){
-  $(".tech_multitasking").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_multitasking", unattainable);
 $(".tech_multitasking").addClass((technologies["multitasking"] >0 ? "researched" : ""))
 $(".tech_multitasking").html("Multitasking" + (technologies["multitasking"] >0 ? " (researched)" : ""));
 $(".tech_multitasking").attr('tooltip', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".tech_multitasking").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_multitasking").attr('tooltip4', "Miners now also extract some clay.");
+
 
 plankcost=3000;
 coincost=800;
@@ -7091,15 +7155,15 @@ else
 {
 	$(".tech_seacaptain").removeClass("unavailable")
 }
-if(unlocked[".tech_seacaptain"] && technologies["seacaptain"] == 0){
-  $(".tech_seacaptain").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_seacaptain", unattainable);
 $(".tech_seacaptain").addClass((technologies["seacaptain"] >0 ? "researched" : ""))
 $(".tech_seacaptain").html("Sea captain" + (technologies["seacaptain"] >0 ? " (researched)" : ""));
 $(".tech_seacaptain").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip2', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_seacaptain").attr('tooltip5', "Unlocks a new  leader.");
+
 
 knowledgecost=1300;
 if(items["knowledge"]<knowledgecost){
@@ -7109,13 +7173,13 @@ else
 {
 	$(".tech_wisdom").removeClass("unavailable")
 }
-if(unlocked[".tech_wisdom"] && technologies["wisdom"] == 0){
-  $(".tech_wisdom").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_wisdom", unattainable);
 $(".tech_wisdom").addClass((technologies["wisdom"] >0 ? "researched" : ""))
 $(".tech_wisdom").html("Wisdom" + (technologies["wisdom"] >0 ? " (researched)" : ""));
 $(".tech_wisdom").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_wisdom").attr('tooltip3', "Unlocks a new leader.");
+
 
 framecost=20;
 blockcost=3000;
@@ -7127,15 +7191,15 @@ else
 {
 	$(".tech_masonry").removeClass("unavailable")
 }
-if(unlocked[".tech_masonry"] && technologies["masonry"] == 0){
-  $(".tech_masonry").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_masonry", unattainable);
 $(".tech_masonry").addClass((technologies["masonry"] >0 ? "researched" : ""))
 $(".tech_masonry").html("Masonry" + (technologies["masonry"] >0 ? " (researched)" : ""));
 $(".tech_masonry").attr('tooltip', 'Block: '+ parseFloat(craft["block"]).toFixed(2)+" / "+parseFloat(blockcost).toFixed(2))
 $(".tech_masonry").attr('tooltip2', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
 $(".tech_masonry").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_masonry").attr('tooltip5', "Allows you to craft bricks used in buildings.");
+
 
 woodcost=90000;
 knowledgecost=1000;
@@ -7146,14 +7210,14 @@ else
 {
 	$(".tech_woodwork").removeClass("unavailable")
 }
-if(unlocked[".tech_woodwork"] && technologies["woodwork"] == 0){
-  $(".tech_woodwork").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_woodwork", unattainable);
 $(".tech_woodwork").addClass((technologies["woodwork"] >0 ? "researched" : ""))
 $(".tech_woodwork").html("Woodwork" + (technologies["woodwork"] >0 ? " (researched)" : ""));
 $(".tech_woodwork").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_woodwork").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_woodwork").attr('tooltip4', "Allows you to build carpentries to automate structure crafting.");
+
 
 coincost=1000;
 knowledgecost=1000;
@@ -7164,14 +7228,14 @@ else
 {
 	$(".tech_commodities").removeClass("unavailable")
 }
-if(unlocked[".tech_commodities"] && technologies["commodities"] == 0){
-  $(".tech_commodities").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_commodities", unattainable);
 $(".tech_commodities").addClass((technologies["commodities"] >0 ? "researched" : ""))
 $(".tech_commodities").html("Commodities" + (technologies["commodities"] >0 ? " (researched)" : ""));
 $(".tech_commodities").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_commodities").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_commodities").attr('tooltip4', "Allows you to buy sand on the market");
+
 
 coincost=2000;
 knowledgecost=1200;
@@ -7182,14 +7246,14 @@ else
 {
 	$(".tech_commerce").removeClass("unavailable")
 }
-if(unlocked[".tech_commerce"] && technologies["commerce"] == 0){
-  $(".tech_commerce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_commerce", unattainable);
 $(".tech_commerce").addClass((technologies["commerce"] >0 ? "researched" : ""))
 $(".tech_commerce").html("Commerce" + (technologies["commerce"] >0 ? " (researched)" : ""));
 $(".tech_commerce").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_commerce").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_commerce").attr('tooltip4', "Allows you to hire marketers");
+
 
 moralecost=70;
 knowledgecost=1300;
@@ -7200,14 +7264,14 @@ else
 {
 	$(".tech_explosives").removeClass("unavailable")
 }
-if(unlocked[".tech_explosives"] && technologies["explosives"] == 0){
-  $(".tech_explosives").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_explosives", unattainable);
 $(".tech_explosives").addClass((technologies["explosives"] >0 ? "researched" : ""))
 $(".tech_explosives").html("Explosives" + (technologies["explosives"] >0 ? " (researched)" : ""));
 $(".tech_explosives").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_explosives").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_explosives").attr('tooltip4', "Allows you to craft gunpowder.");
+
 
 ironcost=500;
 steelcost=250;
@@ -7219,15 +7283,15 @@ else
 {
 	$(".tech_quenching").removeClass("unavailable")
 }
-if(unlocked[".tech_quenching"] && technologies["quenching"] == 0){
-  $(".tech_quenching").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_quenching", unattainable);
 $(".tech_quenching").addClass((technologies["quenching"] >0 ? "researched" : ""))
 $(".tech_quenching").html("Quenching" + (technologies["quenching"] >0 ? " (researched)" : ""));
 $(".tech_quenching").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_quenching").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_quenching").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_quenching").attr('tooltip5', "Increases iron and steel production by 25%");
+
 
 brickcost=50;
 knowledgecost=1200;
@@ -7238,14 +7302,14 @@ else
 {
 	$(".tech_castiron").removeClass("unavailable")
 }
-if(unlocked[".tech_castiron"] && technologies["castiron"] == 0){
-  $(".tech_castiron").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_castiron", unattainable);
 $(".tech_castiron").addClass((technologies["castiron"] >0 ? "researched" : ""))
 $(".tech_castiron").html("Cast iron" + (technologies["castiron"] >0 ? " (researched)" : ""));
 $(".tech_castiron").attr('tooltip', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
 $(".tech_castiron").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_castiron").attr('tooltip4', "New techniques allows you to build blast furnaces.");
+
 
 chemicalscost=20;
 knowledgecost=1200;
@@ -7256,14 +7320,14 @@ else
 {
 	$(".tech_insecticides").removeClass("unavailable")
 }
-if(unlocked[".tech_insecticides"] && technologies["insecticides"] == 0){
-  $(".tech_insecticides").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_insecticides", unattainable);
 $(".tech_insecticides").addClass((technologies["insecticides"] >0 ? "researched" : ""))
 $(".tech_insecticides").html("Insecticides" + (technologies["insecticides"] >0 ? " (researched)" : ""));
 $(".tech_insecticides").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".tech_insecticides").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_insecticides").attr('tooltip4', "Increases food production by 40%");
+
 
 lockcost=100;
 knowledgecost=1200;
@@ -7274,14 +7338,14 @@ else
 {
 	$(".tech_safes").removeClass("unavailable")
 }
-if(unlocked[".tech_safes"] && technologies["safes"] == 0){
-  $(".tech_safes").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_safes", unattainable);
 $(".tech_safes").addClass((technologies["safes"] >0 ? "researched" : ""))
 $(".tech_safes").html("Safes" + (technologies["safes"] >0 ? " (researched)" : ""));
 $(".tech_safes").attr('tooltip', 'Lock: '+ parseFloat(craft["lock"]).toFixed(2)+" / "+parseFloat(lockcost).toFixed(2))
 $(".tech_safes").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_safes").attr('tooltip4', "Increases gold storage by 30");
+
 
 gunpowdercost=50;
 knowledgecost=1200;
@@ -7292,14 +7356,14 @@ else
 {
 	$(".tech_ammunition").removeClass("unavailable")
 }
-if(unlocked[".tech_ammunition"] && technologies["ammunition"] == 0){
-  $(".tech_ammunition").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_ammunition", unattainable);
 $(".tech_ammunition").addClass((technologies["ammunition"] >0 ? "researched" : ""))
 $(".tech_ammunition").html("Ammunition" + (technologies["ammunition"] >0 ? " (researched)" : ""));
 $(".tech_ammunition").attr('tooltip', 'Gunpowder: '+ parseFloat(craft["gunpowder"]).toFixed(2)+" / "+parseFloat(gunpowdercost).toFixed(2))
 $(".tech_ammunition").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_ammunition").attr('tooltip4', "Allows you to craft ammo");
+
 
 ironcost=500;
 ammocost=1000;
@@ -7311,15 +7375,15 @@ else
 {
 	$(".tech_gunnery").removeClass("unavailable")
 }
-if(unlocked[".tech_gunnery"] && technologies["gunnery"] == 0){
-  $(".tech_gunnery").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_gunnery", unattainable);
 $(".tech_gunnery").addClass((technologies["gunnery"] >0 ? "researched" : ""))
 $(".tech_gunnery").html("Gunnery" + (technologies["gunnery"] >0 ? " (researched)" : ""));
 $(".tech_gunnery").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_gunnery").attr('tooltip2', 'Ammo: '+ parseFloat(craft["ammo"]).toFixed(2)+" / "+parseFloat(ammocost).toFixed(2))
 $(".tech_gunnery").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_gunnery").attr('tooltip4', "Allows you to craft musket and hire musketeers");
+
 
 woodcost=200000
 plankcost=10000
@@ -7331,15 +7395,15 @@ else
 {
 	$(".tech_windward").removeClass("unavailable")
 }
-if(unlocked[".tech_windward"] && technologies["windward"] == 0){
-  $(".tech_windward").attr('style', (maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_windward", unattainable);
 $(".tech_windward").addClass((technologies["windward"] >0 ? "researched" : ""))
 $(".tech_windward").html("Windward" + (technologies["windward"] >0 ? " (researched)" : ""));
 $(".tech_windward").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".tech_windward").attr('tooltip2', 'Plank: '+ parseFloat(craft["plank"]).toFixed(2)+" / "+parseFloat(plankcost).toFixed(2))
 $(".tech_windward").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_windward").attr('tooltip5', "Allows you to build caravels.");
+
 
 pickaxecost=10000;
 coalcost=500;
@@ -7351,15 +7415,15 @@ else
 {
 	$(".tech_mineralcoal").removeClass("unavailable")
 }
-if(unlocked[".tech_mineralcoal"] && technologies["mineralcoal"] == 0){
-  $(".tech_mineralcoal").attr('style', (maximums["coal"]*(bonus["storage"]+1)<coalcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["coal"]*(bonus["storage"]+1)<coalcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_mineralcoal", unattainable);
 $(".tech_mineralcoal").addClass((technologies["mineralcoal"] >0 ? "researched" : ""))
 $(".tech_mineralcoal").html("Mineral Coal" + (technologies["mineralcoal"] >0 ? " (researched)" : ""));
 $(".tech_mineralcoal").attr('tooltip', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
 $(".tech_mineralcoal").attr('tooltip2', 'Pickaxe: '+ parseFloat(craft["pickaxe"]).toFixed(2)+" / "+parseFloat(pickaxecost).toFixed(2))
 $(".tech_mineralcoal").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_mineralcoal").attr('tooltip5', "Quarries now also produce coal.");
+
 
 horsecost=100
 moralecost=120
@@ -7371,15 +7435,15 @@ else
 {
 	$(".tech_carrying").removeClass("unavailable")
 }
-if(unlocked[".tech_carrying"] && technologies["carrying"] == 0){
-  $(".tech_carrying").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_carrying", unattainable);
 $(".tech_carrying").addClass((technologies["carrying"] >0 ? "researched" : ""))
 $(".tech_carrying").html("Carrying" + (technologies["carrying"] >0 ? " (researched)" : ""));
 $(".tech_carrying").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_carrying").attr('tooltip2', 'Horse: '+ parseFloat(craft["horse"]).toFixed(2)+" / "+parseFloat(horsecost).toFixed(2))
 $(".tech_carrying").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_carrying").attr('tooltip5', "Increases the amount of resources you get on expeditions by 50%");
+
 
 tokencost=5000;
 coincost=5000;
@@ -7391,15 +7455,15 @@ else
 {
 	$(".tech_shareholding").removeClass("unavailable")
 }
-if(unlocked[".tech_shareholding"] && technologies["shareholding"] == 0){
-  $(".tech_shareholding").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_shareholding", unattainable);
 $(".tech_shareholding").addClass((technologies["shareholding"] >0 ? "researched" : ""))
 $(".tech_shareholding").html("Shareholding" + (technologies["shareholding"] >0 ? " (researched)" : ""));
 $(".tech_shareholding").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_shareholding").attr('tooltip2', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
 $(".tech_shareholding").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_shareholding").attr('tooltip5', "Allows you to redeem tokens on the casino for casino shares.");
+
 
 framecost=100;
 glasscost=300;
@@ -7411,9 +7475,8 @@ else
 {
 	$(".tech_safestorage").removeClass("unavailable")
 }
-if(unlocked[".tech_safestorage"] && technologies["safestorage"] == 0){
-  $(".tech_safestorage").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_safestorage", unattainable);
 $(".tech_safestorage").addClass((technologies["safestorage"] >0 ? "researched" : ""))
 $(".tech_safestorage").html("Safe storage" + (technologies["safestorage"] >0 ? " (researched)" : ""));
 $(".tech_safestorage").attr('tooltip', 'Frame: '+ parseFloat(craft["frame"]).toFixed(2)+" / "+parseFloat(framecost).toFixed(2))
@@ -7422,6 +7485,7 @@ $(".tech_safestorage").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowled
 $(".tech_safestorage").attr('tooltip5', "Allows you to build repositories to store complex materials");
 $(".tech_safestorage").attr('tooltip6', "Quarries now also produce nickel");
 $(".tech_safestorage").attr('tooltip7', "You can also get nickel on expeditions or trade routes.");
+
 
 ironcost=750;
 steelcost=400;
@@ -7433,15 +7497,15 @@ else
 {
 	$(".tech_metalwork").removeClass("unavailable")
 }
-if(unlocked[".tech_metalwork"] && technologies["metalwork"] == 0){
-  $(".tech_metalwork").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost || maximums["steel"]*(bonus["storage"]+1)<steelcost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_metalwork", unattainable);
 $(".tech_metalwork").addClass((technologies["metalwork"] >0 ? "researched" : ""))
 $(".tech_metalwork").html("Metalwork" + (technologies["metalwork"] >0 ? " (researched)" : ""));
 $(".tech_metalwork").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_metalwork").attr('tooltip2', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".tech_metalwork").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_metalwork").attr('tooltip5', "Allows you to craft alloy plates.");
+
 
 ironcost=800;
 platecost=50;
@@ -7453,15 +7517,15 @@ else
 {
 	$(".tech_steamengine").removeClass("unavailable")
 }
-if(unlocked[".tech_steamengine"] && technologies["steamengine"] == 0){
-  $(".tech_steamengine").attr('style', (maximums["iron"]*(bonus["storage"]+1)<ironcost) ? 'color: coral' : '');
-}
+unattainable=maximums["iron"]*(bonus["storage"]+1)<ironcost
+set_unattainable(".tech_steamengine", unattainable);
 $(".tech_steamengine").addClass((technologies["steamengine"] >0 ? "researched" : ""))
 $(".tech_steamengine").html("Steam engine" + (technologies["steamengine"] >0 ? " (researched)" : ""));
 $(".tech_steamengine").attr('tooltip', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".tech_steamengine").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_steamengine").attr('tooltip5', "Allows you to build steam powered engines.");
+
 
 moralecost=130;
 platecost=500;
@@ -7473,15 +7537,15 @@ else
 {
 	$(".tech_armoredcombat").removeClass("unavailable")
 }
-if(unlocked[".tech_armoredcombat"] && technologies["armoredcombat"] == 0){
-  $(".tech_armoredcombat").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_armoredcombat", unattainable);
 $(".tech_armoredcombat").addClass((technologies["armoredcombat"] >0 ? "researched" : ""))
 $(".tech_armoredcombat").html("Armored combat" + (technologies["armoredcombat"] >0 ? " (res...)" : ""));
 $(".tech_armoredcombat").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
 $(".tech_armoredcombat").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_armoredcombat").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_armoredcombat").attr('tooltip5', "Allows you to build armored tanks to ride into battle");
+
 
 coincost=10000;
 platecost=300;
@@ -7493,15 +7557,15 @@ else
 {
 	$(".tech_railtransport").removeClass("unavailable")
 }
-if(unlocked[".tech_railtransport"] && technologies["railtransport"] == 0){
-  $(".tech_railtransport").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_railtransport", unattainable);
 $(".tech_railtransport").addClass((technologies["railtransport"] >0 ? "researched" : ""))
 $(".tech_railtransport").html("Rail transport" + (technologies["railtransport"] >0 ? " (researched)" : ""));
 $(".tech_railtransport").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_railtransport").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_railtransport").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_railtransport").attr('tooltip5', "Trains are a good way to keep your economy moving.");
+
 
 chemicalscost=100;
 platecost=300;
@@ -7513,15 +7577,15 @@ else
 {
 	$(".tech_industrialization").removeClass("unavailable")
 }
-if(unlocked[".tech_industrialization"] && technologies["industrialization"] == 0){
-  $(".tech_industrialization").attr('style', (maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["chemicals"]*(bonus["storage"]+1)<chemicalscost || maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_industrialization", unattainable);
 $(".tech_industrialization").addClass((technologies["industrialization"] >0 ? "researched" : ""))
 $(".tech_industrialization").html("Industrialization" + (technologies["industrialization"] >0 ? " (researched)" : ""));
 $(".tech_industrialization").attr('tooltip', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".tech_industrialization").attr('tooltip2', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".tech_industrialization").attr('tooltip3', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_industrialization").attr('tooltip5', "Further developments has increased the efficiency of crafting.");
+
 
 knowledgecost=2500;
 if(items["knowledge"]<knowledgecost){
@@ -7531,13 +7595,13 @@ else
 {
 	$(".tech_academicpublishing").removeClass("unavailable")
 }
-if(unlocked[".tech_academicpublishing"] && technologies["academicpublishing"] == 0){
-  $(".tech_academicpublishing").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_academicpublishing", unattainable);
 $(".tech_academicpublishing").addClass((technologies["academicpublishing"] >0 ? "researched" : ""))
 $(".tech_academicpublishing").html("Academic Publishing" + (technologies["academicpublishing"] >0 ? " (res..)" : ""));
 $(".tech_academicpublishing").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_academicpublishing").attr('tooltip3', "Allows you to store your knowledge in books of scientific papers.");
+
 
 coincost=10000;
 knowledgecost=2000;
@@ -7548,14 +7612,14 @@ else
 {
 	$(".tech_patents").removeClass("unavailable")
 }
-if(unlocked[".tech_patents"] && technologies["patents"] == 0){
-  $(".tech_patents").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_patents", unattainable);
 $(".tech_patents").addClass((technologies["patents"] >0 ? "researched" : ""))
 $(".tech_patents").html("Patents" + (technologies["patents"] >0 ? " (researched)" : ""));
 $(".tech_patents").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".tech_patents").attr('tooltip2', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_patents").attr('tooltip4', "Allows you to buy patents to further advance your research.");
+
 
 coincost=5000;
 bookcost=10;
@@ -7573,6 +7637,7 @@ $(".tech_logistics").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixe
 $(".tech_logistics").attr('tooltip4', "Logistics provide a shortcut to crafting.");
 $(".tech_logistics").attr('tooltip5', "Allows you to craft materials directly by clicking its name on the inventory.");
 
+
 knowledgecost=2800;
 bookcost=10;
 if(craft["book"]<bookcost || items["knowledge"]<knowledgecost ){
@@ -7582,15 +7647,15 @@ else
 {
 	$(".tech_electricity").removeClass("unavailable")
 }
-if(unlocked[".tech_electricity"] && technologies["electricity"] == 0){
-  $(".tech_electricity").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_electricity", unattainable);
 $(".tech_electricity").addClass((technologies["electricity"] >0 ? "researched" : ""))
 $(".tech_electricity").html("Electricity" + (technologies["electricity"] >0 ? " (researched)" : ""));
 $(".tech_electricity").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_electricity").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_electricity").attr('tooltip4', "Grants you to the knowledge of handling electricity");
 $(".tech_electricity").attr('tooltip5', "Allows you to build powerplants");
+
 
 mineralcost=200000;
 claycost=10000
@@ -7602,9 +7667,8 @@ else
 {
 	$(".tech_pyroprocessing").removeClass("unavailable")
 }
-if(unlocked[".tech_pyroprocessing"] && technologies["pyroprocessing"] == 0){
-  $(".tech_pyroprocessing").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost) ? 'color: coral' : '');
-}
+unattainable=maximums["clay"]*(bonus["storage"]+1)<claycost || maximums["mineral"]*(bonus["storage"]+1)<mineralcost
+set_unattainable(".tech_pyroprocessing", unattainable);
 $(".tech_pyroprocessing").addClass((technologies["pyroprocessing"] >0 ? "researched" : ""))
 $(".tech_pyroprocessing").html("Pyroprocessing" + (technologies["pyroprocessing"] >0 ? " (researched)" : ""));
 $(".tech_pyroprocessing").attr('tooltip', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
@@ -7621,9 +7685,8 @@ else
 {
 	$(".tech_triforce").removeClass("unavailable")
 }
-if(unlocked[".tech_triforce"] && technologies["triforce"] == 0){
-  $(".tech_triforce").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_triforce", unattainable);
 $(".tech_triforce").addClass((technologies["triforce"] >0 ? "researched" : ""))
 $(".tech_triforce").html("Triforce" + (technologies["triforce"] >0 ? " (researched)" : ""));
 $(".tech_triforce").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
@@ -7632,6 +7695,7 @@ $(".tech_triforce").attr('tooltip4', "+30% knowledge production");
 $(".tech_triforce").attr('tooltip5', "+30% morale production");
 $(".tech_triforce").attr('tooltip6', "+30% storage space");
 $(".tech_triforce").attr('tooltip7', "+30% craft efficiency");
+
 
 bookcost=20;
 knowledgecost=3000;
@@ -7642,14 +7706,14 @@ else
 {
 	$(".tech_education").removeClass("unavailable")
 }
-if(unlocked[".tech_education"] && technologies["education"] == 0){
-  $(".tech_education").attr('style', (maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost) ? 'color: coral' : '');
-}
+unattainable=maximums["knowledge"]*(bonus["storage"]+1)<knowledgecost
+set_unattainable(".tech_education", unattainable);
 $(".tech_education").addClass((technologies["education"] >0 ? "researched" : ""))
 $(".tech_education").html("Education" + (technologies["education"] >0 ? " (researched)" : ""));
 $(".tech_education").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".tech_education").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_education").attr('tooltip4', "Allows the building of universities");
+
 
 claycost=15000;
 bookcost=20;
@@ -7660,14 +7724,14 @@ else
 {
 	$(".tech_cementhydration").removeClass("unavailable")
 }
-if(unlocked[".tech_cementhydration"] && technologies["cementhydration"] == 0){
-  $(".tech_cementhydration").attr('style', (maximums["clay"]*(bonus["storage"]+1)<claycost) ? 'color: coral' : '');
-}
+unattainable=maximums["clay"]*(bonus["storage"]+1)<claycost
+set_unattainable(".tech_cementhydration", unattainable);
 $(".tech_cementhydration").addClass((technologies["cementhydration"] >0 ? "researched" : ""))
 $(".tech_cementhydration").html("Cement Hydration" + (technologies["cementhydration"] >0 ? " (researched)" : ""));
 $(".tech_cementhydration").attr('tooltip', 'Clay: '+ parseFloat(items["clay"]).toFixed(2)+" / "+parseFloat(claycost).toFixed(2))
 $(".tech_cementhydration").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_cementhydration").attr('tooltip4', "Allows you to build concrete mixers");
+
 
 concretecost=15000;
 bookcost=30;
@@ -7678,14 +7742,14 @@ else
 {
 	$(".tech_workforce").removeClass("unavailable")
 }
-if(unlocked[".tech_workforce"] && technologies["workforce"] == 0){
-  $(".tech_workforce").attr('style', (maximums["concrete"]*(bonus["storage"]+1)<concretecost) ? 'color: coral' : '');
-}
+unattainable=maximums["concrete"]*(bonus["storage"]+1)<concretecost
+set_unattainable(".tech_workforce", unattainable);
 $(".tech_workforce").addClass((technologies["workforce"] >0 ? "researched" : ""))
 $(".tech_workforce").html("Work force" + (technologies["workforce"] >0 ? " (researched)" : ""));
 $(".tech_workforce").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
 $(".tech_workforce").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_workforce").attr('tooltip4', "Allows you to build tool factories to provide industrial tools.");
+
 
 spearcost=300000;
 swordcost=100000;
@@ -7704,6 +7768,7 @@ $(".tech_militarization").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"])
 $(".tech_militarization").attr('tooltip3', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_militarization").attr('tooltip5', "Allows you to build barracks");
 
+
 moralecost=250;
 bookcost=20;
 if(items["morale"]<moralecost || craft["book"]<bookcost){
@@ -7713,9 +7778,8 @@ else
 {
 	$(".tech_wargames").removeClass("unavailable")
 }
-if(unlocked[".tech_wargames"] && technologies["wargames"] == 0){
-  $(".tech_wargames").attr('style', (maximums["morale"]*(bonus["storage"]+1)<moralecost) ? 'color: coral' : '');
-}
+unattainable=maximums["morale"]*(bonus["storage"]+1)<moralecost
+set_unattainable(".tech_wargames", unattainable);
 $(".tech_wargames").addClass((technologies["wargames"] >0 ? "researched" : ""))
 $(".tech_wargames").html("War games" + (technologies["wargames"] >0 ? " (researched)" : ""));
 $(".tech_wargames").attr('tooltip', 'Morale: '+ parseFloat(items["morale"]).toFixed(2)+" / "+parseFloat(moralecost).toFixed(2))
@@ -7742,7 +7806,11 @@ $(".research_military").attr('tooltip4', "Increases troops attack and hp");
 if(bonus["military"]>100000) {$(".research_military").attr('tooltip6', 'An additional investment of ' + parseFloat(Math.pow(1.1,Math.round(Math.ceil(Math.log(bonus["military"]/100000)/Math.log(1.1),0)))*100000-bonus["military"]).toFixed(2) + ' knowledge will unlock the next Mastery Technology.');}
 
 
-//crafting
+
+
+//Crafting
+
+
 woodcost=20;
 coppercost=1;
 if(items["wood"]<woodcost || items["copper"]<coppercost){
@@ -7756,6 +7824,7 @@ $(".craft_pickaxe").html("Pickaxe");
 $(".craft_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
 $(".craft_pickaxe").attr('tooltip4', "Basic copper pickaxe");
+
 
 woodcost=50;
 coppercost=3;
@@ -7798,6 +7867,7 @@ $(".craft_block").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)
 $(".craft_block").attr('tooltip2', 'Mineral: '+ parseFloat(items["mineral"]).toFixed(2)+" / "+parseFloat(mineralcost).toFixed(2))
 $(".craft_block").attr('tooltip3', "Compact building material");
 
+
 goldcost=5
 if(items["gold"]<goldcost){
 	$(".craft_coin").addClass("unavailable")
@@ -7809,6 +7879,7 @@ else
 $(".craft_coin").html("Coin");
 $(".craft_coin").attr('tooltip', 'Gold: '+ parseFloat(items["gold"]).toFixed(2)+" / "+parseFloat(goldcost).toFixed(2))
 $(".craft_coin").attr('tooltip3', "Gold refined into a coin for future use.");
+
 
 coppercost=40
 tincost=10
@@ -7824,6 +7895,7 @@ $(".craft_bronze").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFix
 $(".craft_bronze").attr('tooltip2', 'Tin: '+ parseFloat(items["tin"]).toFixed(2)+" / "+parseFloat(tincost).toFixed(2))
 $(".craft_bronze").attr('tooltip4', "A refined alloy of copper and tin");
 
+
 woodcost=1000;
 ironcost=20;
 if(items["wood"]<woodcost || items["iron"]<ironcost){
@@ -7837,6 +7909,7 @@ $(".craft_structure").html("Structure");
 $(".craft_structure").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
 $(".craft_structure").attr('tooltip2', 'Iron: '+ parseFloat(items["iron"]).toFixed(2)+" / "+parseFloat(ironcost).toFixed(2))
 $(".craft_structure").attr('tooltip4', "Reinforced structure for big buildings");
+
 
 steelcost=30;
 bronzecost=5;
@@ -7852,10 +7925,10 @@ $(".craft_armor").attr('tooltip', 'Steel: '+ parseFloat(items["steel"]).toFixed(
 $(".craft_armor").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".craft_armor").attr('tooltip4', "Fine crafted armor");
 
+
 plankcost=5;
 foodcost=500;
 watercost=100;
-
 if(craft["plank"]<plankcost || items["food"]<foodcost || items["water"]<watercost){
 	$(".craft_supplies").addClass("unavailable")
 }
@@ -7868,6 +7941,7 @@ $(".craft_supplies").attr('tooltip', 'Plank: '+ parseFloat(craft["plank"]).toFix
 $(".craft_supplies").attr('tooltip2', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))
 $(".craft_supplies").attr('tooltip3', 'Water: '+ parseFloat(items["water"]).toFixed(2)+" / "+parseFloat(watercost).toFixed(2))
 $(".craft_supplies").attr('tooltip5', "A barrel containing supplies");
+
 
 plankcost=100;
 steelcost=30;
@@ -7905,8 +7979,8 @@ $(".craft_glass").attr('tooltip2', 'Sand: '+ parseFloat(items["sand"]).toFixed(2
 $(".craft_glass").attr('tooltip3', 'Coal: '+ parseFloat(items["coal"]).toFixed(2)+" / "+parseFloat(coalcost).toFixed(2))
 $(".craft_glass").attr('tooltip5', "A sheet of glass");
 
-glasscost=5
 
+glasscost=5
 if(craft["glass"]<glasscost){
 	$(".craft_bottle").addClass("unavailable")
 }
@@ -7919,8 +7993,8 @@ $(".craft_bottle").attr('tooltip', 'Glass: '+ parseFloat(craft["glass"]).toFixed
 $(".craft_bottle").attr('tooltip3', "A bottle of glass to store water and others liquids.");
 $(".craft_bottle").attr('tooltip4', "+1 water storage");
 
-steelcost=100
 
+steelcost=100
 if(items["steel"]<steelcost){
 	$(".craft_greatsword").addClass("unavailable")
 }
@@ -7949,6 +8023,7 @@ $(".craft_frame").attr('tooltip2', 'Structure: '+ parseFloat(craft["structure"])
 $(".craft_frame").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixed(2)+" / "+parseFloat(steelcost).toFixed(2))
 $(".craft_frame").attr('tooltip5', "Massive construction material used in big buildings.");
 
+
 sandcost=500;
 claycost=150;
 if(items["sand"]<sandcost || items["clay"]<claycost){
@@ -7963,11 +8038,11 @@ $(".craft_brick").attr('tooltip', 'Sand: '+ parseFloat(items["sand"]).toFixed(2)
 $(".craft_brick").attr('tooltip2', 'Clay: '+ parseFloat(items["clay"]).toFixed(2)+" / "+parseFloat(claycost).toFixed(2))
 $(".craft_brick").attr('tooltip4', "Bricks are a modular construction material.");
 
+
 sandcost=300;
 coalcost=100;
 bronzecost=10;
 chemicalscost=5;
-
 if(items["sand"]<sandcost || items["coal"]<coalcost || items["chemicals"]<chemicalscost || craft["bronze"]<bronzecost){
 	$(".craft_gunpowder").addClass("unavailable")
 }
@@ -7981,6 +8056,7 @@ $(".craft_gunpowder").attr('tooltip2', 'Coal: '+ parseFloat(items["coal"]).toFix
 $(".craft_gunpowder").attr('tooltip3', 'Bronze: '+ parseFloat(craft["bronze"]).toFixed(2)+" / "+parseFloat(bronzecost).toFixed(2))
 $(".craft_gunpowder").attr('tooltip4', 'Chemicals: '+ parseFloat(items["chemicals"]).toFixed(2)+" / "+parseFloat(chemicalscost).toFixed(2))
 $(".craft_gunpowder").attr('tooltip5', "A powder used for explosives and ammunition.");
+
 
 ironcost=50;
 gunpowdercost=10;
@@ -7997,12 +8073,9 @@ $(".craft_ammo").attr('tooltip2', 'Gunpowder: '+ parseFloat(craft["gunpowder"]).
 $(".craft_ammo").attr('tooltip4', "Iron shells and gunpowder x500");
 
 
-
-
 woodcost=500;
 ironcost=500;
 steelcost=300;
-
 if(items["wood"]<woodcost || items["iron"]<ironcost || items["steel"]<steelcost){
 	$(".craft_musket").addClass("unavailable")
 }
@@ -8017,12 +8090,9 @@ $(".craft_musket").attr('tooltip3', 'Steel: '+ parseFloat(items["steel"]).toFixe
 $(".craft_musket").attr('tooltip5', "A rudimentary fire weapon.");
 
 
-
 coppercost=400;
 ironcost=200;
 nickelcost=10;
-
-
 if(items["copper"]<coppercost || items["iron"]<ironcost || items["nickel"]<nickelcost){
 	$(".craft_plate").addClass("unavailable")
 }
@@ -8040,7 +8110,6 @@ $(".craft_plate").attr('tooltip5', "A plate made of complex alloy.");
 steelcost=400;
 platecost=100;
 bronzecost=200;
-
 if(craft["plate"]<platecost || craft["bronze"]<bronzecost || items["steel"]<steelcost){
 	$(".craft_engine").addClass("unavailable")
 }
@@ -8054,6 +8123,7 @@ $(".craft_engine").attr('tooltip2', 'Bronze: '+ parseFloat(craft["bronze"]).toFi
 $(".craft_engine").attr('tooltip3', 'Plate: '+ parseFloat(craft["plate"]).toFixed(2)+" / "+parseFloat(platecost).toFixed(2))
 $(".craft_engine").attr('tooltip5', "A steam powered engine.");
 
+
 knowledgecost=2500;
 if(items["knowledge"]<knowledgecost){
 	$(".craft_book").addClass("unavailable")
@@ -8065,6 +8135,7 @@ else
 $(".craft_book").html("Scientific papers");
 $(".craft_book").attr('tooltip', 'Knowledge: '+ parseFloat(items["knowledge"]).toFixed(2)+" / "+parseFloat(knowledgecost).toFixed(2))
 $(".craft_book").attr('tooltip3', "Book with scientific papers which can be used to research new technologies");
+
 
 planscost=2500;
 if(craft["plans"]<planscost){
@@ -8078,6 +8149,7 @@ $(".craft_strategy").html("Strategy");
 $(".craft_strategy").attr('tooltip', 'Plans: '+ parseFloat(craft["plans"]).toFixed(2)+" / "+parseFloat(planscost).toFixed(2))
 $(".craft_strategy").attr('tooltip3', "Book with military plans");
 
+
 coincost=2500;
 if(craft["coin"]<coincost){
 	$(".craft_patent").addClass("unavailable")
@@ -8089,7 +8161,12 @@ else
 $(".craft_patent").html("Patent");
 $(".craft_patent").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
 $(".craft_patent").attr('tooltip3', "Book with all sorts of blueprints and inventions which can be used for new technologies.");
+
+
+
+
 //Leaders
+
 
 if(bonus["title"]<1){
 	$(".leader_sucellus").addClass("unavailable")
@@ -8277,15 +8354,18 @@ hp+=people["lighttank"]*5000
 power=power*(bonus["power"]+1)
 hp=hp*(bonus["hp"]+1)
 healing=healing*(bonus["healing"]+1)
-if(items["food"]<foodcost || items["water"]<watercost || items["morale"]<moralecost || items["coal"]<coalcost){
+if(power == 0 || items["food"]<foodcost || items["water"]<watercost || items["morale"]<moralecost || items["coal"]<coalcost){
 	$(".expedition").addClass("unavailable")
 }
 else
 {
 	$(".expedition").removeClass("unavailable")
 }
-if(unlocked[".expedition"]){
-  $(".expedition").attr('style', (maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost|| maximums["morale"]*(bonus["storage"]+1)<moralecost|| maximums["coal"]*(bonus["storage"]+1)<coalcost) ? 'color: coral' : '');
+unattainable=maximums["food"]*(bonus["storage"]+1)<foodcost || maximums["water"]*(bonus["storage"]+1)<watercost|| maximums["morale"]*(bonus["storage"]+1)<moralecost || maximums["coal"]*(bonus["storage"]+1)<coalcost
+if(unattainable){
+  $(".expedition").addClass("unattainable"); 
+} else {
+  $(".expedition").removeClass("unattainable"); 
 }
 $(".expedition").html("Expedition");
 $(".expedition").attr('tooltip', 'Food: '+ parseFloat(items["food"]).toFixed(2)+" / "+parseFloat(foodcost).toFixed(2))

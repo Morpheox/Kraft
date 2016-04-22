@@ -101,6 +101,7 @@ buildings["concretemixer"]=0;
 buildings["university"]=0;
 buildings["toolfactory"]=0;
 buildings["barracks"]=0;
+buildings["factory"]=0;
 
 var buildstatus =new Array()
 for(key in buildings){
@@ -228,6 +229,7 @@ technologies["cementhydration"]=0
 technologies["workforce"]=0
 technologies["militarization"]=0
 technologies["wargames"]=0
+technologies["industrialrevolution"]=0
 
 var people=new Array();
 people["woodcutter"]=0
@@ -1073,6 +1075,9 @@ function crafting(b){
 	var tocraft=1;
 	if(buildstatus["workbench"]==1 && b!="book" && b!="patent"){
 		tocraft=buildings["workbench"]+1;
+	}
+	if(buildstatus["factory"]==1 && b!="book" && b!="patent"){
+		tocraft+=buildings["factory"]*100;
 	}
 	for(i=0;i<tocraft;i++)
 	{
@@ -3526,6 +3531,24 @@ function research(b){
 		}
 
 	}
+	else if (b=="industrialrevolution" && technologies["industrialrevolution"]==0){
+
+		coincost=50000;
+		toolboxcost=100;
+		bookcost=100;
+		
+		if (craft["coin"]>=coincost && craft["toolbox"]>=toolboxcost && craft["book"]>=bookcost){
+
+			craft["coin"]-=coincost;
+			craft["toolbox"]-=toolboxcost;
+			craft["book"]-=bookcost;
+
+			technologies["industrialrevolution"]++
+			$(".build_factory").show()
+			unlocked[".build_factory"]=1;
+		}
+
+	}
 setTimeout(function(){
 
 if(techvisible==0){
@@ -4835,6 +4858,30 @@ function build(b){
 			unlocked[".toggle_barracks"]=1
 		}
 	}
+	else if (b=="factory"){
+
+		brickcost= Math.pow(1.2,(buildings["factory"]))*10000
+		toolboxcost=Math.pow(1.2,(buildings["factory"]))*50
+		concretecost=Math.pow(1.2,(buildings["factory"]))*5000
+	
+
+
+
+		if (craft["brick"]>=brickcost && craft["toolbox"]>=toolboxcost && items["concrete"]>=concretecost){
+
+			craft["brick"]-=brickcost;
+			craft["toolbox"]-=toolboxcost;
+			items["concrete"]-=concretecost;
+
+			bonus["craft"]+=0.20
+			buildings["factory"]+=1
+
+
+			$(".toggle_factory").show()
+			unlocked[".toggle_factory"]=1
+
+		}
+	}
 }
 
 function calculatecost(){
@@ -5599,7 +5646,26 @@ $(".build_barracks").attr('tooltip6', 'Morale consumption: -3.00/s');
 $(".build_barracks").attr('tooltip7', 'Plans production: +0.1/s');
 
 
+brickcost= Math.pow(1.2,(buildings["factory"]))*10000
+toolboxcost=Math.pow(1.2,(buildings["factory"]))*50
+concretecost=Math.pow(1.2,(buildings["factory"]))*5000
 
+if(items["concrete"]<concretecost || craft["brick"]<brickcost || craft["toolbox"]<toolboxcost){
+	$(".build_factory").addClass("unavailable")
+}
+else
+{
+	$(".build_factory").removeClass("unavailable")
+}
+unattainable=maximums["concrete"]*(bonus["storage"]+1)<concretecost
+set_unattainable(".build_factory", unattainable);
+$(".build_factory").html("Factory ("+buildings["factory"]+")");
+$(".build_factory").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"]).toFixed(2)+" / "+parseFloat(concretecost).toFixed(2))
+$(".build_factory").attr('tooltip2', 'Brick: '+ parseFloat(craft["brick"]).toFixed(2)+" / "+parseFloat(brickcost).toFixed(2))
+$(".build_factory").attr('tooltip3', 'Toolbox: '+ parseFloat(craft["toolbox"]).toFixed(2)+" / "+parseFloat(toolboxcost).toFixed(2))
+
+$(".build_factory").attr('tooltip5', '+20% Craft efficiency ');
+$(".build_factory").attr('tooltip6', '+100 items crafted when active');
 
 //People
 
@@ -7761,12 +7827,31 @@ else
 {
 	$(".tech_militarization").removeClass("unavailable")
 }
+
 $(".tech_militarization").addClass((technologies["militarization"] >0 ? "researched" : ""))
 $(".tech_militarization").html("Militarization" + (technologies["militarization"] >0 ? " (researched)" : ""));
 $(".tech_militarization").attr('tooltip', 'Spear: '+ parseFloat(craft["spear"]).toFixed(2)+" / "+parseFloat(spearcost).toFixed(2))
 $(".tech_militarization").attr('tooltip2', 'Sword: '+ parseFloat(craft["sword"]).toFixed(2)+" / "+parseFloat(swordcost).toFixed(2))
 $(".tech_militarization").attr('tooltip3', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_militarization").attr('tooltip5', "Allows you to build barracks");
+
+coincost=50000;
+toolboxcost=100;
+bookcost=100;
+if(craft["coin"]<coincost || craft["toolbox"]<toolboxcost || craft["book"]<bookcost){
+	$(".tech_industrialrevolution").addClass("unavailable")
+}
+else
+{
+	$(".tech_industrialrevolution").removeClass("unavailable")
+}
+$(".tech_industrialrevolution").addClass((technologies["industrialrevolution"] >0 ? "researched" : ""))
+$(".tech_industrialrevolution").html("Industrial Revolution" + (technologies["industrialrevolution"] >0 ? " (res..)" : ""));
+$(".tech_industrialrevolution").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".tech_industrialrevolution").attr('tooltip2', 'Toolbox: '+ parseFloat(craft["toolbox"]).toFixed(2)+" / "+parseFloat(toolboxcost).toFixed(2))
+$(".tech_industrialrevolution").attr('tooltip3', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_industrialrevolution").attr('tooltip5', "Allows you to build mass production factories");
+
 
 
 moralecost=250;

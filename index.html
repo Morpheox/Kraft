@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.7 beta</title>
+	<title>Keep Craft v0.8.8 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -28,7 +28,7 @@
 <body>
 
 
-    <div class="infokraft">Keep Craft v0.8.7 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added every day, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.8 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -243,6 +243,7 @@
 			<div class="block tech_wargames"></div>
 			<div class="block tech_workforce"></div>
 			<div class="block tech_militarization"></div>
+			<div class="block tech_industrialrevolution"></div>
 			<br><br><br>
 			<div class="autolist">
 			</div>
@@ -255,7 +256,8 @@
 	<div class="craftline">
 		<div class="craftamount"></div>
 		<div class="block build_workbench"></div><button class="toggle toggle_workbench" onclick='toggle("workbench")'>Toggle</button><br>
-		<div class="block build_workshop"></div><button class="toggle toggle_workshop" onclick='toggle("workshop")'>Toggle</button><br><br>
+		<div class="block build_workshop"></div><button class="toggle toggle_workshop" onclick='toggle("workshop")'>Toggle</button><br>
+		<div class="block build_factory"></div><button class="toggle toggle_factory" onclick='toggle("factory")'>Toggle</button><br><br>
 		<div class="block craft_pickaxe"></div>
 		<div class="block craft_spear"></div>
 		<div class="block craft_sword"></div>
@@ -482,10 +484,18 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.8.8</b>
+        <ul>
+        <li>New science and economy tech</li>
+        <li>New building - Factory</li>
+        <li>Factories provide a way to craft massive amounts of items with 1 click</li>
+        <li>Now buildings wich require more resources than your storage capacity appear red</li>
+        <li>Now you can see how much legacy you will get before exploring a new continent</li>
+        </ul>	
         <b>V 0.8.7</b>
         <ul>
         <li>New military tech</li>
-        <li>New building - Barracks</li>
+        <li>New building - Barracks</li> 
         <li>Barracks provide housing and planification for your troops.</li>
         </ul>	
         <b>V 0.8.6</b>
@@ -1073,6 +1083,7 @@
 	$(".build_concretemixer").click(function() {build("concretemixer")});
 	$(".build_toolfactory").click(function() {build("toolfactory")});
 	$(".build_barracks").click(function() {build("barracks")});
+	$(".build_factory").click(function() {build("factory")});
 
 	$(".hire_woodcutter").click(function() {hire("woodcutter")});
 	$(".hire_smelter").click(function() {hire("smelter")});
@@ -1200,6 +1211,7 @@
 	$(".tech_workforce").click(function() {research("workforce")});
 	$(".tech_wargames").click(function() {research("wargames")});
 	$(".tech_militarization").click(function() {research("militarization")});
+	$(".tech_industrialrevolution").click(function() {research("industrialrevolution")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});

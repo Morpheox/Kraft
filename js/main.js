@@ -227,6 +227,7 @@ technologies["pyroprocessing"]=0
 technologies["education"]=0
 technologies["cementhydration"]=0
 technologies["workforce"]=0
+technologies["luck"]=0
 technologies["militarization"]=0
 technologies["wargames"]=0
 technologies["industrialrevolution"]=0
@@ -3494,6 +3495,22 @@ function research(b){
 			technologies["workforce"]++
 			$(".build_toolfactory").show()
 			unlocked[".build_toolfactory"]=1;
+		}
+
+	}
+	else if (b=="luck" && technologies["luck"]==0){
+
+		tokencost=50000;
+		bookcost=50;
+		
+		if (craft["token"]>=tokencost && craft["book"]>=bookcost){
+
+			craft["token"]-=tokencost;
+			craft["book"]-=bookcost;
+
+			technologies["luck"]++
+			$(".slotmachine").show()
+			unlocked[".slotmachine"]=1;
 		}
 
 	}
@@ -7816,6 +7833,23 @@ $(".tech_workforce").attr('tooltip', 'Concrete: '+ parseFloat(items["concrete"])
 $(".tech_workforce").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
 $(".tech_workforce").attr('tooltip4', "Allows you to build tool factories to provide industrial tools.");
 
+tokencost=50000;
+bookcost=50;
+if(craft["book"]<bookcost || craft["token"]<tokencost){
+	$(".tech_luck").addClass("unavailable")
+}
+else
+{
+	$(".tech_luck").removeClass("unavailable")
+}
+
+$(".tech_luck").addClass((technologies["luck"] >0 ? "researched" : ""))
+$(".tech_luck").html("Luck" + (technologies["luck"] >0 ? " (researched)" : ""));
+$(".tech_luck").attr('tooltip', 'Token: '+ parseFloat(craft["token"]).toFixed(2)+" / "+parseFloat(tokencost).toFixed(2))
+$(".tech_luck").attr('tooltip2', 'Book: '+ parseFloat(craft["book"]).toFixed(2)+" / "+parseFloat(bookcost).toFixed(2))
+$(".tech_luck").attr('tooltip4', "Allows you to play the slot machine in the casino.");
+$(".tech_luck").attr('tooltip5', "Multiplies by 1000 the maximum bet on double or nothing.");
+
 
 spearcost=300000;
 swordcost=100000;
@@ -9009,7 +9043,7 @@ for(var key in unlocked){
 	unlocked[".legacy_warp"]=1;
 
 $("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
-$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals").hide()
+$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.slotmachine").hide()
 $(".playx10,.playx100").hide()
 
 $(".block").removeClass("researched");

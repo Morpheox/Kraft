@@ -372,3 +372,27 @@ font-size: 20px;
 .progress-bar{
   text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+#slot { 
+  margin-bottom:15px;
+}
+.slotlog{
+  margin-top:15px;
+}
+#slot td{
+  text-shadow: 2px 2px black;
+  width:150px;
+  height:50px;
+  text-align:center;
+  padding:5px;
+  color:white;
+  font-size:40px;
+    border:1px solid black;
+}
+
+.slotmachine{
+
+  border:1px solid black;
+  padding:10px;
+  margin-bottom: 25px;
+}

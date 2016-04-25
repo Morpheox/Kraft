@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.8 beta</title>
+	<title>Keep Craft v0.8.9 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -28,7 +28,7 @@
 <body>
 
 
-    <div class="infokraft">Keep Craft v0.8.8 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.8.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -65,7 +65,9 @@
 	<div class="tab-content">
 
 		<div id="build" class="build tab-pane fade in active">
+
 		<div class="buildlist">
+
 			<div class="block build_lumbermill"></div>
 			<div class="block build_mine"></div>
 			<div class="block build_warehouse"></div>
@@ -242,6 +244,7 @@
 			<div class="block tech_cementhydration"></div>
 			<div class="block tech_wargames"></div>
 			<div class="block tech_workforce"></div>
+			<div class="block tech_luck"></div>
 			<div class="block tech_militarization"></div>
 			<div class="block tech_industrialrevolution"></div>
 			<br><br><br>
@@ -300,6 +303,20 @@
 	<div class="block build_relic"></div><br>
 	<div class="block build_share"></div>
 	</div><br><br>
+	    <div class="slotmachine">
+		<table id="slot">
+		<tr><td class="slot00">A</td><td class="slot01">Q</td><td class="slot02">7</td></tr>
+		<tr><td class="slot10">Q</td><td class="slot11">A</td><td class="slot12">J</td></tr>
+		<tr><td class="slot20">K</td><td class="slot21">*</td><td class="slot22">A</td></tr>
+		</table>
+
+		<button onclick="slotstart(50)">25 coins</button>
+		<button onclick="slotstart(100)">100 coins</button>
+		<button onclick="slotstart(500)">500 coins</button>
+		<button onclick="slotstart(1000)">1000 coins</button>
+		<button onclick="slotstart(5000)">5000 coins</button>
+		<div class="slotlog"></div>
+		</div>
 	<div class="casinogame1">
 	<div class="betresult">000</div>
 	Amount to bet:<input value="0.5" type="number" class="betamount"></input><br>
@@ -313,6 +330,7 @@
     <button class="playgame2" onclick="playgame2('5')">Play</button> <button class="playx10" onclick="playgame2('50')">Play x10</button> <button class="playx100" onclick="playgame2('500')">Play x100</button>
     <div class='totalwon'></div>
     </div>
+
 	</div>
 
 
@@ -484,6 +502,11 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.8.9</b>
+        <ul>
+        <li>New economy tech</li>
+        <li>New casino game - Slot machines!</li>
+        </ul>
         <b>V 0.8.8</b>
         <ul>
         <li>New science and economy tech</li>
@@ -1037,7 +1060,7 @@
 	setInterval(function(){ save()}, 60000);
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
@@ -1212,6 +1235,7 @@
 	$(".tech_wargames").click(function() {research("wargames")});
 	$(".tech_militarization").click(function() {research("militarization")});
 	$(".tech_industrialrevolution").click(function() {research("industrialrevolution")});
+	$(".tech_luck").click(function() {research("luck")});
 
 	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
 	$(".craft_spear").click(function() {crafting("spear")});
@@ -1281,7 +1305,6 @@
    	$(".research_military").click(function() {develop("military")});
    	$(".research_economy").click(function() {develop("economy")});
    	$(".research_science").click(function() {develop("science")});
-
 
 
 

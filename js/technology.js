@@ -334,6 +334,10 @@ function researchunlock(){
 		$(".tech_workforce").show()
 		unlocked[".tech_workforce"]=1;
 	}
+	if(bonus["economy"]>=300000 && unlocked[".tech_luck"]!=1){
+		$(".tech_luck").show()
+		unlocked[".tech_luck"]=1;
+	}
 	if(bonus["military"]>=200000 && unlocked[".tech_wargames"]!=1){
 		$(".tech_wargames").show()
 		unlocked[".tech_wargames"]=1;
@@ -342,7 +346,7 @@ function researchunlock(){
 		$(".tech_militarization").show()
 		unlocked[".tech_militarization"]=1;
 	}
-	if(bonus["science"]>=500000 || bonus["economy"]>=500000){
+	if(bonus["science"]>=500000 || bonus["economy"]>=500000 && unlocked[".tech_industrialrevolution"]!=1){
 		$(".tech_industrialrevolution").show()
 		unlocked[".tech_industrialrevolution"]=1;
 	}

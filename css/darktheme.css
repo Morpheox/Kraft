@@ -409,3 +409,28 @@ color:black;
 .progress-bar{
   text-shadow:-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+#slot { 
+  margin-bottom:15px;
+}
+.slotlog{
+  margin-top:15px;
+}
+#slot td{
+  width:150px;
+  height:50px;
+  text-align:center;
+  padding:5px;
+  font-size:40px;
+  color:black;
+  border:1px solid white;
+}
+
+.slotmachine{
+  border:1px solid white;
+  padding:10px;
+}
+
+.slotmachine button{
+  color:black!important;
+}
+

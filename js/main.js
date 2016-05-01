@@ -1472,20 +1472,25 @@ function crafting(b){
 	}
 }
 
-resdat = {
+var resdat = {
   "coppertools": {
+    name: "Copper tools",
     cost: {"copper": 1},
     bonus: {wood: 0.20, mineral: 0.2}
   },
   "pickaxe": {
+    name: "Pickaxe",
     cost: {"wood": 100, "copper": 3},
-    unlock: {"#craftingpane", ".craft_pickaxe", ".hire_miner"}
+    unlock: ["#craftingpane", ".craft_pickaxe", ".hire_miner"],
+    tooltip: "Allows the crafting of pickaxes and hiring of miners"
   },
   "spear": {
+    name: "Basic weapons",
     cost: {"wood": 200, "copper": 5},
-    unlock: {"#craftingpane", "#militarypane", ".craft_spear", ".hire_pikeman"}
+    unlock: ["#craftingpane", "#militarypane", ".craft_spear", ".hire_pikeman"],
+    tooltip: "Allows the crafting of spears and hiring of pikeman"
   }
-}
+};
 
 function research(b){
 
@@ -1498,7 +1503,7 @@ function research(b){
         canafford = canafford && items[cost] >= resdat[b]["cost"][cost]
       }
       if (canafford) {
-      	
+
         for (cost in resdat[b]["cost"]) {
           items[cost] -= resdat[b]["cost"][cost]
         }
@@ -1506,12 +1511,12 @@ function research(b){
 
         if ("bonus" in resdat[b]) {
           for (bonusitem in resdat[b]["bonus"]) {
-          	bonus[bonusitem]+=resdat[b]["bonus"][bonusitem];
+            bonus[bonusitem]+=resdat[b]["bonus"][bonusitem];
           }
         }
 
         if ("unlock" in resdat[b]) {
-          for (unlockitem in resdat[b]["unlock") {
+          for (unlockitem in resdat[b]["unlock"]) {
             unlocked[unlockitem]=1;
             if (unlockitem[0] == "#") {
             	$(unlockitem).removeClass("invisible")
@@ -6064,57 +6069,40 @@ $(".hire_cargotrain").attr('tooltip7', 'Trade amount: 3 coins/minute');
 
 //Technologies
 
+function toProperCase(str) {
+  return str[0].toUpperCase() + str.substr(1)
+}
 
-coppercost=1;
-if(items["copper"]<coppercost){
-	$(".tech_coppertools").addClass("unavailable")
+for (b in resdat) {
+  if (true) {
+    affordable = true;
+    attainable = true;
+    tooltips = [];
+    for (costitem in resdat[b]["cost"]) {
+      affordable = affordable && items[costitem] >= resdat[b]["cost"][costitem];
+      attainable = attainable && maximums[costitem]*(bonus["storage"]+1) >= resdat[b]["cost"][costitem];
+      tooltips.push(toProperCase(costitem) + ": " + parseFloat(items[costitem]).toFixed(2) + " / " + parseFloat(resdat[b]["cost"][costitem]).toFixed(2));
+    }
+    if (affordable) {
+      $(".tech_"+b).removeClass("unavailable");
+    } else {
+      $(".tech_"+b).addClass("unavailable");
+    }
+    set_unattainable(".tech_"+b, !attainable);
+    $(".tech_"+b).addClass((technologies[b] > 0 ? "researched" : ""));
+    $(".tech_"+b).html(resdat[b]["name"] + (technologies[b] >0 ? " (researched)" : ""));
+    for (bonusitem in resdat[b]['bonus']) {
+      tooltips.push('+' + (resdat[b]['bonus'][bonusitem])*100 + '% ' + bonusitem + ' production');
+    }
+    if ('tooltip' in resdat[b]) {
+      tooltips.push(resdat[b]['tooltip'])
+    }
+    for (i=0; i<tooltips.length; i++) {
+      attr = 'tooltip' + (i>0 ? i+1 : '');
+      $(".tech_"+b).attr(attr, tooltips[i]);
+    }
+  }
 }
-else
-{
-	$(".tech_coppertools").removeClass("unavailable")
-}
-unattainable=maximums["copper"]*(bonus["storage"]+1)<coppercost
-set_unattainable(".tech_coppertools", unattainable);
-$(".tech_coppertools").addClass((technologies["coppertools"] >0 ? "researched" : ""))
-$(".tech_coppertools").html("Copper tools" + (technologies["coppertools"] >0 ? " (researched)" : ""));
-$(".tech_coppertools").attr('tooltip', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".tech_coppertools").attr('tooltip2', "Increments wood and mineral production by 20%");
-
-
-woodcost=100;
-coppercost=3;
-if(items["copper"]<coppercost || items["wood"]<woodcost){
-	$(".tech_pickaxe").addClass("unavailable")
-}
-else
-{
-	$(".tech_pickaxe").removeClass("unavailable")
-}
-unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
-set_unattainable(".tech_pickaxe", unattainable);
-$(".tech_pickaxe").addClass((technologies["pickaxe"] >0 ? "researched" : ""))
-$(".tech_pickaxe").html("Pickaxe" + (technologies["pickaxe"] >0 ? " (researched)" : ""));
-$(".tech_pickaxe").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
-$(".tech_pickaxe").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".tech_pickaxe").attr('tooltip3', "Allows the crafting of pickaxes and hiring of miners");
-
-
-woodcost=200;
-coppercost=5;
-if(items["copper"]<coppercost || items["wood"]<woodcost){
-	$(".tech_spear").addClass("unavailable")
-}
-else
-{
-	$(".tech_spear").removeClass("unavailable")
-}
-unattainable=maximums["wood"]*(bonus["storage"]+1)<woodcost || maximums["copper"]*(bonus["storage"]+1)<coppercost
-set_unattainable(".tech_spear", unattainable);
-$(".tech_spear").addClass((technologies["spear"] >0 ? "researched" : ""))
-$(".tech_spear").html("Basic weapons" + (technologies["spear"] >0 ? " (researched)" : ""));
-$(".tech_spear").attr('tooltip', 'Wood: '+ parseFloat(items["wood"]).toFixed(2)+" / "+parseFloat(woodcost).toFixed(2))
-$(".tech_spear").attr('tooltip2', 'Copper: '+ parseFloat(items["copper"]).toFixed(2)+" / "+parseFloat(coppercost).toFixed(2))
-$(".tech_spear").attr('tooltip3', "Allows the crafting of spears and hiring of pikeman");
 
 
 foodcost=100;

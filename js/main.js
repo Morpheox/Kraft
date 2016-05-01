@@ -1472,63 +1472,60 @@ function crafting(b){
 	}
 }
 
+resdat = {
+  "coppertools": {
+    cost: {"copper": 1},
+    bonus: {wood: 0.20, mineral: 0.2}
+  },
+  "pickaxe": {
+    cost: {"wood": 100, "copper": 3},
+    unlock: {"#craftingpane", ".craft_pickaxe", ".hire_miner"}
+  },
+  "spear": {
+    cost: {"wood": 200, "copper": 5},
+    unlock: {"#craftingpane", "#militarypane", ".craft_spear", ".hire_pikeman"}
+  }
+}
 
 function research(b){
 
-	if (b=="coppertools"){
+  if (b in resdat) {
 
-		coppercost=1;
+    if (technologies[b]==0) {
 
-		if (items["copper"]>=coppercost && technologies["coppertools"]==0){
-			items["copper"]-=coppercost;
-			bonus["wood"]+=0.20;
-			bonus["mineral"]+=0.20;
-			technologies["coppertools"]++
-		}
+      canafford = true;
+      for (cost in resdat[b]["cost"]) {
+        canafford = canafford && items[cost] >= resdat[b]["cost"][cost]
+      }
+      if (canafford) {
+      	
+        for (cost in resdat[b]["cost"]) {
+          items[cost] -= resdat[b]["cost"][cost]
+        }
+        technologies[b]++
 
-	}
-	else if (b=="pickaxe"){
+        if ("bonus" in resdat[b]) {
+          for (bonusitem in resdat[b]["bonus"]) {
+          	bonus[bonusitem]+=resdat[b]["bonus"][bonusitem];
+          }
+        }
 
-		woodcost=100;
-		coppercost=3;
+        if ("unlock" in resdat[b]) {
+          for (unlockitem in resdat[b]["unlock") {
+            unlocked[unlockitem]=1;
+            if (unlockitem[0] == "#") {
+            	$(unlockitem).removeClass("invisible")
+            } else if (unlockitem[0] == ".") {
+            	$(unlockitem).show()
+            }
+          }
+        }
 
+      }
 
-		if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["pickaxe"]==0){
-			items["copper"]-=coppercost;
-			items["wood"]-=woodcost;
-			technologies["pickaxe"]++
-			$("#craftingpane").removeClass("invisible")
-			$(".craft_pickaxe").show()
-			$(".hire_miner").show()
-			unlocked["#craftingpane"]=1;
-			unlocked[".craft_pickaxe"]=1;
-			unlocked[".hire_miner"]=1;
-		}
+    }
 
-
-	}
-	else if (b=="spear"){
-
-		woodcost=200;
-		coppercost=5;
-
-
-		if (items["wood"]>=woodcost && items["copper"]>=coppercost && technologies["spear"]==0){
-			items["copper"]-=coppercost;
-			items["wood"]-=woodcost;
-			technologies["spear"]++
-			$("#craftingpane").removeClass("invisible")
-			$("#militarypane").removeClass("invisible")
-			$(".craft_spear").show()
-			$(".hire_pikeman").show()
-			unlocked["#craftingpane"]=1;
-			unlocked["#militarypane"]=1;
-			unlocked[".craft_spear"]=1;
-			unlocked[".hire_pikeman"]=1;
-		}
-
-
-	}
+  }
 	else if (b=="exploration"){
 
 		foodcost=100;

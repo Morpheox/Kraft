@@ -14,8 +14,8 @@ color:#F8F8F2!important;
 .unattainable{
   color:coral!important;
 }
-button{
-  color:black;
+#heirlooms button{
+  color:black!important;
 }
 .modal-dialog{
 background-color:#FFF!important;

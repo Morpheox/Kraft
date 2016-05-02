@@ -207,11 +207,11 @@ return "white";
 else if(x<=25){
 return "#1eff00";
 }
-else if(x<=50){
+else if(x<=75){
 return "#0070dd";
-}else if(x<=100){
+}else if(x<=150){
 return "#a335ee";
-}else if(x<=200){
+}else if(x<=250){
 return "#ff8000";
 }
 else

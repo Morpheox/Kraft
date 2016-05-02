@@ -342,10 +342,10 @@
 	<select class="tradetrainselect"></select><br><br><div class="tradetrainlog"></div>
 	</div>
 	Coins can be traded for commodities at the listed per coin rate : <br><br>
-	<div class="trade trade_wood"></div><div class="trade trade_wood max"></div><br>
-	<div class="trade trade_mineral"><div class="trade trade_mineral max"></div></div><br>
-	<div class="trade trade_food"></div><div class="trade trade_food max"></div><br>
-	<div class="trade trade_sand"></div><div class="trade trade_sand max"></div><br><br><br>
+	<div class="trade trade_wood"></div><div class="trade trade_wood_max"></div><br>
+	<div class="trade trade_mineral"><div class="trade trade_mineral_max"></div></div><br>
+	<div class="trade trade_food"></div><div class="trade trade_food_max"></div><br>
+	<div class="trade trade_sand"></div><div class="trade trade_sand_max"></div><br><br><br>
 	<div class="deals">
 	<div class="deallog">
 	</div><br><div class="dealtime">
@@ -1063,6 +1063,7 @@
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand").hide()
+	$(".trade_sand_max").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
 	$(".build_pasture").click(function() {build("pasture")});

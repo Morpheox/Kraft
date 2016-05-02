@@ -342,10 +342,10 @@
 	<select class="tradetrainselect"></select><br><br><div class="tradetrainlog"></div>
 	</div>
 	Coins can be traded for commodities at the listed per coin rate : <br><br>
-	<div class="trade trade_wood"></div><div class="trade trade_wood_max">Max</div><br>
-	<div class="trade trade_mineral"></div><div class="trade trade_mineral_max">Max</div><br>
-	<div class="trade trade_food"></div><div class="trade trade_food_max">Max</div><br>
-	<div class="trade trade_sand"></div><div class="trade trade_sand_max">Max</div><br><br><br>
+	<div class="trade trade_wood"></div><div class="trademax trademax_wood">Max</div><br>
+	<div class="trade trade_mineral"></div><div class="trademax trademax_mineral">Max</div><br>
+	<div class="trade trade_food"></div><div class="trademax trademax_food">Max</div><br>
+	<div class="trade trade_sand"></div><div class="trademax trademax_sand">Max</div><br><br><br>
 	<div class="deals">
 	<div class="deallog">
 	</div><br><div class="dealtime">
@@ -1062,8 +1062,7 @@
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".playx10,.playx100").hide()
-	$(".trade_sand").hide()
-	$(".trade_sand_max").hide()
+	$(".trade_sand, .trademax_sand").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});
 	$(".build_lumbermill").show()
 	$(".build_pasture").click(function() {build("pasture")});
@@ -1264,13 +1263,13 @@
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});
-    $(".trade_wood_max").click(function() {tradeMaximum("wood")});
+    $(".trademax_wood").click(function() {tradeMaximum("wood")});
     $(".trade_mineral").click(function() {trade("mineral")});
-    $(".trade_mineral_max").click(function() {tradeMaximum("mineral")});
+    $(".trademax_mineral").click(function() {tradeMaximum("mineral")});
     $(".trade_food").click(function() {trade("food")});
-    $(".trade_food_max").click(function() {tradeMaximum("food")});
+    $(".trademax_food").click(function() {tradeMaximum("food")});
     $(".trade_sand").click(function() {trade("sand")});
-    $(".trade_sand_max").click(function() {tradeMaximum("sand")});
+    $(".trademax_sand").click(function() {tradeMaximum("sand")});
 
     $(".leader_sucellus").click(function() {lead("sucellus")});
     $(".leader_eredal").click(function() {lead("eredal")});

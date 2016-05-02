@@ -2899,6 +2899,7 @@ function research(b){
 
 			technologies["commodities"]++
 			$(".trade_sand").show()
+			$(".trade_sand_max").show()
 			unlocked[".trade_sand"]=1;
 
 		}

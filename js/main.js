@@ -8544,7 +8544,7 @@ $(".trade_food_max").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tr
 $(".trade_sand").html("Sand: " + Math.round(tradesand));
 $(".trade_sand_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
 $(".trade_sand_max").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
-
+}
 
 
 function refresh(){

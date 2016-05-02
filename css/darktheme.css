@@ -14,7 +14,9 @@ color:#F8F8F2!important;
 .unattainable{
   color:coral!important;
 }
-
+button{
+  color:black;
+}
 .modal-dialog{
 background-color:#FFF!important;
 color:black!important;
@@ -34,6 +36,10 @@ color:black!important;
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none;
   }
+  .heirloomslog,.heirloomslog2{
+  border:1px solid white;
+  padding:3px;
+}
   .block[style*="display: none;"]{
     padding:0px;
     margin-top:0px;
@@ -61,7 +67,7 @@ color:black!important;
 .tradesea button{
   color:black!important;
 }
-.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities{
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities,.heirlooms{
 	float:left;
 	position: relative;
 	padding:25px;

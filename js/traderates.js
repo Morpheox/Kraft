@@ -271,6 +271,14 @@ docklog+=("You also get 1 lock<br>");
 craft["lock"]++
 
 }
+if(Math.random()>0.99){
+				docklog+="The locals gave you a heirloom!<br>";
+				createheirloom();
+				$("#heirlooms").show()
+				unlocked["#heirlooms"]=1;
+				$("#heirloomspane").removeClass("invisible");
+				unlocked["#heirloomspane"]=1;
+}
 if(technologies["culturaltrade"]==1 && Math.random()>0.70){
 var gainings=0;
 gainings+=people["galley"]*15

@@ -2,7 +2,10 @@ html,body{
 margin:0;
 padding:0;
 }
-
+.heirloomslog,.heirloomslog2{
+  border:1px solid black;
+    padding:3px;
+}
   label {
     display: inline-block;
     width: 5em;
@@ -42,7 +45,7 @@ padding:0;
      white-space: pre;
 }
 
-.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities{
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities,.heirlooms{
 	float:left;
 	position: relative;
 	padding:25px;

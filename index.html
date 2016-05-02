@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.8.9 beta</title>
+	<title>Keep Craft v0.9.0 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="js/functions.js"></script>
 	<script type="text/javascript" src="js/prestige.js"></script>
 	<script type="text/javascript" src="js/traderates.js"></script>
+	<script type="text/javascript" src="js/heirlooms.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/technology.js"></script>
 	<script type="text/javascript" src="js/expansion.js"></script>
@@ -28,7 +29,7 @@
 <body>
 
 
-    <div class="infokraft">Keep Craft v0.8.9 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.9.0 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -52,6 +53,7 @@
 		<li id="marketpane"><a data-toggle="tab" href="#market">Market</a></li>
 		<li id="leaderpane"><a data-toggle="tab" href="#leader">Leaders</a></li>
 		<li id="dockpane"><a data-toggle="tab" href="#dock">Dock</a></li>
+		<li id="heirloomspane"><a data-toggle="tab" href="#heirlooms">Heirlooms</a></li>
 		<li id="legacypane"><a data-toggle="tab" href="#legacy">Legacy</a></li>
 	</ul>
 	<br><br>
@@ -402,6 +404,29 @@
 	</div>
 	<button type="button" class="resetbutton" data-toggle="modal" data-target="#myModal">Explore new continent</button>
 	</div>
+
+
+
+		<div id="heirlooms" class="heirlooms tab-pane fade">
+		<button id="sellheirloombutton" onclick="sellheirloom()">Sell</button>
+		<button onclick="swapheirlooms()">Pick</button><br><br>
+		<div class="heirloomslog"></div><br><br>
+		Your empire heirloom:<br>
+		<div class="heirloomslog2"></div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div id="legacy" class="legacy tab-pane fade">
 	Use your legacy wisely<br>
 	<div class="block legacy_motivation"></div><br>
@@ -502,6 +527,17 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+         <b>V 0.9.0</b>
+        <ul>
+        <li>This update introduces a new mechanic - Heirlooms!</li>
+        <li>This mechanic its still in its earlier phase</li>
+        <li>There are 2 slots for heirlooms right now, the heirloom in the first slot will be sold automatically if you find a new one</li>
+        <li>They can be found on expeditions, fights or trades at any level on the game.</li>
+        <li>Heirlooms dont dissapear when you explore a new continent</li>
+        <li>Heirlooms give diamonds when sold</li>
+        <li>Heirlooms can be common(white), uncommon(green), rare(blue),epic(purple),legendary(orange) or trascendental(red)</li>
+        <li>In the future they will give bonuses and other interesting stuff, so keep an eye on them!</li>
+        </ul>
         <b>V 0.8.9</b>
         <ul>
         <li>New economy tech</li>
@@ -1059,7 +1095,7 @@
 	setInterval(function(){ refresh()}, 250);
 	setInterval(function(){ save()}, 60000);
 
-	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane").addClass("invisible");
+	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane,#heirloomspane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand").hide()

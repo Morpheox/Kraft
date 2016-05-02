@@ -650,7 +650,14 @@ function expedition(){
 				reward+=parseFloat(rnd).toFixed(2) + " elephant<br>";
 				craft["elephant"]+=rnd;
 			}
-
+			if(Math.random()>0.999){
+				reward+="<div style='display:inline;color:orange'>You found a heirloom!</div><br>";
+				createheirloom();
+				$("#heirlooms").show()
+				unlocked["#heirlooms"]=1;
+				$("#heirloomspane").removeClass("invisible");
+				unlocked["#heirloomspane"]=1;
+			}
 			if(reward!="The expedition found:<br>")
 
 			{
@@ -773,6 +780,7 @@ function expedition(){
 				stringencuentro+=enemy["rifleman"]+" Rifleman (Attack:200 Hp:400)<br>";
 				rew+=(Math.random()*enemy["rifleman"]*5)+(enemy["rifleman"]*1.5)
 			}
+
 			enemy["reward"]=rew;
 			stringencuentro+="Reward: "+parseFloat(rew).toFixed(2)+" Coins<br>"
 			stringencuentro+="<button class='fight' onclick='fight()'>Fight</button><button class='retreat' onclick='retreat()'>Flee</button>";
@@ -1051,6 +1059,14 @@ function fight(){
 			if(Math.random()>0.999){
 				combatlog+="You found a strange artifact!<br>";
 				craft["artifact"]+=1;
+			}
+			if(Math.random()>0.99){
+				combatlog+="<div style='display:inline;color:orange'>You found a heirloom!</div><br>";
+				createheirloom();
+				$("#heirlooms").show()
+				unlocked["#heirlooms"]=1;
+				$("#heirloomspane").removeClass("invisible");
+				unlocked["#heirloomspane"]=1;
 			}
 			break;
 		}
@@ -8991,6 +9007,7 @@ function save(){
 	Cookies.set('prestige', prestige,{ expires: 9999 });
 	Cookies.set('buildstatus', buildstatus,{ expires: 9999 });
 	Cookies.set('autotechnologies', autotechnologies,{ expires: 9999 });
+	Cookies.set('heirlooms', heirlooms,{ expires: 9999 });
 
 	var unlock1=new Array()
 	var unlock2=new Array()
@@ -9022,7 +9039,7 @@ encodestring=JSON.stringify(items)+"--"+JSON.stringify(bonus)+"--"
 encodestring+=JSON.stringify(buildings)+"--"+JSON.stringify( maximums)+"--"+JSON.stringify(technologies)+"--"
 encodestring+=JSON.stringify(people)+"--"+JSON.stringify(craft)+"--"+JSON.stringify(unlocked)+"--"
 encodestring+=JSON.stringify(population)+"--"+JSON.stringify(trademission)+"--"
-encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)+"--"+JSON.stringify(autotechnologies)
+encodestring+=JSON.stringify(prestige)+"--"+JSON.stringify(buildstatus)+"--"+JSON.stringify(autotechnologies)+"--"+JSON.stringify(heirlooms)
 b64string=btoa(encodestring);
 $('.inputtxt').val(b64string)
 }
@@ -9067,6 +9084,10 @@ buildstatus = update(buildstatus,JSON.parse(result[11]));
 if(result[12]!=null){
 autotechnologies = update(autotechnologies,JSON.parse(result[12]));
 
+}
+if(result[13]!=null){
+heirlooms = update(heirlooms,JSON.parse(result[13]));
+drawheirlooms();
 }
 		population = Cookies.get('population');
 		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
@@ -9127,7 +9148,10 @@ function load(){
 		technologies = update(technologies,JSON.parse(Cookies.get( 'technologies')));
 		people = update(people,JSON.parse(Cookies.get( 'people')));
 		craft = update(craft,JSON.parse(Cookies.get( 'craft')));
-
+if(typeof Cookies.get( 'heirlooms') != 'undefined'){
+heirlooms = update(heirlooms,JSON.parse(Cookies.get( 'heirlooms')));
+drawheirlooms();
+}
 		if(typeof Cookies.get( 'unlock1') != 'undefined'){
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock1'))));
 		update(unlocked,JSON.parse(atob(Cookies.get( 'unlock2'))));

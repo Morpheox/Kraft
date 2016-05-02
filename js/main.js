@@ -8509,37 +8509,45 @@ tradesand=20*(bonus["trade"]+1);
 maxSandCoin = Math.min(Math.ceil((maximums["sand"] - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
+	$(".trade_wood_max").addClass("unavailable")
 	$(".trade_mineral").addClass("unavailable")
+	$(".trade_mineral_max").addClass("unavailable")
 	$(".trade_food").addClass("unavailable")
+	$(".trade_food_max").addClass("unavailable")
 	$(".trade_sand").addClass("unavailable")
+	$(".trade_sand_max").addClass("unavailable")
 }
 else
 {
 
 	$(".trade_wood").removeClass("unavailable")
+	$(".trade_wood_max").removeClass("unavailable")
 	$(".trade_mineral").removeClass("unavailable")
+	$(".trade_mineral_max").removeClass("unavailable")
 	$(".trade_food").removeClass("unavailable")
+	$(".trade_food_max").removeClass("unavailable")
 	$(".trade_sand").removeClass("unavailable")
+	$(".trade_sand_max").removeClass("unavailable")
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
-$(".trade_wood.max").html("Max");
-$(".trade_wood.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxWoodCoin).toFixed(0));
-$(".trade_wood.max").attr('tooltip2', 'For Wood: ' + parseFloat(maxWoodCoin * tradewood).toFixed(0));
+$(".trade_wood_max").html("Max");
+$(".trade_wood_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxWoodCoin).toFixed(0));
+$(".trade_wood_max").attr('tooltip2', 'For Wood: ' + parseFloat(maxWoodCoin * tradewood).toFixed(0));
 
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
-$(".trade_mineral.max").html("Max");
-$(".trade_mineral.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxMineralCoin).toFixed(0));
-$(".trade_mineral.max").attr('tooltip2', 'For Mineral: ' + parseFloat(maxMineralCoin * trademineral).toFixed(0));
+$(".trade_mineral_max").html("Max");
+$(".trade_mineral_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxMineralCoin).toFixed(0));
+$(".trade_mineral_max").attr('tooltip2', 'For Mineral: ' + parseFloat(maxMineralCoin * trademineral).toFixed(0));
 
 $(".trade_food").html("Food: " + Math.round(tradefood));
-$(".trade_food.max").html("Max");
-$(".trade_food.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxFoodCoin).toFixed(0));
-$(".trade_food.max").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tradefood).toFixed(0));
+$(".trade_food_max").html("Max");
+$(".trade_food_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxFoodCoin).toFixed(0));
+$(".trade_food_max").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tradefood).toFixed(0));
 
 $(".trade_sand").html("Sand: " + Math.round(tradesand));
-$(".trade_sand.max").html("Max");
-$(".trade_sand.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
-$(".trade_sand.max").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
+$(".trade_sand_max").html("Max");
+$(".trade_sand_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
+$(".trade_sand_max").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
 
 
 
@@ -8977,10 +8985,10 @@ function tradeMaximum(b){
 		maxFoodCoin = Math.min(Math.ceil((maximums["food"] - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
 		tradesand=20*(bonus["trade"]+1);
 		maxSandCoin = Math.min(Math.ceil((maximums["sand"] - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
-		if(b=="wood")			{ for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="mineral")	{ for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="food")		{ for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="sand")		{ for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		if(b=="wood") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="mineral") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="food") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="sand") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
 	}
 }
 

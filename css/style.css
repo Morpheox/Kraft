@@ -129,15 +129,24 @@ font-size:10px;
     display: inline-block;
 }
 
-.trademax{
-    border:1px solid black;
-    cursor:pointer;
-    padding:5px;
-    width:50px!important;
-    margin-top:10px;
+  .trademax[style*="display: none;"]{
+    padding:0px;
+    margin-top:0px;
+    width:0px;
+  }
+  .trademax:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(tooltip) "\A" attr(tooltip2) "\A" attr(tooltip3) "\A" attr(tooltip4) "\A" attr(tooltip5) "\A" attr(tooltip6) "\A" attr(tooltip7);;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
     margin-left:20px;
-    display: inline-block;
-    content: attr(tooltip) "\A" attr(tooltip2) "\A" attr(tooltip3) "\A" attr(tooltip4) "\A" attr(tooltip5) "\A" attr(tooltip6) "\A" attr(tooltip7);
+    width: auto;
+    height:auto;
+     white-space: pre;
 }
 
 .bonus{

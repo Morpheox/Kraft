@@ -341,11 +341,11 @@
 	<div style="text-align:center">Resource to get</div><be>
 	<select class="tradetrainselect"></select><br><br><div class="tradetrainlog"></div>
 	</div>
-	All trades cost 1 coin: <br><br>
-	<div class="trade trade_wood"></div><br>
-	<div class="trade trade_mineral"></div><br>
-	<div class="trade trade_food"></div><br>
-	<div class="trade trade_sand"></div><br><br><br>
+	Coins can be traded for commodities at the listed per coin rate : <br><br>
+	<div class="trade trade_wood"></div><div class="trade trade_wood max"></div><br>
+	<div class="trade trade_mineral"><div class="trade trade_mineral max"></div></div><br>
+	<div class="trade trade_food"></div><div class="trade trade_food max"></div><br>
+	<div class="trade trade_sand"></div><div class="trade trade_sand max"></div><br><br><br>
 	<div class="deals">
 	<div class="deallog">
 	</div><br><div class="dealtime">
@@ -1263,9 +1263,13 @@
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});
+    $(".trade_wood.max").click(function() {tradeMaximum("wood")});
     $(".trade_mineral").click(function() {trade("mineral")});
+    $(".trade_mineral.max").click(function() {tradeMaximum("mineral")});
     $(".trade_food").click(function() {trade("food")});
+    $(".trade_food.max").click(function() {tradeMaximum("food")});
     $(".trade_sand").click(function() {trade("sand")});
+    $(".trade_sand.max").click(function() {tradeMaximum("sand")});
 
     $(".leader_sucellus").click(function() {lead("sucellus")});
     $(".leader_eredal").click(function() {lead("eredal")});

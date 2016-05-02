@@ -8504,10 +8504,10 @@ trademineral=500*(bonus["trade"]+1);
 tradefood=400*(bonus["trade"]+1);
 tradesand=20*(bonus["trade"]+1);
 
-maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
-maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
-maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
-maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+var maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
+var maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+var maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
 
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
@@ -8980,15 +8980,15 @@ function tradeMaximum(b){
 		tradefood=400*(bonus["trade"]+1);
 		tradesand=20*(bonus["trade"]+1);
 		
-		maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
-		maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
-		maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
-		maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+		var maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
+		var maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+		var maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+		var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
 		
 		if(b=="wood") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="mineral") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="food") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
-		else if(b=="sand") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="mineral") { for(var MaxTradeCt = 0; MaxTradeCt < maxMineralCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="food") { for(var MaxTradeCt = 0; MaxTradeCt < maxFoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="sand") { for(var MaxTradeCt = 0; MaxTradeCt < maxSandCoin; MaxTradeCt++) { trade(b); } }
 	}
 }
 

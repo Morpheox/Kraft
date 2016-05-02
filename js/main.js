@@ -8506,8 +8506,9 @@ tradesand=20*(bonus["trade"]+1);
 
 maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
 maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
-maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
-maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
 	$(".trade_wood_max").addClass("unavailable")

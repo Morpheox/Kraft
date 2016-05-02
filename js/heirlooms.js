@@ -204,7 +204,7 @@ function getRarityColor(x){
 if(x<=3){
 return "white";
 }
-else if(x<=25){
+else if(x<=20){
 return "#1eff00";
 }
 else if(x<=75){

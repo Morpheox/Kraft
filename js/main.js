@@ -8502,7 +8502,7 @@ $(".expedition").attr('tooltip7', "Total Healing: "+Math.round(healing));
 tradewood=600*(bonus["trade"]+1);
 maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
 trademineral=500*(bonus["trade"]+1);
-maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
 tradefood=400*(bonus["trade"]+1);
 maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
 tradesand=20*(bonus["trade"]+1);

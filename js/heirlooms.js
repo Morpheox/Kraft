@@ -268,7 +268,7 @@ drawheirlooms();
 function sellheirloom(){
 
 
-craft["diamond"]+=heirlooms[2];
+craft["diamond"]+=heirlooms[1];
 heirlooms[0]=0;
 heirlooms[1]=0;
 heirlooms[2]=0;

@@ -8522,7 +8522,6 @@ if(craft["coin"]<1){
 }
 else
 {
-
 	$(".trade_wood").removeClass("unavailable")
 	$(".trademax_wood").removeClass("unavailable")
 	$(".trade_mineral").removeClass("unavailable")
@@ -8533,20 +8532,28 @@ else
 	$(".trademax_sand").removeClass("unavailable")
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
-$(".trademax_wood").attr('tooltip', 'Spend Coins: ' + parseFloat(maxWoodCoin).toFixed(0));
-$(".trademax_wood").attr('tooltip2', 'For Wood: ' + parseFloat(maxWoodCoin * tradewood).toFixed(0));
+$(".trademax_wood").attr('tooltip', 'Coin Cost:');
+$(".trademax_wood").attr('tooltip2', parseFloat(maxWoodCoin).toFixed(0));
+$(".trademax_wood").attr('tooltip4', 'Wood Purchased:');
+$(".trademax_wood").attr('tooltip5', parseFloat(maxWoodCoin * tradewood).toFixed(0));
 
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
-$(".trademax_mineral").attr('tooltip', 'Spend Coins: ' + parseFloat(maxMineralCoin).toFixed(0));
-$(".trademax_mineral").attr('tooltip2', 'For Mineral: ' + parseFloat(maxMineralCoin * trademineral).toFixed(0));
+$(".trademax_mineral").attr('tooltip', 'Coin Cost:');
+$(".trademax_mineral").attr('tooltip2', parseFloat(maxMineralCoin).toFixed(0));
+$(".trademax_mineral").attr('tooltip4', 'Minerals Purchased:');
+$(".trademax_mineral").attr('tooltip5', parseFloat(maxMineralCoin * trademineral).toFixed(0));
 
 $(".trade_food").html("Food: " + Math.round(tradefood));
-$(".trademax_food").attr('tooltip', 'Spend Coins: ' + parseFloat(maxFoodCoin).toFixed(0));
-$(".trademax_food").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tradefood).toFixed(0));
+$(".trademax_food").attr('tooltip', 'Coin Cost:');
+$(".trademax_food").attr('tooltip2', parseFloat(maxFoodCoin).toFixed(0));
+$(".trademax_food").attr('tooltip4', 'Food Purchased:');
+$(".trademax_food").attr('tooltip5', parseFloat(maxFoodCoin * tradefood).toFixed(0));
 
 $(".trade_sand").html("Sand: " + Math.round(tradesand));
-$(".trademax_sand").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
-$(".trademax_sand").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
+$(".trademax_sand").attr('tooltip', 'Coin Cost:');
+$(".trademax_sand").attr('tooltip2', parseFloat(maxSandCoin).toFixed(0));
+$(".trademax_sand").attr('tooltip4', 'Sand Purchased:');
+$(".trademax_sand").attr('tooltip5', parseFloat(maxSandCoin * tradesand).toFixed(0));
 }
 
 

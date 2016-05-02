@@ -8499,10 +8499,14 @@ if(healing>0){
 $(".expedition").attr('tooltip7', "Total Healing: "+Math.round(healing));
 
 }
-tradewood=600*(bonus["trade"]+1)
-trademineral=500*(bonus["trade"]+1)
-tradefood=400*(bonus["trade"]+1)
-tradesand=20*(bonus["trade"]+1)
+tradewood=600*(bonus["trade"]+1);
+maxWoodCoin = Math.min(Math.ceil((maximums["wood"] - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
+trademineral=500*(bonus["trade"]+1);
+maxMineralCoin = Math.min(Math.ceil((maximums["mineral"] - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+tradefood=400*(bonus["trade"]+1);
+maxFoodCoin = Math.min(Math.ceil((maximums["food"] - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+tradesand=20*(bonus["trade"]+1);
+maxSandCoin = Math.min(Math.ceil((maximums["sand"] - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable")
 	$(".trade_mineral").addClass("unavailable")
@@ -8518,10 +8522,24 @@ else
 	$(".trade_sand").removeClass("unavailable")
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
+$(".trade_wood.max").html("Max");
+$(".trade_wood.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxWoodCoin).toFixed(0));
+$(".trade_wood.max").attr('tooltip2', 'For Wood: ' + parseFloat(maxWoodCoin * tradewood).toFixed(0));
+
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
+$(".trade_mineral.max").html("Max");
+$(".trade_mineral.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxMineralCoin).toFixed(0));
+$(".trade_mineral.max").attr('tooltip2', 'For Mineral: ' + parseFloat(maxMineralCoin * trademineral).toFixed(0));
+
 $(".trade_food").html("Food: " + Math.round(tradefood));
+$(".trade_food.max").html("Max");
+$(".trade_food.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxFoodCoin).toFixed(0));
+$(".trade_food.max").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tradefood).toFixed(0));
+
 $(".trade_sand").html("Sand: " + Math.round(tradesand));
-}
+$(".trade_sand.max").html("Max");
+$(".trade_sand.max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
+$(".trade_sand.max").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
 
 
 

@@ -205,14 +205,14 @@ if(x<=3){
 return "white";
 }
 else if(x<=25){
-return "#ff1eff00";
+return "#ff1eff";
 }
 else if(x<=50){
-return "#ff0070dd";
+return "#ff0070";
 }else if(x<=100){
-return "#ffa335ee";
+return "#ffa335";
 }else if(x<=200){
-return "#ffff8000";
+return "#ffff80";
 }
 else
 {

@@ -205,14 +205,14 @@ if(x<=3){
 return "white";
 }
 else if(x<=25){
-return "green";
+return "#ff1eff00";
 }
 else if(x<=50){
-return "blue";
+return "#ff0070dd";
 }else if(x<=100){
-return "purple";
+return "#ffa335ee";
 }else if(x<=200){
-return "orange";
+return "#ffff8000";
 }
 else
 {

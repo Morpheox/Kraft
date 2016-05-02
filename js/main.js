@@ -8530,22 +8530,18 @@ else
 	$(".trade_sand_max").removeClass("unavailable")
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
-$(".trade_wood_max").html("Max");
 $(".trade_wood_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxWoodCoin).toFixed(0));
 $(".trade_wood_max").attr('tooltip2', 'For Wood: ' + parseFloat(maxWoodCoin * tradewood).toFixed(0));
 
 $(".trade_mineral").html("Mineral: " + Math.round(trademineral));
-$(".trade_mineral_max").html("Max");
 $(".trade_mineral_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxMineralCoin).toFixed(0));
 $(".trade_mineral_max").attr('tooltip2', 'For Mineral: ' + parseFloat(maxMineralCoin * trademineral).toFixed(0));
 
 $(".trade_food").html("Food: " + Math.round(tradefood));
-$(".trade_food_max").html("Max");
 $(".trade_food_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxFoodCoin).toFixed(0));
 $(".trade_food_max").attr('tooltip2', 'For Food: ' + parseFloat(maxFoodCoin * tradefood).toFixed(0));
 
 $(".trade_sand").html("Sand: " + Math.round(tradesand));
-$(".trade_sand_max").html("Max");
 $(".trade_sand_max").attr('tooltip', 'Spend Coins: ' + parseFloat(maxSandCoin).toFixed(0));
 $(".trade_sand_max").attr('tooltip2', 'For Sand: ' + parseFloat(maxSandCoin * tradesand).toFixed(0));
 

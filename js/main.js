@@ -8540,13 +8540,13 @@ if(craft["coin"]<1){
 else
 {
 	$(".trade_wood").removeClass("unavailable");
-	$(".trademax_wood").show();
+	if ( maxWoodCoin > 0 ) { $(".trademax_wood").show(); }
 	$(".trade_mineral").removeClass("unavailable");
-	$(".trademax_mineral").show();
+	if ( maxMineralCoin > 0 ) { $(".trademax_mineral").show(); }
 	$(".trade_food").removeClass("unavailable");
-	$(".trademax_food").show();
+	if ( maxFoodCoin > 0 ) { $(".trademax_food").show(); }
 	$(".trade_sand").removeClass("unavailable");
-	if ( technologies["commodities"] != 0 ) { $(".trademax_sand").show(); }
+	if (  maxSandCoin > 0 && technologies["commodities"] != 0 ) { $(".trademax_sand").show(); }
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trademax_wood").attr('tooltip', 'Coin Cost:');

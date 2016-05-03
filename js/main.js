@@ -8527,25 +8527,29 @@ var maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - 
 var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
 
 if(craft["coin"]<1){
-	$(".trade_wood").addClass("unavailable")
-	$(".trademax_wood").addClass("unavailable")
-	$(".trade_mineral").addClass("unavailable")
-	$(".trademax_mineral").addClass("unavailable")
-	$(".trade_food").addClass("unavailable")
-	$(".trademax_food").addClass("unavailable")
-	$(".trade_sand").addClass("unavailable")
-	$(".trademax_sand").addClass("unavailable")
+	$(".trade_wood").addClass("unavailable");
+	$(".trademax_wood").addClass("unavailable");
+	$(".trade_mineral").addClass("unavailable");
+	$(".trademax_mineral").addClass("unavailable");
+	$(".trade_food").addClass("unavailable");
+	$(".trademax_food").addClass("unavailable");
+	$(".trade_sand").addClass("unavailable");
+	$(".trademax_sand").addClass("unavailable");
 }
 else
 {
-	$(".trade_wood").removeClass("unavailable")
-	$(".trademax_wood").removeClass("unavailable")
-	$(".trade_mineral").removeClass("unavailable")
-	$(".trademax_mineral").removeClass("unavailable")
-	$(".trade_food").removeClass("unavailable")
-	$(".trademax_food").removeClass("unavailable")
-	$(".trade_sand").removeClass("unavailable")
-	$(".trademax_sand").removeClass("unavailable")
+	$(".trade_wood").removeClass("unavailable");
+	$(".trademax_wood").removeClass("unavailable");
+	$(".trademax_wood").show();
+	$(".trade_mineral").removeClass("unavailable");
+	$(".trademax_mineral").removeClass("unavailable");
+	$(".trademax_mineral").show();
+	$(".trade_food").removeClass("unavailable");
+	$(".trademax_food").removeClass("unavailable");
+	$(".trademax_food").show();
+	$(".trade_sand").removeClass("unavailable");
+	$(".trademax_sand").removeClass("unavailable");
+	$(".trademax_sand").show();
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trademax_wood").attr('tooltip', 'Coin Cost:');

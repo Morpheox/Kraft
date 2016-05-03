@@ -2917,6 +2917,7 @@ function research(b){
 			$(".trade_sand").show()
 			$(".trademax_sand").show()
 			unlocked[".trade_sand"]=1;
+			
 
 		}
 
@@ -8528,28 +8529,24 @@ var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - 
 
 if(craft["coin"]<1){
 	$(".trade_wood").addClass("unavailable");
-	$(".trademax_wood").addClass("unavailable");
+	$(".trademax_wood").hide();
 	$(".trade_mineral").addClass("unavailable");
-	$(".trademax_mineral").addClass("unavailable");
+	$(".trademax_mineral").hide();
 	$(".trade_food").addClass("unavailable");
-	$(".trademax_food").addClass("unavailable");
+	$(".trademax_food").hide();
 	$(".trade_sand").addClass("unavailable");
-	$(".trademax_sand").addClass("unavailable");
+	$(".trademax_sand").hide();
 }
 else
 {
 	$(".trade_wood").removeClass("unavailable");
-	$(".trademax_wood").removeClass("unavailable");
 	$(".trademax_wood").show();
 	$(".trade_mineral").removeClass("unavailable");
-	$(".trademax_mineral").removeClass("unavailable");
 	$(".trademax_mineral").show();
 	$(".trade_food").removeClass("unavailable");
-	$(".trademax_food").removeClass("unavailable");
 	$(".trademax_food").show();
 	$(".trade_sand").removeClass("unavailable");
-	$(".trademax_sand").removeClass("unavailable");
-	$(".trademax_sand").show();
+	if ( technologies["commodities"] != 0 ) { $(".trademax_sand").show(); }
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
 $(".trademax_wood").attr('tooltip', 'Coin Cost:');

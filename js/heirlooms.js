@@ -101,7 +101,7 @@ function createheirloom(x){
 		rarity*=1;
 		bns="armor";
 		bnsd="Troops armor: +"
-		power*=0.02;
+		power*=0.05;
 	}else if(rnd2<60){
 		name+="Jar ";
 		value*=1;
@@ -115,7 +115,7 @@ function createheirloom(x){
 		rarity*=2;
 		bns="hp";
 		bnsd="Troops hp: +"
-		power*=0.01;
+		power*=0.03;
 	}else if(rnd2<70){
 		name+="Cannon ";
 		value*=1;

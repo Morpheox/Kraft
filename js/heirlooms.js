@@ -13,6 +13,8 @@ heirlooms[8]=0;
 heirlooms[9]=0;
 heirlooms[10]=0;
 heirlooms[11]=0;
+heirlooms[12]=0;
+heirlooms[13]=0;
 function createheirloom(x){
 
 	var rnd1=Math.random()*100
@@ -278,7 +280,9 @@ function createheirloom(x){
 
 	if(heirlooms[1]>0)
 	{
-		craft["diamond"]+=heirlooms[1];
+		prestige["shards"]+=heirlooms[1];
+		$(".shardsnum").show();
+		unlocked[".shardsnum"]=1;
 	}
 
 	heirlooms[0]=name;
@@ -319,9 +323,18 @@ function getRarityColor(x){
 
 
 function drawheirlooms(){
+
+	suffix=""
+	suffix2=""
+	if(heirlooms[12]>0){
+	suffix=" +"+heirlooms[12]
+	}
+	if(heirlooms[13]>0){
+	suffix2=" +"+heirlooms[13]
+	}
 	if(heirlooms[1]>0){
-		$(".heirloomslog").html("<div style='background-color:#272822;font-weight:700;padding:5px; color:"+getRarityColor(heirlooms[2])+"' >"+heirlooms[0]+"</div> Value: "+heirlooms[1]+" Rarity: "+heirlooms[2]+"<br>"+heirlooms[11]+(heirlooms[3]*100).toFixed(2)+"%")
-		$("#sellheirloombutton").text("Sell ("+heirlooms[1]+" diamonds)")
+		$(".heirloomslog").html("<div style='background-color:#272822;font-weight:700;padding:5px; color:"+getRarityColor(heirlooms[2])+"' >"+heirlooms[0]+suffix+"</div> Value: "+heirlooms[1]+" Rarity: "+heirlooms[2]+"<br>"+heirlooms[11]+(heirlooms[3]*100).toFixed(2)+"%")
+		$("#sellheirloombutton").text("Sell ("+heirlooms[1]+" shards)")
 	}
 	else
 	{
@@ -329,10 +342,12 @@ function drawheirlooms(){
 		$("#sellheirloombutton").text("Sell")
 	}
 	if(heirlooms[5]>0){
-		$(".heirloomslog2").html("<div style='background-color:#272822;font-weight:700;padding:5px; color:"+getRarityColor(heirlooms[6])+"' >"+heirlooms[4]+"</div> Value: "+heirlooms[5]+" Rarity: "+heirlooms[6]+"<br>"+heirlooms[9]+(heirlooms[7]*100).toFixed(2)+"%")
+		$(".heirloomslog2").html("<div style='background-color:#272822;font-weight:700;padding:5px; color:"+getRarityColor(heirlooms[6])+"' >"+heirlooms[4]+suffix2+"</div> Value: "+heirlooms[5]+" Rarity: "+heirlooms[6]+"<br>"+heirlooms[9]+(heirlooms[7]*100).toFixed(2)+"%")
+		$("#upgradeheirloom").text("Upgrade ("+Math.ceil(Math.pow(1.5,(heirlooms[13]))*5)+" shards)")
 	}
 	else
 	{
+		$("#upgradeheirloom").text("Upgrade")
 		$(".heirloomslog2").html(" ")
 	}
 
@@ -354,7 +369,7 @@ function swapheirlooms(){
 	swap4=heirlooms[3]
 	swap5=heirlooms[10]
 	swap6=heirlooms[11]
-
+	swap7=heirlooms[12]
 
 	heirlooms[0]=heirlooms[4]
 	heirlooms[1]=heirlooms[5]
@@ -362,7 +377,7 @@ function swapheirlooms(){
 	heirlooms[3]=heirlooms[7]
 	heirlooms[10]=heirlooms[8]
 	heirlooms[11]=heirlooms[9]
-
+	heirlooms[12]=heirlooms[13]
 
 	heirlooms[4]=swap1
 	heirlooms[5]=swap2
@@ -370,18 +385,49 @@ function swapheirlooms(){
 	heirlooms[7]=swap4
 	heirlooms[8]=swap5
 	heirlooms[9]=swap6
+	heirlooms[13]=swap7
 
 	drawheirlooms();
 }
 
 function sellheirloom(){
 
-
-	craft["diamond"]+=heirlooms[1];
+if(heirlooms[1]>0){
+	prestige["shards"]+=heirlooms[1];
 	heirlooms[0]=0;
 	heirlooms[1]=0;
 	heirlooms[2]=0;
 	heirlooms[3]=0;
+	heirlooms[10]=0
+	heirlooms[11]=0
+	heirlooms[12]=0
 
+	$(".shardsnum").show();
+	unlocked[".shardsnum"]=1;
 	drawheirlooms();
+}
+
+}
+
+function upgradeheirloom(){
+if(heirlooms[5]>0){
+if(prestige["shards"]>=Math.ceil(Math.pow(1.5,(heirlooms[13]))*5)){
+
+bonus[heirlooms[8]]-=heirlooms[7]
+prestige["shards"]-=Math.ceil(Math.pow(1.5,(heirlooms[13]))*5)
+heirlooms[13]++
+
+
+heirlooms[5]+=Math.ceil(Math.pow(1.5,(heirlooms[13]))*2)
+heirlooms[7]*=1.05
+
+
+
+
+bonus[heirlooms[8]]+=heirlooms[7]
+
+}
+}
+
+drawheirlooms()
 }

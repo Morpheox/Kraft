@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.9.1 beta</title>
+	<title>Keep Craft v0.9.2 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 <body>
 
  
-    <div class="infokraft">Keep Craft v0.9.1 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.9.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -39,7 +39,7 @@
 <a href="https://www.reddit.com/r/Keep_Craft/" target="blank" >Subreddit</a><a class="a2" href="https://www.reddit.com/r/Keep_Craft/wiki/index" target="blank">Wiki (old)</a> <a class="a2" href="http://keep-kraft.wikia.com/wiki/Keep_Kraft_Wikia" target="blank">Wiki (in development)</a>
 </div>
 
-	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> 		 <button class='but'  data-toggle="modal" data-target="#options">Options</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div>
+	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> 		 <button class='but'  data-toggle="modal" data-target="#options">Options</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="legacynum"></div><div class="treasurenum"></div><div class="shardsnum"></div>
         <br><br>
             
 	<ul class="nav nav-tabs">
@@ -412,7 +412,8 @@
 		<button onclick="swapheirlooms()">Pick</button><br><br>
 		<div class="heirloomslog"></div><br><br>
 		Your empire heirloom:<br>
-		<div class="heirloomslog2"></div>
+		<div class="heirloomslog2"></div><br>
+		<button id="upgradeheirloom" onclick="upgradeheirloom()">Upgrade</button>
 	</div>
 
 
@@ -527,6 +528,13 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.9.2</b>
+        <ul>
+        <li>Heirlooms now dont sell for diamonds, but for shards</li>
+        <li>Shards can be used to improve heirlooms</li>
+        <li>Shards survive resets</li>
+        <li>Important bug fixes</li>
+        </ul>
         <b>V 0.9.1</b>
         <ul>
         <li>New heirlooms now have a bonus associated with them</li>
@@ -1104,7 +1112,7 @@
 	setInterval(function(){ save()}, 60000);
 
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #dockpane, #marketpane, #leaderpane, #legacypane, #facilitiespane,#heirloomspane").addClass("invisible");
-	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
+	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine,.shardsnum").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand, .trademax_sand").hide()
 	$(".build_lumbermill").click(function() {build("lumbermill")});

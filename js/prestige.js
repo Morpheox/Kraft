@@ -3,6 +3,7 @@ prestige= new Array();
 prestige["number"]=0;
 prestige["upgrades"]=0;
 prestige["treasure"]=0;
+prestige["shards"]=0;
 prestige["legacy"]=0;
 prestige["motivation"]=0;
 prestige["depot"]=0;
@@ -179,7 +180,7 @@ for(key in unlocked){
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane, #facilitiespane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".trade_sand").hide()
-	$(".legacy_motivation, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
+	$(".legacy_motivation,.shards .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
 	$(".block").removeClass("researched");
 	$(".build_lumbermill").show()
 	unlocked[".build_lumbermill"]=1;
@@ -199,7 +200,8 @@ for(key in unlocked){
 	unlocked[".legacy_learning"]=1;
 	unlocked[".legacy_warp"]=1;
 	unlocked[".legacy_memory"]=1;
-	unlocked["#heirloomspane"]=1;
+	unlocked[".legacy_memory"]=1;
+	unlocked[".shardsnum"]=1;
 
 	$(".countdown").show();
 	unlocked[".countdown"]=1;

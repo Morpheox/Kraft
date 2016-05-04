@@ -4934,6 +4934,8 @@ $(".rush7").attr('tooltip3', 'Doubles your production for 1 week')
 $(".currentrush").html("Remaining boost "+totimehour(bonus["rush"]))
 //Others
 
+$(".shardsnum").html("Shards: "+prestige["shards"]);
+
 if(prestige["number"]>0){
 	tooltipsprestige("motivation");
 	tooltipsprestige("depot");

@@ -191,7 +191,7 @@ box-shadow: 0px 0px 0px 0px  rgba(0,0,0,0.75);
   display:inline;
 }
 
-.titles, .ships, .legacynum, .treasurenum,.territory{
+.titles, .ships, .legacynum, .treasurenum,.territory,.shardsnum{
   margin-left:20px;
 }
 

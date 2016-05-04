@@ -342,8 +342,9 @@ function drawheirlooms(){
 function swapheirlooms(){
 
 
-
+	if(heirlooms[3]>0){
 	bonus[heirlooms[10]]+=heirlooms[3]
+	}
 	if(heirlooms[7]>0){
 	bonus[heirlooms[8]]-=heirlooms[7]
 	}

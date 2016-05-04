@@ -2033,7 +2033,7 @@ function isAffordable(cost) {
     } else if (costname == 'pop') {
       netPopCost += cost[costname];
     } else if (costname == 'ships') {
-      affordable = affordable && (ships + cost[costname] < maximums.ships);
+      affordable = affordable && (ships + cost[costname] <= maximums.ships);
     }
   }
   if (netPopCost > 0) {

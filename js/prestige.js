@@ -180,7 +180,7 @@ for(key in unlocked){
 	$("#militarypane, #jobspane, #craftingpane, #technologiespane, #casinopane, #marketpane, #leaderpane, #dockpane, #facilitiespane").addClass("invisible");
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine").hide()
 	$(".trade_sand").hide()
-	$(".legacy_motivation,.shards .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
+	$(".legacy_motivation,.shards, .legacy_depot, .legacy_vengeance,.legacy_aegis ,.legacy_bargain,.legacy_mastery,.legacy_learning,.legacy_warp,.legacy_memory").show()
 	$(".block").removeClass("researched");
 	$(".build_lumbermill").show()
 	unlocked[".build_lumbermill"]=1;

@@ -1844,8 +1844,7 @@ var techdata = {
   },
   commodities: {
     cost: {coin: 1000, knowledge: 1000},
-    unlock: [".trade_sand"],
-    show: [".trademax_sand"],
+    unlock: [".trade_sand", ".trademax_sand"],
     desc: ["Allows you to buy sand on the market"]
   },
   quenching: {

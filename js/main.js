@@ -36,6 +36,7 @@ bonus["reespeccost"]=0;
 bonus["power"]=0;
 bonus["hp"]=0;
 bonus["healing"]=0;
+bonus["armor"]=0;
 bonus["storage"]=0;
 bonus["economy"]=0;
 bonus["science"]=0;
@@ -703,6 +704,7 @@ function expedition(){
 			armor+=people["swordman"]*3
 			armor+=people["knight"]*10
 			armor+=people["lighttank"]*50
+			armor=armor*(bonus["armor"]+1)
 
 			power=(power/2)+(hp/10)+(healing/2)+(burst/10)+(armor/2)
 
@@ -832,7 +834,8 @@ function fight(){
 	armor+=people["swordman"]*3
 	armor+=people["knight"]*10
 	armor+=people["lighttank"]*50
-
+	armor=armor*(bonus["armor"]+1)
+	
 	armor2=0
 	armor2+=enemy["mercenary"]*5
 	armor2+=enemy["soldier"]*10

@@ -213,7 +213,7 @@ for(key in unlocked){
 	bonus["knowledge"]+=prestige["learning"]*0.05
 	bonus["legacy"]+=prestige["memory"]*0.02
 	prestige["number"]++
-
+	bonus[heirlooms[8]]+=heirlooms[7];
 
 }
 

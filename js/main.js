@@ -2019,6 +2019,60 @@ var techdata = {
   }
 };
 
+unction isAffordable(cost) {
+  affordable = true;
+  netPopCost = 0;
+  for (costname in cost) {
+    if (items.hasOwnProperty(costname)) {
+      affordable = affordable && items[costname] >= cost[costname];
+    } else if (craft.hasOwnProperty(costname)) {
+      affordable = affordable && craft[costname] >= cost[costname];
+    } else if (people.hasOwnProperty(costname)) {
+      affordable = affordable && people[costname] >= cost[costname];
+      netPopCost -= cost[costname]; // Offset the net population cost by transforming existing people, e.g. swordsman->knight
+    } else if (costname == 'pop') {
+      netPopCost += cost[costname];
+    } else if (costname == 'ships') {
+      affordable = affordable && (ships + cost[costname] < maximums.ships);
+    }
+  }
+  if (netPopCost > 0) {
+    affordable = affordable && (population + netPopCost <= maximums.population);
+  }
+  return affordable
+}
+
+function payCost(cost) {
+  for (costname in cost) {
+    if (items.hasOwnProperty(costname)) {
+      items[costname] -= cost[costname];
+    } else if (craft.hasOwnProperty(costname)) {
+      craft[costname] -= cost[costname]; 
+      if (costname == 'bottle') {
+        maximums.water -= cost[costname]
+      } else if (costname == 'chest') {
+        maximums.wood -= 50 * cost[costname]
+        maximums.mineral -= 25 * cost[costname]
+        maximums.food -= 10 * cost[costname]
+        maximums.copper -= 0.3 * cost[costname]
+        maximums.gold -= 0.05 * cost[costname]
+        maximums.iron -= 0.2 * cost[costname]
+        maximums.tin -= 0.15 * cost[costname]
+        maximums.coal -= 0.15 * cost[costname]
+        maximums.steel -= 0.10 * cost[costname]
+      }
+    } else if (people.hasOwnProperty(costname)) {
+      people[costname] -= cost[costname];
+      population--;
+      if (people[costname] == 0) {lockFireBtn(costname);} // Hide fire button if none left
+    } else if (costname == 'pop') {
+      population += cost[costname];
+    } else if (costname == 'ships') {
+      ships += cost[costname];
+    }
+  }
+}
+
 function research(b){
 
 	if (b=="coppertools"){

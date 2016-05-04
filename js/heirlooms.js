@@ -150,7 +150,7 @@ function createheirloom(x){
 		rarity*=2;
 		bns="exprew";
 		bnsd="Expedition rewards: +"
-		power*=0.015;
+		power*=0.025;
 	}else if(rnd2<93){
 		name+="Fossil ";
 		value*=9;
@@ -164,7 +164,7 @@ function createheirloom(x){
 		rarity*=3;
 		bns="trade";
 		bnsd="Trade ratios: +"
-		power*=0.02;
+		power*=0.025;
 	}else if(rnd2<98){
 		name+="Chest ";
 		value*=15;

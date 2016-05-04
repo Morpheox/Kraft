@@ -108,7 +108,7 @@ function createheirloom(x){
 		rarity*=1;
 		bns="healing";
 		bnsd="Healing : +"
-		power*=0.05;
+		power*=0.06;
 	}else if(rnd2<65){
 		name+="Dress ";
 		value*=6;
@@ -122,7 +122,7 @@ function createheirloom(x){
 		rarity*=2;
 		bns="shippower";
 		bnsd="Ship power: +"
-		power*=0.01;
+		power*=0.025;
 	}else if(rnd2<75){
 		name+="Book ";
 		value*=1;
@@ -131,12 +131,12 @@ function createheirloom(x){
 		bnsd="Knowledge production: +"
 		power*=0.05;
 	}else if(rnd2<80){
-		name+="Cannon ";
-		value*=3;
+		name+="Crate ";
+		value*=2;
 		rarity*=2;
-		bns="shippower";
-		bnsd="Ship power: +"
-		power*=0.05;
+		bns="shipcargo";
+		bnsd="Ship cargo capacity: +"
+		power*=0.15;
 	}else if(rnd2<85){
 		name+="Hammer ";
 		value*=5;

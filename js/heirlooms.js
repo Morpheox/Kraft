@@ -39,7 +39,7 @@ function createheirloom(x){
 		value=1;
 		power=0.5;
 	}else if(rnd1>99){
-		name="Misterious ";
+		name="Mysterious ";
 		value=5;
 		rarity=5;
 		power=3;
@@ -83,24 +83,24 @@ function createheirloom(x){
 		bns="morale";
 		bnsd="Morale production: +"
 		power*=0.1;
-	}else if(rnd2<30){
+	}else if(rnd2<40){
 		name+="Coin ";
 		value*=2;
 		rarity*=1;
 		bns="gold";
 		bnsd="Gold production: +"
 		power*=0.05;
-	}else if(rnd2<40){
+	}else if(rnd2<50){
 		name+="Sword ";
 		value*=1;
 		rarity*=1;
 		bns="power";
 		bnsd="Troops power: +"
 		power*=0.03;
-	}else if(rnd2<50){
+	}else if(rnd2<55){
 		name+="Shield ";
 		value*=1;
-		rarity*=1;
+		rarity*=2;
 		bns="armor";
 		bnsd="Troops armor: +"
 		power*=0.05;

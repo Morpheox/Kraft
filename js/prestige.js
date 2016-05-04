@@ -200,8 +200,8 @@ for(key in unlocked){
 	unlocked[".legacy_learning"]=1;
 	unlocked[".legacy_warp"]=1;
 	unlocked[".legacy_memory"]=1;
-	unlocked[".legacy_memory"]=1;
 	unlocked[".shardsnum"]=1;
+	unlocked["#heirloomspane"]=1;
 
 	$(".countdown").show();
 	unlocked[".countdown"]=1;

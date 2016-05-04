@@ -344,8 +344,9 @@ function swapheirlooms(){
 
 
 	bonus[heirlooms[10]]+=heirlooms[3]
+	if(heirlooms[7]>0){
 	bonus[heirlooms[8]]-=heirlooms[7]
-
+	}
 	swap1=heirlooms[0]
 	swap2=heirlooms[1]
 	swap3=heirlooms[2]

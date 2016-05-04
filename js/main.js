@@ -1844,8 +1844,7 @@ var techdata = {
   },
   commodities: {
     cost: {coin: 1000, knowledge: 1000},
-    unlock: [".trade_sand"],
-    show: [".trademax_sand"],
+    unlock: [".trade_sand", ".trademax_sand"],
     desc: ["Allows you to buy sand on the market"]
   },
   quenching: {
@@ -2033,7 +2032,7 @@ function isAffordable(cost) {
     } else if (costname == 'pop') {
       netPopCost += cost[costname];
     } else if (costname == 'ships') {
-      affordable = affordable && (ships + cost[costname] < maximums.ships);
+      affordable = affordable && (ships + cost[costname] <= maximums.ships);
     }
   }
   if (netPopCost > 0) {
@@ -2097,10 +2096,8 @@ function research(b) {
 
       if (tech.hasOwnProperty('unlock')) { // Unlock elements, if any
         for (i = 0; i < tech.unlock.length; i++) {
-          unlockname = tech.unlock[i]
-          if (unlocked.hasOwnProperty(unlockname)) {
-            unlocked[unlockname] = 1;
-          }
+          unlockname = tech.unlock[i];
+          unlocked[unlockname] = 1;
           if (unlockname[0] == "#") {
             $(unlockname).removeClass("invisible")
           } else if (unlockname[0] == ".") {

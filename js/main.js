@@ -2019,7 +2019,7 @@ var techdata = {
   }
 };
 
-unction isAffordable(cost) {
+function isAffordable(cost) {
   affordable = true;
   netPopCost = 0;
   for (costname in cost) {
@@ -2098,7 +2098,7 @@ function research(b) {
       if (tech.hasOwnProperty('unlock')) { // Unlock elements, if any
         for (i = 0; i < tech.unlock.length; i++) {
           unlockname = tech.unlock[i]
-          if (unlocked.hasOwnProperty(unlockname) {
+          if (unlocked.hasOwnProperty(unlockname)) {
             unlocked[unlockname] = 1;
           }
           if (unlockname[0] == "#") {

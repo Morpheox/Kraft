@@ -2134,391 +2134,115 @@ function research(b) {
 
 }
 
-function hire(b){
-	if (population<maximums["population"]){
-
-		if (b=="woodcutter"){
-
-			foodcost=50;
-
-			if (items["food"]>=foodcost){
-				items["food"]-=foodcost;
-				people["woodcutter"]+=1
-				population++
-				$(".fire_woodcutter").show()
-				unlocked[".fire_woodcutter"]=1;
-			}
-
-		}
-		else if (b=="smelter"){
-
-			foodcost=50;
-
-			if (items["food"]>=foodcost){
-				items["food"]-=foodcost;
-				people["smelter"]+=1
-				population++
-				$(".fire_smelter").show()
-				unlocked[".fire_smelter"]=1;
-			}
-
-		}
-		else if (b=="farmer"){
-
-			woodcost=50;
-
-			if (items["wood"]>=woodcost){
-				items["wood"]-=woodcost;
-				people["farmer"]+=1
-				population++
-				$(".fire_farmer").show()
-				unlocked[".fire_farmer"]=1;
-			}
-
-		}
-		else if (b=="miner"){
-
-			foodcost=50;
-			pickaxecost=1;
-
-			if (items["food"]>=foodcost && craft["pickaxe"]>=pickaxecost){
-				items["food"]-=foodcost;
-				craft["pickaxe"]-=pickaxecost
-				people["miner"]+=1
-				population++
-				$(".fire_miner").show()
-				unlocked[".fire_miner"]=1;
-			}
-
-		}
-		else if (b=="foundryman"){
-
-			foodcost=200;
-			coincost=1;
-
-			if (items["food"]>=foodcost && craft["coin"]>=coincost){
-				items["food"]-=foodcost;
-				craft["coin"]-=coincost
-				people["foundryman"]+=1
-				population++
-				$(".fire_foundryman").show()
-				unlocked[".fire_foundryman"]=1;
-			}
-
-		}
-
-		else if (b=="sailor"){
-
-			foodcost=500;
-			coincost=5;
-
-			if (items["food"]>=foodcost && craft["coin"]>=coincost){
-				items["food"]-=foodcost;
-				craft["coin"]-=coincost
-				people["sailor"]+=1
-				population++
-				$(".fire_sailor").show()
-				unlocked[".fire_sailor"]=1;
-			}
-
-		}
-		
-		else if (b=="scientist"){
-
-			knowledgecost=100;
-			coincost=10;
-
-			if (items["knowledge"]>=knowledgecost && craft["coin"]>=coincost){
-				items["knowledge"]-=knowledgecost;
-				craft["coin"]-=coincost
-				people["scientist"]+=1
-				population++
-				$(".fire_scientist").show()
-				unlocked[".fire_scientist"]=1;
-			}
-
-		}
-		else if (b=="marketer"){
-
-			coincost=500;
-			goldcost=100;
-
-			if (items["gold"]>=goldcost && craft["coin"]>=coincost){
-				items["gold"]-=goldcost;
-				craft["coin"]-=coincost
-				people["marketer"]+=1
-				population++
-				$(".fire_marketer").show()
-				unlocked[".fire_marketer"]=1;
-			}
-
-		}
-		else if (b=="pikeman"){
-
-			foodcost=50;
-			spearcost=1;
-
-			if (items["food"]>=foodcost && craft["spear"]>=spearcost){
-				items["food"]-=foodcost;
-				craft["spear"]-=spearcost
-				people["pikeman"]+=1
-				population++
-				$(".fire_pikeman").show()
-				unlocked[".fire_pikeman"]=1;
-			}
-
-		}
-
-		else if (b=="swordman"){
-
-			foodcost=150;
-			swordcost=1;
-
-			if (items["food"]>=foodcost && craft["sword"]>=swordcost){
-				items["food"]-=foodcost;
-				craft["sword"]-=swordcost
-				people["swordman"]+=1
-				population++
-				$(".fire_swordman").show()
-				unlocked[".fire_swordman"]=1;
-			}
-
-		}
-		else if (b=="medic"){
-
-			foodcost=1000;
-			coincost=20;
-
-			if (items["food"]>=foodcost && craft["coin"]>=coincost){
-				items["food"]-=foodcost;
-				craft["coin"]-=coincost
-				people["medic"]+=1
-				population++
-				$(".fire_medic").show()
-				unlocked[".fire_medic"]=1;
-			}
-
-		}
-		else if (b=="bersek"){
-
-			coincost=50;
-			greatswordcost=1;
-
-			if (craft["coin"]>=coincost && craft["greatsword"]>=greatswordcost){
-				craft["coin"]-=coincost;
-				craft["greatsword"]-=greatswordcost;
-				people["bersek"]+=1
-				population++
-				$(".fire_bersek").show()
-				unlocked[".fire_bersek"]=1;
-			}
-
-		}
-		else if (b=="warelephant"){
-
-			suppliescost=100;
-			elephantcost=1;
-
-			if (craft["supplies"]>=suppliescost && craft["elephant"]>=elephantcost){
-				craft["supplies"]-=suppliescost;
-				craft["elephant"]-=elephantcost;
-				people["warelephant"]+=1
-				population++
-				$(".fire_warelephant").show()
-				unlocked[".fire_warelephant"]=1;
-			}
-
-		}
-		else if (b=="musketeer"){
-
-			coincost=100;
-			musketcost=1;
-			armorcost=1;
-
-			if (craft["coin"]>=coincost && craft["musket"]>=musketcost && craft["armor"]>=armorcost){
-
-				craft["coin"]-=coincost;
-				craft["musket"]-=musketcost;
-				craft["armor"]-=armorcost;
-				people["musketeer"]+=1
-				population++
-				$(".fire_musketeer").show()
-				unlocked[".fire_musketeer"]=1;
-			}
-
-		}
-		else if (b=="lighttank" && (population+3)<=maximums["population"]){
-
-			platecost=200;
-			enginecost=2;
-
-
-			if (craft["engine"]>=enginecost && craft["plate"]>=platecost){
-
-				craft["plate"]-=platecost;
-				craft["engine"]-=enginecost;
-
-				people["lighttank"]+=1
-				population+=3
-				$(".fire_lighttank").show()
-				unlocked[".fire_lighttank"]=1;
-			}
-
-		}
-	}
-	if (b=="knight"){
-
-		swordmancost=1;
-		horsecost=1;
-		armorcost=1;
-
-		if (people["swordman"]>=swordmancost && craft["horse"]>=horsecost && craft["armor"]>=armorcost){
-			craft["armor"]-=armorcost;
-			craft["horse"]-=horsecost;
-			people["swordman"]-=1;
-			people["knight"]+=1;
-			$(".fire_knight").show()
-			unlocked[".fire_knight"]=1;
-
-			if (people["swordman"]==0){
-				$(".fire_swordman").hide()
-				unlocked[".fire_swordman"]=0;
-			}
-
-
-		}
-
-	}
-
-	if(ships<maximums["ships"]){
-		if (b=="galley"){
-
-			woodcost=20000;
-			plankcost=200;
-			structurecost=50;
-
-
-			if (items["wood"]>=woodcost && craft["plank"]>=plankcost && craft["structure"]>=structurecost){
-
-				items["wood"]-=woodcost
-				craft["plank"]-=plankcost;
-				craft["structure"]-=structurecost;
-
-				people["galley"]+=1;
-				ships++
-
-				$(".salvage_galley").show()
-				unlocked[".salvage_galley"]=1;
-
-
-
-			}
-
-		}
-		if (b=="galleon"){
-
-			plankcost=1500;
-			structurecost=300;
-
-
-			if (craft["plank"]>=plankcost && craft["structure"]>=structurecost){
-
-				craft["plank"]-=plankcost;
-				craft["structure"]-=structurecost;
-
-				people["galleon"]+=1;
-				ships++
-
-				$(".salvage_galleon").show()
-				unlocked[".salvage_galleon"]=1;
-
-
-
-			}
-
-		}
-		if (b=="fireship"){
-
-			plankcost=1000;
-			steelcost=200;
-			coalcost=300;
-
-
-			if (craft["plank"]>=plankcost && items["coal"]>=coalcost && items["steel"]>=steelcost){
-
-				craft["plank"]-=plankcost;
-				items["coal"]-=coalcost;
-				items["steel"]-=steelcost;
-
-				people["fireship"]+=1;
-				ships++
-
-				$(".salvage_fireship").show()
-				unlocked[".salvage_fireship"]=1;
-
-
-
-			}
-
-		}
-		if (b=="caravel"){
-
-			woodcost=100000;
-			ironcost=500;
-			plankcost=1000;
-			
-
-
-
-			if (craft["plank"]>=plankcost && items["iron"]>=ironcost && items["wood"]>=woodcost){
-
-				craft["plank"]-=plankcost;
-				items["wood"]-=woodcost;
-				items["iron"]-=ironcost;
-
-				people["caravel"]+=1;
-				ships++
-
-				$(".salvage_caravel").show()
-				unlocked[".salvage_caravel"]=1;
-
-
-
-			}
-
-		}
-	}
-
-if(trains<maximums["trains"]){
-		if (b=="cargotrain" && (population+3)<=maximums["population"]){
-
-			steelcost=500;
-			platecost=500;
-			enginecost=8;
-
-
-
-			if (items["steel"]>=steelcost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
-
-				items["steel"]-=steelcost
-				craft["plate"]-=platecost;
-				craft["engine"]-=enginecost;
-
-				people["cargotrain"]+=1;
-
-				trains++
-				population+=3;
-
-				$(".salvage_cargotrain").show()
-				unlocked[".salvage_cargotrain"]=1;
-
-
-
-			}
-
-		}
+var armydata = {
+  woodcutter: {
+    cost: {pop: 1, food: 50}
+  },
+  smelter: {
+    cost: {pop: 1, food: 50}
+  },
+  farmer: {
+    cost: {pop: 1, wood: 50}
+  },
+  miner: {
+    cost: {pop: 1, food: 50, pickaxe: 1}
+  },
+  foundryman: {
+    cost: {pop: 1, food: 200, coin: 1}
+  },
+  sailor: {
+    cost: {pop: 1, food: 500, coin: 5}
+  },
+  scientist: {
+    cost: {pop: 1, knowledge: 100, coin: 10}
+  },
+  marketer: {
+    cost: {pop: 1, coin: 500, gold: 100}
+  },
+  pikeman: {
+    cost: {pop: 1, food: 50, spear: 1}
+  },
+  swordman: {
+    cost: {pop: 1, food: 150, sword: 1}
+  },
+  medic: {
+    cost: {pop: 1, food: 1000, coin: 20}
+  },
+  bersek: {
+    cost: {pop: 1, coin: 50, greatsword: 1}
+  },
+  warelephant: {
+    cost: {pop: 1, supplies: 100, elephant: 1}
+  },
+  musketeer: {
+    cost: {pop: 1, coin: 100, musket: 1, armor: 1}
+  },
+  lighttank: {
+    cost: {pop: 1, plate: 200, engine: 2}
+  },
+  knight: {
+    cost: {pop: 1, swordman: 1, horse: 1, armor: 1}
+  }
+};
+
+var shipdata = {
+  galley: {
+    cost: {ships: 1, wood: 20000, plank: 200, structure: 50}
+  },
+  galleon: {
+    cost: {ships: 1, plank: 1500, structure: 300}
+  },
+  fireship: {
+    cost: {ships: 1, plank: 1000, steel: 200, coal: 300}
+  },
+  caravel: {
+    cost: {ships: 1, wood: 100000, iron: 500, plank: 1000}
+  }
+};
+
+var traindata = {
+  cargotrain: {
+    cost: {pop: 3, steel: 500, plate: 500, engine: 8}
+  }
+};
+
+function unlockFireBtn(b) {
+  $(".fire_"+b).show();
+  unlocked[".fire_"+b] = 1;
 }
+
+function lockFireBtn(b) {
+  $(".fire_"+b).hide();
+  unlocked[".fire_"+b] = 0;
 }
+
+function unlockSalvageBtn(b) {
+  $(".salvage_"+b).show();
+  unlocked[".salvage_"+b] = 1;
+}
+
+function hire(b) {
+
+  if (armydata.hasOwnProperty(b) && isAffordable(armydata[b].cost)) {
+    people[b]++;
+    unlockFireBtn(b);
+    payCost(armydata[b].cost);
+  }
+
+  if (shipdata.hasOwnProperty(b) && isAffordable(shipdata[b].cost)) {
+    people[b]++;
+    unlockSalvageBtn(b);
+    payCost(shipdata[b].cost);
+  }
+
+  if (traindata.hasOwnProperty(b) && isAffordable(traindata[b].cost)) {
+    trains++;
+    unlockSalvageBtn(b);
+    payCost(shipdata[b].cost);
+  }
+
+}
+
 function salvage(b){
 	if (people[b]>0){
 

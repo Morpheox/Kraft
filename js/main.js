@@ -2096,10 +2096,8 @@ function research(b) {
 
       if (tech.hasOwnProperty('unlock')) { // Unlock elements, if any
         for (i = 0; i < tech.unlock.length; i++) {
-          unlockname = tech.unlock[i]
-          if (unlocked.hasOwnProperty(unlockname)) {
-            unlocked[unlockname] = 1;
-          }
+          unlockname = tech.unlock[i];
+          unlocked[unlockname] = 1;
           if (unlockname[0] == "#") {
             $(unlockname).removeClass("invisible")
           } else if (unlockname[0] == ".") {

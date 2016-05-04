@@ -2915,7 +2915,9 @@ function research(b){
 
 			technologies["commodities"]++
 			$(".trade_sand").show()
+			$(".trademax_sand").show()
 			unlocked[".trade_sand"]=1;
+			
 
 		}
 
@@ -8515,30 +8517,61 @@ if(healing>0){
 $(".expedition").attr('tooltip7', "Total Healing: "+Math.round(healing));
 
 }
-tradewood=600*(bonus["trade"]+1)
-trademineral=500*(bonus["trade"]+1)
-tradefood=400*(bonus["trade"]+1)
-tradesand=20*(bonus["trade"]+1)
+tradewood=600*(bonus["trade"]+1);
+trademineral=500*(bonus["trade"]+1);
+tradefood=400*(bonus["trade"]+1);
+tradesand=20*(bonus["trade"]+1);
+
+var maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
+var maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+var maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+
 if(craft["coin"]<1){
-	$(".trade_wood").addClass("unavailable")
-	$(".trade_mineral").addClass("unavailable")
-	$(".trade_food").addClass("unavailable")
-	$(".trade_sand").addClass("unavailable")
+	$(".trade_wood").addClass("unavailable");
+	$(".trademax_wood").hide();
+	$(".trade_mineral").addClass("unavailable");
+	$(".trademax_mineral").hide();
+	$(".trade_food").addClass("unavailable");
+	$(".trademax_food").hide();
+	$(".trade_sand").addClass("unavailable");
+	$(".trademax_sand").hide();
 }
 else
 {
-
-	$(".trade_wood").removeClass("unavailable")
-	$(".trade_mineral").removeClass("unavailable")
-	$(".trade_food").removeClass("unavailable")
-	$(".trade_sand").removeClass("unavailable")
+	$(".trade_wood").removeClass("unavailable");
+	$(".trademax_wood").show(); 
+	$(".trade_mineral").removeClass("unavailable");
+	$(".trademax_mineral").show();
+	$(".trade_food").removeClass("unavailable");
+	$(".trademax_food").show();
+	$(".trade_sand").removeClass("unavailable");
+	if ( technologies["commodities"] != 0 ) { $(".trademax_sand").show(); }
 }
 $(".trade_wood").html("Wood: " + Math.round(tradewood));
-$(".trade_mineral").html("Mineral: " + Math.round(trademineral));
-$(".trade_food").html("Food: " + Math.round(tradefood));
-$(".trade_sand").html("Sand: " + Math.round(tradesand));
-}
+$(".trademax_wood").attr('tooltip', 'Coin Cost:');
+$(".trademax_wood").attr('tooltip2', parseFloat(maxWoodCoin).toFixed(0));
+$(".trademax_wood").attr('tooltip4', 'Wood Purchased:');
+$(".trademax_wood").attr('tooltip5', parseFloat(maxWoodCoin * tradewood).toFixed(0));
 
+$(".trade_mineral").html("Mineral: " + Math.round(trademineral));
+$(".trademax_mineral").attr('tooltip', 'Coin Cost:');
+$(".trademax_mineral").attr('tooltip2', parseFloat(maxMineralCoin).toFixed(0));
+$(".trademax_mineral").attr('tooltip4', 'Minerals Purchased:');
+$(".trademax_mineral").attr('tooltip5', parseFloat(maxMineralCoin * trademineral).toFixed(0));
+
+$(".trade_food").html("Food: " + Math.round(tradefood));
+$(".trademax_food").attr('tooltip', 'Coin Cost:');
+$(".trademax_food").attr('tooltip2', parseFloat(maxFoodCoin).toFixed(0));
+$(".trademax_food").attr('tooltip4', 'Food Purchased:');
+$(".trademax_food").attr('tooltip5', parseFloat(maxFoodCoin * tradefood).toFixed(0));
+
+$(".trade_sand").html("Sand: " + Math.round(tradesand));
+$(".trademax_sand").attr('tooltip', 'Coin Cost:');
+$(".trademax_sand").attr('tooltip2', parseFloat(maxSandCoin).toFixed(0));
+$(".trademax_sand").attr('tooltip4', 'Sand Purchased:');
+$(".trademax_sand").attr('tooltip5', parseFloat(maxSandCoin * tradesand).toFixed(0));
+}
 
 
 function refresh(){
@@ -8940,9 +8973,8 @@ calculatecost();
 autorefresh();
 
 }
+
 function trade(b){
-
-
 	if (craft["coin"]>=1){
 		tradewood=600*(bonus["trade"]+1)
 		trademineral=500*(bonus["trade"]+1)
@@ -8964,14 +8996,25 @@ function trade(b){
 			items["sand"]+=Math.round(tradesand)
 			craft["coin"]-=1
 		}
-
 	}
-
-
-
-
-
-
+}
+function tradeMaximum(b){
+	if (craft["coin"]>=1){
+		tradewood=600*(bonus["trade"]+1);
+		trademineral=500*(bonus["trade"]+1);
+		tradefood=400*(bonus["trade"]+1);
+		tradesand=20*(bonus["trade"]+1);
+		
+		var maxWoodCoin = Math.min(Math.ceil(((maximums["wood"]*(bonus["storage"]+1)) - items["wood"]) / Math.round(tradewood)), Math.floor(craft["coin"]));
+		var maxMineralCoin = Math.min(Math.ceil(((maximums["mineral"]*(bonus["storage"]+1)) - items["mineral"]) / Math.round(trademineral)), Math.floor(craft["coin"]));
+		var maxFoodCoin = Math.min(Math.ceil(((maximums["food"]*(bonus["storage"]+1)) - items["food"]) / Math.round(tradefood)), Math.floor(craft["coin"]));
+		var maxSandCoin = Math.min(Math.ceil(((maximums["sand"]*(bonus["storage"]+1)) - items["sand"]) / Math.round(tradesand)), Math.floor(craft["coin"]));
+		
+		if(b=="wood") { for(var MaxTradeCt = 0; MaxTradeCt < maxWoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="mineral") { for(var MaxTradeCt = 0; MaxTradeCt < maxMineralCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="food") { for(var MaxTradeCt = 0; MaxTradeCt < maxFoodCoin; MaxTradeCt++) { trade(b); } }
+		else if(b=="sand") { for(var MaxTradeCt = 0; MaxTradeCt < maxSandCoin; MaxTradeCt++) { trade(b); } }
+	}
 }
 
 

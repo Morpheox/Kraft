@@ -170,6 +170,7 @@ for(key in technologies){
 $(".tech_"+key).removeClass("researched");
 
 }
+
 for(key in unlocked){
 
 	unlocked[key]=0;
@@ -198,6 +199,8 @@ for(key in unlocked){
 	unlocked[".legacy_learning"]=1;
 	unlocked[".legacy_warp"]=1;
 	unlocked[".legacy_memory"]=1;
+	unlocked["#heirlooms"]=1;
+	
 	$(".countdown").show();
 	unlocked[".countdown"]=1;
 

@@ -917,7 +917,7 @@ function fight(){
 				dmg2=0;
 				combatlog+="Your troop's armor blocks all damage!<br>"
 			} else {
-				combatlog+="Your troop's armor blocks "+armor+" damage.<br>"
+				combatlog+="Your troop's armor blocks "+intToString(armor)+" damage.<br>"
 			}
 		}
 		if(armor2>0){
@@ -928,7 +928,7 @@ function fight(){
 				dmg1=0;
 				combatlog+="The enemy's armor blocks all damage!<br>"
 			} else {
-				combatlog+="The enemy's armor blocks "+armor2+" damage.<br>"
+				combatlog+="The enemy's armor blocks "+intToString(armor2)+" damage.<br>"
 			}
 		}
 		if(i==0 && burst>0){

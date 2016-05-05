@@ -2036,6 +2036,8 @@ function isAffordable(cost) {
       netPopCost += cost[costname];
     } else if (costname == 'ships') {
       affordable = affordable && (ships + cost[costname] <= maximums.ships);
+    } else if (costname == 'trains') {
+      affordable = affordable && (trains + cost[costname] <= maximums.trains);
     }
   }
   if (netPopCost > 0) {
@@ -2071,6 +2073,8 @@ function payCost(cost) {
       population += cost[costname];
     } else if (costname == 'ships') {
       ships += cost[costname];
+    }else if (costname == 'trains') {
+      trains += cost[costname];
     }
   }
 }
@@ -2202,7 +2206,7 @@ var shipdata = {
 
 var traindata = {
   cargotrain: {
-    cost: {pop: 3, steel: 500, plate: 500, engine: 8}
+    cost: {pop: 3, steel: 500, plate: 500, engine: 8,trains: 1}
   }
 };
 
@@ -2236,9 +2240,10 @@ function hire(b) {
   }
 
   if (traindata.hasOwnProperty(b) && isAffordable(traindata[b].cost)) {
-    trains++;
+
+    people[b]++;
     unlockSalvageBtn(b);
-    payCost(shipdata[b].cost);
+    payCost(traindata[b].cost);
   }
 
 }

@@ -292,8 +292,16 @@ function createheirloom(x){
 	heirlooms[10]=bns;
 	heirlooms[11]=bnsd;
 	drawheirlooms();
+	setHeirloomNotif();
 }
 
+function setHeirloomNotif() {
+	$("#heirloomspane").html("<a data-toggle='tab' href='#heirlooms'><div onclick='clearHeirloomNotif()'>Heirlooms(!)</div></a>");
+}
+
+function clearHeirloomNotif() {
+  $("#heirloomspane").html("<a data-toggle='tab' href='#heirlooms'>Heirlooms</a>");
+}
 
 
 function getRarityColor(x){
@@ -408,6 +416,7 @@ if(heirlooms[1]>0){
 }
 
 }
+
 
 function upgradeheirloom(){
 if(heirlooms[5]>0){

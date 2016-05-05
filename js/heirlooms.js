@@ -296,7 +296,7 @@ function createheirloom(x){
 }
 
 function setHeirloomNotif() {
-	$("#heirloomspane").html("<a data-toggle='tab' href='#heirlooms'><div onclick='clearHeirloomNotif()'>Heirlooms(!)</div></a>");
+	$("#heirloomspane").html("<a data-toggle='tab' onclick='clearHeirloomNotif()' href='#heirlooms'><div style='color:orange'>Heirlooms(!)</div></a>");
 }
 
 function clearHeirloomNotif() {

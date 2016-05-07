@@ -291,6 +291,7 @@ function createheirloom(x){
 	heirlooms[3]=power;
 	heirlooms[10]=bns;
 	heirlooms[11]=bnsd;
+	heirlooms[12]=0;
 	drawheirlooms();
 	setHeirloomNotif();
 }

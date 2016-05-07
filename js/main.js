@@ -1973,7 +1973,7 @@ var techdata = {
   pyroprocessing: {
     cost: {mineral: 200000, clay: 10000, book: 5},
     unlock: [".build_cementkiln", "#facilitiespane"],
-    unlock: ["Allows you to build cement kilns"]
+    desc: ["Allows you to build cement kilns"]
   },
   triforce: {
     cost: {knowledge: 3000},

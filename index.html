@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Keep Craft v0.9.2 beta</title>
+	<title>Keep Craft v0.9.3 beta</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
 	<link rel="stylesheet" id="estilo" type="text/css" href="css/style.css">
@@ -29,7 +29,7 @@
 <body>
 
  
-    <div class="infokraft">Keep Craft v0.9.2 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
+    <div class="infokraft">Keep Craft v0.9.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="KFT9EFSL3MX8C">
@@ -413,7 +413,10 @@
 		<div class="heirloomslog"></div><br><br>
 		Your empire heirloom:<br>
 		<div class="heirloomslog2"></div><br>
-		<button id="upgradeheirloom" onclick="upgradeheirloom()">Upgrade</button>
+		
+		<button id="upgradeheirloom" onclick="upgradeheirloom()">Upgrade</button> <button id="save" onclick="storeheirlooms(-1)">Store</button><br><br>
+		Your stored heirlooms:<br>
+		<div class="heirloomlist"></div><br>
 	</div>
 
 
@@ -456,7 +459,13 @@
         <div class="modal-body messagetext">
 		 <button class='but' onclick="cleartheme()" >Clear theme</button><br>
 		 <button class='but'  onclick="darktheme()" >Dark theme</button><br>
-		 <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button><br>
+		 <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button><br><br>
+		 Performance factor (Change only if you experience freezing or delay)<br>
+		 <select id='performanceselect'>
+		 	<option value='1'>Maximum performance</option>
+		 	<option value='2'>Medium performance</option>
+			<option value='3'>Low performance</option>
+		 </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -528,6 +537,13 @@
           <h4 class="modal-title messagetitle">Changelog</h4>
         </div>
         <div class="modal-body messagetext changes">
+        <b>V 0.9.3</b>
+        <ul>
+        <li>Added 10 new heirloom slots</li>
+        <li>The interface its a bit clunky, but it works for now</li>
+        <li>Performance option for slow computers or very advanced games added</li>
+        <li>Several bugs fixed</li>
+        </ul>
         <b>V 0.9.2</b>
         <ul>
         <li>Heirlooms now dont sell for diamonds, but for shards</li>
@@ -1414,6 +1430,11 @@ function cleartheme() {
     bonus["theme"]="clear";
 }
 
+
+$("#performanceselect").change(function(){
+
+	tooltipfactor=$("#performanceselect").val();
+})
 </script>
 <script>
 

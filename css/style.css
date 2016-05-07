@@ -2,7 +2,7 @@ html,body{
 margin:0;
 padding:0;
 }
-.heirloomslog,.heirloomslog2{
+.heirloomslog,.heirloomslog2,.heirloomlist{
   border:1px solid black;
     padding:3px;
 }

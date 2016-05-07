@@ -406,7 +406,7 @@ function toggle(t){
 }
 function lead(b){
 
-
+tooltipcurrent=10;
 	if(bonus["title"]>=1){
 		if (b=="sucellus"){
 
@@ -2080,7 +2080,7 @@ function payCost(cost) {
 }
 
 function research(b) {
-
+tooltipcurrent=10;
   if (techdata.hasOwnProperty(b)) {
     tech = techdata[b]
 
@@ -2226,7 +2226,7 @@ function unlockSalvageBtn(b) {
 }
 
 function hire(b) {
-
+tooltipcurrent=10;
   if (armydata.hasOwnProperty(b) && isAffordable(armydata[b].cost)) {
     people[b]++;
     unlockFireBtn(b);
@@ -2319,7 +2319,7 @@ function salvage(b){
 }
 function fire(b){
 
-
+tooltipcurrent=10;
 	if (people[b]>0){
 
 		people[b]-=1
@@ -2335,6 +2335,7 @@ function fire(b){
 	}
 }
 function build(b){
+	tooltipcurrent=10;
 	if (b=="lumbermill"){
 
 		woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
@@ -3184,9 +3185,15 @@ function build(b){
 		}
 	}
 }
-
+var tooltipfactor=1
+var tooltipcurrent=0;
 function calculatecost(){
 
+
+tooltipcurrent++
+if(tooltipcurrent>=tooltipfactor)
+{
+tooltipcurrent=0;
 function set_unattainable(element, unattainable){
   if(unattainable){
     $(element).addClass("unattainable"); 
@@ -5075,6 +5082,8 @@ $(".trademax_sand").attr('tooltip', 'Coin Cost:');
 $(".trademax_sand").attr('tooltip2', parseFloat(maxSandCoin).toFixed(0));
 $(".trademax_sand").attr('tooltip4', 'Sand Purchased:');
 $(".trademax_sand").attr('tooltip5', parseFloat(maxSandCoin * tradesand).toFixed(0));
+
+}
 }
 
 

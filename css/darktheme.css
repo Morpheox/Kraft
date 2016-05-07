@@ -36,7 +36,7 @@ color:black!important;
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none;
   }
-  .heirloomslog,.heirloomslog2{
+  .heirloomslog,.heirloomslog2,.heirloomlist{
   border:1px solid white;
   padding:3px;
 }

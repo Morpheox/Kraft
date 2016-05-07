@@ -1,20 +1,13 @@
 
 
 var heirlooms = new Array()
-heirlooms[0]=0;
-heirlooms[1]=0;
-heirlooms[2]=0;
-heirlooms[3]=0;
-heirlooms[4]=0;
-heirlooms[5]=0;
-heirlooms[6]=0;
-heirlooms[7]=0;
-heirlooms[8]=0;
-heirlooms[9]=0;
-heirlooms[10]=0;
-heirlooms[11]=0;
-heirlooms[12]=0;
-heirlooms[13]=0;
+
+
+for(i=0;i<50;i++){
+	heirlooms[i]=0;
+}
+
+
 function createheirloom(x){
 
 	var rnd1=Math.random()*100
@@ -359,9 +352,105 @@ function drawheirlooms(){
 		$("#upgradeheirloom").text("Upgrade")
 		$(".heirloomslog2").html(" ")
 	}
+	$(".heirloomlist").html("");
+	if(heirlooms[14]>0){
+	heirlist="<table>";
+		for(i=0;i<heirlooms[14];i++){
+		suffix3="";
+		heir=heirlooms[20+i].split(";")
+	
+		if(heir[6]>0){
+		suffix3=" +"+heir[6]
+		}
+
+		heirlist+=("<tr><td style='background-color:#272822;font-weight:700;padding:5px; color:"+getRarityColor(heir[2])+"' >"+heir[0]+suffix3+"</div></td><td><button onclick='storeheirlooms("+i+")'>Pick</button></td></tr>")		
+		}
+heirlist+="<table>"
+		$(".heirloomlist").html(heirlist)
+	}
 
 }
 
+function storeheirlooms(x){
+
+	heir=new Array()
+
+
+		if(x==-1){
+			if(parseFloat(heirlooms[4])==0){
+				return;
+			}
+			x=heirlooms[14]
+			if(heirlooms[14]>9){
+
+				x=0;
+			}
+		}
+
+
+	if(heirlooms[x+20]!=0){
+	heir=heirlooms[x+20].split(";")
+	
+	if(parseFloat(heir[0])==0){
+		heirlooms[14]++;
+	}
+	}
+	else
+	{
+	heirlooms[14]++;
+	heir=new Array()
+	heir[0]=0
+	heir[1]=0
+	heir[2]=0
+	heir[3]=0
+	heir[4]=0
+	heir[5]=0
+	heir[6]=0
+	}
+	if(heir[3]>0){
+	bonus[heir[5]]+=parseFloat(heir[3])
+	}
+	if(heirlooms[7]>0){
+	bonus[heirlooms[8]]-=parseFloat(heirlooms[7])
+	}
+	swap1=heirlooms[4]
+	swap2=heirlooms[5]
+	swap3=heirlooms[6]
+	swap4=heirlooms[7]
+	swap5=heirlooms[9]
+	swap6=heirlooms[8]
+	swap7=heirlooms[13]
+
+	heirlooms[4]=heir[0]
+	heirlooms[5]=parseFloat(heir[1])
+	heirlooms[6]=parseFloat(heir[2])
+	heirlooms[7]=parseFloat(heir[3])
+	heirlooms[9]=heir[4]
+	heirlooms[8]=heir[5]
+	heirlooms[13]=parseFloat(heir[6])
+
+
+	heir[0]=swap1
+	heir[1]=swap2
+	heir[2]=swap3
+	heir[3]=swap4
+	heir[4]=swap5
+	heir[5]=swap6
+	heir[6]=swap7
+
+	heirlooms[20+x]=heir[0]+";"+heir[1]+";"+heir[2]+";"+heir[3]+";"+heir[4]+";"+heir[5]+";"+heir[6]
+
+	if(parseFloat(heir[0])==0){
+		heirlooms[14]--
+		for(i=20+x;i<30;i++){
+			heirlooms[i]=heirlooms[i+1]
+		}
+	}
+
+	drawheirlooms();
+	
+
+}
 
 function swapheirlooms(){
 

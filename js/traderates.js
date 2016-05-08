@@ -271,8 +271,8 @@ docklog+=("You also get 1 lock<br>");
 craft["lock"]++
 
 }
-if(Math.random()>0.99){
-				docklog+="The locals gave you a heirloom!<br>";
+if(Math.random()>0.98){
+				docklog+="<div style='display:inline;color:orange'>The locals gave you a heirloom!</div><br>";
 				createheirloom();
 				$("#heirlooms").show()
 				unlocked["#heirlooms"]=1;

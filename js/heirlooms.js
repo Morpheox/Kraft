@@ -44,12 +44,12 @@ function createheirloom(x){
 	}else if(rnd1>85){
 		name="Untouched ";
 		value=2;
-		rarity=1;
+		rarity=1.5;
 		power=1.5;
 	}else if(rnd1>75){
 		name="New ";
 		value=1.5;
-		rarity=1;
+		rarity=1.5;
 		power=1.2;
 	}
 
@@ -309,9 +309,9 @@ function getRarityColor(x){
 	}
 	else if(x<=75){
 		return "#0070dd";
-	}else if(x<=150){
+	}else if(x<=200){
 		return "#a335ee";
-	}else if(x<=250){
+	}else if(x<=350){
 		return "#ff8000";
 	}
 	else

@@ -30,7 +30,7 @@ for(var w=0;w<t;w++){
 		consumption[key]=0;
 	}
 //buildings
-
+ 
 if(items["coal"]>=people["cargotrain"]*0.02){
 	consumption["coal"]+=people["cargotrain"]*0.02
 	if(trademission["trainbuy"]!="nothing" && craft["coin"]>=people["cargotrain"]*0.05){
@@ -49,7 +49,9 @@ else
 {
 bonus["auto"]=0
 }
-
+if(heirlooms[8]=="auto"){
+bonus["auto"]+=heirlooms[7]
+}
 
 if (items["coal"]>=buildings["powerplant"]*0.05 &&  items["water"]>=buildings["powerplant"]*2 && buildstatus["powerplant"]==1)
 {

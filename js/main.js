@@ -5118,8 +5118,11 @@ if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.0075 && 
 else
 {
 bonus["auto"]=0
-}
 
+}
+if(heirlooms[8]=="auto"){
+bonus["auto"]+=heirlooms[7]
+}
 if (items["coal"]>=buildings["powerplant"]*0.0125 &&  items["water"]>=buildings["powerplant"]*0.5 && buildstatus["powerplant"]==1)
 {
 	consumption["water"]+=buildings["powerplant"]*0.5

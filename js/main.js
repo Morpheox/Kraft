@@ -2230,6 +2230,11 @@ function unlockSalvageBtn(b) {
   unlocked[".salvage_"+b] = 1;
 }
 
+function lockSalvageBtn(b) {
+  $(".salvage_"+b).hide();
+  unlocked[".salvage_"+b] = 0;
+}
+
 function hire(b) {
 tooltipcurrent=10;
   if (peopledata.hasOwnProperty(b) && isAffordable(peopledata[b].cost)) {

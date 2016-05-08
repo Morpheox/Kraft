@@ -5084,7 +5084,7 @@ if(buildstatus["workshop"]==1 && items["coal"]>=buildings["workshop"]*0.0075 && 
 {
 	consumption["coal"]+=buildings["workshop"]*0.0075
 	consumption["chemicals"]+=buildings["workshop"]*0.0025
-	bonus["auto"]=buildings["workshop"]*0.10
+	bonus["auto"] = buildings["workshop"] * 0.10 * bonus['craft']
 }
 else
 {

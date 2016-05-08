@@ -2138,7 +2138,7 @@ tooltipcurrent=10;
 
 }
 
-var armydata = {
+var peopledata = {
   woodcutter: {
     cost: {pop: 1, food: 50}
   },
@@ -2191,22 +2191,27 @@ var armydata = {
 
 var shipdata = {
   galley: {
-    cost: {ships: 1, wood: 20000, plank: 200, structure: 50}
+    cost: {ships: 1, wood: 20000, plank: 200, structure: 50},
+    salvages: {ships: 1, wood: [1000,5000], plank: [10,10], structure: [5,5]}
   },
   galleon: {
-    cost: {ships: 1, plank: 1500, structure: 300}
+    cost: {ships: 1, plank: 1500, structure: 300},
+    salvages: {ships: 1, wood: [20000,20000], plank: [300,300], structure: [50,50]}
   },
   fireship: {
-    cost: {ships: 1, plank: 1000, steel: 200, coal: 300}
+    cost: {ships: 1, plank: 1000, steel: 200, coal: 300},
+    salvages: {ships: 1, wood: [5000,20000], plank: [200,300], steel: [50,50]}
   },
   caravel: {
-    cost: {ships: 1, wood: 100000, iron: 500, plank: 1000}
+    cost: {ships: 1, wood: 100000, iron: 500, plank: 1000},
+    salvages: {ships: 1, wood: [5000,20000], iron: [100,50], plank: [200,300]}
   }
 };
 
 var traindata = {
   cargotrain: {
-    cost: {pop: 3, steel: 500, plate: 500, engine: 8,trains: 1}
+    cost: {trains: 1, pop: 3, steel: 500, plate: 500, engine: 8},
+    salvages: {trains: 1, pop: 3, steel: [100,100], plate: [100,100], engine: [1,2]}
   }
 };
 
@@ -2225,12 +2230,18 @@ function unlockSalvageBtn(b) {
   unlocked[".salvage_"+b] = 1;
 }
 
+function lockSalvageBtn(b) {
+  $(".salvage_"+b).hide();
+  unlocked[".salvage_"+b] = 0;
+}
+
 function hire(b) {
+
 tooltipcurrent=10;
-  if (armydata.hasOwnProperty(b) && isAffordable(armydata[b].cost)) {
+  if (peopledata.hasOwnProperty(b) && isAffordable(peopledata[b].cost)) {
     people[b]++;
     unlockFireBtn(b);
-    payCost(armydata[b].cost);
+    payCost(peopledata[b].cost);
   }
 
   if (shipdata.hasOwnProperty(b) && isAffordable(shipdata[b].cost)) {
@@ -2240,7 +2251,6 @@ tooltipcurrent=10;
   }
 
   if (traindata.hasOwnProperty(b) && isAffordable(traindata[b].cost)) {
-
     people[b]++;
     unlockSalvageBtn(b);
     payCost(traindata[b].cost);
@@ -2248,75 +2258,36 @@ tooltipcurrent=10;
 
 }
 
-function salvage(b){
-	if (people[b]>0){
+function salvage(b) {
+  if (people[b] > 0) {
 
-		people[b]-=1
-		
-		if (people[b]==0){
-			$(".salvage_"+b).hide()
-			unlocked[".salvage_"+b]=0;
-		}
-		if(b=="galley"){
+    people[b]--;
+    if (people[b] == 0) {lockSalvageBtn(b);}
 
-			craft["plank"]+=10+(Math.random()*10);
-			craft["structure"]+=5+(Math.random()*5);
-			items["wood"]+=1000+(Math.random()*5000);
-			ships--
-			if(people["galley"]<1){
-				$(".salvage_galley").hide()
-				unlocked[".salvage_galley"]=0;
-			}
-		}
-		if(b=="galleon"){
+    salvages = {};
+    if (shipdata.hasOwnProperty(b)) {
+      salvages = shipdata[b].salvages;
+    } else if (traindata.hasOwnProperty(b)) {
+      salvages = traindata[b].salvages;
+    }
 
-			craft["plank"]+=300+(Math.random()*300);
-			craft["structure"]+=50+(Math.random()*50);
-			items["wood"]+=20000+(Math.random()*20000);
-			ships--
-			if(people["galleon"]<1){
-				$(".salvage_galleon").hide()
-				unlocked[".salvage_galleon"]=0;
-			}
-		}
-		if(b=="fireship"){
+    for (k in salvages) {
+      if (items.hasOwnProperty(k)) {
+        items[k] += salvages[k][0] + Math.random()*salvages[k][1];
+      } else if (craft.hasOwnProperty(k)) {
+        craft[k] += salvages[k][0] + Math.random()*salvages[k][1];        
+      } else if (k == 'pop') {
+        population -= salvages[k];
+      } else if (k == 'ships') {
+        ships -= salvages[k];
+      } else if (k == 'trains') {
+        trains -= salvages[k];
+      }
+    }
 
-			craft["plank"]+=200+(Math.random()*300);
-			items["steel"]+=50+(Math.random()*50);
-			items["wood"]+=5000+(Math.random()*20000);
-			ships--
-			if(people["fireship"]<1){
-				$(".salvage_fireship").hide()
-				unlocked[".salvage_fireship"]=1;
-			}
-		}
-		if(b=="caravel"){
-
-			craft["plank"]+=200+(Math.random()*300);
-			items["wood"]+=5000+(Math.random()*20000);
-			items["iron"]+=100+(Math.random()*50);
-			ships--
-			if(people["caravel"]<1){
-				$(".salvage_caravel").hide()
-				unlocked[".salvage_caravel"]=1;
-			}
-		}
-		if(b=="cargotrain"){
-
-			craft["plate"]+=100+(Math.random()*100);
-			items["steel"]+=100+(Math.random()*100);
-			craft["engine"]+=1+(Math.random()*2);
-			trains--
-			population-=3;
-			if(people["cargotrain"]<1){
-				$(".salvage_cargotrain").hide()
-				unlocked[".salvage_cargotrain"]=1;
-			}
-		}
-	}
-
-
+  }
 }
+
 function fire(b){
 
 tooltipcurrent=10;

@@ -2138,7 +2138,7 @@ tooltipcurrent=10;
 
 }
 
-var armydata = {
+var peopledata = {
   woodcutter: {
     cost: {pop: 1, food: 50}
   },
@@ -2232,10 +2232,10 @@ function unlockSalvageBtn(b) {
 
 function hire(b) {
 tooltipcurrent=10;
-  if (armydata.hasOwnProperty(b) && isAffordable(armydata[b].cost)) {
+  if (peopledata.hasOwnProperty(b) && isAffordable(peopledata[b].cost)) {
     people[b]++;
     unlockFireBtn(b);
-    payCost(armydata[b].cost);
+    payCost(peopledata[b].cost);
   }
 
   if (shipdata.hasOwnProperty(b) && isAffordable(shipdata[b].cost)) {

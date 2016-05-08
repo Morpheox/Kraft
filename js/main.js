@@ -2191,22 +2191,27 @@ var armydata = {
 
 var shipdata = {
   galley: {
-    cost: {ships: 1, wood: 20000, plank: 200, structure: 50}
+    cost: {ships: 1, wood: 20000, plank: 200, structure: 50},
+    salvages: {ships: 1, wood: [1000,5000], plank: [10,10], structure: [5,5]}
   },
   galleon: {
-    cost: {ships: 1, plank: 1500, structure: 300}
+    cost: {ships: 1, plank: 1500, structure: 300},
+    salvages: {ships: 1, wood: [20000,20000], plank: [300,300], structure: [50,50]}
   },
   fireship: {
-    cost: {ships: 1, plank: 1000, steel: 200, coal: 300}
+    cost: {ships: 1, plank: 1000, steel: 200, coal: 300},
+    salvages: {ships: 1, wood: [5000,20000], plank: [200,300], steel: [50,50]}
   },
   caravel: {
-    cost: {ships: 1, wood: 100000, iron: 500, plank: 1000}
+    cost: {ships: 1, wood: 100000, iron: 500, plank: 1000},
+    salvages: {ships: 1, wood: [5000,20000], iron: [100,50], plank: [200,300]}
   }
 };
 
 var traindata = {
   cargotrain: {
-    cost: {pop: 3, steel: 500, plate: 500, engine: 8,trains: 1}
+    cost: {trains: 1, pop: 3, steel: 500, plate: 500, engine: 8},
+    salvages: {trains: 1, pop: 3, steel: [100,100], plate: [100,100], engine: [1,2]}
   }
 };
 

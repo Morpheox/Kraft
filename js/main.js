@@ -2082,7 +2082,7 @@ function payCost(cost) {
 function research(b) {
 tooltipcurrent=10;
   if (techdata.hasOwnProperty(b)) {
-    tech = techdata[b]
+    var tech = techdata[b]
 
     if (technologies[b] == 0 && isAffordable(techdata[b].cost)) {
 
@@ -2103,7 +2103,7 @@ tooltipcurrent=10;
 
       if (tech.hasOwnProperty('unlock')) { // Unlock elements, if any
         for (i = 0; i < tech.unlock.length; i++) {
-          unlockname = tech.unlock[i];
+          var unlockname = tech.unlock[i];
           unlocked[unlockname] = 1;
           if (unlockname[0] == "#") {
             $(unlockname).removeClass("invisible")
@@ -3177,7 +3177,6 @@ function set_unattainable(element, unattainable){
 
 
 //Buildings
-
 
 woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
 if(items["wood"]<woodcost){
@@ -4329,10 +4328,6 @@ $(".hire_cargotrain").attr('tooltip7', 'Trade amount: 3 coins/minute');
 
 //Technologies
 
-function toProperCase(str) {
-  return str[0].toUpperCase() + str.substr(1)
-}
-
 function setTechBtnAvailability(b) {
   if (isAffordable(techdata[b].cost)) {
     $(".tech_"+b).removeClass("unavailable");
@@ -4341,19 +4336,20 @@ function setTechBtnAvailability(b) {
   }
 }
 
-for (b in techdata) {
-  tech = techdata[b];
-  attainable = true;
-  tooltips = [];
 
-  for (costname in tech.cost) {
-    isItem = items.hasOwnProperty(costname)
-    amt = (isItem ? items : craft)[costname];
-    costAmt = tech.cost[costname];
-    if (isItem) {
-      attainable = attainable && maximums[costname]*(bonus.storage+1) >= costAmt;
+function toProperCase(str) {
+  return str[0].toUpperCase() + str.substr(1)
+}
+
+for (b in techdata) {
+
+  var tech = techdata[b];
+  var attainable = true;
+  
+  for (var costname in tech.cost) {
+    if (items.hasOwnProperty(costname)) {
+      attainable = attainable && maximums[costname]*(bonus.storage+1) >= tech.cost[costname];
     }
-    tooltips.push(toProperCase(costname) + ": " + parseFloat(amt).toFixed(2) + " / " + parseFloat(costAmt).toFixed(2));
   }
 
   setTechBtnAvailability(b);
@@ -4361,47 +4357,10 @@ for (b in techdata) {
   set_unattainable(".tech_"+b, !attainable);
   $(".tech_"+b).addClass((technologies[b] > 0 ? 'researched' : ''));
   
-  techname = tech.hasOwnProperty('name') ? tech.name : toProperCase(b);
-  suffix = (technologies[b] > 0 ? (techname.length < 14 ? ' (researched)' : ' (res...)')  : '');
+  var techname = tech.hasOwnProperty('name') ? tech.name : toProperCase(b);
+  var suffix = (technologies[b] > 0 ? (techname.length < 14 ? ' (researched)' : ' (res...)')  : '');
   $(".tech_"+b).html(techname + suffix);
 
-  if (tech.hasOwnProperty('bonus')) {
-    for (techbonus in tech.bonus) {
-      if (techbonus == 'shipspeed') {
-        tooltips.push('-' + tech.bonus[techbonus] + 's trade mission time')
-      } else if (techbonus == 'shiphp') {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + 'ship hp')
-      } else if (techbonus == 'exprew') {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% more resources found on expeditions')
-      } else if (techbonus == 'storage') {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' space')
-      } else if (techbonus == 'craft') {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' efficiency')
-      } else if (items.hasOwnProperty(techbonus)) {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' production')
-      } else if (techbonus != 'invest') {
-        tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus)
-      }
-    }
-  }
-
-
-  if (tech.hasOwnProperty('max')) {
-    for (techmax in tech.max) {
-      tooltips.push('+' + (tech.max[techmax]) + ' max ' + techmax);
-    }
-  }
-
-  if (tech.hasOwnProperty('desc')) {
-    for (i=0; i<=tech.desc.length;i++) {
-      tooltips.push(tech.desc[i]);
-    }
-  }
-
-  for (i=0; i<tooltips.length; i++) {
-    attr = 'tooltip' + (i>0 ? i+1 : '');
-    $(".tech_"+b).attr(attr, tooltips[i]);
-  }
 }
 
 $(".research_economy").html("Economy " + intToString(bonus["economy"]));
@@ -5769,7 +5728,70 @@ traderatio["mineral"]["nickel"]=0.00018;
 	$('.tradetrainselect').val(trademission["trainbuy"]);
 	save()
 
-	} 
+	}
+
+  function toProperCase(str) {
+    return str[0].toUpperCase() + str.substr(1)
+  }
+
+  function updateTechTooltip(techname) {
+    return function() {
+
+      var tech = techdata[techname];
+      var tooltips = [];
+      for (var costname in tech.cost) {
+        var isItem = items.hasOwnProperty(costname)
+        var amt = (isItem ? items : craft)[costname];
+        var costAmt = tech.cost[costname];
+        tooltips.push(toProperCase(costname) + ": " + parseFloat(amt).toFixed(2) + " / " + parseFloat(costAmt).toFixed(2));
+      }
+
+      if (tech.hasOwnProperty('bonus')) {
+        for (var techbonus in tech.bonus) {
+          if (techbonus == 'shipspeed') {
+            tooltips.push('-' + tech.bonus[techbonus] + 's trade mission time');
+          } else if (techbonus == 'shiphp') {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + 'ship hp');
+          } else if (techbonus == 'exprew') {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% more resources found on expeditions');
+          } else if (techbonus == 'storage') {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' space');
+          } else if (techbonus == 'craft') {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' efficiency');
+          } else if (items.hasOwnProperty(techbonus)) {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus + ' production');
+          } else if (techbonus != 'invest') {
+            tooltips.push('+' + (tech.bonus[techbonus])*100 + '% ' + techbonus);
+          }
+        }
+      }
+
+      if (tech.hasOwnProperty('max')) {
+        for (var techmax in tech.max) {
+          tooltips.push('+' + (tech.max[techmax]) + ' max ' + techmax);
+        }
+      }
+
+      if (tech.hasOwnProperty('desc')) {
+        for (var i=0; i<=tech.desc.length;i++) {
+          tooltips.push(tech.desc[i]);
+        }
+      }
+
+      for (var i=0; i<tooltips.length; i++) {
+        var attr = 'tooltip' + (i>0 ? i+1 : '');
+        $(".tech_"+techname).attr(attr, tooltips[i]);
+      }
+
+    }
+  }
+
+  for (var techname in techdata) {
+  	$(".tech_"+techname).mouseover(
+			updateTechTooltip(techname)
+		);
+  }
+
 } 
 
 

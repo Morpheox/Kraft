@@ -1816,6 +1816,7 @@ var techdata = {
     desc: ["Allows you to find more complex materials in expeditions, like sand, clay or bricks"]
   },
   openmining: {
+    name: "Open mining",
     cost: {mineral: 80000, pickaxe: 3000, knowledge: 1200},
     unlock: [".build_quarry"],
     desc: ["Allows you to build quarrys to extract clay from the ground"]

@@ -2290,22 +2290,14 @@ function salvage(b) {
 }
 
 function fire(b){
-
-tooltipcurrent=10;
-	if (people[b]>0){
-
-		people[b]-=1
-		population--
-		if(b=="lighttank"){
-		population-=2;
-
-		}
-		if (people[b]==0){
-			$(".fire_"+b).hide()
-			unlocked[".fire_"+b]=0;
-		}
+  tooltipcurrent=10;
+	if (people[b] > 0) {
+		people[b]--;
+		population -= peopledata[b].cost.pop;
 	}
+	if (people[b] == 0) {lockFireBtn(b);}
 }
+
 function build(b){
 	tooltipcurrent=10;
 	if (b=="lumbermill"){
@@ -5652,13 +5644,21 @@ drawheirlooms();
 		console.log('old');
 		}
 
-		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
+		//population = Cookies.get('population');
+    population = 0 // Doesn't it make more sense to start from 0 since it is recalculating from scratch?
+    trains = 0
+    ships = 0
+    for (p in peopledata) {
+      population += people[p] * peopledata[p].cost.pop;
+    }
+    for (p in shipdata) {
+      ships += people[p] * shipdata[p].cost.ships;
+    }
+    for (p in traindata) {
+      population += people[p] * traindata[p].cost.pop;
+      trains += people[p] * traindata[p].cost.trains;
+    }
 
-		trains=people["cargotrain"]
-		
-
-		ships=people["galley"]+people["galleon"]+people["fireship"]+people["caravel"]
 		for(key in unlocked){
 			if (unlocked[key]==1)
 			{

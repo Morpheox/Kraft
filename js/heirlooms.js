@@ -222,7 +222,7 @@ function createheirloom(x){
 	}else if(rnd3<85){
 		name+="of the Noble ";
 		value*=2.5;
-		rarity*=5;
+		rarity*=2.5;
 		power*=2;
 	}else if(rnd3<93){
 		name+="of the Queen ";
@@ -242,7 +242,7 @@ function createheirloom(x){
 	}
 
 
-	if(rnd3<100){
+	if(rnd3<150){
 		if(rnd4<1){
 			name+="God";
 			value*=100;
@@ -255,15 +255,15 @@ function createheirloom(x){
 			rarity*=35;
 			power*=20;
 		}
-		else if(rnd4<100){
+		else if(rnd4<50){
 			name+="Master";
 			value*=20;
 			rarity*=20;
 			power*=5;
-		}else if(rnd4<200){
+		}else if(rnd4<150){
 			name+="Teacher";
 			value*=10;
-			rarity*=3;
+			rarity*=10;
 			power*=2;
 		}
 	}
@@ -311,7 +311,7 @@ function getRarityColor(x){
 		return "#0070dd";
 	}else if(x<=200){
 		return "#a335ee";
-	}else if(x<=350){
+	}else if(x<=400){
 		return "#ff8000";
 	}
 	else

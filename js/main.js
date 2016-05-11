@@ -2183,7 +2183,7 @@ var peopledata = {
     cost: {pop: 1, coin: 100, musket: 1, armor: 1}
   },
   lighttank: {
-    cost: {pop: 1, plate: 200, engine: 2}
+    cost: {pop: 3, plate: 200, engine: 2}
   },
   knight: {
     cost: {pop: 1, swordman: 1, horse: 1, armor: 1}

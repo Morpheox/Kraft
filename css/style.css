@@ -1,34 +1,7 @@
 html,body{
 margin:0;
 padding:0;
-height: 100%;
-width: 100%;
 }
-
-#sidebar, #content {
-	height: 100%;
-	width: 100%;
-	margin:0;
-	padding:0;
-}
-
-#sidebar {
-	width: 350px;
-	position: fixed;
-	overflow-y: scroll;
-	left: 0;
-	top: 0;
-	bottom: 0;
-}
-
-#sidebar * {
-	font-size: 12px;
-}
-
-#content {
-	padding-left: 360px;
-}
-
 .heirloomslog,.heirloomslog2,.heirloomlist{
   border:1px solid black;
     padding:3px;
@@ -71,14 +44,15 @@ width: 100%;
     height:auto;
      white-space: pre;
 }
-.tab-pane{
- width: 95%;
- margin: 0 auto;
+
+.inventory,.build,.people,.technologies,.crafting,.inventory_craft,.soldiers,.market,.leader,.casino,.dock,.legacy,.facilities,.heirlooms{
+	float:left;
+	position: relative;
+	padding:25px;
+
 }
 .inventory{
- padding-top: 10px;
- width: 95%;
- margin: 0 auto;
+
 }
 .inventory td{
   padding:1px;

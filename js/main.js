@@ -2450,7 +2450,7 @@ var buildingdata = {
     max: {sand: 200},
     unlock: [".toggle_crusher"]
   },
-  blockhard: {
+  blockyard: {
     cost: {bronze: 50, pickaxe: 500},
     scale: 1.3,
     unlock: [".toggle_blockyard"]

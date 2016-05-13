@@ -2505,7 +2505,7 @@ var buildingdata = {
   },
   share: {
     cost: {token: 1000},
-    scale: 1.5
+    scale: 1.15
   },
   repository: {
     cost: {block: 5000, glass: 100, bottle: 10},

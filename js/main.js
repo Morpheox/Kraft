@@ -2030,6 +2030,8 @@ function isAffordable(cost) {
       affordable = affordable && items[costname] >= cost[costname];
     } else if (craft.hasOwnProperty(costname)) {
       affordable = affordable && craft[costname] >= cost[costname];
+    } else if (bonus.hasOwnProperty(costname)) {
+      affordable = affordable && bonus[costname] >= cost[costname];
     } else if (people.hasOwnProperty(costname)) {
       affordable = affordable && people[costname] >= cost[costname];
       netPopCost -= cost[costname]; // Offset the net population cost by transforming existing people, e.g. swordsman->knight
@@ -2066,6 +2068,8 @@ function payCost(cost) {
         maximums.coal -= 0.15 * cost[costname]
         maximums.steel -= 0.10 * cost[costname]
       }
+    } else if (bonus.hasOwnProperty(costname)) {
+      bonus[costname] -= cost[costname];
     } else if (people.hasOwnProperty(costname)) {
       people[costname] -= cost[costname];
       population--;
@@ -2080,6 +2084,47 @@ function payCost(cost) {
   }
 }
 
+function unlockElements(unlocks) {
+  if (typeof unlocks != 'undefined') {
+    for (i = 0; i < unlocks.length; i++) {
+      var u = unlocks[i];
+      unlocked[u] = 1;
+      if (u[0] == "#") {
+        $(u).removeClass("invisible");
+      } else if (u[0] == ".") {
+        $(u).show();
+        // Turn on buildings
+        if (u.substr(1,5) == 'build') {
+          buildstatus[u.substr(7)] = 1;
+        }
+      }
+    }
+  }
+}
+
+function incrementMaximums(maxes) {
+  if (typeof maxes != 'undefined') {
+    for (m in maxes) {
+      if (unlocked["#dockpane"] && traderatio.hasOwnProperty(m) && maximums[m] == 0) { // Resource is new and now tradeable
+        maximums[m] += maxes[m];
+        items[m] += 0.0001; // Add small amount for refreshselect() logic
+        refreshselect(); // Update trade dropdown with new resource
+      } else {
+        maximums[m] += maxes[m];
+      }
+    }
+  }
+}
+
+function applyBonuses(bonuses) {
+  if (typeof bonuses != 'unavailable') {
+    for (var b in bonuses) {
+      bonus[b] += bonuses[b];
+    }
+  }
+}
+
+
 function research(b) {
 tooltipcurrent=10;
   if (techdata.hasOwnProperty(b)) {
@@ -2089,34 +2134,9 @@ tooltipcurrent=10;
 
       payCost(tech.cost);        
       technologies[b]++
-
-      if (tech.hasOwnProperty('bonus')) {
-        for (techbonus in tech.bonus) {
-          bonus[techbonus] += tech.bonus[techbonus];
-        }
-      }
-
-      if (tech.hasOwnProperty('max')) {
-        for (techmax in tech.max) {
-          maximums[techmax] += tech.max[techmax];
-        }
-      }
-
-      if (tech.hasOwnProperty('unlock')) { // Unlock elements, if any
-        for (i = 0; i < tech.unlock.length; i++) {
-          var unlockname = tech.unlock[i];
-          unlocked[unlockname] = 1;
-          if (unlockname[0] == "#") {
-            $(unlockname).removeClass("invisible")
-          } else if (unlockname[0] == ".") {
-            $(unlockname).show()
-            // Turn on buildings
-            if (unlockname.substr(1,5) == 'build') {
-              buildstatus[unlockname.substr(7)] = 1
-            }
-          }
-        }
-      }
+      applyBonuses(tech.bonus);
+      incrementMaximums(tech.max);
+      unlockElements(tech.unlock);
 
       if (b == 'deals') { // Special cases
         newDeal();
@@ -2298,857 +2318,279 @@ function fire(b){
 	if (people[b] == 0) {lockFireBtn(b);}
 }
 
+var buildingdata = {
+  lumbermill: {
+    cost: {wood: 3},
+    scale: 1.1,
+    unlock: [".build_mine"]
+  },
+  mine: {
+    cost: {wood: 2, mineral: 3.5},
+    scale: 1.1,
+    unlock: [".build_warehouse"]
+  },
+  warehouse: {
+    cost: {wood: 20, mineral: 10},
+    scale: 1.6,
+    max: {wood: 200, mineral: 200, food: 100, copper: 5, gold: 1, iron: 5, tin: 4, coal: 5, steel: 3},
+    unlock: [".build_fountain", ".build_pasture"]
+  },
+  fountain: {
+    cost: {mineral: 6},
+    scale: 1.35,
+    max: {water: 5}
+  },
+  pasture: {
+    cost: {wood: 10},
+    scale: 1.35,
+    unlock: [".build_house", ".toggle_pasture"]
+  },
+  house: {
+    cost: {wood: 20, mineral: 50, food: 15},
+    scale: 1.8,
+    max: {population: 3},
+    unlock: [".build_library", ".population", ".hire_woodcutter", ".hire_smelter", ".hire_farmer", "#jobspane"]
+  },
+  library: {
+    cost: {wood: 300, mineral: 100},
+    scale: 1.9,
+    max: {knowledge: 100},
+    tieredUnlock: {
+      1: [".tech_coppertools", ".tech_pickaxe", "#technologiespane"],
+      2: [".build_banner", ".tech_spear", ".tech_exploration"],
+      3: [".tech_ironfoundry", ".tech_metallurgy", ".tech_sword", ".tech_storage"],
+      4: [".tech_currency", ".tech_exchange", ".tech_coin"],
+      5: [".tech_bronze", ".tech_bronzetools", ".tech_charcoal", ".tech_centralisation"],
+      6: [".tech_steel", ".tech_manufacturing", ".tech_steeltools", ".tech_husbandry", ".tech_cavalry"],
+      7: [".tech_leadership", ".tech_armament", ".tech_gambling", ".tech_redeem", ".tech_wrapping"],
+      8: [".tech_shipyard", ".tech_sailing", ".tech_trade", ".tech_cache", ".tech_specialization"]
+    }
+  },
+  banner: {
+    cost: {wood: 100, copper: 1},
+    scale: 1.7,
+    max: {morale: 1}
+  },
+  foundry: {
+    cost: {mineral: 500, copper: 5},
+    scale: 1.3,
+    unlock: [".toggle_foundry"]
+  },
+  barn: {
+    cost: {block: 5},
+    scale: 1.4,
+    max: {wood: 500, mineral: 500}
+  },
+  casino: {
+    cost: {block: 3, gold: 1},
+    scale: 1.6,
+    max: {gold: 1, bet: 0.5},
+    unlock: ["#casinopane"]
+  },
+  market: {
+    cost: {wood: 500, coin: 1},
+    scale: 1.6,
+    bonus: {trade: 0.05},
+    unlock: ["#marketpane"]
+  },
+  kiln: {
+    cost: {block: 15, mineral: 2000},
+    scale: 1.5,
+    unlock: [".toggle_kiln"]
+  },
+  statue: {
+    cost: {bronze: 1},
+    scale: 1.5,
+    max: {morale: 2},
+    bonus: {morale: 0.05}
+  },
+  towncenter: {
+    cost: {block: 20, structure: 5, coin: 3},
+    scale: 1.25,
+    max: {wood: 1500, mineral: 1000, food: 500, copper: 10, gold: 2, iron: 10, tin: 10, coal: 5, steel: 5, population: 5}
+  },
+  workbench: {
+    cost: {steel: 2},
+    scale: 1.4,
+    bonus: {craft: 0.08},
+    unlock: [".toggle_workbench", ".craftamount"]
+  },
+  castle: {
+    cost: {block: 50, gold: 5},
+    scale: 1.6,
+    bonus: {title: 1},
+    unlock: [".leader_sucellus", ".leader_eredal", ".leader_khrysos", ".leader_elisia",
+      ".leader_xochiquetzal", ".leader_warmuk", ".titles", "#leaderpane"]
+  },
+  relic: {
+    cost: {token: 20},
+    scale: 1.2,
+    bonus: {global: 0.01}
+  },
+  shipyard: {
+    cost: {wood: 20000, structure: 50},
+    scale: 1.4,
+    unlock: [".toggle_shipyard"]
+  },
+  docks: {
+    cost: {iron: 100, plank: 50},
+    scale: 1.3,
+    max: {ships: 1},
+    unlock: ["#dockpane", ".hire_galley", ".ships"]
+  },
+  bank: {
+    cost: {block: 200, steel: 100, coin: 100},
+    scale: 1.4,
+    max: {gold: 2},
+    unlock: [".toggle_bank"]
+  },
+  crusher: {
+    cost: {copper: 150, iron: 100, steel: 50},
+    scale: 1.2,
+    max: {sand: 200},
+    unlock: [".toggle_crusher"]
+  },
+  blockhard: {
+    cost: {bronze: 50, pickaxe: 500},
+    scale: 1.3,
+    unlock: [".toggle_blockyard"]
+  },
+  bunker: {
+    cost: {frame: 5, pickaxe: 750},
+    scale: 1.4,
+    max: {wood: 4000, mineral: 4000, sand: 4000, clay: 500, cement: 500, concrete: 500}
+  },
+  laboratory: {
+    cost: {frame: 5, glass: 20},
+    scale: 1.4,
+    max: {chemicals: 5},
+    unlock: [".toggle_laboratory"]
+  },
+  scienceoutpost: {
+    cost: {frame: 10, glass: 20, territory: 400},
+    scale: 1.3,
+    max: {population: 10},
+    bonus: {title: 1}
+  },
+  tradeoutpost: {
+    cost: {frame: 10, coin: 300, territory: 400},
+    scale: 1.3,
+    max: {population: 10},
+    bonus: {title: 1}
+  },
+  militaryoutpost: {
+    cost: {frame: 10, sword: 400, armor: 20, territory: 400},
+    scale: 1.3,
+    max: {population: 10, morale: 3},
+    bonus: {title: 1}
+  },
+  quarry: {
+    cost: {mineral: 50000, pickaxe: 500},
+    scale: 1.2
+  },
+  carpentry: {
+    cost: {frame: 5, brick: 20},
+    scale: 1.4,
+    unlock: [".toggle_carpentry"]
+  },
+  blastfurnace: {
+    cost: {brick: 25},
+    scale: 1.4,
+    unlock: [".toggle_blastfurnace"]
+  },
+  compressor: {
+    cost: {brick: 500, glass: 50, frame: 25},
+    scale: 1.2,
+    bonus: {storage: 0.05}
+  },
+  share: {
+    cost: {token: 1000},
+    scale: 1.5
+  },
+  repository: {
+    cost: {block: 5000, glass: 100, bottle: 10},
+    scale: 1.2,
+    max: {tin: 5, chemicals: 3, steel: 5, nickel: 5, silicon: 2, lithium: 1}
+  },
+  trainstation: {
+    cost: {wood: 100000, iron: 500, frame: 50},
+    scale: 1.2,
+    max: {trains: 2},
+    unlock: [".hire_cargotrain", ".trains", ".tradetrain"]
+  },
+  workshop: {
+    cost: {brick: 500, plate: 500, engine: 10},
+    scale: 1.3,
+    bonus: {craft: 0.1},
+    unlock: [".toggle_workshop"]
+  },
+  powerplant: {
+    cost: {frame: 300, plate: 500},
+    scale: 1.1,
+    max: {energy: 100},
+    unlock: [".toggle_powerplant"]
+  },
+  cementkiln: {
+    cost: {steel: 600, plate: 200},
+    scale: 1.3,
+    unlock: [".toggle_cementkiln"]
+  },
+  university: {
+    cost: {cement: 15000, brick: 1000, frame: 500},
+    scale: 1.3,
+    max: {knowledge: 200},
+    unlock: [".toggle_university"]
+  },
+  concretemixer: {
+    cost: {brick: 1000, plate: 200},
+    scale: 1.25,
+    max: {knowledge: 200},
+    unlock: [".toggle_concretemixer"]
+  },
+  toolfactory: {
+    cost: {brick: 2500, concrete: 1000},
+    scale: 1.2,
+    unlock: [".toggle_toolfactory"]
+  },
+  barracks: {
+    cost: {concrete: 20000},
+    scale: 1.2,
+    max: {population: 5},
+    unlock: [".toggle_barracks"]
+  },
+  factory: {
+    cost: {brick: 10000, toolbox: 50, concrete: 5000},
+    scale: 1.2,
+    bonus: {craft: 0.2},
+    unlock: [".toggle_factory"]
+  }
+};
+
 function build(b){
 	tooltipcurrent=10;
-	if (b=="lumbermill"){
-
-		woodcost= Math.pow(1.1,(buildings["lumbermill"]))*3
-
-		if (items["wood"]>=woodcost){
-			items["wood"]-=woodcost;
-			buildings["lumbermill"]+=1
-			$(".build_mine").show()
-			unlocked[".build_mine"]=1;
-		}
-
-	}
-	else if (b=="mine"){
-
-		woodcost= Math.pow(1.1,(buildings["mine"]))*2
-		mineralcost=Math.pow(1.1, (buildings["mine"]))*3.5
-
-		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-			items["wood"]-=woodcost;
-			items["mineral"]-=mineralcost
-			buildings["mine"]+=1
-			$(".build_warehouse").show()
-			unlocked[".build_warehouse"]=1;
-
-
-		}
-
-	}
-	else if (b=="warehouse"){
-
-		woodcost= Math.pow(1.6,(buildings["warehouse"]))*20
-		mineralcost=Math.pow(1.6, (buildings["warehouse"]))*10
-
-		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-			items["wood"]-=woodcost;
-			items["mineral"]-=mineralcost
-
-			maximums["wood"]+=200;
-			maximums["mineral"]+=200;
-			maximums["food"]+=100;
-			maximums["copper"]+=5;
-			maximums["gold"]+=1;
-			maximums["iron"]+=5;
-			maximums["tin"]+=4;
-			maximums["coal"]+=5;
-			maximums["steel"]+=3;
-
-			buildings["warehouse"]+=1
-			$(".build_fountain").show()
-			$(".build_pasture").show()
-			unlocked[".build_fountain"]=1;
-			unlocked[".build_pasture"]=1;
-		}
-
-	}
-	else if (b=="fountain"){
-
-		mineralcost=Math.pow(1.35, (buildings["fountain"]))*6
-
-		if (items["mineral"]>=mineralcost){
-			items["mineral"]-=mineralcost
-			buildings["fountain"]+=1
-			maximums["water"]+=5;
-		}
-
-	}
-	else if (b=="pasture"){
-
-		woodcost= Math.pow(1.35,(buildings["pasture"]))*10
-
-		if (items["wood"]>=woodcost){
-			items["wood"]-=woodcost;
-			buildings["pasture"]+=1
-			$(".build_house").show()
-			$(".toggle_pasture").show()
-			unlocked[".build_house"]=1;
-			unlocked[".toggle_pasture"]=1;
-		}
-
-	}
-	else if (b=="house"){
-
-		woodcost= Math.pow(1.8,(buildings["house"]))*20
-		mineralcost=Math.pow(1.8, (buildings["house"]))*50
-		foodcost=Math.pow(1.8, (buildings["house"]))*15
-		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost && items["food"]>=foodcost ){
-			items["wood"]-=woodcost;
-			items["mineral"]-=mineralcost
-			items["food"]-=foodcost
-			buildings["house"]+=1
-			maximums["population"]+=3;
-			$(".build_library").show()
-			$(".population").show()
-			$(".hire_woodcutter").show()
-			$(".hire_smelter").show()
-			$(".hire_farmer").show()
-			$("#jobspane").removeClass("invisible")
-			unlocked[".build_library"]=1;
-			unlocked[".population"]=1;
-			unlocked[".hire_woodcutter"]=1;
-			unlocked[".hire_smelter"]=1;
-			unlocked[".hire_farmer"]=1;
-			unlocked["#jobspane"]=1;
-		}
-
-	}
-	else if (b=="library"){
-
-		woodcost= Math.pow(1.9,(buildings["library"]))*300
-		mineralcost=Math.pow(1.9, (buildings["library"]))*100
-
-		if (items["wood"]>=woodcost && items["mineral"]>=mineralcost){
-			items["wood"]-=woodcost;
-			items["mineral"]-=mineralcost;
-			buildings["library"]+=1;
-			maximums["knowledge"]+=100;
-
-			switch(buildings["library"]){
-				case 1: $(".tech_coppertools").show();unlocked[".tech_coppertools"]=1;$(".tech_pickaxe").show();unlocked[".tech_pickaxe"]=1;$("#technologiespane").removeClass("invisible");unlocked["#technologiespane"]=1;break;
-				case 2: $(".build_banner").show();unlocked[".build_banner"]=1;$(".tech_spear").show();unlocked[".tech_spear"]=1;$(".tech_exploration").show();unlocked[".tech_exploration"]=1;break;
-				case 3: $(".tech_ironfoundry").show();unlocked[".tech_ironfoundry"]=1;$(".tech_metallurgy").show();unlocked[".tech_metallurgy"]=1;$(".tech_sword").show();unlocked[".tech_sword"]=1;$(".tech_storage").show();unlocked[".tech_storage"]=1;break;
-				case 4: $(".tech_currency").show();unlocked[".tech_currency"]=1;$(".tech_exchange").show();unlocked[".tech_exchange"]=1;$(".tech_coin").show();unlocked[".tech_coin"]=1;break;
-				case 5: $(".tech_bronze").show();unlocked[".tech_bronze"]=1;$(".tech_bronzetools").show();unlocked[".tech_bronzetools"]=1;$(".tech_charcoal").show();unlocked[".tech_charcoal"]=1;$(".tech_centralisation").show();unlocked[".tech_centralisation"]=1;break;
-				case 6: $(".tech_steel").show();unlocked[".tech_steel"]=1;$(".tech_manufacturing").show();unlocked[".tech_manufacturing"]=1;$(".tech_steeltools").show();unlocked[".tech_steeltools"]=1;$(".tech_husbandry").show();unlocked[".tech_husbandry"]=1;$(".tech_cavalry").show();unlocked[".tech_cavalry"]=1;break;
-				case 7: $(".tech_leadership").show();unlocked[".tech_leadership"]=1;$(".tech_armament").show();unlocked[".tech_armament"]=1;$(".tech_gambling").show();unlocked[".tech_gambling"]=1;$(".tech_redeem").show();unlocked[".tech_redeem"]=1;$(".tech_wrapping").show();unlocked[".tech_wrapping"]=1;break;
-				case 8: $(".tech_shipyard").show();unlocked[".tech_shipyard"]=1;$(".tech_sailing").show();unlocked[".tech_sailing"]=1;$(".tech_trade").show();unlocked[".tech_trade"]=1;$(".tech_cache").show();unlocked[".tech_cache"]=1;$(".tech_specialization").show();unlocked[".tech_specialization"]=1;break;
-			}
-
-		}
-
-	}
-	else if (b=="banner"){
-
-
-		woodcost= Math.pow(1.7,(buildings["banner"]))*100;
-		coppercost=Math.pow(1.7, (buildings["banner"]))*1;
-
-		if (items["copper"]>=coppercost && items["wood"]>=woodcost){
-			items["wood"]-=woodcost;
-			items["copper"]-=coppercost;
-			buildings["banner"]+=1;
-			maximums["morale"]+=1;
-
-		}
-
-	}
-	else if (b=="foundry"){
-
-
-		mineralcost= Math.pow(1.3,(buildings["foundry"]))*500;
-		coppercost=Math.pow(1.3, (buildings["foundry"]))*5
-
-		if (items["copper"]>=coppercost && items["mineral"]>=mineralcost){
-			items["mineral"]-=mineralcost;
-			items["copper"]-=coppercost;
-			buildings["foundry"]+=1;
-			$(".toggle_foundry").show()
-			unlocked[".toggle_foundry"]=1
-		}
-
-	}
-	else if (b=="barn"){
-
-		blockcost= Math.pow(1.4,(buildings["barn"]))*5
-
-
-		if (craft["block"]>=blockcost){
-			craft["block"]-=blockcost;
-
-			maximums["wood"]+=500;
-			maximums["mineral"]+=500;
-
-			buildings["barn"]+=1
-
-
-		}
-	}
-	else if (b=="casino"){
-
-		blockcost= Math.pow(1.6,(buildings["casino"]))*3
-		goldcost= Math.pow(1.6,(buildings["casino"]))*1
-
-		if (craft["block"]>=blockcost && items["gold"]>=goldcost){
-			craft["block"]-=blockcost;
-			items["gold"]-=goldcost
-
-			maximums["gold"]+=1;
-			maximums["bet"]+=0.5;
-
-			$("#casinopane").removeClass("invisible")
-			unlocked["#casinopane"]=1
-			buildings["casino"]+=1
-
-
-		}
-	}
-	else if (b=="market"){
-
-		woodcost= Math.pow(1.6,(buildings["market"]))*500
-		coincost= Math.pow(1.6,(buildings["market"]))*1
-
-		if (items["wood"]>=woodcost && craft["coin"]>=coincost){
-			items["wood"]-=woodcost;
-			craft["coin"]-=coincost
-
-			bonus["trade"]+=0.05
-
-			$("#marketpane").removeClass("invisible")
-			unlocked["#marketpane"]=1
-			buildings["market"]+=1
-
-
-		}
-	}
-	else if (b=="kiln"){
-
-		blockcost= Math.pow(1.5,(buildings["kiln"]))*15
-		mineralcost= Math.pow(1.5,(buildings["kiln"]))*2000
-
-		if (items["mineral"]>=mineralcost && craft["block"]>=blockcost){
-			items["mineral"]-=mineralcost;
-			craft["block"]-=blockcost;
-			$(".toggle_kiln").show()
-			unlocked[".toggle_kiln"]=1
-			buildings["kiln"]+=1
-
-
-		}
-	}
-	else if (b=="statue"){
-
-		bronzecost= Math.pow(1.5,(buildings["statue"]))*1
-
-
-		if (craft["bronze"]>=bronzecost){
-
-			craft["bronze"]-=bronzecost;
-			maximums["morale"]+=2;
-			bonus["morale"]+=0.05;
-
-
-			buildings["statue"]+=1
-		}
-	}
-	else if (b=="towncenter"){
-
-		blockcost= Math.pow(1.25,(buildings["towncenter"]))*20
-		structurecost= Math.pow(1.25,(buildings["towncenter"]))*5
-		coincost= Math.pow(1.25,(buildings["towncenter"]))*3
-
-		if (craft["block"]>=blockcost && craft["structure"]>=structurecost && craft["coin"]>=coincost){
-
-			craft["block"]-=blockcost;
-			craft["structure"]-=structurecost;
-			craft["coin"]-=coincost;
-
-			maximums["wood"]+=1500;
-			maximums["mineral"]+=1000;
-			maximums["food"]+=500;
-			maximums["copper"]+=10;
-			maximums["gold"]+=2;
-			maximums["iron"]+=10;
-			maximums["tin"]+=10;
-			maximums["coal"]+=5;
-			maximums["steel"]+=5;
-
-			maximums["population"]+=5;
-
-			buildings["towncenter"]+=1
-		}
-	}
-	else if (b=="workbench"){
-
-		steelcost= Math.pow(1.4,(buildings["workbench"]))*2
-
-
-		if (items["steel"]>=steelcost){
-
-			items["steel"]-=steelcost;
-			bonus["craft"]+=0.08;
-
-
-			buildings["workbench"]+=1
-			$(".toggle_workbench").show()
-			unlocked[".toggle_workbench"]=1
-			$(".craftamount").show()
-			unlocked[".craftamount"]=1
-		}
-	}
-	else if (b=="castle"){
-
-		blockcost= Math.pow(1.6,(buildings["castle"]))*50
-		goldcost= Math.pow(1.6,(buildings["castle"]))*5
-
-		if (craft["block"]>=blockcost && items["gold"]>=goldcost){
-
-			craft["block"]-=blockcost;
-			items["gold"]-=goldcost
-
-			bonus["title"]+=1;
-
-
-			buildings["castle"]+=1
-			$(".leader_sucellus").show()
-			unlocked[".leader_sucellus"]=1;
-			$(".leader_eredal").show()
-			unlocked[".leader_eredal"]=1;
-			$(".leader_khrysos").show()
-			unlocked[".leader_khrysos"]=1;
-			$(".leader_elisia").show()
-			unlocked[".leader_elisia"]=1;
-			$(".leader_xochiquetzal").show()
-			unlocked[".leader_xochiquetzal"]=1;
-			$(".leader_warmuk").show()
-			unlocked[".leader_warmuk"]=1;
-			$(".titles").show()
-			unlocked[".titles"]=1;
-			$("#leaderpane").removeClass("invisible")
-			unlocked["#leaderpane"]=1;
-		}
-	}
-	else if (b=="relic"){
-
-		tokencost= Math.pow(1.2,(buildings["relic"]))*20
-
-
-		if (craft["token"]>=tokencost){
-
-			craft["token"]-=tokencost;
-
-
-
-			buildings["relic"]+=1
-			bonus["global"]+=0.01
-		}
-	}
-	else if (b=="shipyard"){
-
-		woodcost=Math.pow(1.4,(buildings["shipyard"]))*20000
-		structurecost= Math.pow(1.4,(buildings["shipyard"]))*50
-
-
-
-		if (craft["structure"]>=structurecost && items["wood"]>=woodcost){
-
-			craft["structure"]-=structurecost;
-			items["wood"]-=woodcost;
-
-
-			buildings["shipyard"]+=1
-			$(".toggle_shipyard").show()
-			unlocked[".toggle_shipyard"]=1
-
-		}
-	}
-
-	else if (b=="docks"){
-		ironcost=Math.pow(1.3,(buildings["docks"]))*100
-		plankcost= Math.pow(1.3,(buildings["docks"]))*50
-
-
-
-		if (craft["plank"]>=plankcost && items["iron"]>=ironcost){
-
-			craft["plank"]-=plankcost;
-			items["iron"]-=ironcost;
-
-			maximums["ships"]++
-
-			buildings["docks"]+=1
-
-			$("#dockpane").removeClass("invisible");
-			unlocked["#dockpane"]=1
-			$(".hire_galley").show()
-			unlocked[".hire_galley"]=1
-			$(".ships").show()
-			unlocked[".ships"]=1
-		}
-	}
-	else if (b=="bank"){
-
-		blockcost=Math.pow(1.4,(buildings["bank"]))*200
-		steelcost=Math.pow(1.4,(buildings["bank"]))*100
-		coincost=Math.pow(1.4,(buildings["bank"]))*100
-
-
-		if (craft["block"]>=blockcost && items["steel"]>=steelcost && craft["coin"]>=coincost ){
-
-			craft["block"]-=blockcost;
-			craft["coin"]-=coincost;
-			items["steel"]-=steelcost;
-
-			maximums["gold"]+=2;
-
-			buildings["bank"]+=1
-			$(".toggle_bank").show()
-			unlocked[".toggle_bank"]=1
-
-		}
-	}
-	else if (b=="crusher"){
-
-		coppercost=Math.pow(1.2,(buildings["crusher"]))*150
-		ironcost=Math.pow(1.2,(buildings["crusher"]))*100
-		steelcost=Math.pow(1.2,(buildings["crusher"]))*50
-
-
-		if (items["copper"]>=coppercost && items["steel"]>=steelcost && items["iron"]>=ironcost ){
-
-			items["copper"]-=coppercost;
-			items["iron"]-=ironcost;
-			items["steel"]-=steelcost;
-
-			maximums["sand"]+=200;
-
-			buildings["crusher"]+=1
-			$(".toggle_crusher").show()
-			unlocked[".toggle_crusher"]=1
-
-			items["sand"]+=0.0001
-			refreshselect()
-
-		}
-	}
-	else if (b=="blockyard"){
-
-		bronzecost=Math.pow(1.3,(buildings["blockyard"]))*50
-		pickaxecost=Math.pow(1.3,(buildings["blockyard"]))*500
-
-
-
-		if (craft["bronze"]>=bronzecost && craft["pickaxe"]>=pickaxecost){
-
-			craft["bronze"]-=bronzecost;
-			craft["pickaxe"]-=pickaxecost;
-
-
-			buildings["blockyard"]+=1
-			$(".toggle_blockyard").show()
-			unlocked[".toggle_blockyard"]=1
-
-		}
-	}
-		else if (b=="bunker"){
-
-		framecost= Math.pow(1.4,(buildings["bunker"]))*5
-		pickaxecost=Math.pow(1.4, (buildings["bunker"]))*750
-
-		if (craft["pickaxe"]>=pickaxecost && craft["frame"]>=framecost){
-
-			craft["pickaxe"]-=pickaxecost;
-			craft["frame"]-=framecost
-
-			maximums["wood"]+=4000;
-			maximums["mineral"]+=4000;
-			maximums["sand"]+=4000;
-			maximums["clay"]+=500;
-			maximums["cement"]+=500;
-			maximums["concrete"]+=500;
-
-
-			buildings["bunker"]+=1
-
-		}
-
-	}
-	else if (b=="laboratory"){
-
-		framecost=Math.pow(1.4,(buildings["laboratory"]))*5
-		glasscost=Math.pow(1.4,(buildings["laboratory"]))*20
-
-
-		if (craft["frame"]>=framecost && craft["glass"]>=glasscost){
-
-			craft["frame"]-=framecost;
-			craft["glass"]-=glasscost;
-
-			maximums["chemicals"]+=5;
-
-			buildings["laboratory"]+=1
-			$(".toggle_laboratory").show()
-			unlocked[".toggle_laboratory"]=1
-
-			items["chemicals"]+=0.0001
-			refreshselect()
-
-
-		}
-	}
-	else if (b=="scienceoutpost"){
-
-		framecost=Math.pow(1.3,(buildings["scienceoutpost"]))*10
-		glasscost=Math.pow(1.3,(buildings["scienceoutpost"]))*20
-		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
-
-		if (craft["frame"]>=framecost && craft["glass"]>=glasscost && bonus["territory"]>=territorycost){
-
-			craft["frame"]-=framecost;
-			craft["glass"]-=glasscost;
-			bonus["territory"]-=territorycost
-
-			buildings["scienceoutpost"]+=1
-			maximums["population"]+=10;
-			bonus["title"]+=1;
-
-		}
-	}
-	else if (b=="tradeoutpost"){
-
-		framecost=Math.pow(1.3,(buildings["tradeoutpost"]))*10
-		coincost=Math.pow(1.3,(buildings["tradeoutpost"]))*300
-		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
-
-		if (craft["frame"]>=framecost && craft["coin"]>=coincost && bonus["territory"]>=territorycost){
-
-			craft["frame"]-=framecost;
-			craft["coin"]-=coincost;
-			bonus["territory"]-=territorycost
-
-			buildings["tradeoutpost"]+=1
-			maximums["population"]+=10;
-			bonus["title"]+=1;
-
-		}
-	}
-	else if (b=="militaryoutpost"){
-
-		framecost=Math.pow(1.3,(buildings["militaryoutpost"]))*10
-		swordcost=Math.pow(1.3,(buildings["militaryoutpost"]))*400
-		armorcost=Math.pow(1.3,(buildings["militaryoutpost"]))*20
-		territorycost=Math.pow(1.2,(buildings["tradeoutpost"]+buildings["scienceoutpost"]+buildings["militaryoutpost"]))*400
-
-		if (craft["frame"]>=framecost && craft["armor"]>=armorcost && craft["sword"]>=swordcost && bonus["territory"]>=territorycost){
-
-			craft["frame"]-=framecost;
-			craft["armor"]-=armorcost;
-			craft["sword"]-=swordcost
-			bonus["territory"]-=territorycost
-
-			maximums["morale"]+=3;
-			buildings["militaryoutpost"]+=1;
-			maximums["population"]+=10;
-			bonus["title"]+=1;
-
-		}
-	}
-	else if (b=="quarry"){
-
-		mineralcost=Math.pow(1.2,(buildings["quarry"]))*50000
-		pickaxecost=Math.pow(1.2,(buildings["quarry"]))*500
-
-
-		if (items["mineral"]>=mineralcost && craft["pickaxe"]>=pickaxecost){
-
-			items["mineral"]-=mineralcost;
-			craft["pickaxe"]-=pickaxecost;
-
-
-			buildings["quarry"]+=1
-
-
-		}
-	}
-	else if (b=="carpentry"){
-
-		framecost=Math.pow(1.4,(buildings["carpentry"]))*5
-		brickcost=Math.pow(1.4,(buildings["carpentry"]))*20
-
-
-
-		if (craft["brick"]>=brickcost && craft["frame"]>=framecost){
-
-			craft["brick"]-=brickcost;
-			craft["frame"]-=framecost;
-
-
-			buildings["carpentry"]+=1
-			$(".toggle_carpentry").show()
-			unlocked[".toggle_carpentry"]=1
-
-		}
-	}
-	else if (b=="blastfurnace"){
-
-		brickcost=Math.pow(1.4,(buildings["blastfurnace"]))*25
-
-		if (craft["brick"]>=brickcost){
-
-			craft["brick"]-=brickcost;
-			buildstatus["blastfurnace"]=1;
-			buildings["blastfurnace"]+=1;
-			$(".toggle_blastfurnace").show()
-			unlocked[".toggle_blastfurnace"]=1
-
-		}
-	}
-	else if (b=="compressor"){
-
-		brickcost=Math.pow(1.2,(buildings["compressor"]))*500
-		glasscost=Math.pow(1.2,(buildings["compressor"]))*50
-		framecost=Math.pow(1.2,(buildings["compressor"]))*25
-
-
-		if (craft["brick"]>=brickcost && craft["glass"]>=glasscost && craft["frame"]>=framecost){
-
-			craft["brick"]-=brickcost;
-			craft["glass"]-=glasscost;
-			craft["frame"]-=framecost;
-
-			bonus["storage"]+=0.05
-
-			buildings["compressor"]+=1;
-
-
-		}
-	}
-	else if (b=="share"){
-
-		tokencost=Math.pow(1.15,(buildings["share"]))*1000
-
-
-		if (craft["token"]>=tokencost){
-
-			craft["token"]-=tokencost;
-
-			buildings["share"]+=1;
-
-
-		}
-	}
-	else if (b=="repository"){
-
-		blockcost=Math.pow(1.2,(buildings["repository"]))*5000
-		glasscost=Math.pow(1.2,(buildings["repository"]))*100
-		bottlecost=Math.pow(1.2,(buildings["repository"]))*10
-
-
-		if (craft["block"]>=blockcost && craft["glass"]>=glasscost && craft["bottle"]>=bottlecost){
-
-			craft["block"]-=blockcost;
-			craft["glass"]-=glasscost;
-			craft["bottle"]-=bottlecost;
-			maximums["water"]-=bottlecost;
-
-			buildings["repository"]+=1;
-
-			maximums["tin"]+=5;
-			maximums["chemicals"]+=3;
-			maximums["steel"]+=5;
-			maximums["nickel"]+=5;
-			maximums["silicon"]+=2;
-			maximums["lithium"]+=1;
-
-
-		}
-	}
-	else if (b=="trainstation"){
-
-		woodcost=Math.pow(1.2,(buildings["trainstation"]))*100000
-		ironcost=Math.pow(1.2,(buildings["trainstation"]))*500
-		framecost= Math.pow(1.2,(buildings["trainstation"]))*50
-
-
-
-		if (craft["frame"]>=framecost && items["iron"]>=ironcost && items["wood"]>=woodcost){
-
-			craft["frame"]-=framecost;
-			items["iron"]-=ironcost;
-			items["wood"]-=woodcost;
-
-			maximums["trains"]+=2;
-
-			buildings["trainstation"]+=1
-
-
-			$(".hire_cargotrain").show()
-			unlocked[".hire_cargotrain"]=1
-			$(".trains").show()
-			unlocked[".trains"]=1
-			$(".tradetrain").show()
-			unlocked[".tradetrain"]=1;
-		}
-	}
-	else if (b=="workshop"){
-
-		brickcost= Math.pow(1.3,(buildings["workshop"]))*500
-		platecost=Math.pow(1.3,(buildings["workshop"]))*500
-		enginecost=Math.pow(1.3,(buildings["workshop"]))*10
-	
-
-
-
-		if (craft["brick"]>=brickcost && craft["plate"]>=platecost && craft["engine"]>=enginecost){
-
-			craft["brick"]-=brickcost;
-			craft["plate"]-=platecost;
-			craft["engine"]-=enginecost;
-
-			bonus["craft"]+=0.10
-			buildings["workshop"]+=1
-
-
-			$(".toggle_workshop").show()
-			unlocked[".toggle_workshop"]=1
-
-		}
-	}
-	else if (b=="powerplant"){
-
-		framecost= Math.pow(1.1,(buildings["powerplant"]))*300
-		platecost=Math.pow(1.1,(buildings["powerplant"]))*500
-	
-
-		if (craft["frame"]>=framecost && craft["plate"]>=platecost){
-
-			craft["frame"]-=framecost;
-			craft["plate"]-=platecost;
-
-			maximums["energy"]+=100;
-
-			buildstatus["powerplant"]=1;
-			buildings["powerplant"]+=1
-
-
-			$(".toggle_powerplant").show()
-			unlocked[".toggle_powerplant"]=1
-
-		}
-	}
-	else if (b=="cementkiln"){
-
-		steelcost = Math.pow(1.3,(buildings["cementkiln"]))*600
-		platecost = Math.pow(1.3,(buildings["cementkiln"]))*200
-	
-
-		if (items["steel"]>=steelcost && craft["plate"]>=platecost){
-
-			items["steel"]-=steelcost;
-			craft["plate"]-=platecost;
-
-			buildstatus["cementkiln"]=1;
-			buildings["cementkiln"]+=1
-
-
-			$(".toggle_cementkiln").show()
-			unlocked[".toggle_cementkiln"]=1
-
-		}
-	}
-	else if (b=="university"){
-
-		cementcost = Math.pow(1.3,(buildings["university"]))*15000
-		brickcost = Math.pow(1.3,(buildings["university"]))*1000
-		framecost = Math.pow(1.3,(buildings["university"]))*500
-
-	
-
-		if (items["cement"]>=cementcost && craft["frame"]>=framecost && craft["brick"]>=brickcost){
-
-			items["cement"]-=cementcost;
-			craft["brick"]-=brickcost;
-			craft["frame"]-=framecost;
-
-			buildstatus["university"]=1;
-			buildings["university"]+=1
-
-			maximums["knowledge"]+=200;
-
-			$(".toggle_university").show()
-			unlocked[".toggle_university"]=1
-
-		}
-	}
-	else if (b=="concretemixer"){
-
-		brickcost = Math.pow(1.25,(buildings["concretemixer"]))*1000
-		platecost = Math.pow(1.25,(buildings["concretemixer"]))*200
-	
-		if (craft["brick"]>=brickcost && craft["plate"]>=platecost){
-
-			craft["brick"]-=brickcost;
-			craft["plate"]-=platecost;
-
-			buildstatus["concretemixer"]=1;
-			buildings["concretemixer"]+=1
-
-			$(".toggle_concretemixer").show()
-			unlocked[".toggle_concretemixer"]=1
-		}
-	}
-	else if (b=="toolfactory"){
-
-		brickcost = Math.pow(1.20,(buildings["toolfactory"]))*2500
-		concretecost = Math.pow(1.20,(buildings["toolfactory"]))*10000
-	
-		if (craft["brick"]>=brickcost && items["concrete"]>=concretecost){
-
-			craft["brick"]-=brickcost;
-			items["concrete"]-=concretecost;
-
-			buildstatus["toolfactory"]=1;
-			buildings["toolfactory"]+=1
-
-			$(".toggle_toolfactory").show()
-			unlocked[".toggle_toolfactory"]=1
-		}
-	}
-	else if (b=="barracks"){
-
-		concretecost = Math.pow(1.20,(buildings["barracks"]))*20000
-	
-		if (items["concrete"]>=concretecost){
-
-			items["concrete"]-=concretecost;
-
-			maximums["population"]+=5;
-
-			buildstatus["barracks"]=1;
-			buildings["barracks"]+=1
-
-			$(".toggle_barracks").show()
-			unlocked[".toggle_barracks"]=1
-		}
-	}
-	else if (b=="factory"){
-
-		brickcost= Math.pow(1.2,(buildings["factory"]))*10000
-		toolboxcost=Math.pow(1.2,(buildings["factory"]))*50
-		concretecost=Math.pow(1.2,(buildings["factory"]))*5000
-	
-
-
-
-		if (craft["brick"]>=brickcost && craft["toolbox"]>=toolboxcost && items["concrete"]>=concretecost){
-
-			craft["brick"]-=brickcost;
-			craft["toolbox"]-=toolboxcost;
-			items["concrete"]-=concretecost;
-
-			bonus["craft"]+=0.20
-			buildings["factory"]+=1
-
-
-			$(".toggle_factory").show()
-			unlocked[".toggle_factory"]=1
-
-		}
-	}
+  if (b in buildingdata) {
+    currentCost = {};
+    for (var c in buildingdata[b].cost) {
+      currentCost[c] = buildingdata[b].cost[c]
+      if (c == 'territory') {
+        currentCost[c] *= Math.pow(1.2, buildings["tradeoutpost"] + buildings["scienceoutpost"] + buildings["militaryoutpost"]);
+      } else {
+        currentCost[c] *= Math.pow(buildingdata[b].scale, buildings[b]);
+      }
+    }
+    if (isAffordable(currentCost)) {
+      buildings[b]++;
+      payCost(currentCost);
+      unlockElements(buildingdata[b].unlock);
+      incrementMaximums(buildingdata[b].max);
+      applyBonuses(buildingdata[b].bonus);
+      if (buildingdata[b].hasOwnProperty('tieredUnlock')) {
+        unlockElements(buildingdata[b].tieredUnlock[buildings[b]]);
+      }
+    }
+  }
 }
+
 var tooltipfactor=1
 var tooltipcurrent=0;
 function calculatecost(){

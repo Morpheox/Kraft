@@ -28,7 +28,7 @@
 </head>
 <body>
 
- 
+ <div id='header'>
     <div class="infokraft">Keep Craft v0.9.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -41,7 +41,8 @@
 
 	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> 		 <button class='but'  data-toggle="modal" data-target="#options">Options</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="shardsnum"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <br><br>
-            
+	</div>
+ <div id='navigation'>          
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#build">Buildings</a></li>
 		<li id="facilitiespane"><a data-toggle="tab" href="#facilities">Facilities</a></li>
@@ -57,12 +58,14 @@
 		<li id="legacypane"><a data-toggle="tab" href="#legacy">Legacy</a></li>
 	</ul>
 	<br><br>
-
+</div>
+<div id='inventory'>
 	<div class="inventory">
 	</div>
 	<div class="inventory_craft">
 	</div>
-
+</div>
+<div id='content'>
 
 	<div class="tab-content">
 
@@ -1121,7 +1124,7 @@
       
     </div>
   </div>
-
+	</div>
 </body>
 <script>
 	setInterval(function(){ refresh()}, 250);

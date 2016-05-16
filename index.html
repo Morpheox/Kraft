@@ -462,6 +462,7 @@
         <div class="modal-body messagetext">
 		 <button class='but' onclick="cleartheme()" >Clear theme</button><br>
 		 <button class='but'  onclick="darktheme()" >Dark theme</button><br>
+		 <button class='but'  onclick="sidetheme()" >Sidebar theme</button><br>
 		 <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button><br><br>
 		 Performance factor (Change only if you experience freezing or delay)<br>
 		 <select id='performanceselect'>
@@ -1157,8 +1158,10 @@
 		console.log('hiring worker');
 		var classes = $(this).attr("class").split(" ");
 		classes.forEach(function(c) {
-			if (c.substring(0, 6) == "hire_") {
+			console.log(c);
+			if (c.substring(0, 5) == "hire_") {
 				var thing = c.replace("hire_", "");
+				console.log(thing);
 				hire(thing);
 			}
 		})
@@ -1169,7 +1172,7 @@
 		var classes = $(this).attr("class").split(" ");
 		classes.forEach(function(c) {
 			console.log(c);
-			if (c.substring(0, 6) == "tech_") {
+			if (c.substring(0, 5) == "tech_") {
 				var thing = c.replace("tech_", "");
 				research(thing);
 			}
@@ -1288,6 +1291,10 @@ function darktheme() {
 function cleartheme() {
     $("#estilo").attr("href", "css/style.css");
     bonus["theme"]="clear";
+}
+function sidetheme() {
+    $("#estilo").attr("href", "css/sidetheme.css");
+    bonus["theme"]="sidebar";
 }
 
 

@@ -28,7 +28,7 @@
 </head>
 <body>
 
- 
+ <div id='header'>
     <div class="infokraft">Keep Craft v0.9.3 beta Created by Ernesto Mayoral emayoralc@gmail.com<br>New content added regularly, don't forget to refresh 
 <form  class="imgdonar" action="https://www.paypal.com/cgi-bin/webscr&lc=US" method="post" target="blank">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -41,7 +41,8 @@
 
 	<button class='but' onclick="save()">Save</button> <button class='but'  data-toggle="modal" data-target="#changelog">Changelog</button> 		 <button class='but'  data-toggle="modal" data-target="#options">Options</button> <div class="population"></div><div class="ships"></div><div class="titles"></div><div class="territory"></div><div class="shardsnum"></div><div class="legacynum"></div><div class="treasurenum"></div>
         <br><br>
-            
+	</div>
+ <div id='navigation'>          
 	<ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#build">Buildings</a></li>
 		<li id="facilitiespane"><a data-toggle="tab" href="#facilities">Facilities</a></li>
@@ -57,12 +58,14 @@
 		<li id="legacypane"><a data-toggle="tab" href="#legacy">Legacy</a></li>
 	</ul>
 	<br><br>
-
+</div>
+<div id='inventory'>
 	<div class="inventory">
 	</div>
 	<div class="inventory_craft">
 	</div>
-
+</div>
+<div id='content'>
 
 	<div class="tab-content">
 
@@ -1121,7 +1124,7 @@
       
     </div>
   </div>
-
+	</div>
 </body>
 <script>
 	setInterval(function(){ refresh()}, 250);
@@ -1131,203 +1134,60 @@
 	$(".block, .fire, .population,.toggle ,.titles,.craftamount,.encounter,.casinogame2,.ships,.tradesea,.expansionsea,.territory,.deals,.trains,.tradetrain,.currentrush,.slotmachine,.shardsnum").hide()
 	$(".playx10,.playx100").hide()
 	$(".trade_sand, .trademax_sand").hide()
-	$(".build_lumbermill").click(function() {build("lumbermill")});
-	$(".build_lumbermill").show()
-	$(".build_pasture").click(function() {build("pasture")});
-	$(".build_mine").click(function() {build("mine")});
-	$(".build_warehouse").click(function() {build("warehouse")});
-	$(".build_fountain").click(function() {build("fountain")});
-	$(".build_library").click(function() {build("library")});
-	$(".build_banner").click(function() {build("banner")});
-	$(".build_house").click(function() {build("house")});
-	$(".build_foundry").click(function() {build("foundry")});
-	$(".build_barn").click(function() {build("barn")});
-	$(".build_casino").click(function() {build("casino")});
-	$(".build_market").click(function() {build("market")});
-	$(".build_kiln").click(function() {build("kiln")});
-	$(".build_statue").click(function() {build("statue")});
-	$(".build_towncenter").click(function() {build("towncenter")});
-	$(".build_workbench").click(function() {build("workbench")});
-	$(".build_castle").click(function() {build("castle")});
-	$(".build_relic").click(function() {build("relic")});
-	$(".build_shipyard").click(function() {build("shipyard")});
-	$(".build_docks").click(function() {build("docks")});
-	$(".build_bank").click(function() {build("bank")});
-	$(".build_crusher").click(function() {build("crusher")});
-	$(".build_blockyard").click(function() {build("blockyard")});
-	$(".build_laboratory").click(function() {build("laboratory")});
-	$(".build_bunker").click(function() {build("bunker")});
-	$(".build_tradeoutpost").click(function() {build("tradeoutpost")});
-	$(".build_scienceoutpost").click(function() {build("scienceoutpost")});
-	$(".build_militaryoutpost").click(function() {build("militaryoutpost")});
-	$(".build_quarry").click(function() {build("quarry")});
-	$(".build_carpentry").click(function() {build("carpentry")});
-	$(".build_blastfurnace").click(function() {build("blastfurnace")});
-	$(".build_compressor").click(function() {build("compressor")});
-	$(".build_share").click(function() {build("share")});
-	$(".build_repository").click(function() {build("repository")});
-	$(".build_trainstation").click(function() {build("trainstation")});
-	$(".build_workshop").click(function() {build("workshop")});
-	$(".build_powerplant").click(function() {build("powerplant")});
-	$(".build_cementkiln").click(function() {build("cementkiln")});
-	$(".build_university").click(function() {build("university")});
-	$(".build_concretemixer").click(function() {build("concretemixer")});
-	$(".build_toolfactory").click(function() {build("toolfactory")});
-	$(".build_barracks").click(function() {build("barracks")});
-	$(".build_factory").click(function() {build("factory")});
-
-	$(".hire_woodcutter").click(function() {hire("woodcutter")});
-	$(".hire_smelter").click(function() {hire("smelter")});
-	$(".hire_farmer").click(function() {hire("farmer")});
-	$(".hire_miner").click(function() {hire("miner")});
-	$(".hire_foundryman").click(function() {hire("foundryman")});
-	$(".hire_sailor").click(function() {hire("sailor")});
-	$(".hire_scientist").click(function() {hire("scientist")});
-	$(".hire_marketer").click(function() {hire("marketer")});
-
-	$(".hire_pikeman").click(function() {hire("pikeman")});
-	$(".hire_swordman").click(function() {hire("swordman")});
-	$(".hire_knight").click(function() {hire("knight")});
-	$(".hire_medic").click(function() {hire("medic")});
-	$(".hire_bersek").click(function() {hire("bersek")});
-	$(".hire_warelephant").click(function() {hire("warelephant")});
-	$(".hire_musketeer").click(function() {hire("musketeer")});
-
-	$(".hire_lighttank").click(function() {hire("lighttank")});
-
-	$(".hire_cargotrain").click(function() {hire("cargotrain")});
-
-	$(".hire_galley").click(function() {hire("galley")});
-	$(".hire_galleon").click(function() {hire("galleon")});
-	$(".hire_fireship").click(function() {hire("fireship")});
-	$(".hire_caravel").click(function() {hire("caravel")});
-
-	$(".tech_coppertools").click(function() {research("coppertools")});
-	$(".tech_pickaxe").click(function() {research("pickaxe")});
-	$(".tech_spear").click(function() {research("spear")});
-	$(".tech_exploration").click(function() {research("exploration")});
-	$(".tech_ironfoundry").click(function() {research("ironfoundry")});
-	$(".tech_metallurgy").click(function() {research("metallurgy")});
-	$(".tech_currency").click(function() {research("currency")});
-	$(".tech_exchange").click(function() {research("exchange")});
-	$(".tech_coin").click(function() {research("coin")});
-	$(".tech_sword").click(function() {research("sword")});
-	$(".tech_storage").click(function() {research("storage")});
-	$(".tech_charcoal").click(function() {research("charcoal")});
-	$(".tech_bronze").click(function() {research("bronze")});
-	$(".tech_bronzetools").click(function() {research("bronzetools")});
-	$(".tech_centralisation").click(function() {research("centralisation")});
-	$(".tech_steel").click(function() {research("steel")});
-	$(".tech_manufacturing").click(function() {research("manufacturing")});
-	$(".tech_steeltools").click(function() {research("steeltools")});
-	$(".tech_husbandry").click(function() {research("husbandry")});
-	$(".tech_cavalry").click(function() {research("cavalry")});
-	$(".tech_leadership").click(function() {research("leadership")});
-	$(".tech_armament").click(function() {research("armament")});
-	$(".tech_gambling").click(function() {research("gambling")});
-	$(".tech_redeem").click(function() {research("redeem")});
-	$(".tech_wrapping").click(function() {research("wrapping")});
-	$(".tech_shipyard").click(function() {research("shipyard")});
-	$(".tech_sailing").click(function() {research("sailing")});
-	$(".tech_trade").click(function() {research("trade")});
-	$(".tech_cache").click(function() {research("cache")});
-	$(".tech_specialization").click(function() {research("specialization")});
-	$(".tech_geology").click(function() {research("geology")});
-	$(".tech_funding").click(function() {research("funding")});
-	$(".tech_tactics").click(function() {research("tactics")});
-	$(".tech_healing").click(function() {research("healing")});
-	$(".tech_savings").click(function() {research("savings")});
-	$(".tech_studies").click(function() {research("studies")});
-	$(".tech_organization").click(function() {research("organization")});
-	$(".tech_culturaltrade").click(function() {research("culturaltrade")});
-	$(".tech_intelligence").click(function() {research("intelligence")});
-	$(".tech_crushing").click(function() {research("crushing")});
-	$(".tech_floatglass").click(function() {research("floatglass")});
-	$(".tech_canteen").click(function() {research("canteen")});
-	$(".tech_contracts").click(function() {research("contracts")});
-	$(".tech_galleon").click(function() {research("galleon")});
-	$(".tech_glassblowing").click(function() {research("glassblowing")});
-	$(".tech_rampage").click(function() {research("rampage")});
-	$(".tech_construction").click(function() {research("construction")});
-	$(".tech_architecture").click(function() {research("architecture")});
-	$(".tech_chemistry").click(function() {research("chemistry")});
-	$(".tech_risk").click(function() {research("risk")});
-	$(".tech_domestication").click(function() {research("domestication")});
-	$(".tech_elephantry").click(function() {research("elephantry")});
-	$(".tech_wareconomy").click(function() {research("wareconomy")});
-	$(".tech_undergroundstorage").click(function() {research("undergroundstorage")});
-	$(".tech_expansion").click(function() {research("expansion")});
-	$(".tech_internationalization").click(function() {research("internationalization")});
-	$(".tech_investigation").click(function() {research("investigation")});
-	$(".tech_camps").click(function() {research("camps")});
-	$(".tech_investment").click(function() {research("investment")});
-	$(".tech_fireship").click(function() {research("fireship")});
-	$(".tech_careening").click(function() {research("careening")});
-	$(".tech_deals").click(function() {research("deals")});
-	$(".tech_finding").click(function() {research("finding")});
-	$(".tech_seacaptain").click(function() {research("seacaptain")});
-	$(".tech_openmining").click(function() {research("openmining")});
-	$(".tech_masonry").click(function() {research("masonry")});
-	$(".tech_woodwork").click(function() {research("woodwork")});
-	$(".tech_multitasking").click(function() {research("multitasking")});
-	$(".tech_commodities").click(function() {research("commodities")});
-	$(".tech_quenching").click(function() {research("quenching")});
-	$(".tech_castiron").click(function() {research("castiron")});
-	$(".tech_commerce").click(function() {research("commerce")});
-	$(".tech_insecticides").click(function() {research("insecticides")});
-	$(".tech_explosives").click(function() {research("explosives")});
-	$(".tech_safes").click(function() {research("safes")});
-	$(".tech_packaging").click(function() {research("packaging")});
-	$(".tech_ammunition").click(function() {research("ammunition")});
-	$(".tech_gunnery").click(function() {research("gunnery")});
-	$(".tech_wisdom").click(function() {research("wisdom")});
-	$(".tech_windward").click(function() {research("windward")});
-	$(".tech_carrying").click(function() {research("carrying")});
-	$(".tech_shareholding").click(function() {research("shareholding")});
-	$(".tech_steamengine").click(function() {research("steamengine")});
-	$(".tech_metalwork").click(function() {research("metalwork")});
-	$(".tech_safestorage").click(function() {research("safestorage")});
-	$(".tech_armoredcombat").click(function() {research("armoredcombat")});
-	$(".tech_railtransport").click(function() {research("railtransport")});
-	$(".tech_industrialization").click(function() {research("industrialization")});
-	$(".tech_academicpublishing").click(function() {research("academicpublishing")});
-	$(".tech_patents").click(function() {research("patents")});
-	$(".tech_triforce").click(function() {research("triforce")});
-	$(".tech_logistics").click(function() {research("logistics")});
-	$(".tech_mineralcoal").click(function() {research("mineralcoal")});
-	$(".tech_electricity").click(function() {research("electricity")});
-	$(".tech_pyroprocessing").click(function() {research("pyroprocessing")});
-	$(".tech_education").click(function() {research("education")});
-	$(".tech_cementhydration").click(function() {research("cementhydration")});
-	$(".tech_workforce").click(function() {research("workforce")});
-	$(".tech_wargames").click(function() {research("wargames")});
-	$(".tech_militarization").click(function() {research("militarization")});
-	$(".tech_industrialrevolution").click(function() {research("industrialrevolution")});
-	$(".tech_luck").click(function() {research("luck")});
-
-	$(".craft_pickaxe").click(function() {crafting("pickaxe")});
-	$(".craft_spear").click(function() {crafting("spear")});
-	$(".craft_sword").click(function() {crafting("sword")});
-	$(".craft_block").click(function() {crafting("block")});
-	$(".craft_coin").click(function() {crafting("coin")});
-	$(".craft_bronze").click(function() {crafting("bronze")});
-	$(".craft_structure").click(function() {crafting("structure")});
-	$(".craft_armor").click(function() {crafting("armor")});
-	$(".craft_supplies").click(function() {crafting("supplies")});
-	$(".craft_chest").click(function() {crafting("chest")});
-	$(".craft_glass").click(function() {crafting("glass")});
-	$(".craft_bottle").click(function() {crafting("bottle")});
-	$(".craft_greatsword").click(function() {crafting("greatsword")});
-	$(".craft_frame").click(function() {crafting("frame")});
-	$(".craft_brick").click(function() {crafting("brick")});
-	$(".craft_gunpowder").click(function() {crafting("gunpowder")});
-	$(".craft_ammo").click(function() {crafting("ammo")});
-	$(".craft_musket").click(function() {crafting("musket")});
-	$(".craft_plate").click(function() {crafting("plate")});
-	$(".craft_engine").click(function() {crafting("engine")});
-	$(".craft_patent").click(function() {crafting("patent")});
-	$(".craft_book").click(function() {crafting("book")});
-	$(".craft_strategy").click(function() {crafting("strategy")});
+	$(".build_lumbermill").show();
+	
+	// This script replaces the long list of different build() calls below. 
+	// it fires whenever you slick on a DOM element with a class starting with 'build_'
+	$(".block[class*='build_']").click(function() {
+		// create an array from all of the classes in the element
+		var classes = $(this).attr("class").split(" ");
+		//loop through the array
+		classes.forEach(function(c) {
+			// check that the class starts with 'build_'. Nothing happens if no matching classes are found.
+			if (c.substring(0, 6) == "build_") {
+				// if it does, remove the 'build_' bit. You are left with the thing you want to build
+				var thing = c.replace("build_", "");
+				// build the thing!
+				build(thing);
+			}
+		})
+	});
+	// Same again for hires. 
+	$(".block[class*='hire_']").click(function() {
+		console.log('hiring worker');
+		var classes = $(this).attr("class").split(" ");
+		classes.forEach(function(c) {
+			if (c.substring(0, 6) == "hire_") {
+				var thing = c.replace("hire_", "");
+				hire(thing);
+			}
+		})
+	});
+	// And also for research. 
+	$(".block[class*='tech_']").click(function() {
+		console.log('researching');
+		var classes = $(this).attr("class").split(" ");
+		classes.forEach(function(c) {
+			console.log(c);
+			if (c.substring(0, 6) == "tech_") {
+				var thing = c.replace("tech_", "");
+				research(thing);
+			}
+		})
+	});
+	// And finally for crafting
+	$(".block[class*='craft_']").click(function() {
+		console.log('crafting');
+		var classes = $(this).attr("class").split(" ");
+		classes.forEach(function(c) {
+			if (c.substring(0, 6) == "craft_") {
+				var thing = c.replace("craft_", "");
+				crafting(thing);
+			}
+		})
+	});
+	
+	
 	$(".expedition").click(function() {expedition()});
         
     $(".trade_wood").click(function() {trade("wood")});

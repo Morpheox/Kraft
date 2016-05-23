@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="js/traderates.js"></script>
 	<script type="text/javascript" src="js/heirlooms.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/combat.js"></script>
 	<script type="text/javascript" src="js/technology.js"></script>
 	<script type="text/javascript" src="js/expansion.js"></script>
 	<script type="text/javascript" src="js/casino.js"></script>
@@ -462,6 +463,7 @@
         <div class="modal-body messagetext">
 		 <button class='but' onclick="cleartheme()" >Clear theme</button><br>
 		 <button class='but'  onclick="darktheme()" >Dark theme</button><br>
+		 <button class='but'  onclick="sidetheme()" >Sidebar theme</button><br>
 		 <button class='but'  data-toggle="modal" onclick="encode()" data-target="#importmodal">Import/Export</button><br><br>
 		 Performance factor (Change only if you experience freezing or delay)<br>
 		 <select id='performanceselect'>
@@ -1291,6 +1293,11 @@ function cleartheme() {
     $("#estilo").attr("href", "css/style.css");
     bonus["theme"]="clear";
 }
+function sidetheme() {
+    $("#estilo").attr("href", "css/sidetheme.css");
+    bonus["theme"]="sidebar";
+}
+
 
 $("#performanceselect").change(function(){
 

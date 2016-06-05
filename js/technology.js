@@ -346,7 +346,7 @@ function researchunlock(){
 		$(".tech_militarization").show()
 		unlocked[".tech_militarization"]=1;
 	}
-	if(bonus["science"]>=500000 || bonus["economy"]>=500000 && unlocked[".tech_industrialrevolution"]!=1){
+	if((bonus["science"]>=500000 || bonus["economy"]>=500000) && unlocked[".tech_industrialrevolution"]!=1){
 		$(".tech_industrialrevolution").show()
 		unlocked[".tech_industrialrevolution"]=1;
 	}

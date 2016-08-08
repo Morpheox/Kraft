@@ -1066,7 +1066,6 @@ function fight(){
 			if(Math.random()>0.99){
 				combatlog+="<div style='display:inline;color:orange'>You found a heirloom!</div><br>";
 				createheirloom();
-				$("#heirlooms").show()
 				unlocked["#heirlooms"]=1;
 				$("#heirloomspane").removeClass("invisible");
 				unlocked["#heirloomspane"]=1;

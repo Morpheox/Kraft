@@ -294,7 +294,7 @@ function setHeirloomNotif() {
 }
 
 function clearHeirloomNotif() {
-  $("#heirloomspane").html("<a data-toggle='tab' href='#heirlooms'>Heirlooms</a>");
+	setTimeout(function(){$("#heirloomspane").html("<a data-toggle='tab' href='#heirlooms'>Heirlooms</a>");},20);
 }
 
 

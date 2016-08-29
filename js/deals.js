@@ -25,7 +25,7 @@ trademission["merchantcraft"]=randomKey(mratio)
 trademission["marchantratio"]=(Math.random()*mratio[trademission["merchantcraft"]])+(mratio[trademission["merchantcraft"]]/2)
 trademission["merchantnumber"]=(Math.random()*maximums["gold"]*10)/mratio[trademission["merchantcraft"]]
 
-$(".deallog").html("A merchant arrived at your market<br><br>I Offer you this fine "+intToString(trademission["merchantnumber"])+" "+trademission["merchantcraft"]+"<br>For only "+intToString(trademission["merchantnumber"]*trademission["marchantratio"])+" coins.")
+$(".deallog").html("A merchant arrived at your market<br><br>I offer you this fine "+intToString(trademission["merchantnumber"])+" "+trademission["merchantcraft"]+"<br>for only "+intToString(trademission["merchantnumber"]*trademission["marchantratio"])+" coins.")
 
 $(".btndeal").show()
 }
@@ -44,7 +44,7 @@ newDeal();
 function fillDeal(){
 if(trademission["done"]==0)
 {
-$(".deallog").html("A merchant arrived at your market<br><br>I Offer you this fine "+intToString(trademission["merchantnumber"])+" "+trademission["merchantcraft"]+"<br>For only "+intToString(trademission["merchantnumber"]*trademission["marchantratio"])+" coins.")
+$(".deallog").html("A merchant arrived at your market<br><br>I offer you this fine "+intToString(trademission["merchantnumber"])+" "+trademission["merchantcraft"]+"<br>for only "+intToString(trademission["merchantnumber"]*trademission["marchantratio"])+" coins.")
 $(".btndeal").show()
 }
 else
@@ -70,7 +70,7 @@ $(".deallog").html("Thanks for the buy, we will see again.");
 }
 else if(Math.random()>0.5)
 {
-$(".deallog").html("You will enjoy my wares, i promise.");
+$(".deallog").html("You will enjoy my wares, I promise.");
 }
 else 
 {

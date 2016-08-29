@@ -247,7 +247,7 @@ people["pikeman"]=0
 people["swordman"]=0
 people["knight"]=0
 people["medic"]=0
-people["bersek"]=0
+people["berserk"]=0
 people["warelephant"]=0
 people["musketeer"]=0
 
@@ -513,7 +513,7 @@ function expedition(){
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
 	power+=people["medic"]*1
-	power+=people["bersek"]*80
+	power+=people["berserk"]*80
 	power+=people["warelephant"]*100
 	power+=people["musketeer"]*75
 
@@ -652,7 +652,7 @@ function expedition(){
 				craft["elephant"]+=rnd;
 			}
 			if(Math.random()>0.999){
-				reward+="<div style='display:inline;color:orange'>You found a heirloom!</div><br>";
+				reward+="<div style='display:inline;color:orange'>You found an heirloom!</div><br>";
 				createheirloom();
 				$("#heirlooms").show()
 				unlocked["#heirlooms"]=1;
@@ -679,7 +679,7 @@ function expedition(){
 			hp+=people["swordman"]*50
 			hp+=people["knight"]*200
 			hp+=people["medic"]*50
-			hp+=people["bersek"]*100
+			hp+=people["berserk"]*100
 			hp+=people["warelephant"]*1200
 			hp+=people["musketeer"]*400
 			hp+=people["lighttank"]*5000
@@ -691,7 +691,7 @@ function expedition(){
 			healing=healing*(bonus["healing"]+1)
 
 			burst=0;
-			burst+=people["bersek"]*80
+			burst+=people["berserk"]*80
 			burst=burst*(bonus["power"]+1)
 
 			power=power/(bonus["exprew"]+1)
@@ -808,7 +808,7 @@ function fight(){
 	power+=people["swordman"]*10
 	power+=people["knight"]*25
 	power+=people["medic"]*1
-	power+=people["bersek"]*80
+	power+=people["berserk"]*80
 
 	disobey=people["warelephant"]*100*(bonus["power"]+1)
 
@@ -823,7 +823,7 @@ function fight(){
 	hp+=people["swordman"]*50
 	hp+=people["knight"]*200
 	hp+=people["medic"]*50
-	hp+=people["bersek"]*100
+	hp+=people["berserk"]*100
 	hp+=people["warelephant"]*1200
 	hp+=people["musketeer"]*400
 	hp+=people["lighttank"]*5000
@@ -841,7 +841,7 @@ function fight(){
 	armor2+=enemy["soldier"]*10
 
 	burst=0;
-	burst+=people["bersek"]*80
+	burst+=people["berserk"]*80
 
 	burst=burst*(bonus["power"]+1)
 
@@ -983,11 +983,11 @@ function fight(){
 				population-=losses;
 				combatlog+="You lost "+losses+" medics.<br>"
 			}
-			if(people["bersek"]>0 && Math.random()>0.75){
-				losses=Math.round(Math.random()*(people["bersek"]-1))+1
-				people["bersek"]-=losses;
+			if(people["berserk"]>0 && Math.random()>0.75){
+				losses=Math.round(Math.random()*(people["berserk"]-1))+1
+				people["berserk"]-=losses;
 				population-=losses;
-				combatlog+="You lost "+losses+" berseks.<br>"
+				combatlog+="You lost "+losses+" berserks.<br>"
 			}
 			if(people["warelephant"]>0 && Math.random()>0.75){
 				losses=Math.round(Math.random()*(people["warelephant"]-1))+1
@@ -1727,9 +1727,9 @@ var techdata = {
   },
   rampage: {
     cost: {sword: 1000, knowledge: 800},
-    unlock: [".craft_greatsword", ".hire_bersek"],
+    unlock: [".craft_greatsword", ".hire_berserk"],
     desc: ["A thousand swords were used to perfect the technique, allows crafting greatswords,",
-      "and hiring berseks"]
+      "and hiring berserks"]
   },
   construction: {
     cost: {block: 2000, knowledge: 800},
@@ -2192,7 +2192,7 @@ var peopledata = {
   medic: {
     cost: {pop: 1, food: 1000, coin: 20}
   },
-  bersek: {
+  berserk: {
     cost: {pop: 1, coin: 50, greatsword: 1}
   },
   warelephant: {
@@ -3590,20 +3590,20 @@ $(".hire_medic").attr('tooltip5', 'Attack: 1 Hp: 50 Healing: 10');
 coincost=50;
 greatswordcost=1;
 if(craft["coin"]<coincost || craft["greatsword"]<greatswordcost || population>=maximums["population"]){
-	$(".hire_bersek").addClass("unavailable")
+	$(".hire_berserk").addClass("unavailable")
 }
 else
 {
-	$(".hire_bersek").removeClass("unavailable")
+	$(".hire_berserk").removeClass("unavailable")
 }
-$(".hire_bersek").html("Bersek ("+people["bersek"]+")");
-$(".hire_bersek").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
-$(".hire_bersek").attr('tooltip2', 'Greatsword: '+ parseFloat(craft["greatsword"]).toFixed(2)+" / "+parseFloat(greatswordcost).toFixed(2))
-$(".hire_bersek").attr('tooltip3', "Food consumption: -0.80/s");
-$(".hire_bersek").attr('tooltip4', "Gold consumption: -0.01/s");
-$(".hire_bersek").attr('tooltip5', 'Morale production +0.20/s');
-$(".hire_bersek").attr('tooltip6', 'Attack: 80 Hp: 100');
-$(".hire_bersek").attr('tooltip7', 'Deals double damage the first round');
+$(".hire_berserk").html("Berserk ("+people["berserk"]+")");
+$(".hire_berserk").attr('tooltip', 'Coin: '+ parseFloat(craft["coin"]).toFixed(2)+" / "+parseFloat(coincost).toFixed(2))
+$(".hire_berserk").attr('tooltip2', 'Greatsword: '+ parseFloat(craft["greatsword"]).toFixed(2)+" / "+parseFloat(greatswordcost).toFixed(2))
+$(".hire_berserk").attr('tooltip3', "Food consumption: -0.80/s");
+$(".hire_berserk").attr('tooltip4', "Gold consumption: -0.01/s");
+$(".hire_berserk").attr('tooltip5', 'Morale production +0.20/s');
+$(".hire_berserk").attr('tooltip6', 'Attack: 80 Hp: 100');
+$(".hire_berserk").attr('tooltip7', 'Deals double damage the first round');
 
 
 suppliescost=100;
@@ -4333,7 +4333,7 @@ power+=people["pikeman"]*5
 power+=people["swordman"]*10
 power+=people["knight"]*25
 power+=people["medic"]*1
-power+=people["bersek"]*80
+power+=people["berserk"]*80
 power+=people["warelephant"]*100
 power+=people["musketeer"]*75
 
@@ -4342,7 +4342,7 @@ hp+=people["pikeman"]*30
 hp+=people["swordman"]*50
 hp+=people["knight"]*200
 hp+=people["medic"]*50
-hp+=people["bersek"]*100
+hp+=people["berserk"]*100
 hp+=people["warelephant"]*1200
 hp+=people["musketeer"]*400
 
@@ -4727,11 +4727,11 @@ if (items["food"]>=people["knight"]/2)
 
 consumption["food"]+=people["medic"]/10
 
-if (items["food"]>=people["bersek"]/5 && items["gold"]>=people["bersek"]/400)
+if (items["food"]>=people["berserk"]/5 && items["gold"]>=people["berserk"]/400)
 {
-	consumption["food"]+=people["bersek"]/5
-	consumption["gold"]+=people["bersek"]/400
-	production["morale"]+=people["bersek"]/20
+	consumption["food"]+=people["berserk"]/5
+	consumption["gold"]+=people["berserk"]/400
+	production["morale"]+=people["berserk"]/20
 }
 
 if (items["food"]>=people["warelephant"]*2.5 && items["water"]>=people["warelephant"]/2)
@@ -5012,7 +5012,7 @@ heirlooms = update(heirlooms,JSON.parse(result[13]));
 drawheirlooms();
 }
 		population = Cookies.get('population');
-		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["bersek"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
+		population=people["woodcutter"]+people["smelter"]+people["farmer"]+people["miner"]+people["foundryman"]+people["sailor"]+people["scientist"]+people["marketer"]+people["pikeman"]+people["swordman"]+people["knight"]+people["medic"]+people["berserk"]+people["warelephant"]+people["musketeer"]+(people["lighttank"]*3)+(people["cargotrain"]*3)
 
 		trains=people["cargotrain"]
 
